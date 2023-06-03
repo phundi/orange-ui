@@ -298,13 +298,13 @@ class OptionsCenterArea extends StatelessWidget {
                 borderRadius: BorderRadius.circular(30),
                 gradient: enable
                     ? const LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    ColorRes.lightOrange1,
-                    ColorRes.darkOrange,
-                  ],
-                )
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          ColorRes.lightOrange1,
+                          ColorRes.darkOrange,
+                        ],
+                      )
                     : null,
               ),
               child: Container(

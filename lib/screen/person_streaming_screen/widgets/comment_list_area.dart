@@ -91,7 +91,7 @@ class CommentListArea extends StatelessWidget {
                         ),
                         commentList[index].commentType == FirebaseRes.msg
                             ? Text(
-                          commentList[index].comment ?? '',
+                                commentList[index].comment ?? '',
                                 style: TextStyle(
                                   color: ColorRes.white.withOpacity(0.90),
                                   fontSize: 13,

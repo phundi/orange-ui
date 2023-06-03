@@ -149,7 +149,8 @@ class AuthCard extends StatelessWidget {
     );
   }
 
-  Widget socialButton(Image image, String title, VoidCallback onTap, EdgeInsets padding) {
+  Widget socialButton(
+      Image image, String title, VoidCallback onTap, EdgeInsets padding) {
     return InkWell(
       onTap: onTap,
       child: Container(

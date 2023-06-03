@@ -108,7 +108,7 @@ class BottomSelectionList extends StatelessWidget {
                         ),
                         child: Center(
                           child:
-                          Image.asset(AssetRes.plus, height: 17, width: 17),
+                              Image.asset(AssetRes.plus, height: 17, width: 17),
                         ),
                       ),
                     ),

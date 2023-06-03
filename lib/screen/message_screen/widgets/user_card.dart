@@ -35,7 +35,7 @@ class UserCard extends StatelessWidget {
         Container(
           margin: const EdgeInsets.only(bottom: 6),
           padding:
-          const EdgeInsets.only(top: 8, left: 12, right: 12, bottom: 11),
+              const EdgeInsets.only(top: 8, left: 12, right: 12, bottom: 11),
           height: 74,
           width: Get.width,
           decoration: BoxDecoration(
