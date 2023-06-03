@@ -10,7 +10,7 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<ProfileScreenViewModel>.reactive(
-      onModelReady: (model) {
+      onViewModelReady: (model) {
         model.init();
       },
       viewModelBuilder: () => ProfileScreenViewModel(),
@@ -23,15 +23,17 @@ class ProfileScreen extends StatelessWidget {
                 onSearchTap: model.onSearchBtnTap,
               ),
               ProfileImageArea(
-                imageList: model.imageList,
+                userData: model.userData,
                 pageController: model.pageController,
                 onEditProfileTap: model.onEditProfileTap,
                 onMoreBtnTap: model.onMoreBtnTap,
                 onImageTap: model.onImageTap,
-                fullName: model.userName,
-                age: model.age,
-                address: model.address,
-                bioText: model.bioText,
+                onInstagramTap: model.onInstagramTap,
+                onFacebookTap: model.onFBTap,
+                onYoutubeTap: model.onYoutubeTap,
+                isLoading: model.isLoading,
+                isVerified: model.userData?.isVerified == 2 ? true : false,
+                isSocialBtnVisible: model.isSocialBtnVisible,
               ),
             ],
           ),

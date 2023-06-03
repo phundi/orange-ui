@@ -2,9 +2,10 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:orange_ui/utils/app_res.dart';
+import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
+import 'package:orange_ui/utils/font_res.dart';
 
 class BottomTextField extends StatelessWidget {
   final TextEditingController commentController;
@@ -12,15 +13,17 @@ class BottomTextField extends StatelessWidget {
   final VoidCallback onMsgSend;
   final VoidCallback onGoProTap;
   final VoidCallback onGiftTap;
+  final int count;
 
-  const BottomTextField({
-    Key? key,
-    required this.commentController,
-    required this.commentFocus,
-    required this.onMsgSend,
-    required this.onGoProTap,
-    required this.onGiftTap,
-  }) : super(key: key);
+  const BottomTextField(
+      {Key? key,
+      required this.commentController,
+      required this.commentFocus,
+      required this.onMsgSend,
+      required this.onGoProTap,
+      required this.onGiftTap,
+      required this.count})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +34,10 @@ class BottomTextField extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(20),
               child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
+                filter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),
                 child: Container(
-                  width: Get.width - 70,
+                  width: Get.width - 60,
+                  margin: const EdgeInsets.only(left: 5),
                   padding: const EdgeInsets.all(2),
                   decoration: BoxDecoration(
                     color: ColorRes.black4.withOpacity(0.33),
@@ -56,7 +60,7 @@ class BottomTextField extends StatelessWidget {
                           decoration: InputDecoration(
                             isDense: true,
                             border: InputBorder.none,
-                            hintText: AppRes.comment,
+                            hintText: S.current.comment,
                             contentPadding: const EdgeInsets.only(
                                 left: 14, bottom: 10, top: 0),
                             hintStyle: TextStyle(
@@ -99,8 +103,9 @@ class BottomTextField extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
                 child: BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
+                  filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
                   child: Container(
+                    margin: const EdgeInsets.only(right: 10),
                     padding: const EdgeInsets.all(2),
                     decoration: BoxDecoration(
                       color: ColorRes.black4.withOpacity(0.33),
@@ -130,124 +135,127 @@ class BottomTextField extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 8),
-        SafeArea(
-          bottom: true,
-          top: false,
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(10),
-            child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
-              child: Container(
-                height: 59,
-                width: Get.width,
-                padding: const EdgeInsets.fromLTRB(7, 11, 5, 12),
-                decoration: BoxDecoration(
-                  color: ColorRes.black.withOpacity(0.33),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    Row(
-                      children: [
-                        const SizedBox(width: 36),
-                        SizedBox(
-                          width: Get.width - 155,
-                          child: SingleChildScrollView(
-                            physics: const BouncingScrollPhysics(),
-                            scrollDirection: Axis.horizontal,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const SizedBox(height: 5),
-                                Text(
-                                  AppRes.youWillBeSentEtc,
-                                  style: TextStyle(
-                                    color: ColorRes.white.withOpacity(0.85),
-                                    fontSize: 12,
-                                    fontFamily: 'gilroy_bold',
+        Visibility(
+          visible: false,
+          child: SafeArea(
+            bottom: true,
+            top: false,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
+                child: Container(
+                  height: 59,
+                  width: Get.width,
+                  padding: const EdgeInsets.fromLTRB(7, 11, 5, 12),
+                  decoration: BoxDecoration(
+                    color: ColorRes.black.withOpacity(0.33),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Row(
+                        children: [
+                          const SizedBox(width: 36),
+                          SizedBox(
+                            width: Get.width - 155,
+                            child: SingleChildScrollView(
+                              physics: const BouncingScrollPhysics(),
+                              scrollDirection: Axis.horizontal,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const SizedBox(height: 5),
+                                  Text(
+                                    S.current.youWillBeSentEtc,
+                                    style: TextStyle(
+                                      color: ColorRes.white.withOpacity(0.85),
+                                      fontSize: 12,
+                                      fontFamily: FontRes.bold,
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  AppRes.subscribeToProEtc,
-                                  style: TextStyle(
-                                    color: ColorRes.white.withOpacity(0.70),
-                                    fontSize: 11,
+                                  Text(
+                                    S.current.subscribeToProEtc,
+                                    style: TextStyle(
+                                      color: ColorRes.white.withOpacity(0.70),
+                                      fontSize: 11,
+                                    ),
                                   ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          height: 31,
-                          width: 31,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: ColorRes.white.withOpacity(0.15),
-                          ),
-                          child: const Center(
-                            child: Text(
-                              "8",
-                              style: TextStyle(
-                                color: ColorRes.white,
-                                fontSize: 17,
-                                fontFamily: 'gilroy_bold',
-                              ),
-                            ),
-                          ),
-                        ),
-                        InkWell(
-                          onTap: onGoProTap,
-                          child: Container(
-                            height: 31,
-                            padding: const EdgeInsets.fromLTRB(14, 3, 11, 0),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(30),
-                              gradient: const LinearGradient(
-                                begin: Alignment.topCenter,
-                                end: Alignment.bottomCenter,
-                                colors: [
-                                  ColorRes.lightOrange1,
-                                  ColorRes.darkOrange,
                                 ],
                               ),
                             ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            height: 31,
+                            width: 31,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: ColorRes.white.withOpacity(0.15),
+                            ),
                             child: Center(
-                              child: RichText(
-                                text: const TextSpan(
-                                  children: [
-                                    TextSpan(
-                                      text: AppRes.go,
-                                      style: TextStyle(
-                                        color: ColorRes.white,
-                                        fontSize: 12,
-                                        fontFamily: 'gilroy',
-                                      ),
-                                    ),
-                                    TextSpan(
-                                      text: " ${AppRes.pro}",
-                                      style: TextStyle(
-                                        color: ColorRes.white,
-                                        fontSize: 12,
-                                        fontFamily: 'gilroy_bold',
-                                      ),
-                                    ),
-                                  ],
+                              child: Text(
+                                "$count",
+                                style: const TextStyle(
+                                  color: ColorRes.white,
+                                  fontSize: 17,
+                                  fontFamily: FontRes.bold,
                                 ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ],
+                          InkWell(
+                            onTap: onGoProTap,
+                            child: Container(
+                              height: 31,
+                              padding: const EdgeInsets.fromLTRB(14, 3, 11, 0),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(30),
+                                gradient: const LinearGradient(
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                  colors: [
+                                    ColorRes.lightOrange1,
+                                    ColorRes.darkOrange,
+                                  ],
+                                ),
+                              ),
+                              child: Center(
+                                child: RichText(
+                                  text: TextSpan(
+                                    children: [
+                                      TextSpan(
+                                        text: S.current.go,
+                                        style: const TextStyle(
+                                          color: ColorRes.white,
+                                          fontSize: 12,
+                                          fontFamily: FontRes.regular,
+                                        ),
+                                      ),
+                                      TextSpan(
+                                        text: " ${S.current.pro}",
+                                        style: const TextStyle(
+                                          color: ColorRes.white,
+                                          fontSize: 12,
+                                          fontFamily: FontRes.bold,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

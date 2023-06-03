@@ -1,42 +1,54 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:orange_ui/api_provider/api_provider.dart';
+import 'package:orange_ui/common/widgets/loader.dart';
+import 'package:orange_ui/common/widgets/snack_bar_widget.dart';
+import 'package:orange_ui/generated/l10n.dart';
+import 'package:orange_ui/model/user/registration_user.dart';
+import 'package:orange_ui/screen/dashboard/dashboard_screen.dart';
+import 'package:orange_ui/screen/select_hobbies_screen/select_hobbies_screen.dart';
 import 'package:orange_ui/screen/select_photo_screen/select_photo_screen.dart';
 import 'package:orange_ui/service/pref_service.dart';
-import 'package:orange_ui/utils/app_res.dart';
 import 'package:stacked/stacked.dart';
 
 class StartingProfileScreenViewModel extends BaseViewModel {
-  void init() {
-    getPrefsData();
-  }
-
-  TextEditingController addressController =
-      TextEditingController(text: AppRes.newYorkUsa);
-  TextEditingController bioController =
-      TextEditingController(text: AppRes.profileBioText);
-  TextEditingController ageController =
-      TextEditingController(text: AppRes.twentyFour);
+  TextEditingController addressController = TextEditingController();
+  TextEditingController bioController = TextEditingController();
+  TextEditingController ageController = TextEditingController();
 
   FocusNode addressFocus = FocusNode();
   FocusNode bioFocus = FocusNode();
   FocusNode ageFocus = FocusNode();
 
-  String fullName = '';
+  String? fullName = '';
   String addressError = '';
   String bioError = '';
-
-  String gender = AppRes.female;
+  String ageError = '';
+  String latitude = '';
+  String longitude = '';
+  String gender = S.current.female;
   bool showDropdown = false;
 
-  Future<void> getPrefsData() async {
-    String? fName = await PrefService.getFullName();
-    fullName = fName ?? '';
-    notifyListeners();
+  void init() {
+    getProfileApi();
+    prefData();
   }
 
   void onAllScreenTap() {
     showDropdown = false;
     notifyListeners();
+  }
+
+  void getProfileApi() {
+    ApiProvider().getProfile(userID: PrefService.userId).then((value) async {
+      fullName = value?.data?.fullname;
+      notifyListeners();
+    });
+  }
+
+  void prefData() async {
+    latitude = await PrefService.getLatitude() ?? '';
+    longitude = await PrefService.getLongitude() ?? '';
   }
 
   void onGenderTap() {
@@ -53,32 +65,43 @@ class StartingProfileScreenViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  void onNextTap() {
-    if (isValid()) {
-      setPrefsData();
+  void onNextTap() async {
+    if (ageController.text.isEmpty) {
+      SnackBarWidget.snackBar(message: 'Please enter your age');
+      ageFocus.requestFocus();
+      return;
+    }
+    if (int.parse(ageController.text) < 18) {
+      SnackBarWidget.snackBar(message: S.current.youMustBe18);
+      return;
+    }
+    Loader().lottieLoader();
+    ApiProvider()
+        .updateProfile(
+            fullName: fullName,
+            live: addressController.text,
+            bio: bioController.text,
+            age: ageController.text,
+            gender: gender == S.current.male
+                ? 1
+                : gender == S.current.female
+                    ? 2
+                    : 3,
+            latitude: latitude,
+            longitude: longitude)
+        .then((value) async {
+      Get.back();
+      checkScreenCondition(value.data);
+    });
+  }
+
+  void checkScreenCondition(RegistrationUserData? data) {
+    if (data?.images == null || data!.images!.isEmpty) {
       Get.to(() => const SelectPhotoScreen());
+    } else if (data.interests == null || data.interests!.isEmpty) {
+      Get.to(() => const SelectHobbiesScreen());
+    } else {
+      Get.offAll(() => const DashboardScreen());
     }
-  }
-
-  bool isValid() {
-    int i = 0;
-    if (addressController.text == '') {
-      addressError = AppRes.enterAddress;
-      i++;
-    }
-    if (bioController.text == '') {
-      bioError = AppRes.enterBio;
-      i++;
-    }
-    notifyListeners();
-    return i == 0 ? true : false;
-  }
-
-  Future<void> setPrefsData() async {
-    await PrefService.setAddress(addressController.text);
-    await PrefService.setBioText(bioController.text);
-    await PrefService.setAge(int.parse(ageController.text));
-    await PrefService.setGender(gender);
-    await PrefService.setLoginText(true);
   }
 }

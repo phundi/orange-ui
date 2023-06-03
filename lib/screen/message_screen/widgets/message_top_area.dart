@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:orange_ui/service/pref_service.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 
 class MessageTopArea extends StatelessWidget {
@@ -21,12 +22,17 @@ class MessageTopArea extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              InkWell(
-                onTap: onNotificationTap,
-                child: Image.asset(
-                  AssetRes.bell,
-                  height: 37,
-                  width: 37,
+              Visibility(
+                visible: PrefService.settingData?.appdata?.isDating == 0
+                    ? false
+                    : true,
+                child: InkWell(
+                  onTap: onNotificationTap,
+                  child: Image.asset(
+                    AssetRes.bell,
+                    height: 37,
+                    width: 37,
+                  ),
                 ),
               ),
               InkWell(

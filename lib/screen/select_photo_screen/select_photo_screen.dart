@@ -12,7 +12,7 @@ class SelectPhotoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<SelectPhotoScreenViewModel>.reactive(
-      onModelReady: (model) {
+      onViewModelReady: (model) {
         model.init();
       },
       viewModelBuilder: () => SelectPhotoScreenViewModel(),
@@ -23,7 +23,7 @@ class SelectPhotoScreen extends StatelessWidget {
               const StartingProfileTopText(),
               SizedBox(height: Get.height / 25),
               FullImageView(
-                imageList: model.imageList,
+                imageList: model.imageFileList,
                 pageController: model.pageController,
                 fullName: model.fullName,
                 age: model.age,
@@ -32,7 +32,7 @@ class SelectPhotoScreen extends StatelessWidget {
               ),
               const Spacer(),
               BottomSelectionList(
-                imageList: model.imageList,
+                imageList: model.imageFileList,
                 selectedIndex: model.pageIndex,
                 onAddBtnTap: model.onImageAdd,
                 onImgRemove: model.onImageRemove,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class ColorRes {
   static const Color white = Color(0xFFFFFFFF);
+  static const Color transparent = Color(0x00000000);
   static const Color black = Color(0xFF000000);
   static const Color black2 = Color(0xFF1F1F1F);
   static const Color black3 = Color(0xFF151515);
@@ -39,6 +40,8 @@ class ColorRes {
   static const Color darkGrey8 = Color(0xFF656565);
   static const Color darkGrey9 = Color(0xFF6F6F6F);
   static const Color darkGrey10 = Color(0xFF404040);
+  static const Color greyShade300 = Color(0xffE0E0E0);
+  static const Color greyShade200 = Color(0xFFEEEEEE);
   static const Color grey = Color(0xFF909090);
   static const Color grey2 = Color(0xFF9C9C9C);
   static const Color grey3 = Color(0xFF8B8B8B);
@@ -85,16 +88,15 @@ class ColorRes {
   static const Color lightGrey6 = Color(0xFFB8B8B8);
   static const Color skyBlue = Color(0xFFF6F6F6);
   static const Color blueGrey = Color(0xFF5D5D5D);
-  static const Color lightpink = Color(0xFFFF782C);
-  static const Color lightpink1 = Color(0xFFFE1C04);
+  static const Color blueGrey1 = Color(0xFFD5D5D5);
   static const Color lightorange = Color(0xFFFF710B);
+  static const Color lightpink1 = Color(0xFFFE1C04);
   static const Color lightgreen = Color(0xFF1ED600);
-  static const Color lightgreen1 = Color(0xFF009E06);
+  static const Color green3 = Color(0xFF27C200);
   static const Color darkgreen = Color(0xFF0B8500);
   static const Color green = Color(0xFF0B8500);
+  static const Color lightgreen1 = Color(0xFF009E06);
   static const Color green2 = Color(0xFF009D2C);
-  static const Color green3 = Color(0xFF27C200);
   static const Color tometo = Color(0xFFFF7347);
   static const Color lighttometo = Color(0xFFFF7575);
-  static const Color red1 = Color(0xFFFE1C05);
 }

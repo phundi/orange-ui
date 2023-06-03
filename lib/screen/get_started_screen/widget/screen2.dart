@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/screen/get_started_screen/widget/bottom_info_field.dart';
-import 'package:orange_ui/utils/app_res.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
+import 'package:orange_ui/utils/font_res.dart';
 
 class Screen2 extends StatelessWidget {
   final VoidCallback onNextTap;
@@ -38,16 +39,16 @@ class Screen2 extends StatelessWidget {
                 Row(
                   children: [
                     SizedBox(width: Get.width / 2.25),
-                    clipTile(AssetRes.fitness, AppRes.fitness),
+                    clipTile(AssetRes.fitness, S.current.fitness),
                   ],
                 ),
                 const SizedBox(height: 13),
                 Row(
                   children: [
                     SizedBox(width: Get.width / 4.8),
-                    clipTile(AssetRes.music, AppRes.music),
+                    clipTile(AssetRes.music, S.current.music),
                     const SizedBox(width: 7),
-                    clipTile(AssetRes.fastFood, AppRes.foodies),
+                    clipTile(AssetRes.fastFood, S.current.foodies),
                   ],
                 ),
                 const SizedBox(height: 6),
@@ -58,11 +59,11 @@ class Screen2 extends StatelessWidget {
                   child: Row(
                     children: [
                       SizedBox(width: Get.width / 10),
-                      clipTile(AssetRes.movies, AppRes.movies),
+                      clipTile(AssetRes.movies, S.current.movies),
                       const SizedBox(width: 11),
-                      clipTile(AssetRes.walking, AppRes.walking),
+                      clipTile(AssetRes.walking, S.current.walking),
                       const SizedBox(width: 11),
-                      clipTile(AssetRes.chef, AppRes.chef),
+                      clipTile(AssetRes.chef, S.current.chef),
                     ],
                   ),
                 ),
@@ -70,16 +71,16 @@ class Screen2 extends StatelessWidget {
                 Row(
                   children: [
                     SizedBox(width: Get.width / 4.0),
-                    clipTile(AssetRes.microphone, AppRes.singing),
+                    clipTile(AssetRes.microphone, S.current.singing),
                     const SizedBox(width: 11),
-                    clipTile(AssetRes.travel, AppRes.travel),
+                    clipTile(AssetRes.travel, S.current.travel),
                   ],
                 ),
                 const SizedBox(height: 13),
                 Row(
                   children: [
                     SizedBox(width: Get.width / 2.5),
-                    clipTile(AssetRes.artist, AppRes.artist),
+                    clipTile(AssetRes.artist, S.current.artist),
                   ],
                 ),
                 SizedBox(height: Get.height / 8),
@@ -87,11 +88,11 @@ class Screen2 extends StatelessWidget {
             ),
           ),
           BottomInfoField(
-            title: AppRes.exploreProfiles,
-            subTitle: AppRes.getStarted2Subtitle,
+            title: S.current.exploreProfiles,
+            subTitle: S.current.getStarted2Subtitle,
             onNextTap: onNextTap,
             onSkipTap: onSkipTap,
-            buttonText: AppRes.thatGreat,
+            buttonText: S.current.thatGreat,
           )
         ],
       ),
@@ -127,7 +128,7 @@ class Screen2 extends StatelessWidget {
             style: const TextStyle(
               color: ColorRes.darkGrey,
               fontSize: 15,
-              fontFamily: 'gilroy_semibold',
+              fontFamily: FontRes.semiBold,
             ),
           ),
         ],

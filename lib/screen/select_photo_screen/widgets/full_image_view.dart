@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -5,12 +6,13 @@ import 'package:get/get.dart';
 import 'package:orange_ui/common/widgets/gradient_widget.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
+import 'package:orange_ui/utils/font_res.dart';
 
 class FullImageView extends StatelessWidget {
-  final List<String> imageList;
+  final List<File>? imageList;
   final PageController pageController;
   final String fullName;
-  final int age;
+  final int? age;
   final String address;
   final String bioText;
 
@@ -32,33 +34,48 @@ class FullImageView extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 36),
       child: Stack(
         children: [
-          PageView.builder(
-            controller: pageController,
-            itemCount: imageList.length,
-            itemBuilder: (context, index) {
-              return FractionallySizedBox(
-                widthFactor: 1 / pageController.viewportFraction,
-                child: Container(
+          imageList == null || imageList!.isEmpty
+              ? Container(
                   width: Get.width,
                   height: Get.height / 1.65,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: AssetImage(imageList[index]),
-                    ),
+                      color: ColorRes.blueGrey1,
+                      borderRadius: BorderRadius.circular(20)),
+                  child: Image.asset(
+                    AssetRes.imageWarning,
+                    height: 100,
+                    width: 100,
                   ),
+                )
+              : PageView.builder(
+                  controller: pageController,
+                  itemCount: imageList?.length,
+                  physics: const ClampingScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    return FractionallySizedBox(
+                      widthFactor: 1 / pageController.viewportFraction,
+                      child: Container(
+                        width: Get.width,
+                        height: Get.height / 1.65,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image: FileImage(File(imageList![index].path)),
+                          ),
+                        ),
+                      ),
+                    );
+                  },
                 ),
-              );
-            },
-          ),
           SizedBox(
             width: Get.width,
             height: Get.height / 1.65,
             child: Column(
               children: [
                 const SizedBox(height: 14),
-                topStoryLine(),
+                TopStoryLine(
+                    pageController: pageController, images: imageList ?? []),
                 const Spacer(),
                 Padding(
                   padding: const EdgeInsets.only(left: 9),
@@ -96,16 +113,15 @@ class FullImageView extends StatelessWidget {
                                     style: const TextStyle(
                                       color: ColorRes.white,
                                       fontSize: 18,
-                                      //fontFamily: 'gilroy_bold',
-                                      fontFamily: "gilroy_bold",
+                                      fontFamily: FontRes.bold,
                                     ),
                                   ),
                                   TextSpan(
-                                    text: " $age",
+                                    text: " ${age ?? ''}",
                                     style: const TextStyle(
                                       color: ColorRes.white,
                                       fontSize: 18,
-                                      fontFamily: "gilroy",
+                                      fontFamily: FontRes.regular,
                                     ),
                                   ),
                                 ],
@@ -125,7 +141,7 @@ class FullImageView extends StatelessWidget {
                                   address,
                                   style: const TextStyle(
                                     color: ColorRes.white,
-                                    fontSize: 11,
+                                    fontSize: 12,
                                   ),
                                 ),
                               ],
@@ -135,7 +151,7 @@ class FullImageView extends StatelessWidget {
                               bioText,
                               style: const TextStyle(
                                 color: ColorRes.white,
-                                fontSize: 11,
+                                fontSize: 12,
                               ),
                             ),
                           ],
@@ -152,34 +168,6 @@ class FullImageView extends StatelessWidget {
     );
   }
 
-  Widget topStoryLine() {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 30),
-      height: 3,
-      width: Get.width,
-      child: ListView.builder(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        scrollDirection: Axis.horizontal,
-        itemCount: imageList.length,
-        itemBuilder: (context, index) {
-          return Container(
-            margin: const EdgeInsets.only(right: 3),
-            height: 2.7,
-            width:
-                Get.width / imageList.length - (128 / (imageList.length)) - 3,
-            decoration: BoxDecoration(
-              color: pageController.page!.round() == index
-                  ? ColorRes.white
-                  : ColorRes.white.withOpacity(0.30),
-              borderRadius: BorderRadius.circular(10),
-            ),
-          );
-        },
-      ),
-    );
-  }
-
   Widget socialIcon(String icon, double size) {
     return Container(
       height: 27,
@@ -191,6 +179,56 @@ class FullImageView extends StatelessWidget {
       ),
       child: Center(
         child: Image.asset(icon, height: size, width: size),
+      ),
+    );
+  }
+}
+
+class TopStoryLine extends StatefulWidget {
+  final List<File> images;
+  final PageController pageController;
+
+  const TopStoryLine(
+      {Key? key, required this.images, required this.pageController})
+      : super(key: key);
+
+  @override
+  State<TopStoryLine> createState() => _TopStoryLineState();
+}
+
+class _TopStoryLineState extends State<TopStoryLine> {
+  int currentPosition = 0;
+  int lastCurrentPosition = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    widget.pageController.addListener(() {
+      currentPosition = widget.pageController.page?.round() ?? 0;
+      if (currentPosition != lastCurrentPosition) {
+        if (mounted) {
+          lastCurrentPosition = currentPosition;
+          setState(() {});
+        }
+      }
+    });
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 31),
+      child: Row(
+        children: List.generate(widget.images.length, (index) {
+          return Expanded(
+            child: Container(
+              margin: const EdgeInsets.only(right: 3),
+              height: 2.7,
+              width: (Get.width - 62) / widget.images.length,
+              decoration: BoxDecoration(
+                color: currentPosition == index
+                    ? ColorRes.white
+                    : ColorRes.white.withOpacity(0.30),
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+          );
+        }),
       ),
     );
   }

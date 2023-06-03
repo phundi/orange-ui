@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:orange_ui/utils/color_res.dart';
+import 'package:orange_ui/utils/font_res.dart';
 
 class SubmitButton1 extends StatelessWidget {
   final String title;
@@ -31,7 +32,7 @@ class SubmitButton1 extends StatelessWidget {
             style: const TextStyle(
               color: ColorRes.white,
               fontSize: 15,
-              fontFamily: 'gilroy_semibold',
+              fontFamily: FontRes.semiBold,
             ),
           ),
         ),
@@ -71,7 +72,7 @@ class SubmitButton2 extends StatelessWidget {
               color: ColorRes.white,
               fontSize: 14,
               fontWeight: FontWeight.w300,
-              fontFamily: "gilroy_bold",
+              fontFamily: FontRes.bold,
               letterSpacing: 1,
             ),
           ),

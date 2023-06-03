@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:orange_ui/service/pref_service.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 
 class ExploreTopArea extends StatelessWidget {
@@ -16,20 +17,25 @@ class ExploreTopArea extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
       child: Stack(
         alignment: Alignment.center,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              InkWell(
-                borderRadius: BorderRadius.circular(20),
-                onTap: onNotificationTap,
-                child: Image.asset(
-                  AssetRes.bell,
-                  height: 37,
-                  width: 37,
+              Visibility(
+                visible: PrefService.settingData?.appdata?.isDating == 0
+                    ? false
+                    : true,
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(20),
+                  onTap: onNotificationTap,
+                  child: Image.asset(
+                    AssetRes.bell,
+                    height: 37,
+                    width: 37,
+                  ),
                 ),
               ),
               InkWell(

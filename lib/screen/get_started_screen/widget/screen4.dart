@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/screen/get_started_screen/widget/bottom_info_field.dart';
-import 'package:orange_ui/utils/app_res.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
 
@@ -47,11 +47,11 @@ class Screen4 extends StatelessWidget {
             ),
           ),
           BottomInfoField(
-            title: AppRes.streamYourself,
-            subTitle: AppRes.getStarted4Subtitle,
+            title: S.current.streamYourself,
+            subTitle: S.current.getStarted4Subtitle,
             onNextTap: onNextTap,
             onSkipTap: onSkipTap,
-            buttonText: AppRes.allow,
+            buttonText: S.current.allow,
           )
         ],
       ),

@@ -1,53 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:orange_ui/utils/app_res.dart';
+import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/utils/color_res.dart';
+import 'package:orange_ui/utils/font_res.dart';
 
 class BottomArea extends StatelessWidget {
-  final VoidCallback onSearchingTextTap;
   final VoidCallback onCancelTap;
+  final VoidCallback onNextTap;
+  final bool isLoading;
 
-  const BottomArea({
-    Key? key,
-    required this.onSearchingTextTap,
-    required this.onCancelTap,
-  }) : super(key: key);
+  const BottomArea(
+      {Key? key,
+      required this.onCancelTap,
+      required this.isLoading,
+      required this.onNextTap})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      top: false,
       child: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 34.0),
-            child: InkWell(
-              onTap: onSearchingTextTap,
-              child: const Text(
-                AppRes.randomSearchingText,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 12,
-                  color: ColorRes.darkGrey8,
-                ),
-              ),
-            ),
-          ),
-          const SizedBox(height: 15),
-          const Text(
-            AppRes.searching,
-            style: TextStyle(
-              fontFamily: 'gilroy_bold',
-              fontSize: 22,
-              color: ColorRes.darkGrey7,
-            ),
-          ),
-          const SizedBox(height: 23),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 28),
             child: InkWell(
               borderRadius: BorderRadius.circular(10),
-              onTap: onCancelTap,
+              onTap: () {
+                isLoading ? onCancelTap() : onNextTap();
+              },
               child: Container(
                 height: 50,
                 width: Get.width,
@@ -55,12 +35,21 @@ class BottomArea extends StatelessWidget {
                   color: ColorRes.orange3.withOpacity(0.13),
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: const Center(
-                  child: Text(
-                    AppRes.cancelCap,
-                    style: TextStyle(
-                      color: ColorRes.orange3,
-                      fontFamily: 'gilroy_bold',
+                child: Center(
+                  child: AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 300),
+                    transitionBuilder:
+                        (Widget child, Animation<double> animation) {
+                      return ScaleTransition(scale: animation, child: child);
+                    },
+                    child: Text(
+                      isLoading ? S.current.cancelCap : S.current.next,
+                      key: ValueKey<String>(
+                          isLoading ? S.current.cancelCap : S.current.next),
+                      style: const TextStyle(
+                        color: ColorRes.orange3,
+                        fontFamily: FontRes.bold,
+                      ),
                     ),
                   ),
                 ),

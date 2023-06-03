@@ -1,11 +1,17 @@
+import 'dart:io';
+
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:orange_ui/utils/app_res.dart';
+import 'package:orange_ui/generated/l10n.dart';
+import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
+import 'package:orange_ui/utils/const_res.dart';
+import 'package:orange_ui/utils/font_res.dart';
 
 class ImageListArea extends StatelessWidget {
-  final List<String> imageList;
+  final List<Images>? imageList;
   final Function(int index) onImgRemove;
   final VoidCallback onAddBtnTap;
 
@@ -21,14 +27,14 @@ class ImageListArea extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Padding(
-          padding: EdgeInsets.only(left: 20.0),
+        Padding(
+          padding: const EdgeInsets.only(left: 20.0),
           child: Text(
-            AppRes.photos,
-            style: TextStyle(
+            S.current.photosCap,
+            style: const TextStyle(
               color: ColorRes.darkGrey3,
               fontSize: 15,
-              fontFamily: "gilroy_extra_bold",
+              fontFamily: FontRes.extraBold,
             ),
           ),
         ),
@@ -42,41 +48,54 @@ class ImageListArea extends StatelessWidget {
                 height: 58,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  itemCount: imageList.length,
+                  itemCount: imageList?.length,
                   physics: const BouncingScrollPhysics(),
                   itemBuilder: (context, index) {
                     return InkWell(
                       onTap: () {
                         onImgRemove(index);
                       },
-                      child: Container(
-                        height: 58,
-                        width: 58,
-                        margin: const EdgeInsets.only(right: 10),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: AssetImage(imageList[index]),
-                          ),
-                        ),
-                        child: Center(
-                          child: Container(
-                            height: 31,
-                            width: 31,
-                            decoration: BoxDecoration(
-                              color: ColorRes.white.withOpacity(0.30),
-                              shape: BoxShape.circle,
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 10),
+                        child: Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: imageList?[index].id != -123
+                                  ? CachedNetworkImage(
+                                      imageUrl:
+                                          '${ConstRes.aImageBaseUrl}${imageList?[index].image}',
+                                      cacheKey:
+                                          '${ConstRes.aImageBaseUrl}${imageList?[index].image}',
+                                      fit: BoxFit.cover,
+                                      height: 58,
+                                      width: 58,
+                                    )
+                                  : Image.file(
+                                      File(imageList![index].image!),
+                                      fit: BoxFit.cover,
+                                      height: 58,
+                                      width: 58,
+                                    ),
                             ),
-                            child: Center(
-                              child: Image.asset(
-                                AssetRes.bin,
-                                height: 16,
-                                width: 15,
-                                color: ColorRes.white,
+                            Container(
+                              height: 31,
+                              width: 31,
+                              decoration: BoxDecoration(
+                                color: ColorRes.white.withOpacity(0.30),
+                                shape: BoxShape.circle,
+                              ),
+                              child: Center(
+                                child: Image.asset(
+                                  AssetRes.bin,
+                                  height: 16,
+                                  width: 15,
+                                  color: ColorRes.white,
+                                ),
                               ),
                             ),
-                          ),
+                          ],
                         ),
                       ),
                     );
@@ -100,7 +119,7 @@ class ImageListArea extends StatelessWidget {
                         ),
                         child: Center(
                           child:
-                              Image.asset(AssetRes.plus, height: 17, width: 17),
+                          Image.asset(AssetRes.plus, height: 17, width: 17),
                         ),
                       ),
                     ),

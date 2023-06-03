@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:orange_ui/utils/app_res.dart';
+import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/utils/color_res.dart';
 
 class DropDownBox extends StatelessWidget {
@@ -17,9 +17,7 @@ class DropDownBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 100,
-      //width: Get.width,
       padding: const EdgeInsets.symmetric(horizontal: 20),
-      //margin: const EdgeInsets.only(left: 5),
       decoration: BoxDecoration(color: ColorRes.white, boxShadow: [
         BoxShadow(
           color: ColorRes.grey2.withOpacity(0.35),
@@ -40,16 +38,16 @@ class DropDownBox extends StatelessWidget {
             children: [
               InkWell(
                 onTap: () {
-                  onChange(AppRes.male);
+                  onChange(S.current.male);
                 },
                 child: Container(
                   height: 30,
                   width: Get.width - 80,
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    AppRes.male,
+                    S.current.male,
                     style: TextStyle(
-                      color: gender == AppRes.male
+                      color: gender == S.current.male
                           ? ColorRes.orange
                           : ColorRes.grey,
                     ),
@@ -58,16 +56,16 @@ class DropDownBox extends StatelessWidget {
               ),
               InkWell(
                 onTap: () {
-                  onChange(AppRes.female);
+                  onChange(S.current.female);
                 },
                 child: Container(
                   height: 30,
                   width: Get.width - 80,
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    AppRes.female,
+                    S.current.female,
                     style: TextStyle(
-                      color: gender == AppRes.female
+                      color: gender == S.current.female
                           ? ColorRes.orange
                           : ColorRes.grey,
                     ),
@@ -76,16 +74,16 @@ class DropDownBox extends StatelessWidget {
               ),
               InkWell(
                 onTap: () {
-                  onChange(AppRes.other);
+                  onChange(S.current.other);
                 },
                 child: Container(
                   height: 30,
                   width: Get.width - 80,
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    AppRes.other,
+                    S.current.other,
                     style: TextStyle(
-                      color: gender == AppRes.other
+                      color: gender == S.current.other
                           ? ColorRes.orange
                           : ColorRes.grey,
                     ),

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:orange_ui/common/widgets/loader.dart';
 import 'package:orange_ui/screen/live_grid_screen/live_grid_screen_view_model.dart';
 import 'package:orange_ui/screen/live_grid_screen/widgets/custom_grid_view.dart';
 import 'package:orange_ui/screen/live_grid_screen/widgets/live_grid_top_area.dart';
@@ -11,7 +13,7 @@ class LiveGridScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<LiveGridScreenViewModel>.reactive(
-      onModelReady: (model) {
+      onViewModelReady: (model) {
         model.init();
       },
       viewModelBuilder: () => LiveGridScreenViewModel(),
@@ -22,12 +24,28 @@ class LiveGridScreen extends StatelessWidget {
             children: [
               LiveGridTopArea(
                 onBackBtnTap: model.onBackBtnTap,
-                onGoLiveTap: model.onGoLiveTap,
+                onGoLiveTap: model.goLiveBtnClick,
+                userData: model.registrationUser,
               ),
-              CustomGridView(
-                userData: model.userData,
-                onImageTap: model.onImageTap,
+              if (!model.isLoading)
+                CustomGridView(
+                  userData: model.userData,
+                  onImageTap: model.onLiveStreamProfileTap,
+                )
+              else
+                Expanded(
+                  child: Loader().lottieWidget(),
+                ),
+              const SizedBox(
+                height: 10,
               ),
+              if (model.bannerAd != null)
+                Container(
+                  alignment: Alignment.center,
+                  width: model.bannerAd?.size.width.toDouble(),
+                  height: model.bannerAd?.size.height.toDouble(),
+                  child: AdWidget(ad: model.bannerAd!),
+                ),
             ],
           ),
         );

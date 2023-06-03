@@ -1,28 +1,34 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:orange_ui/utils/app_res.dart';
+import 'package:intl/intl.dart';
+import 'package:orange_ui/generated/l10n.dart';
+import 'package:orange_ui/model/chat_and_live_stream/fetch_live_stream_history.dart';
 import 'package:orange_ui/utils/color_res.dart';
+import 'package:orange_ui/utils/font_res.dart';
 
 class CenterAreaLiveStream extends StatelessWidget {
-  final List<Map<String, dynamic>> dataList;
+  final List<FetchLiveStreamHistoryData>? dataList;
+  final ScrollController controller;
 
-  const CenterAreaLiveStream({Key? key, required this.dataList})
+  const CenterAreaLiveStream(
+      {Key? key, required this.dataList, required this.controller})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: ListView.builder(
+        controller: controller,
         padding: EdgeInsets.zero,
-        itemCount: dataList.length,
+        itemCount: dataList?.length,
         physics: const BouncingScrollPhysics(),
         itemBuilder: (context, index) {
           return customContainer(
-            dataList[index]['time'],
-            dataList[index]['date'],
-            dataList[index]['duration'],
-            dataList[index]['diamonds'],
+            time: dataList?[index].startedAt,
+            streamed: dataList?[index].streamedFor,
+            collected: dataList?[index].amountCollected.toString(),
+            date: dataList?[index].updatedAt,
           );
         },
       ),
@@ -30,7 +36,7 @@ class CenterAreaLiveStream extends StatelessWidget {
   }
 
   Widget customContainer(
-      String time, String date, String streamed, String collected) {
+      {String? time, String? date, String? streamed, String? collected}) {
     return Container(
       width: Get.width,
       margin: const EdgeInsets.all(7),
@@ -44,11 +50,11 @@ class CenterAreaLiveStream extends StatelessWidget {
         children: [
           Row(
             children: [
-              const Text(
-                AppRes.time,
-                style: TextStyle(
+              Text(
+                S.current.time,
+                style: const TextStyle(
                   color: ColorRes.grey28,
-                  fontFamily: 'gilroy_semibold',
+                  fontFamily: FontRes.semiBold,
                 ),
               ),
               Expanded(
@@ -61,7 +67,7 @@ class CenterAreaLiveStream extends StatelessWidget {
                 ),
               ),
               Text(
-                date,
+                DateFormat('dd MMM yyyy').format(DateTime.parse('$date')),
                 style: const TextStyle(
                   fontSize: 14,
                   color: ColorRes.grey27,
@@ -72,17 +78,17 @@ class CenterAreaLiveStream extends StatelessWidget {
           const SizedBox(height: 7),
           Row(
             children: [
-              const Text(
-                AppRes.streamed,
-                style: TextStyle(
+              Text(
+                S.current.streamed,
+                style: const TextStyle(
                   color: ColorRes.grey28,
-                  fontFamily: 'gilroy_semibold',
+                  fontFamily: FontRes.semiBold,
                 ),
               ),
               Text(
                 " $streamed",
                 style: const TextStyle(
-                  fontFamily: 'gilroy',
+                  fontFamily: FontRes.regular,
                   fontSize: 14,
                   color: ColorRes.grey27,
                 ),
@@ -92,17 +98,17 @@ class CenterAreaLiveStream extends StatelessWidget {
           const SizedBox(height: 7),
           Row(
             children: [
-              const Text(
-                AppRes.diamound,
-                style: TextStyle(
+              Text(
+                S.current.diamond,
+                style: const TextStyle(
                   color: ColorRes.grey28,
-                  fontFamily: 'gilroy_semibold',
+                  fontFamily: FontRes.semiBold,
                 ),
               ),
               Text(
                 " $collected",
                 style: const TextStyle(
-                  fontFamily: 'gilroy',
+                  fontFamily: FontRes.regular,
                   fontSize: 14,
                   color: ColorRes.grey27,
                 ),

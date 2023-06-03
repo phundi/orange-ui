@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:orange_ui/screen/person_streaming_screen/person_streaming_screen_view_model.dart';
 import 'package:orange_ui/screen/person_streaming_screen/widgets/bottom_text_field.dart';
 import 'package:orange_ui/screen/person_streaming_screen/widgets/comment_list_area.dart';
-import 'package:orange_ui/screen/person_streaming_screen/widgets/top_bar_area.dart';
-import 'package:orange_ui/utils/asset_res.dart';
+import 'package:orange_ui/screen/person_streaming_screen/widgets/person_top_bar_area.dart';
+import 'package:orange_ui/utils/color_res.dart';
 import 'package:stacked/stacked.dart';
 
 class PersonStreamingScreen extends StatelessWidget {
@@ -13,45 +12,54 @@ class PersonStreamingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<PersonStreamingScreenViewModel>.reactive(
-      onModelReady: (model) {
+      onViewModelReady: (model) {
         model.init();
       },
       viewModelBuilder: () => PersonStreamingScreenViewModel(),
       builder: (context, model, child) {
-        return Scaffold(
-          body: Container(
-            height: Get.height,
-            width: Get.width,
-            padding: EdgeInsets.symmetric(horizontal: Get.width * 0.035),
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                fit: BoxFit.cover,
-                image: AssetImage(AssetRes.profile22),
+        return WillPopScope(
+          onWillPop: () async {
+            model.onExitTap();
+            return false;
+          },
+          child: Scaffold(
+              body: Stack(
+            children: [
+              model.broadcastView(),
+              InkWell(
+                onTap: () {
+                  model.commentFocus.unfocus();
+                },
+                splashColor: ColorRes.transparent,
+                highlightColor: ColorRes.transparent,
+                child: Column(
+                  children: [
+                    PersonTopBarArea(
+                      onViewTap: model.onViewTap,
+                      onMoreBtnTap: model.onMoreBtnTap,
+                      onExitTap: model.onExitTap,
+                      liveStreamUser: model.liveStreamUser,
+                      onUserTap: model.onUserTap,
+                    ),
+                    const Spacer(),
+                    CommentListArea(
+                      commentList: model.commentList,
+                      pageContext: context,
+                    ),
+                    BottomTextField(
+                      commentController: model.commentController,
+                      commentFocus: model.commentFocus,
+                      onMsgSend: model.onCommentSend,
+                      onGiftTap: model.onGiftBtnTap,
+                      onGoProTap: model.onGoPremiumTap,
+                      count: model.countDownValue,
+                    ),
+                    const SizedBox(height: 16),
+                  ],
+                ),
               ),
-            ),
-            child: Column(
-              children: [
-                TopBarArea(
-                  onViewTap: model.onViewTap,
-                  onMoreBtnTap: model.onMoreBtnTap,
-                  onExitTap: model.onExitTap,
-                ),
-                const Spacer(),
-                CommentListArea(
-                  commentList: model.commentList.reversed.toList(),
-                  pageContext: context,
-                ),
-                BottomTextField(
-                  commentController: model.commentController,
-                  commentFocus: model.commentFocus,
-                  onMsgSend: model.onCommentSend,
-                  onGiftTap: model.onGiftGtnTap,
-                  onGoProTap: model.onGoPremiumTap,
-                ),
-                const SizedBox(height: 16),
-              ],
-            ),
-          ),
+            ],
+          )),
         );
       },
     );

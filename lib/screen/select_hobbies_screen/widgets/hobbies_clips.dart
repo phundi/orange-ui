@@ -1,22 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:orange_ui/utils/color_res.dart';
+import 'package:orange_ui/utils/font_res.dart';
+
+import '../../../model/user/registration_user.dart';
 
 class HobbiesClips extends StatelessWidget {
-  final List<String> hobbiesList;
-  final List<String> selectedList;
+  final List<Interest> hobbiesList;
+  final List<String?> selectedList;
   final Function(String value) onClipTap;
+  final double paddingLeft;
+  final double paddingRight;
 
   const HobbiesClips({
     Key? key,
     required this.hobbiesList,
     required this.selectedList,
     required this.onClipTap,
+    this.paddingLeft = 22,
+    this.paddingRight = 13,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 22, right: 13),
+      padding: EdgeInsets.only(left: paddingLeft, right: paddingRight),
       child: Wrap(
         alignment: WrapAlignment.center,
         children: hobbiesList.map<Widget>((e) => clip(e)).toList(),
@@ -24,18 +31,18 @@ class HobbiesClips extends StatelessWidget {
     );
   }
 
-  Widget clip(String label) {
-    bool selected = selectedList.contains(label);
+  Widget clip(Interest label) {
+    bool selected = selectedList.contains(label.id.toString());
     return Padding(
-      padding: const EdgeInsets.only(right: 9, bottom: 10),
+      padding: const EdgeInsets.only(right: 20, bottom: 10),
       child: InkWell(
         borderRadius: BorderRadius.circular(30),
         onTap: () {
-          onClipTap(label);
+          onClipTap(label.id.toString());
         },
         child: Container(
-          height: 35,
-          padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 10),
+          padding:
+              const EdgeInsets.only(right: 22, left: 22, top: 10, bottom: 8),
           decoration: BoxDecoration(
             color:
                 selected ? ColorRes.white : ColorRes.orange2.withOpacity(0.06),
@@ -52,11 +59,11 @@ class HobbiesClips extends StatelessWidget {
                 : null,
           ),
           child: Text(
-            label,
+            label.title!,
             style: TextStyle(
               color: selected ? ColorRes.white : ColorRes.orange2,
-              fontSize: 12,
-              fontFamily: "gilroy_bold",
+              fontSize: 15,
+              fontFamily: FontRes.bold,
             ),
           ),
         ),

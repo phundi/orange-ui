@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:orange_ui/utils/app_res.dart';
+import 'package:orange_ui/generated/l10n.dart';
+import 'package:orange_ui/service/pref_service.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
+import 'package:orange_ui/utils/font_res.dart';
 
 class BottomBar extends StatelessWidget {
   final int pageIndex;
@@ -29,13 +31,22 @@ class BottomBar extends StatelessWidget {
         ]),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            iconBox(AssetRes.explore, AppRes.explore, 17.5, 17.5, 0),
-            iconBox(AssetRes.randoms, AppRes.randoms, 18.22, 20.02, 1),
-            iconBox(AssetRes.joinLives, AppRes.joinLive, 17.5, 17.5, 2),
-            iconBox(AssetRes.message, AppRes.message, 16.8, 18, 3),
-            iconBox(AssetRes.profile, AppRes.profile, 18, 17, 4),
-          ],
+          children: PrefService.settingData?.appdata?.isDating == 0
+              ? [
+                  iconBox(AssetRes.explore, S.current.explore, 17.5, 17.5, 0),
+                  iconBox(
+                      AssetRes.joinLives, S.current.joinLive, 17.5, 17.5, 2),
+                  iconBox(AssetRes.message, S.current.message, 16.8, 18, 3),
+                  iconBox(AssetRes.profile, S.current.profile, 18, 17, 4),
+                ]
+              : [
+                  iconBox(AssetRes.explore, S.current.explore, 17.5, 17.5, 0),
+                  iconBox(AssetRes.randoms, S.current.randoms, 18.22, 20.02, 1),
+                  iconBox(
+                      AssetRes.joinLives, S.current.joinLive, 17.5, 17.5, 2),
+                  iconBox(AssetRes.message, S.current.message, 16.8, 18, 3),
+                  iconBox(AssetRes.profile, S.current.profile, 18, 17, 4),
+                ],
         ),
       ),
     );
@@ -60,9 +71,10 @@ class BottomBar extends StatelessWidget {
           Text(
             title,
             style: TextStyle(
-              fontSize: 10,
-              color: index == pageIndex ? ColorRes.orange2 : ColorRes.dimGrey6,
-            ),
+                fontSize: 12,
+                color:
+                    index == pageIndex ? ColorRes.orange2 : ColorRes.dimGrey6,
+                fontFamily: FontRes.medium),
           ),
           const SizedBox(height: 10),
         ],

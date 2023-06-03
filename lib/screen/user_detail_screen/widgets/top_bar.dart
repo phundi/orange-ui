@@ -1,86 +1,140 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:orange_ui/model/user/registration_user.dart';
+import 'package:orange_ui/service/pref_service.dart';
 import 'package:orange_ui/utils/app_res.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
+import 'package:orange_ui/utils/font_res.dart';
 
 class TopBar extends StatelessWidget {
   final VoidCallback onBackTap;
-  final VoidCallback onMoreBtnTap;
+  final Function(String value) onMoreBtnTap;
+  final String? fullName;
+  final String? age;
+  final bool isVerified;
+  final String blockUnblock;
+  final RegistrationUserData? userData;
+  final bool moreInfo;
 
-  const TopBar({
-    Key? key,
-    required this.onBackTap,
-    required this.onMoreBtnTap,
-  }) : super(key: key);
+  const TopBar(
+      {Key? key,
+      required this.onBackTap,
+      required this.onMoreBtnTap,
+      required this.fullName,
+      required this.age,
+      required this.isVerified,
+      required this.blockUnblock,
+      this.userData,
+      required this.moreInfo})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(10, 40, 10, 7),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(10),
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
-          child: Container(
-            height: 54,
-            decoration: BoxDecoration(
-              color: ColorRes.black.withOpacity(0.33),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                Row(
-                  children: [
-                    InkWell(
-                      onTap: onBackTap,
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(25, 5, 25, 5),
-                        child: Image.asset(
-                          AssetRes.backArrow,
-                          height: 18,
-                          width: 10,
+      padding: const EdgeInsets.fromLTRB(10, 0, 10, 7),
+      child: SafeArea(
+        bottom: false,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(10),
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
+            child: Container(
+              height: 54,
+              decoration: BoxDecoration(
+                color: ColorRes.black.withOpacity(0.33),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  Row(
+                    children: [
+                      InkWell(
+                        onTap: onBackTap,
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(25, 5, 25, 5),
+                          child: Image.asset(
+                            AssetRes.backArrow,
+                            height: 18,
+                            width: 10,
+                          ),
                         ),
                       ),
-                    ),
-                    const Spacer(),
-                    InkWell(
-                      onTap: onMoreBtnTap,
-                      child: Image.asset(
-                        AssetRes.moreHorizontal,
-                        height: 10,
-                        width: 26.74,
-                        fit: BoxFit.cover,
+                      const Spacer(),
+                      Visibility(
+                        visible:
+                            PrefService.userId == userData?.id ? false : true,
+                        child: Visibility(
+                          visible: moreInfo == true ? false : true,
+                          child: PopupMenuButton<String>(
+                            onSelected: (value) {
+                              onMoreBtnTap(value);
+                            },
+                            color: ColorRes.black2.withOpacity(0.9),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            elevation: 3,
+                            itemBuilder: (BuildContext context) {
+                              return {blockUnblock, AppRes.report}.map(
+                                (String choice) {
+                                  return PopupMenuItem<String>(
+                                    value: choice,
+                                    textStyle: const TextStyle(
+                                        fontFamily: FontRes.medium,
+                                        color: ColorRes.white),
+                                    child: Text(
+                                      choice,
+                                      style: const TextStyle(
+                                          fontFamily: FontRes.medium,
+                                          color: ColorRes.white),
+                                    ),
+                                  );
+                                },
+                              ).toList();
+                            },
+                            child: Image.asset(
+                              AssetRes.moreHorizontal,
+                              height: 10,
+                              width: 26.74,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
                       ),
-                    ),
-                    const SizedBox(width: 25),
-                  ],
-                ),
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const Text(
-                      AppRes.nataliaNora,
-                      style: TextStyle(
-                        color: ColorRes.white,
-                        fontSize: 16,
-                        fontFamily: "gilroy_bold",
+                      const SizedBox(width: 25),
+                    ],
+                  ),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        fullName ?? '',
+                        style: const TextStyle(
+                          color: ColorRes.white,
+                          fontSize: 16,
+                          fontFamily: FontRes.bold,
+                        ),
                       ),
-                    ),
-                    const Text(
-                      AppRes.twentyFour,
-                      style: TextStyle(
-                        color: ColorRes.white,
-                        fontSize: 16,
+                      Text(
+                        ' $age',
+                        style: const TextStyle(
+                          color: ColorRes.white,
+                          fontSize: 16,
+                        ),
                       ),
-                    ),
-                    const SizedBox(width: 5.7),
-                    Image.asset(AssetRes.tickMark, height: 16, width: 16),
-                  ],
-                ),
-              ],
+                      const SizedBox(width: 5.7),
+                      Visibility(
+                        visible: isVerified,
+                        child: Image.asset(AssetRes.tickMark,
+                            height: 16, width: 16),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),

@@ -4,9 +4,12 @@ import 'package:get/get.dart';
 import 'package:orange_ui/screen/starting_profile_screen/widet/text_field_area/text_field_controller.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
+import 'package:orange_ui/utils/font_res.dart';
+
+String capitalize(String s) => s[0].toUpperCase() + s.substring(1);
 
 class TopCardArea extends StatelessWidget {
-  final String fullName;
+  final String? fullName;
 
   TopCardArea({Key? key, required this.fullName}) : super(key: key);
 
@@ -19,7 +22,6 @@ class TopCardArea extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            //height: 100,
             width: Get.width,
             padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
             decoration: BoxDecoration(
@@ -35,20 +37,22 @@ class TopCardArea extends StatelessWidget {
                     RichText(
                       text: TextSpan(
                         children: [
-                          TextSpan(
-                            text: fullName,
-                            style: const TextStyle(
-                              color: ColorRes.white,
-                              fontSize: 18,
-                              fontFamily: "gilroy_bold",
-                            ),
-                          ),
+                          fullName == null || fullName!.isEmpty
+                              ? const TextSpan(text: '')
+                              : TextSpan(
+                                  text: '${capitalize('$fullName')} ',
+                                  style: const TextStyle(
+                                    color: ColorRes.white,
+                                    fontSize: 18,
+                                    fontFamily: FontRes.bold,
+                                  ),
+                                ),
                           TextSpan(
                             text: controller.age.value,
                             style: const TextStyle(
                               color: ColorRes.white,
                               fontSize: 18,
-                              fontFamily: "gilroy",
+                              fontFamily: FontRes.regular,
                             ),
                           ),
                         ],
@@ -60,11 +64,13 @@ class TopCardArea extends StatelessWidget {
                         Image.asset(AssetRes.locationPin,
                             height: 13, width: 13),
                         const SizedBox(width: 5),
-                        Text(
-                          controller.address.value,
-                          style: const TextStyle(
-                            color: ColorRes.white,
-                            fontSize: 12,
+                        Expanded(
+                          child: Text(
+                            controller.address.value,
+                            style: const TextStyle(
+                              color: ColorRes.white,
+                              fontSize: 12,
+                            ),
                           ),
                         ),
                       ],

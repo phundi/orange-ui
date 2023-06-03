@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:orange_ui/common/widgets/buttons.dart';
 import 'package:orange_ui/common/widgets/starting_profile_top_text.dart';
+import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/screen/starting_profile_screen/starting_profile_screen_view_model.dart';
 import 'package:orange_ui/screen/starting_profile_screen/widet/text_field_area/text_fields_area.dart';
 import 'package:orange_ui/screen/starting_profile_screen/widet/top_card_area.dart';
-import 'package:orange_ui/utils/app_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
 import 'package:stacked/stacked.dart';
 
@@ -15,7 +15,7 @@ class StartingProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<StartingProfileScreenViewModel>.reactive(
-      onModelReady: (model) {
+      onViewModelReady: (model) {
         model.init();
       },
       viewModelBuilder: () => StartingProfileScreenViewModel(),
@@ -45,12 +45,15 @@ class StartingProfileScreen extends StatelessWidget {
                     onTextFieldTap: model.onAllScreenTap,
                     showDropdown: model.showDropdown,
                     onGenderChange: model.onGenderChange,
+                    bioError: model.bioError,
+                    addressError: model.addressError,
+                    ageError: model.ageError,
                   ),
                   Padding(
                     padding:
                         const EdgeInsets.only(left: 16, right: 16, bottom: 22),
                     child: SubmitButton2(
-                        title: AppRes.next, onTap: model.onNextTap),
+                        title: S.current.next, onTap: model.onNextTap),
                   )
                 ],
               ),

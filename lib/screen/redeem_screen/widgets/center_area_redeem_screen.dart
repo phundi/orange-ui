@@ -1,148 +1,150 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:orange_ui/generated/l10n.dart';
+import 'package:orange_ui/model/fetch_redeem_request.dart';
+import 'package:orange_ui/service/pref_service.dart';
 import 'package:orange_ui/utils/app_res.dart';
+import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
+import 'package:orange_ui/utils/font_res.dart';
 
 class CenterAreaRedeemScreen extends StatelessWidget {
-  const CenterAreaRedeemScreen({Key? key}) : super(key: key);
+  final List<RedeemRequestData>? redeemData;
+
+  const CenterAreaRedeemScreen({Key? key, this.redeemData}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const SizedBox(height: 1),
-        customContainer(
-          ColorRes.lightpink.withOpacity(0.20),
-          'Processing',
-          ColorRes.lightorange,
-          '5 Sep 2021',
-          ' 50236',
-          '',
-        ),
-        customContainer(
-          ColorRes.lightgreen.withOpacity(0.22),
-          'Completed',
-          ColorRes.darkgreen,
-          '1 Sep 2021',
-          ' 50236',
-          ' \$250',
-        ),
-        customContainer(
-          ColorRes.lightgreen.withOpacity(0.22),
-          'Completed',
-          ColorRes.darkgreen,
-          '25 Oct 2021',
-          ' 60236',
-          ' \$320',
-        ),
-        customContainer(
-          ColorRes.lightgreen.withOpacity(0.22),
-          'Completed',
-          ColorRes.darkgreen,
-          '19 Oct 2021',
-          ' 60236',
-          ' \$320',
-        ),
-      ],
-    );
-  }
-
-  Widget customContainer(
-    Color color,
-    String text,
-    Color textColor,
-    String date,
-    String data,
-    String amount,
-  ) {
-    return Container(
-      width: Get.width,
-      margin: const EdgeInsets.only(left: 7, right: 7, bottom: 5),
-      padding: const EdgeInsets.only(top: 10, left: 11, bottom: 11, right: 13),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
-        color: ColorRes.grey26,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              const Text(
-                AppRes.data,
-                style: TextStyle(
-                  fontSize: 14,
-                  fontFamily: 'gilroy_semibold',
+    return Expanded(
+      child: redeemData!.isEmpty
+          ? Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(AssetRes.themeLabel, width: 150),
+                const SizedBox(
+                  height: 10,
                 ),
-              ),
-              const SizedBox(width: 8),
-              Container(
-                padding: const EdgeInsets.fromLTRB(16, 5, 13, 4),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  color: color,
+                Text(
+                  S.current.noRedeemData,
+                  style: const TextStyle(
+                      color: ColorRes.grey14,
+                      fontFamily: FontRes.medium,
+                      fontSize: 16),
                 ),
-                child: Center(
-                  child: Text(
-                    text,
-                    style: TextStyle(
-                      color: textColor,
-                      fontSize: 12,
-                      fontFamily: 'gilroy_semibold',
+              ],
+            )
+          : SafeArea(
+              top: false,
+              child: ListView.builder(
+                itemCount: redeemData?.length,
+                padding: EdgeInsets.zero,
+                itemBuilder: (context, index) {
+                  RedeemRequestData? data = redeemData?[index];
+                  return Container(
+                    width: Get.width,
+                    margin: const EdgeInsets.only(left: 7, right: 7, bottom: 5),
+                    padding: const EdgeInsets.only(
+                        top: 10, left: 11, bottom: 11, right: 13),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      color: ColorRes.grey26,
                     ),
-                  ),
-                ),
-              ),
-              const Spacer(),
-              Text(
-                date,
-                style: const TextStyle(
-                  fontSize: 14,
-                  color: ColorRes.grey27,
-                ),
-              )
-            ],
-          ),
-          const SizedBox(height: 7),
-          Row(
-            children: [
-              const Text(
-                AppRes.diamond1,
-                style: TextStyle(
-                    color: ColorRes.grey27, fontSize: 14, fontFamily: 'gilroy'),
-              ),
-              Text(
-                data,
-                style: const TextStyle(
-                  color: ColorRes.grey28,
-                  fontSize: 14,
-                  fontFamily: 'gilroy_semibold',
-                ),
-              )
-            ],
-          ),
-          const SizedBox(height: 6),
-          amount == ''
-              ? const SizedBox()
-              : Row(
-                  children: [
-                    const Text(
-                      AppRes.amount,
-                      style: TextStyle(color: ColorRes.grey27, fontSize: 14),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text(
+                              '${data?.requestId}',
+                              style: const TextStyle(
+                                fontSize: 14,
+                                fontFamily: FontRes.semiBold,
+                              ),
+                            ),
+                            const SizedBox(width: 8),
+                            Container(
+                              padding: const EdgeInsets.fromLTRB(16, 5, 13, 4),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(30),
+                                color: data?.status == 0
+                                    ? ColorRes.lightorange.withOpacity(0.20)
+                                    : ColorRes.lightgreen.withOpacity(0.22),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  data?.status == 0
+                                      ? S.current.processing
+                                      : S.current.complete,
+                                  style: TextStyle(
+                                    color: data?.status == 0
+                                        ? ColorRes.lightorange
+                                        : ColorRes.darkgreen,
+                                    fontSize: 12,
+                                    fontFamily: FontRes.semiBold,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            const Spacer(),
+                            Text(
+                              DateFormat(AppRes.dMY)
+                                  .format(DateTime.parse('${data?.createdAt}')),
+                              style: const TextStyle(
+                                fontSize: 14,
+                                color: ColorRes.grey27,
+                              ),
+                            )
+                          ],
+                        ),
+                        const SizedBox(height: 7),
+                        Row(
+                          children: [
+                            Text(
+                              S.current.diamond1,
+                              style: const TextStyle(
+                                  color: ColorRes.grey27,
+                                  fontSize: 14,
+                                  fontFamily: FontRes.regular),
+                            ),
+                            Text(
+                              ' ${data?.coinAmount}',
+                              style: const TextStyle(
+                                color: ColorRes.grey28,
+                                fontSize: 14,
+                                fontFamily: FontRes.semiBold,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 6),
+                        Visibility(
+                          visible: data?.status == 0 ? false : true,
+                          child: Row(
+                            children: [
+                              Text(
+                                S.current.amount,
+                                style: const TextStyle(
+                                    color: ColorRes.grey27, fontSize: 14),
+                              ),
+                              Text(
+                                ' ${PrefService.currency}${data?.amountPaid}',
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                  color: ColorRes.grey28,
+                                  fontFamily: FontRes.semiBold,
+                                ),
+                              )
+                            ],
+                          ),
+                        )
+                      ],
                     ),
-                    Text(
-                      amount,
-                      style: const TextStyle(
-                        fontSize: 14,
-                        color: ColorRes.grey28,
-                        fontFamily: 'gilroy_semibold',
-                      ),
-                    )
-                  ],
-                )
-        ],
-      ),
+                  );
+                },
+              ),
+            ),
     );
   }
 }

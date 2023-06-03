@@ -2,12 +2,34 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:orange_ui/utils/app_res.dart';
+import 'package:intl/intl.dart';
+import 'package:orange_ui/generated/l10n.dart';
+import 'package:orange_ui/service/pref_service.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
+import 'package:orange_ui/utils/font_res.dart';
 
 class CenterAreaSubmitRedeemScreen extends StatelessWidget {
-  const CenterAreaSubmitRedeemScreen({Key? key}) : super(key: key);
+  final String wallet;
+  final VoidCallback onSubmitBtnTap;
+  final TextEditingController accountDetailController;
+  final String? payment;
+  final Function(String? value) onPaymentChange;
+  final List<String> paymentList;
+  final String accountError;
+  final bool isEmpty;
+
+  const CenterAreaSubmitRedeemScreen(
+      {Key? key,
+      required this.wallet,
+      required this.onSubmitBtnTap,
+      required this.accountDetailController,
+      required this.payment,
+      required this.onPaymentChange,
+      required this.paymentList,
+      required this.accountError,
+      required this.isEmpty})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -38,13 +60,13 @@ class CenterAreaSubmitRedeemScreen extends StatelessWidget {
                         children: [
                           Row(
                             children: [
-                              const Text(
-                                AppRes.wallet,
-                                style: TextStyle(
+                              Text(
+                                S.current.wallet,
+                                style: const TextStyle(
                                   fontSize: 13,
                                   color: ColorRes.lightGrey5,
                                   letterSpacing: 2,
-                                  fontFamily: 'gilroy_semibold',
+                                  fontFamily: FontRes.semiBold,
                                 ),
                               ),
                               const Spacer(),
@@ -53,20 +75,43 @@ class CenterAreaSubmitRedeemScreen extends StatelessWidget {
                                 height: 23,
                                 width: 76,
                               ),
-                              const Text(
-                                AppRes.liveCAp,
-                                style: TextStyle(fontSize: 16),
+                              Text(
+                                S.current.liveCAp,
+                                style: const TextStyle(fontSize: 16),
                               )
                             ],
                           ),
                           const SizedBox(height: 12),
-                          const Text(
-                            AppRes.num3,
-                            style: TextStyle(
-                                color: ColorRes.lightGrey4,
-                                letterSpacing: 4,
-                                fontSize: 22,
-                                fontFamily: 'gilroy_bold'),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Text(
+                                NumberFormat.compactCurrency(
+                                        decimalDigits: 0,
+                                        locale: 'en_US',
+                                        name: '')
+                                    .format(int.parse(wallet)),
+                                style: const TextStyle(
+                                    color: ColorRes.lightGrey4,
+                                    letterSpacing: 2,
+                                    fontSize: 22,
+                                    fontFamily: FontRes.bold),
+                              ),
+                              const SizedBox(
+                                width: 5,
+                              ),
+                              Text(
+                                '(${NumberFormat.compactCurrency(decimalDigits: 0, locale: 'en_US', symbol: '\$').format(
+                                  int.parse(wallet) *
+                                      double.parse(PrefService.coinRate),
+                                )})',
+                                style: const TextStyle(
+                                    color: ColorRes.lightGrey5,
+                                    letterSpacing: 2,
+                                    fontSize: 15,
+                                    fontFamily: FontRes.bold),
+                              ),
+                            ],
                           ),
                           const SizedBox(height: 17),
                           Container(
@@ -87,12 +132,12 @@ class CenterAreaSubmitRedeemScreen extends StatelessWidget {
                           const SizedBox(height: 8),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.end,
-                            children: const [
+                            children: [
                               Text(
-                                AppRes.threshold,
-                                style: TextStyle(
+                                '${S.current.threshold} ${PrefService.minThreshold}',
+                                style: const TextStyle(
                                   color: ColorRes.lightGrey4,
-                                  fontSize: 11,
+                                  fontSize: 13,
                                 ),
                               )
                             ],
@@ -100,12 +145,12 @@ class CenterAreaSubmitRedeemScreen extends StatelessWidget {
                           const SizedBox(height: 8),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.end,
-                            children: const [
+                            children: [
                               Text(
-                                '1 Diamond = \$0.001',
-                                style: TextStyle(
+                                '1 Diamond = ${PrefService.currency} ${PrefService.coinRate}',
+                                style: const TextStyle(
                                   color: ColorRes.lightGrey4,
-                                  fontSize: 11,
+                                  fontSize: 13,
                                 ),
                               )
                             ],
@@ -117,12 +162,12 @@ class CenterAreaSubmitRedeemScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 21),
-              const Text(
-                'PAYMENT GATEWAY',
-                style: TextStyle(
+              Text(
+                S.of(context).paymentGateway,
+                style: const TextStyle(
                   color: ColorRes.darkGrey3,
                   fontSize: 15,
-                  fontFamily: 'gilroy_extra_bold',
+                  fontFamily: FontRes.extraBold,
                 ),
               ),
               const SizedBox(height: 6),
@@ -134,43 +179,46 @@ class CenterAreaSubmitRedeemScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                   color: ColorRes.lightGrey2,
                 ),
-                child: Center(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        'PayPal',
-                        style: TextStyle(
-                          color: ColorRes.dimGrey3,
-                          fontSize: 14,
+                child: DropdownButton(
+                    // Initial Value
+                    style: const TextStyle(
+                      color: ColorRes.dimGrey3,
+                      fontSize: 14,
+                    ),
+                    underline: const SizedBox(),
+                    value: payment,
+                    isExpanded: true,
+                    borderRadius: BorderRadius.circular(15),
+                    // Down Arrow Icon
+                    icon: Container(
+                      height: 37,
+                      width: 37,
+                      padding: const EdgeInsets.only(right: 3),
+                      child: Center(
+                        child: Image.asset(
+                          AssetRes.downArrow,
                         ),
                       ),
-                      Container(
-                        height: 37,
-                        width: 37,
-                        padding: const EdgeInsets.only(right: 3),
-                        decoration: const BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage(AssetRes.backButton),
-                          ),
+                    ),
+                    // Array list of items
+                    items: paymentList.map((String items) {
+                      return DropdownMenuItem(
+                        value: items,
+                        child: Text(
+                          items,
+                          style: const TextStyle(fontFamily: FontRes.regular),
                         ),
-                        child: Center(
-                          child: Image.asset(
-                            AssetRes.downArrow,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                      );
+                    }).toList(),
+                    onChanged: onPaymentChange),
               ),
               const SizedBox(height: 18),
-              const Text(
-                'ACCOUNT DETAILS',
-                style: TextStyle(
+              Text(
+                S.of(context).accountDetails,
+                style: const TextStyle(
                   color: ColorRes.darkGrey3,
                   fontSize: 15,
-                  fontFamily: 'gilroy_extra_bold',
+                  fontFamily: FontRes.extraBold,
                 ),
               ),
               const SizedBox(height: 6),
@@ -179,45 +227,57 @@ class CenterAreaSubmitRedeemScreen extends StatelessWidget {
                 width: Get.width,
                 padding: const EdgeInsets.only(left: 12, top: 5),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: ColorRes.lightGrey2,
-                ),
-                child: const TextField(
+                    borderRadius: BorderRadius.circular(10),
+                    color: ColorRes.lightGrey2,
+                    border: Border.all(
+                        color: isEmpty
+                            ? ColorRes.darkOrange
+                            : ColorRes.transparent)),
+                child: TextField(
+                  controller: accountDetailController,
                   expands: true,
                   maxLines: null,
                   minLines: null,
                   decoration: InputDecoration(
-                    hintText: 'Enter Account details',
+                    hintText: accountError == ''
+                        ? S.of(context).enterAccountDetails
+                        : accountError,
                     border: InputBorder.none,
                     contentPadding: EdgeInsets.zero,
-                    hintStyle:
-                        TextStyle(color: ColorRes.dimGrey3, fontSize: 14),
+                    hintStyle: TextStyle(
+                        color: accountError == ''
+                            ? ColorRes.dimGrey3
+                            : ColorRes.darkOrange,
+                        fontSize: 14),
                   ),
                 ),
               ),
               const SizedBox(height: 39),
-              Container(
-                height: 41,
-                width: Get.width,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  gradient: const LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      ColorRes.lightOrange1,
-                      ColorRes.darkOrange,
-                    ],
+              InkWell(
+                onTap: onSubmitBtnTap,
+                child: Container(
+                  height: 41,
+                  width: Get.width,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                    gradient: const LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        ColorRes.lightOrange1,
+                        ColorRes.darkOrange,
+                      ],
+                    ),
                   ),
-                ),
-                child: const Center(
-                  child: Text(
-                    AppRes.submit,
-                    style: TextStyle(
-                      color: ColorRes.white,
-                      fontSize: 12,
-                      fontFamily: 'gilroy_semibold',
-                      letterSpacing: 0.8,
+                  child: Center(
+                    child: Text(
+                      S.current.submit,
+                      style: const TextStyle(
+                        color: ColorRes.white,
+                        fontSize: 12,
+                        fontFamily: FontRes.semiBold,
+                        letterSpacing: 0.8,
+                      ),
                     ),
                   ),
                 ),

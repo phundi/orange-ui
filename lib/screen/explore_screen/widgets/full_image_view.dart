@@ -1,263 +1,262 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
 import 'package:get/get.dart';
-import 'package:orange_ui/common/widgets/gradient_widget.dart';
+import 'package:orange_ui/common/widgets/full_image_view_shimmer.dart';
 import 'package:orange_ui/common/widgets/live_icon.dart';
-import 'package:orange_ui/utils/app_res.dart';
+import 'package:orange_ui/common/widgets/profile_detail_card.dart';
+import 'package:orange_ui/common/widgets/social_icon.dart';
+import 'package:orange_ui/common/widgets/top_story_line.dart';
+import 'package:orange_ui/generated/l10n.dart';
+import 'package:orange_ui/model/user/registration_user.dart';
+import 'package:orange_ui/screen/shimmer_screen/shimmer_screen.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
+import 'package:orange_ui/utils/const_res.dart';
+import 'package:orange_ui/utils/font_res.dart';
 
 class FullImageView extends StatelessWidget {
-  final List<String> imageList;
-  final PageController pageController;
+  final List<RegistrationUserData>? userData;
   final VoidCallback onLiveBtnTap;
   final VoidCallback onImageTap;
-  final String fullName;
-  final int age;
-  final String address;
-  final String bioText;
+  final VoidCallback onInstagramTap;
+  final VoidCallback onFacebookTap;
+  final VoidCallback onYoutubeTap;
+  final bool isLoading;
+  final SwiperController userController;
+  final Function(int index) onIndexChange;
+  final bool Function(String? value) isSocialBtnVisible;
 
-  const FullImageView({
-    Key? key,
-    required this.imageList,
-    required this.pageController,
-    required this.onLiveBtnTap,
-    required this.onImageTap,
-    required this.fullName,
-    required this.age,
-    required this.address,
-    required this.bioText,
-  }) : super(key: key);
+  const FullImageView(
+      {Key? key,
+      this.userData,
+      required this.onLiveBtnTap,
+      required this.onImageTap,
+      required this.onInstagramTap,
+      required this.onFacebookTap,
+      required this.onYoutubeTap,
+      required this.isLoading,
+      required this.userController,
+      required this.onIndexChange,
+      required this.isSocialBtnVisible})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: Get.width,
-      height: Get.height - 264,
-      margin: const EdgeInsets.symmetric(horizontal: 21),
-      child: InkWell(
-        onTap: onImageTap,
-        child: Stack(
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: PageView.builder(
-                controller: pageController,
-                itemCount: imageList.length,
-                itemBuilder: (context, index) {
-                  return FractionallySizedBox(
-                    widthFactor: 1 / pageController.viewportFraction,
-                    child: Container(
-                      width: Get.width,
-                      height: Get.height - 256,
-                      decoration: BoxDecoration(
-                        //borderRadius: BorderRadius.circular(20),
-                        image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: AssetImage(imageList[index]),
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
-            SizedBox(
-              height: Get.height - 256,
-              width: Get.width,
-              child: Column(
-                children: [
-                  const SizedBox(height: 14),
-                  topStoryLine(),
-                  const Spacer(),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 9),
-                    child: Row(
-                      children: [
-                        socialIcon(AssetRes.instaLogo, 15),
-                        socialIcon(AssetRes.facebookLogo, 21.0),
-                        socialIcon(AssetRes.youtubeLogo, 20.16),
-                        const Spacer(),
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(20),
-                          child: BackdropFilter(
-                            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                            child: InkWell(
-                              onTap: onLiveBtnTap,
-                              child: Container(
-                                height: 35,
-                                width: 113,
-                                padding: const EdgeInsets.all(4),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(40),
-                                  color: ColorRes.black.withOpacity(0.33),
-                                ),
-                                child: Row(
-                                  children: const [
-                                    LiveIcon(),
-                                    Text(
-                                      " ${AppRes.liveCap}",
-                                      style: TextStyle(
-                                        color: ColorRes.white,
-                                        fontSize: 12,
-                                      ),
+    if (isLoading) {
+      return const FullImageViewShimmer();
+    } else {
+      return Expanded(
+        child: Container(
+          margin: const EdgeInsets.symmetric(horizontal: 17),
+          child: AspectRatio(
+            aspectRatio: 1 / 1.30,
+            child: Swiper(
+              controller: userController,
+              duration: 500,
+              itemCount: userData?.length ?? 0,
+              physics: const NeverScrollableScrollPhysics(),
+              onIndexChanged: onIndexChange,
+              itemBuilder: (context, currentProfileIndex) {
+                List<Images>? imagesProfile =
+                    userData?[currentProfileIndex].images;
+                final PageController pageController = PageController();
+                return Stack(
+                  children: [
+                    imagesProfile == null || imagesProfile.isEmpty
+                        ? Container(
+                            width: double.infinity,
+                            height: Get.height,
+                            decoration: BoxDecoration(
+                              color: ColorRes.lightGrey,
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Image.asset(AssetRes.imageWarning),
+                          )
+                        : ClipRRect(
+                            borderRadius: BorderRadius.circular(20),
+                            child: PageView.builder(
+                              controller: pageController,
+                              itemCount:
+                                  userData?[currentProfileIndex].images?.length,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemBuilder: (context, currentImageIndex) {
+                                return Stack(
+                                  children: [
+                                    Image.network(
+                                      '${ConstRes.aImageBaseUrl}${imagesProfile[currentImageIndex].image}',
+                                      fit: BoxFit.cover,
+                                      width: double.infinity,
+                                      height: double.infinity,
+                                      filterQuality: FilterQuality.medium,
+                                      errorBuilder:
+                                          (context, error, stackTrace) {
+                                        return Container(
+                                          color: ColorRes.grey13,
+                                          child: Image.asset(
+                                            AssetRes.themeLabel,
+                                            width: Get.width,
+                                            height: Get.height,
+                                          ),
+                                        );
+                                      },
+                                      loadingBuilder:
+                                          (context, child, loadingProgress) {
+                                        if (loadingProgress == null) {
+                                          return child;
+                                        }
+                                        return ShimmerScreen.rectangular(
+                                          width: Get.width,
+                                          height: Get.height,
+                                          shapeBorder: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(21),
+                                          ),
+                                        );
+                                      },
                                     ),
-                                    Text(
-                                      " ${AppRes.nowCap}",
-                                      style: TextStyle(
-                                        color: ColorRes.white,
-                                        fontFamily: "gilroy_bold",
-                                        fontSize: 12,
-                                      ),
-                                    ),
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                          child: InkWell(
+                                            onTap: () {
+                                              if (currentImageIndex == 0) {
+                                                return;
+                                              }
+                                              pageController.previousPage(
+                                                  duration: const Duration(
+                                                      milliseconds: 500),
+                                                  curve: Curves.linear);
+                                            },
+                                            child: Container(
+                                              height: Get.height - 256,
+                                              color: ColorRes.transparent,
+                                            ),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          child: InkWell(
+                                            onTap: () {
+                                              if (imagesProfile.length - 1 ==
+                                                  currentImageIndex) {
+                                                return;
+                                              }
+                                              pageController.nextPage(
+                                                  duration: const Duration(
+                                                      milliseconds: 500),
+                                                  curve: Curves.linear);
+                                            },
+                                            child: Container(
+                                              height: Get.height - 256,
+                                              color: ColorRes.transparent,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    )
                                   ],
-                                ),
-                              ),
+                                );
+                              },
                             ),
                           ),
-                        ),
-                        const SizedBox(width: 10),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        left: 10, right: 10, bottom: 10, top: 7),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: BackdropFilter(
-                        filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                        child: Container(
-                          width: Get.width,
-                          padding: const EdgeInsets.fromLTRB(13, 9, 13, 12),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: ColorRes.black.withOpacity(0.33),
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                    Column(
+                      children: [
+                        const SizedBox(height: 14),
+                        TopStoryLine(
+                            pageController: pageController,
+                            images:
+                                userData?[currentProfileIndex].images ?? []),
+                        const Spacer(),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 9),
+                          child: Row(
                             children: [
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    fullName,
-                                    style: const TextStyle(
-                                      color: ColorRes.white,
-                                      fontSize: 20,
-                                      //fontFamily: 'gilroy_bold',
-                                      fontFamily: "gilroy_bold",
-                                    ),
-                                  ),
-                                  Text(
-                                    " $age",
-                                    style: const TextStyle(
-                                      color: ColorRes.white,
-                                      fontSize: 20,
-                                      fontFamily: "gilroy",
-                                    ),
-                                  ),
-                                  const SizedBox(width: 4),
-                                  Stack(
-                                    alignment: Alignment.center,
-                                    children: [
-                                      Container(
-                                        height: 9,
-                                        width: 9,
-                                        color: ColorRes.white,
+                              SocialIcon(
+                                  icon: AssetRes.instaLogo,
+                                  size: 15,
+                                  onSocialIconTap: onInstagramTap,
+                                  isVisible: isSocialBtnVisible(
+                                      userData?[currentProfileIndex]
+                                          .instagram)),
+                              SocialIcon(
+                                  icon: AssetRes.facebookLogo,
+                                  size: 21.0,
+                                  onSocialIconTap: onFacebookTap,
+                                  isVisible: isSocialBtnVisible(
+                                      userData?[currentProfileIndex].facebook)),
+                              SocialIcon(
+                                  icon: AssetRes.youtubeLogo,
+                                  size: 20.16,
+                                  onSocialIconTap: onYoutubeTap,
+                                  isVisible: isSocialBtnVisible(
+                                      userData?[currentProfileIndex].youtube)),
+                              const Spacer(),
+                              Visibility(
+                                visible:
+                                    userData?[currentProfileIndex].isLiveNow ==
+                                            1
+                                        ? true
+                                        : false,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(20),
+                                  child: BackdropFilter(
+                                    filter: ImageFilter.blur(
+                                        sigmaX: 10, sigmaY: 10),
+                                    child: InkWell(
+                                      onTap: onLiveBtnTap,
+                                      child: Container(
+                                        height: 35,
+                                        width: 113,
+                                        padding: const EdgeInsets.all(4),
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(40),
+                                          color:
+                                              ColorRes.black.withOpacity(0.33),
+                                        ),
+                                        child: Row(
+                                          children: [
+                                            const LiveIcon(),
+                                            Text(
+                                              " ${S.current.liveCap}",
+                                              style: const TextStyle(
+                                                color: ColorRes.white,
+                                                fontSize: 12,
+                                              ),
+                                            ),
+                                            Text(
+                                              " ${S.current.nowCap}",
+                                              style: const TextStyle(
+                                                color: ColorRes.white,
+                                                fontFamily: FontRes.bold,
+                                                fontSize: 12,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                      Image.asset(
-                                        AssetRes.tickMark,
-                                        height: 17.5,
-                                        width: 18.33,
-                                      ),
-                                    ],
-                                  )
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  GradientWidget(
-                                    child: Image.asset(
-                                      AssetRes.locationPin,
-                                      height: 13.5,
-                                      width: 10.5,
                                     ),
                                   ),
-                                  const SizedBox(width: 6),
-                                  Text(
-                                    address,
-                                    style: const TextStyle(
-                                      color: ColorRes.white,
-                                      fontSize: 11,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(height: 6.25),
-                              Text(
-                                bioText,
-                                style: const TextStyle(
-                                  color: ColorRes.white,
-                                  fontSize: 11,
                                 ),
                               ),
+                              const SizedBox(width: 10),
                             ],
                           ),
                         ),
-                      ),
+                        ProfileDetailCard(
+                          userData: userData?[currentProfileIndex],
+                          onImageTap: onImageTap,
+                        )
+                      ],
                     ),
-                  ),
-                ],
-              ),
+                  ],
+                );
+              },
             ),
-          ],
+          ),
         ),
-      ),
-    );
-  }
-
-  Widget topStoryLine() {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 31),
-      height: 3,
-      width: Get.width,
-      child: ListView.builder(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        scrollDirection: Axis.horizontal,
-        itemCount: imageList.length,
-        itemBuilder: (context, index) {
-          return Container(
-            margin: const EdgeInsets.only(right: 3),
-            height: 2.7,
-            width:
-                Get.width / imageList.length - (106 / (imageList.length)) - 3,
-            decoration: BoxDecoration(
-              color: pageController.page!.round() == index
-                  ? ColorRes.white
-                  : ColorRes.white.withOpacity(0.30),
-              borderRadius: BorderRadius.circular(10),
-            ),
-          );
-        },
-      ),
-    );
-  }
-
-  Widget socialIcon(String icon, double size) {
-    return Container(
-      height: 29,
-      width: 29,
-      margin: const EdgeInsets.only(right: 7),
-      decoration: const BoxDecoration(
-        shape: BoxShape.circle,
-        color: ColorRes.white,
-      ),
-      child: Center(
-        child: Image.asset(icon, height: size, width: size),
-      ),
-    );
+      );
+    }
   }
 }

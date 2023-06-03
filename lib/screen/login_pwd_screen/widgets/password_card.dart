@@ -3,9 +3,11 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:orange_ui/common/widgets/buttons.dart';
-import 'package:orange_ui/utils/app_res.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
+import 'package:orange_ui/utils/font_res.dart';
+
+import '../../../generated/l10n.dart';
 
 class PasswordCard extends StatelessWidget {
   final TextEditingController pwdController;
@@ -15,17 +17,21 @@ class PasswordCard extends StatelessWidget {
   final VoidCallback onContinueTap;
   final VoidCallback onForgotPwdTap;
   final VoidCallback onViewBtnTap;
+  final VoidCallback onChangeEmailTap;
+  final String email;
 
-  const PasswordCard({
-    Key? key,
-    required this.pwdController,
-    required this.pwdFocus,
-    required this.pwdError,
-    required this.showPwd,
-    required this.onContinueTap,
-    required this.onForgotPwdTap,
-    required this.onViewBtnTap,
-  }) : super(key: key);
+  const PasswordCard(
+      {Key? key,
+      required this.pwdController,
+      required this.pwdFocus,
+      required this.pwdError,
+      required this.showPwd,
+      required this.onContinueTap,
+      required this.onForgotPwdTap,
+      required this.onViewBtnTap,
+      required this.email,
+      required this.onChangeEmailTap})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -51,27 +57,29 @@ class PasswordCard extends StatelessWidget {
                   color: ColorRes.white,
                   borderRadius: BorderRadius.circular(6),
                 ),
+                alignment: Alignment.center,
                 child: TextField(
                   focusNode: pwdFocus,
                   controller: pwdController,
                   obscureText: !showPwd,
                   style: const TextStyle(
-                    fontFamily: 'gilroy_semibold',
+                    fontFamily: FontRes.semiBold,
                   ),
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.only(left: 14, top: 10),
                     border: InputBorder.none,
-                    hintText: pwdError == "" ? AppRes.password : pwdError,
+                    hintText: pwdError == "" ? S.current.password : pwdError,
                     suffixIcon: InkWell(
                       onTap: onViewBtnTap,
                       child: Padding(
                         padding: const EdgeInsets.only(top: 14),
                         child: Text(
-                          showPwd ? AppRes.hide : AppRes.view,
+                          showPwd ? S.current.hide : S.current.view,
+                          textAlign: TextAlign.center,
                           style: const TextStyle(
                             color: ColorRes.veryDarkGrey2,
                             fontSize: 13,
-                            fontFamily: 'gilroy_bold',
+                            fontFamily: FontRes.bold,
                           ),
                         ),
                       ),
@@ -79,19 +87,20 @@ class PasswordCard extends StatelessWidget {
                     hintStyle: TextStyle(
                       color: pwdError == "" ? ColorRes.dimGrey2 : ColorRes.red,
                       fontSize: 14,
-                      fontFamily: 'gilroy_semibold',
+                      fontFamily: FontRes.semiBold,
                     ),
                   ),
                 ),
               ),
               const SizedBox(height: 15),
-              SubmitButton1(title: AppRes.continueText, onTap: onContinueTap),
+              SubmitButton1(
+                  title: S.current.continueText, onTap: onContinueTap),
               const SizedBox(height: 28),
               InkWell(
                 onTap: onForgotPwdTap,
-                child: const Text(
-                  AppRes.forgotYourPassword,
-                  style: TextStyle(
+                child: Text(
+                  S.current.forgotYourPassword,
+                  style: const TextStyle(
                     color: ColorRes.white,
                     fontSize: 14,
                   ),
@@ -107,29 +116,45 @@ class PasswordCard extends StatelessWidget {
 
   Widget profileBox() {
     return SizedBox(
-      child: Row(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Image.asset(AssetRes.profile1, height: 45, width: 45),
-          const SizedBox(width: 10),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
-              Text(
-                AppRes.userFullName,
-                style: TextStyle(
-                  color: ColorRes.white,
-                  fontSize: 16,
-                  fontFamily: "gilroy_semibold",
+          Text(
+            S.current.enterThePasswordForTheAccountNwithTheEmailBelow,
+            style: const TextStyle(
+              color: ColorRes.white,
+              fontSize: 13,
+            ),
+          ),
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  email,
+                  style: const TextStyle(
+                    color: ColorRes.white,
+                    fontSize: 17,
+                    fontFamily: FontRes.semiBold,
+                  ),
                 ),
               ),
-              Text(
-                AppRes.userEmail,
-                style: TextStyle(
-                  color: ColorRes.white,
-                  fontSize: 12,
-                  fontFamily: "gilroy",
-                ),
+              const SizedBox(
+                width: 15,
               ),
+              InkWell(
+                onTap: onChangeEmailTap,
+                child: Container(
+                  padding: const EdgeInsets.all(5),
+                  decoration: BoxDecoration(
+                      color: ColorRes.white,
+                      borderRadius: BorderRadius.circular(30)),
+                  child: Image.asset(
+                    AssetRes.edit,
+                    width: 20,
+                    height: 20,
+                  ),
+                ),
+              )
             ],
           ),
         ],

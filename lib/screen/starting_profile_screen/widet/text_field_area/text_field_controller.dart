@@ -1,10 +1,9 @@
 import 'package:get/get.dart';
-import 'package:orange_ui/utils/app_res.dart';
 
 class TextFieldController extends GetxController {
-  Rx<String> address = AppRes.newYorkUsa.obs;
-  Rx<String> bio = AppRes.profileBioText.obs;
-  Rx<String> age = AppRes.twentyFour.obs;
+  Rx<String> address = ''.obs;
+  Rx<String> bio = ''.obs;
+  Rx<String> age = ''.obs;
 
   void onAddressChange(String? value) {
     if (value != null) {

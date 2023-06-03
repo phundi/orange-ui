@@ -1,11 +1,14 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:orange_ui/utils/app_res.dart';
+import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
+import 'package:orange_ui/utils/font_res.dart';
 
 class BottomSelectionList extends StatelessWidget {
-  final List<String> imageList;
+  final List<File>? imageList;
   final int selectedIndex;
   final Function(int index) onImgRemove;
   final VoidCallback onPlayBtnTap;
@@ -25,13 +28,13 @@ class BottomSelectionList extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Padding(
-          padding: EdgeInsets.only(left: 20.0),
+        Padding(
+          padding: const EdgeInsets.only(left: 20.0),
           child: Text(
-            AppRes.photos,
-            style: TextStyle(
+            S.current.photosCap,
+            style: const TextStyle(
               color: ColorRes.dimGrey4,
-              fontFamily: "gilroy_bold",
+              fontFamily: FontRes.bold,
               fontSize: 13,
             ),
           ),
@@ -47,7 +50,7 @@ class BottomSelectionList extends StatelessWidget {
                 height: 58,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  itemCount: imageList.length,
+                  itemCount: imageList?.length,
                   physics: const BouncingScrollPhysics(),
                   itemBuilder: (context, index) {
                     return InkWell(
@@ -62,7 +65,7 @@ class BottomSelectionList extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10),
                           image: DecorationImage(
                             fit: BoxFit.cover,
-                            image: AssetImage(imageList[index]),
+                            image: FileImage(File(imageList![index].path)),
                           ),
                         ),
                         child: Center(
@@ -105,7 +108,7 @@ class BottomSelectionList extends StatelessWidget {
                         ),
                         child: Center(
                           child:
-                              Image.asset(AssetRes.plus, height: 17, width: 17),
+                          Image.asset(AssetRes.plus, height: 17, width: 17),
                         ),
                       ),
                     ),

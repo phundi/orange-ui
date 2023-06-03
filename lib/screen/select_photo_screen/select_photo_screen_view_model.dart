@@ -1,45 +1,48 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:orange_ui/api_provider/api_provider.dart';
+import 'package:orange_ui/common/widgets/loader.dart';
+import 'package:orange_ui/common/widgets/snack_bar_widget.dart';
+import 'package:orange_ui/generated/l10n.dart';
+import 'package:orange_ui/model/user/registration_user.dart';
+import 'package:orange_ui/screen/dashboard/dashboard_screen.dart';
 import 'package:orange_ui/screen/select_hobbies_screen/select_hobbies_screen.dart';
 import 'package:orange_ui/service/pref_service.dart';
-import 'package:orange_ui/utils/asset_res.dart';
+import 'package:orange_ui/utils/const_res.dart';
 import 'package:stacked/stacked.dart';
 
 class SelectPhotoScreenViewModel extends BaseViewModel {
+  late PageController pageController;
+  List<String> imageList = [];
+  int pageIndex = 0;
+  String fullName = '';
+  int? age;
+  int gender = 0;
+  String address = '';
+  String bioText = '';
+  int currentImgIndex = 0;
+  final ImagePicker imagePicker = ImagePicker();
+  List<File>? imageFileList = [];
+
   void init() {
     getPrefsData();
-    get4ImgFromGallery();
     pageController = PageController(initialPage: 0, viewportFraction: 1.05)
       ..addListener(() {
         onMainImageChange();
       });
   }
 
-  late PageController pageController;
-  List<String> imageList = [];
-
-  int pageIndex = 0;
-  String fullName = '';
-  int age = 0;
-  String address = '';
-  String bioText = '';
-  int currentImgIndex = 0;
-
   Future<void> getPrefsData() async {
-    fullName = await PrefService.getFullName() ?? '';
-    age = await PrefService.getAge() ?? 0;
-    address = await PrefService.getAddress() ?? '';
-    bioText = await PrefService.getBioText() ?? '';
-    notifyListeners();
-  }
-
-  Future<void> get4ImgFromGallery() async {
-    imageList.addAll([
-      AssetRes.p1,
-      AssetRes.p2,
-      AssetRes.p3,
-    ]);
-    notifyListeners();
+    PrefService.getUserData().then((value) {
+      fullName = value?.fullname ?? '';
+      age = value?.age ?? 0;
+      bioText = value?.bio ?? '';
+      address = value?.live ?? '';
+      notifyListeners();
+    });
   }
 
   void onMainImageChange() {
@@ -49,12 +52,52 @@ class SelectPhotoScreenViewModel extends BaseViewModel {
     }
   }
 
-  void onImageRemove(int index) {}
+  void onImageRemove(int index) {
+    imageFileList?.removeAt(index);
+    notifyListeners();
+  }
 
-  void onImageAdd() async {}
+  void onImageAdd() async {
+    selectImages();
+  }
 
-  Future<void> onPlayButtonTap() async {
-    await PrefService.setProfileImageList(imageList);
-    Get.to(() => const SelectHobbiesScreen());
+  void onPlayButtonTap() {
+    if (imageFileList == null || imageFileList!.isEmpty) {
+      SnackBarWidget().snackBarWidget(S.current.pleaseSelectImage);
+      return;
+    }
+    Loader().lottieLoader();
+    for (int i = 0; i < imageFileList!.length; i++) {
+      String image = imageFileList![i].path;
+      imageList.add(image);
+    }
+    ApiProvider().updateProfile(images: imageFileList).then((value) {
+      Get.back();
+      checkScreenCondition(value.data);
+    });
+  }
+
+  void selectImages() async {
+    final selectedImages = await imagePicker.pickMultiImage(
+        imageQuality: quality, maxHeight: maxHeight, maxWidth: maxWidth);
+    if (selectedImages.isEmpty) return;
+    if (selectedImages.isNotEmpty) {
+      for (XFile image in selectedImages) {
+        var images = File(image.path);
+
+        imageFileList?.add(images);
+      }
+    }
+    notifyListeners();
+  }
+
+  void checkScreenCondition(RegistrationUserData? data) {
+    if (data!.images == null || data.images!.isEmpty) {
+      return;
+    } else if (data.interests!.isEmpty || data.interests == null) {
+      Get.offAll(() => const SelectHobbiesScreen());
+    } else {
+      Get.offAll(() => const DashboardScreen());
+    }
   }
 }

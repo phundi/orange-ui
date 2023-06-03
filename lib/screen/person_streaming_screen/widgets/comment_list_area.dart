@@ -1,13 +1,19 @@
 import 'dart:ui';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
+import 'package:orange_ui/utils/const_res.dart';
+import 'package:orange_ui/utils/firebase_res.dart';
+import 'package:orange_ui/utils/font_res.dart';
+
+import '../../../model/chat_and_live_stream/live_stream.dart';
 
 class CommentListArea extends StatelessWidget {
   final BuildContext pageContext;
-  final List<Map<String, dynamic>> commentList;
+  final List<LiveStreamComment> commentList;
 
   const CommentListArea({
     Key? key,
@@ -44,15 +50,26 @@ class CommentListArea extends StatelessWidget {
           reverse: true,
           physics: const BouncingScrollPhysics(),
           itemBuilder: (context, index) {
-            return Padding(
+            return Container(
+              margin: const EdgeInsets.only(left: 10),
               padding: const EdgeInsets.only(bottom: 14),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadius.circular(30),
-                    child: Image.asset(
-                      commentList[index]['image'],
+                    child: CachedNetworkImage(
+                      imageUrl:
+                          '${ConstRes.aImageBaseUrl}${commentList[index].userImage}',
+                      cacheKey:
+                          '${ConstRes.aImageBaseUrl}${commentList[index].userImage}',
+                      errorWidget: (context, url, error) {
+                        return Image.asset(
+                          AssetRes.themeLabel,
+                          width: 32,
+                          height: 32,
+                        );
+                      },
                       fit: BoxFit.cover,
                       height: 32,
                       width: 32,
@@ -65,20 +82,20 @@ class CommentListArea extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          commentList[index]['name'],
+                          commentList[index].userName ?? '',
                           style: TextStyle(
                             color: ColorRes.white.withOpacity(0.55),
                             fontSize: 12,
-                            fontFamily: 'gilroy_semibold',
+                            fontFamily: FontRes.semiBold,
                           ),
                         ),
-                        commentList[index]['type'] == "text"
+                        commentList[index].commentType == FirebaseRes.msg
                             ? Text(
-                                commentList[index]['comment'],
+                          commentList[index].comment ?? '',
                                 style: TextStyle(
                                   color: ColorRes.white.withOpacity(0.90),
                                   fontSize: 13,
-                                  fontFamily: 'gilroy_semibold',
+                                  fontFamily: FontRes.semiBold,
                                 ),
                               )
                             : ClipRRect(
@@ -89,15 +106,26 @@ class CommentListArea extends StatelessWidget {
                                   child: Container(
                                     height: 54,
                                     width: 54,
-                                    padding: const EdgeInsets.all(8),
+                                    padding: const EdgeInsets.all(5),
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(15),
                                       color: ColorRes.black.withOpacity(0.33),
                                     ),
-                                    child: Image.asset(
-                                      AssetRes.heart,
+                                    child: CachedNetworkImage(
+                                      imageUrl:
+                                          '${ConstRes.aImageBaseUrl}${commentList[index].comment}',
+                                      cacheKey:
+                                          '${ConstRes.aImageBaseUrl}${commentList[index].comment}',
+                                      errorWidget: (context, url, error) {
+                                        return Image.asset(
+                                          AssetRes.themeLabel,
+                                          width: 40,
+                                          height: 35,
+                                        );
+                                      },
                                       width: 40,
                                       height: 35,
+                                      fit: BoxFit.cover,
                                     ),
                                   ),
                                 ),

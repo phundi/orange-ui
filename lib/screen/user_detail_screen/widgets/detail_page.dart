@@ -1,35 +1,41 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:orange_ui/utils/app_res.dart';
+import 'package:orange_ui/generated/l10n.dart';
+import 'package:orange_ui/model/user/registration_user.dart';
+import 'package:orange_ui/service/pref_service.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
+import 'package:orange_ui/utils/font_res.dart';
 
 class DetailPage extends StatelessWidget {
+  final RegistrationUserData? userData;
   final bool save;
-  final List<String> interestList;
   final VoidCallback onHideBtnTap;
   final VoidCallback onSaveTap;
   final VoidCallback onChatWithTap;
   final VoidCallback onShareWithTap;
   final VoidCallback onReportTap;
+  final double distance;
 
-  const DetailPage({
-    Key? key,
-    required this.save,
-    required this.interestList,
-    required this.onHideBtnTap,
-    required this.onSaveTap,
-    required this.onChatWithTap,
-    required this.onShareWithTap,
-    required this.onReportTap,
-  }) : super(key: key);
+  const DetailPage(
+      {Key? key,
+      this.userData,
+      required this.save,
+      required this.onHideBtnTap,
+      required this.onSaveTap,
+      required this.onChatWithTap,
+      required this.onShareWithTap,
+      required this.onReportTap,
+      required this.distance})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: Get.height - 101,
+      height: Get.height - 100,
       width: Get.width,
       child: Stack(
         alignment: Alignment.topCenter,
@@ -53,52 +59,76 @@ class DetailPage extends StatelessWidget {
                     ),
                   ),
                   child: SingleChildScrollView(
-                    physics: const BouncingScrollPhysics(),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const SizedBox(height: 12),
                         Row(
                           children: [
-                            const Text(
-                              AppRes.nataliaNora,
-                              style: TextStyle(
-                                color: ColorRes.white,
-                                fontSize: 22,
-                                fontFamily: 'gilroy_bold',
+                            Flexible(
+                              child: Row(
+                                children: [
+                                  Flexible(
+                                    flex: 5,
+                                    child: Text(
+                                      '${userData?.fullname}',
+                                      style: const TextStyle(
+                                          color: ColorRes.white,
+                                          fontSize: 22,
+                                          fontFamily: FontRes.bold,
+                                          overflow: TextOverflow.ellipsis),
+                                      maxLines: 1,
+                                    ),
+                                  ),
+                                  Flexible(
+                                    child: Text(
+                                      userData?.age == null
+                                          ? ''
+                                          : " ${userData?.age} ",
+                                      style: const TextStyle(
+                                          color: ColorRes.white,
+                                          fontSize: 22,
+                                          fontFamily: FontRes.regular,
+                                          overflow: TextOverflow.ellipsis),
+                                      maxLines: 1,
+                                    ),
+                                  ),
+                                  Flexible(
+                                    child: Visibility(
+                                      visible: userData?.isVerified == 2
+                                          ? true
+                                          : false,
+                                      child: Image.asset(
+                                        AssetRes.tickMark,
+                                        height: 20,
+                                        width: 20,
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                            const Text(
-                              " ${AppRes.twentyFour}",
-                              style: TextStyle(
-                                color: ColorRes.white,
-                                fontSize: 22,
-                                fontFamily: 'gilroy',
-                              ),
-                            ),
-                            const SizedBox(width: 5),
-                            Image.asset(
-                              AssetRes.tickMark,
-                              height: 20,
-                              width: 20,
-                            ),
-                            const Spacer(),
-                            InkWell(
-                              borderRadius: BorderRadius.circular(30),
-                              onTap: onSaveTap,
-                              child: Container(
-                                height: 37,
-                                width: 37,
-                                padding: const EdgeInsets.all(10),
-                                decoration: const BoxDecoration(
-                                  color: ColorRes.white,
-                                  shape: BoxShape.circle,
-                                ),
-                                child: Image.asset(
-                                  AssetRes.save,
-                                  color: save
-                                      ? null
-                                      : ColorRes.dimGrey5.withOpacity(0.70),
+                            Visibility(
+                              visible: PrefService.userId == userData?.id
+                                  ? false
+                                  : true,
+                              child: InkWell(
+                                borderRadius: BorderRadius.circular(30),
+                                onTap: onSaveTap,
+                                child: Container(
+                                  height: 37,
+                                  width: 37,
+                                  padding: const EdgeInsets.all(10),
+                                  decoration: const BoxDecoration(
+                                    color: ColorRes.white,
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: Image.asset(
+                                    AssetRes.save,
+                                    color: save
+                                        ? null
+                                        : ColorRes.dimGrey5.withOpacity(0.70),
+                                  ),
                                 ),
                               ),
                             ),
@@ -106,7 +136,7 @@ class DetailPage extends StatelessWidget {
                         ),
                         const SizedBox(height: 3),
                         Text(
-                          AppRes.profileBioText,
+                          userData?.bio ?? '',
                           style: TextStyle(
                             color: ColorRes.white.withOpacity(0.80),
                             fontSize: 14,
@@ -129,94 +159,119 @@ class DetailPage extends StatelessWidget {
                                     child: Image.asset(AssetRes.home),
                                   ),
                                   const SizedBox(width: 7),
-                                  Text(
-                                    AppRes.newYorkUsa,
-                                    style: TextStyle(
-                                      color: ColorRes.white.withOpacity(0.80),
-                                      fontSize: 14,
+                                  Flexible(
+                                    child: Text(
+                                      userData?.live == null ||
+                                              userData!.live!.isEmpty
+                                          ? ''
+                                          : '${userData?.live}',
+                                      style: TextStyle(
+                                          color:
+                                              ColorRes.white.withOpacity(0.80),
+                                          fontSize: 14,
+                                          overflow: TextOverflow.ellipsis),
+                                      maxLines: 2,
                                     ),
                                   ),
                                 ],
                               ),
+                            ),
+                            const SizedBox(
+                              width: 10,
                             ),
                             Expanded(
-                              child: Row(
-                                children: [
-                                  Container(
-                                    height: 27,
-                                    width: 27,
-                                    padding: const EdgeInsets.all(6.5),
-                                    decoration: const BoxDecoration(
-                                      color: ColorRes.white,
-                                      shape: BoxShape.circle,
+                              child: Visibility(
+                                visible: PrefService.userId == userData?.id
+                                    ? false
+                                    : true,
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      height: 27,
+                                      width: 27,
+                                      padding: const EdgeInsets.all(6.5),
+                                      decoration: const BoxDecoration(
+                                        color: ColorRes.white,
+                                        shape: BoxShape.circle,
+                                      ),
+                                      child: Image.asset(
+                                        AssetRes.locationPin,
+                                        color: ColorRes.darkOrange,
+                                        height: 12.25,
+                                        width: 10.5,
+                                      ),
                                     ),
-                                    child: Image.asset(
-                                      AssetRes.locationPin,
-                                      color: ColorRes.darkOrange,
-                                      height: 12.25,
-                                      width: 10.5,
+                                    const SizedBox(width: 7),
+                                    Flexible(
+                                      child: Text(
+                                        distance == 0.0
+                                            ? S.of(context).noLocation
+                                            : '${distance.toStringAsFixed(2)} ${S.of(context).kmsAway}',
+                                        style: TextStyle(
+                                            color: ColorRes.white
+                                                .withOpacity(0.80),
+                                            fontSize: 14,
+                                            overflow: TextOverflow.ellipsis),
+                                        maxLines: 2,
+                                      ),
                                     ),
-                                  ),
-                                  const SizedBox(width: 7),
-                                  Text(
-                                    AppRes.fiveKmAway,
-                                    style: TextStyle(
-                                      color: ColorRes.white.withOpacity(0.80),
-                                      fontSize: 14,
-                                    ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
-                            ),
+                            )
                           ],
                         ),
                         const SizedBox(height: 24),
-                        const Text(
-                          AppRes.about,
-                          style: TextStyle(
+                        Text(
+                          S.current.about,
+                          style: const TextStyle(
                             color: ColorRes.white,
-                            fontFamily: 'gilroy_bold',
+                            fontFamily: FontRes.bold,
                             fontSize: 17,
                           ),
                         ),
                         const SizedBox(height: 5),
-                        const Text(
-                          AppRes.nataliyaBioText,
+                        Text(
+                          userData?.about ?? S.current.noDataAvailable,
                           style: TextStyle(
-                            color: ColorRes.white,
+                            color: ColorRes.white.withOpacity(0.80),
                             fontSize: 14,
                           ),
                         ),
                         const SizedBox(height: 15),
-                        const Text(
-                          AppRes.interest,
-                          style: TextStyle(
+                        Text(
+                          S.current.interest,
+                          style: const TextStyle(
                             color: ColorRes.white,
-                            fontFamily: 'gilroy_bold',
+                            fontFamily: FontRes.bold,
                             fontSize: 17,
                           ),
                         ),
                         const SizedBox(height: 11),
-                        interestButtons(),
+                        interestButtons(userData?.interests ?? []),
                         const SizedBox(height: 6),
-                        InkWell(
-                          onTap: onChatWithTap,
-                          borderRadius: BorderRadius.circular(10),
-                          child: Container(
-                            height: 50,
-                            width: Get.width,
-                            decoration: BoxDecoration(
-                              color: ColorRes.white,
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: const Center(
-                              child: Text(
-                                AppRes.chatWithNatalia,
-                                style: TextStyle(
-                                  color: ColorRes.red3,
-                                  fontSize: 12,
-                                  fontFamily: 'gilroy_bold',
-                                  letterSpacing: 0.6,
+                        Visibility(
+                          visible:
+                              PrefService.userId == userData?.id ? false : true,
+                          child: InkWell(
+                            onTap: onChatWithTap,
+                            borderRadius: BorderRadius.circular(10),
+                            child: Container(
+                              height: 50,
+                              width: Get.width,
+                              decoration: BoxDecoration(
+                                color: ColorRes.white,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  '${S.current.chatWith}${userData?.fullname?.toUpperCase()}',
+                                  style: const TextStyle(
+                                    color: ColorRes.red3,
+                                    fontSize: 12,
+                                    fontFamily: FontRes.bold,
+                                    letterSpacing: 0.6,
+                                  ),
                                 ),
                               ),
                             ),
@@ -233,13 +288,13 @@ class DetailPage extends StatelessWidget {
                               color: ColorRes.dimGrey7.withOpacity(0.25),
                               borderRadius: BorderRadius.circular(10),
                             ),
-                            child: const Center(
+                            child: Center(
                               child: Text(
-                                AppRes.shareNataliaProfile,
-                                style: TextStyle(
+                                '${S.current.share} ${userData?.fullname?.toUpperCase()}\'S ${S.current.profileCap}',
+                                style: const TextStyle(
                                   color: ColorRes.white,
                                   fontSize: 12,
-                                  fontFamily: 'gilroy_bold',
+                                  fontFamily: FontRes.bold,
                                   letterSpacing: 0.6,
                                 ),
                               ),
@@ -247,15 +302,19 @@ class DetailPage extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 27),
-                        Center(
-                          child: InkWell(
-                            onTap: onReportTap,
-                            child: Text(
-                              AppRes.reportNatalia,
-                              style: TextStyle(
-                                color: ColorRes.white.withOpacity(0.50),
-                                fontSize: 12,
-                                fontFamily: 'gilroy_bold',
+                        Visibility(
+                          visible:
+                              PrefService.userId == userData?.id ? false : true,
+                          child: Center(
+                            child: InkWell(
+                              onTap: onReportTap,
+                              child: Text(
+                                '${S.current.reportCap}${userData?.fullname?.toUpperCase()}',
+                                style: TextStyle(
+                                  color: ColorRes.white.withOpacity(0.50),
+                                  fontSize: 12,
+                                  fontFamily: FontRes.bold,
+                                ),
                               ),
                             ),
                           ),
@@ -268,64 +327,117 @@ class DetailPage extends StatelessWidget {
               ),
             ),
           ),
-          hideInfoChip(),
+          HideInfoChip(onHideBtnTap: onHideBtnTap),
         ],
       ),
     );
   }
 
-  Widget hideInfoChip() {
+  Widget interestButtons(List<Interest> interests) {
+    return Wrap(
+      children: interests.map<Widget>((e) {
+        return Container(
+          margin: const EdgeInsets.only(right: 8, bottom: 10),
+          padding: const EdgeInsets.fromLTRB(20.6, 9.50, 20.6, 8.51),
+          decoration: BoxDecoration(
+            color: ColorRes.white.withOpacity(0.15),
+            borderRadius: BorderRadius.circular(50),
+          ),
+          child: Text(
+            '${e.title?.toUpperCase()}',
+            style: const TextStyle(
+              fontSize: 12,
+              color: ColorRes.white,
+              letterSpacing: 0.5,
+              fontFamily: FontRes.semiBold,
+            ),
+          ),
+        );
+      }).toList(),
+    );
+  }
+}
+
+class HideInfoChip extends StatefulWidget {
+  final VoidCallback onHideBtnTap;
+
+  const HideInfoChip({Key? key, required this.onHideBtnTap}) : super(key: key);
+
+  @override
+  State<HideInfoChip> createState() => _HideInfoChipState();
+}
+
+class _HideInfoChipState extends State<HideInfoChip>
+    with SingleTickerProviderStateMixin {
+  double? _scale;
+  AnimationController? _controller;
+
+  @override
+  void initState() {
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(
+        milliseconds: 200,
+      ),
+      lowerBound: 0.0,
+      upperBound: 0.1,
+    )..addListener(() {
+        setState(() {});
+      });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _controller?.dispose();
+    super.dispose();
+  }
+
+  void _tapDown(TapDownDetails details) {
+    _controller?.forward();
+  }
+
+  void _tapUp(TapUpDetails details) {
+    _controller?.reverse();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    _scale = 1 - _controller!.value;
     return InkWell(
       borderRadius: BorderRadius.circular(20),
-      onTap: onHideBtnTap,
-      child: Container(
-        padding: const EdgeInsets.fromLTRB(21, 10, 21, 9),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          gradient: const LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              ColorRes.lightOrange1,
-              ColorRes.darkOrange,
-            ],
+      onTap: () {
+        widget.onHideBtnTap();
+        HapticFeedback.lightImpact();
+      },
+      onTapUp: _tapUp,
+      onTapDown: _tapDown,
+      child: Transform.scale(
+        scale: _scale,
+        child: Container(
+          padding: const EdgeInsets.fromLTRB(21, 10, 21, 9),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            gradient: const LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                ColorRes.lightOrange1,
+                ColorRes.darkOrange,
+              ],
+            ),
           ),
-        ),
-        child: Text(
-          AppRes.hideInfo,
-          style: TextStyle(
-            color: ColorRes.white.withOpacity(0.80),
-            fontSize: 11,
-            fontFamily: "gilroy_bold",
-            letterSpacing: 0.65,
+          child: Text(
+            S.current.hideInfo,
+            style: TextStyle(
+              color: ColorRes.white.withOpacity(0.80),
+              fontSize: 11,
+              fontFamily: FontRes.bold,
+              letterSpacing: 0.65,
+            ),
           ),
         ),
       ),
-    );
-  }
-
-  Widget interestButtons() {
-    return Wrap(
-      children: interestList
-          .map<Widget>(
-            (e) => Container(
-              margin: const EdgeInsets.only(right: 8, bottom: 10),
-              padding: const EdgeInsets.fromLTRB(20.6, 9.50, 20.6, 8.51),
-              decoration: BoxDecoration(
-                color: ColorRes.white.withOpacity(0.15),
-                borderRadius: BorderRadius.circular(50),
-              ),
-              child: Text(
-                e,
-                style: const TextStyle(
-                  fontSize: 10,
-                  color: ColorRes.white,
-                  fontFamily: 'gilroy_bold',
-                ),
-              ),
-            ),
-          )
-          .toList(),
     );
   }
 }

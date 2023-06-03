@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:orange_ui/utils/app_res.dart';
+import 'package:orange_ui/generated/l10n.dart';
+import 'package:orange_ui/service/pref_service.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
+import 'package:orange_ui/utils/font_res.dart';
 
 class Screen1 extends StatelessWidget {
   final VoidCallback onTap;
@@ -29,11 +31,14 @@ class Screen1 extends StatelessWidget {
                   width: Get.width / 1.7,
                   fit: BoxFit.cover,
                 ),
-                const Text(
-                  AppRes.getStarted1Subtitle,
-                  style: TextStyle(
-                    color: ColorRes.grey,
-                    fontSize: 16,
+                Visibility(
+                  visible: PrefService.settingData?.appdata?.isDating == 1,
+                  child: Text(
+                    S.current.getStarted1Subtitle,
+                    style: const TextStyle(
+                      color: ColorRes.grey,
+                      fontSize: 16,
+                    ),
                   ),
                 ),
               ],
@@ -55,13 +60,13 @@ class Screen1 extends StatelessWidget {
           color: ColorRes.orange1.withOpacity(0.14),
           borderRadius: BorderRadius.circular(50),
         ),
-        child: const Center(
+        child: Center(
           child: Text(
-            AppRes.continueText,
-            style: TextStyle(
+            S.current.continueText,
+            style: const TextStyle(
               color: ColorRes.orange,
               fontSize: 15,
-              fontFamily: 'gilroy_semibold',
+              fontFamily: FontRes.semiBold,
             ),
           ),
         ),

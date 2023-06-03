@@ -2,22 +2,34 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:orange_ui/utils/app_res.dart';
+import 'package:intl/intl.dart';
+import 'package:orange_ui/common/widgets/snack_bar_widget.dart';
+import 'package:orange_ui/generated/l10n.dart';
+import 'package:orange_ui/model/setting.dart';
+import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/utils/color_res.dart';
+import 'package:orange_ui/utils/const_res.dart';
+import 'package:orange_ui/utils/font_res.dart';
 
 class BottomPurchaseShirt extends StatelessWidget {
-  final List<Map<String, dynamic>> diamondList;
+  final List<Gifts>? diamondList;
   final VoidCallback onGemsSubmit;
   final VoidCallback onAddDiamonds;
-  final Function(Map<String, dynamic> data) onDiamondTap;
+  final Function(Gifts? data) onGiftTap;
+  final VoidCallback onGiftDiamondEmpty;
+  final int? diamond;
+  final RegistrationUserData? userData;
 
-  const BottomPurchaseShirt({
-    Key? key,
-    required this.diamondList,
-    required this.onGemsSubmit,
-    required this.onAddDiamonds,
-    required this.onDiamondTap,
-  }) : super(key: key);
+  const BottomPurchaseShirt(
+      {Key? key,
+      required this.diamondList,
+      required this.onGemsSubmit,
+      required this.onAddDiamonds,
+      required this.onGiftTap,
+      required this.diamond,
+      required this.onGiftDiamondEmpty,
+      required this.userData})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,68 +39,100 @@ class BottomPurchaseShirt extends StatelessWidget {
         topRight: Radius.circular(25),
       ),
       child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
-        child: Container(
-          width: Get.width,
-          height: Get.width * 1.063,
-          padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
-          decoration: BoxDecoration(
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(25),
-              topRight: Radius.circular(25),
+        filter: ImageFilter.blur(
+          sigmaX: 3,
+          sigmaY: 3,
+          tileMode: TileMode.mirror,
+        ),
+        child: Stack(
+          children: [
+            Container(
+              width: Get.width,
+              // height: 425,
+              color: const Color(0x08000000),
             ),
-            color: ColorRes.black.withOpacity(0.33),
-          ),
-          child: Column(
-            children: [
-              topButtons(),
-              const SizedBox(height: 17),
-              GridView.builder(
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: diamondList.length,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 4,
-                  childAspectRatio: 0.95,
-                  crossAxisSpacing: 8,
-                  mainAxisSpacing: 8,
+            Container(
+              width: Get.width,
+              height: Get.width * 1.063,
+              padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(25),
+                  topRight: Radius.circular(25),
                 ),
-                itemBuilder: (context, index) {
-                  return InkWell(
-                    borderRadius: BorderRadius.circular(15),
-                    onTap: () {
-                      onDiamondTap(diamondList[index]);
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: ColorRes.white.withOpacity(0.14),
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            diamondList[index]['image'],
-                            height: 45.5,
-                            width: 52.45,
-                            fit: BoxFit.cover,
-                          ),
-                          const SizedBox(height: 2.5),
-                          Text(
-                            "${diamondList[index]['gems']} 💎",
-                            style: const TextStyle(
-                              color: ColorRes.white,
-                              fontSize: 12,
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  );
-                },
+                color: ColorRes.black.withOpacity(0.33),
               ),
-            ],
-          ),
+              child: Column(
+                children: [
+                  topButtons(),
+                  const SizedBox(height: 17),
+                  GridView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: diamondList?.length,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 4,
+                      childAspectRatio: 0.95,
+                      crossAxisSpacing: 8,
+                      mainAxisSpacing: 8,
+                    ),
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                        borderRadius: BorderRadius.circular(15),
+                        onTap: () {
+                          if (userData?.isFake != 1) {
+                            diamondList![index].coinPrice! <= diamond!.toInt()
+                                ? onGiftTap(diamondList?[index])
+                                : onGiftDiamondEmpty();
+                          } else {
+                            if (Get.isBottomSheetOpen == true) {
+                              Get.back();
+                            }
+                            SnackBarWidget()
+                                .snackBarWidget(S.of(context).youAreFakeUser);
+                          }
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: ColorRes.white.withOpacity(0.14),
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.network(
+                                  '${ConstRes.aImageBaseUrl}${diamondList?[index].image}',
+                                  height: 45.5,
+                                  width: 52.45,
+                                  fit: BoxFit.cover,
+                                  color: diamond == null ||
+                                          diamondList![index].coinPrice! >
+                                              diamond!.toInt()
+                                      ? ColorRes.black.withOpacity(0.2)
+                                      : null),
+                              const SizedBox(height: 2.5),
+                              Text(
+                                "${diamondList?[index].coinPrice} 💎",
+                                style: TextStyle(
+                                  color: diamond == null ||
+                                          diamondList![index].coinPrice! >
+                                              diamond!.toInt()
+                                      ? ColorRes.black.withOpacity(0.2)
+                                      : ColorRes.white,
+                                  fontSize: 12,
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -114,13 +158,13 @@ class BottomPurchaseShirt extends StatelessWidget {
                 ],
               ),
             ),
-            child: const Center(
+            child: Center(
               child: Text(
-                "💎 200",
-                style: TextStyle(
+                "💎 ${NumberFormat.compact(locale: 'en').format(diamond ?? 0)}",
+                style: const TextStyle(
                   color: ColorRes.white,
                   fontSize: 13,
-                  fontFamily: 'gilroy',
+                  fontFamily: FontRes.regular,
                 ),
               ),
             ),
@@ -146,22 +190,22 @@ class BottomPurchaseShirt extends StatelessWidget {
             ),
             child: Center(
               child: RichText(
-                text: const TextSpan(
+                text: TextSpan(
                   children: [
                     TextSpan(
-                      text: AppRes.add,
-                      style: TextStyle(
+                      text: S.current.add,
+                      style: const TextStyle(
                         color: ColorRes.white,
                         fontSize: 13,
-                        fontFamily: 'gilroy',
+                        fontFamily: FontRes.regular,
                       ),
                     ),
                     TextSpan(
-                      text: " ${AppRes.diamonds}",
-                      style: TextStyle(
+                      text: " ${S.current.diamonds}",
+                      style: const TextStyle(
                         color: ColorRes.white,
                         fontSize: 13,
-                        fontFamily: 'gilroy_bold',
+                        fontFamily: FontRes.bold,
                       ),
                     ),
                   ],

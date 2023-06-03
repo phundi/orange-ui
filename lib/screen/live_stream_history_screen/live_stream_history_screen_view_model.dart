@@ -1,29 +1,47 @@
+import 'dart:developer';
+
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:orange_ui/api_provider/api_provider.dart';
+import 'package:orange_ui/model/chat_and_live_stream/fetch_live_stream_history.dart';
 import 'package:stacked/stacked.dart';
 
 class LiveStreamHistoryViewModel extends BaseViewModel {
-  void init() {}
+  List<FetchLiveStreamHistoryData>? liveStreamHistory = [];
+  bool isLoading = false;
+  int currentPage = 0;
+  ScrollController scrollController = ScrollController();
 
-  List<Map<String, dynamic>> dataList = [
-    {
-      'time': "10:00 am to 11:24 am",
-      'date': "5 Sep 2021",
-      'duration': "1 hr 24 mins",
-      'diamonds': "2536",
-    },
-    {
-      'time': "10:00 am to 11:24 am",
-      'date': "6 Sep 2021",
-      'duration': "1 hr 24 mins",
-      'diamonds': "2536",
-    },
-    {
-      'time': "10:00 am to 11:24 am",
-      'date': "7 Sep 2021",
-      'duration': "1 hr 24 mins",
-      'diamonds': "2536",
-    },
-  ];
+  void init() {
+    fetchNextPage();
+    fetchLiveStreamApiCall();
+  }
+
+  void fetchNextPage() {
+    scrollController.addListener(() {
+      if (scrollController.offset ==
+          scrollController.position.maxScrollExtent) {
+        if (!isLoading) {
+          fetchLiveStreamApiCall();
+        } else {}
+      }
+    });
+  }
+
+  void fetchLiveStreamApiCall() {
+    isLoading = true;
+    ApiProvider().fetchAllLiveStreamHistory(currentPage).then((value) {
+      if (currentPage == 0) {
+        liveStreamHistory = value.data;
+      } else {
+        liveStreamHistory?.addAll(value.data!);
+      }
+      currentPage = liveStreamHistory!.length;
+      isLoading = false;
+      log('$currentPage');
+      notifyListeners();
+    });
+  }
 
   void onBackBtnTap() {
     Get.back();

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/screen/login_pwd_screen/login_pwd_screen_view_model.dart';
 import 'package:orange_ui/screen/login_pwd_screen/widgets/password_card.dart';
-import 'package:orange_ui/utils/app_res.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
+import 'package:orange_ui/utils/font_res.dart';
 import 'package:stacked/stacked.dart';
 
 class LoginPwdScreen extends StatelessWidget {
@@ -15,7 +16,7 @@ class LoginPwdScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<LoginPwdScreenViewModel>.reactive(
-      onModelReady: (model) {
+      onViewModelReady: (model) {
         model.init(email);
       },
       viewModelBuilder: () => LoginPwdScreenViewModel(),
@@ -36,23 +37,40 @@ class LoginPwdScreen extends StatelessWidget {
                 width: Get.width,
                 child: SingleChildScrollView(
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(height: Get.height / 6),
-                      Image.asset(
-                        AssetRes.themeLabelWhite,
-                        height: 51,
-                        width: 176,
+                      SafeArea(
+                        child: InkWell(
+                          onTap: model.onBackBtnTap,
+                          child: Container(
+                            margin: const EdgeInsets.only(left: 10, top: 5),
+                            child: Image.asset(
+                              AssetRes.backArrow,
+                              color: ColorRes.white,
+                              width: 20,
+                              height: 20,
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: Get.height / 6.2),
+                      Center(
+                        child: Image.asset(
+                          AssetRes.themeLabelWhite,
+                          height: 51,
+                          width: 176,
+                        ),
                       ),
                       SizedBox(height: Get.height / 18),
                       Row(
-                        children: const [
-                          SizedBox(width: 20),
+                        children: [
+                          const SizedBox(width: 20),
                           Text(
-                            AppRes.logIn,
-                            style: TextStyle(
+                            S.current.logIn,
+                            style: const TextStyle(
                               color: ColorRes.white,
                               fontSize: 25,
-                              fontFamily: 'gilroy_extra_bold',
+                              fontFamily: FontRes.extraBold,
                             ),
                           ),
                         ],
@@ -66,6 +84,8 @@ class LoginPwdScreen extends StatelessWidget {
                         onContinueTap: model.onContinueTap,
                         showPwd: model.showPwd,
                         onViewBtnTap: model.onViewBtnTap,
+                        email: model.email,
+                        onChangeEmailTap: model.onBackBtnTap,
                       ),
                     ],
                   ),

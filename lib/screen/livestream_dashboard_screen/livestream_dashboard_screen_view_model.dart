@@ -1,23 +1,67 @@
+import 'dart:io';
+
+import 'package:bubbly_camera/bubbly_camera.dart';
 import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:orange_ui/api_provider/api_provider.dart';
+import 'package:orange_ui/common/widgets/common_fun.dart';
+import 'package:orange_ui/model/get_diamond_pack.dart';
+import 'package:orange_ui/model/user/registration_user.dart';
+import 'package:orange_ui/screen/bottom_diamond_shop/bottom_diamond_shop.dart';
+import 'package:orange_ui/screen/live_stream_application_screen/live_stream_application_screen.dart';
 import 'package:orange_ui/screen/live_stream_history_screen/live_stream_history_screen.dart';
-import 'package:orange_ui/screen/live_stream_screen/live_stream_screen.dart';
 import 'package:orange_ui/screen/redeem_screen/redeem_screen.dart';
 import 'package:orange_ui/screen/submit_redeem_screen/submit_redeem_screen.dart';
+import 'package:orange_ui/service/pref_service.dart';
+import 'package:orange_ui/utils/color_res.dart';
 import 'package:stacked/stacked.dart';
 
 class LiveStreamDashBoardViewModel extends BaseViewModel {
-  void init() {}
+  int eligible = 0;
+  bool isLoading = false;
+  RegistrationUserData? userData;
+  String? coinValue;
+  BannerAd? bannerAd;
 
-  bool eligible = false;
-  bool redeem = false;
-
-  void onRedeemTap() {
-    Get.to(() => const SubmitRedeemSceen());
+  void init() {
+    getProfileApiCall();
+    getBannerAd();
   }
 
-  void onEligibleTap() {
-    eligible = !eligible;
-    notifyListeners();
+  void getProfileApiCall() {
+    isLoading = true;
+    ApiProvider().getProfile(userID: PrefService.userId).then((value) async {
+      userData = value?.data;
+      eligible = value?.data?.canGoLive == 0
+          ? 0
+          : value?.data?.canGoLive == 1
+              ? 1
+              : 2;
+      coinValue = value?.data?.wallet.toString() ?? '0';
+      isLoading = false;
+      notifyListeners();
+    });
+  }
+
+  void onRedeemTap() {
+    Get.to(() => const SubmitRedeemScreen(), arguments: coinValue)
+        ?.then((value) {
+      getProfileApiCall();
+    });
+  }
+
+  void onAddCoinsBtnTap() {
+    Get.bottomSheet(
+      const BottomDiamondShop(),
+      backgroundColor: ColorRes.transparent,
+    ).then((value) {
+      getProfileApiCall();
+    });
+  }
+
+  void onDiamondPurchase(GetDiamondPackData? data) {
+    BubblyCamera.inAppPurchase(
+        Platform.isAndroid ? data?.androidProductId : data?.iosProductId);
   }
 
   void onBackBtnTap() {
@@ -32,7 +76,16 @@ class LiveStreamDashBoardViewModel extends BaseViewModel {
     Get.to(() => const RedeemScreen());
   }
 
+  void getBannerAd() {
+    CommonFun.bannerAd((ad) {
+      bannerAd = ad as BannerAd;
+      notifyListeners();
+    });
+  }
+
   void onApplyBtnTap() {
-    Get.to(() => const LiveStreamScreen());
+    Get.to(() => const LiveStreamApplicationScreen())?.then((value) {
+      getProfileApiCall();
+    });
   }
 }

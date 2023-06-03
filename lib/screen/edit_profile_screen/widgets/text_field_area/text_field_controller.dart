@@ -1,10 +1,10 @@
 import 'package:get/get.dart';
-import 'package:orange_ui/utils/app_res.dart';
 
 class ProfileTextFieldController extends GetxController {
-  Rx<String> address = AppRes.newYorkUsa.obs;
-  Rx<String> bio = AppRes.profileBioText.obs;
-  Rx<String> age = AppRes.twentyFour.obs;
+  Rx<String> address = ''.obs;
+  Rx<String> bio = ''.obs;
+  Rx<String> about = ''.obs;
+  Rx<String> age = ''.obs;
 
   void onAddressChange(String? value) {
     if (value != null) {
@@ -15,6 +15,12 @@ class ProfileTextFieldController extends GetxController {
   void onBioChange(String? value) {
     if (value != null) {
       bio.value = value;
+    }
+  }
+
+  void onAboutChange(String? value) {
+    if (value != null) {
+      about.value = value;
     }
   }
 

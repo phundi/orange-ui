@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
+import 'package:orange_ui/utils/font_res.dart';
 
 class SearchBarArea extends StatelessWidget {
   final TextEditingController searchController;
   final String selectedTab;
-  final List<String> tabList;
+  final List<Interest> tabList;
   final VoidCallback onBackBtnTap;
-  final VoidCallback onSearchBtnTap;
+  final Function(String value) onSearchBtnTap;
   final VoidCallback onLocationTap;
-  final Function(String value) onTabSelect;
+  final Function(Interest value) onTabSelect;
 
   const SearchBarArea({
     Key? key,
@@ -26,16 +28,8 @@ class SearchBarArea extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: ColorRes.white,
-        boxShadow: [
-          BoxShadow(
-            offset: const Offset(0, 1),
-            color: ColorRes.black.withOpacity(0.05),
-            blurRadius: 3,
-            spreadRadius: 0,
-          ),
-        ],
       ),
       child: selectedTab == '' ? withoutSelected() : withSelected(),
     );
@@ -112,7 +106,8 @@ class SearchBarArea extends StatelessWidget {
                     left: 12,
                     right: index == (tabList.length - 1) ? 12 : 0,
                   ),
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  padding: const EdgeInsets.only(
+                      left: 20, right: 20, top: 10, bottom: 8),
                   height: 35,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(50),
@@ -120,11 +115,10 @@ class SearchBarArea extends StatelessWidget {
                   ),
                   child: Center(
                     child: Text(
-                      tabList[index],
+                      '${tabList[index].title}',
                       style: const TextStyle(
                         color: ColorRes.orange2,
-                        fontSize: 12,
-                        fontFamily: 'gilroy_bold',
+                        fontFamily: FontRes.bold,
                       ),
                     ),
                   ),
@@ -152,8 +146,8 @@ class SearchBarArea extends StatelessWidget {
                 selectedTab,
                 style: const TextStyle(
                   color: ColorRes.orange2,
-                  fontSize: 15,
-                  fontFamily: 'gilroy_bold',
+                  fontSize: 18,
+                  fontFamily: FontRes.bold,
                 ),
               ),
               Row(
@@ -184,7 +178,7 @@ class SearchBarArea extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
+          padding: const EdgeInsets.only(left: 12, right: 12, top: 10),
           child: textField(),
         ),
       ],
@@ -194,31 +188,23 @@ class SearchBarArea extends StatelessWidget {
   Widget textField() {
     return Container(
       height: 38,
-      padding: const EdgeInsets.only(left: 20),
+      padding: const EdgeInsets.only(left: 5, bottom: 12),
       decoration: BoxDecoration(
         color: ColorRes.lightGrey2,
         borderRadius: BorderRadius.circular(30),
       ),
       child: TextField(
         controller: searchController,
+        cursorHeight: 15,
+        onChanged: onSearchBtnTap,
         style: const TextStyle(
           color: ColorRes.grey17,
           fontSize: 15,
         ),
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
           border: InputBorder.none,
-          contentPadding: const EdgeInsets.only(top: 5),
-          suffixIcon: InkWell(
-            onTap: onSearchBtnTap,
-            child: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Image.asset(AssetRes.search2),
-            ),
-          ),
+          contentPadding: EdgeInsets.only(left: 10, right: 10, bottom: 10),
         ),
-        onSubmitted: (value) {
-          onSearchBtnTap();
-        },
         textInputAction: TextInputAction.search,
       ),
     );

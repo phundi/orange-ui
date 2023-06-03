@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:orange_ui/utils/app_res.dart';
+import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/utils/color_res.dart';
+import 'package:orange_ui/utils/font_res.dart';
 
 class BottomInfoField extends StatelessWidget {
   final String title;
@@ -32,7 +33,7 @@ class BottomInfoField extends StatelessWidget {
             style: const TextStyle(
               color: ColorRes.veryDarkGrey,
               fontSize: 25,
-              fontFamily: 'gilroy_bold',
+              fontFamily: FontRes.bold,
             ),
           ),
           const SizedBox(height: 10),
@@ -67,7 +68,7 @@ class BottomInfoField extends StatelessWidget {
                   style: const TextStyle(
                     color: ColorRes.white,
                     fontSize: 15,
-                    fontFamily: 'gilroy_semibold',
+                    fontFamily: FontRes.semiBold,
                   ),
                 ),
               ),
@@ -76,9 +77,9 @@ class BottomInfoField extends StatelessWidget {
           SizedBox(height: Get.height / 25),
           InkWell(
             onTap: onSkipTap,
-            child: const Text(
-              AppRes.skip,
-              style: TextStyle(
+            child: Text(
+              S.current.skip,
+              style: const TextStyle(
                 color: ColorRes.dimGrey1,
                 fontSize: 15,
               ),

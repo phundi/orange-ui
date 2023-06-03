@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:orange_ui/common/widgets/loader.dart';
+import 'package:orange_ui/common/widgets/top_bar_area.dart';
+import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/screen/live_stream_history_screen/widgets/center_area_live_stream_history.dart';
-import 'package:orange_ui/screen/live_stream_history_screen/widgets/live_stream_history_top_bar.dart';
 import 'package:orange_ui/utils/color_res.dart';
 import 'package:stacked/stacked.dart';
 
@@ -12,29 +14,36 @@ class LiveStreamHistory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<LiveStreamHistoryViewModel>.reactive(
-        onModelReady: (model) {
-          model.init();
-        },
-        viewModelBuilder: () => LiveStreamHistoryViewModel(),
-        builder: (context, model, child) {
-          return Scaffold(
-            backgroundColor: ColorRes.white,
-            body: Column(
-              children: [
-                LiveStreamTopBar(onBackBtnTap: model.onBackBtnTap),
-                Container(
-                  height: 1,
-                  margin: const EdgeInsets.symmetric(horizontal: 7),
-                  width: MediaQuery.of(context).size.width,
-                  color: ColorRes.grey5,
-                ),
-                const SizedBox(
-                  height: 12,
-                ),
-                CenterAreaLiveStream(dataList: model.dataList),
-              ],
-            ),
-          );
-        });
+      onViewModelReady: (model) {
+        model.init();
+      },
+      viewModelBuilder: () => LiveStreamHistoryViewModel(),
+      builder: (context, model, child) {
+        return Scaffold(
+          backgroundColor: ColorRes.white,
+          body: Column(
+            children: [
+              TopBarArea(
+                  title: S.current.liveStreamCap, title2: S.current.history),
+              Container(
+                height: 1,
+                margin: const EdgeInsets.symmetric(horizontal: 7),
+                width: MediaQuery.of(context).size.width,
+                color: ColorRes.grey5,
+              ),
+              const SizedBox(
+                height: 12,
+              ),
+              model.isLoading
+                  ? Expanded(child: Loader().lottieWidget())
+                  : CenterAreaLiveStream(
+                      dataList: model.liveStreamHistory,
+                      controller: model.scrollController,
+                    ),
+            ],
+          ),
+        );
+      },
+    );
   }
 }

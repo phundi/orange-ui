@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:orange_ui/utils/app_res.dart';
+import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
+import 'package:orange_ui/utils/font_res.dart';
 
 class BottomLegalArea extends StatelessWidget {
   final VoidCallback onPrivacyPolicyTap;
   final VoidCallback onTermsOfUseTap;
-  final VoidCallback onHelpNSupportTap;
   final VoidCallback onLogoutTap;
   final VoidCallback onDeleteAccountTap;
 
@@ -15,7 +15,6 @@ class BottomLegalArea extends StatelessWidget {
     Key? key,
     required this.onPrivacyPolicyTap,
     required this.onTermsOfUseTap,
-    required this.onHelpNSupportTap,
     required this.onLogoutTap,
     required this.onDeleteAccountTap,
   }) : super(key: key);
@@ -25,20 +24,18 @@ class BottomLegalArea extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          AppRes.legal,
-          style: TextStyle(
-            fontFamily: 'gilroy_bold',
+        Text(
+          S.current.legal,
+          style: const TextStyle(
+            fontFamily: FontRes.bold,
             color: ColorRes.grey23,
             letterSpacing: 0.8,
           ),
         ),
         const SizedBox(height: 9),
-        navigationTile(AppRes.privacyPolicy, onPrivacyPolicyTap),
+        navigationTile(S.current.privacyPolicy, onPrivacyPolicyTap),
         const SizedBox(height: 8),
-        navigationTile(AppRes.termsOfUse, onTermsOfUseTap),
-        const SizedBox(height: 9),
-        navigationTile(AppRes.helpNSupport, onHelpNSupportTap),
+        navigationTile(S.current.termsOfUse, onTermsOfUseTap),
         const SizedBox(height: 47),
         InkWell(
           borderRadius: BorderRadius.circular(10),
@@ -50,13 +47,13 @@ class BottomLegalArea extends StatelessWidget {
               color: ColorRes.grey12,
               borderRadius: BorderRadius.circular(10),
             ),
-            child: const Center(
+            child: Center(
               child: Text(
-                AppRes.logOut,
-                style: TextStyle(
+                S.current.logOut,
+                style: const TextStyle(
                   fontSize: 15,
                   color: ColorRes.grey24,
-                  fontFamily: 'gilroy_semibold',
+                  fontFamily: FontRes.semiBold,
                 ),
               ),
             ),
@@ -66,10 +63,10 @@ class BottomLegalArea extends StatelessWidget {
         Center(
           child: Image.asset(AssetRes.themeLabel, height: 28, width: 93),
         ),
-        const Center(
+        Center(
           child: Text(
-            AppRes.versionText,
-            style: TextStyle(
+            S.current.versionText,
+            style: const TextStyle(
               fontSize: 12,
               color: ColorRes.grey25,
             ),
@@ -86,13 +83,13 @@ class BottomLegalArea extends StatelessWidget {
               color: ColorRes.grey12,
               borderRadius: BorderRadius.circular(10),
             ),
-            child: const Center(
+            child: Center(
               child: Text(
-                AppRes.deleteAccount,
-                style: TextStyle(
+                S.current.deleteAccount,
+                style: const TextStyle(
                   fontSize: 15,
                   color: ColorRes.grey24,
-                  fontFamily: 'gilroy_semibold',
+                  fontFamily: FontRes.semiBold,
                 ),
               ),
             ),
@@ -120,7 +117,7 @@ class BottomLegalArea extends StatelessWidget {
               style: const TextStyle(
                 color: ColorRes.grey24,
                 fontSize: 15,
-                fontFamily: 'gilroy_semibold',
+                fontFamily: FontRes.semiBold,
               ),
             ),
             const Spacer(),

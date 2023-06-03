@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:orange_ui/common/widgets/buttons.dart';
 import 'package:orange_ui/common/widgets/starting_profile_top_text.dart';
+import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/screen/select_hobbies_screen/select_hobbies_screen_view_model.dart';
 import 'package:orange_ui/screen/select_hobbies_screen/widgets/hobbies_clips.dart';
-import 'package:orange_ui/utils/app_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
 import 'package:stacked/stacked.dart';
 
@@ -14,7 +14,7 @@ class SelectHobbiesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<SelectHobbiesScreenViewModel>.reactive(
-      onModelReady: (model) {
+      onViewModelReady: (model) {
         model.init();
       },
       viewModelBuilder: () => SelectHobbiesScreenViewModel(),
@@ -27,7 +27,7 @@ class SelectHobbiesScreen extends StatelessWidget {
               Expanded(
                 child: Center(
                   child: HobbiesClips(
-                    hobbiesList: model.hobbiesList,
+                    hobbiesList: model.hobbiesList!,
                     selectedList: model.selectedList,
                     onClipTap: model.onClipTap,
                   ),
@@ -35,15 +35,15 @@ class SelectHobbiesScreen extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 17),
-                child:
-                    SubmitButton2(title: AppRes.next, onTap: model.onNextTap),
+                child: SubmitButton2(
+                    title: S.current.next, onTap: model.onNextTap),
               ),
               const SizedBox(height: 27),
               InkWell(
                 onTap: model.onSkipTap,
-                child: const Text(
-                  AppRes.skip,
-                  style: TextStyle(
+                child: Text(
+                  S.current.skip,
+                  style: const TextStyle(
                     color: ColorRes.dimGrey2,
                     fontSize: 14,
                   ),

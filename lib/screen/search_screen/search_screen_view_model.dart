@@ -1,105 +1,148 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:orange_ui/api_provider/api_provider.dart';
+import 'package:orange_ui/common/widgets/common_fun.dart';
+import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/screen/map_screen/map_screen.dart';
 import 'package:orange_ui/screen/user_detail_screen/user_detail_screen.dart';
-import 'package:orange_ui/utils/app_res.dart';
-import 'package:orange_ui/utils/asset_res.dart';
 import 'package:stacked/stacked.dart';
 
 class SearchScreenViewModel extends BaseViewModel {
+  String selectedTab = '';
+  int selectedTabId = 0;
+  TextEditingController searchController = TextEditingController();
+  List<Interest> tabList = [];
+  List<RegistrationUserData> searchUsers = [];
+  bool isLoading = false;
+  BannerAd? bannerAd;
+  ScrollController userScrollController = ScrollController();
+
   void init() {
-    onSearchBtnTap();
+    getInterestApiCall();
+    getSearchByUser();
+    getBannerAd();
+    fetchScrollData();
   }
 
-  String selectedTab = '';
-  TextEditingController searchController = TextEditingController();
-  List<String> tabList = [
-    AppRes.dance,
-    AppRes.singingCap,
-    AppRes.travelCap,
-    AppRes.athletics,
-    AppRes.photography,
-    AppRes.gym,
-    AppRes.yoga,
-    AppRes.swimming,
-    AppRes.musicCap,
-    AppRes.walkingCap,
-    AppRes.pets,
-    AppRes.fitnessCap,
-    AppRes.sports,
-    AppRes.fashion,
-  ];
-  List<Map<String, dynamic>> filterList = [];
-  List<Map<String, dynamic>> userList = [
-    {
-      'name': "Natalia Nora",
-      'age': 24,
-      'address': 'Las Vegas, USA',
-      'tickMark': true,
-      'image': AssetRes.profile6,
-    },
-    {
-      'name': "Pinky Arora",
-      'age': 22,
-      'address': 'Mumbai, India',
-      'tickMark': true,
-      'image': AssetRes.profile9,
-    },
-    {
-      'name': "Nora Malik",
-      'age': 28,
-      'address': 'Karachi, Pakistan',
-      'tickMark': false,
-      'image': AssetRes.profile10,
-    },
-    {
-      'name': "Aron Nora",
-      'age': 26,
-      'address': 'London, UK',
-      'tickMark': true,
-      'image': AssetRes.profile11,
-    },
-    {
-      'name': "Norak Patel",
-      'age': 26,
-      'address': 'Delhi, India',
-      'tickMark': true,
-      'image': AssetRes.profile12,
-    },
-  ];
+  void getInterestApiCall() async {
+    ApiProvider().getInterest().then((value) {
+      if (value != null && value.status!) {
+        tabList = value.data ?? [];
+        notifyListeners();
+      }
+    });
+  }
+
+  void fetchScrollData() {
+    userScrollController.addListener(
+      () {
+        if (userScrollController.offset ==
+            userScrollController.position.maxScrollExtent) {
+          if (!isLoading) {
+            if (selectedTab.isEmpty) {
+              getSearchByUser();
+            } else {
+              getSearchById(selectedTabId);
+            }
+          }
+        }
+      },
+    );
+  }
+
+  void getSearchByUser() async {
+    isLoading = true;
+    ApiProvider()
+        .searchUser(
+      searchKeyword: searchController.text,
+      start: searchUsers.length,
+    )
+        .then((value) {
+      List<String> list =
+          searchUsers.map((e) => e.id?.toString() ?? '').toList();
+      value.data?.forEach((element) {
+        if (!list.contains(element.id?.toString())) {
+          searchUsers.add(element);
+        }
+      });
+      isLoading = false;
+      notifyListeners();
+    });
+  }
+
+  void getSearchById(int interestId) async {
+    isLoading = true;
+    ApiProvider()
+        .searchUserById(
+      searchKeyword: searchController.text,
+      interestId: interestId,
+      start: searchUsers.length,
+    )
+        .then((value) {
+      List<String> list =
+          searchUsers.map((e) => e.id?.toString() ?? '').toList();
+      value.data?.forEach((element) {
+        if (!list.contains(element.id?.toString())) {
+          searchUsers.add(element);
+        }
+      });
+      isLoading = false;
+      notifyListeners();
+    });
+  }
 
   void onBackBtnTap() {
     if (selectedTab == '') {
       Get.back();
     } else {
       selectedTab = '';
+      searchUsers = [];
+      getSearchByUser();
       notifyListeners();
     }
   }
 
-  void onSearchBtnTap() {
-    filterList = [];
-    for (var element in userList) {
-      if (element['name']
-          .toString()
-          .toUpperCase()
-          .contains(searchController.text.toUpperCase())) {
-        filterList.add(element);
-      }
+  void onSearchingUser(String value) {
+    searchUsers = [];
+    if (searchController.text.isEmpty) {
+      searchController.clear();
     }
-    notifyListeners();
+    if (selectedTab.isNotEmpty) {
+      getSearchById(selectedTabId);
+    } else {
+      getSearchByUser();
+    }
   }
 
   void onLocationTap() {
-    Get.to(() => const MapScreen());
+    Get.to(
+      () => const MapScreen(),
+    );
   }
 
-  void onTabSelect(String value) {
-    selectedTab = value;
+  void onTabSelect(Interest value) {
+    selectedTab = value.title ?? '';
+    selectedTabId = value.id ?? -1;
+    searchUsers = [];
+    getSearchById(selectedTabId);
     notifyListeners();
   }
 
-  void onUserTap(Map<String, dynamic> data) {
-    Get.to(() => const UserDetailScreen());
+  void onUserTap(RegistrationUserData? data) {
+    Get.to(() => const UserDetailScreen(), arguments: data);
+  }
+
+  void getBannerAd() {
+    CommonFun.bannerAd((ad) {
+      bannerAd = ad as BannerAd;
+      notifyListeners();
+    });
+  }
+
+  @override
+  void dispose() {
+    userScrollController.dispose();
+    super.dispose();
   }
 }

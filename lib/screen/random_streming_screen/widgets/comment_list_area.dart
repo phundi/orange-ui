@@ -2,11 +2,14 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:orange_ui/utils/asset_res.dart';
+import 'package:orange_ui/model/chat_and_live_stream/live_stream.dart';
 import 'package:orange_ui/utils/color_res.dart';
+import 'package:orange_ui/utils/const_res.dart';
+import 'package:orange_ui/utils/firebase_res.dart';
+import 'package:orange_ui/utils/font_res.dart';
 
 class CommentListArea extends StatelessWidget {
-  final List<Map<String, dynamic>> commentList;
+  final List<LiveStreamComment> commentList;
   final BuildContext pageContext;
 
   const CommentListArea({
@@ -44,18 +47,20 @@ class CommentListArea extends StatelessWidget {
           itemCount: commentList.length,
           reverse: true,
           itemBuilder: (context, index) {
-            return Padding(
+            LiveStreamComment? comment = commentList[index];
+            return Container(
+              margin: const EdgeInsets.only(left: 10),
               padding: const EdgeInsets.only(bottom: 14),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadius.circular(30),
-                    child: Image.asset(
-                      commentList[index]['image'],
+                    child: Image.network(
+                      '${ConstRes.aImageBaseUrl}${comment.userImage}',
                       fit: BoxFit.cover,
-                      height: 32,
-                      width: 32,
+                      height: 34,
+                      width: 34,
                     ),
                   ),
                   const SizedBox(width: 8),
@@ -65,19 +70,19 @@ class CommentListArea extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          commentList[index]['name'],
-                          style: TextStyle(
-                            color: ColorRes.white.withOpacity(0.65),
-                            fontSize: 12,
-                          ),
+                          comment.userName ?? '',
+                          style: const TextStyle(
+                              color: ColorRes.white,
+                              fontSize: 13,
+                              fontFamily: FontRes.semiBold),
                         ),
-                        commentList[index]['type'] == "text"
+                        comment.commentType == FirebaseRes.msg
                             ? Text(
-                                commentList[index]['comment'],
-                                style: TextStyle(
-                                  color: ColorRes.white.withOpacity(0.90),
-                                  fontSize: 13,
-                                ),
+                                comment.comment ?? '',
+                                style: const TextStyle(
+                                    color: ColorRes.white,
+                                    fontSize: 12,
+                                    fontFamily: FontRes.medium),
                               )
                             : ClipRRect(
                                 borderRadius: BorderRadius.circular(15),
@@ -87,15 +92,16 @@ class CommentListArea extends StatelessWidget {
                                   child: Container(
                                     height: 54,
                                     width: 54,
-                                    padding: const EdgeInsets.all(8),
+                                    padding: const EdgeInsets.all(5),
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(15),
                                       color: ColorRes.black.withOpacity(0.33),
                                     ),
-                                    child: Image.asset(
-                                      AssetRes.heart,
+                                    child: Image.network(
+                                      '${ConstRes.aImageBaseUrl}${comment.comment}',
                                       width: 40,
                                       height: 35,
+                                      fit: BoxFit.cover,
                                     ),
                                   ),
                                 ),

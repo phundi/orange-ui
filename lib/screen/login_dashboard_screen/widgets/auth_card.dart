@@ -1,11 +1,13 @@
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:orange_ui/common/widgets/buttons.dart';
-import 'package:orange_ui/utils/app_res.dart';
+import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
+import 'package:orange_ui/utils/font_res.dart';
 
 class AuthCard extends StatelessWidget {
   final TextEditingController emailController;
@@ -13,7 +15,6 @@ class AuthCard extends StatelessWidget {
   final String emailError;
   final VoidCallback onContinueTap;
   final VoidCallback onGoogleTap;
-  final VoidCallback onFacebookTap;
   final VoidCallback onAppleTap;
   final VoidCallback onSignUpTap;
   final VoidCallback onForgotPwdTap;
@@ -25,7 +26,6 @@ class AuthCard extends StatelessWidget {
     required this.emailError,
     required this.onContinueTap,
     required this.onGoogleTap,
-    required this.onFacebookTap,
     required this.onAppleTap,
     required this.onSignUpTap,
     required this.onForgotPwdTap,
@@ -44,6 +44,7 @@ class AuthCard extends StatelessWidget {
             color: ColorRes.black.withOpacity(0.5),
           ),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
                 height: 44,
@@ -55,100 +56,91 @@ class AuthCard extends StatelessWidget {
                 child: TextField(
                   controller: emailController,
                   focusNode: emailFocus,
-                  style: const TextStyle(fontFamily: 'gilroy_semibold'),
+                  style: const TextStyle(fontFamily: FontRes.semiBold),
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.only(left: 14),
                     border: InputBorder.none,
-                    hintText: emailError == "" ? AppRes.email : emailError,
+                    hintText: emailError == "" ? S.current.email : emailError,
                     hintStyle: TextStyle(
                       color:
                           emailError == "" ? ColorRes.dimGrey2 : ColorRes.red,
                       fontSize: 14,
-                      fontFamily: 'gilroy_semibold',
+                      fontFamily: FontRes.semiBold,
                     ),
                   ),
                 ),
               ),
               const SizedBox(height: 15),
-              SubmitButton1(title: AppRes.continueText, onTap: onContinueTap),
+              SubmitButton1(
+                  title: S.current.continueText, onTap: onContinueTap),
               const SizedBox(height: 15),
-              const Text(
-                AppRes.or,
-                style: TextStyle(
-                  color: ColorRes.white,
-                  fontSize: 12,
+              Center(
+                child: Text(
+                  S.current.or,
+                  style: const TextStyle(
+                    color: ColorRes.white,
+                    fontSize: 12,
+                  ),
                 ),
               ),
               const SizedBox(height: 15),
               socialButton(
                 Image.asset(
                   AssetRes.googleLogo,
-                  height: 18,
-                  width: 18,
+                  height: 20,
+                  width: 20,
                 ),
-                AppRes.continueWithGoogle,
+                S.current.continueWithGoogle,
                 onGoogleTap,
                 const EdgeInsets.symmetric(horizontal: 16),
               ),
               const SizedBox(height: 15),
-              socialButton(
-                Image.asset(
-                  AssetRes.facebookLogo,
-                  height: 26,
-                  width: 26,
+              Visibility(
+                visible: Platform.isIOS ? true : false,
+                child: socialButton(
+                  Image.asset(
+                    AssetRes.appleLogo,
+                    height: 25,
+                    width: 25,
+                  ),
+                  S.current.continueWithApple,
+                  onAppleTap,
+                  const EdgeInsets.symmetric(horizontal: 8),
                 ),
-                AppRes.continueWithFacebook,
-                onFacebookTap,
-                const EdgeInsets.symmetric(horizontal: 13),
-              ),
-              const SizedBox(height: 15),
-              socialButton(
-                Image.asset(
-                  AssetRes.appleLogo,
-                  height: 38,
-                  width: 38,
-                ),
-                AppRes.continueWithApple,
-                onAppleTap,
-                const EdgeInsets.symmetric(horizontal: 8),
               ),
               const SizedBox(height: 25),
-              InkWell(
-                onTap: onSignUpTap,
-                child: Row(
-                  children: const [
-                    Text(
-                      AppRes.donTHaveAnAccount,
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: ColorRes.white,
-                      ),
-                    ),
-                    SizedBox(width: 5),
-                    Text(
-                      AppRes.signUp,
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: ColorRes.lightOrange2,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 15),
               Row(
                 children: [
+                  Text(
+                    S.current.donTHaveAnAccount,
+                    style: const TextStyle(
+                      fontSize: 14,
+                      color: ColorRes.white,
+                    ),
+                  ),
+                  const SizedBox(width: 5),
                   InkWell(
-                    onTap: onForgotPwdTap,
-                    child: const Text(
-                      AppRes.forgotYourPassword,
-                      style: TextStyle(
+                    onTap: onSignUpTap,
+                    child: Text(
+                      S.current.signUp,
+                      style: const TextStyle(
                         fontSize: 14,
                         color: ColorRes.lightOrange2,
                       ),
                     ),
                   ),
                 ],
+              ),
+              const SizedBox(height: 15),
+              InkWell(
+                onTap: onForgotPwdTap,
+                child: Text(
+                  S.current.forgotYourPassword,
+                  style: const TextStyle(
+                    fontSize: 14,
+                    color: ColorRes.lightOrange2,
+                  ),
+                ),
               )
             ],
           ),
@@ -157,32 +149,34 @@ class AuthCard extends StatelessWidget {
     );
   }
 
-  Widget socialButton(
-      Image image, String title, VoidCallback onTap, EdgeInsets padding) {
-    return Container(
-      height: 44,
-      width: Get.width,
-      padding: padding,
-      decoration: BoxDecoration(
-        color: ColorRes.white,
-        borderRadius: BorderRadius.circular(6),
-      ),
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          Positioned(
-            left: 0,
-            child: image,
-          ),
-          Text(
-            title,
-            style: const TextStyle(
-              color: ColorRes.darkGrey2,
-              fontSize: 14,
-              fontFamily: 'gilroy_semibold',
+  Widget socialButton(Image image, String title, VoidCallback onTap, EdgeInsets padding) {
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        height: 44,
+        width: Get.width,
+        padding: padding,
+        decoration: BoxDecoration(
+          color: ColorRes.white,
+          borderRadius: BorderRadius.circular(6),
+        ),
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            Positioned(
+              left: 10,
+              child: image,
             ),
-          ),
-        ],
+            Text(
+              title,
+              style: const TextStyle(
+                color: ColorRes.darkGrey2,
+                fontSize: 14,
+                fontFamily: FontRes.semiBold,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

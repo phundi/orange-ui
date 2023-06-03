@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/screen/login_dashboard_screen/login_dashboard_screen_view_model.dart';
 import 'package:orange_ui/screen/login_dashboard_screen/widgets/auth_card.dart';
-import 'package:orange_ui/utils/app_res.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
+import 'package:orange_ui/utils/font_res.dart';
 import 'package:stacked/stacked.dart';
 
 class LoginDashboardScreen extends StatelessWidget {
@@ -13,7 +14,7 @@ class LoginDashboardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<LoginDashboardScreenViewModel>.reactive(
-      onModelReady: (model) {
+      onViewModelReady: (model) {
         model.init();
       },
       viewModelBuilder: () => LoginDashboardScreenViewModel(),
@@ -43,12 +44,12 @@ class LoginDashboardScreen extends StatelessWidget {
                         width: 176,
                       ),
                       const SizedBox(height: 23),
-                      const Text(
-                        AppRes.loginToContinue,
-                        style: TextStyle(
+                      Text(
+                        S.current.loginToContinue,
+                        style: const TextStyle(
                           color: ColorRes.white,
                           fontSize: 12,
-                          fontFamily: 'gilroy_bold',
+                          fontFamily: FontRes.bold,
                           letterSpacing: 2.0,
                         ),
                       ),
@@ -59,7 +60,6 @@ class LoginDashboardScreen extends StatelessWidget {
                         emailError: model.emailError,
                         onContinueTap: model.onContinueTap,
                         onGoogleTap: model.onGoogleTap,
-                        onFacebookTap: model.onFacebookTap,
                         onAppleTap: model.onAppleTap,
                         onSignUpTap: model.onSignUpTap,
                         onForgotPwdTap: model.onForgotPwdTap,

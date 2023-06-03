@@ -1,40 +1,18 @@
 import 'dart:ui';
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:orange_ui/common/widgets/buttons.dart';
-import 'package:orange_ui/utils/app_res.dart';
+import 'package:orange_ui/generated/l10n.dart';
+import 'package:orange_ui/screen/register_screen/register_screen_view_model.dart';
 import 'package:orange_ui/utils/color_res.dart';
+import 'package:orange_ui/utils/font_res.dart';
 
 class RegisterCard extends StatelessWidget {
-  final TextEditingController fullNameController;
-  final TextEditingController pwdController;
-  final TextEditingController confirmPwdController;
-  final FocusNode fullNameFocus;
-  final FocusNode pwdFocus;
-  final FocusNode confirmPwdFocus;
-  final bool showPwd;
-  final String fullNameError;
-  final String pwdError;
-  final String confirmPwdError;
-  final VoidCallback onViewTap;
-  final VoidCallback onContinueTap;
+  final RegisterScreenViewModel model;
 
-  const RegisterCard({
-    Key? key,
-    required this.fullNameController,
-    required this.pwdController,
-    required this.confirmPwdController,
-    required this.fullNameFocus,
-    required this.pwdFocus,
-    required this.confirmPwdFocus,
-    required this.showPwd,
-    required this.fullNameError,
-    required this.pwdError,
-    required this.confirmPwdError,
-    required this.onViewTap,
-    required this.onContinueTap,
-  }) : super(key: key);
+  const RegisterCard({Key? key, required this.model}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -51,48 +29,59 @@ class RegisterCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                AppRes.registerInfoText,
-                style: TextStyle(
+              Text(
+                S.current.registerInfoText,
+                style: const TextStyle(
                   color: ColorRes.lightGrey,
                   fontSize: 15,
-                ),
-              ),
-              const Text(
-                AppRes.exampleEmail,
-                style: TextStyle(
-                  color: ColorRes.lightGrey,
-                  fontSize: 15,
-                  fontFamily: 'gilroy_semibold',
                 ),
               ),
               const SizedBox(height: 25),
               textField(
-                controller: fullNameController,
-                focusNode: fullNameFocus,
-                error: fullNameError,
-                hint: AppRes.fullName,
+                  controller: model.emailController,
+                  focusNode: model.emailFocus,
+                  error: model.emailError,
+                  textCapitalization: TextCapitalization.none,
+                  hint: S.current.email),
+              const SizedBox(height: 20),
+              textField(
+                controller: model.fullNameController,
+                focusNode: model.fullNameFocus,
+                error: model.fullNameError,
+                textCapitalization: TextCapitalization.sentences,
+                hint: S.current.fullName,
               ),
               const SizedBox(height: 20),
               textField(
-                  controller: pwdController,
-                  focusNode: pwdFocus,
-                  error: pwdError,
-                  hint: AppRes.password,
-                  showPwd: showPwd,
-                  onViewTap: onViewTap),
+                  controller: model.pwdController,
+                  focusNode: model.pwdFocus,
+                  error: model.pwdError,
+                  hint: S.current.password,
+                  showPwd: model.showPwd,
+                  textCapitalization: TextCapitalization.sentences,
+                  onViewTap: model.onViewTap),
               const SizedBox(height: 20),
               textField(
-                controller: confirmPwdController,
-                focusNode: confirmPwdFocus,
-                error: confirmPwdError,
-                hint: AppRes.confirmPassword,
+                controller: model.confirmPwdController,
+                focusNode: model.confirmPwdFocus,
+                error: model.confirmPwdError,
+                hint: S.current.confirmPassword,
+                textCapitalization: TextCapitalization.sentences,
                 showPwd: false,
               ),
+              const SizedBox(height: 20),
+              textField(
+                  controller: model.ageController,
+                  focusNode: model.ageFocus,
+                  error: model.ageError,
+                  hint: S.current.enterAge,
+                  textCapitalization: TextCapitalization.sentences,
+                  textInputType: TextInputType.number),
               const SizedBox(height: 25),
               policyText(),
               const SizedBox(height: 30),
-              SubmitButton1(title: AppRes.agreeNContinue, onTap: onContinueTap),
+              SubmitButton1(
+                  title: S.current.agreeNContinue, onTap: model.onContinueTap),
             ],
           ),
         ),
@@ -100,14 +89,15 @@ class RegisterCard extends StatelessWidget {
     );
   }
 
-  Widget textField({
-    required TextEditingController controller,
-    required FocusNode focusNode,
-    required String error,
-    required String hint,
-    bool? showPwd,
-    VoidCallback? onViewTap,
-  }) {
+  Widget textField(
+      {required TextEditingController controller,
+      required FocusNode focusNode,
+      required String error,
+      required String hint,
+      bool? showPwd,
+      required TextCapitalization textCapitalization,
+      VoidCallback? onViewTap,
+      TextInputType textInputType = TextInputType.text}) {
     return Container(
       height: 44,
       width: Get.width,
@@ -119,11 +109,13 @@ class RegisterCard extends StatelessWidget {
         focusNode: focusNode,
         controller: controller,
         obscureText: showPwd == null ? false : !showPwd,
+        textCapitalization: textCapitalization,
+        keyboardType: textInputType,
         style: const TextStyle(
-          fontFamily: 'gilroy_semibold',
+          fontFamily: FontRes.semiBold,
         ),
         decoration: InputDecoration(
-          contentPadding: const EdgeInsets.only(left: 14, top: 10),
+          contentPadding: const EdgeInsets.only(left: 14, top: 12),
           border: InputBorder.none,
           hintText: error == "" ? hint : error,
           suffixIcon: onViewTap == null
@@ -133,11 +125,11 @@ class RegisterCard extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.only(top: 14),
                     child: Text(
-                      showPwd! ? AppRes.hide : AppRes.view,
+                      showPwd! ? S.current.hide : S.current.view,
                       style: const TextStyle(
                         color: ColorRes.veryDarkGrey2,
                         fontSize: 13,
-                        fontFamily: 'gilroy_bold',
+                        fontFamily: FontRes.bold,
                       ),
                     ),
                   ),
@@ -145,7 +137,7 @@ class RegisterCard extends StatelessWidget {
           hintStyle: TextStyle(
             color: error == "" ? ColorRes.dimGrey2 : ColorRes.red,
             fontSize: 14,
-            fontFamily: "gilroy_semibold",
+            fontFamily: FontRes.semiBold,
           ),
         ),
       ),
@@ -154,38 +146,41 @@ class RegisterCard extends StatelessWidget {
 
   Widget policyText() {
     return RichText(
-      text: const TextSpan(
+      text: TextSpan(
         children: [
           TextSpan(
-            text: AppRes.policy1,
-            style: TextStyle(
+            text: S.current.policy1,
+            style: const TextStyle(
               color: ColorRes.lightGrey,
               fontSize: 13,
-              fontFamily: "gilroy",
+              fontFamily: FontRes.regular,
             ),
           ),
           TextSpan(
-            text: AppRes.policy2,
-            style: TextStyle(
+            text: S.current.policy2,
+            recognizer: TapGestureRecognizer()..onTap = model.onTermsOfUseTap,
+            style: const TextStyle(
               color: ColorRes.lightOrange3,
               fontSize: 13,
-              fontFamily: "gilroy_semibold",
+              fontFamily: FontRes.semiBold,
             ),
           ),
           TextSpan(
-            text: AppRes.policy3,
-            style: TextStyle(
+            text: S.current.policy3,
+            style: const TextStyle(
               color: ColorRes.lightGrey,
               fontSize: 13,
-              fontFamily: "gilroy",
+              fontFamily: FontRes.regular,
             ),
           ),
           TextSpan(
-            text: AppRes.policy4,
-            style: TextStyle(
+            text: S.current.policy4,
+            recognizer: TapGestureRecognizer()
+              ..onTap = model.onPrivacyPolicyTap,
+            style: const TextStyle(
               color: ColorRes.lightOrange3,
               fontSize: 13,
-              fontFamily: "gilroy_semibold",
+              fontFamily: FontRes.semiBold,
             ),
           ),
         ],

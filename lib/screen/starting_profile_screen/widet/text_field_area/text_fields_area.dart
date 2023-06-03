@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:orange_ui/common/widgets/drop_down_box.dart';
+import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/screen/starting_profile_screen/widet/text_field_area/text_field_controller.dart';
-import 'package:orange_ui/utils/app_res.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
+import 'package:orange_ui/utils/font_res.dart';
 
 class TextFieldsArea extends StatelessWidget {
   final TextEditingController addressController;
@@ -18,21 +19,27 @@ class TextFieldsArea extends StatelessWidget {
   final VoidCallback onGenderTap;
   final VoidCallback onTextFieldTap;
   final Function(String value) onGenderChange;
+  final String addressError;
+  final String bioError;
+  final String ageError;
 
-  TextFieldsArea({
-    Key? key,
-    required this.addressController,
-    required this.bioController,
-    required this.ageController,
-    required this.addressFocus,
-    required this.bioFocus,
-    required this.ageFocus,
-    required this.gender,
-    required this.onGenderTap,
-    required this.showDropdown,
-    required this.onTextFieldTap,
-    required this.onGenderChange,
-  }) : super(key: key);
+  TextFieldsArea(
+      {Key? key,
+      required this.addressController,
+      required this.bioController,
+      required this.ageController,
+      required this.addressFocus,
+      required this.bioFocus,
+      required this.ageFocus,
+      required this.gender,
+      required this.onGenderTap,
+      required this.showDropdown,
+      required this.onTextFieldTap,
+      required this.onGenderChange,
+      required this.ageError,
+      required this.addressError,
+      required this.bioError})
+      : super(key: key);
 
   final TextFieldController controller = Get.put(TextFieldController());
 
@@ -41,17 +48,32 @@ class TextFieldsArea extends StatelessWidget {
     return Expanded(
       child: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 17),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                AppRes.whereDoYouLive,
-                style: TextStyle(
-                  color: ColorRes.darkGrey3,
-                  fontSize: 15,
-                  fontFamily: "gilroy_extra_bold",
+              RichText(
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: S.current.whereDoYouLive,
+                      style: const TextStyle(
+                        color: ColorRes.darkGrey3,
+                        fontSize: 15,
+                        fontFamily: FontRes.extraBold,
+                      ),
+                    ),
+                    TextSpan(
+                      text: " (${S.current.optional})",
+                      style: const TextStyle(
+                        color: ColorRes.dimGrey2,
+                        fontSize: 14,
+                        fontFamily: FontRes.bold,
+                      ),
+                    )
+                  ],
                 ),
               ),
               const SizedBox(height: 6),
@@ -67,12 +89,23 @@ class TextFieldsArea extends StatelessWidget {
                   onTap: onTextFieldTap,
                   onChanged: controller.onAddressChange,
                   style: const TextStyle(
-                    color: ColorRes.dimGrey3,
-                    fontSize: 14,
-                  ),
-                  decoration: const InputDecoration(
+                      color: ColorRes.dimGrey3,
+                      fontSize: 15,
+                      fontFamily: FontRes.semiBold),
+                  keyboardType: TextInputType.streetAddress,
+                  textCapitalization: TextCapitalization.sentences,
+                  decoration: InputDecoration(
+                    hintText: addressError == ''
+                        ? S.current.enterAddress
+                        : addressError,
+                    hintStyle: TextStyle(
+                      color:
+                          addressError == "" ? ColorRes.dimGrey2 : ColorRes.red,
+                      fontSize: 14,
+                      fontFamily: FontRes.semiBold,
+                    ),
                     border: InputBorder.none,
-                    contentPadding: EdgeInsets.only(bottom: 10, left: 10),
+                    contentPadding: const EdgeInsets.only(bottom: 10, left: 10),
                   ),
                 ),
               ),
@@ -80,23 +113,28 @@ class TextFieldsArea extends StatelessWidget {
               Obx(() => RichText(
                     text: TextSpan(
                       children: [
-                        const TextSpan(
-                          text: AppRes.bio,
-                          style: TextStyle(
+                        TextSpan(
+                          text: S.current.bio,
+                          style: const TextStyle(
                             color: ColorRes.darkGrey3,
                             fontSize: 15,
-                            fontFamily: "gilroy_extra_bold",
+                            fontFamily: FontRes.extraBold,
                           ),
                         ),
                         TextSpan(
-                          text: " (" +
-                              controller.bio.value.length.toString() +
-                              "/80" +
-                              ")",
+                          text: ' (${S.current.optional})',
                           style: const TextStyle(
                             color: ColorRes.dimGrey2,
                             fontSize: 14,
-                            fontFamily: 'gilroy_bold',
+                            fontFamily: FontRes.bold,
+                          ),
+                        ),
+                        TextSpan(
+                          text: " (${controller.bio.value.length}/100)",
+                          style: const TextStyle(
+                            color: ColorRes.dimGrey2,
+                            fontSize: 14,
+                            fontFamily: FontRes.bold,
                           ),
                         )
                       ],
@@ -116,41 +154,35 @@ class TextFieldsArea extends StatelessWidget {
                   maxLines: null,
                   minLines: null,
                   expands: true,
-                  maxLength: 80,
+                  maxLength: 100,
+                  keyboardType: TextInputType.streetAddress,
+                  textCapitalization: TextCapitalization.sentences,
                   onChanged: controller.onBioChange,
                   style: const TextStyle(
-                    color: ColorRes.dimGrey3,
-                    fontSize: 14,
-                  ),
-                  decoration: const InputDecoration(
+                      color: ColorRes.dimGrey3,
+                      fontSize: 15,
+                      fontFamily: FontRes.semiBold),
+                  decoration: InputDecoration(
                     border: InputBorder.none,
                     contentPadding:
-                        EdgeInsets.only(bottom: 10, left: 10, top: 9),
+                        const EdgeInsets.only(bottom: 10, left: 10, top: 9),
                     counterText: "",
+                    hintText: bioError == '' ? S.current.enterBio : bioError,
+                    hintStyle: TextStyle(
+                      color: bioError == "" ? ColorRes.dimGrey2 : ColorRes.red,
+                      fontSize: 14,
+                      fontFamily: FontRes.semiBold,
+                    ),
                   ),
                 ),
               ),
               const SizedBox(height: 15),
-              RichText(
-                text: const TextSpan(
-                  children: [
-                    TextSpan(
-                      text: AppRes.age,
-                      style: TextStyle(
-                        color: ColorRes.darkGrey3,
-                        fontSize: 15,
-                        fontFamily: "gilroy_extra_bold",
-                      ),
-                    ),
-                    TextSpan(
-                      text: " (" + AppRes.optional + ")",
-                      style: TextStyle(
-                        color: ColorRes.dimGrey2,
-                        fontSize: 14,
-                        fontFamily: 'gilroy_bold',
-                      ),
-                    ),
-                  ],
+              Text(
+                S.current.age,
+                style: const TextStyle(
+                  color: ColorRes.darkGrey3,
+                  fontSize: 15,
+                  fontFamily: FontRes.extraBold,
                 ),
               ),
               const SizedBox(height: 6),
@@ -165,34 +197,33 @@ class TextFieldsArea extends StatelessWidget {
                   focusNode: ageFocus,
                   onChanged: controller.onAgeChange,
                   onTap: onTextFieldTap,
+                  keyboardType: TextInputType.phone,
                   style: const TextStyle(
-                    color: ColorRes.dimGrey3,
-                    fontSize: 14,
-                  ),
-                  decoration: const InputDecoration(
+                      color: ColorRes.dimGrey3,
+                      fontSize: 15,
+                      fontFamily: FontRes.semiBold),
+                  decoration: InputDecoration(
+                    hintText: ageError == '' ? S.current.enterAge : ageError,
+                    hintStyle: TextStyle(
+                      color: ageError == "" ? ColorRes.dimGrey2 : ColorRes.red,
+                      fontSize: 14,
+                      fontFamily: FontRes.semiBold,
+                    ),
                     border: InputBorder.none,
-                    contentPadding: EdgeInsets.only(bottom: 10, left: 10),
+                    contentPadding: const EdgeInsets.only(bottom: 10, left: 10),
                   ),
                 ),
               ),
               const SizedBox(height: 15),
               RichText(
-                text: const TextSpan(
+                text: TextSpan(
                   children: [
                     TextSpan(
-                      text: AppRes.gender,
-                      style: TextStyle(
+                      text: S.current.gender,
+                      style: const TextStyle(
                         color: ColorRes.darkGrey3,
                         fontSize: 15,
-                        fontFamily: "gilroy_extra_bold",
-                      ),
-                    ),
-                    TextSpan(
-                      text: " (" + AppRes.optional + ")",
-                      style: TextStyle(
-                        color: ColorRes.dimGrey2,
-                        fontSize: 14,
-                        fontFamily: 'gilroy_bold',
+                        fontFamily: FontRes.extraBold,
                       ),
                     ),
                   ],

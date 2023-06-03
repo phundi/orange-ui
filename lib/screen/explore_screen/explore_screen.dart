@@ -11,7 +11,7 @@ class ExploreScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<ExploreScreenViewModel>.reactive(
-      onModelReady: (model) {
+      onViewModelReady: (model) {
         model.init();
       },
       viewModelBuilder: () => ExploreScreenViewModel(),
@@ -23,22 +23,28 @@ class ExploreScreen extends StatelessWidget {
               onSearchTap: model.onSearchTap,
               onTitleTap: model.onTitleTap,
             ),
+            const SizedBox(
+              height: 20,
+            ),
             FullImageView(
-              pageController: model.pageController,
-              fullName: model.userName,
-              age: model.age,
-              bioText: model.bioText,
-              address: model.address,
-              imageList: model.imageList,
+              userData: model.userData,
+              userController: model.userController,
               onLiveBtnTap: model.onLiveBtnTap,
               onImageTap: model.onImageTap,
+              onYoutubeTap: model.onYoutubeTap,
+              onFacebookTap: model.onFBTap,
+              onInstagramTap: model.onInstagramTap,
+              isLoading: model.isLoading,
+              onIndexChange: model.onIndexChange,
+              isSocialBtnVisible: model.isSocialBtnVisible,
             ),
             const SizedBox(height: 26),
             BottomButtons(
               onPlayBtnTap: model.onPlayButtonTap,
               onNextBtnTap: model.onNextButtonTap,
               onEyeTap: model.onEyeButtonTap,
-            )
+            ),
+            const SizedBox(height: 26),
           ],
         );
       },

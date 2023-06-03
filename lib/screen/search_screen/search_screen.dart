@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:orange_ui/common/widgets/loader.dart';
 import 'package:orange_ui/screen/search_screen/search_screen_view_model.dart';
 import 'package:orange_ui/screen/search_screen/widgets/search_bar_area.dart';
 import 'package:orange_ui/screen/search_screen/widgets/user_list.dart';
@@ -11,7 +13,7 @@ class SearchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<SearchScreenViewModel>.reactive(
-      onModelReady: (model) {
+      onViewModelReady: (model) {
         model.init();
       },
       viewModelBuilder: () => SearchScreenViewModel(),
@@ -30,15 +32,28 @@ class SearchScreen extends StatelessWidget {
                   selectedTab: model.selectedTab,
                   tabList: model.tabList,
                   onBackBtnTap: model.onBackBtnTap,
-                  onSearchBtnTap: model.onSearchBtnTap,
+                  onSearchBtnTap: model.onSearchingUser,
                   onLocationTap: model.onLocationTap,
                   onTabSelect: model.onTabSelect,
                 ),
                 const SizedBox(height: 11),
-                UserList(
-                  userList: model.filterList,
-                  onUserTap: model.onUserTap,
+                model.isLoading
+                    ? Expanded(child: Loader().lottieWidget())
+                    : UserList(
+                        controller: model.userScrollController,
+                        userList: model.searchUsers,
+                        onUserTap: model.onUserTap,
+                      ),
+                const SizedBox(
+                  height: 10,
                 ),
+                if (model.bannerAd != null)
+                  Container(
+                    alignment: Alignment.center,
+                    width: model.bannerAd?.size.width.toDouble(),
+                    height: model.bannerAd?.size.height.toDouble(),
+                    child: AdWidget(ad: model.bannerAd!),
+                  ),
               ],
             ),
           ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:orange_ui/utils/app_res.dart';
+import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
 
@@ -9,6 +9,7 @@ class BottomInputBar extends StatelessWidget {
   final VoidCallback onShareBtnTap;
   final VoidCallback onAddBtnTap;
   final VoidCallback onCameraTap;
+  final FocusNode msgFocusNode;
 
   const BottomInputBar({
     Key? key,
@@ -16,12 +17,14 @@ class BottomInputBar extends StatelessWidget {
     required this.onShareBtnTap,
     required this.onAddBtnTap,
     required this.onCameraTap,
+    required this.msgFocusNode,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 3),
+      margin: const EdgeInsets.only(bottom: 7),
       width: Get.width,
       color: ColorRes.white,
       child: SafeArea(
@@ -41,15 +44,19 @@ class BottomInputBar extends StatelessWidget {
                     width: Get.width - 135,
                     child: TextField(
                       controller: msgController,
+                      focusNode: msgFocusNode,
+                      textCapitalization: TextCapitalization.sentences,
+                      keyboardType: TextInputType.name,
                       textInputAction: TextInputAction.newline,
                       minLines: 1,
                       maxLines: 5,
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         isDense: true,
-                        contentPadding: EdgeInsets.only(left: 15, bottom: 3),
+                        contentPadding: const EdgeInsets.only(
+                            left: 15, bottom: 3, right: 5),
                         border: InputBorder.none,
-                        hintText: AppRes.chatHint,
-                        hintStyle: TextStyle(fontSize: 14),
+                        hintText: S.current.chatHint,
+                        hintStyle: const TextStyle(fontSize: 14),
                       ),
                     ),
                   ),

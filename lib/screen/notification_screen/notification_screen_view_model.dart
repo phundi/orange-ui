@@ -1,124 +1,91 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:orange_ui/utils/app_res.dart';
-import 'package:orange_ui/utils/asset_res.dart';
+import 'package:orange_ui/api_provider/api_provider.dart';
+import 'package:orange_ui/generated/l10n.dart';
+import 'package:orange_ui/model/notification/admin_notification.dart';
+import 'package:orange_ui/model/notification/user_notification.dart';
+import 'package:orange_ui/model/user/registration_user.dart';
+import 'package:orange_ui/screen/user_detail_screen/user_detail_screen.dart';
 import 'package:stacked/stacked.dart';
 
 class NotificationScreenViewModel extends BaseViewModel {
-  void init() {}
-
-  String notification = AppRes.notification;
+  String notification = S.current.notification;
   int tabIndex = 0;
+  int start = 0;
+  int adminStart = 0;
+  ScrollController userScrollController = ScrollController();
+  ScrollController adminScrollController = ScrollController();
+  bool isLoading = false;
+  bool isUserLoading = false;
+  List<AdminNotificationData>? adminNotification = [];
+  List<UserNotificationData>? userNotification = [];
 
-  List<Map<String, dynamic>> notificationList = [
-    {
-      'image': AssetRes.userPick2,
-      'name': 'Pinky Arora',
-      'age': 22,
-      'msg':
-          'Pinkey Arora has liked your profile, You should check their profile.',
-      'time': '5 min',
-      'type': "personal",
-    },
-    {
-      'image': AssetRes.profile27,
-      'name': 'Sagar Patel',
-      'age': 22,
-      'msg':
-          'Sagar Patel has liked your profile, You should check their profile.',
-      'time': 'Yesterday',
-      'type': "personal",
-    },
-    {
-      'image': 'orange',
-      'name': 'Coin Offers',
-      'age': 0,
-      'msg':
-          'Subscribe to the Premium plan and enjoy unlimited features and have more fun.',
-      'time': '5 Sep 2021',
-      'type': "platform",
-    },
-    {
-      'image': AssetRes.userPick2,
-      'name': 'Pinky Arora',
-      'age': 22,
-      'msg':
-          'Pinkey Arora has liked your profile, You should check their profile.',
-      'time': '5 min',
-      'type': "personal",
-    },
-    {
-      'image': AssetRes.profile27,
-      'name': 'Sagar Patel',
-      'age': 22,
-      'msg':
-          'Sagar Patel has liked your profile, You should check their profile.',
-      'time': 'Yesterday',
-      'type': "personal",
-    },
-    {
-      'image': 'orange',
-      'name': 'Privacy Policy Update',
-      'age': 0,
-      'msg':
-          'Subscribe to the Premium plan and enjoy unlimited features and have more fun.',
-      'time': '5 Sep 2021',
-      'type': "platform",
-    },
-    {
-      'image': AssetRes.userPick2,
-      'name': 'Pinky Arora',
-      'age': 22,
-      'msg':
-          'Pinkey Arora has liked your profile, You should check their profile.',
-      'time': '5 min',
-      'type': "personal",
-    },
-    {
-      'image': AssetRes.profile27,
-      'name': 'Sagar Patel',
-      'age': 22,
-      'msg':
-          'Sagar Patel has liked your profile, You should check their profile.',
-      'time': 'Yesterday',
-      'type': "personal",
-    },
-    {
-      'image': 'orange',
-      'name': 'Coin Offers',
-      'age': 0,
-      'msg':
-          'Subscribe to the Premium plan and enjoy unlimited features and have more fun.',
-      'time': '5 Sep 2021',
-      'type': "platform",
-    },
-    {
-      'image': AssetRes.userPick2,
-      'name': 'Pinky Arora',
-      'age': 22,
-      'msg':
-          'Pinkey Arora has liked your profile, You should check their profile.',
-      'time': '5 min',
-      'type': "personal",
-    },
-    {
-      'image': AssetRes.profile27,
-      'name': 'Sagar Patel',
-      'age': 22,
-      'msg':
-          'Sagar Patel has liked your profile, You should check their profile.',
-      'time': 'Yesterday',
-      'type': "personal",
-    },
-    {
-      'image': 'orange',
-      'name': 'Privacy Policy Update',
-      'age': 0,
-      'msg':
-          'Subscribe to the Premium plan and enjoy unlimited features and have more fun.',
-      'time': '5 Sep 2021',
-      'type': "platform",
-    },
-  ];
+  void init() {
+    getUserNotificationApiCall();
+    fetchScrollData();
+  }
+
+  @override
+  void dispose() {
+    userScrollController.dispose();
+    adminScrollController.dispose();
+    super.dispose();
+  }
+
+  void getAdminNotificationApiCall() async {
+    isLoading = true;
+    await ApiProvider().adminNotification(adminStart).then((value) {
+      if (adminStart == 0) {
+        adminNotification = value.data;
+      } else {
+        adminNotification?.addAll(value.data!);
+      }
+      adminStart = adminNotification!.length;
+      isLoading = false;
+      notifyListeners();
+    });
+  }
+
+  void fetchScrollData() {
+    adminScrollController.addListener(
+      () {
+        if (adminScrollController.offset ==
+            adminScrollController.position.maxScrollExtent) {
+          if (!isLoading) {
+            getAdminNotificationApiCall();
+          }
+        }
+      },
+    );
+    userScrollController.addListener(
+      () {
+        if (userScrollController.offset ==
+            userScrollController.position.maxScrollExtent) {
+          if (!isUserLoading) {
+            getUserNotificationApiCall();
+          }
+        }
+      },
+    );
+  }
+
+  void getUserNotificationApiCall() {
+    isUserLoading = true;
+    ApiProvider().getUserNotification(start).then((value) async {
+      if (start == 0) {
+        userNotification = value.data;
+      } else {
+        userNotification?.addAll(value.data!);
+      }
+      start = userNotification!.length;
+      isUserLoading = false;
+      notifyListeners();
+    });
+  }
+
+  void onUserTap(RegistrationUserData? data) {
+    Get.to(() => const UserDetailScreen(), arguments: data);
+  }
 
   void onBack() {
     Get.back();
@@ -126,6 +93,9 @@ class NotificationScreenViewModel extends BaseViewModel {
 
   void onTabChange(int index) {
     tabIndex = index;
+    tabIndex == 0
+        ? getUserNotificationApiCall()
+        : getAdminNotificationApiCall();
     notifyListeners();
   }
 }
