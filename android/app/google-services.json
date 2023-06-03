@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "670241921181",
+    "project_id": "orange-16f8b",
+    "storage_bucket": "orange-16f8b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:670241921181:android:0b1882a3b8b249d4f85c74",
+        "android_client_info": {
+          "package_name": "com.retrytech.orange"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "670241921181-69578i1a0lg08hid333kk8rni78csct6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.retrytech.orange",
+            "certificate_hash": "97c66063c42817740498d1c74e068c146bf0a0ce"
+          }
+        },
+        {
+          "client_id": "670241921181-hmk7t4bmgb3kukrm43qv9lp3mtlr81ks.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDluEyxM0C-wZitShXNG-SbRqqXl9Ct_4U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "670241921181-hmk7t4bmgb3kukrm43qv9lp3mtlr81ks.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "670241921181-fk3tuab4rsob0ktq0357jgfdh90s2nk7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.orangeFlutterUi"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
