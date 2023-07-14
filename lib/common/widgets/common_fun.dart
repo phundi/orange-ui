@@ -65,7 +65,6 @@ class CommonFun {
   static String readTimestamp(double timestamp) {
     var now = DateTime.now();
     var date = DateTime.fromMicrosecondsSinceEpoch(timestamp.toInt() * 1000);
-    // var diff = date.difference(now);
     var time = '';
     if (now.day == date.day) {
       time = DateFormat('hh:mm a')

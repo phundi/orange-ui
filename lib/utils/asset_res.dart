@@ -73,6 +73,7 @@ class AssetRes {
   static const String imageWarning = "${icons}image_warning.png";
   static const String emptyEmoji = "${icons}empty_emoji.png";
   static const String personLocationPin = "${icons}person_location_pin.png";
+  static const String placeholder = "${icons}placeholder.png";
 
   ///______________________________ common images ______________________________///
 

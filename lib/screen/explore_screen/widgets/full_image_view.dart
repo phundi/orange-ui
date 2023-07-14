@@ -10,7 +10,6 @@ import 'package:orange_ui/common/widgets/social_icon.dart';
 import 'package:orange_ui/common/widgets/top_story_line.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
-import 'package:orange_ui/screen/shimmer_screen/shimmer_screen.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
 import 'package:orange_ui/utils/const_res.dart';
@@ -84,13 +83,17 @@ class FullImageView extends StatelessWidget {
                               itemBuilder: (context, currentImageIndex) {
                                 return Stack(
                                   children: [
-                                    Image.network(
-                                      '${ConstRes.aImageBaseUrl}${imagesProfile[currentImageIndex].image}',
+                                    FadeInImage(
+                                      placeholder: const AssetImage(
+                                          AssetRes.placeholder),
+                                      image: NetworkImage(
+                                        '${ConstRes.aImageBaseUrl}${imagesProfile[currentImageIndex].image}',
+                                      ),
                                       fit: BoxFit.cover,
                                       width: double.infinity,
                                       height: double.infinity,
                                       filterQuality: FilterQuality.medium,
-                                      errorBuilder:
+                                      imageErrorBuilder:
                                           (context, error, stackTrace) {
                                         return Container(
                                           color: ColorRes.grey13,
@@ -98,20 +101,6 @@ class FullImageView extends StatelessWidget {
                                             AssetRes.themeLabel,
                                             width: Get.width,
                                             height: Get.height,
-                                          ),
-                                        );
-                                      },
-                                      loadingBuilder:
-                                          (context, child, loadingProgress) {
-                                        if (loadingProgress == null) {
-                                          return child;
-                                        }
-                                        return ShimmerScreen.rectangular(
-                                          width: Get.width,
-                                          height: Get.height,
-                                          shapeBorder: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(21),
                                           ),
                                         );
                                       },

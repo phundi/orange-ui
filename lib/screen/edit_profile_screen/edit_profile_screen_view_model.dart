@@ -205,7 +205,6 @@ class EditProfileScreenViewModel extends BaseViewModel {
         );
       }
     }
-
     notifyListeners();
   }
 
