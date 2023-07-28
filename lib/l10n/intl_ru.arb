@@ -298,5 +298,6 @@
   "messagePriceWillCostYou": "Стоимость сообщения будет стоить вам",
   "coinsPerMsgPleaseConfirmIfYouToContinueOr": "монет за сообщение, пожалуйста, подтвердите, хотите ли вы продолжить или нет",
   "liveStreamPriceWillCostYou": "Стоимость прямой трансляции будет стоить вам",
-  "coinsPerMinutesPleaseConfirmIfYouToContinueOr": "монет в минуту, Пожалуйста, подтвердите, если вы хотите продолжить или нет"
+  "coinsPerMinutesPleaseConfirmIfYouToContinueOr": "монет в минуту, Пожалуйста, подтвердите, если вы хотите продолжить или нет",
+  "liveStreamEnded": "Прямая трансляция завершена"
 }

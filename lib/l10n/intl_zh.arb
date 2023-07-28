@@ -298,5 +298,6 @@
   "messagePriceWillCostYou": "留言价格将花费您",
   "coinsPerMsgPleaseConfirmIfYouToContinueOr": "每个消息的硬币，请确认是否继续",
   "liveStreamPriceWillCostYou": "直播价格会让你付出代价",
-  "coinsPerMinutesPleaseConfirmIfYouToContinueOr": "每分钟硬币，请确认是否继续"
+  "coinsPerMinutesPleaseConfirmIfYouToContinueOr": "每分钟硬币，请确认是否继续",
+  "liveStreamEnded": "直播结束"
 }

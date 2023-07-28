@@ -298,5 +298,6 @@
   "messagePriceWillCostYou": "메시지 가격은 귀하에게 부과됩니다",
   "coinsPerMsgPleaseConfirmIfYouToContinueOr": "메시지 당 동전, 계속할지 여부를 확인하십시오",
   "liveStreamPriceWillCostYou": "라이브 스트림 가격은 비용이 듭니다",
-  "coinsPerMinutesPleaseConfirmIfYouToContinueOr": "분당 동전, 계속할지 여부를 확인하십시오"
+  "coinsPerMinutesPleaseConfirmIfYouToContinueOr": "분당 동전, 계속할지 여부를 확인하십시오",
+  "liveStreamEnded": "라이브 스트림 종료됨"
 }

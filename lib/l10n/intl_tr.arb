@@ -298,5 +298,6 @@
   "messagePriceWillCostYou": "Mesaj fiyatı size mal olacak",
   "coinsPerMsgPleaseConfirmIfYouToContinueOr": "Msg başına jeton, Lütfen devam edip etmeyeceğinizi onaylayın",
   "liveStreamPriceWillCostYou": "Canlı yayın fiyatı size mal olacak",
-  "coinsPerMinutesPleaseConfirmIfYouToContinueOr": "dakika başına jeton, lütfen devam edip etmeyeceğinizi onaylayın"
+  "coinsPerMinutesPleaseConfirmIfYouToContinueOr": "dakika başına jeton, lütfen devam edip etmeyeceğinizi onaylayın",
+  "liveStreamEnded": "Canlı Yayın Sona Erdi"
 }

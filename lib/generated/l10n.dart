@@ -3050,6 +3050,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Live Stream Ended`
+  String get liveStreamEnded {
+    return Intl.message(
+      'Live Stream Ended',
+      name: 'liveStreamEnded',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
@@ -3083,10 +3093,8 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
 
   @override
   bool isSupported(Locale locale) => _isSupported(locale);
-
   @override
   Future<S> load(Locale locale) => S.load(locale);
-
   @override
   bool shouldReload(AppLocalizationDelegate old) => false;
 

@@ -21,7 +21,6 @@ class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ko';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
-
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "about": MessageLookupByLibrary.simpleMessage("에 대한"),
         "accept": MessageLookupByLibrary.simpleMessage("수용하다"),
@@ -193,6 +192,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "liveCAp": MessageLookupByLibrary.simpleMessage("살다"),
         "liveCap": MessageLookupByLibrary.simpleMessage("살다"),
         "liveStreamCap": MessageLookupByLibrary.simpleMessage("생중계"),
+        "liveStreamEnded": MessageLookupByLibrary.simpleMessage("라이브 스트림 종료됨"),
         "liveStreamPriceWillCostYou":
             MessageLookupByLibrary.simpleMessage("라이브 스트림 가격은 비용이 듭니다"),
         "liveVerification": MessageLookupByLibrary.simpleMessage("실시간 검증"),

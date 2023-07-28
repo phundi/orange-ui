@@ -298,5 +298,6 @@
   "messagePriceWillCostYou": "Der Nachrichtenpreis wird Sie kosten",
   "coinsPerMsgPleaseConfirmIfYouToContinueOr": "Münzen pro Nachricht. Bitte bestätigen Sie, ob Sie fortfahren möchten oder nicht",
   "liveStreamPriceWillCostYou": "Der Preis für den Live-Stream kostet Sie",
-  "coinsPerMinutesPleaseConfirmIfYouToContinueOr": "Münzen pro Minute. Bitte bestätigen Sie, ob Sie fortfahren möchten oder nicht"
+  "coinsPerMinutesPleaseConfirmIfYouToContinueOr": "Münzen pro Minute. Bitte bestätigen Sie, ob Sie fortfahren möchten oder nicht",
+  "liveStreamEnded": "Livestream beendet"
 }

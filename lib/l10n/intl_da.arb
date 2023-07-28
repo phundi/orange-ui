@@ -298,5 +298,6 @@
   "messagePriceWillCostYou": "Beskedprisen vil koste dig",
   "coinsPerMsgPleaseConfirmIfYouToContinueOr": "mønter pr. besked, bekræft venligst, om du vil fortsætte eller ej",
   "liveStreamPriceWillCostYou": "Prisen for live stream vil koste dig",
-  "coinsPerMinutesPleaseConfirmIfYouToContinueOr": "mønter pr. minut. Bekræft venligst, om du vil fortsætte eller ej"
+  "coinsPerMinutesPleaseConfirmIfYouToContinueOr": "mønter pr. minut. Bekræft venligst, om du vil fortsætte eller ej",
+  "liveStreamEnded": "Livestream afsluttet"
 }

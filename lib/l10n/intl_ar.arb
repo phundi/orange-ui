@@ -298,5 +298,6 @@
   "messagePriceWillCostYou": "سعر الرسالة سيكلفك",
   "coinsPerMsgPleaseConfirmIfYouToContinueOr": "عملات لكل رسالة ، يرجى تأكيد ما إذا كنت ستستمر أم لا",
   "liveStreamPriceWillCostYou": "سعر البث المباشر سيكلفك",
-  "coinsPerMinutesPleaseConfirmIfYouToContinueOr": "عملات معدنية في الدقيقة ، يرجى تأكيد ما إذا كنت ستستمر أم لا"
+  "coinsPerMinutesPleaseConfirmIfYouToContinueOr": "عملات معدنية في الدقيقة ، يرجى تأكيد ما إذا كنت ستستمر أم لا",
+  "liveStreamEnded": "انتهى البث المباشر"
 }

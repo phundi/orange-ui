@@ -298,5 +298,6 @@
   "messagePriceWillCostYou": "Message price will cost you",
   "coinsPerMsgPleaseConfirmIfYouToContinueOr": "coins per Msg, Please confirm if you to continue or not",
   "liveStreamPriceWillCostYou": "Live stream price will cost you",
-  "coinsPerMinutesPleaseConfirmIfYouToContinueOr": "coins per minutes, Please confirm if you to continue or not"
+  "coinsPerMinutesPleaseConfirmIfYouToContinueOr": "coins per minutes, Please confirm if you to continue or not",
+  "liveStreamEnded": "Live Stream Ended"
 }

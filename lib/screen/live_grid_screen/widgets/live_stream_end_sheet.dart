@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/utils/color_res.dart';
 import 'package:orange_ui/utils/font_res.dart';
 
@@ -47,9 +48,9 @@ class LiveStreamEndSheet extends StatelessWidget {
                   fontSize: 20,
                   fontFamily: FontRes.bold),
             ),
-            const Text(
-              'Live Stream Ended',
-              style: TextStyle(
+            Text(
+              S.of(context).liveStreamEnded,
+              style: const TextStyle(
                   color: ColorRes.black2,
                   fontSize: 19,
                   fontFamily: FontRes.regular),

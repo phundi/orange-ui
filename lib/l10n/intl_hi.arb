@@ -298,5 +298,6 @@
   "messagePriceWillCostYou": "संदेश की कीमत आपको चुकानी पड़ेगी",
   "coinsPerMsgPleaseConfirmIfYouToContinueOr": "प्रति संदेश सिक्के, कृपया पुष्टि करें कि आपको जारी रखना है या नहीं",
   "liveStreamPriceWillCostYou": "लाइव स्ट्रीम की कीमत आपको महंगी पड़ेगी",
-  "coinsPerMinutesPleaseConfirmIfYouToContinueOr": "सिक्के प्रति मिनट, कृपया पुष्टि करें कि आपको जारी रखना है या नहीं"
+  "coinsPerMinutesPleaseConfirmIfYouToContinueOr": "सिक्के प्रति मिनट, कृपया पुष्टि करें कि आपको जारी रखना है या नहीं",
+  "liveStreamEnded": "लाइव स्ट्रीम समाप्त"
 }

@@ -298,5 +298,6 @@
   "messagePriceWillCostYou": "Harga pesan akan dikenakan biaya",
   "coinsPerMsgPleaseConfirmIfYouToContinueOr": "koin per Msg, Harap konfirmasi apakah Anda ingin melanjutkan atau tidak",
   "liveStreamPriceWillCostYou": "Harga streaming langsung akan dikenakan biaya",
-  "coinsPerMinutesPleaseConfirmIfYouToContinueOr": "koin per menit, Harap konfirmasi apakah Anda ingin melanjutkan atau tidak"
+  "coinsPerMinutesPleaseConfirmIfYouToContinueOr": "koin per menit, Harap konfirmasi apakah Anda ingin melanjutkan atau tidak",
+  "liveStreamEnded": "Streaming Langsung Berakhir"
 }

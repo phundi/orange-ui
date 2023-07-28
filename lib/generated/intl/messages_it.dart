@@ -21,7 +21,6 @@ class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'it';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
-
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "about": MessageLookupByLibrary.simpleMessage("Di"),
         "accept": MessageLookupByLibrary.simpleMessage("Accettare"),
@@ -229,6 +228,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "liveCap": MessageLookupByLibrary.simpleMessage("VIVERE"),
         "liveStreamCap":
             MessageLookupByLibrary.simpleMessage("TRASMISSIONE IN DIRETTA"),
+        "liveStreamEnded": MessageLookupByLibrary.simpleMessage(
+            "Streaming in diretta terminato"),
         "liveStreamPriceWillCostYou": MessageLookupByLibrary.simpleMessage(
             "Il prezzo del live streaming ti costerà"),
         "liveVerification":

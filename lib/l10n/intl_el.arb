@@ -298,5 +298,6 @@
   "messagePriceWillCostYou": "Η τιμή του μηνύματος θα σας κοστίσει",
   "coinsPerMsgPleaseConfirmIfYouToContinueOr": "κέρματα ανά μήνυμα, επιβεβαιώστε εάν θέλετε να συνεχίσετε ή όχι",
   "liveStreamPriceWillCostYou": "Η τιμή της ζωντανής ροής θα σας κοστίσει",
-  "coinsPerMinutesPleaseConfirmIfYouToContinueOr": "κέρματα ανά λεπτό, επιβεβαιώστε εάν θέλετε να συνεχίσετε ή όχι"
+  "coinsPerMinutesPleaseConfirmIfYouToContinueOr": "κέρματα ανά λεπτό, επιβεβαιώστε εάν θέλετε να συνεχίσετε ή όχι",
+  "liveStreamEnded": "Η ζωντανή ροή έληξε"
 }

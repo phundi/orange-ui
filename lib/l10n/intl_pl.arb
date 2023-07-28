@@ -298,5 +298,6 @@
   "messagePriceWillCostYou": "Cena wiadomości będzie Cię kosztować",
   "coinsPerMsgPleaseConfirmIfYouToContinueOr": "monety na wiadomość. Potwierdź, czy chcesz kontynuować",
   "liveStreamPriceWillCostYou": "Cena transmisji na żywo będzie Cię kosztować",
-  "coinsPerMinutesPleaseConfirmIfYouToContinueOr": "monet na minutę. Potwierdź, czy chcesz kontynuować"
+  "coinsPerMinutesPleaseConfirmIfYouToContinueOr": "monet na minutę. Potwierdź, czy chcesz kontynuować",
+  "liveStreamEnded": "Transmisja na żywo zakończona"
 }

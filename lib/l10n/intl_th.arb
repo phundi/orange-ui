@@ -298,5 +298,6 @@
   "messagePriceWillCostYou": "ราคาข้อความจะทำให้คุณเสียค่าใช้จ่าย",
   "coinsPerMsgPleaseConfirmIfYouToContinueOr": "เหรียญต่อข่าวสารโปรดยืนยันว่าคุณจะดำเนินการต่อหรือไม่",
   "liveStreamPriceWillCostYou": "ราคาสตรีมสดจะทำให้คุณเสียค่าใช้จ่าย",
-  "coinsPerMinutesPleaseConfirmIfYouToContinueOr": "เหรียญต่อนาที โปรดยืนยันว่าจะดำเนินการต่อหรือไม่"
+  "coinsPerMinutesPleaseConfirmIfYouToContinueOr": "เหรียญต่อนาที โปรดยืนยันว่าจะดำเนินการต่อหรือไม่",
+  "liveStreamEnded": "สตรีมสดสิ้นสุดลง"
 }

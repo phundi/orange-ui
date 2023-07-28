@@ -298,5 +298,6 @@
   "messagePriceWillCostYou": "Bericht prijs zal je kosten",
   "coinsPerMsgPleaseConfirmIfYouToContinueOr": "munten per bericht, bevestig alstublieft of u wilt doorgaan of niet",
   "liveStreamPriceWillCostYou": "De prijs van de livestream zal u kosten",
-  "coinsPerMinutesPleaseConfirmIfYouToContinueOr": "munten per minuut, gelieve te bevestigen of u door wilt gaan of niet"
+  "coinsPerMinutesPleaseConfirmIfYouToContinueOr": "munten per minuut, gelieve te bevestigen of u door wilt gaan of niet",
+  "liveStreamEnded": "Livestream beëindigd"
 }

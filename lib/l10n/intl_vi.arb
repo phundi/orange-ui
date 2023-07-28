@@ -298,5 +298,6 @@
   "messagePriceWillCostYou": "Tin nhắn giá sẽ chi phí bạn",
   "coinsPerMsgPleaseConfirmIfYouToContinueOr": "xu trên mỗi Msg, Vui lòng xác nhận xem bạn có tiếp tục hay không",
   "liveStreamPriceWillCostYou": "Giá phát trực tiếp sẽ khiến bạn phải trả giá",
-  "coinsPerMinutesPleaseConfirmIfYouToContinueOr": "xu mỗi phút, Vui lòng xác nhận nếu bạn tiếp tục hay không"
+  "coinsPerMinutesPleaseConfirmIfYouToContinueOr": "xu mỗi phút, Vui lòng xác nhận nếu bạn tiếp tục hay không",
+  "liveStreamEnded": "Luồng trực tiếp đã kết thúc"
 }

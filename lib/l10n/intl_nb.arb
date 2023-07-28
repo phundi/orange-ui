@@ -298,5 +298,6 @@
   "messagePriceWillCostYou": "Meldingsprisen vil koste deg",
   "coinsPerMsgPleaseConfirmIfYouToContinueOr": "mynter per melding, bekreft om du vil fortsette eller ikke",
   "liveStreamPriceWillCostYou": "Prisen for direktesending vil koste deg",
-  "coinsPerMinutesPleaseConfirmIfYouToContinueOr": "mynter per minutt, Vennligst bekreft om du vil fortsette eller ikke"
+  "coinsPerMinutesPleaseConfirmIfYouToContinueOr": "mynter per minutt, Vennligst bekreft om du vil fortsette eller ikke",
+  "liveStreamEnded": "Direktesending avsluttet"
 }
