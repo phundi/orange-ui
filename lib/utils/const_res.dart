@@ -13,8 +13,9 @@ class ConstRes {
       'AAAAnA2IGJ0:APA91bHWzrP9xV1smMTdl2Ara16eHmjf604CanNudhHhm2vkwQ3D79cXL3i83_DGYn8ygusP8BFp4MOcLx-2mPJtCQcMY5EUsx0k42Z_ZSgBLRE1p6HXRD8DGHg_JY07zVhY-Ezi762q';
 
   ///------------------------ Agora app Id ------------------------///
-
   static const String agoraAppId = "6e660987f7c541309c0c45a133fde8c7";
+  static const String customerId = "2fa80f7f38ec48c7b3df029de7599738";
+  static const String customerSecret = "ce11056b3fd44851919670703656b9e9";
 }
 
 ///_____________________________ Image Quality _______________________///

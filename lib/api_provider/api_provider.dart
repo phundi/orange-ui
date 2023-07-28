@@ -1,8 +1,10 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import 'package:orange_ui/model/chat_and_live_stream/add_live_stream_history.dart';
+import 'package:orange_ui/model/chat_and_live_stream/agora.dart';
 import 'package:orange_ui/model/chat_and_live_stream/apply_for_live.dart';
 import 'package:orange_ui/model/chat_and_live_stream/fetch_live_stream_history.dart';
 import 'package:orange_ui/model/fetch_redeem_request.dart';
@@ -647,5 +649,15 @@ class ApiProvider {
         headers: {Urls.aApiKeyName: ConstRes.apiKey},
         body: {Urls.aUserIdName: PrefService.userId.toString()});
     return Report.fromJson(jsonDecode(response.body));
+  }
+
+  Future<Agora> agoraListStreamingCheck(
+      String channelName, String authToken, String agoraAppId) async {
+    log('$channelName\n$agoraAppId\n$authToken');
+    http.Response response = await http.get(
+        Uri.parse(
+            'https://api.agora.io/dev/v1/channel/user/$agoraAppId/$channelName'),
+        headers: {'Authorization': 'Basic $authToken'});
+    return Agora.fromJson(jsonDecode(response.body));
   }
 }

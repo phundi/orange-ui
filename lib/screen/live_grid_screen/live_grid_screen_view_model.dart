@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -15,10 +16,12 @@ import 'package:orange_ui/model/chat_and_live_stream/live_stream.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/screen/bottom_diamond_shop/bottom_diamond_shop.dart';
 import 'package:orange_ui/screen/explore_screen/widgets/reverse_swipe_dialog.dart';
+import 'package:orange_ui/screen/live_grid_screen/widgets/live_stream_end_sheet.dart';
 import 'package:orange_ui/screen/person_streaming_screen/person_streaming_screen.dart';
 import 'package:orange_ui/screen/random_streming_screen/random_streaming_screen.dart';
 import 'package:orange_ui/service/pref_service.dart';
 import 'package:orange_ui/utils/app_res.dart';
+import 'package:orange_ui/utils/const_res.dart';
 import 'package:orange_ui/utils/firebase_res.dart';
 import 'package:orange_ui/utils/urls.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -72,7 +75,7 @@ class LiveGridScreenViewModel extends BaseViewModel {
         ? SnackBarWidget().snackBarWidget(S.current.userBlock)
         : Get.dialog(
             ConfirmationDialog(
-              onYesBtnClick: onGoLiveTap,
+              onYesBtnClick: onGoLiveYesBtnTap,
               aspectRatio: 1 / 0.6,
               horizontalPadding: 60,
               onNoBtnClick: onBackBtnTap,
@@ -84,32 +87,12 @@ class LiveGridScreenViewModel extends BaseViewModel {
           );
   }
 
-  Future<void> onGoLiveTap() async {
+  Future<void> onGoLiveYesBtnTap() async {
     Get.back();
     await [Permission.camera, Permission.microphone].request().then((value) {
       if ((value[Permission.camera] == PermissionStatus.granted &&
               value[Permission.microphone] == PermissionStatus.granted) ||
           Platform.isIOS) {
-        db
-            .collection(FirebaseRes.liveHostList)
-            .doc(registrationUser?.identity)
-            .set(LiveStreamUser(
-                    userId: registrationUser?.id,
-                    fullName: registrationUser?.fullname,
-                    userImage: registrationUser?.images != null ||
-                            registrationUser!.images!.isNotEmpty
-                        ? registrationUser!.images![0].image
-                        : '',
-                    agoraToken: '',
-                    id: DateTime.now().millisecondsSinceEpoch,
-                    collectedDiamond: 0,
-                    hostIdentity: registrationUser?.identity,
-                    isVerified: false,
-                    joinedUser: [],
-                    address: registrationUser?.live,
-                    age: registrationUser?.age,
-                    watchingCount: 0)
-                .toJson());
         Get.to(() => const RandomStreamingScreen(), arguments: {
           Urls.aChannelId: registrationUser?.identity,
           Urls.aIsBroadcasting: true,
@@ -147,50 +130,82 @@ class LiveGridScreenViewModel extends BaseViewModel {
     if (registrationUser?.isBlock == 1) {
       return SnackBarWidget().snackBarWidget(S.current.userBlock);
     } else {
-      if (registrationUser?.isFake != 1) {
-        if (PrefService.liveWatchingPrice <= walletCoin! && walletCoin != 0) {
-          Get.dialog(
-            ReverseSwipeDialog(
-                onCancelTap: onBackBtnTap,
-                onContinueTap: (isSelected) {
-                  Get.back();
-                  showDialog(
-                    context: Get.context!,
-                    barrierDismissible: false,
-                    builder: (context) {
-                      return Center(
-                        child: Loader().lottieWidget(),
+      String authString = '${ConstRes.customerId}:${ConstRes.customerSecret}';
+      String authToken = base64.encode(authString.codeUnits);
+      ApiProvider()
+          .agoraListStreamingCheck(
+              user?.hostIdentity ?? '', authToken, ConstRes.agoraAppId)
+          .then((value) {
+        if (value.data?.channelExist == true ||
+            value.data!.broadcasters!.isNotEmpty) {
+          if (registrationUser?.isFake != 1) {
+            if (PrefService.liveWatchingPrice <= walletCoin! &&
+                walletCoin != 0) {
+              Get.dialog(
+                ReverseSwipeDialog(
+                    onCancelTap: onBackBtnTap,
+                    onContinueTap: (isSelected) {
+                      Get.back();
+                      showDialog(
+                        context: Get.context!,
+                        barrierDismissible: false,
+                        builder: (context) {
+                          return Center(
+                            child: Loader().lottieWidget(),
+                          );
+                        },
                       );
+                      minusCoinApi().then((value) {
+                        onImageTap(user);
+                      });
                     },
-                  );
-                  minusCoinApi().then((value) {
-                    onImageTap(user);
-                  });
-                },
-                isCheckBoxVisible: false,
-                walletCoin: walletCoin,
-                title1: S.current.liveCap,
-                title2: S.current.streamCap,
-                dialogDisc: AppRes.liveStreamDisc,
-                coinPrice: '${PrefService.liveWatchingPrice}'),
-          );
+                    isCheckBoxVisible: false,
+                    walletCoin: walletCoin,
+                    title1: S.current.liveCap,
+                    title2: S.current.streamCap,
+                    dialogDisc: AppRes.liveStreamDisc,
+                    coinPrice: '${PrefService.liveWatchingPrice}'),
+              );
+            } else {
+              Get.dialog(
+                EmptyWalletDialog(
+                  onCancelTap: onBackBtnTap,
+                  onContinueTap: () {
+                    Get.back();
+                    Get.bottomSheet(
+                      const BottomDiamondShop(),
+                    );
+                  },
+                  walletCoin: walletCoin,
+                ),
+              );
+            }
+          } else {
+            onImageTap(user);
+          }
         } else {
-          Get.dialog(
-            EmptyWalletDialog(
-              onCancelTap: onBackBtnTap,
-              onContinueTap: () {
-                Get.back();
-                Get.bottomSheet(
-                  const BottomDiamondShop(),
-                );
-              },
-              walletCoin: walletCoin,
-            ),
-          );
+          Get.bottomSheet(LiveStreamEndSheet(
+            name: user?.fullName ?? '',
+            onExitBtn: () async {
+              Get.back();
+              db
+                  .collection(FirebaseRes.liveHostList)
+                  .doc(user?.hostIdentity)
+                  .delete();
+              final batch = db.batch();
+              var collection = db
+                  .collection(FirebaseRes.liveHostList)
+                  .doc(user?.hostIdentity)
+                  .collection(FirebaseRes.comments);
+              var snapshots = await collection.get();
+              for (var doc in snapshots.docs) {
+                batch.delete(doc.reference);
+              }
+              await batch.commit();
+            },
+          ));
         }
-      } else {
-        onImageTap(user);
-      }
+      });
     }
   }
 

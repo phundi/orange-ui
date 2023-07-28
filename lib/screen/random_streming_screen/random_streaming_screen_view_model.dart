@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:agora_rtc_engine/rtc_engine.dart';
 import 'package:agora_rtc_engine/rtc_local_view.dart' as rtc_local_view;
@@ -62,11 +63,38 @@ class RandomStreamingScreenViewModel extends BaseViewModel {
     }
     engine.setEventHandler(RtcEngineEventHandler(
       joinChannelSuccess: (channel, uid, elapsed) {
+        PrefService.getUserData().then((value) {
+          db.collection(FirebaseRes.liveHostList).doc(value?.identity).set(
+              LiveStreamUser(
+                      userId: value?.id,
+                      fullName: value?.fullname,
+                      userImage:
+                          value?.images != null || value!.images!.isNotEmpty
+                              ? value!.images![0].image
+                              : '',
+                      agoraToken: '',
+                      id: DateTime.now().millisecondsSinceEpoch,
+                      collectedDiamond: 0,
+                      hostIdentity: value.identity,
+                      isVerified: false,
+                      joinedUser: [],
+                      address: value.live,
+                      age: value.age,
+                      watchingCount: 0)
+                  .toJson());
+        });
         notifyListeners();
       },
       userJoined: (uid, elapsed) {
+        log('userJoined');
         users.add(uid);
         notifyListeners();
+      },
+      leaveChannel: (stats) {
+        log('leaveChannel');
+      },
+      userOffline: (uid, reason) {
+        log('userOffline');
       },
     ));
     await engine.joinChannel(null, channelName, null, 0).catchError((e) {});

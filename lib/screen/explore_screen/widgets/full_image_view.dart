@@ -153,9 +153,9 @@ class FullImageView extends StatelessWidget {
                       children: [
                         const SizedBox(height: 14),
                         TopStoryLine(
-                            pageController: pageController,
-                            images:
-                                userData?[currentProfileIndex].images ?? []),
+                          pageController: pageController,
+                          images: userData?[currentProfileIndex].images ?? [],
+                        ),
                         const Spacer(),
                         Padding(
                           padding: const EdgeInsets.only(left: 9),

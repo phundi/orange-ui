@@ -39,7 +39,7 @@ class ProfileDetailCard extends StatelessWidget {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Expanded(
+                      Flexible(
                         child: Text(
                           '${userData?.fullname} ',
                           style: const TextStyle(
