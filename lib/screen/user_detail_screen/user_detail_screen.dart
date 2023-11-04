@@ -99,23 +99,22 @@ class _UserDetailScreenState extends State<UserDetailScreen>
                               },
                             ),
                           ),
-                SingleChildScrollView(
-                  physics: const ClampingScrollPhysics(),
-                  child: Column(
-                    children: [
-                      TopBar(
-                          userData: model.userData,
-                          onBackTap: model.onBackTap,
-                          onMoreBtnTap: model.onMoreBtnTap,
-                          fullName: model.userData?.fullname,
-                          age: model.userData?.age != null
-                              ? '${model.userData?.age}'
-                              : '',
-                          isVerified:
-                              model.userData?.isVerified == 2 ? true : false,
-                          blockUnblock: model.blockUnBlock,
-                          moreInfo: model.moreInfo),
-                      !model.moreInfo
+                Column(
+                  children: [
+                    TopBar(
+                        userData: model.userData,
+                        onBackTap: model.onBackTap,
+                        onMoreBtnTap: model.onMoreBtnTap,
+                        fullName: model.userData?.fullname,
+                        age: model.userData?.age != null
+                            ? '${model.userData?.age}'
+                            : '',
+                        isVerified:
+                            model.userData?.isVerified == 2 ? true : false,
+                        blockUnblock: model.blockUnBlock,
+                        moreInfo: model.moreInfo),
+                    Expanded(
+                      child: !model.moreInfo
                           ? ImageSelectionArea(
                               selectedImgIndex: model.selectedImgIndex,
                               imageList: model.userData?.images ?? [],
@@ -149,9 +148,9 @@ class _UserDetailScreenState extends State<UserDetailScreen>
                                 onReportTap: model.onReportTap,
                                 distance: model.distance,
                               ),
-                            )
-                    ],
-                  ),
+                            ),
+                    )
+                  ],
                 ),
               ],
             ),

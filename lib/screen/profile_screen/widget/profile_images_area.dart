@@ -126,18 +126,18 @@ class ProfileImageArea extends StatelessWidget {
                         ),
                         Padding(
                           padding: const EdgeInsets.only(
-                              left: 10, right: 10, bottom: 0, top: 7),
+                              left: 10, right: 10, top: 7),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(10),
                             child: BackdropFilter(
-                              filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                              filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
                               child: Container(
                                 width: Get.width,
                                 padding:
                                     const EdgeInsets.fromLTRB(13, 9, 13, 12),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
-                                  color: ColorRes.black.withOpacity(0.33),
+                                  color: ColorRes.black.withOpacity(0.4),
                                 ),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -226,34 +226,32 @@ class ProfileImageArea extends StatelessWidget {
                         Row(
                           children: [
                             Expanded(
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 10),
-                                child: InkWell(
-                                  onTap: onEditProfileTap,
-                                  borderRadius: BorderRadius.circular(10),
+                              child: InkWell(
+                                onTap: onEditProfileTap,
+                                borderRadius: BorderRadius.circular(10),
+                                child: Container(
+                                  margin: const EdgeInsets.symmetric(
+                                      horizontal: 10),
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(10),
                                     child: BackdropFilter(
                                       filter: ImageFilter.blur(
-                                          sigmaY: 15, sigmaX: 15),
+                                          sigmaY: 6, sigmaX: 6),
                                       child: Container(
                                         height: 48,
                                         decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          color:
-                                              ColorRes.black.withOpacity(0.33),
-                                        ),
-                                        child: Center(
-                                          child: Text(
-                                            S.current.editProfile,
-                                            style: TextStyle(
-                                              color: ColorRes.white
-                                                  .withOpacity(0.86),
-                                              letterSpacing: 0.8,
-                                              fontFamily: FontRes.bold,
-                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            color: ColorRes.black
+                                                .withOpacity(0.4)),
+                                        alignment: Alignment.center,
+                                        child: Text(
+                                          S.current.editProfile,
+                                          style: TextStyle(
+                                            color: ColorRes.white
+                                                .withOpacity(0.86),
+                                            letterSpacing: 0.8,
+                                            fontFamily: FontRes.bold,
                                           ),
                                         ),
                                       ),
@@ -270,15 +268,15 @@ class ProfileImageArea extends StatelessWidget {
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(10),
                                   child: BackdropFilter(
-                                    filter: ImageFilter.blur(
-                                        sigmaY: 15, sigmaX: 15),
+                                    filter:
+                                        ImageFilter.blur(sigmaY: 6, sigmaX: 6),
                                     child: Container(
                                       height: 48,
                                       width: 56,
                                       padding: const EdgeInsets.all(10),
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(10),
-                                        color: ColorRes.black.withOpacity(0.33),
+                                        color: ColorRes.black.withOpacity(0.4),
                                       ),
                                       child: Center(
                                         child: Image.asset(

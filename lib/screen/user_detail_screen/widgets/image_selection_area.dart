@@ -41,7 +41,7 @@ class ImageSelectionArea extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: Get.height - 120,
+      height: 35 + 76 + 15 + AppBar().preferredSize.height + 20 + 57 + 10,
       width: Get.width,
       child: Column(
         children: [
@@ -136,6 +136,7 @@ class ImageSelectionArea extends StatelessWidget {
       child: ListView.builder(
         itemCount: imageList.length,
         shrinkWrap: true,
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         scrollDirection: Axis.horizontal,
         physics: const BouncingScrollPhysics(),
         itemBuilder: (context, index) {
@@ -281,6 +282,7 @@ class _BottomMoreBtnState extends State<BottomMoreBtn>
     with SingleTickerProviderStateMixin {
   double? _scale;
   AnimationController? _controller;
+  double height = AppBar().preferredSize.height;
 
   @override
   void initState() {
@@ -315,62 +317,66 @@ class _BottomMoreBtnState extends State<BottomMoreBtn>
   Widget build(BuildContext context) {
     _scale = 1 - _controller!.value;
     return SizedBox(
-      height: 57,
+      height: height,
       width: Get.width,
       child: Stack(
-        alignment: Alignment.topCenter,
+        alignment: Alignment.bottomCenter,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 15),
-            child: ClipRRect(
-              borderRadius: const BorderRadius.vertical(
-                top: Radius.circular(30),
-              ),
-              child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaY: 10, sigmaX: 10),
-                child: Container(
-                  width: Get.width,
-                  height: 42,
-                  decoration: BoxDecoration(
-                    color: ColorRes.black.withOpacity(0.33),
-                    borderRadius: const BorderRadius.vertical(
-                      top: Radius.circular(30),
-                    ),
+          ClipRRect(
+            borderRadius: const BorderRadius.vertical(
+              top: Radius.circular(30),
+            ),
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaY: 10, sigmaX: 10),
+              child: Container(
+                width: Get.width,
+                height: height - 15,
+                decoration: BoxDecoration(
+                  color: ColorRes.black.withOpacity(0.4),
+                  borderRadius: const BorderRadius.vertical(
+                    top: Radius.circular(30),
                   ),
                 ),
               ),
             ),
           ),
-          InkWell(
-            borderRadius: BorderRadius.circular(20),
-            onTap: () {
-              widget.onMoreInfoTap();
-              HapticFeedback.lightImpact();
-            },
-            onTapUp: _tapUp,
-            onTapDown: _tapDown,
-            child: Transform.scale(
-              scale: _scale,
-              child: Container(
-                padding: const EdgeInsets.fromLTRB(21, 10, 21, 9),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  gradient: const LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      ColorRes.lightOrange1,
-                      ColorRes.darkOrange,
-                    ],
-                  ),
-                ),
-                child: Text(
-                  S.current.moreInfo,
-                  style: TextStyle(
-                    color: ColorRes.white.withOpacity(0.80),
-                    fontSize: 11,
-                    fontFamily: FontRes.bold,
-                    letterSpacing: 0.65,
+          Align(
+            alignment: Alignment.topCenter,
+            child: InkWell(
+              borderRadius: BorderRadius.circular(20),
+              onTap: () {
+                widget.onMoreInfoTap();
+                HapticFeedback.lightImpact();
+              },
+              onTapUp: _tapUp,
+              onTapDown: _tapDown,
+              child: Transform.scale(
+                scale: _scale,
+                child: FittedBox(
+                  child: Container(
+                    height: 30,
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      gradient: const LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          ColorRes.lightOrange1,
+                          ColorRes.darkOrange,
+                        ],
+                      ),
+                    ),
+                    child: Text(
+                      S.current.moreInfo,
+                      style: TextStyle(
+                        color: ColorRes.white.withOpacity(0.80),
+                        fontSize: 11,
+                        fontFamily: FontRes.bold,
+                        letterSpacing: 0.65,
+                      ),
+                    ),
                   ),
                 ),
               ),
