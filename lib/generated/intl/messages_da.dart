@@ -237,7 +237,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "messagePriceWillCostYou":
             MessageLookupByLibrary.simpleMessage("Beskedprisen vil koste dig"),
         "messageWillOnlyBeRemoved": MessageLookupByLibrary.simpleMessage(
-            "Beskeden vil kun blive fjernet fra denne enhed\nEr du sikker?"),
+            "Beskeden vil kun blive fjernet fra denne enhed Er du sikker?"),
         "moreInfo": MessageLookupByLibrary.simpleMessage("MERE INFO"),
         "movies": MessageLookupByLibrary.simpleMessage("Film"),
         "music": MessageLookupByLibrary.simpleMessage("musik"),
@@ -336,6 +336,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "reverseSwipeWillCostYou":
             MessageLookupByLibrary.simpleMessage("Omvendt swipe vil koste dig"),
         "save": MessageLookupByLibrary.simpleMessage("GEMME"),
+        "savedProfiles": MessageLookupByLibrary.simpleMessage("Saved Profiles"),
         "searching": MessageLookupByLibrary.simpleMessage("Søger..."),
         "selectAnother": MessageLookupByLibrary.simpleMessage("Vælg en anden"),
         "selectDocument": MessageLookupByLibrary.simpleMessage("Vælg Dokument"),

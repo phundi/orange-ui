@@ -209,7 +209,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "messagePriceWillCostYou":
             MessageLookupByLibrary.simpleMessage("메시지 가격은 귀하에게 부과됩니다"),
         "messageWillOnlyBeRemoved":
-            MessageLookupByLibrary.simpleMessage("메시지는 이 장치에서만 제거됩니다.\n정말입니까?"),
+            MessageLookupByLibrary.simpleMessage("메시지는 이 장치에서만 제거됩니다. 정말입니까?"),
         "moreInfo": MessageLookupByLibrary.simpleMessage("더 많은 정보"),
         "movies": MessageLookupByLibrary.simpleMessage("영화 산업"),
         "music": MessageLookupByLibrary.simpleMessage("음악"),
@@ -297,6 +297,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "reverseSwipeWillCostYou":
             MessageLookupByLibrary.simpleMessage("리버스 스와이프를 하면 비용이 발생합니다."),
         "save": MessageLookupByLibrary.simpleMessage("구하다"),
+        "savedProfiles": MessageLookupByLibrary.simpleMessage("Saved Profiles"),
         "searching": MessageLookupByLibrary.simpleMessage("수색..."),
         "selectAnother": MessageLookupByLibrary.simpleMessage("다른 선택"),
         "selectDocument": MessageLookupByLibrary.simpleMessage("문서 선택"),

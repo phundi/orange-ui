@@ -38,13 +38,10 @@ class ChatTopBarArea extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: onBack,
-                  child: SizedBox(
-                    width: 20,
-                    child: Image.asset(
-                      AssetRes.backArrow,
-                      height: 20,
-                      width: 20,
-                    ),
+                  child: Image.asset(
+                    AssetRes.backArrow,
+                    height: 30,
+                    width: 30,
                   ),
                 ),
                 const SizedBox(width: 15),

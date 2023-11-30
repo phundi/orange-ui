@@ -137,7 +137,7 @@
   "deleteMessage": "Verwijder bericht",
   "deleteThisChat": "Verwijder deze chat",
   "areYouSureYouEtc": "Weet je zeker dat je dit bericht wilt verwijderen?",
-  "messageWillOnlyBeRemoved": "Bericht wordt alleen verwijderd van dit apparaat\nWeet je het zeker?",
+  "messageWillOnlyBeRemoved": "Bericht wordt alleen verwijderd van dit apparaat Weet je het zeker?",
   "areYouSure": "Weet je het zeker",
   "chatHint": "Typ iets...!",
   "yes": "Ja",
@@ -299,5 +299,6 @@
   "coinsPerMsgPleaseConfirmIfYouToContinueOr": "munten per bericht, bevestig alstublieft of u wilt doorgaan of niet",
   "liveStreamPriceWillCostYou": "De prijs van de livestream zal u kosten",
   "coinsPerMinutesPleaseConfirmIfYouToContinueOr": "munten per minuut, gelieve te bevestigen of u door wilt gaan of niet",
-  "liveStreamEnded": "Livestream beëindigd"
+  "liveStreamEnded": "Livestream beëindigd",
+  "savedProfiles": "Saved Profiles"
 }

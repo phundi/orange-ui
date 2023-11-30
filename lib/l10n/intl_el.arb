@@ -137,7 +137,7 @@
   "deleteMessage": "Διαγραφή μηνύματος",
   "deleteThisChat": "Διαγραφή αυτής της συνομιλίας",
   "areYouSureYouEtc": "Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτό το μήνυμα;",
-  "messageWillOnlyBeRemoved": "Το μήνυμα θα αφαιρεθεί μόνο από αυτήν τη συσκευή\nΕίστε βέβαιοι;",
+  "messageWillOnlyBeRemoved": "Το μήνυμα θα αφαιρεθεί μόνο από αυτήν τη συσκευή Είστε βέβαιοι;",
   "areYouSure": "Είσαι σίγουρος",
   "chatHint": "Πληκτρολόγησε κάτι...!",
   "yes": "Ναί",
@@ -299,5 +299,6 @@
   "coinsPerMsgPleaseConfirmIfYouToContinueOr": "κέρματα ανά μήνυμα, επιβεβαιώστε εάν θέλετε να συνεχίσετε ή όχι",
   "liveStreamPriceWillCostYou": "Η τιμή της ζωντανής ροής θα σας κοστίσει",
   "coinsPerMinutesPleaseConfirmIfYouToContinueOr": "κέρματα ανά λεπτό, επιβεβαιώστε εάν θέλετε να συνεχίσετε ή όχι",
-  "liveStreamEnded": "Η ζωντανή ροή έληξε"
+  "liveStreamEnded": "Η ζωντανή ροή έληξε",
+  "savedProfiles": "Saved Profiles"
 }

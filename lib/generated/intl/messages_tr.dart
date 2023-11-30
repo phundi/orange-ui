@@ -235,7 +235,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "messagePriceWillCostYou": MessageLookupByLibrary.simpleMessage(
             "Mesaj fiyatı size mal olacak"),
         "messageWillOnlyBeRemoved": MessageLookupByLibrary.simpleMessage(
-            "Mesaj yalnızca bu cihazdan kaldırılacak\nEmin misiniz?"),
+            "Mesaj yalnızca bu cihazdan kaldırılacak Emin misiniz?"),
         "moreInfo": MessageLookupByLibrary.simpleMessage("DAHA FAZLA BİLGİ"),
         "movies": MessageLookupByLibrary.simpleMessage("Filmler"),
         "music": MessageLookupByLibrary.simpleMessage("Müzik"),
@@ -334,6 +334,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "reverseSwipeWillCostYou": MessageLookupByLibrary.simpleMessage(
             "Ters Kaydırma size mal olacak"),
         "save": MessageLookupByLibrary.simpleMessage("KAYDETMEK"),
+        "savedProfiles": MessageLookupByLibrary.simpleMessage("Saved Profiles"),
         "searching": MessageLookupByLibrary.simpleMessage("Aranıyor..."),
         "selectAnother": MessageLookupByLibrary.simpleMessage("başka seç"),
         "selectDocument": MessageLookupByLibrary.simpleMessage("Belge Seç"),

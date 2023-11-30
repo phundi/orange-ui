@@ -259,8 +259,8 @@ class TextFieldsArea extends StatelessWidget {
                                   angle: showDropdown ? 3.1 : 0,
                                   child: Image.asset(
                                     AssetRes.downArrow,
-                                    height: 7,
-                                    width: 14,
+                                    height: 25,
+                                    width: 25,
                                   ),
                                 ),
                               ],

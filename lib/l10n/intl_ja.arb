@@ -137,7 +137,7 @@
   "deleteMessage": "メッセージを削除する",
   "deleteThisChat": "このチャットを削除",
   "areYouSureYouEtc": "このメッセージを削除してもよろしいですか?",
-  "messageWillOnlyBeRemoved": "メッセージはこのデバイスからのみ削除されます\nよろしいですか?",
+  "messageWillOnlyBeRemoved": "メッセージはこのデバイスからのみ削除されます よろしいですか?",
   "areYouSure": "本気ですか",
   "chatHint": "何かを入力...！",
   "yes": "はい",
@@ -299,5 +299,6 @@
   "coinsPerMsgPleaseConfirmIfYouToContinueOr": "メッセージあたりのコイン。続行するかどうかを確認してください",
   "liveStreamPriceWillCostYou": "ライブストリームの料金がかかります",
   "coinsPerMinutesPleaseConfirmIfYouToContinueOr": "1分あたりのコイン、続行するかどうかを確認してください",
-  "liveStreamEnded": "ライブストリームが終了しました"
+  "liveStreamEnded": "ライブストリームが終了しました",
+  "savedProfiles": "Saved Profiles"
 }

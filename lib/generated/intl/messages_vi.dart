@@ -242,7 +242,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "messagePriceWillCostYou":
             MessageLookupByLibrary.simpleMessage("Tin nhắn giá sẽ chi phí bạn"),
         "messageWillOnlyBeRemoved": MessageLookupByLibrary.simpleMessage(
-            "Tin nhắn sẽ chỉ bị xóa khỏi thiết bị này\nBạn có chắc không?"),
+            "Tin nhắn sẽ chỉ bị xóa khỏi thiết bị này Bạn có chắc không?"),
         "moreInfo": MessageLookupByLibrary.simpleMessage("THÊM THÔNG TIN"),
         "movies": MessageLookupByLibrary.simpleMessage("Phim"),
         "music": MessageLookupByLibrary.simpleMessage("Âm nhạc"),
@@ -343,6 +343,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "reverseSwipeWillCostYou": MessageLookupByLibrary.simpleMessage(
             "Reverse Swipe sẽ khiến bạn phải trả giá"),
         "save": MessageLookupByLibrary.simpleMessage("CỨU"),
+        "savedProfiles": MessageLookupByLibrary.simpleMessage("Saved Profiles"),
         "searching": MessageLookupByLibrary.simpleMessage("Đang tìm kiếm..."),
         "selectAnother": MessageLookupByLibrary.simpleMessage("Chọn cái khác"),
         "selectDocument": MessageLookupByLibrary.simpleMessage("Chọn tài liệu"),

@@ -33,7 +33,7 @@ class TopBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(10, 0, 10, 7),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
       child: SafeArea(
         bottom: false,
         child: ClipRRect(
@@ -41,97 +41,96 @@ class TopBar extends StatelessWidget {
           child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
             child: Container(
-              height: 54,
+              height: 55,
               decoration: BoxDecoration(
                 color: ColorRes.black.withOpacity(0.33),
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: Stack(
-                alignment: Alignment.center,
+              padding: const EdgeInsets.symmetric(horizontal: 17),
+              child: Row(
                 children: [
-                  Row(
-                    children: [
-                      InkWell(
-                        onTap: onBackTap,
-                        child: Padding(
-                          padding: const EdgeInsets.fromLTRB(25, 5, 25, 5),
-                          child: Image.asset(
-                            AssetRes.backArrow,
-                            height: 18,
-                            width: 10,
-                          ),
-                        ),
-                      ),
-                      const Spacer(),
-                      Visibility(
-                        visible:
-                            PrefService.userId == userData?.id ? false : true,
-                        child: Visibility(
-                          visible: moreInfo == true ? false : true,
-                          child: PopupMenuButton<String>(
-                            onSelected: (value) {
-                              onMoreBtnTap(value);
-                            },
-                            color: ColorRes.black2.withOpacity(0.9),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            elevation: 3,
-                            itemBuilder: (BuildContext context) {
-                              return {blockUnblock, AppRes.report}.map(
-                                (String choice) {
-                                  return PopupMenuItem<String>(
-                                    value: choice,
-                                    textStyle: const TextStyle(
-                                        fontFamily: FontRes.medium,
-                                        color: ColorRes.white),
-                                    child: Text(
-                                      choice,
-                                      style: const TextStyle(
-                                          fontFamily: FontRes.medium,
-                                          color: ColorRes.white),
-                                    ),
-                                  );
-                                },
-                              ).toList();
-                            },
-                            child: Image.asset(
-                              AssetRes.moreHorizontal,
-                              height: 10,
-                              width: 26.74,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 25),
-                    ],
+                  InkWell(
+                    onTap: onBackTap,
+                    child: Image.asset(
+                      AssetRes.backArrow,
+                      height: 20,
+                      width: 20,
+                    ),
                   ),
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        fullName ?? '',
-                        style: const TextStyle(
-                          color: ColorRes.white,
-                          fontSize: 16,
-                          fontFamily: FontRes.bold,
+                  const SizedBox(width: 20),
+                  Flexible(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Flexible(
+                          child: Text(
+                            fullName ?? 'Unknown',
+                            style: const TextStyle(
+                              color: ColorRes.white,
+                              fontSize: 16,
+                              fontFamily: FontRes.bold,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                          ),
+                        ),
+                        Text(
+                          ' $age ',
+                          style: const TextStyle(
+                            color: ColorRes.white,
+                            fontSize: 16,
+                          ),
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                        ),
+                        Visibility(
+                          visible: isVerified,
+                          child: Image.asset(AssetRes.tickMark,
+                              height: 16, width: 16),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(width: 20),
+                  Visibility(
+                    visible: PrefService.userId == userData?.id ? false : true,
+                    child: Visibility(
+                      visible: moreInfo == true ? false : true,
+                      child: PopupMenuButton<String>(
+                        onSelected: (value) {
+                          onMoreBtnTap(value);
+                        },
+                        color: ColorRes.black2.withOpacity(0.9),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        elevation: 3,
+                        itemBuilder: (BuildContext context) {
+                          return {blockUnblock, AppRes.report}.map(
+                            (String choice) {
+                              return PopupMenuItem<String>(
+                                value: choice,
+                                textStyle: const TextStyle(
+                                    fontFamily: FontRes.medium,
+                                    color: ColorRes.white),
+                                child: Text(
+                                  choice,
+                                  style: const TextStyle(
+                                      fontFamily: FontRes.medium,
+                                      color: ColorRes.white),
+                                ),
+                              );
+                            },
+                          ).toList();
+                        },
+                        child: Image.asset(
+                          AssetRes.moreHorizontal,
+                          height: 10,
+                          width: 26.74,
+                          fit: BoxFit.cover,
                         ),
                       ),
-                      Text(
-                        ' $age',
-                        style: const TextStyle(
-                          color: ColorRes.white,
-                          fontSize: 16,
-                        ),
-                      ),
-                      const SizedBox(width: 5.7),
-                      Visibility(
-                        visible: isVerified,
-                        child: Image.asset(AssetRes.tickMark,
-                            height: 16, width: 16),
-                      ),
-                    ],
+                    ),
                   ),
                 ],
               ),

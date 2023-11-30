@@ -244,7 +244,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "messagePriceWillCostYou": MessageLookupByLibrary.simpleMessage(
             "El precio del mensaje te costará"),
         "messageWillOnlyBeRemoved": MessageLookupByLibrary.simpleMessage(
-            "El mensaje solo se eliminará de este dispositivo\n¿Estás seguro?"),
+            "El mensaje solo se eliminará de este dispositivo ¿Estás seguro?"),
         "moreInfo": MessageLookupByLibrary.simpleMessage("MÁS INFORMACIÓN"),
         "movies": MessageLookupByLibrary.simpleMessage("Películas"),
         "music": MessageLookupByLibrary.simpleMessage("Música"),
@@ -345,6 +345,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "reverseSwipeWillCostYou":
             MessageLookupByLibrary.simpleMessage("Reverse Swipe te costará"),
         "save": MessageLookupByLibrary.simpleMessage("AHORRAR"),
+        "savedProfiles": MessageLookupByLibrary.simpleMessage("Saved Profiles"),
         "searching": MessageLookupByLibrary.simpleMessage("Buscando..."),
         "selectAnother":
             MessageLookupByLibrary.simpleMessage("Selecciona otro"),

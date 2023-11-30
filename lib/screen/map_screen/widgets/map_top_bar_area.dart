@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:orange_ui/common/widgets/custom_box_shadow.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
@@ -27,17 +26,6 @@ class MapTopBarArea extends StatelessWidget {
       bottom: false,
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 10),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          boxShadow: [
-            CustomBoxShadow(
-              color: ColorRes.black.withOpacity(0.20),
-              offset: const Offset(0, 1.0),
-              blurRadius: 5.0,
-              style: BlurStyle.outer,
-            ),
-          ],
-        ),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(10),
           child: BackdropFilter(
@@ -46,7 +34,7 @@ class MapTopBarArea extends StatelessWidget {
               height: 54,
               padding: const EdgeInsets.fromLTRB(11, 8, 8, 8),
               decoration: BoxDecoration(
-                color: ColorRes.grey18.withOpacity(0.22),
+                color: ColorRes.grey18.withOpacity(0.5),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Row(
@@ -57,17 +45,13 @@ class MapTopBarArea extends StatelessWidget {
                     child: Container(
                       height: 37,
                       width: 37,
-                      padding: const EdgeInsets.only(right: 3),
+                      padding: const EdgeInsets.all(5),
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         color: ColorRes.red4.withOpacity(0.10),
                       ),
-                      child: Center(
-                        child: Image.asset(
-                          AssetRes.backArrow,
-                          height: 14,
-                          width: 7,
-                        ),
+                      child: Image.asset(
+                        AssetRes.backArrow,
                       ),
                     ),
                   ),
@@ -97,8 +81,8 @@ class MapTopBarArea extends StatelessWidget {
                           child: Image.asset(
                             AssetRes.backArrow,
                             color: ColorRes.grey14,
-                            height: 14,
-                            width: 7,
+                            height: 20,
+                            width: 20,
                           ),
                         ),
                       ),

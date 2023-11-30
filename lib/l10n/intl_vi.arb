@@ -137,7 +137,7 @@
   "deleteMessage": "Xóa tin nhắn",
   "deleteThisChat": "Xóa cuộc trò chuyện này",
   "areYouSureYouEtc": "Bạn có chắc chắn muốn xóa tin nhắn này ?",
-  "messageWillOnlyBeRemoved": "Tin nhắn sẽ chỉ bị xóa khỏi thiết bị này\nBạn có chắc không?",
+  "messageWillOnlyBeRemoved": "Tin nhắn sẽ chỉ bị xóa khỏi thiết bị này Bạn có chắc không?",
   "areYouSure": "Bạn có chắc không",
   "chatHint": "Nhập một cái gì đó ...!",
   "yes": "Đúng",
@@ -299,5 +299,6 @@
   "coinsPerMsgPleaseConfirmIfYouToContinueOr": "xu trên mỗi Msg, Vui lòng xác nhận xem bạn có tiếp tục hay không",
   "liveStreamPriceWillCostYou": "Giá phát trực tiếp sẽ khiến bạn phải trả giá",
   "coinsPerMinutesPleaseConfirmIfYouToContinueOr": "xu mỗi phút, Vui lòng xác nhận nếu bạn tiếp tục hay không",
-  "liveStreamEnded": "Luồng trực tiếp đã kết thúc"
+  "liveStreamEnded": "Luồng trực tiếp đã kết thúc",
+  "savedProfiles": "Saved Profiles"
 }

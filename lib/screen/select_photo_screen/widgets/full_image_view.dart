@@ -81,7 +81,7 @@ class FullImageView extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 9),
                   child: Row(
                     children: [
-                      socialIcon(AssetRes.instaLogo, 13.58),
+                      socialIcon(AssetRes.instagramLogo, 13.58),
                       socialIcon(AssetRes.facebookLogo, 18.0),
                       socialIcon(AssetRes.youtubeLogo, 18.26),
                     ],

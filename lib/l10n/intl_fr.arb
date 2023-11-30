@@ -137,7 +137,7 @@
   "deleteMessage": "Supprimer le message",
   "deleteThisChat": "Supprimer ce chat",
   "areYouSureYouEtc": "Etes-vous sur de vouloir supprimer ce message ?",
-  "messageWillOnlyBeRemoved": "Le message ne sera supprimé que de cet appareil\nÊtes-vous sûr ?",
+  "messageWillOnlyBeRemoved": "Le message ne sera supprimé que de cet appareil Êtes-vous sûr ?",
   "areYouSure": "Es-tu sûr",
   "chatHint": "Tapez quelque chose... !",
   "yes": "Oui",
@@ -299,5 +299,6 @@
   "coinsPerMsgPleaseConfirmIfYouToContinueOr": "pièces par message, veuillez confirmer si vous souhaitez continuer ou non",
   "liveStreamPriceWillCostYou": "Le prix de la diffusion en direct vous coûtera",
   "coinsPerMinutesPleaseConfirmIfYouToContinueOr": "pièces par minute, veuillez confirmer si vous continuez ou non",
-  "liveStreamEnded": "Diffusion en direct terminée"
+  "liveStreamEnded": "Diffusion en direct terminée",
+  "savedProfiles": "Saved Profiles"
 }

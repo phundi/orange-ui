@@ -29,7 +29,7 @@ class OptionScreen extends StatelessWidget {
               children: [
                 TopBarArea(title2: S.current.options),
                 Container(
-                  height: 1,
+                  height: 0.5,
                   margin: const EdgeInsets.symmetric(horizontal: 7),
                   width: MediaQuery.of(context).size.width,
                   color: ColorRes.grey5,

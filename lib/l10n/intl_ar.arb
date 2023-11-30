@@ -137,7 +137,7 @@
   "deleteMessage": "حذف رسالة",
   "deleteThisChat": "احذف هذه الدردشة",
   "areYouSureYouEtc": "هل أنت متأكد أنك تريد حذف هذه الرسالة ؟",
-  "messageWillOnlyBeRemoved": "ستتم إزالة الرسالة فقط من هذا الجهاز \n هل أنت متأكد؟",
+  "messageWillOnlyBeRemoved": "ستتم إزالة الرسالة فقط من هذا الجهاز  هل أنت متأكد؟",
   "areYouSure": "هل أنت متأكد",
   "chatHint": "اطبع شيئا...!",
   "yes": "نعم",
@@ -299,5 +299,6 @@
   "coinsPerMsgPleaseConfirmIfYouToContinueOr": "عملات لكل رسالة ، يرجى تأكيد ما إذا كنت ستستمر أم لا",
   "liveStreamPriceWillCostYou": "سعر البث المباشر سيكلفك",
   "coinsPerMinutesPleaseConfirmIfYouToContinueOr": "عملات معدنية في الدقيقة ، يرجى تأكيد ما إذا كنت ستستمر أم لا",
-  "liveStreamEnded": "انتهى البث المباشر"
+  "liveStreamEnded": "انتهى البث المباشر",
+  "savedProfiles": "Saved Profiles"
 }

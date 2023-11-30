@@ -240,7 +240,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "messagePriceWillCostYou": MessageLookupByLibrary.simpleMessage(
             "Harga pesan akan dikenakan biaya"),
         "messageWillOnlyBeRemoved": MessageLookupByLibrary.simpleMessage(
-            "Pesan hanya akan dihapus dari perangkat ini\nAnda yakin?"),
+            "Pesan hanya akan dihapus dari perangkat ini Anda yakin?"),
         "moreInfo": MessageLookupByLibrary.simpleMessage("INFO LEBIH LANJUT"),
         "movies": MessageLookupByLibrary.simpleMessage("Film"),
         "music": MessageLookupByLibrary.simpleMessage("Musik"),
@@ -340,6 +340,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "reverseSwipeWillCostYou": MessageLookupByLibrary.simpleMessage(
             "Reverse Swipe akan dikenakan biaya"),
         "save": MessageLookupByLibrary.simpleMessage("MENYIMPAN"),
+        "savedProfiles": MessageLookupByLibrary.simpleMessage("Saved Profiles"),
         "searching": MessageLookupByLibrary.simpleMessage("Mencari..."),
         "selectAnother":
             MessageLookupByLibrary.simpleMessage("Pilih yang lain"),

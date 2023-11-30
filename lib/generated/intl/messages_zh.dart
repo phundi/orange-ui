@@ -201,7 +201,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "messagePriceWillCostYou":
             MessageLookupByLibrary.simpleMessage("留言价格将花费您"),
         "messageWillOnlyBeRemoved":
-            MessageLookupByLibrary.simpleMessage("消息只会从此设备中删除\n你确定吗？"),
+            MessageLookupByLibrary.simpleMessage("消息只会从此设备中删除 你确定吗？"),
         "moreInfo": MessageLookupByLibrary.simpleMessage("更多信息"),
         "movies": MessageLookupByLibrary.simpleMessage("电影"),
         "music": MessageLookupByLibrary.simpleMessage("音乐"),
@@ -280,6 +280,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "reverseSwipeWillCostYou":
             MessageLookupByLibrary.simpleMessage("反向滑动会让你付出代价"),
         "save": MessageLookupByLibrary.simpleMessage("节省"),
+        "savedProfiles": MessageLookupByLibrary.simpleMessage("Saved Profiles"),
         "searching": MessageLookupByLibrary.simpleMessage("正在搜索..."),
         "selectAnother": MessageLookupByLibrary.simpleMessage("选择另一个"),
         "selectDocument": MessageLookupByLibrary.simpleMessage("选择文档"),

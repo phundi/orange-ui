@@ -137,7 +137,7 @@
   "deleteMessage": "메시지 삭제",
   "deleteThisChat": "이 채팅 삭제",
   "areYouSureYouEtc": "이 메시지를 삭제하시겠습니까?",
-  "messageWillOnlyBeRemoved": "메시지는 이 장치에서만 제거됩니다.\n정말입니까?",
+  "messageWillOnlyBeRemoved": "메시지는 이 장치에서만 제거됩니다. 정말입니까?",
   "areYouSure": "확실합니까",
   "chatHint": "아무거나 입력하세요...!",
   "yes": "예",
@@ -299,5 +299,6 @@
   "coinsPerMsgPleaseConfirmIfYouToContinueOr": "메시지 당 동전, 계속할지 여부를 확인하십시오",
   "liveStreamPriceWillCostYou": "라이브 스트림 가격은 비용이 듭니다",
   "coinsPerMinutesPleaseConfirmIfYouToContinueOr": "분당 동전, 계속할지 여부를 확인하십시오",
-  "liveStreamEnded": "라이브 스트림 종료됨"
+  "liveStreamEnded": "라이브 스트림 종료됨",
+  "savedProfiles": "Saved Profiles"
 }

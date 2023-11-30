@@ -52,17 +52,14 @@ class TopBarArea extends StatelessWidget {
               child: Container(
                 height: 37,
                 width: 37,
-                padding: const EdgeInsets.only(right: 3),
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage(AssetRes.backButton),
-                  ),
-                ),
+                decoration: BoxDecoration(
+                    color: ColorRes.orange3.withOpacity(0.1),
+                    shape: BoxShape.circle),
                 child: Center(
                   child: Image.asset(
                     AssetRes.backArrow,
-                    height: 14,
-                    width: 7,
+                    height: 20,
+                    width: 20,
                   ),
                 ),
               ),

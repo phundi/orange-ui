@@ -137,7 +137,7 @@
   "deleteMessage": "Mesajı sil",
   "deleteThisChat": "Bu sohbeti sil",
   "areYouSureYouEtc": "Bu mesajı silmek istediğinizden emin misiniz?",
-  "messageWillOnlyBeRemoved": "Mesaj yalnızca bu cihazdan kaldırılacak\nEmin misiniz?",
+  "messageWillOnlyBeRemoved": "Mesaj yalnızca bu cihazdan kaldırılacak Emin misiniz?",
   "areYouSure": "Emin misin",
   "chatHint": "Birşeyler yaz...!",
   "yes": "Evet",
@@ -299,5 +299,6 @@
   "coinsPerMsgPleaseConfirmIfYouToContinueOr": "Msg başına jeton, Lütfen devam edip etmeyeceğinizi onaylayın",
   "liveStreamPriceWillCostYou": "Canlı yayın fiyatı size mal olacak",
   "coinsPerMinutesPleaseConfirmIfYouToContinueOr": "dakika başına jeton, lütfen devam edip etmeyeceğinizi onaylayın",
-  "liveStreamEnded": "Canlı Yayın Sona Erdi"
+  "liveStreamEnded": "Canlı Yayın Sona Erdi",
+  "savedProfiles": "Saved Profiles"
 }

@@ -109,7 +109,10 @@ class ProfileImageArea extends StatelessWidget {
                           padding: const EdgeInsets.only(left: 10),
                           child: Row(
                             children: [
-                              socialIcon(AssetRes.instaLogo, 15, onInstagramTap,
+                              socialIcon(
+                                  AssetRes.instagramLogo,
+                                  15,
+                                  onInstagramTap,
                                   isSocialBtnVisible(userData?.instagram)),
                               socialIcon(
                                   AssetRes.facebookLogo,
@@ -146,12 +149,16 @@ class ProfileImageArea extends StatelessWidget {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
                                       children: [
-                                        Text(
-                                          '${userData?.fullname}',
-                                          style: const TextStyle(
-                                            color: ColorRes.white,
-                                            fontSize: 20,
-                                            fontFamily: FontRes.bold,
+                                        Flexible(
+                                          child: Text(
+                                            '${userData?.fullname}',
+                                            style: const TextStyle(
+                                              color: ColorRes.white,
+                                              fontSize: 20,
+                                              fontFamily: FontRes.bold,
+                                            ),
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 1,
                                           ),
                                         ),
                                         Text(

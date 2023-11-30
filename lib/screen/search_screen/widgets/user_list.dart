@@ -83,9 +83,11 @@ class UserList extends StatelessWidget {
                           Row(
                             children: [
                               Flexible(
-                                flex: 5,
                                 child: Text(
-                                  '${userList?[index].fullname ?? ''} ',
+                                  (userList?[index].fullname == null ||
+                                          userList![index].fullname!.isEmpty)
+                                      ? 'Unknown'
+                                      : userList![index].fullname!,
                                   style: const TextStyle(
                                     color: ColorRes.darkGrey4,
                                     fontSize: 18,
@@ -96,23 +98,19 @@ class UserList extends StatelessWidget {
                                 ),
                               ),
                               const SizedBox(width: 3),
-                              Flexible(
-                                child: Text(
-                                  '${userList?[index].age ?? ''}',
-                                  style: const TextStyle(
-                                      color: ColorRes.darkGrey4,
-                                      fontSize: 18,
-                                      overflow: TextOverflow.ellipsis),
-                                  maxLines: 1,
-                                ),
+                              Text(
+                                '${userList?[index].age ?? ''}',
+                                style: const TextStyle(
+                                    color: ColorRes.darkGrey4,
+                                    fontSize: 18,
+                                    overflow: TextOverflow.ellipsis),
+                                maxLines: 1,
                               ),
                               const SizedBox(width: 3),
-                              Flexible(
-                                child: userList?[index].isVerified == 2
-                                    ? Image.asset(AssetRes.tickMark,
-                                        height: 18, width: 18)
-                                    : const SizedBox(),
-                              ),
+                              userList?[index].isVerified == 2
+                                  ? Image.asset(AssetRes.tickMark,
+                                      height: 18, width: 18)
+                                  : const SizedBox(),
                             ],
                           ),
                           Text(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:orange_ui/service/pref_service.dart';
 import 'package:orange_ui/utils/asset_res.dart';
+import 'package:orange_ui/utils/color_res.dart';
 
 class MessageTopArea extends StatelessWidget {
   final VoidCallback onNotificationTap;
@@ -28,19 +29,37 @@ class MessageTopArea extends StatelessWidget {
                     : true,
                 child: InkWell(
                   onTap: onNotificationTap,
-                  child: Image.asset(
-                    AssetRes.bell,
+                  child: Container(
                     height: 37,
                     width: 37,
+                    decoration: BoxDecoration(
+                        color: ColorRes.orange3.withOpacity(0.1),
+                        shape: BoxShape.circle),
+                    child: Center(
+                      child: Image.asset(
+                        AssetRes.bell,
+                        height: 20,
+                        width: 20,
+                      ),
+                    ),
                   ),
                 ),
               ),
               InkWell(
                 onTap: onSearchTap,
-                child: Image.asset(
-                  AssetRes.search,
+                child: Container(
                   height: 37,
                   width: 37,
+                  decoration: BoxDecoration(
+                      color: ColorRes.orange3.withOpacity(0.1),
+                      shape: BoxShape.circle),
+                  child: Center(
+                    child: Image.asset(
+                      AssetRes.search,
+                      height: 20,
+                      width: 20,
+                    ),
+                  ),
                 ),
               ),
             ],

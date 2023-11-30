@@ -252,7 +252,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "messagePriceWillCostYou": MessageLookupByLibrary.simpleMessage(
             "Η τιμή του μηνύματος θα σας κοστίσει"),
         "messageWillOnlyBeRemoved": MessageLookupByLibrary.simpleMessage(
-            "Το μήνυμα θα αφαιρεθεί μόνο από αυτήν τη συσκευή\nΕίστε βέβαιοι;"),
+            "Το μήνυμα θα αφαιρεθεί μόνο από αυτήν τη συσκευή Είστε βέβαιοι;"),
         "moreInfo":
             MessageLookupByLibrary.simpleMessage("ΠΕΡΙΣΣΟΤΕΡΕΣ ΠΛΗΡΟΦΟΡΙΕΣ"),
         "movies": MessageLookupByLibrary.simpleMessage("Κινηματογράφος"),
@@ -353,6 +353,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "reverseSwipeWillCostYou": MessageLookupByLibrary.simpleMessage(
             "Το Reverse Swipe θα σας κοστίσει"),
         "save": MessageLookupByLibrary.simpleMessage("ΑΠΟΘΗΚΕΥΣΕΤΕ"),
+        "savedProfiles": MessageLookupByLibrary.simpleMessage("Saved Profiles"),
         "searching": MessageLookupByLibrary.simpleMessage("Ερευνητικός..."),
         "selectAnother": MessageLookupByLibrary.simpleMessage("Επιλέξτε άλλο"),
         "selectDocument":

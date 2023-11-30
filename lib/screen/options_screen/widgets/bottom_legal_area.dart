@@ -125,8 +125,8 @@ class BottomLegalArea extends StatelessWidget {
               angle: 3.2,
               child: Image.asset(
                 AssetRes.backArrow,
-                height: 12,
-                width: 6,
+                height: 20,
+                width: 20,
               ),
             )
           ],

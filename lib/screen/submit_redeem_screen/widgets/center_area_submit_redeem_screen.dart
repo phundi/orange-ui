@@ -193,11 +193,9 @@ class CenterAreaSubmitRedeemScreen extends StatelessWidget {
                     icon: Container(
                       height: 37,
                       width: 37,
-                      padding: const EdgeInsets.only(right: 3),
-                      child: Center(
-                        child: Image.asset(
-                          AssetRes.downArrow,
-                        ),
+                      padding: const EdgeInsets.all(7),
+                      child: Image.asset(
+                        AssetRes.downArrow,
                       ),
                     ),
                     // Array list of items

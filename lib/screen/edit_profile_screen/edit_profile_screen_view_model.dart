@@ -160,11 +160,9 @@ class EditProfileScreenViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  Future<void> onSaveTap() async {
+  void onSaveTap() {
     updateProfileApiCall();
   }
-
-  void onPreviewTap() {}
 
   void selectImages() async {
     if (Platform.isAndroid) {
@@ -245,29 +243,20 @@ class EditProfileScreenViewModel extends BaseViewModel {
       }
       SnackBarWidget().snackBarWidget(S.current.imageIsEmpty);
       i++;
-    } else {
-      FocusScope.of(Get.context!).requestFocus(fullNameFocus);
     }
     if (fullNameController.text == '') {
       fullNameError = S.current.enterFullName;
       i++;
-    } else {
-      fullNameFocus.unfocus();
-      FocusScope.of(Get.context!).requestFocus(aboutFocus);
     }
     if (aboutController.text == '') {
       aboutError = S.current.enterAbout;
       i++;
-    } else {
-      aboutFocus.unfocus();
-      fullNameFocus.unfocus();
-      FocusScope.of(Get.context!).requestFocus(ageFocus);
     }
     if (ageController.text == '') {
       ageError = S.current.enterAge;
-      ageFocus.requestFocus();
       i++;
     } else if (int.parse(ageController.text) < 18) {
+      ageFocus.requestFocus();
       SnackBarWidget.snackBar(message: S.current.youMustBe18);
       return false;
     }

@@ -137,7 +137,7 @@
   "deleteMessage": "删除消息",
   "deleteThisChat": "删除此聊天",
   "areYouSureYouEtc": "你确定要删除这条消息吗 ？",
-  "messageWillOnlyBeRemoved": "消息只会从此设备中删除\n你确定吗？",
+  "messageWillOnlyBeRemoved": "消息只会从此设备中删除 你确定吗？",
   "areYouSure": "你确定吗",
   "chatHint": "输入一些东西...！",
   "yes": "是的",
@@ -299,5 +299,6 @@
   "coinsPerMsgPleaseConfirmIfYouToContinueOr": "每个消息的硬币，请确认是否继续",
   "liveStreamPriceWillCostYou": "直播价格会让你付出代价",
   "coinsPerMinutesPleaseConfirmIfYouToContinueOr": "每分钟硬币，请确认是否继续",
-  "liveStreamEnded": "直播结束"
+  "liveStreamEnded": "直播结束",
+  "savedProfiles": "Saved Profiles"
 }

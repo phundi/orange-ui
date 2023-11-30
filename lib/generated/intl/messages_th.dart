@@ -230,7 +230,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "messagePriceWillCostYou": MessageLookupByLibrary.simpleMessage(
             "ราคาข้อความจะทำให้คุณเสียค่าใช้จ่าย"),
         "messageWillOnlyBeRemoved": MessageLookupByLibrary.simpleMessage(
-            "ข้อความจะถูกลบออกจากอุปกรณ์นี้เท่านั้น\nคุณแน่ใจหรือไม่"),
+            "ข้อความจะถูกลบออกจากอุปกรณ์นี้เท่านั้น คุณแน่ใจหรือไม่"),
         "moreInfo": MessageLookupByLibrary.simpleMessage("ข้อมูลเพิ่มเติม"),
         "movies": MessageLookupByLibrary.simpleMessage("ภาพยนตร์"),
         "music": MessageLookupByLibrary.simpleMessage("ดนตรี"),
@@ -329,6 +329,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "reverseSwipeWillCostYou": MessageLookupByLibrary.simpleMessage(
             "การปัดแบบย้อนกลับจะทำให้คุณเสียค่าใช้จ่าย"),
         "save": MessageLookupByLibrary.simpleMessage("บันทึก"),
+        "savedProfiles": MessageLookupByLibrary.simpleMessage("Saved Profiles"),
         "searching": MessageLookupByLibrary.simpleMessage("กำลังค้นหา..."),
         "selectAnother":
             MessageLookupByLibrary.simpleMessage("เลือกรายการอื่น"),

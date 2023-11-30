@@ -137,7 +137,7 @@
   "deleteMessage": "Удаленное сообщение",
   "deleteThisChat": "Удалить этот чат",
   "areYouSureYouEtc": "Вы уверены, что хотите удалить это сообщение ?",
-  "messageWillOnlyBeRemoved": "Сообщение будет удалено только с этого устройства\nВы уверены?",
+  "messageWillOnlyBeRemoved": "Сообщение будет удалено только с этого устройства Вы уверены?",
   "areYouSure": "Вы уверены",
   "chatHint": "Введите что-либо...!",
   "yes": "Да",
@@ -299,5 +299,6 @@
   "coinsPerMsgPleaseConfirmIfYouToContinueOr": "монет за сообщение, пожалуйста, подтвердите, хотите ли вы продолжить или нет",
   "liveStreamPriceWillCostYou": "Стоимость прямой трансляции будет стоить вам",
   "coinsPerMinutesPleaseConfirmIfYouToContinueOr": "монет в минуту, Пожалуйста, подтвердите, если вы хотите продолжить или нет",
-  "liveStreamEnded": "Прямая трансляция завершена"
+  "liveStreamEnded": "Прямая трансляция завершена",
+  "savedProfiles": "Saved Profiles"
 }

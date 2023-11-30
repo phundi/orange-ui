@@ -210,7 +210,7 @@ class ProfilePicArea extends StatelessWidget {
                         child: Row(
                           children: [
                             SocialIcon(
-                                icon: AssetRes.instaLogo,
+                                icon: AssetRes.instagramLogo,
                                 size: 15,
                                 onSocialIconTap: onInstagramTap,
                                 isVisible:

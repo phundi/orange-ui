@@ -137,7 +137,7 @@
   "deleteMessage": "ลบข้อความ",
   "deleteThisChat": "ลบแชทนี้",
   "areYouSureYouEtc": "คุณแน่ใจหรือไม่ว่าต้องการลบข้อความนี้",
-  "messageWillOnlyBeRemoved": "ข้อความจะถูกลบออกจากอุปกรณ์นี้เท่านั้น\nคุณแน่ใจหรือไม่",
+  "messageWillOnlyBeRemoved": "ข้อความจะถูกลบออกจากอุปกรณ์นี้เท่านั้น คุณแน่ใจหรือไม่",
   "areYouSure": "คุณแน่ใจไหม",
   "chatHint": "พิมพ์บางอย่าง...!",
   "yes": "ใช่",
@@ -299,5 +299,6 @@
   "coinsPerMsgPleaseConfirmIfYouToContinueOr": "เหรียญต่อข่าวสารโปรดยืนยันว่าคุณจะดำเนินการต่อหรือไม่",
   "liveStreamPriceWillCostYou": "ราคาสตรีมสดจะทำให้คุณเสียค่าใช้จ่าย",
   "coinsPerMinutesPleaseConfirmIfYouToContinueOr": "เหรียญต่อนาที โปรดยืนยันว่าจะดำเนินการต่อหรือไม่",
-  "liveStreamEnded": "สตรีมสดสิ้นสุดลง"
+  "liveStreamEnded": "สตรีมสดสิ้นสุดลง",
+  "savedProfiles": "Saved Profiles"
 }

@@ -1431,10 +1431,10 @@ class S {
     );
   }
 
-  /// `Message will only be removed from this device\nAre you sure?`
+  /// `Message will only be removed from this device Are you sure?`
   String get messageWillOnlyBeRemoved {
     return Intl.message(
-      'Message will only be removed from this device\nAre you sure?',
+      'Message will only be removed from this device Are you sure?',
       name: 'messageWillOnlyBeRemoved',
       desc: '',
       args: [],
@@ -3056,6 +3056,16 @@ class S {
     return Intl.message(
       'Live Stream Ended',
       name: 'liveStreamEnded',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Saved Profiles`
+  String get savedProfiles {
+    return Intl.message(
+      'Saved Profiles',
+      name: 'savedProfiles',
       desc: '',
       args: [],
     );

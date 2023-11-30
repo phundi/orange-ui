@@ -137,7 +137,7 @@
   "deleteMessage": "संदेश को हटाएं",
   "deleteThisChat": "इस चैट को हटा दें",
   "areYouSureYouEtc": "क्या आप निश्चित रूप से यह संदेश हटाना चाहते हैं ?",
-  "messageWillOnlyBeRemoved": "संदेश केवल इस डिवाइस से निकाला जाएगा\nक्या आप सुनिश्चित हैं?",
+  "messageWillOnlyBeRemoved": "संदेश केवल इस डिवाइस से निकाला जाएगा क्या आप सुनिश्चित हैं?",
   "areYouSure": "क्या आपको यकीन है",
   "chatHint": "कुछ लिखें...!",
   "yes": "हाँ",
@@ -299,5 +299,6 @@
   "coinsPerMsgPleaseConfirmIfYouToContinueOr": "प्रति संदेश सिक्के, कृपया पुष्टि करें कि आपको जारी रखना है या नहीं",
   "liveStreamPriceWillCostYou": "लाइव स्ट्रीम की कीमत आपको महंगी पड़ेगी",
   "coinsPerMinutesPleaseConfirmIfYouToContinueOr": "सिक्के प्रति मिनट, कृपया पुष्टि करें कि आपको जारी रखना है या नहीं",
-  "liveStreamEnded": "लाइव स्ट्रीम समाप्त"
+  "liveStreamEnded": "लाइव स्ट्रीम समाप्त",
+  "savedProfiles": "Saved Profiles"
 }

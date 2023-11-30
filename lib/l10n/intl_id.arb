@@ -137,7 +137,7 @@
   "deleteMessage": "Hapus pesan",
   "deleteThisChat": "Hapus obrolan ini",
   "areYouSureYouEtc": "Apakah Anda yakin ingin menghapus pesan ini?",
-  "messageWillOnlyBeRemoved": "Pesan hanya akan dihapus dari perangkat ini\nAnda yakin?",
+  "messageWillOnlyBeRemoved": "Pesan hanya akan dihapus dari perangkat ini Anda yakin?",
   "areYouSure": "Apa kamu yakin",
   "chatHint": "Ketik sesuatu...!",
   "yes": "Ya",
@@ -299,5 +299,6 @@
   "coinsPerMsgPleaseConfirmIfYouToContinueOr": "koin per Msg, Harap konfirmasi apakah Anda ingin melanjutkan atau tidak",
   "liveStreamPriceWillCostYou": "Harga streaming langsung akan dikenakan biaya",
   "coinsPerMinutesPleaseConfirmIfYouToContinueOr": "koin per menit, Harap konfirmasi apakah Anda ingin melanjutkan atau tidak",
-  "liveStreamEnded": "Streaming Langsung Berakhir"
+  "liveStreamEnded": "Streaming Langsung Berakhir",
+  "savedProfiles": "Saved Profiles"
 }

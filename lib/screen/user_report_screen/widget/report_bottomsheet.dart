@@ -86,7 +86,7 @@ class ReportBottomSheet extends StatelessWidget {
                         child: Image.asset(
                           AssetRes.backArrow,
                           height: 20,
-                          width: 15,
+                          width: 20,
                         ),
                       ),
                       Center(
@@ -215,8 +215,8 @@ class ReportBottomSheet extends StatelessWidget {
                                       angle: showDropdown ? 3.1 : 0,
                                       child: Image.asset(
                                         AssetRes.downArrow,
-                                        height: 7,
-                                        width: 14,
+                                        height: 25,
+                                        width: 25,
                                       ),
                                     ),
                                   ],

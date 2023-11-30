@@ -137,7 +137,7 @@
   "deleteMessage": "Nachricht löschen",
   "deleteThisChat": "Löschen Sie diesen Chat",
   "areYouSureYouEtc": "Sind Sie sicher, dass Sie diese Nachricht löschen möchten?",
-  "messageWillOnlyBeRemoved": "Die Nachricht wird nur von diesem Gerät entfernt\nSind Sie sicher?",
+  "messageWillOnlyBeRemoved": "Die Nachricht wird nur von diesem Gerät entfernt Sind Sie sicher?",
   "areYouSure": "Bist du dir sicher",
   "chatHint": "Schreibe etwas...!",
   "yes": "Ja",
@@ -299,5 +299,6 @@
   "coinsPerMsgPleaseConfirmIfYouToContinueOr": "Münzen pro Nachricht. Bitte bestätigen Sie, ob Sie fortfahren möchten oder nicht",
   "liveStreamPriceWillCostYou": "Der Preis für den Live-Stream kostet Sie",
   "coinsPerMinutesPleaseConfirmIfYouToContinueOr": "Münzen pro Minute. Bitte bestätigen Sie, ob Sie fortfahren möchten oder nicht",
-  "liveStreamEnded": "Livestream beendet"
+  "liveStreamEnded": "Livestream beendet",
+  "savedProfiles": "Saved Profiles"
 }

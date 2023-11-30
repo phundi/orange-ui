@@ -137,7 +137,7 @@
   "deleteMessage": "Slet besked",
   "deleteThisChat": "Slet denne chat",
   "areYouSureYouEtc": "Er du sikker på, at du vil slette denne besked?",
-  "messageWillOnlyBeRemoved": "Beskeden vil kun blive fjernet fra denne enhed\nEr du sikker?",
+  "messageWillOnlyBeRemoved": "Beskeden vil kun blive fjernet fra denne enhed Er du sikker?",
   "areYouSure": "Er du sikker",
   "chatHint": "Skriv noget...!",
   "yes": "Ja",
@@ -299,5 +299,6 @@
   "coinsPerMsgPleaseConfirmIfYouToContinueOr": "mønter pr. besked, bekræft venligst, om du vil fortsætte eller ej",
   "liveStreamPriceWillCostYou": "Prisen for live stream vil koste dig",
   "coinsPerMinutesPleaseConfirmIfYouToContinueOr": "mønter pr. minut. Bekræft venligst, om du vil fortsætte eller ej",
-  "liveStreamEnded": "Livestream afsluttet"
+  "liveStreamEnded": "Livestream afsluttet",
+  "savedProfiles": "Saved Profiles"
 }

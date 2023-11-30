@@ -216,7 +216,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "messagePriceWillCostYou":
             MessageLookupByLibrary.simpleMessage("メッセージ料金がかかります"),
         "messageWillOnlyBeRemoved": MessageLookupByLibrary.simpleMessage(
-            "メッセージはこのデバイスからのみ削除されます\nよろしいですか?"),
+            "メッセージはこのデバイスからのみ削除されます よろしいですか?"),
         "moreInfo": MessageLookupByLibrary.simpleMessage("より詳しい情報"),
         "movies": MessageLookupByLibrary.simpleMessage("映画"),
         "music": MessageLookupByLibrary.simpleMessage("音楽"),
@@ -305,6 +305,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "reverseSwipeWillCostYou":
             MessageLookupByLibrary.simpleMessage("逆スワイプには費用がかかります"),
         "save": MessageLookupByLibrary.simpleMessage("保存"),
+        "savedProfiles": MessageLookupByLibrary.simpleMessage("Saved Profiles"),
         "searching": MessageLookupByLibrary.simpleMessage("検索中..."),
         "selectAnother": MessageLookupByLibrary.simpleMessage("別のを選択してください"),
         "selectDocument": MessageLookupByLibrary.simpleMessage("ドキュメントの選択"),

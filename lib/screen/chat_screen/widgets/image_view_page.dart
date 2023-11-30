@@ -78,7 +78,7 @@ class ImageViewPage extends StatelessWidget {
               child: Image.asset(
                 AssetRes.backArrow,
                 height: 20,
-                width: 10,
+                width: 20,
               ),
             ),
           ),

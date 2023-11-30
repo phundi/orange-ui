@@ -26,17 +26,13 @@ class RandomSearchTopBarArea extends StatelessWidget {
               child: Container(
                 height: 37,
                 width: 37,
-                padding: const EdgeInsets.only(right: 3),
+                padding: const EdgeInsets.all(5),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: ColorRes.orange2.withOpacity(0.06),
                 ),
-                child: Center(
-                  child: Image.asset(
-                    AssetRes.backArrow,
-                    height: 14,
-                    width: 7,
-                  ),
+                child: Image.asset(
+                  AssetRes.backArrow,
                 ),
               ),
             ),

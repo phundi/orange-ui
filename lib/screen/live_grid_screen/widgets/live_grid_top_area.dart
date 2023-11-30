@@ -32,12 +32,10 @@ class LiveGridTopArea extends StatelessWidget {
               child: Container(
                 height: 37,
                 width: 37,
-                padding: const EdgeInsets.fromLTRB(11, 11, 14, 11),
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage(AssetRes.backButton),
-                  ),
-                ),
+                padding: const EdgeInsets.all(5),
+                decoration: BoxDecoration(
+                    color: ColorRes.orange3.withOpacity(0.1),
+                    shape: BoxShape.circle),
                 child: Image.asset(
                   AssetRes.backArrow,
                 ),

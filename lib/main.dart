@@ -82,12 +82,20 @@ class _MyAppState extends State<MyApp> {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
+      builder: (context, child) {
+        return ScrollConfiguration(
+          behavior: MyBehavior(),
+          child: child!,
+        );
+      },
       supportedLocales: S.delegate.supportedLocales,
       locale: Locale(LanguagesScreenViewModel.selectedLanguage),
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         fontFamily: FontRes.regular,
         primaryColor: ColorRes.orange,
+        splashColor: ColorRes.transparent,
+        highlightColor: ColorRes.transparent,
       ),
       home: const GetStartedScreen(),
     );
@@ -168,5 +176,13 @@ class _MyAppState extends State<MyApp> {
         .resolvePlatformSpecificImplementation<
             AndroidFlutterLocalNotificationsPlugin>()
         ?.createNotificationChannel(channel);
+  }
+}
+
+class MyBehavior extends ScrollBehavior {
+  @override
+  Widget buildOverscrollIndicator(
+      BuildContext context, Widget child, ScrollableDetails details) {
+    return child;
   }
 }
