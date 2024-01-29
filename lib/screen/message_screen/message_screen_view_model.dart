@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
 import 'package:orange_ui/common/widgets/common_fun.dart';
+import 'package:orange_ui/common/widgets/confirmation_dialog.dart';
 import 'package:orange_ui/common/widgets/snack_bar_widget.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/chat_and_live_stream/chat.dart';
@@ -16,8 +17,6 @@ import 'package:orange_ui/screen/search_screen/search_screen.dart';
 import 'package:orange_ui/service/pref_service.dart';
 import 'package:orange_ui/utils/firebase_res.dart';
 import 'package:stacked/stacked.dart';
-
-import '../../common/widgets/confirmation_dialog.dart';
 
 class MessageScreenViewModel extends BaseViewModel {
   FirebaseFirestore db = FirebaseFirestore.instance;

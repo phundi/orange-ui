@@ -67,11 +67,10 @@ class ChatScreenViewModel extends BaseViewModel {
   Conversation? conversation;
   ChatUser? receiverUser;
   RegistrationUserData? registrationUserData;
-  RegistrationUserData? conversationUserData;
+  RegistrationUserData? receiverUserData;
 
   Map<String, List<ChatMessage>>? grouped;
   int startingNumber = 30;
-
   List<String> notDeletedIdentity = [];
   List<String> timeStamp = [];
   bool isLongPress = false;
@@ -105,7 +104,7 @@ class ChatScreenViewModel extends BaseViewModel {
       initFireBaseData();
     });
     ApiProvider().getProfile(userID: conversation?.user?.userid).then((value) {
-      conversationUserData = value?.data;
+      receiverUserData = value?.data;
       notifyListeners();
     });
   }
@@ -671,15 +670,17 @@ class ChatScreenViewModel extends BaseViewModel {
       textMsgController.clear();
       return;
     }
-    PermissionStatus status = await Permission.camera.request();
+    if (Platform.isAndroid) {
+      PermissionStatus status = await Permission.camera.request();
 
-    var allAccepted = true;
-    if (status != PermissionStatus.granted) {
-      allAccepted = false;
-    }
-    if (!allAccepted) {
-      openAppSettings();
-      return;
+      var allAccepted = true;
+      if (status != PermissionStatus.granted) {
+        allAccepted = false;
+      }
+      if (!allAccepted) {
+        openAppSettings();
+        return;
+      }
     }
 
     try {
@@ -787,12 +788,10 @@ class ChatScreenViewModel extends BaseViewModel {
       String? video}) async {
     var time = DateTime.now().millisecondsSinceEpoch;
     notDeletedIdentity = [];
-    notDeletedIdentity.addAll(
-      [
-        '${registrationUserData?.identity}',
-        '${conversation?.user?.userIdentity}'
-      ],
-    );
+    notDeletedIdentity.addAll([
+      '${registrationUserData?.identity}',
+      '${conversation?.user?.userIdentity}'
+    ]);
 
     drChatMessages
         .doc(
@@ -824,9 +823,9 @@ class ChatScreenViewModel extends BaseViewModel {
     if (chatData.isEmpty && deletedId.isEmpty) {
       Map con = conversation?.toJson() ?? {};
       con[FirebaseRes.lastMsg] = msgType == FirebaseRes.image
-          ? '🖼️ ${FirebaseRes.image}'
+          ? FirebaseRes.imageText
           : msgType == FirebaseRes.video
-              ? '🎥 ${FirebaseRes.video}'
+              ? FirebaseRes.videoText
               : textMessage;
       documentSender.set(con);
       documentReceiver.set(
@@ -838,9 +837,9 @@ class ChatScreenViewModel extends BaseViewModel {
           isDeleted: false,
           isMute: false,
           lastMsg: msgType == FirebaseRes.image
-              ? '🖼️ ${FirebaseRes.image}'
+              ? FirebaseRes.imageText
               : msgType == FirebaseRes.video
-                  ? '🎥 ${FirebaseRes.video}'
+                  ? FirebaseRes.videoText
                   : textMessage,
           newMsg: textMessage,
           time: DateTime.now().millisecondsSinceEpoch.toDouble(),
@@ -864,9 +863,9 @@ class ChatScreenViewModel extends BaseViewModel {
           FirebaseRes.isDeleted: false,
           FirebaseRes.time: DateTime.now().millisecondsSinceEpoch.toDouble(),
           FirebaseRes.lastMsg: msgType == FirebaseRes.image
-              ? '🖼️ ${FirebaseRes.image}'
+              ? FirebaseRes.imageText
               : msgType == FirebaseRes.video
-                  ? '🎥 ${FirebaseRes.video}'
+                  ? FirebaseRes.videoText
                   : textMessage,
           FirebaseRes.user: receiverUser?.toJson(),
         },
@@ -876,23 +875,23 @@ class ChatScreenViewModel extends BaseViewModel {
           FirebaseRes.isDeleted: false,
           FirebaseRes.time: DateTime.now().millisecondsSinceEpoch.toDouble(),
           FirebaseRes.lastMsg: msgType == FirebaseRes.image
-              ? '🖼️ ${FirebaseRes.image}'
+              ? FirebaseRes.imageText
               : msgType == FirebaseRes.video
-                  ? '🎥 ${FirebaseRes.video}'
+                  ? FirebaseRes.videoText
                   : textMessage
         },
       );
     }
 
-    conversationUserData?.isNotification == 1
+    receiverUserData?.isNotification == 1
         ? ApiProvider().pushNotification(
             title: registrationUserData?.fullname ?? '',
             body: msgType == FirebaseRes.image
-                ? '🖼️ ${FirebaseRes.image}'
+                ? FirebaseRes.imageText
                 : msgType == FirebaseRes.video
-                    ? '🎥 ${FirebaseRes.video}'
+                    ? FirebaseRes.videoText
                     : '$textMessage',
-            token: '${conversationUserData?.deviceToken}')
+            token: '${receiverUserData?.deviceToken}')
         : null;
   }
 

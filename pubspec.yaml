@@ -65,22 +65,20 @@ dependencies:
   http: ^0.13.4
 
   #_______________ firebase ___________________#
-  firebase_messaging: ^14.6.0
+  firebase_messaging: ^14.7.10
   firebase_core: ^2.12.0
   firebase_auth: ^4.6.0
   cloud_firestore: ^4.7.0
-  flutter_local_notifications: ^14.0.0+2
+  flutter_local_notifications: ^14.0.0+1
   flutter_app_badger: ^1.5.0
   google_mobile_ads: ^3.0.0
 
   #_______________ sign in  ___________________#
   google_sign_in: ^5.3.2
   sign_in_with_apple: ^4.0.0
-  #  the_apple_sign_in: ^1.1.1
 
   #_______________ permission ___________________#
   permission_handler: ^10.0.0
-  location: ^4.4.0
   app_tracking_transparency: ^2.0.3
 
   #_______________ url_launcher ___________________#

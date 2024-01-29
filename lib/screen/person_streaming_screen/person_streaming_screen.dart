@@ -17,11 +17,9 @@ class PersonStreamingScreen extends StatelessWidget {
       },
       viewModelBuilder: () => PersonStreamingScreenViewModel(),
       builder: (context, model, child) {
-        return WillPopScope(
-          onWillPop: () async {
-            model.onExitTap();
-            return false;
-          },
+        return PopScope(
+          onPopInvoked: (didPop) => model.onExitTap(),
+          canPop: false,
           child: Scaffold(
               body: Stack(
             children: [

@@ -20,8 +20,8 @@ class DashboardScreen extends StatelessWidget {
       },
       viewModelBuilder: () => DashboardScreenViewModel(),
       builder: (context, model, child) {
-        return WillPopScope(
-          onWillPop: model.onBack,
+        return PopScope(
+          onPopInvoked: (didPop) => model.onBack,
           child: Scaffold(
             backgroundColor: ColorRes.white,
             bottomNavigationBar: BottomBar(

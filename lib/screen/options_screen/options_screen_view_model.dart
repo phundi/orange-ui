@@ -117,7 +117,6 @@ class OptionalScreenViewModel extends BaseViewModel {
         : ApiProvider().onOffAnonymous(goAnonymous ? 0 : 1).then((value) async {
             if (value.status == true) {
               goAnonymous = value.data?.anonymous == 1 ? true : false;
-              // await PrefService.setOnOffAnonymous(goAnonymous);
               await PrefService.saveUser(value.data);
               notifyListeners();
               SnackBarWidget().snackBarWidget(value.message!);

@@ -3,12 +3,12 @@ import 'package:get/get.dart';
 import 'package:orange_ui/utils/color_res.dart';
 
 class SnackBarWidget {
-  void snackBarWidget(String titleName) {
+  void snackBarWidget(String? titleName) {
     ScaffoldMessenger.of(Get.context!)
         .showSnackBar(
           SnackBar(
             content: Text(
-              titleName,
+              (titleName ?? '').capitalizeFirst ?? '',
               style: const TextStyle(overflow: TextOverflow.ellipsis),
               maxLines: 2,
             ),

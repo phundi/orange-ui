@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:firebase_core/firebase_core.dart';
@@ -102,8 +103,17 @@ class _MyAppState extends State<MyApp> {
   }
 
   void saveTokenUpdate() async {
-    await FirebaseMessaging.instance
-        .subscribeToTopic(ConstRes.subscribeToTopic);
+    await firebaseMessaging.subscribeToTopic(ConstRes.subscribeToTopic);
+
+    flutterLocalNotificationsPlugin
+        .resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin>()
+        ?.requestPermission();
+
+    flutterLocalNotificationsPlugin
+        .resolvePlatformSpecificImplementation<
+            IOSFlutterLocalNotificationsPlugin>()
+        ?.requestPermissions();
 
     await firebaseMessaging.requestPermission(
       alert: true,
@@ -119,7 +129,6 @@ class _MyAppState extends State<MyApp> {
       'orange_flutter', // id
       'Orange', // title
       playSound: true,
-      description: 'Orange App',
       enableLights: true,
       enableVibration: true,
       importance: Importance.max,
@@ -127,6 +136,7 @@ class _MyAppState extends State<MyApp> {
 
     FirebaseMessaging.onMessage.listen(
       (RemoteMessage message) {
+        log(' 🔔 Notification Icon ${message.data}');
         var initializationSettingsAndroid =
             const AndroidInitializationSettings('@mipmap/ic_launcher');
         var initializationSettingsIOS = const DarwinInitializationSettings();
@@ -146,12 +156,10 @@ class _MyAppState extends State<MyApp> {
             notification.title,
             notification.body,
             const NotificationDetails(
-              iOS: DarwinNotificationDetails(
-                presentSound: true,
-                presentAlert: true,
-                presentBadge: true,
-              ),
-            ),
+                iOS: DarwinNotificationDetails(
+                    presentSound: true,
+                    presentAlert: true,
+                    presentBadge: true)),
           );
         }
         if (notification != null &&
@@ -162,16 +170,13 @@ class _MyAppState extends State<MyApp> {
             notification.title,
             notification.body,
             NotificationDetails(
-              android: AndroidNotificationDetails(
-                channel.id,
-                channel.name,
-                channelDescription: channel.description,
-              ),
-            ),
+                android: AndroidNotificationDetails(channel.id, channel.name,
+                    channelDescription: channel.description)),
           );
         }
       },
     );
+
     await flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
             AndroidFlutterLocalNotificationsPlugin>()

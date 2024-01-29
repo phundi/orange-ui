@@ -10,7 +10,6 @@ import 'package:orange_ui/utils/font_res.dart';
 
 class ChatTopBarArea extends StatelessWidget {
   final Conversation? conversation;
-  final VoidCallback onBack;
   final Function(String value) onMoreBtnTap;
   final String blockUnblock;
   final VoidCallback onUserTap;
@@ -19,7 +18,6 @@ class ChatTopBarArea extends StatelessWidget {
   const ChatTopBarArea(
       {Key? key,
       required this.conversation,
-      required this.onBack,
       required this.onMoreBtnTap,
       required this.blockUnblock,
       required this.onUserTap,
@@ -37,7 +35,9 @@ class ChatTopBarArea extends StatelessWidget {
             child: Row(
               children: [
                 InkWell(
-                  onTap: onBack,
+                  onTap: () {
+                    Get.back();
+                  },
                   child: Image.asset(
                     AssetRes.backArrow,
                     height: 30,
@@ -72,56 +72,63 @@ class ChatTopBarArea extends StatelessWidget {
                         ),
                 ),
                 const SizedBox(width: 10),
-                InkWell(
-                  onTap: onUserTap,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Text(
-                            conversation?.user?.username != null
-                                ? '${conversation?.user?.username} '
-                                : ' ',
-                            style: const TextStyle(
-                              color: ColorRes.darkGrey4,
-                              fontSize: 16,
-                              fontFamily: FontRes.bold,
+                Expanded(
+                  child: InkWell(
+                    onTap: onUserTap,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Text(
+                              conversation?.user?.username != null
+                                  ? '${conversation?.user?.username} '
+                                  : ' ',
+                              style: const TextStyle(
+                                color: ColorRes.darkGrey4,
+                                fontSize: 16,
+                                fontFamily: FontRes.bold,
+                              ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
                             ),
-                          ),
-                          Text(
-                            conversation?.user?.age != null
-                                ? "${conversation?.user?.age}"
-                                : '',
-                            style: const TextStyle(
-                              color: ColorRes.darkGrey4,
-                              fontSize: 16,
+                            Text(
+                              conversation?.user?.age != null
+                                  ? "${conversation?.user?.age}"
+                                  : '',
+                              style: const TextStyle(
+                                color: ColorRes.darkGrey4,
+                                fontSize: 16,
+                              ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
                             ),
-                          ),
-                          const SizedBox(width: 5),
-                          Visibility(
-                              visible: conversation != null &&
-                                  conversation?.user != null &&
-                                  conversation?.user?.isHost != null &&
-                                  conversation!.user!.isHost!,
-                              child: Image.asset(AssetRes.tickMark,
-                                  height: 15, width: 15)),
-                        ],
-                      ),
-                      Text(
-                        conversation?.user?.city != null
-                            ? "${conversation?.user?.city}"
-                            : '',
-                        style: const TextStyle(
-                          color: ColorRes.grey6,
-                          fontSize: 13,
+                            const SizedBox(width: 5),
+                            Visibility(
+                                visible: conversation != null &&
+                                    conversation?.user != null &&
+                                    conversation?.user?.isHost != null &&
+                                    conversation!.user!.isHost!,
+                                child: Image.asset(AssetRes.tickMark,
+                                    height: 15, width: 15)),
+                          ],
                         ),
-                      ),
-                    ],
+                        Text(
+                          conversation?.user?.city != null
+                              ? "${conversation?.user?.city}"
+                              : '',
+                          style: const TextStyle(
+                            color: ColorRes.grey6,
+                            fontSize: 13,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-                const Spacer(),
+                const SizedBox(width: 15),
                 PopupMenuButton<String>(
                   onSelected: (value) {
                     onMoreBtnTap(value);

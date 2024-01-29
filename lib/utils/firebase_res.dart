@@ -24,4 +24,7 @@ class FirebaseRes {
   static const String isDeleted = 'isDeleted';
   static const String deletedId = 'deletedId';
   static const String isMute = 'isMute';
+
+  static const String imageText = '📷️ Image';
+  static const String videoText = '🎥 Video';
 }

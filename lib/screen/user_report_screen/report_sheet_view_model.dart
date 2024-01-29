@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
 import 'package:orange_ui/common/widgets/snack_bar_widget.dart';
 import 'package:orange_ui/generated/l10n.dart';
-import 'package:orange_ui/model/chat_and_live_stream/chat.dart';
 import 'package:orange_ui/screen/webview_screen/webview_screen.dart';
 import 'package:orange_ui/utils/color_res.dart';
 import 'package:orange_ui/utils/urls.dart';
@@ -16,8 +15,6 @@ class ReportSheetViewModel extends BaseViewModel {
   String city = '';
   String userImage = '';
   String age = '';
-
-  Conversation? conversation;
 
   TextEditingController explainController = TextEditingController();
   FocusNode explainMoreFocus = FocusNode();
@@ -53,9 +50,7 @@ class ReportSheetViewModel extends BaseViewModel {
 
   void onTermAndConditionClick() {
     Get.to(() => WebViewScreen(
-          appBarTitle: S.current.termsOfUse,
-          url: Urls.aTermsOfUse,
-        ));
+        appBarTitle: S.current.termsOfUse, url: Urls.aTermsOfUse));
   }
 
   bool isValid() {
@@ -85,15 +80,17 @@ class ReportSheetViewModel extends BaseViewModel {
     return i == 0 ? true : false;
   }
 
-  void onSubmitBtnTap() {
+  void onSubmitBtnTap(int userId) {
     bool validation = isValid();
+    if (userId == -1) {
+      SnackBarWidget.snackBar(message: 'User Not Found!!');
+      return;
+    }
     notifyListeners();
     if (validation) {
-      ApiProvider()
-          .addReport(reason, explainController.text, conversation?.user?.userid)
-          .then(
+      ApiProvider().addReport(reason, explainController.text, userId).then(
         (value) {
-          SnackBarWidget().snackBarWidget('${value.message}');
+          SnackBarWidget().snackBarWidget('Reported Successfully!!');
           Get.back();
         },
       );

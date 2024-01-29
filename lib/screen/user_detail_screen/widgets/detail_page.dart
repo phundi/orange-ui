@@ -288,7 +288,7 @@ class DetailPage extends StatelessWidget {
                               color: ColorRes.dimGrey7.withOpacity(0.25),
                               borderRadius: BorderRadius.circular(10),
                             ),
-                            padding: EdgeInsets.symmetric(horizontal: 20),
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
                             child: Center(
                               child: Text(
                                 '${S.current.share} ${userData?.fullname?.toUpperCase()}\'S ${S.current.profileCap}',

@@ -32,7 +32,6 @@ class ChatScreen extends StatelessWidget {
             children: [
               ChatTopBarArea(
                 conversation: model.conversation,
-                onBack: model.onBackBtnTap,
                 onMoreBtnTap: model.onMoreBtnTap,
                 blockUnblock: model.blockUnblock,
                 onUserTap: model.onUserTap,

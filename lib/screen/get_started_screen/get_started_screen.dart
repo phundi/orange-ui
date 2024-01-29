@@ -17,8 +17,8 @@ class GetStartedScreen extends StatelessWidget {
       },
       viewModelBuilder: () => GetStartedScreenViewModel(),
       builder: (context, model, child) {
-        return WillPopScope(
-          onWillPop: model.onBack,
+        return PopScope(
+          onPopInvoked: (didPop) => model.onBack,
           child: Scaffold(
             body: model.screenIndex == 0
                 ? Screen1(onTap: model.screen1NextTap)

@@ -59,17 +59,19 @@ class MapScreenViewModel extends BaseViewModel {
         .then((value) async {
       userData = value.data;
       items = [];
+
       for (int i = 0; i < userData!.length; i++) {
         items.add(
           Place(
             userData: userData?[i],
             latLng: LatLng(
-              double.parse(userData![i].lattitude!),
-              double.parse(userData![i].longitude!),
+              double.parse(userData?[i].lattitude ?? '0.0'),
+              double.parse(userData?[i].longitude ?? '0.0'),
             ),
           ),
         );
       }
+
       manager.setItems(items);
       notifyListeners();
     });

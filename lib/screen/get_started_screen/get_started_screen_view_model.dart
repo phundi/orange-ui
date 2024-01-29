@@ -3,9 +3,8 @@ import 'dart:io';
 import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:geolocator/geolocator.dart' as geo;
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
-import 'package:location/location.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
 import 'package:orange_ui/common/widgets/loader.dart';
 import 'package:orange_ui/screen/dashboard/dashboard_screen.dart';
@@ -15,7 +14,7 @@ import 'package:orange_ui/screen/select_hobbies_screen/select_hobbies_screen.dar
 import 'package:orange_ui/screen/select_photo_screen/select_photo_screen.dart';
 import 'package:orange_ui/screen/starting_profile_screen/starting_profile_screen.dart';
 import 'package:orange_ui/service/pref_service.dart';
-import 'package:permission_handler/permission_handler.dart' as p;
+import 'package:permission_handler/permission_handler.dart';
 import 'package:stacked/stacked.dart';
 
 class GetStartedScreenViewModel extends BaseViewModel {
@@ -23,9 +22,6 @@ class GetStartedScreenViewModel extends BaseViewModel {
   String? coinRate = '';
   int? minThreshold = 0;
   int screenIndex = 0;
-  Location location = Location();
-  bool _serviceEnabled = false;
-  PermissionStatus? _permissionGranted;
 
   void init() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -180,23 +176,25 @@ class GetStartedScreenViewModel extends BaseViewModel {
   }
 
   void checkPermissionScreen3() async {
-    _permissionGranted = await location.hasPermission();
-    if (_permissionGranted == PermissionStatus.denied) {
-      _permissionGranted = await location.requestPermission();
-      if (_permissionGranted != PermissionStatus.granted) {
-        return;
+    bool serviceEnabled;
+    LocationPermission permission;
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      await Geolocator.openLocationSettings();
+    }
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        await Geolocator.openAppSettings();
       }
     }
-    _serviceEnabled = await location.serviceEnabled();
-    if (!_serviceEnabled) {
-      _serviceEnabled = await location.requestService();
-      if (!_serviceEnabled) {
-        return;
-      }
+
+    if (permission == LocationPermission.deniedForever) {
+      await Geolocator.openAppSettings();
     }
     Loader().lottieLoader();
-    await geo.Geolocator.getCurrentPosition(
-            desiredAccuracy: geo.LocationAccuracy.high)
+    await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high)
         .then((value) async {
       await PrefService.setLatitude(value.latitude.toString());
       await PrefService.setLongitude(value.longitude.toString());
@@ -207,20 +205,19 @@ class GetStartedScreenViewModel extends BaseViewModel {
   }
 
   void checkPermissionsScreen4() async {
-    Map<p.Permission, p.PermissionStatus> statuses = await [
-      p.Permission.camera,
-      p.Permission.photos,
-      p.Permission.videos,
-      p.Permission.storage,
-      p.Permission.microphone,
-      p.Permission.manageExternalStorage,
+    Map<Permission, PermissionStatus> statuses = await [
+      Permission.camera,
+      Permission.photos,
+      Permission.videos,
+      Permission.storage,
+      Permission.microphone,
+      Permission.manageExternalStorage,
     ].request();
-    if (statuses[p.Permission.camera] == p.PermissionStatus.denied &&
-        statuses[p.Permission.storage] == p.PermissionStatus.denied &&
-        statuses[p.Permission.microphone] == p.PermissionStatus.denied &&
-        statuses[p.Permission.manageExternalStorage] ==
-            p.PermissionStatus.denied) {
-      await p.openAppSettings();
+    if (statuses[Permission.camera] == PermissionStatus.denied &&
+        statuses[Permission.storage] == PermissionStatus.denied &&
+        statuses[Permission.microphone] == PermissionStatus.denied &&
+        statuses[Permission.manageExternalStorage] == PermissionStatus.denied) {
+      await openAppSettings();
     } else {
       Get.off(() => const LoginDashboardScreen());
     }

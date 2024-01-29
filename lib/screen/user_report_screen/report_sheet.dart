@@ -32,7 +32,7 @@ class UserReportSheet extends StatelessWidget {
             reasonList: model.reasonList,
             onCheckBoxChange: model.onCheckBoxChange,
             onReasonChange: model.onReasonChange,
-            onSubmitBtnTap: model.onSubmitBtnTap,
+            onSubmitBtnTap: () => model.onSubmitBtnTap(reportId ?? -1),
             fullName:
                 '${Get.arguments[AppRes.reportName]}  ( ${Get.arguments[AppRes.reportAge]} )',
             profileImage: Get.arguments[AppRes.reportImage],

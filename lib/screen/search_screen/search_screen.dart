@@ -18,11 +18,9 @@ class SearchScreen extends StatelessWidget {
       },
       viewModelBuilder: () => SearchScreenViewModel(),
       builder: (context, model, child) {
-        return WillPopScope(
-          onWillPop: () async {
-            model.onBackBtnTap();
-            return false;
-          },
+        return PopScope(
+          onPopInvoked: (didPop) => model.onBackBtnTap(),
+          canPop: false,
           child: Scaffold(
             backgroundColor: ColorRes.white,
             body: Column(

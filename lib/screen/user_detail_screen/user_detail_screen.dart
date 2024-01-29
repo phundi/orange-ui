@@ -51,11 +51,9 @@ class _UserDetailScreenState extends State<UserDetailScreen>
       },
       viewModelBuilder: () => UserDetailScreenViewModel(),
       builder: (context, model, child) {
-        return WillPopScope(
-          onWillPop: () async {
-            model.onBackTap();
-            return true;
-          },
+        return PopScope(
+          onPopInvoked: (didPop) => model.onBackTap(),
+          canPop: true,
           child: Scaffold(
             body: Stack(
               children: [
