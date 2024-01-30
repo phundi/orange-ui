@@ -53,6 +53,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "من خلال الاستمرار في الشراء فإنك توافق على"),
         "bio": MessageLookupByLibrary.simpleMessage("السيرة الذاتية"),
         "block": MessageLookupByLibrary.simpleMessage("حاجز"),
+        "blockedProfiles":
+            MessageLookupByLibrary.simpleMessage("الملفات الشخصية المحظورة"),
         "both": MessageLookupByLibrary.simpleMessage("كلاهما"),
         "boys": MessageLookupByLibrary.simpleMessage("أولاد"),
         "cancel": MessageLookupByLibrary.simpleMessage("يلغي"),
@@ -209,6 +211,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "languagesYouEtc":
             MessageLookupByLibrary.simpleMessage("اللغات التي ستتحدثها"),
         "legal": MessageLookupByLibrary.simpleMessage("قانوني"),
+        "likeProfiles":
+            MessageLookupByLibrary.simpleMessage("مثل الملفات الشخصية"),
         "live": MessageLookupByLibrary.simpleMessage("يعيش"),
         "liveCAp": MessageLookupByLibrary.simpleMessage("يعيش"),
         "liveCap": MessageLookupByLibrary.simpleMessage("يعيش"),
@@ -330,7 +334,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "reverseSwipeWillCostYou":
             MessageLookupByLibrary.simpleMessage("التمرير العكسي سيكلفك"),
         "save": MessageLookupByLibrary.simpleMessage("يحفظ"),
-        "savedProfiles": MessageLookupByLibrary.simpleMessage("Saved Profiles"),
+        "savedProfiles":
+            MessageLookupByLibrary.simpleMessage("الملفات الشخصية المحفوظة"),
         "searching": MessageLookupByLibrary.simpleMessage("يبحث..."),
         "selectAnother": MessageLookupByLibrary.simpleMessage("اختر آخر"),
         "selectDocument": MessageLookupByLibrary.simpleMessage("حدد المستند"),

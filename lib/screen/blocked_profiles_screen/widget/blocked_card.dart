@@ -1,0 +1,124 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:orange_ui/model/user/registration_user.dart';
+import 'package:orange_ui/screen/blocked_profiles_screen/blocked_profiles_screen_view_model.dart';
+import 'package:orange_ui/screen/user_detail_screen/user_detail_screen.dart';
+import 'package:orange_ui/utils/asset_res.dart';
+import 'package:orange_ui/utils/color_res.dart';
+import 'package:orange_ui/utils/const_res.dart';
+import 'package:orange_ui/utils/font_res.dart';
+
+class BlockedCard extends StatelessWidget {
+  final RegistrationUserData userData;
+  final BlockedProfilesScreenViewModel viewModel;
+  final bool isBlocked;
+
+  const BlockedCard(
+      {Key? key,
+      required this.userData,
+      required this.viewModel,
+      required this.isBlocked})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        Get.to(() => const UserDetailScreen(), arguments: userData)
+            ?.then((value) {
+          viewModel.onBackBlockIds(userData);
+        });
+      },
+      child: Container(
+        margin: const EdgeInsets.symmetric(vertical: 2),
+        padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 10),
+        decoration: const BoxDecoration(color: ColorRes.lightGrey2),
+        child: Row(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(50),
+              child: CachedNetworkImage(
+                imageUrl:
+                    '${ConstRes.aImageBaseUrl}${(userData.images ?? []).isEmpty ? '' : ((userData.images ?? []).first.image ?? '')}',
+                width: 40,
+                height: 40,
+                fit: BoxFit.cover,
+                errorWidget: (context, url, error) {
+                  return Image.asset(AssetRes.themeLabel,
+                      height: 40, width: 40);
+                },
+              ),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Flexible(
+                        child: Text(userData.fullname ?? 'Unknown',
+                            style: const TextStyle(
+                              color: ColorRes.darkGrey4,
+                              fontSize: 18,
+                              overflow: TextOverflow.ellipsis,
+                              fontFamily: FontRes.bold,
+                            ),
+                            maxLines: 1),
+                      ),
+                      const SizedBox(width: 3),
+                      Text(
+                        "${userData.age ?? ''}",
+                        style: const TextStyle(
+                            color: ColorRes.darkGrey4,
+                            fontSize: 18,
+                            overflow: TextOverflow.ellipsis),
+                        maxLines: 1,
+                      ),
+                      const SizedBox(width: 3),
+                      userData.isVerified == 2
+                          ? Image.asset(AssetRes.tickMark,
+                              height: 18, width: 18)
+                          : const SizedBox(),
+                    ],
+                  ),
+                  Text(userData.live ?? '',
+                      style: const TextStyle(
+                          color: ColorRes.grey6,
+                          fontSize: 13,
+                          overflow: TextOverflow.ellipsis),
+                      maxLines: 1),
+                ],
+              ),
+            ),
+            const SizedBox(width: 10),
+            TextButton(
+              onPressed: () => viewModel.onUnblockClick(userData),
+              style: ButtonStyle(
+                maximumSize: MaterialStateProperty.all(
+                  const Size(100, 100),
+                ),
+                backgroundColor: MaterialStateProperty.all(
+                  ColorRes.orange3.withOpacity(0.1),
+                ),
+                shape: MaterialStateProperty.all(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+              ),
+              child: const Text(
+                'Unblock',
+                style: TextStyle(
+                  fontFamily: FontRes.bold,
+                  color: ColorRes.orange3,
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}

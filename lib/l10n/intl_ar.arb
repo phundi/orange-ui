@@ -300,5 +300,7 @@
   "liveStreamPriceWillCostYou": "سعر البث المباشر سيكلفك",
   "coinsPerMinutesPleaseConfirmIfYouToContinueOr": "عملات معدنية في الدقيقة ، يرجى تأكيد ما إذا كنت ستستمر أم لا",
   "liveStreamEnded": "انتهى البث المباشر",
-  "savedProfiles": "Saved Profiles"
+  "savedProfiles": "الملفات الشخصية المحفوظة",
+  "likeProfiles": "مثل الملفات الشخصية",
+  "blockedProfiles": "الملفات الشخصية المحظورة"
 }

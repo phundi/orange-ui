@@ -12,7 +12,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:orange_ui/generated/l10n.dart';
-import 'package:orange_ui/screen/chat_screen/chat_screen_view_model.dart';
 import 'package:orange_ui/screen/get_started_screen/get_started_screen.dart';
 import 'package:orange_ui/screen/languages_screen/languages_screen_view_model.dart';
 import 'package:orange_ui/screen/restart_app/restart_app.dart';
@@ -84,20 +83,16 @@ class _MyAppState extends State<MyApp> {
         GlobalCupertinoLocalizations.delegate,
       ],
       builder: (context, child) {
-        return ScrollConfiguration(
-          behavior: MyBehavior(),
-          child: child!,
-        );
+        return ScrollConfiguration(behavior: MyBehavior(), child: child!);
       },
       supportedLocales: S.delegate.supportedLocales,
       locale: Locale(LanguagesScreenViewModel.selectedLanguage),
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        fontFamily: FontRes.regular,
-        primaryColor: ColorRes.orange,
-        splashColor: ColorRes.transparent,
-        highlightColor: ColorRes.transparent,
-      ),
+          fontFamily: FontRes.regular,
+          primaryColor: ColorRes.orange,
+          splashColor: ColorRes.transparent,
+          highlightColor: ColorRes.transparent),
       home: const GetStartedScreen(),
     );
   }
@@ -134,48 +129,37 @@ class _MyAppState extends State<MyApp> {
       importance: Importance.max,
     );
 
-    FirebaseMessaging.onMessage.listen(
-      (RemoteMessage message) {
-        log(' 🔔 Notification Icon ${message.data}');
-        var initializationSettingsAndroid =
-            const AndroidInitializationSettings('@mipmap/ic_launcher');
-        var initializationSettingsIOS = const DarwinInitializationSettings();
-        var initializationSettings = InitializationSettings(
-            android: initializationSettingsAndroid,
-            iOS: initializationSettingsIOS);
-        flutterLocalNotificationsPlugin.initialize(initializationSettings);
-        RemoteNotification? notification = message.notification;
-        AndroidNotification? android = message.notification?.android;
-        AppleNotification? apple = message.notification?.apple;
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      log(' 🔔 Notification Icon ${message.data}');
+      var initializationSettingsAndroid =
+          const AndroidInitializationSettings('@mipmap/ic_launcher');
 
-        if (notification != null &&
-            apple != null &&
-            !ChatScreenViewModel.isScreen) {
-          flutterLocalNotificationsPlugin.show(
-            1,
-            notification.title,
-            notification.body,
-            const NotificationDetails(
-                iOS: DarwinNotificationDetails(
-                    presentSound: true,
-                    presentAlert: true,
-                    presentBadge: true)),
-          );
-        }
-        if (notification != null &&
-            android != null &&
-            !ChatScreenViewModel.isScreen) {
-          flutterLocalNotificationsPlugin.show(
-            1,
-            notification.title,
-            notification.body,
-            NotificationDetails(
-                android: AndroidNotificationDetails(channel.id, channel.name,
-                    channelDescription: channel.description)),
-          );
-        }
-      },
-    );
+      var initializationSettingsIOS = const DarwinInitializationSettings();
+
+      var initializationSettings = InitializationSettings(
+          android: initializationSettingsAndroid,
+          iOS: initializationSettingsIOS);
+
+      flutterLocalNotificationsPlugin.initialize(initializationSettings);
+      RemoteNotification? notification = message.notification;
+      // AndroidNotification? android = message.notification?.android;
+      // AppleNotification? apple = message.notification?.apple;
+
+      flutterLocalNotificationsPlugin.show(
+        1,
+        notification?.title,
+        notification?.body,
+        NotificationDetails(
+          iOS: const DarwinNotificationDetails(
+              presentSound: true, presentAlert: true, presentBadge: true),
+          android: AndroidNotificationDetails(
+            channel.id,
+            channel.name,
+            channelDescription: channel.description,
+          ),
+        ),
+      );
+    });
 
     await flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<

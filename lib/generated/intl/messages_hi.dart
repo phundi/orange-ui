@@ -53,6 +53,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "खरीदारी जारी रखकर आप हमारी सहमति देते हैं"),
         "bio": MessageLookupByLibrary.simpleMessage("जैव"),
         "block": MessageLookupByLibrary.simpleMessage("अवरोध पैदा करना"),
+        "blockedProfiles":
+            MessageLookupByLibrary.simpleMessage("अवरुद्ध प्रोफ़ाइलें"),
         "both": MessageLookupByLibrary.simpleMessage("दोनों"),
         "boys": MessageLookupByLibrary.simpleMessage("लड़के"),
         "cancel": MessageLookupByLibrary.simpleMessage("रद्द करना"),
@@ -211,6 +213,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "languagesYouEtc":
             MessageLookupByLibrary.simpleMessage("आप जो भाषाएँ बोलेंगे"),
         "legal": MessageLookupByLibrary.simpleMessage("कानूनी"),
+        "likeProfiles":
+            MessageLookupByLibrary.simpleMessage("प्रोफ़ाइल की तरह"),
         "live": MessageLookupByLibrary.simpleMessage("रहना"),
         "liveCAp": MessageLookupByLibrary.simpleMessage("रहना"),
         "liveCap": MessageLookupByLibrary.simpleMessage("रहना"),
@@ -334,7 +338,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "reverseSwipeWillCostYou": MessageLookupByLibrary.simpleMessage(
             "रिवर्स स्वाइप आपको महंगा पड़ेगा"),
         "save": MessageLookupByLibrary.simpleMessage("बचाना"),
-        "savedProfiles": MessageLookupByLibrary.simpleMessage("Saved Profiles"),
+        "savedProfiles":
+            MessageLookupByLibrary.simpleMessage("सहेजे गए प्रोफ़ाइल"),
         "searching": MessageLookupByLibrary.simpleMessage("खोज कर..."),
         "selectAnother": MessageLookupByLibrary.simpleMessage("दूसरा चुनें"),
         "selectDocument":

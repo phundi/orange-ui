@@ -3,6 +3,9 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:orange_ui/generated/l10n.dart';
+import 'package:orange_ui/screen/blocked_profiles_screen/blocked_profiles_screen.dart';
+import 'package:orange_ui/screen/like_profiles_screen/like_profiles_screen.dart';
+import 'package:orange_ui/screen/saved_profiles_screen/saved_profiles_screen.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
 import 'package:orange_ui/utils/font_res.dart';
@@ -146,10 +149,27 @@ class OptionsCenterArea extends StatelessWidget {
           ),
         ),
         TopOptionCard(
-          onTap: () {},
+          onTap: () {
+            Get.to(() => const SavedProfilesScreen());
+          },
           image: AssetRes.save,
           title: S.current.savedProfiles,
           savedProfile: true,
+        ),
+        TopOptionCard(
+          onTap: () {
+            Get.to(() => const LikeProfilesScreen());
+          },
+          image: '',
+          title: S.current.likeProfiles,
+          isLikeProfile: true,
+        ),
+        TopOptionCard(
+          onTap: () {
+            Get.to(() => const BlockedProfilesScreen());
+          },
+          image: AssetRes.blockUser,
+          title: S.of(context).blockedProfiles,
         ),
         Padding(
           padding: const EdgeInsets.only(top: 18, bottom: 9),
@@ -279,6 +299,7 @@ class TopOptionCard extends StatelessWidget {
   final String image;
   final String title;
   final bool savedProfile;
+  final bool isLikeProfile;
 
   const TopOptionCard({
     Key? key,
@@ -286,6 +307,7 @@ class TopOptionCard extends StatelessWidget {
     required this.image,
     required this.title,
     this.savedProfile = false,
+    this.isLikeProfile = false,
   }) : super(key: key);
 
   @override
@@ -300,27 +322,42 @@ class TopOptionCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(10), color: ColorRes.grey12),
         child: Row(
           children: [
-            savedProfile
+            isLikeProfile
                 ? Container(
                     height: 25,
                     width: 25,
-                    padding: const EdgeInsets.all(6),
                     margin: const EdgeInsets.symmetric(horizontal: 10),
                     decoration: BoxDecoration(
                         color: ColorRes.orange3.withOpacity(0.1),
                         shape: BoxShape.circle),
-                    child: Image.asset(
-                      image,
+                    child: const Icon(
+                      Icons.favorite,
+                      color: ColorRes.orange3,
+                      size: 17,
                     ),
                   )
-                : Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: Image.asset(
-                      image,
-                      height: 25,
-                      width: 25,
-                    ),
-                  ),
+                : savedProfile
+                    ? Container(
+                        height: 25,
+                        width: 25,
+                        padding: const EdgeInsets.all(6),
+                        margin: const EdgeInsets.symmetric(horizontal: 10),
+                        decoration: BoxDecoration(
+                            color: ColorRes.orange3.withOpacity(0.1),
+                            shape: BoxShape.circle),
+                        child: Image.asset(
+                          image,
+                        ),
+                      )
+                    : Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: Image.asset(
+                          image,
+                          height: 25,
+                          width: 25,
+                          color: ColorRes.orange3,
+                        ),
+                      ),
             Text(
               title,
               style: const TextStyle(

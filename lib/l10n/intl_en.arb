@@ -300,5 +300,7 @@
   "liveStreamPriceWillCostYou": "Live stream price will cost you",
   "coinsPerMinutesPleaseConfirmIfYouToContinueOr": "coins per minutes, Please confirm if you to continue or not",
   "liveStreamEnded": "Live Stream Ended",
-  "savedProfiles": "Saved Profiles"
+  "savedProfiles": "Saved Profiles",
+  "likeProfiles": "Like Profiles",
+  "blockedProfiles": "Blocked Profiles"
 }

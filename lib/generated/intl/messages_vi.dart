@@ -57,6 +57,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Bằng cách tiếp tục mua hàng, bạn đồng ý với chúng tôi"),
         "bio": MessageLookupByLibrary.simpleMessage("SINH HỌC"),
         "block": MessageLookupByLibrary.simpleMessage("Khối"),
+        "blockedProfiles":
+            MessageLookupByLibrary.simpleMessage("Hồ sơ bị chặn"),
         "both": MessageLookupByLibrary.simpleMessage("CẢ HAI"),
         "boys": MessageLookupByLibrary.simpleMessage("NHỮNG CẬU BÉ"),
         "cancel": MessageLookupByLibrary.simpleMessage("Hủy bỏ"),
@@ -217,6 +219,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "languagesYouEtc":
             MessageLookupByLibrary.simpleMessage("NGÔN NGỮ BẠN SẼ NÓI"),
         "legal": MessageLookupByLibrary.simpleMessage("HỢP PHÁP"),
+        "likeProfiles": MessageLookupByLibrary.simpleMessage("Thích hồ sơ"),
         "live": MessageLookupByLibrary.simpleMessage("Sống"),
         "liveCAp": MessageLookupByLibrary.simpleMessage("Sống"),
         "liveCap": MessageLookupByLibrary.simpleMessage("SỐNG"),
@@ -343,7 +346,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "reverseSwipeWillCostYou": MessageLookupByLibrary.simpleMessage(
             "Reverse Swipe sẽ khiến bạn phải trả giá"),
         "save": MessageLookupByLibrary.simpleMessage("CỨU"),
-        "savedProfiles": MessageLookupByLibrary.simpleMessage("Saved Profiles"),
+        "savedProfiles": MessageLookupByLibrary.simpleMessage("Hồ sơ đã lưu"),
         "searching": MessageLookupByLibrary.simpleMessage("Đang tìm kiếm..."),
         "selectAnother": MessageLookupByLibrary.simpleMessage("Chọn cái khác"),
         "selectDocument": MessageLookupByLibrary.simpleMessage("Chọn tài liệu"),

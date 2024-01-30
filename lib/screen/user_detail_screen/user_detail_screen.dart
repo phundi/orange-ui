@@ -51,107 +51,103 @@ class _UserDetailScreenState extends State<UserDetailScreen>
       },
       viewModelBuilder: () => UserDetailScreenViewModel(),
       builder: (context, model, child) {
-        return PopScope(
-          onPopInvoked: (didPop) => model.onBackTap(),
-          canPop: true,
-          child: Scaffold(
-            body: Stack(
-              children: [
-                model.isLoading
-                    ? ShimmerScreen.rectangular(
-                        height: Get.height,
-                        shapeBorder: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(0),
+        return Scaffold(
+          body: Stack(
+            children: [
+              model.isLoading
+                  ? ShimmerScreen.rectangular(
+                      height: Get.height,
+                      shapeBorder: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(0),
+                      ),
+                    )
+                  : model.userData?.images == null ||
+                          model.userData!.images!.isEmpty
+                      ? Container(
+                          height: Get.height,
+                          width: double.infinity,
+                          decoration: const BoxDecoration(
+                            color: ColorRes.lightGrey,
+                          ),
+                          child: Image.asset(AssetRes.imageWarning),
+                        )
+                      : Container(
+                          height: Get.height,
+                          width: Get.width,
+                          color: ColorRes.darkOrange.withOpacity(0.2),
+                          child: CachedNetworkImage(
+                            imageUrl:
+                                '${ConstRes.aImageBaseUrl}${model.userData?.images?[model.selectedImgIndex].image}',
+                            cacheKey:
+                                '${ConstRes.aImageBaseUrl}${model.userData?.images?[model.selectedImgIndex].image}',
+                            fit: BoxFit.cover,
+                            errorWidget: (context, error, stackTrace) {
+                              return Container(
+                                decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color:
+                                        ColorRes.darkOrange.withOpacity(0.2)),
+                                child: Image.asset(
+                                  AssetRes.themeLabel,
+                                ),
+                              );
+                            },
+                          ),
                         ),
-                      )
-                    : model.userData?.images == null ||
-                            model.userData!.images!.isEmpty
-                        ? Container(
-                            height: Get.height,
-                            width: double.infinity,
-                            decoration: const BoxDecoration(
-                              color: ColorRes.lightGrey,
-                            ),
-                            child: Image.asset(AssetRes.imageWarning),
+              Column(
+                children: [
+                  TopBar(
+                      userData: model.userData,
+                      onBackTap: model.onBackTap,
+                      onMoreBtnTap: model.onMoreBtnTap,
+                      fullName: model.userData?.fullname,
+                      age: model.userData?.age != null
+                          ? '${model.userData?.age}'
+                          : '',
+                      isVerified:
+                          model.userData?.isVerified == 2 ? true : false,
+                      blockUnblock: model.blockUnBlock,
+                      moreInfo: model.moreInfo),
+                  Expanded(
+                    child: !model.moreInfo
+                        ? ImageSelectionArea(
+                            selectedImgIndex: model.selectedImgIndex,
+                            imageList: model.userData?.images ?? [],
+                            like: model.like,
+                            onImgSelect: model.onImageSelect,
+                            onJoinBtnTap: model.onJoinBtnTap,
+                            onMoreInfoTap: () {
+                              model.moreInfo = true;
+                              _controller.forward();
+                              setState(() {});
+                            },
+                            onLikeBtnTap: model.onLikeBtnTap,
+                            userId: model.userData?.id,
+                            userData: model.userData,
                           )
-                        : Container(
-                            height: Get.height,
-                            width: Get.width,
-                            color: ColorRes.darkOrange.withOpacity(0.2),
-                            child: CachedNetworkImage(
-                              imageUrl:
-                                  '${ConstRes.aImageBaseUrl}${model.userData?.images?[model.selectedImgIndex].image}',
-                              cacheKey:
-                                  '${ConstRes.aImageBaseUrl}${model.userData?.images?[model.selectedImgIndex].image}',
-                              fit: BoxFit.cover,
-                              errorWidget: (context, error, stackTrace) {
-                                return Container(
-                                  decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color:
-                                          ColorRes.darkOrange.withOpacity(0.2)),
-                                  child: Image.asset(
-                                    AssetRes.themeLabel,
-                                  ),
-                                );
+                        : SlideTransition(
+                            position: _animation,
+                            transformHitTests: true,
+                            child: DetailPage(
+                              userData: model.userData,
+                              save: model.save,
+                              onHideBtnTap: () {
+                                _controller.reverse().then((value) {
+                                  model.moreInfo = false;
+                                  setState(() {});
+                                });
                               },
+                              onSaveTap: model.onSaveTap,
+                              onChatWithTap: model.onChatWithBtnTap,
+                              onShareWithTap: model.onShareProfileBtnTap,
+                              onReportTap: model.onReportTap,
+                              distance: model.distance,
                             ),
                           ),
-                Column(
-                  children: [
-                    TopBar(
-                        userData: model.userData,
-                        onBackTap: model.onBackTap,
-                        onMoreBtnTap: model.onMoreBtnTap,
-                        fullName: model.userData?.fullname,
-                        age: model.userData?.age != null
-                            ? '${model.userData?.age}'
-                            : '',
-                        isVerified:
-                            model.userData?.isVerified == 2 ? true : false,
-                        blockUnblock: model.blockUnBlock,
-                        moreInfo: model.moreInfo),
-                    Expanded(
-                      child: !model.moreInfo
-                          ? ImageSelectionArea(
-                              selectedImgIndex: model.selectedImgIndex,
-                              imageList: model.userData?.images ?? [],
-                              like: model.like,
-                              onImgSelect: model.onImageSelect,
-                              onJoinBtnTap: model.onJoinBtnTap,
-                              onMoreInfoTap: () {
-                                model.moreInfo = true;
-                                _controller.forward();
-                                setState(() {});
-                              },
-                              onLikeBtnTap: model.onLikeBtnTap,
-                              userId: model.userData?.id,
-                              userData: model.userData,
-                            )
-                          : SlideTransition(
-                              position: _animation,
-                              transformHitTests: true,
-                              child: DetailPage(
-                                userData: model.userData,
-                                save: model.save,
-                                onHideBtnTap: () {
-                                  _controller.reverse().then((value) {
-                                    model.moreInfo = false;
-                                    setState(() {});
-                                  });
-                                },
-                                onSaveTap: model.onSaveTap,
-                                onChatWithTap: model.onChatWithBtnTap,
-                                onShareWithTap: model.onShareProfileBtnTap,
-                                onReportTap: model.onReportTap,
-                                distance: model.distance,
-                              ),
-                            ),
-                    )
-                  ],
-                ),
-              ],
-            ),
+                  )
+                ],
+              ),
+            ],
           ),
         );
       },

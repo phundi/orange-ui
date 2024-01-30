@@ -547,7 +547,7 @@ class ApiProvider {
     return FetchRedeemRequest.fromJson(jsonDecode(response.body));
   }
 
-  Future<UserBlockList> userBlockList(int? blockProfileId) async {
+  Future<UserBlockList> updateBlockList(int? blockProfileId) async {
     var userData = await PrefService.getUserData();
     String? blockProfile = userData?.blockedUsers;
     List<int> blockProfileList = [];
@@ -623,24 +623,24 @@ class ApiProvider {
   Future pushNotification(
       {required String title,
       required String body,
+      required Map<String, dynamic> data,
       required String token}) async {
     await http.post(
       Uri.parse(Urls.aNotificationUrl),
       headers: {
-        'Authorization': 'key=${ConstRes.authorisationKey}',
+        Urls.aApiKeyName: ConstRes.apiKey,
         'content-type': 'application/json'
       },
-      body: json.encode(
-        {
+      body: json.encode({
+        'message': {
           'notification': {
             'title': title,
             'body': body,
-            "sound": "default",
-            "badge": "1"
           },
-          'to': '/token/$token',
+          'token': token,
+          'data': data
         },
-      ),
+      }),
     );
   }
 
@@ -659,5 +659,32 @@ class ApiProvider {
             'https://api.agora.io/dev/v1/channel/user/$agoraAppId/$channelName'),
         headers: {'Authorization': 'Basic $authToken'});
     return Agora.fromJson(jsonDecode(response.body));
+  }
+
+  Future<SearchUser> fetchSavedProfiles() async {
+    http.Response response = await http.post(
+        Uri.parse(Urls.aFetchSavedProfiles),
+        headers: {Urls.aApiKeyName: ConstRes.apiKey},
+        body: {Urls.aUserIdName: PrefService.userId.toString()});
+    // print(response.body);
+    return SearchUser.fromJson(jsonDecode(response.body));
+  }
+
+  Future<SearchUser> fetchLikedProfiles() async {
+    http.Response response = await http.post(
+        Uri.parse(Urls.aFetchLikedProfiles),
+        headers: {Urls.aApiKeyName: ConstRes.apiKey},
+        body: {Urls.aUserIdName: PrefService.userId.toString()});
+    // print(response.body);
+    return SearchUser.fromJson(jsonDecode(response.body));
+  }
+
+  Future<SearchUser> fetchBlockedProfiles() async {
+    http.Response response = await http.post(
+        Uri.parse(Urls.aFetchBlockedProfiles),
+        headers: {Urls.aApiKeyName: ConstRes.apiKey},
+        body: {Urls.aUserIdName: PrefService.userId.toString()});
+    // print(response.body);
+    return SearchUser.fromJson(jsonDecode(response.body));
   }
 }

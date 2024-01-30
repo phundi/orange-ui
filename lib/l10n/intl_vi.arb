@@ -300,5 +300,7 @@
   "liveStreamPriceWillCostYou": "Giá phát trực tiếp sẽ khiến bạn phải trả giá",
   "coinsPerMinutesPleaseConfirmIfYouToContinueOr": "xu mỗi phút, Vui lòng xác nhận nếu bạn tiếp tục hay không",
   "liveStreamEnded": "Luồng trực tiếp đã kết thúc",
-  "savedProfiles": "Saved Profiles"
+  "savedProfiles": "Hồ sơ đã lưu",
+  "likeProfiles": "Thích hồ sơ",
+  "blockedProfiles": "Hồ sơ bị chặn"
 }

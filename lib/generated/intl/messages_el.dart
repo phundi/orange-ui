@@ -57,6 +57,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Συνεχίζοντας την αγορά συμφωνείτε με μας"),
         "bio": MessageLookupByLibrary.simpleMessage("BIO"),
         "block": MessageLookupByLibrary.simpleMessage("ΟΙΚΟΔΟΜΙΚΟ ΤΕΤΡΑΓΩΝΟ"),
+        "blockedProfiles":
+            MessageLookupByLibrary.simpleMessage("Αποκλεισμένα προφίλ"),
         "both": MessageLookupByLibrary.simpleMessage("ΚΑΙ ΤΑ ΔΥΟ"),
         "boys": MessageLookupByLibrary.simpleMessage("ΑΓΟΡΙΑ"),
         "cancel": MessageLookupByLibrary.simpleMessage("Ματαίωση"),
@@ -226,6 +228,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "languagesYouEtc":
             MessageLookupByLibrary.simpleMessage("ΓΛΩΣΣΕΣ ΠΟΥ ΘΑ ΜΙΛΑΣ"),
         "legal": MessageLookupByLibrary.simpleMessage("ΝΟΜΙΚΟΣ"),
+        "likeProfiles": MessageLookupByLibrary.simpleMessage("Όπως τα προφίλ"),
         "live": MessageLookupByLibrary.simpleMessage("Ζω"),
         "liveCAp": MessageLookupByLibrary.simpleMessage("Ζω"),
         "liveCap": MessageLookupByLibrary.simpleMessage("ΖΩ"),
@@ -353,7 +356,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "reverseSwipeWillCostYou": MessageLookupByLibrary.simpleMessage(
             "Το Reverse Swipe θα σας κοστίσει"),
         "save": MessageLookupByLibrary.simpleMessage("ΑΠΟΘΗΚΕΥΣΕΤΕ"),
-        "savedProfiles": MessageLookupByLibrary.simpleMessage("Saved Profiles"),
+        "savedProfiles":
+            MessageLookupByLibrary.simpleMessage("Αποθηκευμένα Προφίλ"),
         "searching": MessageLookupByLibrary.simpleMessage("Ερευνητικός..."),
         "selectAnother": MessageLookupByLibrary.simpleMessage("Επιλέξτε άλλο"),
         "selectDocument":

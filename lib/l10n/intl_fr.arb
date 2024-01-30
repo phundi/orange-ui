@@ -300,5 +300,7 @@
   "liveStreamPriceWillCostYou": "Le prix de la diffusion en direct vous coûtera",
   "coinsPerMinutesPleaseConfirmIfYouToContinueOr": "pièces par minute, veuillez confirmer si vous continuez ou non",
   "liveStreamEnded": "Diffusion en direct terminée",
-  "savedProfiles": "Saved Profiles"
+  "savedProfiles": "Profils enregistrés",
+  "likeProfiles": "J'aime les profils",
+  "blockedProfiles": "Profils bloqués"
 }

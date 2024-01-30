@@ -56,6 +56,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Продолжая покупку, вы соглашаетесь с нашими"),
         "bio": MessageLookupByLibrary.simpleMessage("БИО"),
         "block": MessageLookupByLibrary.simpleMessage("Блокировать"),
+        "blockedProfiles":
+            MessageLookupByLibrary.simpleMessage("Заблокированные профили"),
         "both": MessageLookupByLibrary.simpleMessage("ОБА"),
         "boys": MessageLookupByLibrary.simpleMessage("МАЛЬЧИКИ"),
         "cancel": MessageLookupByLibrary.simpleMessage("Отмена"),
@@ -224,6 +226,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "languagesYouEtc": MessageLookupByLibrary.simpleMessage(
             "ЯЗЫКИ, НА КОТОРЫХ ВЫ БУДЕТЕ ГОВОРИТЬ"),
         "legal": MessageLookupByLibrary.simpleMessage("ЮРИДИЧЕСКИЙ"),
+        "likeProfiles":
+            MessageLookupByLibrary.simpleMessage("Нравятся профили"),
         "live": MessageLookupByLibrary.simpleMessage("Жить"),
         "liveCAp": MessageLookupByLibrary.simpleMessage("Жить"),
         "liveCap": MessageLookupByLibrary.simpleMessage("ЖИТЬ"),
@@ -352,7 +356,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "reverseSwipeWillCostYou": MessageLookupByLibrary.simpleMessage(
             "Обратный свайп будет стоить вам"),
         "save": MessageLookupByLibrary.simpleMessage("СОХРАНЯТЬ"),
-        "savedProfiles": MessageLookupByLibrary.simpleMessage("Saved Profiles"),
+        "savedProfiles":
+            MessageLookupByLibrary.simpleMessage("Сохраненные профили"),
         "searching": MessageLookupByLibrary.simpleMessage("Идет поиск..."),
         "selectAnother":
             MessageLookupByLibrary.simpleMessage("Выберите другой"),

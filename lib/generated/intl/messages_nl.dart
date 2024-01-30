@@ -54,6 +54,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Door verder te gaan met de aankoop gaat u akkoord met onze"),
         "bio": MessageLookupByLibrary.simpleMessage("BIO"),
         "block": MessageLookupByLibrary.simpleMessage("Blok"),
+        "blockedProfiles":
+            MessageLookupByLibrary.simpleMessage("Geblokkeerde profielen"),
         "both": MessageLookupByLibrary.simpleMessage("BEIDE"),
         "boys": MessageLookupByLibrary.simpleMessage("JONGENS"),
         "cancel": MessageLookupByLibrary.simpleMessage("Annuleren"),
@@ -216,6 +218,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "languagesYouEtc":
             MessageLookupByLibrary.simpleMessage("TALEN DIE JE ZULT SPREKEN"),
         "legal": MessageLookupByLibrary.simpleMessage("WETTELIJK"),
+        "likeProfiles": MessageLookupByLibrary.simpleMessage("Zoals profielen"),
         "live": MessageLookupByLibrary.simpleMessage("Live"),
         "liveCAp": MessageLookupByLibrary.simpleMessage("Live"),
         "liveCap": MessageLookupByLibrary.simpleMessage("LIVE"),
@@ -341,7 +344,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "reverseSwipeWillCostYou":
             MessageLookupByLibrary.simpleMessage("Reverse Swipe kost je geld"),
         "save": MessageLookupByLibrary.simpleMessage("REDDEN"),
-        "savedProfiles": MessageLookupByLibrary.simpleMessage("Saved Profiles"),
+        "savedProfiles":
+            MessageLookupByLibrary.simpleMessage("Opgeslagen profielen"),
         "searching": MessageLookupByLibrary.simpleMessage("Zoeken..."),
         "selectAnother":
             MessageLookupByLibrary.simpleMessage("Selecteer een andere"),

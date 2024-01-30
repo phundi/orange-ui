@@ -300,5 +300,7 @@
   "liveStreamPriceWillCostYou": "Prisen for direktesending vil koste deg",
   "coinsPerMinutesPleaseConfirmIfYouToContinueOr": "mynter per minutt, Vennligst bekreft om du vil fortsette eller ikke",
   "liveStreamEnded": "Direktesending avsluttet",
-  "savedProfiles": "Saved Profiles"
+  "savedProfiles": "Lagrede profiler",
+  "likeProfiles": "Som profiler",
+  "blockedProfiles": "Blokkerte profiler"
 }

@@ -55,6 +55,7 @@ class AssetRes {
   static const String emptyEmoji = "${icons}empty_emoji.png";
   static const String personLocationPin = "${icons}person_location_pin.png";
   static const String placeholder = "${icons}placeholder.png";
+  static const String blockUser = "${icons}block_user.png";
 
   ///______________________________ common images ______________________________///
 

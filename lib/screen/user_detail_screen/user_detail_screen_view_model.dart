@@ -222,7 +222,7 @@ class UserDetailScreenViewModel extends BaseViewModel {
 
   Future<void> blockUnblockApi({int? blockProfileId}) async {
     Loader().lottieLoader();
-    await ApiProvider().userBlockList(blockProfileId);
+    await ApiProvider().updateBlockList(blockProfileId);
     onBackTap();
   }
 
@@ -230,10 +230,12 @@ class UserDetailScreenViewModel extends BaseViewModel {
     await ApiProvider().updateLikedProfile(userData?.id);
     like = !like;
     notifyListeners();
-    like == true
+    like != true
         ? null
-        : await ApiProvider()
-            .notifyLikeUser(userId: userData?.id ?? 0, type: 1);
+        : await ApiProvider().notifyLikeUser(
+            userId: userData?.id ?? 0,
+            type: 1,
+          );
   }
 
   void onSaveTap() {

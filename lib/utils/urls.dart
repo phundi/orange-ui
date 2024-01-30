@@ -55,7 +55,14 @@ class Urls {
       '${ConstRes.aBaseUrl}getRandomProfile';
   static const String aNotifyLikedUser = '${ConstRes.aBaseUrl}notifyLikedUser';
   static const String aLogoutUser = '${ConstRes.aBaseUrl}logOutUser';
-  static const String aNotificationUrl = 'https://fcm.googleapis.com/fcm/send';
+  static const String aNotificationUrl =
+      '${ConstRes.aBaseUrl}pushNotificationToSingleUser';
+  static const String aFetchSavedProfiles =
+      '${ConstRes.aBaseUrl}fetchSavedProfiles';
+  static const String aFetchLikedProfiles =
+      '${ConstRes.aBaseUrl}fetchLikedProfiles';
+  static const String aFetchBlockedProfiles =
+      '${ConstRes.aBaseUrl}fetchBlockedProfiles';
 
   ///------------------------ Params ------------------------///
   static const String aApiKeyName = 'apikey';

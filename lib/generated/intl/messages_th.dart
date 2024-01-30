@@ -55,6 +55,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "การซื้อต่อถือว่าคุณยอมรับของเรา"),
         "bio": MessageLookupByLibrary.simpleMessage("ไบโอ"),
         "block": MessageLookupByLibrary.simpleMessage("ปิดกั้น"),
+        "blockedProfiles":
+            MessageLookupByLibrary.simpleMessage("โปรไฟล์ที่ถูกบล็อก"),
         "both": MessageLookupByLibrary.simpleMessage("ทั้งคู่"),
         "boys": MessageLookupByLibrary.simpleMessage("เด็กชาย"),
         "cancel": MessageLookupByLibrary.simpleMessage("ยกเลิก"),
@@ -206,6 +208,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "languagesYouEtc":
             MessageLookupByLibrary.simpleMessage("ภาษาที่คุณจะพูด"),
         "legal": MessageLookupByLibrary.simpleMessage("ถูกกฎหมาย"),
+        "likeProfiles": MessageLookupByLibrary.simpleMessage("ชอบโปรไฟล์"),
         "live": MessageLookupByLibrary.simpleMessage("สด"),
         "liveCAp": MessageLookupByLibrary.simpleMessage("สด"),
         "liveCap": MessageLookupByLibrary.simpleMessage("สด"),
@@ -329,7 +332,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "reverseSwipeWillCostYou": MessageLookupByLibrary.simpleMessage(
             "การปัดแบบย้อนกลับจะทำให้คุณเสียค่าใช้จ่าย"),
         "save": MessageLookupByLibrary.simpleMessage("บันทึก"),
-        "savedProfiles": MessageLookupByLibrary.simpleMessage("Saved Profiles"),
+        "savedProfiles":
+            MessageLookupByLibrary.simpleMessage("โปรไฟล์ที่บันทึกไว้"),
         "searching": MessageLookupByLibrary.simpleMessage("กำลังค้นหา..."),
         "selectAnother":
             MessageLookupByLibrary.simpleMessage("เลือกรายการอื่น"),

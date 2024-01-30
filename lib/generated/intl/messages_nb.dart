@@ -53,6 +53,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ved å fortsette kjøpet godtar du vår"),
         "bio": MessageLookupByLibrary.simpleMessage("BIO"),
         "block": MessageLookupByLibrary.simpleMessage("Blokkere"),
+        "blockedProfiles":
+            MessageLookupByLibrary.simpleMessage("Blokkerte profiler"),
         "both": MessageLookupByLibrary.simpleMessage("BÅDE"),
         "boys": MessageLookupByLibrary.simpleMessage("GUTTER"),
         "cancel": MessageLookupByLibrary.simpleMessage("Avbryt"),
@@ -210,6 +212,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "languagesYouEtc":
             MessageLookupByLibrary.simpleMessage("SPRÅK DU SKAL SNAKE"),
         "legal": MessageLookupByLibrary.simpleMessage("LOVLIG"),
+        "likeProfiles": MessageLookupByLibrary.simpleMessage("Som profiler"),
         "live": MessageLookupByLibrary.simpleMessage("Bo"),
         "liveCAp": MessageLookupByLibrary.simpleMessage("Bo"),
         "liveCap": MessageLookupByLibrary.simpleMessage("BO"),
@@ -336,7 +339,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "reverseSwipeWillCostYou":
             MessageLookupByLibrary.simpleMessage("Omvendt sveip vil koste deg"),
         "save": MessageLookupByLibrary.simpleMessage("LAGRE"),
-        "savedProfiles": MessageLookupByLibrary.simpleMessage("Saved Profiles"),
+        "savedProfiles":
+            MessageLookupByLibrary.simpleMessage("Lagrede profiler"),
         "searching": MessageLookupByLibrary.simpleMessage("Søker..."),
         "selectAnother": MessageLookupByLibrary.simpleMessage("Velg en annen"),
         "selectDocument": MessageLookupByLibrary.simpleMessage("Velg Dokument"),

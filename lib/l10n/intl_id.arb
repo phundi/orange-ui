@@ -300,5 +300,7 @@
   "liveStreamPriceWillCostYou": "Harga streaming langsung akan dikenakan biaya",
   "coinsPerMinutesPleaseConfirmIfYouToContinueOr": "koin per menit, Harap konfirmasi apakah Anda ingin melanjutkan atau tidak",
   "liveStreamEnded": "Streaming Langsung Berakhir",
-  "savedProfiles": "Saved Profiles"
+  "savedProfiles": "Profil Tersimpan",
+  "likeProfiles": "Seperti Profil",
+  "blockedProfiles": "Profil yang Diblokir"
 }

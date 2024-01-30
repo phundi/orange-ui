@@ -300,5 +300,7 @@
   "liveStreamPriceWillCostYou": "ราคาสตรีมสดจะทำให้คุณเสียค่าใช้จ่าย",
   "coinsPerMinutesPleaseConfirmIfYouToContinueOr": "เหรียญต่อนาที โปรดยืนยันว่าจะดำเนินการต่อหรือไม่",
   "liveStreamEnded": "สตรีมสดสิ้นสุดลง",
-  "savedProfiles": "Saved Profiles"
+  "savedProfiles": "โปรไฟล์ที่บันทึกไว้",
+  "likeProfiles": "ชอบโปรไฟล์",
+  "blockedProfiles": "โปรไฟล์ที่ถูกบล็อก"
 }

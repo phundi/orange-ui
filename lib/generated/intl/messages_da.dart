@@ -54,6 +54,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ved at fortsætte købet accepterer du vores"),
         "bio": MessageLookupByLibrary.simpleMessage("BIO"),
         "block": MessageLookupByLibrary.simpleMessage("Blok"),
+        "blockedProfiles":
+            MessageLookupByLibrary.simpleMessage("Blokerede profiler"),
         "both": MessageLookupByLibrary.simpleMessage("BEGGE"),
         "boys": MessageLookupByLibrary.simpleMessage("DRENGE"),
         "cancel": MessageLookupByLibrary.simpleMessage("Afbestille"),
@@ -212,6 +214,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "languagesYouEtc":
             MessageLookupByLibrary.simpleMessage("SPROG DU VIL TALE"),
         "legal": MessageLookupByLibrary.simpleMessage("GYLDIGE"),
+        "likeProfiles":
+            MessageLookupByLibrary.simpleMessage("Ligesom profiler"),
         "live": MessageLookupByLibrary.simpleMessage("Direkte"),
         "liveCAp": MessageLookupByLibrary.simpleMessage("Direkte"),
         "liveCap": MessageLookupByLibrary.simpleMessage("DIREKTE"),
@@ -336,7 +340,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "reverseSwipeWillCostYou":
             MessageLookupByLibrary.simpleMessage("Omvendt swipe vil koste dig"),
         "save": MessageLookupByLibrary.simpleMessage("GEMME"),
-        "savedProfiles": MessageLookupByLibrary.simpleMessage("Saved Profiles"),
+        "savedProfiles": MessageLookupByLibrary.simpleMessage("Gemte profiler"),
         "searching": MessageLookupByLibrary.simpleMessage("Søger..."),
         "selectAnother": MessageLookupByLibrary.simpleMessage("Vælg en anden"),
         "selectDocument": MessageLookupByLibrary.simpleMessage("Vælg Dokument"),

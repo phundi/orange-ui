@@ -300,5 +300,7 @@
   "liveStreamPriceWillCostYou": "라이브 스트림 가격은 비용이 듭니다",
   "coinsPerMinutesPleaseConfirmIfYouToContinueOr": "분당 동전, 계속할지 여부를 확인하십시오",
   "liveStreamEnded": "라이브 스트림 종료됨",
-  "savedProfiles": "Saved Profiles"
+  "savedProfiles": "저장된 프로필",
+  "likeProfiles": "프로필처럼",
+  "blockedProfiles": "차단된 프로필"
 }

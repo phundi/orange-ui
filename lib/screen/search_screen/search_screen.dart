@@ -18,42 +18,38 @@ class SearchScreen extends StatelessWidget {
       },
       viewModelBuilder: () => SearchScreenViewModel(),
       builder: (context, model, child) {
-        return PopScope(
-          onPopInvoked: (didPop) => model.onBackBtnTap(),
-          canPop: false,
-          child: Scaffold(
-            backgroundColor: ColorRes.white,
-            body: Column(
-              children: [
-                SearchBarArea(
-                  searchController: model.searchController,
-                  selectedTab: model.selectedTab,
-                  tabList: model.tabList,
-                  onBackBtnTap: model.onBackBtnTap,
-                  onSearchBtnTap: model.onSearchingUser,
-                  onLocationTap: model.onLocationTap,
-                  onTabSelect: model.onTabSelect,
+        return Scaffold(
+          backgroundColor: ColorRes.white,
+          body: Column(
+            children: [
+              SearchBarArea(
+                searchController: model.searchController,
+                selectedTab: model.selectedTab,
+                tabList: model.tabList,
+                onBackBtnTap: model.onBackBtnTap,
+                onSearchBtnTap: model.onSearchingUser,
+                onLocationTap: model.onLocationTap,
+                onTabSelect: model.onTabSelect,
+              ),
+              const SizedBox(height: 11),
+              model.isLoading
+                  ? Expanded(child: Loader().lottieWidget())
+                  : UserList(
+                      controller: model.userScrollController,
+                      userList: model.searchUsers,
+                      onUserTap: model.onUserTap,
+                    ),
+              const SizedBox(
+                height: 10,
+              ),
+              if (model.bannerAd != null)
+                Container(
+                  alignment: Alignment.center,
+                  width: model.bannerAd?.size.width.toDouble(),
+                  height: model.bannerAd?.size.height.toDouble(),
+                  child: AdWidget(ad: model.bannerAd!),
                 ),
-                const SizedBox(height: 11),
-                model.isLoading
-                    ? Expanded(child: Loader().lottieWidget())
-                    : UserList(
-                        controller: model.userScrollController,
-                        userList: model.searchUsers,
-                        onUserTap: model.onUserTap,
-                      ),
-                const SizedBox(
-                  height: 10,
-                ),
-                if (model.bannerAd != null)
-                  Container(
-                    alignment: Alignment.center,
-                    width: model.bannerAd?.size.width.toDouble(),
-                    height: model.bannerAd?.size.height.toDouble(),
-                    child: AdWidget(ad: model.bannerAd!),
-                  ),
-              ],
-            ),
+            ],
           ),
         );
       },

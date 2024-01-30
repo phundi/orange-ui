@@ -300,5 +300,7 @@
   "liveStreamPriceWillCostYou": "Стоимость прямой трансляции будет стоить вам",
   "coinsPerMinutesPleaseConfirmIfYouToContinueOr": "монет в минуту, Пожалуйста, подтвердите, если вы хотите продолжить или нет",
   "liveStreamEnded": "Прямая трансляция завершена",
-  "savedProfiles": "Saved Profiles"
+  "savedProfiles": "Сохраненные профили",
+  "likeProfiles": "Нравятся профили",
+  "blockedProfiles": "Заблокированные профили"
 }

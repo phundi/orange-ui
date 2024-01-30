@@ -55,6 +55,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Dengan melanjutkan pembelian, Anda setuju dengan kami"),
         "bio": MessageLookupByLibrary.simpleMessage("BIO"),
         "block": MessageLookupByLibrary.simpleMessage("Memblokir"),
+        "blockedProfiles":
+            MessageLookupByLibrary.simpleMessage("Profil yang Diblokir"),
         "both": MessageLookupByLibrary.simpleMessage("KEDUANYA"),
         "boys": MessageLookupByLibrary.simpleMessage("LAKI-LAKI"),
         "cancel": MessageLookupByLibrary.simpleMessage("Membatalkan"),
@@ -214,6 +216,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "languagesYouEtc":
             MessageLookupByLibrary.simpleMessage("BAHASA ANDA AKAN BERBICARA"),
         "legal": MessageLookupByLibrary.simpleMessage("HUKUM"),
+        "likeProfiles": MessageLookupByLibrary.simpleMessage("Seperti Profil"),
         "live": MessageLookupByLibrary.simpleMessage("Hidup"),
         "liveCAp": MessageLookupByLibrary.simpleMessage("Hidup"),
         "liveCap": MessageLookupByLibrary.simpleMessage("HIDUP"),
@@ -340,7 +343,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "reverseSwipeWillCostYou": MessageLookupByLibrary.simpleMessage(
             "Reverse Swipe akan dikenakan biaya"),
         "save": MessageLookupByLibrary.simpleMessage("MENYIMPAN"),
-        "savedProfiles": MessageLookupByLibrary.simpleMessage("Saved Profiles"),
+        "savedProfiles":
+            MessageLookupByLibrary.simpleMessage("Profil Tersimpan"),
         "searching": MessageLookupByLibrary.simpleMessage("Mencari..."),
         "selectAnother":
             MessageLookupByLibrary.simpleMessage("Pilih yang lain"),

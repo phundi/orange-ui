@@ -18,6 +18,7 @@ class SearchUser {
   SearchUser.fromJson(dynamic json) {
     _status = json['status'];
     _message = json['message'];
+
     if (json['data'] != null) {
       _data = [];
       json['data'].forEach((v) {

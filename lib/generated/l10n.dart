@@ -3070,6 +3070,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Like Profiles`
+  String get likeProfiles {
+    return Intl.message(
+      'Like Profiles',
+      name: 'likeProfiles',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Blocked Profiles`
+  String get blockedProfiles {
+    return Intl.message(
+      'Blocked Profiles',
+      name: 'blockedProfiles',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

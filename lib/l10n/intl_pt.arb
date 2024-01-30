@@ -300,5 +300,7 @@
   "liveStreamPriceWillCostYou": "O preço da transmissão ao vivo custará caro",
   "coinsPerMinutesPleaseConfirmIfYouToContinueOr": "moedas por minuto, por favor, confirme se você deseja continuar ou não",
   "liveStreamEnded": "Transmissão ao vivo encerrada",
-  "savedProfiles": "Saved Profiles"
+  "savedProfiles": "Perfis salvos",
+  "likeProfiles": "Curtir perfis",
+  "blockedProfiles": "Perfis bloqueados"
 }

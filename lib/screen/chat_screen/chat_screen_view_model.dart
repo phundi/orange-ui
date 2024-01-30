@@ -280,7 +280,7 @@ class ChatScreenViewModel extends BaseViewModel {
   }
 
   Future<void> blockUser() async {
-    ApiProvider().userBlockList(conversation?.user?.userid);
+    ApiProvider().updateBlockList(conversation?.user?.userid);
     await db
         .collection(FirebaseRes.userChatList)
         .doc(registrationUserData?.identity)
@@ -314,7 +314,7 @@ class ChatScreenViewModel extends BaseViewModel {
   }
 
   Future<void> unBlockUser() async {
-    ApiProvider().userBlockList(conversation?.user?.userid);
+    ApiProvider().updateBlockList(conversation?.user?.userid);
     await db
         .collection(FirebaseRes.userChatList)
         .doc(registrationUserData?.identity)
@@ -891,6 +891,7 @@ class ChatScreenViewModel extends BaseViewModel {
                 : msgType == FirebaseRes.video
                     ? FirebaseRes.videoText
                     : '$textMessage',
+            data: {'NotificationType': 'Chat', 'NotificationID': '1'},
             token: '${receiverUserData?.deviceToken}')
         : null;
   }

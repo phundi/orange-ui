@@ -300,5 +300,7 @@
   "liveStreamPriceWillCostYou": "Η τιμή της ζωντανής ροής θα σας κοστίσει",
   "coinsPerMinutesPleaseConfirmIfYouToContinueOr": "κέρματα ανά λεπτό, επιβεβαιώστε εάν θέλετε να συνεχίσετε ή όχι",
   "liveStreamEnded": "Η ζωντανή ροή έληξε",
-  "savedProfiles": "Saved Profiles"
+  "savedProfiles": "Αποθηκευμένα Προφίλ",
+  "likeProfiles": "Όπως τα προφίλ",
+  "blockedProfiles": "Αποκλεισμένα προφίλ"
 }

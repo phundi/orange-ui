@@ -300,5 +300,7 @@
   "liveStreamPriceWillCostYou": "Canlı yayın fiyatı size mal olacak",
   "coinsPerMinutesPleaseConfirmIfYouToContinueOr": "dakika başına jeton, lütfen devam edip etmeyeceğinizi onaylayın",
   "liveStreamEnded": "Canlı Yayın Sona Erdi",
-  "savedProfiles": "Saved Profiles"
+  "savedProfiles": "Kayıtlı Profiller",
+  "likeProfiles": "Profilleri Beğen",
+  "blockedProfiles": "Engellenen Profiller"
 }

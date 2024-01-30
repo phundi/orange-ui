@@ -300,5 +300,7 @@
   "liveStreamPriceWillCostYou": "直播价格会让你付出代价",
   "coinsPerMinutesPleaseConfirmIfYouToContinueOr": "每分钟硬币，请确认是否继续",
   "liveStreamEnded": "直播结束",
-  "savedProfiles": "Saved Profiles"
+  "savedProfiles": "保存的配置文件",
+  "likeProfiles": "喜欢个人资料",
+  "blockedProfiles": "被阻止的个人资料"
 }

@@ -56,6 +56,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Satın almaya devam ederek şunları kabul etmiş olursunuz:"),
         "bio": MessageLookupByLibrary.simpleMessage("BİYO"),
         "block": MessageLookupByLibrary.simpleMessage("Engellemek"),
+        "blockedProfiles":
+            MessageLookupByLibrary.simpleMessage("Engellenen Profiller"),
         "both": MessageLookupByLibrary.simpleMessage("İKİSİ BİRDEN"),
         "boys": MessageLookupByLibrary.simpleMessage("ERKEKLER"),
         "cancel": MessageLookupByLibrary.simpleMessage("İptal etmek"),
@@ -210,6 +212,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "languagesYouEtc":
             MessageLookupByLibrary.simpleMessage("KONUŞACAĞINIZ DİLLER"),
         "legal": MessageLookupByLibrary.simpleMessage("YASAL"),
+        "likeProfiles":
+            MessageLookupByLibrary.simpleMessage("Profilleri Beğen"),
         "live": MessageLookupByLibrary.simpleMessage("Canlı"),
         "liveCAp": MessageLookupByLibrary.simpleMessage("Canlı"),
         "liveCap": MessageLookupByLibrary.simpleMessage("CANLI"),
@@ -334,7 +338,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "reverseSwipeWillCostYou": MessageLookupByLibrary.simpleMessage(
             "Ters Kaydırma size mal olacak"),
         "save": MessageLookupByLibrary.simpleMessage("KAYDETMEK"),
-        "savedProfiles": MessageLookupByLibrary.simpleMessage("Saved Profiles"),
+        "savedProfiles":
+            MessageLookupByLibrary.simpleMessage("Kayıtlı Profiller"),
         "searching": MessageLookupByLibrary.simpleMessage("Aranıyor..."),
         "selectAnother": MessageLookupByLibrary.simpleMessage("başka seç"),
         "selectDocument": MessageLookupByLibrary.simpleMessage("Belge Seç"),

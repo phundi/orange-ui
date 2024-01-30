@@ -300,5 +300,7 @@
   "liveStreamPriceWillCostYou": "लाइव स्ट्रीम की कीमत आपको महंगी पड़ेगी",
   "coinsPerMinutesPleaseConfirmIfYouToContinueOr": "सिक्के प्रति मिनट, कृपया पुष्टि करें कि आपको जारी रखना है या नहीं",
   "liveStreamEnded": "लाइव स्ट्रीम समाप्त",
-  "savedProfiles": "Saved Profiles"
+  "savedProfiles": "सहेजे गए प्रोफ़ाइल",
+  "likeProfiles": "प्रोफ़ाइल की तरह",
+  "blockedProfiles": "अवरुद्ध प्रोफ़ाइलें"
 }

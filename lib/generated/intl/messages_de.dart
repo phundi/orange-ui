@@ -54,6 +54,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Indem Sie den Kauf fortsetzen, stimmen Sie unserem zu"),
         "bio": MessageLookupByLibrary.simpleMessage("BIO"),
         "block": MessageLookupByLibrary.simpleMessage("Block"),
+        "blockedProfiles":
+            MessageLookupByLibrary.simpleMessage("Blockierte Profile"),
         "both": MessageLookupByLibrary.simpleMessage("BEIDE"),
         "boys": MessageLookupByLibrary.simpleMessage("JUNGEN"),
         "cancel": MessageLookupByLibrary.simpleMessage("Stornieren"),
@@ -216,6 +218,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "languagesYouEtc": MessageLookupByLibrary.simpleMessage(
             "Sprachen, die Sie sprechen werden"),
         "legal": MessageLookupByLibrary.simpleMessage("RECHTLICH"),
+        "likeProfiles": MessageLookupByLibrary.simpleMessage("Like-Profile"),
         "live": MessageLookupByLibrary.simpleMessage("Live"),
         "liveCAp": MessageLookupByLibrary.simpleMessage("Live"),
         "liveCap": MessageLookupByLibrary.simpleMessage("LIVE"),
@@ -343,7 +346,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "reverseSwipeWillCostYou":
             MessageLookupByLibrary.simpleMessage("Reverse Swipe kostet Sie"),
         "save": MessageLookupByLibrary.simpleMessage("SPEICHERN"),
-        "savedProfiles": MessageLookupByLibrary.simpleMessage("Saved Profiles"),
+        "savedProfiles":
+            MessageLookupByLibrary.simpleMessage("Gespeicherte Profile"),
         "searching": MessageLookupByLibrary.simpleMessage("Suche..."),
         "selectAnother":
             MessageLookupByLibrary.simpleMessage("Wählen Sie ein anderes aus"),

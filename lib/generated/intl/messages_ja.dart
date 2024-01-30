@@ -52,6 +52,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("購入を続けると、次のことに同意したことになります。"),
         "bio": MessageLookupByLibrary.simpleMessage("バイオ"),
         "block": MessageLookupByLibrary.simpleMessage("ブロック"),
+        "blockedProfiles":
+            MessageLookupByLibrary.simpleMessage("ブロックされたプロファイル"),
         "both": MessageLookupByLibrary.simpleMessage("両方"),
         "boys": MessageLookupByLibrary.simpleMessage("ボーイズ"),
         "cancel": MessageLookupByLibrary.simpleMessage("キャンセル"),
@@ -192,6 +194,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("ストリーミング中に話す言語.."),
         "languagesYouEtc": MessageLookupByLibrary.simpleMessage("あなたが話す言語"),
         "legal": MessageLookupByLibrary.simpleMessage("法的"),
+        "likeProfiles": MessageLookupByLibrary.simpleMessage("プロフィールが好き"),
         "live": MessageLookupByLibrary.simpleMessage("ライブ"),
         "liveCAp": MessageLookupByLibrary.simpleMessage("ライブ"),
         "liveCap": MessageLookupByLibrary.simpleMessage("ライブ"),
@@ -305,7 +308,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "reverseSwipeWillCostYou":
             MessageLookupByLibrary.simpleMessage("逆スワイプには費用がかかります"),
         "save": MessageLookupByLibrary.simpleMessage("保存"),
-        "savedProfiles": MessageLookupByLibrary.simpleMessage("Saved Profiles"),
+        "savedProfiles": MessageLookupByLibrary.simpleMessage("保存されたプロファイル"),
         "searching": MessageLookupByLibrary.simpleMessage("検索中..."),
         "selectAnother": MessageLookupByLibrary.simpleMessage("別のを選択してください"),
         "selectDocument": MessageLookupByLibrary.simpleMessage("ドキュメントの選択"),

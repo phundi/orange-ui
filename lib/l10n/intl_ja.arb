@@ -300,5 +300,7 @@
   "liveStreamPriceWillCostYou": "ライブストリームの料金がかかります",
   "coinsPerMinutesPleaseConfirmIfYouToContinueOr": "1分あたりのコイン、続行するかどうかを確認してください",
   "liveStreamEnded": "ライブストリームが終了しました",
-  "savedProfiles": "Saved Profiles"
+  "savedProfiles": "保存されたプロファイル",
+  "likeProfiles": "プロフィールが好き",
+  "blockedProfiles": "ブロックされたプロファイル"
 }

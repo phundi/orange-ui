@@ -300,5 +300,7 @@
   "liveStreamPriceWillCostYou": "De prijs van de livestream zal u kosten",
   "coinsPerMinutesPleaseConfirmIfYouToContinueOr": "munten per minuut, gelieve te bevestigen of u door wilt gaan of niet",
   "liveStreamEnded": "Livestream beëindigd",
-  "savedProfiles": "Saved Profiles"
+  "savedProfiles": "Opgeslagen profielen",
+  "likeProfiles": "Zoals profielen",
+  "blockedProfiles": "Geblokkeerde profielen"
 }

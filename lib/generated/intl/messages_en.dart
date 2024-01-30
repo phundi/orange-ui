@@ -54,6 +54,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "By continuing the purchase you agree to our "),
         "bio": MessageLookupByLibrary.simpleMessage("BIO"),
         "block": MessageLookupByLibrary.simpleMessage("Block"),
+        "blockedProfiles":
+            MessageLookupByLibrary.simpleMessage("Blocked Profiles"),
         "both": MessageLookupByLibrary.simpleMessage("BOTH"),
         "boys": MessageLookupByLibrary.simpleMessage("BOYS"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
@@ -209,6 +211,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "languagesYouEtc":
             MessageLookupByLibrary.simpleMessage("LANGUAGES YOU WILL SPEAK"),
         "legal": MessageLookupByLibrary.simpleMessage("LEGAL"),
+        "likeProfiles": MessageLookupByLibrary.simpleMessage("Like Profiles"),
         "live": MessageLookupByLibrary.simpleMessage("Live"),
         "liveCAp": MessageLookupByLibrary.simpleMessage("Live"),
         "liveCap": MessageLookupByLibrary.simpleMessage("LIVE"),
