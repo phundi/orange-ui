@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_badger/flutter_app_badger.dart';
 import 'package:get/get.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
 import 'package:orange_ui/generated/l10n.dart';
@@ -21,6 +22,7 @@ class NotificationScreenViewModel extends BaseViewModel {
   List<UserNotificationData>? userNotification = [];
 
   void init() {
+    FlutterAppBadger.removeBadge();
     getUserNotificationApiCall();
     fetchScrollData();
   }

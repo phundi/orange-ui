@@ -44,16 +44,18 @@ class VerificationScreenViewModel extends BaseViewModel {
   }
 
   void onTakePhotoTap() async {
-    final PermissionStatus status;
-    status = await Permission.camera.request();
+    if (Platform.isAndroid) {
+      final PermissionStatus status;
+      status = await Permission.camera.request();
 
-    var allAccepted = true;
-    if (status != PermissionStatus.granted) {
-      allAccepted = false;
-    }
-    if (!allAccepted) {
-      openAppSettings();
-      return;
+      var allAccepted = true;
+      if (status != PermissionStatus.granted) {
+        allAccepted = false;
+      }
+      if (!allAccepted) {
+        openAppSettings();
+        return;
+      }
     }
     fullNameFocus.unfocus();
     final ImagePicker picker = ImagePicker();

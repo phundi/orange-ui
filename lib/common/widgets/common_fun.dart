@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:intl/intl.dart';
 import 'package:orange_ui/service/pref_service.dart';
+import 'package:orange_ui/utils/firebase_res.dart';
 
 class CommonFun {
   static Future<void> interstitialAd(
@@ -82,5 +83,24 @@ class CommonFun {
       return time;
     }
     return time;
+  }
+
+  static String getConversationID(
+      {required int? myId, required int? otherUserId}) {
+    String conversationID = '${myId}_$otherUserId';
+    List<String> v = conversationID.split('_');
+    v.sort((a, b) {
+      return int.parse(a).compareTo(int.parse(b));
+    });
+    conversationID = v.join('_');
+    return conversationID;
+  }
+
+  static getLastMsg({required String msgType, required String msg}) {
+    return msgType == FirebaseRes.image
+        ? FirebaseRes.imageText
+        : msgType == FirebaseRes.video
+            ? FirebaseRes.videoText
+            : msg;
   }
 }

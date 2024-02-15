@@ -16,10 +16,12 @@ class BottomDiamondShopViewModel extends BaseViewModel {
 
   void init() {
     const MethodChannel('bubbly_camera').setMethodCallHandler((call) async {
+      print(call);
       if (call.arguments == true) {
         addCoinApiCall(coinValue);
       } else {
-        SnackBarWidget().snackBarWidget(S.current.failedPayment);
+        Get.back();
+        SnackBarWidget.snackBar(message: S.current.failedPayment);
       }
       return;
     });
@@ -43,9 +45,11 @@ class BottomDiamondShopViewModel extends BaseViewModel {
     });
   }
 
-  void onDiamondPurchase(GetDiamondPackData? data) {
-    BubblyCamera.inAppPurchase(
+  void onDiamondPurchase(GetDiamondPackData? data) async {
+    Loader().lottieLoader();
+    await BubblyCamera.inAppPurchase(
         Platform.isAndroid ? data?.androidProductId : data?.iosProductId);
+    Get.back();
     coinValue = data?.amount;
   }
 }

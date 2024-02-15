@@ -29,8 +29,9 @@ class ProfileScreenViewModel extends BaseViewModel {
 
   void profileScreenApiCall() async {
     isLoading = true;
-    ApiProvider().getProfile(userID: PrefService.userId).then((value) {
+    ApiProvider().getProfile(userID: PrefService.userId).then((value) async {
       userData = value?.data;
+      await PrefService.saveUser(value?.data);
       isLoading = false;
       notifyListeners();
     });

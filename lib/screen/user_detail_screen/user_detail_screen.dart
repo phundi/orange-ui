@@ -66,9 +66,8 @@ class _UserDetailScreenState extends State<UserDetailScreen>
                       ? Container(
                           height: Get.height,
                           width: double.infinity,
-                          decoration: const BoxDecoration(
-                            color: ColorRes.lightGrey,
-                          ),
+                          decoration:
+                              const BoxDecoration(color: ColorRes.lightGrey),
                           child: Image.asset(AssetRes.imageWarning),
                         )
                       : Container(
@@ -83,65 +82,40 @@ class _UserDetailScreenState extends State<UserDetailScreen>
                             fit: BoxFit.cover,
                             errorWidget: (context, error, stackTrace) {
                               return Container(
-                                decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color:
-                                        ColorRes.darkOrange.withOpacity(0.2)),
-                                child: Image.asset(
-                                  AssetRes.themeLabel,
-                                ),
-                              );
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color:
+                                          ColorRes.darkOrange.withOpacity(0.2)),
+                                  child: Image.asset(AssetRes.themeLabel));
                             },
                           ),
                         ),
               Column(
                 children: [
                   TopBar(
-                      userData: model.userData,
-                      onBackTap: model.onBackTap,
-                      onMoreBtnTap: model.onMoreBtnTap,
-                      fullName: model.userData?.fullname,
-                      age: model.userData?.age != null
-                          ? '${model.userData?.age}'
-                          : '',
-                      isVerified:
-                          model.userData?.isVerified == 2 ? true : false,
-                      blockUnblock: model.blockUnBlock,
-                      moreInfo: model.moreInfo),
+                    model: model,
+                  ),
                   Expanded(
                     child: !model.moreInfo
                         ? ImageSelectionArea(
-                            selectedImgIndex: model.selectedImgIndex,
-                            imageList: model.userData?.images ?? [],
-                            like: model.like,
-                            onImgSelect: model.onImageSelect,
-                            onJoinBtnTap: model.onJoinBtnTap,
+                            model: model,
                             onMoreInfoTap: () {
                               model.moreInfo = true;
                               _controller.forward();
                               setState(() {});
                             },
-                            onLikeBtnTap: model.onLikeBtnTap,
-                            userId: model.userData?.id,
-                            userData: model.userData,
                           )
                         : SlideTransition(
                             position: _animation,
                             transformHitTests: true,
                             child: DetailPage(
-                              userData: model.userData,
-                              save: model.save,
+                              model: model,
                               onHideBtnTap: () {
                                 _controller.reverse().then((value) {
                                   model.moreInfo = false;
                                   setState(() {});
                                 });
                               },
-                              onSaveTap: model.onSaveTap,
-                              onChatWithTap: model.onChatWithBtnTap,
-                              onShareWithTap: model.onShareProfileBtnTap,
-                              onReportTap: model.onReportTap,
-                              distance: model.distance,
                             ),
                           ),
                   )

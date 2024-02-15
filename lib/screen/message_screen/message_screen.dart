@@ -50,8 +50,8 @@ class MessageScreen extends StatelessWidget {
                           itemCount: model.userList.length,
                           physics: const BouncingScrollPhysics(),
                           itemBuilder: (context, index) {
-                            Conversation? conversation = model.userList[index];
-                            ChatUser? chatUser = conversation?.user;
+                            Conversation conversation = model.userList[index];
+                            ChatUser? chatUser = conversation.user;
                             return InkWell(
                               onTap: () {
                                 model.onUserTap(conversation);
@@ -62,7 +62,7 @@ class MessageScreen extends StatelessWidget {
                               child: UserCard(
                                 name: chatUser?.username ?? '',
                                 age: chatUser?.age ?? '',
-                                msg: conversation!.lastMsg!.isEmpty
+                                msg: conversation.lastMsg!.isEmpty
                                     ? ''
                                     : conversation.lastMsg,
                                 time: conversation.time.toString(),

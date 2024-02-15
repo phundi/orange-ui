@@ -24,6 +24,12 @@ class SavedProfilesScreen extends StatelessWidget {
             child: Column(
               children: [
                 TopBarArea(title2: S.of(context).savedProfiles),
+                Container(
+                  height: 0.5,
+                  margin: const EdgeInsets.symmetric(horizontal: 7),
+                  width: MediaQuery.of(context).size.width,
+                  color: ColorRes.grey5,
+                ),
                 Expanded(
                   child: viewModel.isLoading
                       ? Loader().lottieWidget()

@@ -270,7 +270,8 @@ class UserDetailScreenViewModel extends BaseViewModel {
                     true
                 ? true
                 : false,
-        conversationId: '${value?.identity}${userData?.identity}',
+        conversationId: CommonFun.getConversationID(
+            myId: value?.id, otherUserId: userData?.id),
         deletedId: '',
         time: DateTime.now().millisecondsSinceEpoch.toDouble(),
         isDeleted: false,
@@ -279,7 +280,7 @@ class UserDetailScreenViewModel extends BaseViewModel {
         newMsg: '',
         user: chatUser,
       );
-      Get.to(() => const ChatScreen(), arguments: conversation)?.then((value) {
+      Get.to(() => ChatScreen(conversation: conversation))?.then((value) {
         registrationUserApiCall();
       });
     });

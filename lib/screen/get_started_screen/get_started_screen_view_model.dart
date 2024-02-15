@@ -1,8 +1,5 @@
 import 'dart:io';
 
-import 'package:app_tracking_transparency/app_tracking_transparency.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
@@ -24,9 +21,6 @@ class GetStartedScreenViewModel extends BaseViewModel {
   int screenIndex = 0;
 
   void init() {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      initPlugin();
-    });
     getPref();
     settingApiCall();
   }
@@ -75,31 +69,6 @@ class GetStartedScreenViewModel extends BaseViewModel {
       PrefService.androidInterstitialAd = value.appdata?.admobInt ?? '';
       notifyListeners();
     });
-  }
-
-  Future<void> initPlugin() async {
-    try {
-      final TrackingStatus status =
-          await AppTrackingTransparency.trackingAuthorizationStatus;
-      notifyListeners();
-      if (status == TrackingStatus.notDetermined) {
-        await AppTrackingTransparency.requestTrackingAuthorization();
-        notifyListeners();
-      }
-    } on PlatformException {
-      notifyListeners();
-    }
-    await AppTrackingTransparency.getAdvertisingIdentifier();
-  }
-
-  Future<bool> onBack() async {
-    if (screenIndex != 0) {
-      screenIndex--;
-      notifyListeners();
-      return false;
-    } else {
-      return true;
-    }
   }
 
   Future<void> screen1NextTap() async {

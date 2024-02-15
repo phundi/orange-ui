@@ -47,7 +47,6 @@ class EditProfileScreen extends StatelessWidget {
                             : SingleChildScrollView(
                                 keyboardDismissBehavior:
                                     ScrollViewKeyboardDismissBehavior.onDrag,
-                                physics: const BouncingScrollPhysics(),
                                 child: Column(
                                   children: [
                                     const SizedBox(height: 16),
@@ -56,9 +55,7 @@ class EditProfileScreen extends StatelessWidget {
                                       onImgRemove: model.onImageRemove,
                                       onAddBtnTap: model.onImageAdd,
                                     ),
-                                    TextFieldsArea(
-                                      model: model,
-                                    ),
+                                    TextFieldsArea(model: model),
                                   ],
                                 ),
                               ),

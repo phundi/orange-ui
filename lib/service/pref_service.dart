@@ -96,7 +96,7 @@ class PrefService {
     RegistrationUserData? registrationUserData = await getUserData();
     db
         .collection(FirebaseRes.userChatList)
-        .doc(registrationUserData?.identity)
+        .doc('${registrationUserData?.id}')
         .collection(FirebaseRes.userList)
         .withConverter(
           fromFirestore: Conversation.fromFirestore,
@@ -109,14 +109,12 @@ class PrefService {
       for (var element in value.docs) {
         db
             .collection(FirebaseRes.userChatList)
-            .doc(element.data().user?.userIdentity)
+            .doc("${element.data().user?.userid}")
             .collection(FirebaseRes.userList)
-            .doc(registrationUserData?.identity)
+            .doc('${registrationUserData?.id}')
             .withConverter(
               fromFirestore: Conversation.fromFirestore,
-              toFirestore: (Conversation value, options) {
-                return value.toFirestore();
-              },
+              toFirestore: (Conversation value, options) => value.toFirestore(),
             )
             .get()
             .then((value) {
@@ -129,9 +127,9 @@ class PrefService {
           user?.city = registrationUserData?.live ?? '';
           db
               .collection(FirebaseRes.userChatList)
-              .doc(element.data().user?.userIdentity)
+              .doc('${element.data().user?.userid}')
               .collection(FirebaseRes.userList)
-              .doc(registrationUserData?.identity)
+              .doc('${registrationUserData?.id}')
               .update({FirebaseRes.user: user?.toJson()});
         });
       }

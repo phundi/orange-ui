@@ -20,4 +20,4 @@ class ConstRes {
 ///_____________________________ Image Quality _______________________///
 const double maxWidth = 720;
 const double maxHeight = 720;
-const int quality = 40;
+const int quality = 100;

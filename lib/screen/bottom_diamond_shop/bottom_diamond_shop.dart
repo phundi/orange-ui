@@ -24,31 +24,21 @@ class BottomDiamondShop extends StatelessWidget {
         return BackdropFilter(
           filter: ImageFilter.blur(sigmaY: 3, sigmaX: 3),
           child: ClipRRect(
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(25),
-              topRight: Radius.circular(25),
-            ),
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(25)),
             child: BackdropFilter(
               filter: ImageFilter.blur(
-                sigmaY: 10,
-                sigmaX: 10,
-                tileMode: TileMode.mirror,
-              ),
+                  sigmaY: 10, sigmaX: 10, tileMode: TileMode.mirror),
               child: Stack(
                 children: [
                   Container(
-                    width: Get.width,
-                    color: ColorRes.black.withOpacity(0.3),
-                  ),
+                      width: Get.width, color: ColorRes.black.withOpacity(0.3)),
                   Container(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 12, vertical: 20),
                     width: Get.width,
                     decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(25),
-                        topRight: Radius.circular(25),
-                      ),
+                      borderRadius:
+                          BorderRadius.vertical(top: Radius.circular(25)),
                     ),
                     child: Column(
                       children: [
@@ -105,10 +95,8 @@ class BottomDiamondShop extends StatelessWidget {
                                     const Spacer(),
                                     InkWell(
                                       borderRadius: BorderRadius.circular(30),
-                                      onTap: () {
-                                        model.onDiamondPurchase(
-                                            model.diamondPriceList?[index]);
-                                      },
+                                      onTap: () => model.onDiamondPurchase(
+                                          model.diamondPriceList?[index]),
                                       child: Container(
                                         width: 131,
                                         height: 35,

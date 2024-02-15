@@ -288,4 +288,8 @@ class EditProfileScreenViewModel extends BaseViewModel {
     youtubeController.dispose();
     super.dispose();
   }
+
+  void onTextFieldChange(String value) {
+    notifyListeners();
+  }
 }

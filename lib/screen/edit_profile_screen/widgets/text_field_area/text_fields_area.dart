@@ -1,29 +1,23 @@
+import 'dart:convert';
+import 'dart:math';
+
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:flutter/services.dart';
 import 'package:orange_ui/common/widgets/drop_down_box.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/screen/edit_profile_screen/edit_profile_screen_view_model.dart';
 import 'package:orange_ui/screen/edit_profile_screen/widgets/interest_list.dart';
-import 'package:orange_ui/screen/edit_profile_screen/widgets/text_field_area/text_field_controller.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
 import 'package:orange_ui/utils/font_res.dart';
 
-const kTextFieldFontStyle = TextStyle(
-  color: ColorRes.dimGrey3,
-  fontSize: 14,
-);
-
 class TextFieldsArea extends StatelessWidget {
   final EditProfileScreenViewModel model;
 
-  TextFieldsArea({
+  const TextFieldsArea({
     Key? key,
     required this.model,
   }) : super(key: key);
-
-  final ProfileTextFieldController controller =
-      Get.put(ProfileTextFieldController());
 
   @override
   Widget build(BuildContext context) {
@@ -33,170 +27,59 @@ class TextFieldsArea extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 10),
-          Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: Text(
-              S.current.fullNameCap,
-              style: const TextStyle(
-                color: ColorRes.darkGrey3,
-                fontSize: 15,
-                fontFamily: FontRes.extraBold,
-              ),
-            ),
+          ExpandedTextFieldCustom(
+            controller: model.fullNameController,
+            error: model.fullNameError,
+            hint: S.current.enterFullName,
+            model: model,
+            focusNode: model.fullNameFocus,
+            title: S.current.fullName,
+            isExpand: false,
           ),
-          _textField(
-              controller: model.fullNameController,
-              focusNode: model.fullNameFocus,
-              error: model.fullNameError,
-              hint: S.current.enterFullName),
-          const SizedBox(height: 10),
-          Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: Obx(
-              () => RichText(
-                text: TextSpan(
-                  children: [
-                    TextSpan(
-                      text: S.current.bio,
-                      style: const TextStyle(
-                        color: ColorRes.darkGrey3,
-                        fontSize: 15,
-                        fontFamily: FontRes.extraBold,
-                      ),
-                    ),
-                    TextSpan(
-                      text: " (${S.current.optional})",
-                      style: const TextStyle(
-                        color: ColorRes.dimGrey2,
-                        fontSize: 14,
-                        fontFamily: FontRes.bold,
-                      ),
-                    ),
-                    TextSpan(
-                      text: " (${controller.bio.value.length}/100)",
-                      style: const TextStyle(
-                        color: ColorRes.dimGrey2,
-                        fontSize: 14,
-                        fontFamily: FontRes.bold,
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
-          ),
-          Container(
-            height: 55,
-            decoration: BoxDecoration(
-              color: ColorRes.lightGrey2,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: TextField(
+          ExpandedTextFieldCustom(
               controller: model.bioController,
+              error: model.bioError,
+              hint: model.bioError == '' ? S.current.enterBio : model.bioError,
+              model: model,
               focusNode: model.bioFocus,
-              onTap: model.onAllScreenTap,
-              maxLines: null,
-              minLines: null,
-              expands: true,
-              textInputAction: TextInputAction.next,
+              height: 65,
               maxLength: 100,
-              onChanged: controller.onBioChange,
-              style: kTextFieldFontStyle,
-              textCapitalization: TextCapitalization.sentences,
-              decoration: InputDecoration(
-                hintText:
-                    model.bioError == '' ? S.current.enterBio : model.bioError,
-                hintStyle: TextStyle(
-                  color:
-                      model.bioError == "" ? ColorRes.dimGrey2 : ColorRes.red,
-                ),
-                border: InputBorder.none,
-                contentPadding:
-                    const EdgeInsets.only(bottom: 10, left: 10, top: 9),
-                counterText: "",
-              ),
-            ),
+              title: S.current.bio,
+              optional:
+                  ' (${S.current.optional}) (${utf8.encode(model.bioController.text).length}/100})',
+              isExpand: true),
+          ExpandedTextFieldCustom(
+            controller: model.aboutController,
+            height: 160,
+            focusNode: model.aboutFocus,
+            model: model,
+            error: model.aboutError,
+            hint: model.aboutError == ''
+                ? S.current.enterAbout
+                : model.aboutError,
+            maxLength: 300,
+            title: S.current.about,
+            optional:
+                ' (${utf8.encode(model.aboutController.text).length}/300})',
+            isExpand: true,
           ),
-          const SizedBox(height: 10),
-          Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: Obx(
-              () => RichText(
-                text: TextSpan(
-                  children: [
-                    TextSpan(
-                      text: S.current.about,
-                      style: const TextStyle(
-                        color: ColorRes.darkGrey3,
-                        fontSize: 15,
-                        fontFamily: FontRes.extraBold,
-                      ),
-                    ),
-                    TextSpan(
-                      text: " (${controller.about.value.length}/300)",
-                      style: const TextStyle(
-                        color: ColorRes.dimGrey2,
-                        fontSize: 14,
-                        fontFamily: FontRes.bold,
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
-          ),
-          Container(
-            height: 100,
-            decoration: BoxDecoration(
-              color: ColorRes.lightGrey2,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: TextField(
-              controller: model.aboutController,
-              focusNode: model.aboutFocus,
-              onTap: model.onAllScreenTap,
-              textInputAction: TextInputAction.next,
-              maxLines: null,
-              minLines: null,
-              expands: true,
-              textCapitalization: TextCapitalization.sentences,
-              maxLength: 300,
-              onChanged: controller.onAboutChange,
-              style: kTextFieldFontStyle,
-              decoration: InputDecoration(
-                hintText: model.aboutError == ''
-                    ? S.current.enterAbout
-                    : model.aboutError,
-                hintStyle: TextStyle(
-                  color:
-                      model.aboutError == "" ? ColorRes.dimGrey2 : ColorRes.red,
-                ),
-                border: InputBorder.none,
-                contentPadding:
-                    const EdgeInsets.only(bottom: 10, left: 10, top: 9),
-                counterText: "",
-              ),
-            ),
-          ),
-          const SizedBox(height: 10),
-          _textView(
-              title: S.current.whereDoYouLive,
-              optional: ' (${S.current.optional})'),
-          _textField(
+          ExpandedTextFieldCustom(
               controller: model.addressController,
               focusNode: model.addressFocus,
               error: model.addressError,
-              hint: S.current.enterAddress),
-          const SizedBox(height: 10),
-          _textView(title: S.current.age, optional: ''),
-          _textField(
+              hint: S.current.enterAddress,
+              model: model,
+              optional: ' (${S.current.optional})',
+              title: S.current.whereDoYouLive),
+          ExpandedTextFieldCustom(
               controller: model.ageController,
               focusNode: model.ageFocus,
               error: model.ageError,
               hint: S.current.enterAge,
-              keyBoardType: TextInputType.phone),
-          const SizedBox(height: 10),
-          _textView(title: S.current.gender, optional: ''),
+              model: model,
+              title: S.current.age,
+              keyboardType: TextInputType.number),
+          RichTextCustom(title: S.current.gender),
           Stack(
             children: [
               Column(
@@ -236,20 +119,29 @@ class TextFieldsArea extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 10),
-                  _textView(title: S.current.instagram, optional: ''),
-                  socialLinkTextField(
+                  ExpandedTextFieldCustom(
                       controller: model.instagramController,
+                      error: '',
+                      hint: '',
+                      model: model,
+                      title: S.current.instagram,
                       focusNode: model.instagramFocus),
                   const SizedBox(height: 10),
-                  _textView(title: S.current.facebook, optional: ''),
-                  socialLinkTextField(
+                  ExpandedTextFieldCustom(
                       controller: model.facebookController,
+                      error: '',
+                      hint: '',
+                      model: model,
+                      title: S.current.facebook,
                       focusNode: model.facebookFocus),
                   const SizedBox(height: 10),
-                  _textView(title: S.current.youtube, optional: ''),
-                  socialLinkTextField(
+                  ExpandedTextFieldCustom(
                       controller: model.youtubeController,
-                      focusNode: model.youtubeFocus),
+                      error: '',
+                      hint: '',
+                      model: model,
+                      title: S.current.youtube,
+                      focusNode: model.youtubeFocus)
                 ],
               ),
               model.showDropdown
@@ -286,93 +178,179 @@ class TextFieldsArea extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: 47),
+          SizedBox(height: AppBar().preferredSize.height),
         ],
       ),
     );
   }
+}
 
-  Widget _textView({required String title, required String optional}) {
+class ExpandedTextFieldCustom extends StatelessWidget {
+  final TextEditingController controller;
+  final String error;
+  final String hint;
+  final EditProfileScreenViewModel model;
+  final FocusNode focusNode;
+  final double? height;
+  final int? maxLength;
+  final String title;
+  final String? optional;
+  final bool isExpand;
+  final TextInputType keyboardType;
+
+  const ExpandedTextFieldCustom(
+      {Key? key,
+      required this.controller,
+      required this.error,
+      required this.hint,
+      required this.model,
+      required this.focusNode,
+      this.height,
+      this.maxLength,
+      required this.title,
+      this.optional,
+      this.isExpand = false,
+      this.keyboardType = TextInputType.name})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        RichTextCustom(title: title, optional: optional),
+        SizedBox(
+          height: height,
+          child: TextField(
+              controller: controller,
+              focusNode: focusNode,
+              keyboardType: keyboardType,
+              decoration: InputDecoration(
+                  contentPadding: const EdgeInsets.all(10),
+                  filled: true,
+                  fillColor: ColorRes.lightGrey2,
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                      borderSide: const BorderSide(
+                          color: ColorRes.transparent, width: 0.0)),
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                      borderSide: const BorderSide(
+                          color: ColorRes.transparent, width: 0.0)),
+                  enabledBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                          color: ColorRes.transparent, width: 0.0),
+                      borderRadius: BorderRadius.circular(10)),
+                  hintText: error == '' ? hint : error,
+                  hintStyle: TextStyle(
+                      color: error == "" ? ColorRes.dimGrey2 : ColorRes.red),
+                  counter: null,
+                  counterText: ''),
+              maxLines: isExpand ? null : 1,
+              minLines: isExpand ? null : 1,
+              expands: isExpand,
+              textCapitalization: TextCapitalization.sentences,
+              maxLength: maxLength,
+              onChanged: model.onTextFieldChange,
+              style: const TextStyle(color: ColorRes.dimGrey3, fontSize: 14),
+              inputFormatters: isExpand
+                  ? [_Utf8LengthLimitingTextInputFormatter(maxLength ?? 0)]
+                  : null,
+              cursorHeight: 15,
+              cursorColor: ColorRes.veryDarkGrey,
+              onTap: model.onAllScreenTap,
+              textAlignVertical: TextAlignVertical.top),
+        ),
+        const SizedBox(height: 10),
+      ],
+    );
+  }
+}
+
+class RichTextCustom extends StatelessWidget {
+  final String title;
+  final String? optional;
+
+  const RichTextCustom({Key? key, required this.title, this.optional})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.all(5.0),
-        child: RichText(
-          text: TextSpan(
-            children: [
-              TextSpan(
-                text: title,
-                style: const TextStyle(
-                  color: ColorRes.darkGrey3,
-                  fontSize: 15,
-                  fontFamily: FontRes.extraBold,
-                ),
+      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2.0),
+      child: RichText(
+        text: TextSpan(
+          children: [
+            TextSpan(
+              text: title,
+              style: const TextStyle(
+                color: ColorRes.darkGrey3,
+                fontSize: 15,
+                fontFamily: FontRes.extraBold,
               ),
-              TextSpan(
-                text: optional,
-                style: const TextStyle(
-                  color: ColorRes.dimGrey2,
-                  fontSize: 14,
-                  fontFamily: FontRes.bold,
-                ),
-              )
-            ],
-          ),
-        ));
-  }
-
-  Widget socialLinkTextField({
-    required TextEditingController controller,
-    required FocusNode focusNode,
-  }) {
-    return Container(
-      height: 40,
-      decoration: BoxDecoration(
-        color: ColorRes.lightGrey2,
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: TextField(
-        controller: controller,
-        focusNode: focusNode,
-        onTap: model.onAllScreenTap,
-        style: const TextStyle(
-          color: ColorRes.dimGrey3,
-          fontSize: 14,
-        ),
-        decoration: const InputDecoration(
-          border: InputBorder.none,
-          contentPadding: EdgeInsets.only(bottom: 10, left: 10),
+            ),
+            TextSpan(
+              text: optional,
+              style: const TextStyle(
+                color: ColorRes.dimGrey2,
+                fontSize: 14,
+                fontFamily: FontRes.bold,
+              ),
+            )
+          ],
         ),
       ),
     );
   }
+}
 
-  Widget _textField(
-      {required TextEditingController controller,
-      required FocusNode focusNode,
-      required String error,
-      required String hint,
-      TextInputType? keyBoardType}) {
-    return Container(
-      height: 40,
-      decoration: BoxDecoration(
-        color: ColorRes.lightGrey2,
-        borderRadius: BorderRadius.circular(10),
+class _Utf8LengthLimitingTextInputFormatter extends TextInputFormatter {
+  _Utf8LengthLimitingTextInputFormatter(this.maxLength)
+      : assert(maxLength == -1 || maxLength > 0);
+
+  final int maxLength;
+
+  @override
+  TextEditingValue formatEditUpdate(
+    TextEditingValue oldValue,
+    TextEditingValue newValue,
+  ) {
+    if (maxLength > 0 && bytesLength(newValue.text) > maxLength) {
+      // If already at the maximum and tried to enter even more, keep the old value.
+      if (bytesLength(oldValue.text) == maxLength) {
+        return oldValue;
+      }
+      return truncate(newValue, maxLength);
+    }
+    return newValue;
+  }
+
+  static TextEditingValue truncate(TextEditingValue value, int maxLength) {
+    var newValue = '';
+    if (bytesLength(value.text) > maxLength) {
+      var length = 0;
+
+      value.text.characters.takeWhile((char) {
+        var nbBytes = bytesLength(char);
+        if (length + nbBytes <= maxLength) {
+          newValue += char;
+          length += nbBytes;
+          return true;
+        }
+        return false;
+      });
+    }
+    return TextEditingValue(
+      text: newValue,
+      selection: value.selection.copyWith(
+        baseOffset: min(value.selection.start, newValue.length),
+        extentOffset: min(value.selection.end, newValue.length),
       ),
-      child: TextField(
-        controller: controller,
-        focusNode: focusNode,
-        keyboardType: keyBoardType,
-        textCapitalization: TextCapitalization.sentences,
-        onTap: model.onAllScreenTap,
-        style: kTextFieldFontStyle,
-        decoration: InputDecoration(
-          hintText: error == '' ? hint : error,
-          hintStyle: TextStyle(
-            color: error == "" ? ColorRes.dimGrey2 : ColorRes.red,
-          ),
-          border: InputBorder.none,
-          contentPadding: const EdgeInsets.only(bottom: 10, left: 10),
-        ),
-      ),
+      composing: TextRange.empty,
     );
+  }
+
+  static int bytesLength(String value) {
+    return utf8.encode(value).length;
   }
 }

@@ -12,21 +12,20 @@ import 'package:orange_ui/utils/color_res.dart';
 import 'package:orange_ui/utils/const_res.dart';
 import 'package:orange_ui/utils/font_res.dart';
 
-class ImageViewPage extends StatelessWidget {
+class ImageViewPage extends StatefulWidget {
   final ChatMessage? userData;
   final VoidCallback onBack;
-  final TransformationController transformationController;
-  final VoidCallback handleDoubleTap;
-  final Function(TapDownDetails details) handleDoubleTapDown;
 
-  const ImageViewPage(
-      {Key? key,
-      this.userData,
-      required this.onBack,
-      required this.transformationController,
-      required this.handleDoubleTap,
-      required this.handleDoubleTapDown})
+  const ImageViewPage({Key? key, this.userData, required this.onBack})
       : super(key: key);
+
+  @override
+  State<ImageViewPage> createState() => _ImageViewPageState();
+}
+
+class _ImageViewPageState extends State<ImageViewPage> {
+  TapDownDetails _doubleTapDetails = TapDownDetails();
+  final _transformationController = TransformationController();
 
   @override
   Widget build(BuildContext context) {
@@ -47,9 +46,10 @@ class ImageViewPage extends StatelessWidget {
               onDoubleTapDown: handleDoubleTapDown,
               onDoubleTap: handleDoubleTap,
               child: InteractiveViewer(
-                transformationController: transformationController,
+                transformationController: _transformationController,
                 child: CachedNetworkImage(
-                  imageUrl: '${ConstRes.aImageBaseUrl}${userData?.image}',
+                  imageUrl:
+                      '${ConstRes.aImageBaseUrl}${widget.userData?.image}',
                   height: Get.height,
                   width: double.infinity,
                 ),
@@ -62,6 +62,21 @@ class ImageViewPage extends StatelessWidget {
     );
   }
 
+  void handleDoubleTapDown(TapDownDetails details) {
+    _doubleTapDetails = details;
+  }
+
+  void handleDoubleTap() {
+    if (_transformationController.value != Matrix4.identity()) {
+      _transformationController.value = Matrix4.identity();
+    } else {
+      final position = _doubleTapDetails.localPosition;
+      _transformationController.value = Matrix4.identity()
+        ..translate(-position.dx * 2, -position.dy * 2)
+        ..scale(3.0);
+    }
+  }
+
   Widget topBarArea() {
     return Container(
       color: ColorRes.black.withOpacity(0.3),
@@ -69,7 +84,7 @@ class ImageViewPage extends StatelessWidget {
       child: Row(
         children: [
           InkWell(
-            onTap: onBack,
+            onTap: widget.onBack,
             splashColor: ColorRes.transparent,
             highlightColor: ColorRes.transparent,
             child: SizedBox(
@@ -90,9 +105,9 @@ class ImageViewPage extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    userData?.senderUser?.userid == PrefService.userId
+                    widget.userData?.senderUser?.userid == PrefService.userId
                         ? S.current.you
-                        : '${userData?.senderUser?.username} ',
+                        : '${widget.userData?.senderUser?.username} ',
                     style: const TextStyle(
                       color: ColorRes.white,
                       fontSize: 16,
@@ -104,7 +119,7 @@ class ImageViewPage extends StatelessWidget {
               Text(
                 DateFormat('${AppRes.dMY}, ${AppRes.hhMmA}').format(
                     DateTime.fromMillisecondsSinceEpoch(
-                        userData!.time!.toInt())),
+                        widget.userData!.time!.toInt())),
                 style: const TextStyle(
                   color: ColorRes.white,
                   fontSize: 11,
@@ -115,5 +130,12 @@ class ImageViewPage extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _transformationController.value = Matrix4.identity();
+    _transformationController.dispose();
+    super.dispose();
   }
 }

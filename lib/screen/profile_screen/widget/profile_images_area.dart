@@ -151,7 +151,7 @@ class ProfileImageArea extends StatelessWidget {
                                       children: [
                                         Flexible(
                                           child: Text(
-                                            '${userData?.fullname}',
+                                            userData?.fullname ?? '',
                                             style: const TextStyle(
                                               color: ColorRes.white,
                                               fontSize: 20,
@@ -207,22 +207,19 @@ class ProfileImageArea extends StatelessWidget {
                                           Text(
                                             userData?.live ?? '',
                                             style: const TextStyle(
-                                              color: ColorRes.white,
-                                              fontSize: 11,
-                                            ),
+                                                color: ColorRes.white,
+                                                fontSize: 11),
                                           ),
                                         ],
                                       ),
                                     ),
                                     const SizedBox(height: 7),
-                                    Text(
-                                      userData?.bio ?? '',
-                                      style: const TextStyle(
-                                          color: ColorRes.white,
-                                          fontSize: 11,
-                                          overflow: TextOverflow.ellipsis),
-                                      maxLines: 3,
-                                    ),
+                                    Text(userData?.bio ?? '',
+                                        style: const TextStyle(
+                                            color: ColorRes.white,
+                                            fontSize: 11,
+                                            overflow: TextOverflow.ellipsis),
+                                        maxLines: 3),
                                   ],
                                 ),
                               ),

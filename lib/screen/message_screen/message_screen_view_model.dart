@@ -20,7 +20,7 @@ import 'package:stacked/stacked.dart';
 
 class MessageScreenViewModel extends BaseViewModel {
   FirebaseFirestore db = FirebaseFirestore.instance;
-  List<Conversation?> userList = [];
+  List<Conversation> userList = [];
   Conversation? conversation;
   bool isLoading = false;
   StreamSubscription<QuerySnapshot<Conversation>>? subscription;
@@ -52,10 +52,10 @@ class MessageScreenViewModel extends BaseViewModel {
         : Get.to(() => const SearchScreen());
   }
 
-  void onUserTap(Conversation? conversation) {
+  void onUserTap(Conversation conversation) {
     userData?.isBlock == 1
         ? SnackBarWidget().snackBarWidget(S.current.userBlock)
-        : Get.to(() => const ChatScreen(), arguments: conversation);
+        : Get.to(() => ChatScreen(conversation: conversation));
   }
 
   void getChatUsers() {
@@ -63,7 +63,7 @@ class MessageScreenViewModel extends BaseViewModel {
     PrefService.getUserData().then((value) {
       subscription = db
           .collection(FirebaseRes.userChatList)
-          .doc(value?.identity)
+          .doc('${value?.id}')
           .collection(FirebaseRes.userList)
           .orderBy(FirebaseRes.time, descending: true)
           .withConverter(

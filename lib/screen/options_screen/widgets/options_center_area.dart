@@ -43,16 +43,21 @@ class OptionsCenterArea extends StatelessWidget {
           height: 6,
         ),
         TopOptionCard(
-          title: S.current.livestream,
-          image: AssetRes.sun,
-          onTap: onLiveStreamTap,
-        ),
+            title: S.current.livestream,
+            onTap: onLiveStreamTap,
+            widget: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              child: Image.asset(AssetRes.sun, height: 28, width: 28),
+            )),
         Visibility(
           visible: verification == 0,
           child: TopOptionCard(
               title: S.current.verification,
-              image: AssetRes.tickMark,
-              onTap: onApplyForVerTap),
+              onTap: onApplyForVerTap,
+              widget: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: Image.asset(AssetRes.icBlueTick, height: 28, width: 28),
+              )),
         ),
         Visibility(
           visible: (verification == 2
@@ -149,28 +154,24 @@ class OptionsCenterArea extends StatelessWidget {
           ),
         ),
         TopOptionCard(
-          onTap: () {
-            Get.to(() => const SavedProfilesScreen());
-          },
-          image: AssetRes.save,
-          title: S.current.savedProfiles,
-          savedProfile: true,
-        ),
+            onTap: () {
+              Get.to(() => const SavedProfilesScreen());
+            },
+            title: S.current.savedProfiles,
+            widget: const CircleImage(image: AssetRes.icBookMark)),
         TopOptionCard(
           onTap: () {
             Get.to(() => const LikeProfilesScreen());
           },
-          image: '',
           title: S.current.likeProfiles,
-          isLikeProfile: true,
+          widget: const CircleImage(image: AssetRes.icHeart),
         ),
         TopOptionCard(
-          onTap: () {
-            Get.to(() => const BlockedProfilesScreen());
-          },
-          image: AssetRes.blockUser,
-          title: S.of(context).blockedProfiles,
-        ),
+            onTap: () {
+              Get.to(() => const BlockedProfilesScreen());
+            },
+            title: S.of(context).blockedProfiles,
+            widget: const CircleImage(image: AssetRes.icBlock)),
         Padding(
           padding: const EdgeInsets.only(top: 18, bottom: 9),
           child: Text(
@@ -202,6 +203,25 @@ class OptionsCenterArea extends StatelessWidget {
           onTap: onAnonymousTap,
         ),
       ],
+    );
+  }
+}
+
+class CircleImage extends StatelessWidget {
+  final String image;
+
+  const CircleImage({Key? key, required this.image}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(6.0),
+      height: 28,
+      width: 28,
+      margin: const EdgeInsets.symmetric(horizontal: 10),
+      decoration: BoxDecoration(
+          color: ColorRes.orange2.withOpacity(0.1), shape: BoxShape.circle),
+      child: Image.asset(image),
     );
   }
 }
@@ -296,18 +316,14 @@ class PermissionTiles extends StatelessWidget {
 
 class TopOptionCard extends StatelessWidget {
   final VoidCallback onTap;
-  final String image;
   final String title;
-  final bool savedProfile;
-  final bool isLikeProfile;
+  final Widget widget;
 
   const TopOptionCard({
     Key? key,
     required this.onTap,
-    required this.image,
     required this.title,
-    this.savedProfile = false,
-    this.isLikeProfile = false,
+    required this.widget,
   }) : super(key: key);
 
   @override
@@ -316,48 +332,15 @@ class TopOptionCard extends StatelessWidget {
       onTap: onTap,
       child: Container(
         height: 49,
-        margin: const EdgeInsets.only(top: 3, bottom: 3),
+        margin: const EdgeInsets.symmetric(vertical: 3),
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10), color: ColorRes.grey12),
+          borderRadius: BorderRadius.circular(10),
+          color: ColorRes.grey12,
+        ),
         child: Row(
           children: [
-            isLikeProfile
-                ? Container(
-                    height: 25,
-                    width: 25,
-                    margin: const EdgeInsets.symmetric(horizontal: 10),
-                    decoration: BoxDecoration(
-                        color: ColorRes.orange3.withOpacity(0.1),
-                        shape: BoxShape.circle),
-                    child: const Icon(
-                      Icons.favorite,
-                      color: ColorRes.orange3,
-                      size: 17,
-                    ),
-                  )
-                : savedProfile
-                    ? Container(
-                        height: 25,
-                        width: 25,
-                        padding: const EdgeInsets.all(6),
-                        margin: const EdgeInsets.symmetric(horizontal: 10),
-                        decoration: BoxDecoration(
-                            color: ColorRes.orange3.withOpacity(0.1),
-                            shape: BoxShape.circle),
-                        child: Image.asset(
-                          image,
-                        ),
-                      )
-                    : Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
-                        child: Image.asset(
-                          image,
-                          height: 25,
-                          width: 25,
-                          color: ColorRes.orange3,
-                        ),
-                      ),
+            widget,
             Text(
               title,
               style: const TextStyle(

@@ -214,7 +214,7 @@ class OptionalScreenViewModel extends BaseViewModel {
   Future<void> deleteFirebaseUser() async {
     await db
         .collection(FirebaseRes.userChatList)
-        .doc(userData?.identity)
+        .doc('${userData?.id}')
         .collection(FirebaseRes.userList)
         .get()
         .then((value) {
@@ -223,7 +223,7 @@ class OptionalScreenViewModel extends BaseViewModel {
             .collection(FirebaseRes.userChatList)
             .doc(element.id)
             .collection(FirebaseRes.userList)
-            .doc(userData?.identity)
+            .doc('${userData?.id}')
             .update({
           FirebaseRes.isDeleted: true,
           FirebaseRes.deletedId: '${DateTime.now().millisecondsSinceEpoch}',
@@ -233,7 +233,7 @@ class OptionalScreenViewModel extends BaseViewModel {
 
         db
             .collection(FirebaseRes.userChatList)
-            .doc(userData?.identity)
+            .doc('${userData?.id}')
             .collection(FirebaseRes.userList)
             .doc(element.id)
             .update({

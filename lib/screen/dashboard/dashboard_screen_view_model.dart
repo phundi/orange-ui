@@ -56,14 +56,4 @@ class DashboardScreenViewModel extends BaseViewModel {
       Get.to(() => const LiveGridScreen());
     }
   }
-
-  Future<bool> onBack() async {
-    if (pageIndex == 0) {
-      return true;
-    } else {
-      pageIndex = 0;
-      notifyListeners();
-      return false;
-    }
-  }
 }

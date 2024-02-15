@@ -1142,7 +1142,7 @@ SPEC CHECKSUMS:
   FirebaseInstallations: 558b1da7d65afeb996fd5c814332f013234ece4e
   FirebaseMessaging: 9bc34a98d2e0237e1b121915120d4d48ddcf301e
   FirebaseSharedSwift: 2fbf73618288b7a36b2014b957745dcdd781389e
-  Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
+  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   flutter_app_badger: b87fc231847b03b92ce1412aa351842e7e97932f
   flutter_branch_sdk: dcf38505c8dcb3249841e2acaf323f4a39f30e2b
   flutter_local_notifications: 0c0b1ae97e741e1521e4c1629a459d04b9aec743

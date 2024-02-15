@@ -20,66 +20,66 @@ class BottomTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       top: false,
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(20),
-        child: Container(
-          width: Get.width,
-          margin: const EdgeInsets.symmetric(horizontal: 10),
-          padding: const EdgeInsets.all(2),
-          decoration: BoxDecoration(
-            color: ColorRes.black4.withOpacity(0.33),
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Expanded(
-                child: TextField(
-                  style: TextStyle(
-                    fontSize: 13,
-                    color: ColorRes.white.withOpacity(0.70),
-                  ),
-                  keyboardType: TextInputType.multiline,
-                  minLines: 1,
-                  maxLines: 5,
+      child: Container(
+        width: Get.width,
+        height: 50,
+        margin: const EdgeInsets.symmetric(horizontal: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 5),
+        decoration: BoxDecoration(
+            color: ColorRes.black4.withOpacity(0.6),
+            borderRadius: BorderRadius.circular(30)),
+        child: Row(
+          children: [
+            Expanded(
+              child: TextField(
                   controller: commentController,
                   focusNode: commentFocus,
+                  style: TextStyle(
+                      fontSize: 13, color: ColorRes.white.withOpacity(0.70)),
+                  keyboardType: TextInputType.multiline,
                   decoration: InputDecoration(
                     isDense: true,
-                    border: InputBorder.none,
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: const BorderSide(
+                            color: ColorRes.transparent, width: 0.0)),
+                    focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: const BorderSide(
+                            color: ColorRes.transparent, width: 0.0)),
+                    enabledBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(
+                            color: ColorRes.transparent, width: 0.0),
+                        borderRadius: BorderRadius.circular(10)),
                     hintText: S.current.comment,
-                    contentPadding:
-                        const EdgeInsets.only(left: 14, bottom: 10, top: 0),
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 10),
                     hintStyle: TextStyle(
-                      color: ColorRes.white.withOpacity(0.45),
-                      fontSize: 13,
-                    ),
+                        color: ColorRes.white.withOpacity(0.45), fontSize: 13),
+                  ),
+                  cursorColor: ColorRes.white),
+            ),
+            InkWell(
+              borderRadius: BorderRadius.circular(30),
+              onTap: onMsgSend,
+              child: Container(
+                height: 36,
+                width: 36,
+                padding: const EdgeInsets.fromLTRB(10, 9, 6, 9),
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      ColorRes.lightOrange1,
+                      ColorRes.darkOrange,
+                    ],
                   ),
                 ),
+                child: Image.asset(AssetRes.share),
               ),
-              InkWell(
-                borderRadius: BorderRadius.circular(30),
-                onTap: onMsgSend,
-                child: Container(
-                  height: 36,
-                  width: 36,
-                  padding: const EdgeInsets.fromLTRB(10, 9, 6, 9),
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        ColorRes.lightOrange1,
-                        ColorRes.darkOrange,
-                      ],
-                    ),
-                  ),
-                  child: Image.asset(AssetRes.share),
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

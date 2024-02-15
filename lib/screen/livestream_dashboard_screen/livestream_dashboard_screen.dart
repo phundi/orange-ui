@@ -39,16 +39,13 @@ class LiveStreamDashBoard extends StatelessWidget {
                       onHistoryBtnTap: model.onHistoryBtnTap,
                       onRedeemBtnTap: model.onRedeemBtnTap,
                       onAddCoinsBtnTap: model.onAddCoinsBtnTap,
-                      // onAddCoinsBtnTap: model.onAddCoinsBtnTap,
                       onApplyBtnTap: model.onApplyBtnTap,
                       wallet: model.userData?.wallet,
                       totalCollection:
                           model.userData?.totalCollected.toString(),
                       totalStream: model.userData?.totalStreams.toString(),
                     ),
-              const SizedBox(
-                height: 10,
-              ),
+              const SizedBox(height: 10),
               if (model.bannerAd != null)
                 Container(
                   alignment: Alignment.center,
@@ -56,9 +53,7 @@ class LiveStreamDashBoard extends StatelessWidget {
                   height: model.bannerAd?.size.height.toDouble(),
                   child: AdWidget(ad: model.bannerAd!),
                 ),
-              const SizedBox(
-                height: 5,
-              ),
+              const SizedBox(height: 5),
             ],
           ),
         );

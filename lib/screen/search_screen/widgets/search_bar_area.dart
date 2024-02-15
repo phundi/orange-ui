@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
@@ -53,8 +54,9 @@ class SearchBarArea extends StatelessWidget {
                   shape: BoxShape.circle,
                   color: ColorRes.orange2.withOpacity(0.06),
                 ),
-                child: Image.asset(
-                  AssetRes.backArrow,
+                child: const Icon(
+                  CupertinoIcons.back,
+                  color: ColorRes.red4,
                 ),
               ),
             ),
@@ -98,12 +100,8 @@ class SearchBarArea extends StatelessWidget {
                   onTabSelect(tabList[index]);
                 },
                 child: Container(
-                  margin: EdgeInsets.only(
-                    left: 12,
-                    right: index == (tabList.length - 1) ? 12 : 0,
-                  ),
-                  padding: const EdgeInsets.only(
-                      left: 20, right: 20, top: 10, bottom: 8),
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  margin: const EdgeInsets.symmetric(horizontal: 3),
                   height: 35,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(50),
@@ -111,7 +109,7 @@ class SearchBarArea extends StatelessWidget {
                   ),
                   child: Center(
                     child: Text(
-                      '${tabList[index].title}',
+                      tabList[index].title ?? '',
                       style: const TextStyle(
                         color: ColorRes.orange2,
                         fontFamily: FontRes.bold,

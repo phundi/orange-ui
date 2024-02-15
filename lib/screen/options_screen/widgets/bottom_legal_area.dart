@@ -36,7 +36,7 @@ class BottomLegalArea extends StatelessWidget {
         navigationTile(S.current.privacyPolicy, onPrivacyPolicyTap),
         const SizedBox(height: 8),
         navigationTile(S.current.termsOfUse, onTermsOfUseTap),
-        const SizedBox(height: 47),
+        SizedBox(height: AppBar().preferredSize.height / 1.5),
         InkWell(
           borderRadius: BorderRadius.circular(10),
           onTap: onLogoutTap,
@@ -44,9 +44,8 @@ class BottomLegalArea extends StatelessWidget {
             height: 46,
             width: Get.width,
             decoration: BoxDecoration(
-              color: ColorRes.grey12,
-              borderRadius: BorderRadius.circular(10),
-            ),
+                color: ColorRes.grey12,
+                borderRadius: BorderRadius.circular(10)),
             child: Center(
               child: Text(
                 S.current.logOut,
@@ -59,20 +58,12 @@ class BottomLegalArea extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(height: 24),
+        const SizedBox(height: 20),
+        Center(child: Image.asset(AssetRes.themeLabel, height: 28, width: 93)),
         Center(
-          child: Image.asset(AssetRes.themeLabel, height: 28, width: 93),
-        ),
-        Center(
-          child: Text(
-            S.current.versionText,
-            style: const TextStyle(
-              fontSize: 12,
-              color: ColorRes.grey25,
-            ),
-          ),
-        ),
-        const SizedBox(height: 23),
+            child: Text(S.current.versionText,
+                style: const TextStyle(fontSize: 12, color: ColorRes.grey25))),
+        const SizedBox(height: 20),
         InkWell(
           borderRadius: BorderRadius.circular(10),
           onTap: onDeleteAccountTap,
@@ -80,9 +71,8 @@ class BottomLegalArea extends StatelessWidget {
             height: 46,
             width: Get.width,
             decoration: BoxDecoration(
-              color: ColorRes.grey12,
-              borderRadius: BorderRadius.circular(10),
-            ),
+                color: ColorRes.grey12,
+                borderRadius: BorderRadius.circular(10)),
             child: Center(
               child: Text(
                 S.current.deleteAccount,
@@ -95,7 +85,7 @@ class BottomLegalArea extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(height: 20),
+        const SizedBox(height: 20)
       ],
     );
   }

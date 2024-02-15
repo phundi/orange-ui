@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:orange_ui/generated/l10n.dart';
+import 'package:orange_ui/model/chat_and_live_stream/chat.dart';
 import 'package:orange_ui/screen/chat_screen/chat_screen_view_model.dart';
 import 'package:orange_ui/screen/chat_screen/widgets/bottom_input_bar.dart';
 import 'package:orange_ui/screen/chat_screen/widgets/bottom_selected_item_bar.dart';
@@ -10,7 +11,9 @@ import 'package:orange_ui/utils/color_res.dart';
 import 'package:stacked/stacked.dart';
 
 class ChatScreen extends StatelessWidget {
-  const ChatScreen({Key? key}) : super(key: key);
+  final Conversation conversation;
+
+  const ChatScreen({Key? key, required this.conversation}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +21,7 @@ class ChatScreen extends StatelessWidget {
       onViewModelReady: (model) {
         model.init();
       },
-      viewModelBuilder: () => ChatScreenViewModel(),
+      viewModelBuilder: () => ChatScreenViewModel(conversation),
       builder: (context, model, child) {
         SystemChrome.setSystemUIOverlayStyle(
           const SystemUiOverlayStyle(

@@ -38,7 +38,7 @@ class BubblyCamera {
     await _channel.invokeMethod('flash');
   }
 
-  static inAppPurchase(String? productID) async {
+  static Future inAppPurchase(String? productID) async {
     await _channel.invokeMethod('in_app_purchase_id', productID);
   }
 

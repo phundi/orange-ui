@@ -56,6 +56,10 @@ class AssetRes {
   static const String personLocationPin = "${icons}person_location_pin.png";
   static const String placeholder = "${icons}placeholder.png";
   static const String blockUser = "${icons}block_user.png";
+  static const String icBlueTick = "${icons}ic_blue_tick.png";
+  static const String icBookMark = "${icons}ic_book_mark.png";
+  static const String icHeart = "${icons}ic_heart.png";
+  static const String icBlock = "${icons}ic_block.png";
 
   ///______________________________ common images ______________________________///
 

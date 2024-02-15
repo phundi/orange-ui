@@ -25,7 +25,6 @@ class LikeCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        print(userData.id);
         Get.to(() => const UserDetailScreen(), arguments: userData)
             ?.then((value) {
           viewModel.onLikeCardBack(userData);

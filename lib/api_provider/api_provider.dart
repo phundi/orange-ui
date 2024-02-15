@@ -155,7 +155,7 @@ class ApiProvider {
       request.fields[Urls.aInterests] = interest.join(",");
     }
     if (gender != null) {
-      request.fields[Urls.aGender] = gender.toString();
+      request.fields[Urls.aGender] = '$gender';
     }
     if (about != null) {
       request.fields[Urls.aAbout] = about;
@@ -625,7 +625,8 @@ class ApiProvider {
       required String body,
       required Map<String, dynamic> data,
       required String token}) async {
-    await http.post(
+    await http
+        .post(
       Uri.parse(Urls.aNotificationUrl),
       headers: {
         Urls.aApiKeyName: ConstRes.apiKey,
@@ -641,7 +642,10 @@ class ApiProvider {
           'data': data
         },
       }),
-    );
+    )
+        .then((value) {
+      print(value.body);
+    });
   }
 
   Future<Report> logoutUser() async {

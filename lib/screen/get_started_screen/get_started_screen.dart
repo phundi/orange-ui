@@ -17,28 +17,25 @@ class GetStartedScreen extends StatelessWidget {
       },
       viewModelBuilder: () => GetStartedScreenViewModel(),
       builder: (context, model, child) {
-        return PopScope(
-          onPopInvoked: (didPop) => model.onBack,
-          child: Scaffold(
-            body: model.screenIndex == 0
-                ? Screen1(onTap: model.screen1NextTap)
-                : model.screenIndex == 1
-                    ? Screen2(
-                        onNextTap: model.screen2NextTap,
-                        onSkipTap: model.onSkipTap,
-                      )
-                    : model.screenIndex == 2
-                        ? Screen3(
-                            onNextTap: model.screen3NextTap,
-                            onSkipTap: model.onSkipTap,
-                          )
-                        : model.screenIndex == 3
-                            ? Screen4(
-                                onNextTap: model.screen4NextTap,
-                                onSkipTap: model.onSkipTap,
-                              )
-                            : const SizedBox(),
-          ),
+        return Scaffold(
+          body: model.screenIndex == 0
+              ? Screen1(onTap: model.screen1NextTap)
+              : model.screenIndex == 1
+                  ? Screen2(
+                      onNextTap: model.screen2NextTap,
+                      onSkipTap: model.onSkipTap,
+                    )
+                  : model.screenIndex == 2
+                      ? Screen3(
+                          onNextTap: model.screen3NextTap,
+                          onSkipTap: model.onSkipTap,
+                        )
+                      : model.screenIndex == 3
+                          ? Screen4(
+                              onNextTap: model.screen4NextTap,
+                              onSkipTap: model.onSkipTap,
+                            )
+                          : const SizedBox(),
         );
       },
     );

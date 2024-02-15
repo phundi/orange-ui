@@ -20,26 +20,23 @@ class DashboardScreen extends StatelessWidget {
       },
       viewModelBuilder: () => DashboardScreenViewModel(),
       builder: (context, model, child) {
-        return PopScope(
-          onPopInvoked: (didPop) => model.onBack,
-          child: Scaffold(
-            backgroundColor: ColorRes.white,
-            bottomNavigationBar: BottomBar(
-              pageIndex: model.pageIndex,
-              onBottomBarTap: model.onBottomBarTap,
-            ),
-            body: SafeArea(
-              bottom: false,
-              child: model.pageIndex == 0
-                  ? const ExploreScreen()
-                  : model.pageIndex == 1
-                      ? const RandomsScreen()
-                      : model.pageIndex == 2
-                          ? const LiveStreamHistory()
-                          : model.pageIndex == 3
-                              ? const MessageScreen()
-                              : const ProfileScreen(),
-            ),
+        return Scaffold(
+          backgroundColor: ColorRes.white,
+          bottomNavigationBar: BottomBar(
+            pageIndex: model.pageIndex,
+            onBottomBarTap: model.onBottomBarTap,
+          ),
+          body: SafeArea(
+            bottom: false,
+            child: model.pageIndex == 0
+                ? const ExploreScreen()
+                : model.pageIndex == 1
+                    ? const RandomsScreen()
+                    : model.pageIndex == 2
+                        ? const LiveStreamHistory()
+                        : model.pageIndex == 3
+                            ? const MessageScreen()
+                            : const ProfileScreen(),
           ),
         );
       },

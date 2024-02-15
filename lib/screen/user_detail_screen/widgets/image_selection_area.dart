@@ -8,6 +8,7 @@ import 'package:orange_ui/common/widgets/gradient_widget.dart';
 import 'package:orange_ui/common/widgets/live_icon.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
+import 'package:orange_ui/screen/user_detail_screen/user_detail_screen_view_model.dart';
 import 'package:orange_ui/service/pref_service.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
@@ -15,27 +16,12 @@ import 'package:orange_ui/utils/const_res.dart';
 import 'package:orange_ui/utils/font_res.dart';
 
 class ImageSelectionArea extends StatelessWidget {
-  final int selectedImgIndex;
-  final List<Images> imageList;
-  final VoidCallback onJoinBtnTap;
-  final bool like;
-  final Function(int index) onImgSelect;
   final VoidCallback onMoreInfoTap;
-  final VoidCallback onLikeBtnTap;
-  final int? userId;
-  final RegistrationUserData? userData;
+
+  final UserDetailScreenViewModel model;
 
   const ImageSelectionArea(
-      {Key? key,
-      required this.selectedImgIndex,
-      required this.imageList,
-      required this.like,
-      required this.onJoinBtnTap,
-      required this.onImgSelect,
-      required this.onMoreInfoTap,
-      required this.onLikeBtnTap,
-      required this.userId,
-      this.userData})
+      {Key? key, required this.onMoreInfoTap, required this.model})
       : super(key: key);
 
   @override
@@ -52,9 +38,11 @@ class ImageSelectionArea extends StatelessWidget {
                   ? false
                   : true,
               child: LikeUnlikeBtn(
-                  like: like, onLikeBtnTap: onLikeBtnTap, userId: userId)),
+                  like: model.like,
+                  onLikeBtnTap: model.onLikeBtnTap,
+                  userId: model.userData?.id)),
           const SizedBox(height: 15),
-          imageListArea(),
+          imageListArea(model.userData?.images ?? []),
           const SizedBox(height: 20),
           BottomMoreBtn(onMoreInfoTap: onMoreInfoTap),
         ],
@@ -64,15 +52,15 @@ class ImageSelectionArea extends StatelessWidget {
 
   Widget joinBtnChip() {
     return Visibility(
-      visible: PrefService.userId == userId ? false : true,
+      visible: PrefService.userId == model.userData?.id ? false : true,
       child: Visibility(
-        visible: userData?.isLiveNow == 1 ? true : false,
+        visible: model.userData?.isLiveNow == 1 ? true : false,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(30),
           child: BackdropFilter(
             filter: ImageFilter.blur(sigmaY: 10, sigmaX: 10),
             child: InkWell(
-              onTap: onJoinBtnTap,
+              onTap: model.onJoinBtnTap,
               borderRadius: BorderRadius.circular(30),
               child: Container(
                 height: 35,
@@ -130,28 +118,24 @@ class ImageSelectionArea extends StatelessWidget {
     );
   }
 
-  Widget imageListArea() {
+  Widget imageListArea(List<Images> imageList) {
     return SizedBox(
       height: 58,
       child: ListView.builder(
         itemCount: imageList.length,
-        shrinkWrap: true,
         padding: const EdgeInsets.symmetric(horizontal: 20),
         scrollDirection: Axis.horizontal,
-        physics: const BouncingScrollPhysics(),
         itemBuilder: (context, index) {
+          Images? images = imageList[index];
           return InkWell(
             borderRadius: BorderRadius.circular(10),
-            onTap: () {
-              onImgSelect(index);
-            },
+            onTap: () => model.onImageSelect(index),
             child: Container(
               height: 58,
               width: 58,
-              margin: EdgeInsets.only(
-                  right: index != (imageList.length - 1) ? 8.33 : 0),
+              margin: const EdgeInsets.symmetric(horizontal: 5),
               decoration: BoxDecoration(
-                border: selectedImgIndex == index
+                border: model.selectedImgIndex == index
                     ? Border.all(
                         color: ColorRes.white.withOpacity(0.80),
                         width: 2,
@@ -160,15 +144,13 @@ class ImageSelectionArea extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
               ),
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(8),
                 child: CachedNetworkImage(
-                  imageUrl:
-                      '${ConstRes.aImageBaseUrl}${imageList[index].image}',
+                  imageUrl: '${ConstRes.aImageBaseUrl}${images.image}',
                   height: 58,
                   width: 58,
                   fit: BoxFit.cover,
-                  cacheKey:
-                      '${ConstRes.aImageBaseUrl}${imageList[index].image}',
+                  cacheKey: '${ConstRes.aImageBaseUrl}${images.image}',
                   errorWidget: (context, url, error) {
                     return Image.asset(
                       AssetRes.themeLabel,
