@@ -528,8 +528,9 @@ class ApiProvider {
   }
 
   Future pushNotification(
-      {required String title,
-      required String body,
+      {
+      //   required String title,
+      // required String body,
       required Map<String, dynamic> data,
       required String token}) async {
     await http
@@ -538,10 +539,10 @@ class ApiProvider {
       headers: {Urls.aApiKeyName: ConstRes.apiKey, 'content-type': 'application/json'},
       body: json.encode({
         'message': {
-          'notification': {
-            'title': title,
-            'body': body,
-          },
+          // 'notification': {
+          //   'title': title,
+          //   'body': body,
+          // },
           'token': token,
           'data': data
         },

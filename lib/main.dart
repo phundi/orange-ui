@@ -135,16 +135,14 @@ class _MyAppState extends State<MyApp> {
     flutterLocalNotificationsPlugin.initialize(initializationSettings);
 
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      RemoteNotification? notification = message.notification;
-
       if (message.data[Urls.aViewerNotificationId] == ChatScreenViewModel.senderId) {
         return;
       }
 
       flutterLocalNotificationsPlugin.show(
         1,
-        notification?.title,
-        notification?.body,
+        message.data['title'],
+        message.data['body'],
         NotificationDetails(
             iOS: const DarwinNotificationDetails(presentSound: true, presentAlert: true, presentBadge: true),
             android:

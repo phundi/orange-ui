@@ -783,9 +783,13 @@ class ChatScreenViewModel extends BaseViewModel {
 
     receiverUserData?.isNotification == 1
         ? ApiProvider().pushNotification(
-            title: registrationUserData?.fullname ?? '',
-            body: CommonFun.getLastMsg(msgType: msgType, msg: textMessage ?? ''),
-            data: {Urls.aViewerNotificationId: conversation.conversationId},
+            // title: registrationUserData?.fullname ?? '',
+            // body: CommonFun.getLastMsg(msgType: msgType, msg: textMessage ?? ''),
+            data: {
+                Urls.aViewerNotificationId: conversation.conversationId,
+                'title': registrationUserData?.fullname ?? '',
+                'body': CommonFun.getLastMsg(msgType: msgType, msg: textMessage ?? ''),
+              },
             token: '${receiverUserData?.deviceToken}')
         : null;
   }
