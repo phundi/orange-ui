@@ -12,15 +12,16 @@ import 'package:stacked/stacked.dart';
 
 class BottomDiamondShopViewModel extends BaseViewModel {
   List<GetDiamondPackData>? diamondPriceList = [];
-  int? coinValue = 0;
+  int? coinValue = 100;
 
   void init() {
+    print('init');
     const MethodChannel('bubbly_camera').setMethodCallHandler((call) async {
-      print(call);
+      Get.back();
+      print(call.arguments == true);
       if (call.arguments == true) {
-        addCoinApiCall(coinValue);
+        addCoinApiCall();
       } else {
-        Get.back();
         SnackBarWidget.snackBar(message: S.current.failedPayment);
       }
       return;
@@ -28,7 +29,7 @@ class BottomDiamondShopViewModel extends BaseViewModel {
     getDiamondPackApiCall();
   }
 
-  void addCoinApiCall(int? coinValue) {
+  void addCoinApiCall() {
     Loader().lottieLoader();
     ApiProvider().addCoinFromWallet(coinValue).then((value) {
       if (Get.isBottomSheetOpen == true) {
@@ -47,9 +48,7 @@ class BottomDiamondShopViewModel extends BaseViewModel {
 
   void onDiamondPurchase(GetDiamondPackData? data) async {
     Loader().lottieLoader();
-    await BubblyCamera.inAppPurchase(
-        Platform.isAndroid ? data?.androidProductId : data?.iosProductId);
-    Get.back();
     coinValue = data?.amount;
+    BubblyCamera.inAppPurchase(Platform.isAndroid ? data?.androidProductId : data?.iosProductId);
   }
 }
