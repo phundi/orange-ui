@@ -105,12 +105,12 @@ class _MyAppState extends State<MyApp> {
 
     flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<IOSFlutterLocalNotificationsPlugin>()
-        ?.requestPermissions();
+        ?.requestPermissions(alert: true, sound: true);
 
     await firebaseMessaging.requestPermission(
         alert: true,
-        announcement: false,
-        badge: true,
+        announcement: true,
+        badge: false,
         carPlay: false,
         criticalAlert: false,
         provisional: false,
@@ -144,9 +144,9 @@ class _MyAppState extends State<MyApp> {
         message.data['title'],
         message.data['body'],
         NotificationDetails(
-            iOS: const DarwinNotificationDetails(presentSound: true, presentAlert: true, presentBadge: true),
-            android:
-                AndroidNotificationDetails(channel.id, channel.name, channelDescription: channel.description)),
+          iOS: const DarwinNotificationDetails(presentSound: true, presentAlert: true, presentBadge: false),
+          android: AndroidNotificationDetails(channel.id, channel.name, channelDescription: channel.description),
+        ),
       );
     });
 

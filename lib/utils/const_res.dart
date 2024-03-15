@@ -2,7 +2,8 @@ class ConstRes {
   ///------------------------ Backend urls and key ------------------------///
 
   static const String base = 'https://orange.invatomarket.com/';
-  // static const String base = 'http://192.168.0.116/orange/';
+
+  // static const String base = 'http://192.168.0.107/orange/';
   static const String aBaseUrl = '${base}api/';
   static const String aImageBaseUrl = '${base}public/storage/';
   static const String apiKey = '123';
