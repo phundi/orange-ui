@@ -12,6 +12,7 @@ import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/chat_and_live_stream/chat.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/screen/chat_screen/chat_screen.dart';
+import 'package:orange_ui/screen/live_grid_screen/live_grid_screen.dart';
 import 'package:orange_ui/screen/notification_screen/notification_screen.dart';
 import 'package:orange_ui/screen/search_screen/search_screen.dart';
 import 'package:orange_ui/service/pref_service.dart';
@@ -50,6 +51,10 @@ class MessageScreenViewModel extends BaseViewModel {
     userData?.isBlock == 1
         ? SnackBarWidget().snackBarWidget(S.current.userBlock)
         : Get.to(() => const SearchScreen());
+  }
+
+  void onLivesBtnClick() {
+    Get.to(() => const LiveGridScreen());
   }
 
   void onUserTap(Conversation conversation) {

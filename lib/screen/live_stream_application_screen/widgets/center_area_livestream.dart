@@ -84,10 +84,7 @@ class CenterAreaLiveStream extends StatelessWidget {
                 decoration: BoxDecoration(
                     color: ColorRes.lightGrey2,
                     borderRadius: BorderRadius.circular(10),
-                    border: Border.all(
-                        color: isAbout
-                            ? ColorRes.darkOrange
-                            : ColorRes.transparent)),
+                    border: Border.all(color: isAbout ? ColorRes.darkOrange : ColorRes.transparent)),
                 child: TextField(
                   controller: aboutController,
                   focusNode: aboutFocus,
@@ -102,8 +99,7 @@ class CenterAreaLiveStream extends StatelessWidget {
                     hintText: S.current.shortIntro,
                     contentPadding: EdgeInsets.zero,
                     border: InputBorder.none,
-                    hintStyle:
-                        const TextStyle(color: ColorRes.dimGrey3, fontSize: 14),
+                    hintStyle: const TextStyle(color: ColorRes.dimGrey3, fontSize: 14),
                   ),
                 ),
               ),
@@ -125,10 +121,7 @@ class CenterAreaLiveStream extends StatelessWidget {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: ColorRes.lightGrey2,
-                    border: Border.all(
-                        color: isLanguages
-                            ? ColorRes.darkOrange
-                            : ColorRes.transparent)),
+                    border: Border.all(color: isLanguages ? ColorRes.darkOrange : ColorRes.transparent)),
                 child: TextField(
                   controller: languageController,
                   focusNode: languageFocus,
@@ -154,10 +147,7 @@ class CenterAreaLiveStream extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 5, top: 12, bottom: 6),
                 child: Text(
                   S.current.intro,
-                  style: const TextStyle(
-                      fontSize: 15,
-                      fontFamily: FontRes.extraBold,
-                      color: ColorRes.darkGrey3),
+                  style: const TextStyle(fontSize: 15, fontFamily: FontRes.extraBold, color: ColorRes.darkGrey3),
                 ),
               ),
               Visibility(
@@ -170,10 +160,7 @@ class CenterAreaLiveStream extends StatelessWidget {
                     decoration: BoxDecoration(
                         color: ColorRes.lightGrey2,
                         borderRadius: BorderRadius.circular(10),
-                        border: Border.all(
-                            color: isIntroVideo
-                                ? ColorRes.darkOrange
-                                : ColorRes.transparent)),
+                        border: Border.all(color: isIntroVideo ? ColorRes.darkOrange : ColorRes.transparent)),
                     child: Center(
                       child: Text(
                         S.current.attach,
@@ -190,8 +177,7 @@ class CenterAreaLiveStream extends StatelessWidget {
                 height: 5,
               ),
               Visibility(
-                visible:
-                    videoImage == null || videoImage!.isEmpty ? false : true,
+                visible: videoImage == null || videoImage!.isEmpty ? false : true,
                 child: Container(
                   height: 75,
                   width: Get.width - 14,
@@ -199,10 +185,7 @@ class CenterAreaLiveStream extends StatelessWidget {
                   decoration: BoxDecoration(
                       color: ColorRes.lightGrey2,
                       borderRadius: BorderRadius.circular(10),
-                      border: Border.all(
-                          color: isIntroVideo
-                              ? ColorRes.darkOrange
-                              : ColorRes.transparent)),
+                      border: Border.all(color: isIntroVideo ? ColorRes.darkOrange : ColorRes.transparent)),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -339,9 +322,7 @@ class CenterAreaLiveStream extends StatelessWidget {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             color: ColorRes.lightGrey2,
-            border: Border.all(
-                color:
-                    isSocialLink ? ColorRes.darkOrange : ColorRes.transparent)),
+            border: Border.all(color: isSocialLink ? ColorRes.darkOrange : ColorRes.transparent)),
         child: controller.text.isEmpty
             ? Row(
                 children: [
@@ -350,8 +331,7 @@ class CenterAreaLiveStream extends StatelessWidget {
                       controller: controller,
                       focusNode: socialLinkFocus,
                       decoration: const InputDecoration(
-                        contentPadding:
-                            EdgeInsets.only(bottom: 10, left: 12, right: 12),
+                        contentPadding: EdgeInsets.only(bottom: 10, left: 12, right: 12),
                         border: InputBorder.none,
                       ),
                     ),
@@ -369,7 +349,7 @@ class CenterAreaLiveStream extends StatelessWidget {
                       width: 32,
                       decoration: const BoxDecoration(
                         shape: BoxShape.circle,
-                        color: ColorRes.tometo,
+                        color: ColorRes.tomato,
                       ),
                       child: const Center(
                         child: Text(
@@ -406,7 +386,7 @@ class CenterAreaLiveStream extends StatelessWidget {
                       width: 32,
                       decoration: const BoxDecoration(
                         shape: BoxShape.circle,
-                        color: ColorRes.tometo,
+                        color: ColorRes.tomato,
                       ),
                       child: const Center(
                         child: Text(

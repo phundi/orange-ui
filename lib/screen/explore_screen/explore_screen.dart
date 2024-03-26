@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:orange_ui/common/widgets/dashboard_top_bar.dart';
 import 'package:orange_ui/screen/explore_screen/explore_screen_view_model.dart';
 import 'package:orange_ui/screen/explore_screen/widgets/bottom_bottons.dart';
-import 'package:orange_ui/screen/explore_screen/widgets/explore_top_area.dart';
 import 'package:orange_ui/screen/explore_screen/widgets/full_image_view.dart';
 import 'package:stacked/stacked.dart';
 
@@ -17,15 +17,14 @@ class ExploreScreen extends StatelessWidget {
       viewModelBuilder: () => ExploreScreenViewModel(),
       builder: (context, model, child) {
         return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ExploreTopArea(
-              onNotificationTap: model.onNotificationTap,
-              onSearchTap: model.onSearchTap,
-              onTitleTap: model.onTitleTap,
-            ),
-            const SizedBox(
-              height: 20,
-            ),
+            DashboardTopBar(
+                onNotificationTap: model.onNotificationTap,
+                // onTitleTap: model.onTitleTap,
+                onSearchTap: model.onSearchTap,
+                onLivesBtnClick: model.onLivesBtnClick),
+            const SizedBox(height: 20),
             FullImageView(
               userData: model.userData,
               userController: model.userController,

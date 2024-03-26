@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:orange_ui/common/widgets/dashboard_top_bar.dart';
 import 'package:orange_ui/screen/randoms_screen/randoms_screen_view_model.dart';
 import 'package:orange_ui/screen/randoms_screen/widgets/bottom_buttons.dart';
 import 'package:orange_ui/screen/randoms_screen/widgets/profile_pic_area.dart';
-import 'package:orange_ui/screen/randoms_screen/widgets/random_top_bar_area.dart';
 import 'package:stacked/stacked.dart';
 
 class RandomsScreen extends StatelessWidget {
@@ -18,17 +18,16 @@ class RandomsScreen extends StatelessWidget {
       builder: (context, model, child) {
         return Column(
           children: [
-            RandomTopBarArea(
-              onNotificationTap: model.onNotificationTap,
-              onSearchBtnTap: model.onSearchBtnTap,
-            ),
+            DashboardTopBar(
+                onNotificationTap: model.onNotificationTap,
+                onSearchTap: model.onSearchBtnTap,
+                onLivesBtnClick: model.onLivesBtnClick),
             const SizedBox(height: 27),
             Expanded(
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    ProfilePicArea(
-                        data: model.data, isLoading: model.isLoading),
+                    ProfilePicArea(data: model.data, isLoading: model.isLoading),
                     BottomButtons(
                       bannerAd: model.bannerAd,
                       genderList: model.genderList,

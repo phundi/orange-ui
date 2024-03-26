@@ -3088,6 +3088,46 @@ class S {
       args: [],
     );
   }
+
+  /// `Lives`
+  String get lives {
+    return Intl.message(
+      'Lives',
+      name: 'lives',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Feed`
+  String get feed {
+    return Intl.message(
+      'Feed',
+      name: 'feed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Comments`
+  String get comments {
+    return Intl.message(
+      'Comments',
+      name: 'comments',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Comment`
+  String get addComment {
+    return Intl.message(
+      'Add Comment',
+      name: 'addComment',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

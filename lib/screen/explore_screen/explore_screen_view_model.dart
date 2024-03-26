@@ -7,6 +7,7 @@ import 'package:orange_ui/common/widgets/snack_bar_widget.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/screen/bottom_diamond_shop/bottom_diamond_shop.dart';
+import 'package:orange_ui/screen/live_grid_screen/live_grid_screen.dart';
 import 'package:orange_ui/screen/map_screen/map_screen.dart';
 import 'package:orange_ui/screen/notification_screen/notification_screen.dart';
 import 'package:orange_ui/screen/search_screen/search_screen.dart';
@@ -57,16 +58,14 @@ class ExploreScreenViewModel extends BaseViewModel {
     ApiProvider().getProfile(userID: PrefService.userId).then((value) async {
       users = value?.data;
       walletCoin = value?.data?.wallet;
-      isSelected =
-          await PrefService.getDialog(PrefConst.isDialogDialog) ?? false;
+      isSelected = await PrefService.getDialog(PrefConst.isDialogDialog) ?? false;
       await PrefService.saveUser(value?.data);
     });
   }
 
   bool isSocialBtnVisible(String? socialLink) {
     if (socialLink != null) {
-      return socialLink.contains(AppRes.isHttp) ||
-          socialLink.contains(AppRes.isHttps);
+      return socialLink.contains(AppRes.isHttp) || socialLink.contains(AppRes.isHttps);
     } else {
       return false;
     }
@@ -116,8 +115,7 @@ class ExploreScreenViewModel extends BaseViewModel {
                       onBackBtnTap();
                     },
                     onContinueTap: (isSelected) {
-                      PrefService.setDialog(
-                          PrefConst.isDialogDialog, isSelected);
+                      PrefService.setDialog(PrefConst.isDialogDialog, isSelected);
                       minusCoinApi().then(
                         (value) {
                           onBackBtnTap();
@@ -198,9 +196,7 @@ class ExploreScreenViewModel extends BaseViewModel {
   }
 
   void onTitleTap() {
-    users?.isBlock == 1
-        ? SnackBarWidget().snackBarWidget(S.current.userBlock)
-        : Get.to(() => const MapScreen());
+    users?.isBlock == 1 ? SnackBarWidget().snackBarWidget(S.current.userBlock) : Get.to(() => const MapScreen());
   }
 
   void onSearchTap() {
@@ -212,8 +208,7 @@ class ExploreScreenViewModel extends BaseViewModel {
   void onImageTap() {
     users?.isBlock == 1
         ? SnackBarWidget().snackBarWidget(S.current.userBlock)
-        : Get.to(() => const UserDetailScreen(),
-            arguments: userData?[currentUserIndex]);
+        : Get.to(() => const UserDetailScreen(), arguments: userData?[currentUserIndex]);
   }
 
   void onLiveBtnTap() {
@@ -223,13 +218,16 @@ class ExploreScreenViewModel extends BaseViewModel {
   void onEyeButtonTap() {
     users?.isBlock == 1
         ? SnackBarWidget().snackBarWidget(S.current.userBlock)
-        : Get.to(() => const UserDetailScreen(showInfo: true),
-            arguments: userData?[currentUserIndex]);
+        : Get.to(() => const UserDetailScreen(showInfo: true), arguments: userData?[currentUserIndex]);
   }
 
   @override
   void dispose() {
     userController.dispose();
     super.dispose();
+  }
+
+  void onLivesBtnClick() {
+    Get.to(() => const LiveGridScreen());
   }
 }

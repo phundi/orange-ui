@@ -27,7 +27,7 @@ class Screen1 extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset(
-                  AssetRes.orangeBanner,
+                  AssetRes.themeLabel,
                   width: Get.width / 1.7,
                   fit: BoxFit.cover,
                 ),

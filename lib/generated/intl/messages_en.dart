@@ -28,6 +28,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("ACCOUNT DETAILS"),
         "add": MessageLookupByLibrary.simpleMessage("ADD"),
         "addCoins": MessageLookupByLibrary.simpleMessage("ADD COINS"),
+        "addComment": MessageLookupByLibrary.simpleMessage("Add Comment"),
         "age": MessageLookupByLibrary.simpleMessage("AGE"),
         "agreeNContinue":
             MessageLookupByLibrary.simpleMessage("Agree & Continue"),
@@ -78,6 +79,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "coins, Please confirm if you to continue or not"),
         "collected": MessageLookupByLibrary.simpleMessage("Collected"),
         "comment": MessageLookupByLibrary.simpleMessage("Comment..."),
+        "comments": MessageLookupByLibrary.simpleMessage("Comments"),
         "complete": MessageLookupByLibrary.simpleMessage("Complete"),
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("Confirm Password"),
@@ -156,6 +158,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "failedPayment": MessageLookupByLibrary.simpleMessage("Failed payment"),
         "failedToLoadVideo": MessageLookupByLibrary.simpleMessage(
             "Failed to load video: Cannot Open"),
+        "feed": MessageLookupByLibrary.simpleMessage("Feed"),
         "female": MessageLookupByLibrary.simpleMessage("Female"),
         "findSomeoneRandomly": MessageLookupByLibrary.simpleMessage(
             "Find Someone Randomly\nAnd check their profile "),
@@ -222,6 +225,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Live stream price will cost you"),
         "liveVerification":
             MessageLookupByLibrary.simpleMessage("LIVE VERIFICATION"),
+        "lives": MessageLookupByLibrary.simpleMessage("Lives"),
         "livestream": MessageLookupByLibrary.simpleMessage(
             "Wallet / Livestream Dashboard"),
         "logIn": MessageLookupByLibrary.simpleMessage("LOG IN"),

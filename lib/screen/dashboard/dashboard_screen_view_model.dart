@@ -5,7 +5,6 @@ import 'package:orange_ui/api_provider/api_provider.dart';
 import 'package:orange_ui/common/widgets/snack_bar_widget.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
-import 'package:orange_ui/screen/live_grid_screen/live_grid_screen.dart';
 import 'package:orange_ui/screen/user_detail_screen/user_detail_screen.dart';
 import 'package:orange_ui/service/pref_service.dart';
 import 'package:stacked/stacked.dart';
@@ -17,8 +16,7 @@ class DashboardScreenViewModel extends BaseViewModel {
   void init() {
     FlutterBranchSdk.initSession().listen(
       (data) {
-        if (data.containsKey("+clicked_branch_link") &&
-            data["+clicked_branch_link"] == true) {
+        if (data.containsKey("+clicked_branch_link") && data["+clicked_branch_link"] == true) {
           if (data.containsKey('user_id')) {
             Get.to(() => const UserDetailScreen(), arguments: data['user_id']);
           }
@@ -26,8 +24,8 @@ class DashboardScreenViewModel extends BaseViewModel {
       },
       onError: (error) {
         PlatformException platformException = error as PlatformException;
-        SnackBarWidget().snackBarWidget(
-            'InitSession error: ${platformException.code} - ${platformException.message}');
+        SnackBarWidget()
+            .snackBarWidget('InitSession error: ${platformException.code} - ${platformException.message}');
       },
     );
     getProfileApiCall();
@@ -49,11 +47,7 @@ class DashboardScreenViewModel extends BaseViewModel {
     if (userData?.isBlock == 1) {
       return SnackBarWidget().snackBarWidget(S.current.userBlock);
     }
-    if (index != 2) {
-      pageIndex = index;
-      notifyListeners();
-    } else {
-      Get.to(() => const LiveGridScreen());
-    }
+    pageIndex = index;
+    notifyListeners();
   }
 }

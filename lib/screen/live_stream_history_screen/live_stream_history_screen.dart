@@ -23,23 +23,17 @@ class LiveStreamHistory extends StatelessWidget {
           backgroundColor: ColorRes.white,
           body: Column(
             children: [
-              TopBarArea(
-                  title: S.current.liveStreamCap, title2: S.current.history),
+              TopBarArea(title: S.current.liveStreamCap, title2: S.current.history),
               Container(
                 height: 1,
                 margin: const EdgeInsets.symmetric(horizontal: 7),
                 width: MediaQuery.of(context).size.width,
                 color: ColorRes.grey5,
               ),
-              const SizedBox(
-                height: 12,
-              ),
+              const SizedBox(height: 12),
               model.isLoading
                   ? Expanded(child: Loader().lottieWidget())
-                  : CenterAreaLiveStream(
-                      dataList: model.liveStreamHistory,
-                      controller: model.scrollController,
-                    ),
+                  : CenterAreaLiveStream(dataList: model.liveStreamHistory, controller: model.scrollController),
             ],
           ),
         );

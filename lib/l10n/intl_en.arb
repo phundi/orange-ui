@@ -302,5 +302,9 @@
   "liveStreamEnded": "Live Stream Ended",
   "savedProfiles": "Saved Profiles",
   "likeProfiles": "Like Profiles",
-  "blockedProfiles": "Blocked Profiles"
+  "blockedProfiles": "Blocked Profiles",
+  "lives": "Lives",
+  "feed": "Feed",
+  "comments": "Comments",
+  "addComment": "Add Comment"
 }

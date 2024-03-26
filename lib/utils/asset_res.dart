@@ -25,7 +25,6 @@ class AssetRes {
   static const String youtubeLogo = "${icons}youtube_logo.png";
   static const String explore = "${icons}explore.png";
   static const String randoms = "${icons}randoms.png";
-  static const String joinLives = "${icons}join_lives.png";
   static const String message = "${icons}message.png";
   static const String profile = "${icons}profile.png";
   static const String bell = "${icons}bell.png";
@@ -55,40 +54,35 @@ class AssetRes {
   static const String emptyEmoji = "${icons}empty_emoji.png";
   static const String personLocationPin = "${icons}person_location_pin.png";
   static const String placeholder = "${icons}placeholder.png";
-  static const String blockUser = "${icons}block_user.png";
   static const String icBlueTick = "${icons}ic_blue_tick.png";
   static const String icBookMark = "${icons}ic_book_mark.png";
   static const String icHeart = "${icons}ic_heart.png";
   static const String icBlock = "${icons}ic_block.png";
+  static const String icFeed = "${icons}ic_feed.png";
+  static const String icHorizontalThreeDot = "${icons}ic_horizontal_three_dot.png";
+  static const String icComment = "${icons}ic_comment.png";
+  static const String icPostShare = "${icons}ic_post_share.png";
+  static const String icPlay = "${icons}ic_play.png";
+  static const String icEye = "${icons}ic_eye.png";
+  static const String icBin = "${icons}ic_bin.png";
 
-  ///______________________________ common images ______________________________///
+  /// ----------------- Images --------------
 
-  static const String common = "${images}common/";
-  static const String blurBG1 = "${common}blur_bg1.png";
-  static const String worldMap = "${common}world_map.png";
-  static const String map1 = "${common}map1.png";
-  static const String map2 = "${common}map2.png";
-  static const String map3 = "${common}map3.png";
-  static const String orangeBanner = "${common}orange_banner.png";
-  static const String emptyListLottie = "${common}33740-sad-empty-box.json";
-  static const String loadingLottie = "${common}lf30_editor_pdbikagl.json";
-
-  ///______________________________ get started screen ______________________________///
-
-  static const String getStarted = "${images}get_started/";
-  static const String themeLabel = "${getStarted}get_started1_label.png";
-  static const String getStarted2BG = "${getStarted}get_started2_bg.png";
-  static const String getStarted3BG = "${getStarted}get_started3_bg.png";
-  static const String getStarted3Marker =
-      "${getStarted}get_started3_marker.png";
-  static const String getStarted4BG = "${getStarted}get_started4_bg.png";
-  static const String getStarted4Camera =
-      "${getStarted}get_started4_camera.png";
-
-  ///______________________________ auth screens ______________________________///
-
-  static const String auth = "${images}auth/";
-  static const String loginBG = "${auth}login_bg.png";
-  static const String themeLabelWhite = "${auth}theme_label_white.png";
-  static const String edit = '${auth}eva_edit-fill.png';
+  static const String blurBG1 = "${images}blur_bg1.png";
+  static const String worldMap = "${images}world_map.png";
+  static const String map1 = "${images}map1.png";
+  static const String map2 = "${images}map2.png";
+  static const String map3 = "${images}map3.png";
+  static const String emptyListLottie = "${images}33740-sad-empty-box.json";
+  static const String loadingLottie = "${images}lf30_editor_pdbikagl.json";
+  static const String themeLabel = "${images}get_started1_label.png";
+  static const String getStarted2BG = "${images}get_started2_bg.png";
+  static const String getStarted3BG = "${images}get_started3_bg.png";
+  static const String getStarted3Marker = "${images}get_started3_marker.png";
+  static const String getStarted4BG = "${images}get_started4_bg.png";
+  static const String getStarted4Camera = "${images}get_started4_camera.png";
+  static const String loginBG = "${images}login_bg.png";
+  static const String themeLabelWhite = "${images}theme_label_white.png";
+  static const String edit = '${images}eva_edit-fill.png';
+  static const String icImage = '${images}ic_image.jpg';
 }

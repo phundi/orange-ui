@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ColorRes {
-  static const Color white = Color(0xFFFFFFFF);
   static const Color transparent = Color(0x00000000);
+  static const Color white = Color(0xFFFFFFFF);
   static const Color black = Color(0xFF000000);
   static const Color black2 = Color(0xFF1F1F1F);
   static const Color black3 = Color(0xFF151515);
@@ -11,17 +11,16 @@ class ColorRes {
   static const Color red2 = Color(0xFFFF5A46);
   static const Color red3 = Color(0xFFFF4026);
   static const Color red4 = Color(0xFFFE3D1D);
-  static const Color red5 = Color(0xFFFF0000);
-  static const Color red6 = Color(0xFFFF4365);
-  static const Color red7 = Color(0xFFDB3D3D);
-  static const Color red8 = Color(0xFFFF1414);
-  static const Color red9 = Color(0xFFFF3232);
-  static const Color darkOrange = Color(0xFFFE1B03);
-  static const Color orange2 = Color(0xFFFE2006);
-  static const Color orange1 = Color(0xFFFE290E);
   static const Color orange3 = Color(0xFFFE3922);
   static const Color orange4 = Color(0xFFFF2727);
+  static const Color orange1 = Color(0xFFFE290E);
   static const Color orange = Color(0xFFFE270D);
+  static const Color red8 = Color(0xFFFF1414);
+  static const Color red5 = Color(0xFFFF0000);
+  static const Color darkOrange = Color(0xFFFE1B03);
+  static const Color orange2 = Color(0xFFFE2006);
+  static const Color red6 = Color(0xFFFF4365);
+  static const Color red7 = Color(0xFFDB3D3D);
   static const Color lightOrange1 = Color(0xFFFF6F43);
   static const Color lightOrange2 = Color(0xFFFF6C41);
   static const Color lightOrange3 = Color(0xFFF98C6C);
@@ -89,14 +88,14 @@ class ColorRes {
   static const Color skyBlue = Color(0xFFF6F6F6);
   static const Color blueGrey = Color(0xFF5D5D5D);
   static const Color blueGrey1 = Color(0xFFD5D5D5);
-  static const Color lightorange = Color(0xFFFF710B);
-  static const Color lightpink1 = Color(0xFFFE1C04);
-  static const Color lightgreen = Color(0xFF1ED600);
+  static const Color lightOrange = Color(0xFFFF710B);
+  static const Color lightPink1 = Color(0xFFFE1C04);
+  static const Color lightGreen = Color(0xFF1ED600);
   static const Color green3 = Color(0xFF27C200);
-  static const Color darkgreen = Color(0xFF0B8500);
+  static const Color darkGreen = Color(0xFF0B8500);
   static const Color green = Color(0xFF0B8500);
-  static const Color lightgreen1 = Color(0xFF009E06);
+  static const Color lightGreen1 = Color(0xFF009E06);
   static const Color green2 = Color(0xFF009D2C);
-  static const Color tometo = Color(0xFFFF7347);
-  static const Color lighttometo = Color(0xFFFF7575);
+  static const Color tomato = Color(0xFFFF7347);
+  static const Color lightTomato = Color(0xFFFF7575);
 }

@@ -92,8 +92,7 @@ class OptionsCenterArea extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(15),
                   child: BackdropFilter(
-                    filter: ImageFilter.blur(
-                        sigmaY: 15, sigmaX: 15, tileMode: TileMode.mirror),
+                    filter: ImageFilter.blur(sigmaY: 15, sigmaX: 15, tileMode: TileMode.mirror),
                     child: Row(
                       children: [
                         Padding(
@@ -122,8 +121,8 @@ class OptionsCenterArea extends StatelessWidget {
                             color: verification == 0
                                 ? ColorRes.red7.withOpacity(0.20)
                                 : verification == 1
-                                    ? ColorRes.lightorange.withOpacity(0.20)
-                                    : ColorRes.lightgreen1.withOpacity(0.20),
+                                    ? ColorRes.lightOrange.withOpacity(0.20)
+                                    : ColorRes.lightGreen1.withOpacity(0.20),
                           ),
                           child: Center(
                             child: Text(
@@ -137,7 +136,7 @@ class OptionsCenterArea extends StatelessWidget {
                                 color: verification == 0
                                     ? ColorRes.red8
                                     : verification == 1
-                                        ? ColorRes.lightorange
+                                        ? ColorRes.lightOrange
                                         : ColorRes.green2,
                                 fontFamily: FontRes.semiBold,
                                 letterSpacing: 0.8,
@@ -219,8 +218,7 @@ class CircleImage extends StatelessWidget {
       height: 28,
       width: 28,
       margin: const EdgeInsets.symmetric(horizontal: 10),
-      decoration: BoxDecoration(
-          color: ColorRes.orange2.withOpacity(0.1), shape: BoxShape.circle),
+      decoration: BoxDecoration(color: ColorRes.orange2.withOpacity(0.1), shape: BoxShape.circle),
       child: Image.asset(image),
     );
   }
@@ -233,11 +231,7 @@ class PermissionTiles extends StatelessWidget {
   final VoidCallback onTap;
 
   const PermissionTiles(
-      {Key? key,
-      required this.title,
-      required this.subTitle,
-      required this.enable,
-      required this.onTap})
+      {Key? key, required this.title, required this.subTitle, required this.enable, required this.onTap})
       : super(key: key);
 
   @override

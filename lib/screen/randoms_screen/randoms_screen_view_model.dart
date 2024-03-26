@@ -4,6 +4,7 @@ import 'package:orange_ui/common/widgets/common_fun.dart';
 import 'package:orange_ui/common/widgets/snack_bar_widget.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
+import 'package:orange_ui/screen/live_grid_screen/live_grid_screen.dart';
 import 'package:orange_ui/screen/notification_screen/notification_screen.dart';
 import 'package:orange_ui/screen/randoms_search_screen/randoms_search_screen.dart';
 import 'package:orange_ui/screen/search_screen/search_screen.dart';
@@ -40,15 +41,15 @@ class RandomsScreenViewModel extends BaseViewModel {
   }
 
   void onSearchBtnTap() {
-    data?.isBlock == 1
-        ? SnackBarWidget().snackBarWidget(S.current.userBlock)
-        : Get.to(() => const SearchScreen());
+    data?.isBlock == 1 ? SnackBarWidget().snackBarWidget(S.current.userBlock) : Get.to(() => const SearchScreen());
+  }
+
+  void onLivesBtnClick() {
+    Get.to(() => const LiveGridScreen());
   }
 
   void onGenderChange(String value) {
-    data?.isBlock == 1
-        ? SnackBarWidget().snackBarWidget(S.current.userBlock)
-        : selectedGender = value;
+    data?.isBlock == 1 ? SnackBarWidget().snackBarWidget(S.current.userBlock) : selectedGender = value;
     notifyListeners();
   }
 
@@ -56,10 +57,7 @@ class RandomsScreenViewModel extends BaseViewModel {
     data?.isBlock == 1
         ? SnackBarWidget().snackBarWidget(S.current.userBlock)
         : Get.to(() => const RandomsSearchScreen(), arguments: [
-            {
-              Urls.aGender: selectedGender,
-              FirebaseRes.image: data?.images?[0].image ?? ''
-            }
+            {Urls.aGender: selectedGender, FirebaseRes.image: data?.images?[0].image ?? ''}
           ]);
   }
 

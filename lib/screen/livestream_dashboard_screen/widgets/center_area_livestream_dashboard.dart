@@ -71,8 +71,7 @@ class CenterAreaLiveStreamDashBoard extends StatelessWidget {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(15),
                       child: BackdropFilter(
-                        filter: ImageFilter.blur(
-                            sigmaY: 15, sigmaX: 15, tileMode: TileMode.mirror),
+                        filter: ImageFilter.blur(sigmaY: 15, sigmaX: 15, tileMode: TileMode.mirror),
                         child: Padding(
                           padding: const EdgeInsets.only(left: 15, right: 5),
                           child: Row(
@@ -93,14 +92,13 @@ class CenterAreaLiveStreamDashBoard extends StatelessWidget {
                                   width: 112,
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(30),
-                                      color: ColorRes.lightpink1
-                                          .withOpacity(0.15)),
+                                      color: ColorRes.lightPink1.withOpacity(0.15)),
                                   child: Center(
                                     child: Text(
                                       S.current.apply,
                                       style: const TextStyle(
                                         fontSize: 12,
-                                        color: ColorRes.lightpink1,
+                                        color: ColorRes.lightPink1,
                                         fontFamily: FontRes.semiBold,
                                         letterSpacing: 0.8,
                                       ),
@@ -156,8 +154,7 @@ class CenterAreaLiveStreamDashBoard extends StatelessWidget {
                             const SizedBox(width: 13),
                             Text(
                               S.current.eligibility,
-                              style: const TextStyle(
-                                  fontSize: 15, color: ColorRes.lightGrey4),
+                              style: const TextStyle(fontSize: 15, color: ColorRes.lightGrey4),
                             ),
                             const Spacer(),
                             Container(
@@ -168,9 +165,8 @@ class CenterAreaLiveStreamDashBoard extends StatelessWidget {
                                 color: eligible == 0
                                     ? ColorRes.red7.withOpacity(0.20)
                                     : eligible == 1
-                                        ? ColorRes.lightorange.withOpacity(0.20)
-                                        : ColorRes.lightgreen1
-                                            .withOpacity(0.20),
+                                        ? ColorRes.lightOrange.withOpacity(0.20)
+                                        : ColorRes.lightGreen1.withOpacity(0.20),
                               ),
                               child: Center(
                                 child: Text(
@@ -183,7 +179,7 @@ class CenterAreaLiveStreamDashBoard extends StatelessWidget {
                                     color: eligible == 0
                                         ? ColorRes.red8
                                         : eligible == 1
-                                            ? ColorRes.lightorange
+                                            ? ColorRes.lightOrange
                                             : ColorRes.green2,
                                     fontSize: 12,
                                     fontFamily: FontRes.semiBold,
@@ -224,8 +220,7 @@ class CenterAreaLiveStreamDashBoard extends StatelessWidget {
                     child: BackdropFilter(
                       filter: ImageFilter.blur(sigmaY: 15, sigmaX: 15),
                       child: Padding(
-                        padding:
-                            const EdgeInsets.only(left: 19, top: 18, right: 13),
+                        padding: const EdgeInsets.only(left: 19, top: 18, right: 13),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -264,11 +259,8 @@ class CenterAreaLiveStreamDashBoard extends StatelessWidget {
                             const Spacer(),
                             LinearProgressIndicator(
                               backgroundColor: ColorRes.grey31,
-                              value: PrefService.minThreshold == 0
-                                  ? 0
-                                  : coinValue / PrefService.minThreshold,
-                              valueColor: const AlwaysStoppedAnimation<Color>(
-                                  ColorRes.darkOrange),
+                              value: PrefService.minThreshold == 0 ? 0 : coinValue / PrefService.minThreshold,
+                              valueColor: const AlwaysStoppedAnimation<Color>(ColorRes.darkOrange),
                             ),
                             const Spacer(),
                             Row(
@@ -288,38 +280,31 @@ class CenterAreaLiveStreamDashBoard extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
                                 InkWell(
-                                  onTap: coinValue >= PrefService.minThreshold
-                                      ? onRedeemTap
-                                      : () {},
+                                  onTap: coinValue >= PrefService.minThreshold ? onRedeemTap : () {},
                                   child: Container(
                                     height: 41,
                                     width: 141,
-                                    decoration:
-                                        coinValue >= PrefService.minThreshold
-                                            ? BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(30),
-                                                gradient: const LinearGradient(
-                                                  begin: Alignment.topCenter,
-                                                  end: Alignment.bottomCenter,
-                                                  colors: [
-                                                    ColorRes.lightOrange1,
-                                                    ColorRes.darkOrange,
-                                                  ],
-                                                ),
-                                              )
-                                            : BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(30),
-                                                color: ColorRes.lightGrey6
-                                                    .withOpacity(0.20),
-                                              ),
+                                    decoration: coinValue >= PrefService.minThreshold
+                                        ? BoxDecoration(
+                                            borderRadius: BorderRadius.circular(30),
+                                            gradient: const LinearGradient(
+                                              begin: Alignment.topCenter,
+                                              end: Alignment.bottomCenter,
+                                              colors: [
+                                                ColorRes.lightOrange1,
+                                                ColorRes.darkOrange,
+                                              ],
+                                            ),
+                                          )
+                                        : BoxDecoration(
+                                            borderRadius: BorderRadius.circular(30),
+                                            color: ColorRes.lightGrey6.withOpacity(0.20),
+                                          ),
                                     child: Center(
                                       child: Text(
                                         S.current.redeemCap,
                                         style: TextStyle(
-                                          color: coinValue >=
-                                                  PrefService.minThreshold
+                                          color: coinValue >= PrefService.minThreshold
                                               ? ColorRes.white
                                               : ColorRes.darkGrey9,
                                           fontSize: 12,
@@ -396,13 +381,11 @@ class CenterAreaLiveStreamDashBoard extends StatelessWidget {
                       child: BackdropFilter(
                         filter: ImageFilter.blur(sigmaY: 15, sigmaX: 15),
                         child: Padding(
-                          padding: const EdgeInsets.only(
-                              left: 19, top: 18, right: 13, bottom: 15),
+                          padding: const EdgeInsets.only(left: 19, top: 18, right: 13, bottom: 15),
                           child: Column(
                             children: [
                               Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
                                     S.current.totalStream,
@@ -426,13 +409,10 @@ class CenterAreaLiveStreamDashBoard extends StatelessWidget {
                               ),
                               const Spacer(),
                               Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    NumberFormat.compactCurrency(
-                                            decimalDigits: 0, name: '')
-                                        .format(
+                                    NumberFormat.compactCurrency(decimalDigits: 0, name: '').format(
                                       int.parse(totalStream ?? '0'),
                                     ),
                                     style: const TextStyle(
@@ -443,9 +423,7 @@ class CenterAreaLiveStreamDashBoard extends StatelessWidget {
                                     ),
                                   ),
                                   Text(
-                                    NumberFormat.compactCurrency(
-                                            decimalDigits: 2, name: '')
-                                        .format(
+                                    NumberFormat.compactCurrency(decimalDigits: 2, name: '').format(
                                       int.parse(totalCollection ?? '0'),
                                     ),
                                     style: const TextStyle(
@@ -459,8 +437,7 @@ class CenterAreaLiveStreamDashBoard extends StatelessWidget {
                               ),
                               const Spacer(),
                               Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   InkWell(
                                     onTap: onHistoryBtnTap,
@@ -469,8 +446,7 @@ class CenterAreaLiveStreamDashBoard extends StatelessWidget {
                                       width: 130,
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(30),
-                                        color: ColorRes.lightGrey6
-                                            .withOpacity(0.20),
+                                        color: ColorRes.lightGrey6.withOpacity(0.20),
                                       ),
                                       child: Center(
                                         child: Text(
@@ -490,12 +466,10 @@ class CenterAreaLiveStreamDashBoard extends StatelessWidget {
                                     child: Container(
                                       // height: 38,
                                       //width: 150,
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 18, vertical: 11),
+                                      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 11),
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(30),
-                                        color: ColorRes.lightGrey6
-                                            .withOpacity(0.20),
+                                        color: ColorRes.lightGrey6.withOpacity(0.20),
                                       ),
                                       child: Center(
                                         child: Text(

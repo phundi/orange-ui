@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:orange_ui/screen/dashboard/dashboard_screen_view_model.dart';
 import 'package:orange_ui/screen/dashboard/widgets/bottom_bar.dart';
 import 'package:orange_ui/screen/explore_screen/explore_screen.dart';
-import 'package:orange_ui/screen/live_stream_history_screen/live_stream_history_screen.dart';
+import 'package:orange_ui/screen/feed_screen/feed_screen.dart';
 import 'package:orange_ui/screen/message_screen/message_screen.dart';
 import 'package:orange_ui/screen/profile_screen/profile_screen.dart';
 import 'package:orange_ui/screen/randoms_screen/randoms_screen.dart';
@@ -33,7 +33,7 @@ class DashboardScreen extends StatelessWidget {
                 : model.pageIndex == 1
                     ? const RandomsScreen()
                     : model.pageIndex == 2
-                        ? const LiveStreamHistory()
+                        ? const FeedScreen()
                         : model.pageIndex == 3
                             ? const MessageScreen()
                             : const ProfileScreen(),

@@ -5,6 +5,7 @@ import 'package:orange_ui/common/widgets/snack_bar_widget.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/screen/edit_profile_screen/edit_profile_screen.dart';
+import 'package:orange_ui/screen/live_grid_screen/live_grid_screen.dart';
 import 'package:orange_ui/screen/notification_screen/notification_screen.dart';
 import 'package:orange_ui/screen/options_screen/options_screen.dart';
 import 'package:orange_ui/screen/search_screen/search_screen.dart';
@@ -80,6 +81,10 @@ class ProfileScreenViewModel extends BaseViewModel {
     userData?.isBlock == 1
         ? SnackBarWidget().snackBarWidget(S.current.userBlock)
         : Get.to(() => const SearchScreen());
+  }
+
+  void onLivesBtnClick() {
+    Get.to(() => const LiveGridScreen());
   }
 
   void onMainImageChange() {

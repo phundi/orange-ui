@@ -7,62 +7,39 @@ class Urls {
   static const String aGetInterests = '${ConstRes.aBaseUrl}getInterests';
   static const String aGetPackage = '${ConstRes.aBaseUrl}getPackage';
   static const String aUpdateProfile = '${ConstRes.aBaseUrl}updateProfile';
-  static const String aGetUserNotification =
-      '${ConstRes.aBaseUrl}getUserNotifications';
+  static const String aGetUserNotification = '${ConstRes.aBaseUrl}getUserNotifications';
   static const String aOnOffAnonymous = '${ConstRes.aBaseUrl}onOffAnonymous';
-  static const String aOnOffShowMeOnMap =
-      '${ConstRes.aBaseUrl}onOffShowMeOnMap';
-  static const String aOnOffNotification =
-      '${ConstRes.aBaseUrl}onOffNotification';
+  static const String aOnOffShowMeOnMap = '${ConstRes.aBaseUrl}onOffShowMeOnMap';
+  static const String aOnOffNotification = '${ConstRes.aBaseUrl}onOffNotification';
   static const String aAddReport = '${ConstRes.aBaseUrl}addReport';
-  static const String aGetAdminNotification =
-      '${ConstRes.aBaseUrl}getAdminNotifications';
+  static const String aGetAdminNotification = '${ConstRes.aBaseUrl}getAdminNotifications';
   static const String aApplyForLive = '${ConstRes.aBaseUrl}applyForLive';
-  static const String aApplyForVerification =
-      '${ConstRes.aBaseUrl}applyForVerification';
-  static const String aPlaceRedeemRequest =
-      '${ConstRes.aBaseUrl}placeRedeemRequest';
+  static const String aApplyForVerification = '${ConstRes.aBaseUrl}applyForVerification';
+  static const String aPlaceRedeemRequest = '${ConstRes.aBaseUrl}placeRedeemRequest';
   static const String aGetSettingData = '${ConstRes.aBaseUrl}getSettingData';
   static const String aSearchUsers = '${ConstRes.aBaseUrl}searchUsers';
-  static const String aSearchUsersForInterest =
-      '${ConstRes.aBaseUrl}searchUsersForInterest';
-  static const String aUpdateSavedProfile =
-      '${ConstRes.aBaseUrl}updateSavedProfile';
-  static const String aUpdateLikedProfile =
-      '${ConstRes.aBaseUrl}updateLikedProfile';
-  static const String aUpdateBlockList =
-      '${ConstRes.aBaseUrl}updateUserBlockList';
-  static const String aFetchAllLiveStreamHistory =
-      '${ConstRes.aBaseUrl}fetchAllLiveStreamHistory';
-  static const String aMinusCoinsFromWallet =
-      '${ConstRes.aBaseUrl}minusCoinsFromWallet';
-  static const String aStorageFileGivePath =
-      '${ConstRes.aBaseUrl}storeFileGivePath';
-  static const String aAddCoinsToWallet =
-      '${ConstRes.aBaseUrl}addCoinsToWallet';
+  static const String aSearchUsersForInterest = '${ConstRes.aBaseUrl}searchUsersForInterest';
+  static const String aUpdateSavedProfile = '${ConstRes.aBaseUrl}updateSavedProfile';
+  static const String aUpdateLikedProfile = '${ConstRes.aBaseUrl}updateLikedProfile';
+  static const String aUpdateBlockList = '${ConstRes.aBaseUrl}updateUserBlockList';
+  static const String aFetchAllLiveStreamHistory = '${ConstRes.aBaseUrl}fetchAllLiveStreamHistory';
+  static const String aMinusCoinsFromWallet = '${ConstRes.aBaseUrl}minusCoinsFromWallet';
+  static const String aStorageFileGivePath = '${ConstRes.aBaseUrl}storeFileGivePath';
+  static const String aAddCoinsToWallet = '${ConstRes.aBaseUrl}addCoinsToWallet';
   static const String aGetDiamondPacks = '${ConstRes.aBaseUrl}getDiamondPacks';
   static const String aDeleteMyAccount = '${ConstRes.aBaseUrl}deleteMyAccount';
-  static const String aAddLiveStreamHistory =
-      '${ConstRes.aBaseUrl}addLiveStreamHistory';
-  static const String aFetchUsersByCoordinates =
-      '${ConstRes.aBaseUrl}fetchUsersByCordinates';
+  static const String aAddLiveStreamHistory = '${ConstRes.aBaseUrl}addLiveStreamHistory';
+  static const String aFetchUsersByCoordinates = '${ConstRes.aBaseUrl}fetchUsersByCordinates';
   static const String aGetUserDetails = '${ConstRes.aBaseUrl}getUserDetails';
-  static const String aFetchMyRedeemRequests =
-      '${ConstRes.aBaseUrl}fetchMyRedeemRequests';
-  static const String aGetExplorePageProfileList =
-      '${ConstRes.aBaseUrl}getExplorePageProfileList';
-  static const String aGetRandomProfile =
-      '${ConstRes.aBaseUrl}getRandomProfile';
+  static const String aFetchMyRedeemRequests = '${ConstRes.aBaseUrl}fetchMyRedeemRequests';
+  static const String aGetExplorePageProfileList = '${ConstRes.aBaseUrl}getExplorePageProfileList';
+  static const String aGetRandomProfile = '${ConstRes.aBaseUrl}getRandomProfile';
   static const String aNotifyLikedUser = '${ConstRes.aBaseUrl}notifyLikedUser';
   static const String aLogoutUser = '${ConstRes.aBaseUrl}logOutUser';
-  static const String aNotificationUrl =
-      '${ConstRes.aBaseUrl}pushNotificationToSingleUser';
-  static const String aFetchSavedProfiles =
-      '${ConstRes.aBaseUrl}fetchSavedProfiles';
-  static const String aFetchLikedProfiles =
-      '${ConstRes.aBaseUrl}fetchLikedProfiles';
-  static const String aFetchBlockedProfiles =
-      '${ConstRes.aBaseUrl}fetchBlockedProfiles';
+  static const String aNotificationUrl = '${ConstRes.aBaseUrl}pushNotificationToSingleUser';
+  static const String aFetchSavedProfiles = '${ConstRes.aBaseUrl}fetchSavedProfiles';
+  static const String aFetchLikedProfiles = '${ConstRes.aBaseUrl}fetchLikedProfiles';
+  static const String aFetchBlockedProfiles = '${ConstRes.aBaseUrl}fetchBlockedProfiles';
 
   ///------------------------ Params ------------------------///
   static const String aApiKeyName = 'apikey';
@@ -129,4 +106,7 @@ class Urls {
   static const String aTopicName = 'Orange';
   static const String aDataUserId = 'data_user_id';
   static const String aViewerNotificationId = 'viewer_notification_id';
+
+  // Social Media
+  static const String aMyUserId = 'my_user_id';
 }

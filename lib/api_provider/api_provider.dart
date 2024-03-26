@@ -187,9 +187,13 @@ class ApiProvider {
     return updateProfile;
   }
 
-  Future<GetProfile?> getProfile({int? userID}) async {
-    http.Response response = await http.post(Uri.parse(Urls.aGetProfile),
-        headers: {Urls.aApiKeyName: ConstRes.apiKey}, body: {Urls.aUserIdName: userID.toString()});
+  Future<GetProfile?> getProfile({int? userID, int? myUserID}) async {
+    http.Response response = await http.post(Uri.parse(Urls.aGetProfile), headers: {
+      Urls.aApiKeyName: ConstRes.apiKey
+    }, body: {
+      Urls.aUserIdName: userID.toString(),
+      Urls.aMyUserId: PrefService.userId.toString(),
+    });
     return GetProfile.fromJson(jsonDecode(response.body));
   }
 

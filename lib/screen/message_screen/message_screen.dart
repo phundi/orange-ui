@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:orange_ui/common/widgets/dashboard_top_bar.dart';
 import 'package:orange_ui/common/widgets/loader.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/chat_and_live_stream/chat.dart';
@@ -8,8 +9,6 @@ import 'package:orange_ui/screen/message_screen/widgets/user_card.dart';
 import 'package:orange_ui/utils/color_res.dart';
 import 'package:orange_ui/utils/font_res.dart';
 import 'package:stacked/stacked.dart';
-
-import 'widgets/message_top_area.dart';
 
 class MessageScreen extends StatelessWidget {
   const MessageScreen({Key? key}) : super(key: key);
@@ -26,10 +25,10 @@ class MessageScreen extends StatelessWidget {
           color: ColorRes.white,
           child: Column(
             children: [
-              MessageTopArea(
-                onNotificationTap: model.onNotificationTap,
-                onSearchTap: model.onSearchTap,
-              ),
+              DashboardTopBar(
+                  onNotificationTap: model.onNotificationTap,
+                  onSearchTap: model.onSearchTap,
+                  onLivesBtnClick: model.onLivesBtnClick),
               const SizedBox(height: 3),
               if (model.isLoading)
                 Expanded(child: Loader().lottieWidget())
@@ -40,9 +39,7 @@ class MessageScreen extends StatelessWidget {
                           child: Text(
                             S.of(context).noData,
                             style: const TextStyle(
-                                color: ColorRes.grey14,
-                                fontFamily: FontRes.semiBold,
-                                fontSize: 17),
+                                color: ColorRes.grey14, fontFamily: FontRes.semiBold, fontSize: 17),
                           ),
                         )
                       : ListView.builder(
@@ -62,9 +59,7 @@ class MessageScreen extends StatelessWidget {
                               child: UserCard(
                                 name: chatUser?.username ?? '',
                                 age: chatUser?.age ?? '',
-                                msg: conversation.lastMsg!.isEmpty
-                                    ? ''
-                                    : conversation.lastMsg,
+                                msg: conversation.lastMsg!.isEmpty ? '' : conversation.lastMsg,
                                 time: conversation.time.toString(),
                                 image: chatUser?.image ?? '',
                                 newMsg: chatUser?.isNewMsg ?? false,
