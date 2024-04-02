@@ -432,7 +432,7 @@ class ApiProvider {
       headers: {Urls.aApiKeyName: ConstRes.apiKey},
       body: {Urls.aUserIdName: PrefService.userId.toString(), Urls.aAmount: amount.toString()},
     );
-    print(response.body);
+
     return MinusCoinFromWallet.fromJson(jsonDecode(response.body));
   }
 
@@ -553,7 +553,7 @@ class ApiProvider {
       }),
     )
         .then((value) {
-      print(value.body);
+      log(value.body);
     });
   }
 

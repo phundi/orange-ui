@@ -3128,6 +3128,126 @@ class S {
       args: [],
     );
   }
+
+  /// `Photo`
+  String get photo {
+    return Intl.message(
+      'Photo',
+      name: 'photo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Write something here...`
+  String get writeSomethingHere {
+    return Intl.message(
+      'Write something here...',
+      name: 'writeSomethingHere',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create Post`
+  String get createPost {
+    return Intl.message(
+      'Create Post',
+      name: 'createPost',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Post`
+  String get post {
+    return Intl.message(
+      'Post',
+      name: 'post',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select interests to continue`
+  String get selectInterestsToContinue {
+    return Intl.message(
+      'Select interests to continue',
+      name: 'selectInterestsToContinue',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Posts`
+  String get posts {
+    return Intl.message(
+      'Posts',
+      name: 'posts',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Follow`
+  String get follow {
+    return Intl.message(
+      'Follow',
+      name: 'follow',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Followers`
+  String get followers {
+    return Intl.message(
+      'Followers',
+      name: 'followers',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Following`
+  String get following {
+    return Intl.message(
+      'Following',
+      name: 'following',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Following List`
+  String get followingList {
+    return Intl.message(
+      'Following List',
+      name: 'followingList',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search Profile`
+  String get searchProfile {
+    return Intl.message(
+      'Search Profile',
+      name: 'searchProfile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unfollow`
+  String get unfollow {
+    return Intl.message(
+      'Unfollow',
+      name: 'unfollow',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

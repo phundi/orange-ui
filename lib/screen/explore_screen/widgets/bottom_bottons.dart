@@ -5,6 +5,7 @@ import 'package:orange_ui/service/pref_service.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
 import 'package:orange_ui/utils/font_res.dart';
+import 'package:orange_ui/utils/style_res.dart';
 
 class BottomButtons extends StatelessWidget {
   final VoidCallback onPlayBtnTap;
@@ -24,21 +25,15 @@ class BottomButtons extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         Visibility(
-            visible:
-                PrefService.settingData?.appdata?.isDating == 0 ? false : true,
+            visible: PrefService.settingData?.appdata?.isDating == 0 ? false : true,
             child: PlayBtnClick(onPlayBtnClick: onPlayBtnTap)),
         UnicornOutlineButton(
+          onPressed: onNextBtnTap,
+          padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+          margin: EdgeInsets.zero,
           strokeWidth: 3,
           radius: 30,
-          gradient: const LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              ColorRes.lightOrange1,
-              ColorRes.darkOrange,
-            ],
-          ),
-          onPressed: onNextBtnTap,
+          gradient: StyleRes.linearGradient,
           child: Center(
             child: Text(
               S.current.next,
@@ -51,8 +46,7 @@ class BottomButtons extends StatelessWidget {
           ),
         ),
         Visibility(
-          visible:
-              PrefService.settingData?.appdata?.isDating == 0 ? false : true,
+          visible: PrefService.settingData?.appdata?.isDating == 0 ? false : true,
           child: InkWell(
             onTap: onEyeTap,
             borderRadius: BorderRadius.circular(10),
@@ -88,15 +82,13 @@ class BottomButtons extends StatelessWidget {
 class PlayBtnClick extends StatefulWidget {
   final VoidCallback onPlayBtnClick;
 
-  const PlayBtnClick({Key? key, required this.onPlayBtnClick})
-      : super(key: key);
+  const PlayBtnClick({Key? key, required this.onPlayBtnClick}) : super(key: key);
 
   @override
   State<PlayBtnClick> createState() => _PlayBtnClickState();
 }
 
-class _PlayBtnClickState extends State<PlayBtnClick>
-    with SingleTickerProviderStateMixin {
+class _PlayBtnClickState extends State<PlayBtnClick> with SingleTickerProviderStateMixin {
   late double _scale;
   late AnimationController _controller;
 

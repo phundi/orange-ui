@@ -39,53 +39,54 @@ class FeedStatusBar extends StatelessWidget {
             width: 80,
             margin: const EdgeInsets.symmetric(vertical: 15),
             child: ListView.builder(
-              itemCount: 5,
-              padding: const EdgeInsets.symmetric(horizontal: 0),
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) => Container(
-                width: 80,
-                height: 90,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      width: 70,
-                      height: 70,
-                      margin: const EdgeInsets.symmetric(horizontal: 5),
-                      decoration: ShapeDecoration(
-                        shape: SmoothRectangleBorder(
-                          borderRadius: SmoothBorderRadius(cornerRadius: 15, cornerSmoothing: 1),
-                        ),
-                        gradient: const LinearGradient(
-                            colors: [ColorRes.lightOrange1, ColorRes.darkOrange],
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter),
-                      ),
-                      child: Container(
-                        width: 66,
-                        height: 66,
-                        margin: const EdgeInsets.all(2.5),
-                        decoration: ShapeDecoration(
-                            color: ColorRes.white,
+                itemCount: 5,
+                padding: const EdgeInsets.symmetric(horizontal: 0),
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) {
+                  return SizedBox(
+                    width: 80,
+                    height: 90,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          width: 70,
+                          height: 70,
+                          margin: const EdgeInsets.symmetric(horizontal: 5),
+                          decoration: ShapeDecoration(
                             shape: SmoothRectangleBorder(
-                                side: const BorderSide(color: ColorRes.white),
-                                borderRadius: SmoothBorderRadius(cornerRadius: 13, cornerSmoothing: 1))),
-                        child: ClipRRect(
-                          borderRadius: SmoothBorderRadius(cornerRadius: 13, cornerSmoothing: 1),
-                          child: Image.asset(AssetRes.icImage, fit: BoxFit.cover),
+                              borderRadius: SmoothBorderRadius(cornerRadius: 15, cornerSmoothing: 1),
+                            ),
+                            gradient: const LinearGradient(
+                                colors: [ColorRes.lightOrange1, ColorRes.darkOrange],
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter),
+                          ),
+                          child: Container(
+                            width: 66,
+                            height: 66,
+                            margin: const EdgeInsets.all(2.5),
+                            decoration: ShapeDecoration(
+                                color: ColorRes.white,
+                                shape: SmoothRectangleBorder(
+                                    side: const BorderSide(color: ColorRes.white),
+                                    borderRadius: SmoothBorderRadius(cornerRadius: 13, cornerSmoothing: 1))),
+                            child: ClipRRect(
+                              borderRadius: SmoothBorderRadius(cornerRadius: 13, cornerSmoothing: 1),
+                              child: Image.asset(AssetRes.icImage, fit: BoxFit.cover),
+                            ),
+                          ),
                         ),
-                      ),
+                        const Text(
+                          'shirley_setia',
+                          style: TextStyle(color: ColorRes.dimGrey3, fontSize: 13, fontFamily: FontRes.semiBold),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        )
+                      ],
                     ),
-                    const Text(
-                      'shirley_setia',
-                      style: TextStyle(color: ColorRes.dimGrey3, fontSize: 13, fontFamily: FontRes.semiBold),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    )
-                  ],
-                ),
-              ),
-            ),
+                  );
+                }),
           ),
         )
       ],

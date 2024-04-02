@@ -306,5 +306,17 @@
   "lives": "Lives",
   "feed": "Feed",
   "comments": "Comments",
-  "addComment": "Add Comment"
+  "addComment": "Add Comment",
+  "photo": "Photo",
+  "writeSomethingHere": "Write something here...",
+  "createPost": "Create Post",
+  "post": "Post",
+  "selectInterestsToContinue": "Select interests to continue",
+  "posts": "Posts",
+  "follow": "Follow",
+  "followers": "Followers",
+  "following": "Following",
+  "followingList": "Following List",
+  "searchProfile": "Search Profile",
+  "unfollow": "Unfollow"
 }

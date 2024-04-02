@@ -31,9 +31,6 @@ class AssetRes {
   static const String search = "${icons}search.png";
   static const String tickMark = "${icons}tick_mark.png";
   static const String eye = "${icons}eye.png";
-  static const String live1 = "${icons}live1.png";
-  static const String live2 = "${icons}live2.png";
-  static const String live3 = "${icons}live3.png";
   static const String backArrow = "${icons}back_arrow.png";
   static const String home = "${icons}home.png";
   static const String moreHorizontal = "${icons}more_horizontal.png";
@@ -56,7 +53,6 @@ class AssetRes {
   static const String placeholder = "${icons}placeholder.png";
   static const String icBlueTick = "${icons}ic_blue_tick.png";
   static const String icBookMark = "${icons}ic_book_mark.png";
-  static const String icHeart = "${icons}ic_heart.png";
   static const String icBlock = "${icons}ic_block.png";
   static const String icFeed = "${icons}ic_feed.png";
   static const String icHorizontalThreeDot = "${icons}ic_horizontal_three_dot.png";
@@ -65,6 +61,12 @@ class AssetRes {
   static const String icPlay = "${icons}ic_play.png";
   static const String icEye = "${icons}ic_eye.png";
   static const String icBin = "${icons}ic_bin.png";
+  static const String icPhoto = "${icons}ic_photo.png";
+  static const String icVideo = "${icons}ic_video.png";
+  static const String icLive = "${icons}ic_live.png";
+  static const String icPostIcon = "${icons}ic_post_icon.png";
+  static const String icFav = "${icons}ic_fav.png";
+  static const String icFillFav = "${icons}ic_fill_fav.png";
 
   /// ----------------- Images --------------
 
@@ -85,4 +87,8 @@ class AssetRes {
   static const String themeLabelWhite = "${images}theme_label_white.png";
   static const String edit = '${images}eva_edit-fill.png';
   static const String icImage = '${images}ic_image.jpg';
+  static const String icImage1 = '${images}image1.jpeg';
+  static const String icImage2 = '${images}image2.jpeg';
+  static const String icImage3 = '${images}image3.jpeg';
+  static const String icImage4 = '${images}image4.jpeg';
 }

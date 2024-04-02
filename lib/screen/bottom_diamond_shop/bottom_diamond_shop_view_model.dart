@@ -15,10 +15,9 @@ class BottomDiamondShopViewModel extends BaseViewModel {
   int? coinValue = 100;
 
   void init() {
-    print('init');
     const MethodChannel('bubbly_camera').setMethodCallHandler((call) async {
       Get.back();
-      print(call.arguments == true);
+
       if (call.arguments == true) {
         addCoinApiCall();
       } else {

@@ -1,15 +1,19 @@
 import 'dart:ui';
 
+import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
+import 'package:orange_ui/screen/following_list_screen/following_list_screen.dart';
 import 'package:orange_ui/screen/user_detail_screen/user_detail_screen_view_model.dart';
 import 'package:orange_ui/service/pref_service.dart';
+import 'package:orange_ui/utils/app_res.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
 import 'package:orange_ui/utils/font_res.dart';
+import 'package:orange_ui/utils/style_res.dart';
 
 class DetailPage extends StatelessWidget {
   final UserDetailScreenViewModel model;
@@ -21,33 +25,28 @@ class DetailPage extends StatelessWidget {
   // final VoidCallback onShareWithTap;
   // final VoidCallback onReportTap;
 
-  const DetailPage({Key? key, required this.onHideBtnTap, required this.model})
-      : super(key: key);
+  const DetailPage({Key? key, required this.onHideBtnTap, required this.model}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: Get.height - 100,
-      width: Get.width,
+    return Container(
+      margin: const EdgeInsets.only(top: 15),
       child: Stack(
         alignment: Alignment.topCenter,
         children: [
           Padding(
             padding: const EdgeInsets.only(top: 15),
             child: ClipRRect(
-              borderRadius: const BorderRadius.vertical(
-                top: Radius.circular(30),
-              ),
+              borderRadius: const BorderRadius.vertical(top: Radius.circular(30)),
               child: BackdropFilter(
                 filter: ImageFilter.blur(sigmaY: 20, sigmaX: 20),
                 child: Container(
                   width: Get.width,
-                  height: Get.height - 116,
+                  height: Get.height,
                   padding: const EdgeInsets.fromLTRB(21, 20, 21, 0),
                   decoration: BoxDecoration(
                     color: ColorRes.black.withOpacity(0.33),
-                    borderRadius:
-                        const BorderRadius.vertical(top: Radius.circular(30)),
+                    borderRadius: const BorderRadius.vertical(top: Radius.circular(30)),
                   ),
                   child: SingleChildScrollView(
                     child: Column(
@@ -62,7 +61,7 @@ class DetailPage extends StatelessWidget {
                                   Flexible(
                                     flex: 5,
                                     child: Text(
-                                      '${model.userData?.fullname}',
+                                      model.userData?.fullname ?? AppRes.defaultFullname,
                                       style: const TextStyle(
                                           color: ColorRes.white,
                                           fontSize: 22,
@@ -73,9 +72,7 @@ class DetailPage extends StatelessWidget {
                                   ),
                                   Flexible(
                                     child: Text(
-                                      model.userData?.age == null
-                                          ? ''
-                                          : " ${model.userData?.age} ",
+                                      " ${model.userData?.age ?? 0} ",
                                       style: const TextStyle(
                                           color: ColorRes.white,
                                           fontSize: 22,
@@ -86,23 +83,15 @@ class DetailPage extends StatelessWidget {
                                   ),
                                   Flexible(
                                     child: Visibility(
-                                      visible: model.userData?.isVerified == 2
-                                          ? true
-                                          : false,
-                                      child: Image.asset(
-                                        AssetRes.tickMark,
-                                        height: 20,
-                                        width: 20,
-                                      ),
+                                      visible: model.userData?.isVerified == 2 ? true : false,
+                                      child: Image.asset(AssetRes.tickMark, height: 20, width: 20),
                                     ),
                                   ),
                                 ],
                               ),
                             ),
                             Visibility(
-                              visible: PrefService.userId == model.userData?.id
-                                  ? false
-                                  : true,
+                              visible: PrefService.userId == model.userData?.id ? false : true,
                               child: InkWell(
                                 borderRadius: BorderRadius.circular(30),
                                 onTap: model.onSaveTap,
@@ -116,9 +105,7 @@ class DetailPage extends StatelessWidget {
                                   ),
                                   child: Image.asset(
                                     AssetRes.save,
-                                    color: model.save
-                                        ? null
-                                        : ColorRes.dimGrey5.withOpacity(0.70),
+                                    color: model.save ? null : ColorRes.dimGrey5.withOpacity(0.70),
                                   ),
                                 ),
                               ),
@@ -128,10 +115,7 @@ class DetailPage extends StatelessWidget {
                         const SizedBox(height: 3),
                         Text(
                           model.userData?.bio ?? '',
-                          style: TextStyle(
-                            color: ColorRes.white.withOpacity(0.80),
-                            fontSize: 14,
-                          ),
+                          style: TextStyle(color: ColorRes.white.withOpacity(0.80), fontSize: 14),
                         ),
                         const SizedBox(height: 10),
                         Row(
@@ -152,13 +136,11 @@ class DetailPage extends StatelessWidget {
                                   const SizedBox(width: 7),
                                   Flexible(
                                     child: Text(
-                                      model.userData?.live == null ||
-                                              model.userData!.live!.isEmpty
+                                      model.userData?.live == null || model.userData!.live!.isEmpty
                                           ? ''
                                           : '${model.userData?.live}',
                                       style: TextStyle(
-                                          color:
-                                              ColorRes.white.withOpacity(0.80),
+                                          color: ColorRes.white.withOpacity(0.80),
                                           fontSize: 14,
                                           overflow: TextOverflow.ellipsis),
                                       maxLines: 2,
@@ -170,10 +152,7 @@ class DetailPage extends StatelessWidget {
                             const SizedBox(width: 10),
                             Expanded(
                               child: Visibility(
-                                visible:
-                                    PrefService.userId == model.userData?.id
-                                        ? false
-                                        : true,
+                                visible: PrefService.userId == model.userData?.id ? false : true,
                                 child: Row(
                                   children: [
                                     Container(
@@ -198,8 +177,7 @@ class DetailPage extends StatelessWidget {
                                             ? S.of(context).noLocation
                                             : '${model.distance.toStringAsFixed(2)} ${S.of(context).kmsAway}',
                                         style: TextStyle(
-                                            color: ColorRes.white
-                                                .withOpacity(0.80),
+                                            color: ColorRes.white.withOpacity(0.80),
                                             fontSize: 14,
                                             overflow: TextOverflow.ellipsis),
                                         maxLines: 2,
@@ -214,42 +192,69 @@ class DetailPage extends StatelessWidget {
                         const SizedBox(height: 24),
                         Text(
                           S.current.about,
-                          style: const TextStyle(
-                              color: ColorRes.white,
-                              fontFamily: FontRes.bold,
-                              fontSize: 17),
+                          style: const TextStyle(color: ColorRes.white, fontFamily: FontRes.bold, fontSize: 17),
                         ),
                         const SizedBox(height: 5),
                         Text(
                           model.userData?.about ?? S.current.noDataAvailable,
-                          style: TextStyle(
-                              color: ColorRes.white.withOpacity(0.80),
-                              fontSize: 14),
+                          style: TextStyle(color: ColorRes.white.withOpacity(0.80), fontSize: 14),
                         ),
                         const SizedBox(height: 15),
                         Text(
                           S.current.interest,
-                          style: const TextStyle(
-                              color: ColorRes.white,
-                              fontFamily: FontRes.bold,
-                              fontSize: 17),
+                          style: const TextStyle(color: ColorRes.white, fontFamily: FontRes.bold, fontSize: 17),
                         ),
                         const SizedBox(height: 11),
                         interestButtons(model.userData?.interests ?? []),
+                        Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 10.0),
+                            child: ClipRect(
+                              child: BackdropFilter(
+                                filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                                  decoration: BoxDecoration(
+                                      color: ColorRes.davyGrey.withOpacity(0.15),
+                                      border: Border.all(color: ColorRes.dimGrey7.withOpacity(0.15)),
+                                      borderRadius: BorderRadius.circular(50)),
+                                  child: Row(
+                                    children: [
+                                      VerticalColumnText(
+                                        count: 10,
+                                        title: S.of(context).following,
+                                        onTap: () {
+                                          Get.to(() => const FollowingListScreen());
+                                        },
+                                      ),
+                                      const SizedBox(width: 20),
+                                      VerticalColumnText(
+                                        count: 25,
+                                        title: S.of(context).followers,
+                                        onTap: () {
+                                          Get.to(() => const FollowingListScreen());
+                                        },
+                                      ),
+                                      const SizedBox(width: 20),
+                                      Expanded(
+                                        child: FollowUnFollowBtn(
+                                            onTap: model.onFollowUnfollowBtnClick, isFollow: model.isFollow),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            )),
                         const SizedBox(height: 6),
                         Visibility(
-                          visible: PrefService.userId == model.userData?.id
-                              ? false
-                              : true,
+                          visible: PrefService.userId != model.userData?.id,
                           child: InkWell(
                             onTap: model.onChatWithBtnTap,
                             borderRadius: BorderRadius.circular(10),
                             child: Container(
                               height: 50,
                               width: Get.width,
-                              decoration: BoxDecoration(
-                                  color: ColorRes.white,
-                                  borderRadius: BorderRadius.circular(10)),
+                              decoration:
+                                  BoxDecoration(color: ColorRes.white, borderRadius: BorderRadius.circular(10)),
                               child: Center(
                                 child: Text(
                                   '${S.current.chatWith}${model.userData?.fullname?.toUpperCase()}',
@@ -290,9 +295,7 @@ class DetailPage extends StatelessWidget {
                         ),
                         const SizedBox(height: 27),
                         Visibility(
-                          visible: PrefService.userId == model.userData?.id
-                              ? false
-                              : true,
+                          visible: PrefService.userId == model.userData?.id ? false : true,
                           child: Center(
                             child: InkWell(
                               onTap: model.onReportTap,
@@ -346,6 +349,56 @@ class DetailPage extends StatelessWidget {
   }
 }
 
+class FollowUnFollowBtn extends StatelessWidget {
+  final VoidCallback onTap;
+  final bool isFollow;
+
+  const FollowUnFollowBtn({Key? key, required this.onTap, required this.isFollow}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+          padding: const EdgeInsets.all(15),
+          alignment: Alignment.center,
+          decoration: ShapeDecoration(
+              shape: SmoothRectangleBorder(borderRadius: SmoothBorderRadius(cornerRadius: 30)),
+              gradient: !isFollow ? StyleRes.linearGradient : null,
+              color: isFollow ? ColorRes.dimGrey7.withOpacity(0.15) : null),
+          child: Text(
+            (isFollow ? S.current.unfollow : S.current.follow).toUpperCase(),
+            style: const TextStyle(
+                fontFamily: FontRes.bold, color: ColorRes.white, fontSize: 12, letterSpacing: 1.33),
+          )),
+    );
+  }
+}
+
+class VerticalColumnText extends StatelessWidget {
+  final int count;
+  final String title;
+  final VoidCallback onTap;
+
+  const VerticalColumnText({Key? key, required this.count, required this.title, required this.onTap})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      child: Column(
+        children: [
+          Text('$count',
+              style: TextStyle(color: ColorRes.white.withOpacity(0.8), fontFamily: FontRes.bold, fontSize: 22)),
+          Text(title,
+              style: TextStyle(color: ColorRes.white.withOpacity(0.8), fontFamily: FontRes.medium, fontSize: 15)),
+        ],
+      ),
+    );
+  }
+}
+
 class HideInfoChip extends StatefulWidget {
   final VoidCallback onHideBtnTap;
 
@@ -355,8 +408,7 @@ class HideInfoChip extends StatefulWidget {
   State<HideInfoChip> createState() => _HideInfoChipState();
 }
 
-class _HideInfoChipState extends State<HideInfoChip>
-    with SingleTickerProviderStateMixin {
+class _HideInfoChipState extends State<HideInfoChip> with SingleTickerProviderStateMixin {
   double? _scale;
   AnimationController? _controller;
 

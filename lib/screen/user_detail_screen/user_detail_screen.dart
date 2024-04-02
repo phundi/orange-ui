@@ -20,8 +20,7 @@ class UserDetailScreen extends StatefulWidget {
   State<UserDetailScreen> createState() => _UserDetailScreenState();
 }
 
-class _UserDetailScreenState extends State<UserDetailScreen>
-    with TickerProviderStateMixin {
+class _UserDetailScreenState extends State<UserDetailScreen> with TickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<Offset> _animation;
 
@@ -36,10 +35,7 @@ class _UserDetailScreenState extends State<UserDetailScreen>
       begin: const Offset(0, 1.0),
       end: const Offset(0.0, 0.0),
     ).animate(
-      CurvedAnimation(
-          parent: _controller,
-          curve: Curves.fastOutSlowIn,
-          reverseCurve: Curves.fastOutSlowIn),
+      CurvedAnimation(parent: _controller, curve: Curves.fastOutSlowIn, reverseCurve: Curves.fastOutSlowIn),
     );
   }
 
@@ -61,13 +57,11 @@ class _UserDetailScreenState extends State<UserDetailScreen>
                         borderRadius: BorderRadius.circular(0),
                       ),
                     )
-                  : model.userData?.images == null ||
-                          model.userData!.images!.isEmpty
+                  : model.userData?.images == null || model.userData!.images!.isEmpty
                       ? Container(
                           height: Get.height,
                           width: double.infinity,
-                          decoration:
-                              const BoxDecoration(color: ColorRes.lightGrey),
+                          decoration: const BoxDecoration(color: ColorRes.lightGrey),
                           child: Image.asset(AssetRes.imageWarning),
                         )
                       : Container(
@@ -83,18 +77,14 @@ class _UserDetailScreenState extends State<UserDetailScreen>
                             errorWidget: (context, error, stackTrace) {
                               return Container(
                                   decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color:
-                                          ColorRes.darkOrange.withOpacity(0.2)),
+                                      shape: BoxShape.circle, color: ColorRes.darkOrange.withOpacity(0.2)),
                                   child: Image.asset(AssetRes.themeLabel));
                             },
                           ),
                         ),
               Column(
                 children: [
-                  TopBar(
-                    model: model,
-                  ),
+                  TopBar(model: model),
                   Expanded(
                     child: !model.moreInfo
                         ? ImageSelectionArea(

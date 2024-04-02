@@ -177,7 +177,7 @@ class CommentSheet extends StatelessWidget {
                                   height: 35,
                                   width: 35,
                                   padding: const EdgeInsets.all(10),
-                                  margin: EdgeInsets.all(2),
+                                  margin: const EdgeInsets.all(2),
                                   decoration: const BoxDecoration(
                                     shape: BoxShape.circle,
                                     gradient: LinearGradient(

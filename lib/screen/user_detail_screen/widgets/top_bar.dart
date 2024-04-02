@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:orange_ui/screen/user_detail_screen/user_detail_screen_view_model.dart';
 import 'package:orange_ui/service/pref_service.dart';
 import 'package:orange_ui/utils/app_res.dart';
@@ -21,18 +22,13 @@ class TopBar extends StatelessWidget {
         child: Container(
           margin: const EdgeInsets.symmetric(horizontal: 15),
           height: 55,
-          decoration: BoxDecoration(
-            color: ColorRes.black.withOpacity(0.33),
-            borderRadius: BorderRadius.circular(10),
-          ),
+          decoration:
+              BoxDecoration(color: ColorRes.black.withOpacity(0.33), borderRadius: BorderRadius.circular(10)),
           child: Row(
             children: [
               IconButton(
                 onPressed: model.onBackTap,
-                icon: const Icon(
-                  CupertinoIcons.back,
-                  color: ColorRes.red4,
-                ),
+                icon: const Icon(CupertinoIcons.back, color: ColorRes.red4),
               ),
               const SizedBox(width: 10),
               Flexible(
@@ -60,8 +56,7 @@ class TopBar extends StatelessWidget {
                     ),
                     Visibility(
                       visible: model.userData?.isVerified == 2,
-                      child:
-                          Image.asset(AssetRes.tickMark, height: 16, width: 16),
+                      child: Image.asset(AssetRes.tickMark, height: 16, width: 16),
                     ),
                   ],
                 ),
@@ -79,7 +74,9 @@ class TopBar extends StatelessWidget {
                 child: Visibility(
                   visible: !model.moreInfo,
                   replacement: IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.back();
+                    },
                     icon: const Icon(
                       CupertinoIcons.back,
                       color: ColorRes.transparent,
@@ -88,21 +85,16 @@ class TopBar extends StatelessWidget {
                   child: PopupMenuButton<String>(
                     onSelected: (value) => model.onMoreBtnTap(value),
                     color: ColorRes.black2.withOpacity(0.9),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                     itemBuilder: (BuildContext context) {
                       return {model.blockUnBlock, AppRes.report}.map(
                         (String choice) {
                           return PopupMenuItem<String>(
                             value: choice,
-                            textStyle: const TextStyle(
-                                fontFamily: FontRes.medium,
-                                color: ColorRes.white),
+                            textStyle: const TextStyle(fontFamily: FontRes.medium, color: ColorRes.white),
                             child: Text(
                               choice,
-                              style: const TextStyle(
-                                  fontFamily: FontRes.medium,
-                                  color: ColorRes.white),
+                              style: const TextStyle(fontFamily: FontRes.medium, color: ColorRes.white),
                             ),
                           );
                         },
@@ -110,12 +102,7 @@ class TopBar extends StatelessWidget {
                     },
                     child: Container(
                       margin: const EdgeInsets.symmetric(horizontal: 9),
-                      child: Image.asset(
-                        AssetRes.moreHorizontal,
-                        height: 10,
-                        width: 30,
-                        fit: BoxFit.cover,
-                      ),
+                      child: Image.asset(AssetRes.moreHorizontal, height: 10, width: 30, fit: BoxFit.cover),
                     ),
                   ),
                 ),

@@ -19,4 +19,6 @@ class AppRes {
   static const String reportAge = 'reportAge';
   static const String reportAddress = 'reportAddress';
   static const String report = 'Report';
+
+  static const String defaultFullname = 'Unknown';
 }

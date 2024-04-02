@@ -1,46 +1,42 @@
 import 'dart:ui';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:orange_ui/common/widgets/gradient_widget.dart';
 import 'package:orange_ui/common/widgets/live_icon.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
+import 'package:orange_ui/screen/post_screen/post_screen.dart';
 import 'package:orange_ui/screen/user_detail_screen/user_detail_screen_view_model.dart';
 import 'package:orange_ui/service/pref_service.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
 import 'package:orange_ui/utils/const_res.dart';
 import 'package:orange_ui/utils/font_res.dart';
+import 'package:orange_ui/utils/style_res.dart';
 
 class ImageSelectionArea extends StatelessWidget {
   final VoidCallback onMoreInfoTap;
 
   final UserDetailScreenViewModel model;
 
-  const ImageSelectionArea(
-      {Key? key, required this.onMoreInfoTap, required this.model})
-      : super(key: key);
+  const ImageSelectionArea({Key? key, required this.onMoreInfoTap, required this.model}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 35 + 76 + 15 + AppBar().preferredSize.height + 20 + 57 + 10,
+      // height: 35 + 76 + 15 + AppBar().preferredSize.height + 20 + 57 + 10,
       width: Get.width,
       child: Column(
         children: [
           joinBtnChip(),
           const Spacer(),
           Visibility(
-              visible: PrefService.settingData?.appdata?.isDating == 0
-                  ? false
-                  : true,
-              child: LikeUnlikeBtn(
-                  like: model.like,
-                  onLikeBtnTap: model.onLikeBtnTap,
-                  userId: model.userData?.id)),
+              visible: PrefService.settingData?.appdata?.isDating == 0 ? false : true,
+              child:
+                  LikeUnlikeBtn(like: model.like, onLikeBtnTap: model.onLikeBtnTap, userId: model.userData?.id)),
           const SizedBox(height: 15),
           imageListArea(model.userData?.images ?? []),
           const SizedBox(height: 20),
@@ -51,115 +47,120 @@ class ImageSelectionArea extends StatelessWidget {
   }
 
   Widget joinBtnChip() {
-    return Visibility(
-      visible: PrefService.userId == model.userData?.id ? false : true,
-      child: Visibility(
-        visible: model.userData?.isLiveNow == 1 ? true : false,
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(30),
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaY: 10, sigmaX: 10),
-            child: InkWell(
-              onTap: model.onJoinBtnTap,
-              borderRadius: BorderRadius.circular(30),
-              child: Container(
-                height: 35,
-                width: 205,
-                padding: const EdgeInsets.fromLTRB(4, 2, 2, 2),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  color: ColorRes.black.withOpacity(0.33),
-                ),
-                child: Row(
-                  children: [
-                    const LiveIcon(),
-                    const SizedBox(width: 3),
-                    Text(
-                      S.current.liveCap,
-                      style: const TextStyle(
-                        color: ColorRes.white,
-                        fontSize: 12,
-                      ),
-                    ),
-                    Text(
-                      " ${S.current.nowCap}",
-                      style: const TextStyle(
-                        color: ColorRes.white,
-                        fontSize: 12,
-                        fontFamily: FontRes.bold,
-                      ),
-                    ),
-                    const Spacer(),
-                    Container(
-                      height: 31,
-                      width: 95,
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Visibility(
+          // visible: PrefService.userId == model.userData?.id ? false : true,
+          child: Visibility(
+            // visible: model.userData?.isLiveNow == 1 ? true : false,
+            child: Container(
+              margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(30),
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(sigmaY: 10, sigmaX: 10),
+                  child: InkWell(
+                    onTap: model.onJoinBtnTap,
+                    borderRadius: BorderRadius.circular(30),
+                    child: Container(
+                      height: 35,
+                      padding: const EdgeInsets.all(2),
                       decoration: BoxDecoration(
-                        color: ColorRes.white.withOpacity(0.10),
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      child: Center(
-                        child: Text(
-                          S.current.join,
-                          style: const TextStyle(
-                            color: ColorRes.white,
-                            fontSize: 12,
-                            fontFamily: FontRes.bold,
+                          borderRadius: BorderRadius.circular(30), color: ColorRes.black.withOpacity(0.33)),
+                      child: Row(
+                        children: [
+                          const LiveIcon(),
+                          const SizedBox(width: 3),
+                          Text(S.current.liveCap, style: const TextStyle(color: ColorRes.white, fontSize: 12)),
+                          Text(
+                            " ${S.current.nowCap}",
+                            style: const TextStyle(color: ColorRes.white, fontSize: 12, fontFamily: FontRes.bold),
                           ),
-                        ),
+                          const SizedBox(width: 10),
+                          Container(
+                            height: 31,
+                            width: 95,
+                            decoration: BoxDecoration(
+                                color: ColorRes.white.withOpacity(0.10), borderRadius: BorderRadius.circular(30)),
+                            child: Center(
+                              child: Text(
+                                S.current.join,
+                                style:
+                                    const TextStyle(color: ColorRes.white, fontSize: 12, fontFamily: FontRes.bold),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  ],
+                  ),
                 ),
               ),
             ),
           ),
         ),
-      ),
+        InkWell(
+          onTap: () {
+            Get.to(() => const PostScreen());
+          },
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 23, vertical: 10),
+            margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+            decoration: ShapeDecoration(
+                shape: SmoothRectangleBorder(borderRadius: SmoothBorderRadius(cornerRadius: 30)),
+                gradient: StyleRes.linearGradient),
+            child: Row(
+              children: [
+                Image.asset(AssetRes.icPostIcon, width: 15, height: 15),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                  child: Text(
+                    S.current.posts.toUpperCase(),
+                    style:
+                        TextStyle(color: ColorRes.white.withOpacity(0.8), fontFamily: FontRes.bold, fontSize: 11),
+                  ),
+                )
+              ],
+            ),
+          ),
+        )
+      ],
     );
   }
 
   Widget imageListArea(List<Images> imageList) {
     return SizedBox(
-      height: 58,
+      height: 60,
       child: ListView.builder(
         itemCount: imageList.length,
         padding: const EdgeInsets.symmetric(horizontal: 20),
         scrollDirection: Axis.horizontal,
+        shrinkWrap: true,
         itemBuilder: (context, index) {
           Images? images = imageList[index];
           return InkWell(
             borderRadius: BorderRadius.circular(10),
             onTap: () => model.onImageSelect(index),
             child: Container(
-              height: 58,
-              width: 58,
+              height: 60,
+              width: 60,
               margin: const EdgeInsets.symmetric(horizontal: 5),
               decoration: BoxDecoration(
-                border: model.selectedImgIndex == index
-                    ? Border.all(
-                        color: ColorRes.white.withOpacity(0.80),
-                        width: 2,
-                      )
-                    : null,
-                borderRadius: BorderRadius.circular(10),
-              ),
+                  border: model.selectedImgIndex == index
+                      ? Border.all(color: ColorRes.white.withOpacity(0.80), width: 2)
+                      : Border.all(color: ColorRes.transparent, width: 2),
+                  borderRadius: BorderRadius.circular(10)),
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: CachedNetworkImage(
-                  imageUrl: '${ConstRes.aImageBaseUrl}${images.image}',
-                  height: 58,
-                  width: 58,
-                  fit: BoxFit.cover,
-                  cacheKey: '${ConstRes.aImageBaseUrl}${images.image}',
-                  errorWidget: (context, url, error) {
-                    return Image.asset(
-                      AssetRes.themeLabel,
-                      height: 58,
-                      width: 58,
-                    );
-                  },
-                ),
-              ),
+                  borderRadius: BorderRadius.circular(8),
+                  child: CachedNetworkImage(
+                      height: 60,
+                      width: 60,
+                      imageUrl: '${ConstRes.aImageBaseUrl}${images.image}',
+                      cacheKey: '${ConstRes.aImageBaseUrl}${images.image}',
+                      fit: BoxFit.cover,
+                      errorWidget: (context, url, error) =>
+                          Image.asset(AssetRes.themeLabel, height: 58, width: 58))),
             ),
           );
         },
@@ -173,18 +174,15 @@ class LikeUnlikeBtn extends StatefulWidget {
   final bool like;
   final int? userId;
 
-  const LikeUnlikeBtn(
-      {Key? key, required this.like, required this.onLikeBtnTap, this.userId})
-      : super(key: key);
+  const LikeUnlikeBtn({Key? key, required this.like, required this.onLikeBtnTap, this.userId}) : super(key: key);
 
   @override
   State<LikeUnlikeBtn> createState() => _LikeUnlikeBtnState();
 }
 
-class _LikeUnlikeBtnState extends State<LikeUnlikeBtn>
-    with SingleTickerProviderStateMixin {
-  late final AnimationController _controller = AnimationController(
-      duration: const Duration(milliseconds: 350), vsync: this, value: 1.0);
+class _LikeUnlikeBtnState extends State<LikeUnlikeBtn> with SingleTickerProviderStateMixin {
+  late final AnimationController _controller =
+      AnimationController(duration: const Duration(milliseconds: 150), vsync: this, value: 1.0);
 
   @override
   void dispose() {
@@ -205,42 +203,23 @@ class _LikeUnlikeBtnState extends State<LikeUnlikeBtn>
         child: Container(
           height: 76,
           width: 76,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: ColorRes.white.withOpacity(0.30),
-          ),
+          decoration: BoxDecoration(shape: BoxShape.circle, color: ColorRes.white.withOpacity(0.30)),
           child: Center(
             child: Container(
               height: 66,
               width: 66,
-              padding: const EdgeInsets.only(top: 3),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: ColorRes.white.withOpacity(0.30),
-              ),
+              padding: const EdgeInsets.all(17),
+              decoration: BoxDecoration(shape: BoxShape.circle, color: ColorRes.white.withOpacity(0.50)),
               child: widget.like
                   ? ScaleTransition(
-                      scale: Tween(begin: 0.7, end: 1.0).animate(
-                          CurvedAnimation(
-                              parent: _controller, curve: Curves.easeOut)),
-                      child: const GradientWidget(
-                        child: Icon(
-                          Icons.favorite,
-                          color: ColorRes.white,
-                          size: 40,
-                        ),
-                      ),
+                      scale: Tween(begin: 0.7, end: 1.0)
+                          .animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut)),
+                      child: Image.asset(AssetRes.icFillFav),
                     )
                   : ScaleTransition(
-                      scale: Tween(begin: 0.7, end: 1.0).animate(
-                          CurvedAnimation(
-                              parent: _controller, curve: Curves.easeOut)),
-                      child: const Icon(
-                        Icons.favorite,
-                        color: ColorRes.white,
-                        size: 40,
-                      ),
-                    ),
+                      scale: Tween(begin: 0.7, end: 1.0)
+                          .animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut)),
+                      child: Image.asset(AssetRes.icFav)),
               //Image.asset(AssetRes.like, height: 30.23, width: 33),
             ),
           ),
@@ -253,15 +232,13 @@ class _LikeUnlikeBtnState extends State<LikeUnlikeBtn>
 class BottomMoreBtn extends StatefulWidget {
   final VoidCallback onMoreInfoTap;
 
-  const BottomMoreBtn({Key? key, required this.onMoreInfoTap})
-      : super(key: key);
+  const BottomMoreBtn({Key? key, required this.onMoreInfoTap}) : super(key: key);
 
   @override
   State<BottomMoreBtn> createState() => _BottomMoreBtnState();
 }
 
-class _BottomMoreBtnState extends State<BottomMoreBtn>
-    with SingleTickerProviderStateMixin {
+class _BottomMoreBtnState extends State<BottomMoreBtn> with SingleTickerProviderStateMixin {
   double? _scale;
   AnimationController? _controller;
   double height = AppBar().preferredSize.height;
@@ -376,18 +353,14 @@ class ImageListArea extends StatefulWidget {
   final int selectedImgIndex;
 
   const ImageListArea(
-      {Key? key,
-      required this.imageList,
-      required this.onImgSelect,
-      required this.selectedImgIndex})
+      {Key? key, required this.imageList, required this.onImgSelect, required this.selectedImgIndex})
       : super(key: key);
 
   @override
   State<ImageListArea> createState() => _ImageListAreaState();
 }
 
-class _ImageListAreaState extends State<ImageListArea>
-    with SingleTickerProviderStateMixin {
+class _ImageListAreaState extends State<ImageListArea> with SingleTickerProviderStateMixin {
   double? _scale;
   AnimationController? _controller;
 
@@ -443,8 +416,7 @@ class _ImageListAreaState extends State<ImageListArea>
               child: Container(
                 height: 58,
                 width: 58,
-                margin: EdgeInsets.only(
-                    right: index != (widget.imageList.length - 1) ? 8.33 : 0),
+                margin: EdgeInsets.only(right: index != (widget.imageList.length - 1) ? 8.33 : 0),
                 decoration: BoxDecoration(
                   border: widget.selectedImgIndex == index
                       ? Border.all(
@@ -455,8 +427,7 @@ class _ImageListAreaState extends State<ImageListArea>
                   borderRadius: BorderRadius.circular(10),
                   image: DecorationImage(
                     fit: BoxFit.cover,
-                    image: NetworkImage(
-                        '${ConstRes.aImageBaseUrl}${widget.imageList[index].image}'),
+                    image: NetworkImage('${ConstRes.aImageBaseUrl}${widget.imageList[index].image}'),
                   ),
                 ),
               ),

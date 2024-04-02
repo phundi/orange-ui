@@ -163,7 +163,7 @@ class OptionsCenterArea extends StatelessWidget {
             Get.to(() => const LikeProfilesScreen());
           },
           title: S.current.likeProfiles,
-          widget: const CircleImage(image: AssetRes.icHeart),
+          widget: const CircleImage(image: AssetRes.icFillFav),
         ),
         TopOptionCard(
             onTap: () {
