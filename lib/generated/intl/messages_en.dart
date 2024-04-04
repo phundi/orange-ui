@@ -34,22 +34,19 @@ class MessageLookup extends MessageLookupByLibrary {
         "amount": MessageLookupByLibrary.simpleMessage("Amount Paid:"),
         "and": MessageLookupByLibrary.simpleMessage("and"),
         "anonymous": MessageLookupByLibrary.simpleMessage("Go Annonymous"),
-        "anonymousData": MessageLookupByLibrary.simpleMessage(
-            "Turn On, if you don\'t want to be seen anywhere in the app.Like: Search,Card Stack."),
+        "anonymousData": MessageLookupByLibrary.simpleMessage("Turn On, if you don\'t want to be seen anywhere in the app.Like: Search,Card Stack."),
         "appLanguages": MessageLookupByLibrary.simpleMessage("App Languages"),
         "application": MessageLookupByLibrary.simpleMessage(" APPLICATION"),
         "apply": MessageLookupByLibrary.simpleMessage("APPLY"),
         "areYou": MessageLookupByLibrary.simpleMessage("Are you"),
         "areYouSure": MessageLookupByLibrary.simpleMessage("Are you sure"),
         "areYouSureYouEtc": MessageLookupByLibrary.simpleMessage("Are you sure you want to delete this message ?"),
-        "areYouSureYouWantToEnd":
-            MessageLookupByLibrary.simpleMessage("Are you sure you want to end your live video?"),
+        "areYouSureYouWantToEnd": MessageLookupByLibrary.simpleMessage("Are you sure you want to end your live video?"),
         "artist": MessageLookupByLibrary.simpleMessage("Artist"),
         "attach": MessageLookupByLibrary.simpleMessage("Attach"),
         "automatically": MessageLookupByLibrary.simpleMessage("automatically"),
         "bankTransfer": MessageLookupByLibrary.simpleMessage("Bank Transfer"),
-        "bayContinuingThePurchaseEtc":
-            MessageLookupByLibrary.simpleMessage("By continuing the purchase you agree to our "),
+        "bayContinuingThePurchaseEtc": MessageLookupByLibrary.simpleMessage("By continuing the purchase you agree to our "),
         "bio": MessageLookupByLibrary.simpleMessage("BIO"),
         "block": MessageLookupByLibrary.simpleMessage("Block"),
         "blockedProfiles": MessageLookupByLibrary.simpleMessage("Blocked Profiles"),
@@ -63,12 +60,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "checkOutThisProfile": MessageLookupByLibrary.simpleMessage("Check out this Profile"),
         "chef": MessageLookupByLibrary.simpleMessage("Chef"),
         "close": MessageLookupByLibrary.simpleMessage("Close"),
-        "coinsPerMinutesPleaseConfirmIfYouToContinueOr":
-            MessageLookupByLibrary.simpleMessage("coins per minutes, Please confirm if you to continue or not"),
-        "coinsPerMsgPleaseConfirmIfYouToContinueOr":
-            MessageLookupByLibrary.simpleMessage("coins per Msg, Please confirm if you to continue or not"),
-        "coinsPleaseConfirmIfYouToContinueOrNot":
-            MessageLookupByLibrary.simpleMessage("coins, Please confirm if you to continue or not"),
+        "coinsPerMinutesPleaseConfirmIfYouToContinueOr": MessageLookupByLibrary.simpleMessage("coins per minutes, Please confirm if you to continue or not"),
+        "coinsPerMsgPleaseConfirmIfYouToContinueOr": MessageLookupByLibrary.simpleMessage("coins per Msg, Please confirm if you to continue or not"),
+        "coinsPleaseConfirmIfYouToContinueOrNot": MessageLookupByLibrary.simpleMessage("coins, Please confirm if you to continue or not"),
         "collected": MessageLookupByLibrary.simpleMessage("Collected"),
         "comment": MessageLookupByLibrary.simpleMessage("Comment..."),
         "comments": MessageLookupByLibrary.simpleMessage("Comments"),
@@ -88,8 +82,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "deleteAccount": MessageLookupByLibrary.simpleMessage("Delete Account"),
         "deleteCap": MessageLookupByLibrary.simpleMessage("DELETE"),
         "deleteChat": MessageLookupByLibrary.simpleMessage("Delete Chat"),
-        "deleteDialogDis": MessageLookupByLibrary.simpleMessage(
-            "Do you really want to delete your account? You won\'t be able to recover it later and data will be lost forever"),
+        "deleteDialogDis": MessageLookupByLibrary.simpleMessage("Do you really want to delete your account? You won\'t be able to recover it later and data will be lost forever"),
         "deleteMessage": MessageLookupByLibrary.simpleMessage("Delete message"),
         "deleteThisChat": MessageLookupByLibrary.simpleMessage("Delete this chat"),
         "diamond": MessageLookupByLibrary.simpleMessage(" Diamonds Collected:"),
@@ -97,8 +90,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "diamondCap": MessageLookupByLibrary.simpleMessage("DIAMOND"),
         "diamonds": MessageLookupByLibrary.simpleMessage("DIAMONDS"),
         "diamondsCamel": MessageLookupByLibrary.simpleMessage("Diamonds"),
-        "doYouReallyWantToLive":
-            MessageLookupByLibrary.simpleMessage("Do you really want to live. Please continue to go Live"),
+        "doYouReallyWantToLive": MessageLookupByLibrary.simpleMessage("Do you really want to live. Please continue to go Live"),
         "docType": MessageLookupByLibrary.simpleMessage("DOCUMENT TYPE"),
         "donTHaveAnAccount": MessageLookupByLibrary.simpleMessage("Don\'t have an account?"),
         "drivingLicence": MessageLookupByLibrary.simpleMessage("Driving Licence"),
@@ -120,10 +112,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterFullName": MessageLookupByLibrary.simpleMessage("Enter Full Name"),
         "enterFullReason": MessageLookupByLibrary.simpleMessage("Enter Full Reason"),
         "enterPassword": MessageLookupByLibrary.simpleMessage("Enter the password"),
-        "enterThePasswordForTheAccountNwithTheEmailBelow":
-            MessageLookupByLibrary.simpleMessage("Enter the password for the account \nwith the email below"),
-        "enterYourMailOnWhichYouHaveNcreatedAnAccount": MessageLookupByLibrary.simpleMessage(
-            "Enter your mail on which you have \ncreated an account. We will send a link \nto reset your password"),
+        "enterThePasswordForTheAccountNwithTheEmailBelow": MessageLookupByLibrary.simpleMessage("Enter the password for the account \nwith the email below"),
+        "enterYourMailOnWhichYouHaveNcreatedAnAccount": MessageLookupByLibrary.simpleMessage("Enter your mail on which you have \ncreated an account. We will send a link \nto reset your password"),
         "exit": MessageLookupByLibrary.simpleMessage("Exit"),
         "explainMore": MessageLookupByLibrary.simpleMessage("Explain More"),
         "explore": MessageLookupByLibrary.simpleMessage("Explore"),
@@ -133,8 +123,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "failedToLoadVideo": MessageLookupByLibrary.simpleMessage("Failed to load video: Cannot Open"),
         "feed": MessageLookupByLibrary.simpleMessage("Feed"),
         "female": MessageLookupByLibrary.simpleMessage("Female"),
-        "findSomeoneRandomly":
-            MessageLookupByLibrary.simpleMessage("Find Someone Randomly\nAnd check their profile "),
+        "findSomeoneRandomly": MessageLookupByLibrary.simpleMessage("Find Someone Randomly\nAnd check their profile "),
         "fitness": MessageLookupByLibrary.simpleMessage("Fitness"),
         "follow": MessageLookupByLibrary.simpleMessage("Follow"),
         "followers": MessageLookupByLibrary.simpleMessage("Followers"),
@@ -148,18 +137,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "gender": MessageLookupByLibrary.simpleMessage("GENDER"),
         "getAccess": MessageLookupByLibrary.simpleMessage("GET ACCESS TO GIVE LIVE"),
         "getStarted1Subtitle": MessageLookupByLibrary.simpleMessage("Find: Call: Chat: Stream"),
-        "getStarted2Subtitle": MessageLookupByLibrary.simpleMessage(
-            "Craft your profile based on \ndifferent interests and find \nlike minded people"),
-        "getStarted3Subtitle": MessageLookupByLibrary.simpleMessage(
-            "Allow access to get your location \nand find local people nearby \nand connect with them."),
-        "getStarted4Subtitle": MessageLookupByLibrary.simpleMessage(
-            "Stream your self and share \nyour life as well join other streamers,\n comment & send gifts"),
+        "getStarted2Subtitle": MessageLookupByLibrary.simpleMessage("Craft your profile based on \ndifferent interests and find \nlike minded people"),
+        "getStarted3Subtitle": MessageLookupByLibrary.simpleMessage("Allow access to get your location \nand find local people nearby \nand connect with them."),
+        "getStarted4Subtitle": MessageLookupByLibrary.simpleMessage("Stream your self and share \nyour life as well join other streamers,\n comment & send gifts"),
         "girls": MessageLookupByLibrary.simpleMessage("GIRLS"),
         "go": MessageLookupByLibrary.simpleMessage("Go"),
         "goLive": MessageLookupByLibrary.simpleMessage("GO LIVE"),
         "harassment": MessageLookupByLibrary.simpleMessage("Harassment"),
-        "hasLikedYourProfileYouShouldCheckTheirProfile":
-            MessageLookupByLibrary.simpleMessage(" has liked your profile, you should check their profile!"),
+        "hasLikedYourProfileYouShouldCheckTheirProfile": MessageLookupByLibrary.simpleMessage(" has liked your profile, you should check their profile!"),
         "hide": MessageLookupByLibrary.simpleMessage("Hide"),
         "hideInfo": MessageLookupByLibrary.simpleMessage("HIDE INFO"),
         "history": MessageLookupByLibrary.simpleMessage(" HISTORY"),
@@ -172,8 +157,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "instagram": MessageLookupByLibrary.simpleMessage("INSTAGRAM"),
         "interest": MessageLookupByLibrary.simpleMessage("Interest"),
         "intro": MessageLookupByLibrary.simpleMessage("SHORT INTRO VIDEO"),
-        "itLooksLikeEtc": MessageLookupByLibrary.simpleMessage(
-            "It looks like your wallet has insufficient coins for this action. let’s recharge it to enjoy this feature."),
+        "itLooksLikeEtc": MessageLookupByLibrary.simpleMessage("It looks like your wallet has insufficient coins for this action. let’s recharge it to enjoy this feature."),
         "join": MessageLookupByLibrary.simpleMessage("JOIN"),
         "joinLive": MessageLookupByLibrary.simpleMessage("Lives"),
         "km": MessageLookupByLibrary.simpleMessage("Km"),
@@ -201,8 +185,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "map": MessageLookupByLibrary.simpleMessage("Map"),
         "message": MessageLookupByLibrary.simpleMessage("Message"),
         "messagePriceWillCostYou": MessageLookupByLibrary.simpleMessage("Message price will cost you"),
-        "messageWillOnlyBeRemoved":
-            MessageLookupByLibrary.simpleMessage("Message will only be removed from this device Are you sure?"),
+        "messageWillOnlyBeRemoved": MessageLookupByLibrary.simpleMessage("Message will only be removed from this device Are you sure?"),
         "moreInfo": MessageLookupByLibrary.simpleMessage("MORE INFO"),
         "movies": MessageLookupByLibrary.simpleMessage("Movies"),
         "music": MessageLookupByLibrary.simpleMessage("Music"),
@@ -216,8 +199,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "noUsersAreLive": MessageLookupByLibrary.simpleMessage("No users are live"),
         "notEligible": MessageLookupByLibrary.simpleMessage("NOT ELIGIBLE"),
         "notification": MessageLookupByLibrary.simpleMessage("NOTIFICATIONS"),
-        "notificationData":
-            MessageLookupByLibrary.simpleMessage("Keep it on, if you want to receive notifications"),
+        "notificationData": MessageLookupByLibrary.simpleMessage("Keep it on, if you want to receive notifications"),
         "nowCap": MessageLookupByLibrary.simpleMessage("NOW"),
         "ok": MessageLookupByLibrary.simpleMessage("Ok"),
         "optional": MessageLookupByLibrary.simpleMessage("Optional"),
@@ -239,15 +221,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "pleaseAddAtLeastInterest": MessageLookupByLibrary.simpleMessage("Please add at least 1 interest"),
         "pleaseAddSelfiePhoto": MessageLookupByLibrary.simpleMessage("Please add selfie photo"),
         "pleaseAddSocialLinks": MessageLookupByLibrary.simpleMessage("Please add social links"),
-        "pleaseApplyForLiveStreamFromLivestreamDashboardFromProfile": MessageLookupByLibrary.simpleMessage(
-            "Please apply for live stream from livestream dashboard from profile!"),
+        "pleaseApplyForLiveStreamFromLivestreamDashboardFromProfile": MessageLookupByLibrary.simpleMessage("Please apply for live stream from livestream dashboard from profile!"),
         "pleaseCheckTerm": MessageLookupByLibrary.simpleMessage("Please check Term & Condition"),
         "pleaseEnterEmail": MessageLookupByLibrary.simpleMessage("Please Enter Email...!"),
         "pleaseEnterValidEmailAddress": MessageLookupByLibrary.simpleMessage("Please Enter valid email address"),
         "pleaseSelectImage": MessageLookupByLibrary.simpleMessage("Please Select Image"),
         "pleaseValidEmail": MessageLookupByLibrary.simpleMessage("Please valid email"),
-        "pleaseVerifyYourEmailFromYourInbox":
-            MessageLookupByLibrary.simpleMessage("Please Verify your e-mail from your inbox"),
+        "pleaseVerifyYourEmailFromYourInbox": MessageLookupByLibrary.simpleMessage("Please Verify your e-mail from your inbox"),
         "policy1": MessageLookupByLibrary.simpleMessage("By selecting Agree and continue below, \n I agree to "),
         "policy2": MessageLookupByLibrary.simpleMessage("Terms of Use"),
         "policy3": MessageLookupByLibrary.simpleMessage(" and "),
@@ -267,8 +247,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "redeemCap": MessageLookupByLibrary.simpleMessage("REDEEM"),
         "redeemRequests": MessageLookupByLibrary.simpleMessage("REDEEM REQUESTS"),
         "register": MessageLookupByLibrary.simpleMessage("REGISTER"),
-        "registerInfoText": MessageLookupByLibrary.simpleMessage(
-            "Looks like you don\'t have an account. \nLet\'s create new account "),
+        "registerInfoText": MessageLookupByLibrary.simpleMessage("Looks like you don\'t have an account. \nLet\'s create new account "),
         "registrationSuccessfully": MessageLookupByLibrary.simpleMessage("Registration Successfully done"),
         "report": MessageLookupByLibrary.simpleMessage("Report"),
         "reportCap": MessageLookupByLibrary.simpleMessage("REPORT "),
@@ -296,12 +275,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "singing": MessageLookupByLibrary.simpleMessage("Singing"),
         "skip": MessageLookupByLibrary.simpleMessage("Skip"),
         "social": MessageLookupByLibrary.simpleMessage("SOCIAL PROFILE LINKS"),
-        "socialData": MessageLookupByLibrary.simpleMessage(
-            "Links to some of your social media profiles,which helps us to know more about your fan followings."),
+        "socialData": MessageLookupByLibrary.simpleMessage("Links to some of your social media profiles,which helps us to know more about your fan followings."),
         "something": MessageLookupByLibrary.simpleMessage("SOMETHING ABOUT YOU?"),
         "startMatching": MessageLookupByLibrary.simpleMessage("START MATCHING"),
-        "startingProfileInfoText": MessageLookupByLibrary.simpleMessage(
-            "Craft your profile with amazing Photos, Interests Bio and stand out from others !"),
+        "startingProfileInfoText": MessageLookupByLibrary.simpleMessage("Craft your profile with amazing Photos, Interests Bio and stand out from others !"),
         "streamCap": MessageLookupByLibrary.simpleMessage("STREAM"),
         "streamFor": MessageLookupByLibrary.simpleMessage("Stream for"),
         "streamYourself": MessageLookupByLibrary.simpleMessage("Stream Yourself"),
@@ -318,8 +295,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "termsOfUse": MessageLookupByLibrary.simpleMessage("Terms Of Use"),
         "thatGreat": MessageLookupByLibrary.simpleMessage("That\'s Great"),
         "thisUserBlockYou": MessageLookupByLibrary.simpleMessage("This User Block You"),
-        "thisVideoIsGreaterThan50MbnpleaseSelectAnother":
-            MessageLookupByLibrary.simpleMessage("This video is greater than 50 mb\nPlease select another..."),
+        "thisVideoIsGreaterThan50MbnpleaseSelectAnother": MessageLookupByLibrary.simpleMessage("This video is greater than 50 mb\nPlease select another..."),
         "threshold": MessageLookupByLibrary.simpleMessage("Minimum Threshold : "),
         "time": MessageLookupByLibrary.simpleMessage(" Time:"),
         "toSendMessage": MessageLookupByLibrary.simpleMessage("to send a message."),
@@ -337,8 +313,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "users": MessageLookupByLibrary.simpleMessage("Users"),
         "validEmail": MessageLookupByLibrary.simpleMessage("Enter Valid Email"),
         "verification": MessageLookupByLibrary.simpleMessage("Apply for Verification"),
-        "verifiedAccountsHaveBlueEtc": MessageLookupByLibrary.simpleMessage(
-            "Verified accounts have blue checkmarks next to their names to show that we have confirmed they are the real presence of the public figures or celebrities."),
+        "verifiedAccountsHaveBlueEtc": MessageLookupByLibrary.simpleMessage("Verified accounts have blue checkmarks next to their names to show that we have confirmed they are the real presence of the public figures or celebrities."),
         "versionText": MessageLookupByLibrary.simpleMessage("Version 1.0.0"),
         "video": MessageLookupByLibrary.simpleMessage("Video?"),
         "videoCall": MessageLookupByLibrary.simpleMessage("Video Call"),
@@ -351,8 +326,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "wallet": MessageLookupByLibrary.simpleMessage("DIAMOND WALLET"),
         "walletCap": MessageLookupByLibrary.simpleMessage("WALLET"),
         "whereDoYouLive": MessageLookupByLibrary.simpleMessage("WHERE DO YOU LIVE ?"),
-        "whichItemWouldYouLikeEtc":
-            MessageLookupByLibrary.simpleMessage("Which item would you like to select?\nSelect a item"),
+        "whichItemWouldYouLikeEtc": MessageLookupByLibrary.simpleMessage("Which item would you like to select?\nSelect a item"),
         "writeMessage": MessageLookupByLibrary.simpleMessage("Write Message"),
         "writeSomethingHere": MessageLookupByLibrary.simpleMessage("Write something here..."),
         "yes": MessageLookupByLibrary.simpleMessage("Yes"),
@@ -364,10 +338,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "youMust18": MessageLookupByLibrary.simpleMessage("You Must 18+"),
         "youMustBe18": MessageLookupByLibrary.simpleMessage("You must be 18+"),
         "youWillBeSentEtc": MessageLookupByLibrary.simpleMessage("YOU WILL BE SENT OUTSIDE SOON"),
-        "yourApplicationIsPendingPleaseWait":
-            MessageLookupByLibrary.simpleMessage("Your Application is pending please wait"),
-        "yourLiveStreamHasBeenEndednbelowIsASummaryOf":
-            MessageLookupByLibrary.simpleMessage("Your live stream has been ended!\nBelow is a summary of it."),
+        "yourApplicationIsPendingPleaseWait": MessageLookupByLibrary.simpleMessage("Your Application is pending please wait"),
+        "yourLiveStreamHasBeenEndednbelowIsASummaryOf": MessageLookupByLibrary.simpleMessage("Your live stream has been ended!\nBelow is a summary of it."),
         "yourSelfie": MessageLookupByLibrary.simpleMessage("YOUR SELFIE"),
         "youtube": MessageLookupByLibrary.simpleMessage("YOUTUBE")
       };

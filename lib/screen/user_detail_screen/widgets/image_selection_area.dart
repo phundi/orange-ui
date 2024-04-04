@@ -33,10 +33,7 @@ class ImageSelectionArea extends StatelessWidget {
         children: [
           joinBtnChip(),
           const Spacer(),
-          Visibility(
-              visible: PrefService.settingData?.appdata?.isDating == 0 ? false : true,
-              child:
-                  LikeUnlikeBtn(like: model.like, onLikeBtnTap: model.onLikeBtnTap, userId: model.userData?.id)),
+          Visibility(visible: PrefService.settingData?.appdata?.isDating == 0 ? false : true, child: LikeUnlikeBtn(like: model.like, onLikeBtnTap: model.onLikeBtnTap, userId: model.userData?.id)),
           const SizedBox(height: 15),
           imageListArea(model.userData?.images ?? []),
           const SizedBox(height: 20),
@@ -51,9 +48,9 @@ class ImageSelectionArea extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Visibility(
-          // visible: PrefService.userId == model.userData?.id ? false : true,
+          visible: PrefService.userId == model.userData?.id ? false : true,
           child: Visibility(
-            // visible: model.userData?.isLiveNow == 1 ? true : false,
+            visible: model.userData?.isLiveNow == 1 ? true : false,
             child: Container(
               margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
               child: ClipRRect(
@@ -66,8 +63,7 @@ class ImageSelectionArea extends StatelessWidget {
                     child: Container(
                       height: 35,
                       padding: const EdgeInsets.all(2),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30), color: ColorRes.black.withOpacity(0.33)),
+                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), color: ColorRes.black.withOpacity(0.33)),
                       child: Row(
                         children: [
                           const LiveIcon(),
@@ -81,13 +77,11 @@ class ImageSelectionArea extends StatelessWidget {
                           Container(
                             height: 31,
                             width: 95,
-                            decoration: BoxDecoration(
-                                color: ColorRes.white.withOpacity(0.10), borderRadius: BorderRadius.circular(30)),
+                            decoration: BoxDecoration(color: ColorRes.white.withOpacity(0.10), borderRadius: BorderRadius.circular(30)),
                             child: Center(
                               child: Text(
                                 S.current.join,
-                                style:
-                                    const TextStyle(color: ColorRes.white, fontSize: 12, fontFamily: FontRes.bold),
+                                style: const TextStyle(color: ColorRes.white, fontSize: 12, fontFamily: FontRes.bold),
                               ),
                             ),
                           ),
@@ -107,9 +101,7 @@ class ImageSelectionArea extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 23, vertical: 10),
             margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-            decoration: ShapeDecoration(
-                shape: SmoothRectangleBorder(borderRadius: SmoothBorderRadius(cornerRadius: 30)),
-                gradient: StyleRes.linearGradient),
+            decoration: ShapeDecoration(shape: SmoothRectangleBorder(borderRadius: SmoothBorderRadius(cornerRadius: 30)), gradient: StyleRes.linearGradient),
             child: Row(
               children: [
                 Image.asset(AssetRes.icPostIcon, width: 15, height: 15),
@@ -117,8 +109,7 @@ class ImageSelectionArea extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 5.0),
                   child: Text(
                     S.current.posts.toUpperCase(),
-                    style:
-                        TextStyle(color: ColorRes.white.withOpacity(0.8), fontFamily: FontRes.bold, fontSize: 11),
+                    style: TextStyle(color: ColorRes.white.withOpacity(0.8), fontFamily: FontRes.bold, fontSize: 11),
                   ),
                 )
               ],
@@ -130,42 +121,31 @@ class ImageSelectionArea extends StatelessWidget {
   }
 
   Widget imageListArea(List<Images> imageList) {
-    return SizedBox(
-      height: 60,
-      child: ListView.builder(
-        itemCount: imageList.length,
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        scrollDirection: Axis.horizontal,
-        shrinkWrap: true,
-        itemBuilder: (context, index) {
-          Images? images = imageList[index];
-          return InkWell(
-            borderRadius: BorderRadius.circular(10),
-            onTap: () => model.onImageSelect(index),
-            child: Container(
-              height: 60,
-              width: 60,
-              margin: const EdgeInsets.symmetric(horizontal: 5),
-              decoration: BoxDecoration(
-                  border: model.selectedImgIndex == index
-                      ? Border.all(color: ColorRes.white.withOpacity(0.80), width: 2)
-                      : Border.all(color: ColorRes.transparent, width: 2),
-                  borderRadius: BorderRadius.circular(10)),
-              child: ClipRRect(
-                  borderRadius: BorderRadius.circular(8),
-                  child: CachedNetworkImage(
-                      height: 60,
-                      width: 60,
-                      imageUrl: '${ConstRes.aImageBaseUrl}${images.image}',
-                      cacheKey: '${ConstRes.aImageBaseUrl}${images.image}',
-                      fit: BoxFit.cover,
-                      errorWidget: (context, url, error) =>
-                          Image.asset(AssetRes.themeLabel, height: 58, width: 58))),
+    return imageList.isEmpty
+        ? const SizedBox()
+        : SizedBox(
+            height: 60,
+            child: ListView.builder(
+              itemCount: imageList.length,
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              scrollDirection: Axis.horizontal,
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                Images? images = imageList[index];
+                return InkWell(
+                  borderRadius: BorderRadius.circular(10),
+                  onTap: () => model.onImageSelect(index),
+                  child: Container(
+                    height: 60,
+                    width: 60,
+                    margin: const EdgeInsets.symmetric(horizontal: 5),
+                    decoration: BoxDecoration(border: model.selectedImgIndex == index ? Border.all(color: ColorRes.white.withOpacity(0.80), width: 2) : Border.all(color: ColorRes.transparent, width: 2), borderRadius: BorderRadius.circular(10)),
+                    child: ClipRRect(borderRadius: BorderRadius.circular(8), child: CachedNetworkImage(height: 60, width: 60, imageUrl: '${ConstRes.aImageBaseUrl}${images.image}', cacheKey: '${ConstRes.aImageBaseUrl}${images.image}', fit: BoxFit.cover, errorWidget: (context, url, error) => Image.asset(AssetRes.themeLabel, height: 58, width: 58))),
+                  ),
+                );
+              },
             ),
           );
-        },
-      ),
-    );
   }
 }
 
@@ -181,8 +161,7 @@ class LikeUnlikeBtn extends StatefulWidget {
 }
 
 class _LikeUnlikeBtnState extends State<LikeUnlikeBtn> with SingleTickerProviderStateMixin {
-  late final AnimationController _controller =
-      AnimationController(duration: const Duration(milliseconds: 150), vsync: this, value: 1.0);
+  late final AnimationController _controller = AnimationController(duration: const Duration(milliseconds: 150), vsync: this, value: 1.0);
 
   @override
   void dispose() {
@@ -212,14 +191,10 @@ class _LikeUnlikeBtnState extends State<LikeUnlikeBtn> with SingleTickerProvider
               decoration: BoxDecoration(shape: BoxShape.circle, color: ColorRes.white.withOpacity(0.50)),
               child: widget.like
                   ? ScaleTransition(
-                      scale: Tween(begin: 0.7, end: 1.0)
-                          .animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut)),
+                      scale: Tween(begin: 0.7, end: 1.0).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut)),
                       child: Image.asset(AssetRes.icFillFav),
                     )
-                  : ScaleTransition(
-                      scale: Tween(begin: 0.7, end: 1.0)
-                          .animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut)),
-                      child: Image.asset(AssetRes.icFav)),
+                  : ScaleTransition(scale: Tween(begin: 0.7, end: 1.0).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut)), child: Image.asset(AssetRes.icFav)),
               //Image.asset(AssetRes.like, height: 30.23, width: 33),
             ),
           ),
@@ -352,9 +327,7 @@ class ImageListArea extends StatefulWidget {
   final Function(int index) onImgSelect;
   final int selectedImgIndex;
 
-  const ImageListArea(
-      {Key? key, required this.imageList, required this.onImgSelect, required this.selectedImgIndex})
-      : super(key: key);
+  const ImageListArea({Key? key, required this.imageList, required this.onImgSelect, required this.selectedImgIndex}) : super(key: key);
 
   @override
   State<ImageListArea> createState() => _ImageListAreaState();

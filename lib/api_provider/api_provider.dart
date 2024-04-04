@@ -538,22 +538,20 @@ class ApiProvider {
       required Map<String, dynamic> data,
       required String token}) async {
     await http
-        .post(
-      Uri.parse(Urls.aNotificationUrl),
-      headers: {Urls.aApiKeyName: ConstRes.apiKey, 'content-type': 'application/json'},
-      body: json.encode({
-        'message': {
-          // 'notification': {
-          //   'title': title,
-          //   'body': body,
-          // },
-          'token': token,
-          'data': data
-        },
-      }),
-    )
+        .post(Uri.parse(Urls.aNotificationUrl),
+            headers: {Urls.aApiKeyName: ConstRes.apiKey, 'content-type': 'application/json'},
+            body: json.encode({
+              'message': {
+                'token': token,
+                'data': data
+                // 'notification': {
+                //   'title': title,
+                //   'body': body,
+                // },
+              }
+            }))
         .then((value) {
-      log(value.body);
+      log('Notification : ${value.body}');
     });
   }
 

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:app_tracking_transparency/app_tracking_transparency.dart';
+import 'package:camera/camera.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -25,10 +26,11 @@ import 'package:orange_ui/utils/urls.dart';
 class MyHttpOverrides extends HttpOverrides {
   @override
   HttpClient createHttpClient(SecurityContext? context) {
-    return super.createHttpClient(context)
-      ..badCertificateCallback = (X509Certificate cert, String host, int port) => true;
+    return super.createHttpClient(context)..badCertificateCallback = (X509Certificate cert, String host, int port) => true;
   }
 }
+
+late List<CameraDescription> cameras;
 
 Future<void> main() async {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
@@ -40,16 +42,14 @@ Future<void> main() async {
   ));
   WidgetsFlutterBinding.ensureInitialized();
   MobileAds.instance.initialize();
-  LanguagesScreenViewModel.selectedLanguage =
-      await PrefService.getString(PrefConst.languageCode) ?? Platform.localeName.split('_')[0];
+  LanguagesScreenViewModel.selectedLanguage = await PrefService.getString(PrefConst.languageCode) ?? Platform.localeName.split('_')[0];
   await Firebase.initializeApp();
+  cameras = await availableCameras();
 
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 
   HttpOverrides.global = MyHttpOverrides();
-  runApp(
-    const RestartWidget(child: MyApp()),
-  );
+  runApp(const RestartWidget(child: MyApp()));
 }
 
 class MyApp extends StatefulWidget {
@@ -99,22 +99,11 @@ class _MyAppState extends State<MyApp> {
   void saveTokenUpdate() async {
     await firebaseMessaging.subscribeToTopic(ConstRes.subscribeToTopic);
 
-    flutterLocalNotificationsPlugin
-        .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
-        ?.requestNotificationsPermission();
+    flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()?.requestNotificationsPermission();
 
-    flutterLocalNotificationsPlugin
-        .resolvePlatformSpecificImplementation<IOSFlutterLocalNotificationsPlugin>()
-        ?.requestPermissions(alert: true, sound: true);
+    flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<IOSFlutterLocalNotificationsPlugin>()?.requestPermissions(alert: true, sound: true);
 
-    await firebaseMessaging.requestPermission(
-        alert: true,
-        announcement: true,
-        badge: false,
-        carPlay: false,
-        criticalAlert: false,
-        provisional: false,
-        sound: true);
+    await firebaseMessaging.requestPermission(alert: true, badge: false, sound: true);
 
     const AndroidNotificationChannel channel = AndroidNotificationChannel(
         'orange_flutter', // id
@@ -126,11 +115,9 @@ class _MyAppState extends State<MyApp> {
 
     var initializationSettingsAndroid = const AndroidInitializationSettings('@mipmap/ic_launcher');
 
-    var initializationSettingsIOS = const DarwinInitializationSettings(
-        defaultPresentAlert: true, defaultPresentSound: true, defaultPresentBadge: false);
+    var initializationSettingsIOS = const DarwinInitializationSettings(defaultPresentAlert: true, defaultPresentSound: true, defaultPresentBadge: false);
 
-    var initializationSettings =
-        InitializationSettings(android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
+    var initializationSettings = InitializationSettings(android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
 
     flutterLocalNotificationsPlugin.initialize(initializationSettings);
 
@@ -143,16 +130,11 @@ class _MyAppState extends State<MyApp> {
         1,
         message.data['title'],
         message.data['body'],
-        NotificationDetails(
-          iOS: const DarwinNotificationDetails(presentSound: true, presentAlert: true, presentBadge: false),
-          android: AndroidNotificationDetails(channel.id, channel.name, channelDescription: channel.description),
-        ),
+        NotificationDetails(iOS: const DarwinNotificationDetails(presentSound: true, presentAlert: true, presentBadge: false), android: AndroidNotificationDetails(channel.id, channel.name, channelDescription: channel.description)),
       );
     });
 
-    await flutterLocalNotificationsPlugin
-        .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
-        ?.createNotificationChannel(channel);
+    await flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()?.createNotificationChannel(channel);
   }
 
   void initPlugin() async {

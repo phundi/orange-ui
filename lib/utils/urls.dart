@@ -106,6 +106,8 @@ class Urls {
   static const String aTopicName = 'Orange';
   static const String aDataUserId = 'data_user_id';
   static const String aViewerNotificationId = 'viewer_notification_id';
+  static const String aTitle = 'title';
+  static const String aBody = 'body';
 
   // Social Media
   static const String aMyUserId = 'my_user_id';

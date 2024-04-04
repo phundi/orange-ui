@@ -39,6 +39,7 @@ class DashboardScreenViewModel extends BaseViewModel {
   }
 
   void onBottomBarTap(int index) {
+    print(userData?.toJson());
     if (userData?.isBlock == 1 && index == 4) {
       pageIndex = index;
       notifyListeners();

@@ -67,6 +67,9 @@ class AssetRes {
   static const String icPostIcon = "${icons}ic_post_icon.png";
   static const String icFav = "${icons}ic_fav.png";
   static const String icFillFav = "${icons}ic_fill_fav.png";
+  static const String icEyeBlack = "${icons}ic_eye_black.png";
+  static const String icMedia = "${icons}ic_media.png";
+  static const String icCameraFlip = "${icons}ic_camera_flip.png";
 
   /// ----------------- Images --------------
 
@@ -91,4 +94,5 @@ class AssetRes {
   static const String icImage2 = '${images}image2.jpeg';
   static const String icImage3 = '${images}image3.jpeg';
   static const String icImage4 = '${images}image4.jpeg';
+  static const String icBlackBgShadow = '${images}ic_black_bg_shadow.png';
 }
