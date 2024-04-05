@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>LSApplicationCategoryType</key>
-	<string></string>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>
@@ -45,16 +43,16 @@
 			</array>
 		</dict>
 	</array>
-	<key>branch_key</key>
-	<dict>
-		<key>live</key>
-		<string>key_live_kb90DpySsESN42q1XsadZaaoyCbSnt5j</string>
-	</dict>
-	<key>branch_universal_link_domains</key>
-	<array>
-		<string>orangeflutter-alternate.app.link</string>
-		<string>orangeflutter.app.link</string>
-	</array>
+    <key>branch_key</key>
+    <dict>
+        <key>live</key>
+        <string>key_live_kb90DpySsESN42q1XsadZaaoyCbSnt5j</string>
+    </dict>
+    <key>branch_universal_link_domains</key>
+    <array>
+        <string>orangeflutter-alternate.app.link</string>
+        <string>orangeflutter.app.link</string>
+    </array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>GADApplicationIdentifier</key>
@@ -81,7 +79,7 @@
 	<key>NSLocationTemporaryUsageDescriptionDictionary</key>
 	<dict>
 		<key>YourPurposeKey</key>
-		<string>The example App requires temporary access to the device&apos;s precise location.</string>
+		<string>The example App requires temporary access to the device's precise location.</string>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>This app uses this to customize your experience and let you discover more around you.</string>
@@ -320,5 +318,6 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+
 </dict>
 </plist>

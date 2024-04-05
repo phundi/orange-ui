@@ -21,7 +21,18 @@ class OptionsCenterArea extends StatelessWidget {
   final VoidCallback onAnonymousTap;
   final int? verification;
 
-  const OptionsCenterArea({Key? key, required this.notificationEnable, required this.showMeOnMap, required this.goAnonymous, required this.onLiveStreamTap, required this.onNotificationTap, required this.onShowMeOnMapTap, required this.onAnonymousTap, required this.onApplyForVerTap, required this.verification}) : super(key: key);
+  const OptionsCenterArea(
+      {Key? key,
+      required this.notificationEnable,
+      required this.showMeOnMap,
+      required this.goAnonymous,
+      required this.onLiveStreamTap,
+      required this.onNotificationTap,
+      required this.onShowMeOnMapTap,
+      required this.onAnonymousTap,
+      required this.onApplyForVerTap,
+      required this.verification})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
