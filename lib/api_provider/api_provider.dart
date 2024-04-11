@@ -591,11 +591,11 @@ class ApiProvider {
     param?.forEach((key, value) {
       params[key] = "$value";
     });
-    // log("❗️{URL}:  $url");
-    // log("❗️{PARAMETERS}:  $params");
+    log("❗️{URL}:  $url");
+    log("❗️{PARAMETERS}:  $params");
     http.post(Uri.parse(url), headers: headers, body: params).then(
       (value) {
-        // log('❗️RESPONSE:  ${value.body}');
+        log('❗️RESPONSE:  ${value.body}');
         var response = jsonDecode(value.body);
         completion.call(response);
       },
@@ -607,10 +607,7 @@ class ApiProvider {
       Map<String, dynamic>? param,
       Map<String, List<XFile?>>? filesMap,
       required Function(Object response) completion}) {
-    var request = http.MultipartRequest(
-      'POST',
-      Uri.parse(url),
-    );
+    var request = http.MultipartRequest('POST', Uri.parse(url));
 
     Map<String, String> params = {};
     param?.forEach((key, value) {

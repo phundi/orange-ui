@@ -42,6 +42,8 @@ class Urls {
   static const String aFetchBlockedProfiles = '${ConstRes.aBaseUrl}fetchBlockedProfiles';
   static const String aFetchHomePageData = '${ConstRes.aBaseUrl}fetchHomePageData';
   static const String aAddPost = '${ConstRes.aBaseUrl}addPost';
+  static const String aLikePost = '${ConstRes.aBaseUrl}likePost';
+  static const String aDislikePost = '${ConstRes.aBaseUrl}dislikePost';
 
   ///------------------------ Params ------------------------///
   static const String aApiKeyName = 'apikey';
@@ -116,6 +118,7 @@ class Urls {
   static const String aContentType = 'content_type';
   static const String aInterestIds = 'interest_ids';
   static const String aHashtags = 'hashtags';
+  static const String aPostId = 'post_id';
 
   // Social Media
   static const String aMyUserId = 'my_user_id';

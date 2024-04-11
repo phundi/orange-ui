@@ -4,6 +4,7 @@ import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:orange_ui/api_provider/api_provider.dart';
 import 'package:orange_ui/common/widgets/common_fun.dart';
 import 'package:orange_ui/common/widgets/common_ui.dart';
 import 'package:orange_ui/generated/l10n.dart';
@@ -15,13 +16,18 @@ import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
 import 'package:orange_ui/utils/const_res.dart';
 import 'package:orange_ui/utils/font_res.dart';
+import 'package:orange_ui/utils/urls.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class FeedPostCard extends StatelessWidget {
   final VoidCallback onCommentBtnClick;
   final Posts? posts;
 
-  const FeedPostCard({Key? key, required this.onCommentBtnClick, this.posts}) : super(key: key);
+  const FeedPostCard({
+    Key? key,
+    required this.onCommentBtnClick,
+    this.posts,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -39,9 +45,7 @@ class FeedPostCard extends StatelessWidget {
                     : const SizedBox(),
         BottomAreaPost(
           onCommentBtnClick: onCommentBtnClick,
-          commentCount: posts?.commentsCount ?? 0,
-          likeCount: posts?.likesCount ?? 0,
-          isLike: true,
+          posts: posts,
         ),
         const Divider(color: ColorRes.greyShade200, indent: 15, endIndent: 15),
         const SizedBox(height: 10),
@@ -266,17 +270,13 @@ class VideoPost extends StatelessWidget {
 
 class BottomAreaPost extends StatelessWidget {
   final VoidCallback onCommentBtnClick;
-  final int commentCount;
-  final int likeCount;
-  final bool isLike;
+  final Posts? posts;
 
-  const BottomAreaPost(
-      {Key? key,
-      required this.onCommentBtnClick,
-      required this.commentCount,
-      required this.likeCount,
-      required this.isLike})
-      : super(key: key);
+  const BottomAreaPost({
+    Key? key,
+    required this.onCommentBtnClick,
+    required this.posts,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -294,7 +294,7 @@ class BottomAreaPost extends StatelessWidget {
                   width: 22,
                 ),
                 Text(
-                  '  $commentCount',
+                  '  ${NumberFormat.compact().format(posts?.commentsCount ?? 0)}',
                   style: const TextStyle(
                       color: ColorRes.veryDarkGrey4, fontFamily: FontRes.medium, letterSpacing: 0.5, fontSize: 15),
                 ),
@@ -304,12 +304,7 @@ class BottomAreaPost extends StatelessWidget {
           const SizedBox(width: 15),
           Container(height: 20, width: 1, color: ColorRes.lightGrey),
           const SizedBox(width: 15),
-          Image.asset(AssetRes.icFillFav, height: 22, width: 22),
-          Text(
-            '  ${NumberFormat.compact().format(likeCount)}  ',
-            style: const TextStyle(
-                color: ColorRes.veryDarkGrey4, fontFamily: FontRes.medium, letterSpacing: 0.5, fontSize: 15),
-          ),
+          LikeButton(posts: posts),
           const SizedBox(width: 5),
           Container(height: 20, width: 1, color: ColorRes.lightGrey),
           const SizedBox(width: 10),
@@ -322,5 +317,60 @@ class BottomAreaPost extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+class LikeButton extends StatefulWidget {
+  final Posts? posts;
+
+  const LikeButton({Key? key, required this.posts}) : super(key: key);
+
+  @override
+  State<LikeButton> createState() => _LikeButtonState();
+}
+
+class _LikeButtonState extends State<LikeButton> {
+  bool isLike = false;
+
+  @override
+  void initState() {
+    fetchLikePost();
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        if (isLike) {
+          ApiProvider().callPost(completion: (response) {}, url: Urls.aDislikePost, param: {
+            Urls.aUserId: PrefService.userId,
+            Urls.aPostId: widget.posts?.id,
+          });
+        } else {
+          ApiProvider().callPost(completion: (response) {}, url: Urls.aLikePost, param: {
+            Urls.aUserId: PrefService.userId,
+            Urls.aPostId: widget.posts?.id,
+          });
+        }
+        isLike = !isLike;
+        setState(() {});
+      },
+      child: Row(
+        children: [
+          Image.asset(isLike ? AssetRes.icFillFav : AssetRes.icFav, height: 22, width: 22),
+          Text(
+            '  ${NumberFormat.compact().format(widget.posts?.likesCount ?? 0)}  ',
+            style: const TextStyle(
+                color: ColorRes.veryDarkGrey4, fontFamily: FontRes.medium, letterSpacing: 0.5, fontSize: 15),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void fetchLikePost() {
+    isLike = widget.posts?.isLike == 1;
+    setState(() {});
   }
 }

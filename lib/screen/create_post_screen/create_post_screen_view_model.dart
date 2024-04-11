@@ -4,6 +4,8 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
+import 'package:orange_ui/common/widgets/common_ui.dart';
+import 'package:orange_ui/common/widgets/loader.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/service/pref_service.dart';
 import 'package:orange_ui/utils/color_res.dart';
@@ -22,10 +24,12 @@ class CreatePostScreenViewModel extends BaseViewModel {
   PageController pageController = PageController();
   int imageIndex = 0;
   List<XFile> imagesFile = [];
+  XFile? thumbnail;
   List<Interest> interests = [];
   List<int> selectedInterests = [];
   List<String> hashtagList = [];
   FocusNode detectableTextFieldFocusNode = FocusNode();
+  int contentType = 2; // description content byDefault = 2
 
   void init() {
     pageType = 0;
@@ -52,6 +56,7 @@ class CreatePostScreenViewModel extends BaseViewModel {
   }
 
   void onPhotoTap() {
+    contentType = 0;
     detectableTextFieldFocusNode.unfocus();
     _picker.pickMultiImage(maxHeight: maxHeight, maxWidth: maxWidth, imageQuality: quality).then((value) {
       for (int i = 0; i < maxImagesForPost; i++) {
@@ -62,6 +67,7 @@ class CreatePostScreenViewModel extends BaseViewModel {
   }
 
   void onVideoTap() {
+    contentType = 1;
     detectableTextFieldFocusNode.unfocus();
     _picker.pickVideo(source: ImageSource.gallery);
   }
@@ -113,19 +119,32 @@ class CreatePostScreenViewModel extends BaseViewModel {
   }
 
   void addPostApiCalling() {
-    // String removeHashTag
+    List<String> removeHasTag = [];
     for (var element in hashtagList) {
-      element.replaceAll('#', '');
+      removeHasTag.add(element.replaceAll('#', ''));
     }
-    // ApiProvider().multiPartCallApi(
-    //     url: Urls.aAddPost,
-    //     completion: (response) {
-    //       print(response);
-    //     },
-    //     param: {
-    //       Urls.aUserId: PrefService.userId,
-    //       Urls.aDescription: detectableTextFieldController.text.trim(),
-    //       Urls.aHashtags : hashtagList.
-    //     });
+    Map<String, List<XFile?>>? filesMap = {};
+
+    if (imagesFile.isNotEmpty) {
+      if (contentType == 1) {
+        filesMap[Urls.aThumbnail] = [thumbnail];
+      }
+      filesMap[Urls.aContent] = imagesFile;
+    }
+    Loader().lottieLoader();
+    ApiProvider().multiPartCallApi(
+        url: Urls.aAddPost,
+        completion: (response) {
+          Get.back();
+          Get.back();
+        },
+        param: {
+          Urls.aUserId: PrefService.userId,
+          Urls.aDescription: detectableTextFieldController.text.trim(),
+          Urls.aHashtags: removeHasTag.join(','),
+          Urls.aInterestIds: selectedInterests.join(','),
+          Urls.aContentType: imagesFile.isEmpty ? 2 : contentType
+        },
+        filesMap: filesMap);
   }
 }

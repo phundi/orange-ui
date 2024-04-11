@@ -51,8 +51,7 @@ class PostScreen extends StatelessWidget {
                             ),
                           ),
                           const Text(' 24 ',
-                              style:
-                                  TextStyle(fontFamily: FontRes.regular, color: ColorRes.dimGrey3, fontSize: 16)),
+                              style: TextStyle(fontFamily: FontRes.regular, color: ColorRes.dimGrey3, fontSize: 16)),
                           Image.asset(
                             AssetRes.icBlueTick,
                             width: 18,
