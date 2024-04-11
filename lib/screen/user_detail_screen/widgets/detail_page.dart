@@ -205,7 +205,7 @@ class DetailPage extends StatelessWidget {
                           style: const TextStyle(color: ColorRes.white, fontFamily: FontRes.bold, fontSize: 17),
                         ),
                         const SizedBox(height: 11),
-                        interestButtons(model.userData?.interests ?? []),
+                        // interestButtons(model.userData?.interests ?? []),
                         Padding(
                             padding: const EdgeInsets.symmetric(vertical: 10.0),
                             child: ClipRect(
@@ -253,16 +253,12 @@ class DetailPage extends StatelessWidget {
                             child: Container(
                               height: 50,
                               width: Get.width,
-                              decoration:
-                                  BoxDecoration(color: ColorRes.white, borderRadius: BorderRadius.circular(10)),
+                              decoration: BoxDecoration(color: ColorRes.white, borderRadius: BorderRadius.circular(10)),
                               child: Center(
                                 child: Text(
                                   '${S.current.chatWith}${model.userData?.fullname?.toUpperCase()}',
                                   style: const TextStyle(
-                                      color: ColorRes.red3,
-                                      fontSize: 12,
-                                      fontFamily: FontRes.bold,
-                                      letterSpacing: 0.6),
+                                      color: ColorRes.red3, fontSize: 12, fontFamily: FontRes.bold, letterSpacing: 0.6),
                                 ),
                               ),
                             ),
@@ -330,18 +326,11 @@ class DetailPage extends StatelessWidget {
         return Container(
           margin: const EdgeInsets.only(right: 8, bottom: 10),
           padding: const EdgeInsets.fromLTRB(20.6, 9.50, 20.6, 8.51),
-          decoration: BoxDecoration(
-            color: ColorRes.white.withOpacity(0.15),
-            borderRadius: BorderRadius.circular(50),
-          ),
+          decoration: BoxDecoration(color: ColorRes.white.withOpacity(0.15), borderRadius: BorderRadius.circular(50)),
           child: Text(
             '${e.title?.toUpperCase()}',
-            style: const TextStyle(
-              fontSize: 12,
-              color: ColorRes.white,
-              letterSpacing: 0.5,
-              fontFamily: FontRes.semiBold,
-            ),
+            style:
+                const TextStyle(fontSize: 12, color: ColorRes.white, letterSpacing: 0.5, fontFamily: FontRes.semiBold),
           ),
         );
       }).toList(),
@@ -368,8 +357,7 @@ class FollowUnFollowBtn extends StatelessWidget {
               color: isFollow ? ColorRes.dimGrey7.withOpacity(0.15) : null),
           child: Text(
             (isFollow ? S.current.unfollow : S.current.follow).toUpperCase(),
-            style: const TextStyle(
-                fontFamily: FontRes.bold, color: ColorRes.white, fontSize: 12, letterSpacing: 1.33),
+            style: const TextStyle(fontFamily: FontRes.bold, color: ColorRes.white, fontSize: 12, letterSpacing: 1.33),
           )),
     );
   }
@@ -380,8 +368,7 @@ class VerticalColumnText extends StatelessWidget {
   final String title;
   final VoidCallback onTap;
 
-  const VerticalColumnText({Key? key, required this.count, required this.title, required this.onTap})
-      : super(key: key);
+  const VerticalColumnText({Key? key, required this.count, required this.title, required this.onTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

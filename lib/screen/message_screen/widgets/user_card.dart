@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:orange_ui/common/widgets/common_fun.dart';
+import 'package:orange_ui/common/widgets/common_ui.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
 import 'package:orange_ui/utils/const_res.dart';
@@ -34,8 +35,7 @@ class UserCard extends StatelessWidget {
       children: [
         Container(
           margin: const EdgeInsets.only(bottom: 6),
-          padding:
-              const EdgeInsets.only(top: 8, left: 12, right: 12, bottom: 11),
+          padding: const EdgeInsets.only(top: 8, left: 12, right: 12, bottom: 11),
           height: 74,
           width: Get.width,
           decoration: BoxDecoration(
@@ -47,26 +47,16 @@ class UserCard extends StatelessWidget {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(30),
-                child: image == null || image!.isEmpty
-                    ? Image.asset(
-                        AssetRes.themeLabel,
-                        height: 53,
-                        width: 53,
-                      )
-                    : CachedNetworkImage(
-                        imageUrl: '${ConstRes.aImageBaseUrl}$image',
-                        height: 53,
-                        width: 53,
-                        fit: BoxFit.cover,
-                        cacheKey: '${ConstRes.aImageBaseUrl}$image',
-                        errorWidget: (context, url, error) {
-                          return Image.asset(
-                            AssetRes.themeLabel,
-                            height: 53,
-                            width: 53,
-                          );
-                        },
-                      ),
+                child: CachedNetworkImage(
+                  imageUrl: '${ConstRes.aImageBaseUrl}$image',
+                  height: 53,
+                  width: 53,
+                  fit: BoxFit.cover,
+                  cacheKey: '${ConstRes.aImageBaseUrl}$image',
+                  errorWidget: (context, url, error) {
+                    return CommonUI.profileImagePlaceHolder(name: name, heightWeight: 53);
+                  },
+                ),
               ),
               const SizedBox(
                 width: 12,
@@ -87,11 +77,7 @@ class UserCard extends StatelessWidget {
                                   child: Text(
                                     '$name',
                                     softWrap: false,
-                                    style: const TextStyle(
-                                        color: ColorRes.veryDarkGrey3,
-                                        fontFamily: FontRes.bold,
-                                        overflow: TextOverflow.ellipsis,
-                                        fontSize: 16),
+                                    style: const TextStyle(color: ColorRes.veryDarkGrey3, fontFamily: FontRes.bold, overflow: TextOverflow.ellipsis, fontSize: 16),
                                   ),
                                 ),
                                 Flexible(
@@ -119,8 +105,7 @@ class UserCard extends StatelessWidget {
                             CommonFun.readTimestamp(
                               double.parse(time ?? ''),
                             ),
-                            style: const TextStyle(
-                                fontSize: 12, color: ColorRes.grey4),
+                            style: const TextStyle(fontSize: 12, color: ColorRes.grey4),
                           ),
                         ],
                       ),

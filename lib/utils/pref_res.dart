@@ -27,4 +27,5 @@ class PrefConst {
   static const String languageCode = 'languageCode';
   static const String time = 'time';
   static const String password = 'Password';
+  static const String interest = 'interest';
 }

@@ -22,3 +22,6 @@ class ConstRes {
 const double maxWidth = 720;
 const double maxHeight = 720;
 const int quality = 100;
+
+// max Images for Post
+const int maxImagesForPost = 5;

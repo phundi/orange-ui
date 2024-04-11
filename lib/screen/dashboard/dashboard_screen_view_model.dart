@@ -24,8 +24,7 @@ class DashboardScreenViewModel extends BaseViewModel {
       },
       onError: (error) {
         PlatformException platformException = error as PlatformException;
-        SnackBarWidget()
-            .snackBarWidget('InitSession error: ${platformException.code} - ${platformException.message}');
+        SnackBarWidget().snackBarWidget('InitSession error: ${platformException.code} - ${platformException.message}');
       },
     );
     getProfileApiCall();
@@ -39,7 +38,6 @@ class DashboardScreenViewModel extends BaseViewModel {
   }
 
   void onBottomBarTap(int index) {
-    print(userData?.toJson());
     if (userData?.isBlock == 1 && index == 4) {
       pageIndex = index;
       notifyListeners();

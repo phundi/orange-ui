@@ -40,6 +40,8 @@ class Urls {
   static const String aFetchSavedProfiles = '${ConstRes.aBaseUrl}fetchSavedProfiles';
   static const String aFetchLikedProfiles = '${ConstRes.aBaseUrl}fetchLikedProfiles';
   static const String aFetchBlockedProfiles = '${ConstRes.aBaseUrl}fetchBlockedProfiles';
+  static const String aFetchHomePageData = '${ConstRes.aBaseUrl}fetchHomePageData';
+  static const String aAddPost = '${ConstRes.aBaseUrl}addPost';
 
   ///------------------------ Params ------------------------///
   static const String aApiKeyName = 'apikey';
@@ -58,7 +60,7 @@ class Urls {
   static const String aInterests = 'interests';
   static const String aPassword = 'password';
   static const String aPost = 'POST';
-  static const String aUserIdName = 'user_id';
+  static const String aUserId = 'user_id';
   static const String aLive = 'live';
   static const String aBio = 'bio';
   static const String aAge = 'age';
@@ -68,9 +70,10 @@ class Urls {
   static const String aBubblyCamera = 'bubbly_camera';
   static const String aSettingData = 'settingData';
   static const String aState = 'state';
+  static const String aCount = 'count';
+  static const String aLimit = 'limit';
   static const String aReason = 'reason';
   static const String aDescription = 'description';
-  static const String aCount = 'count';
   static const String aAboutYou = 'about_you';
   static const String aSocialLink = 'social_links';
   static const String aIntroVideo = 'intro_video';
@@ -108,6 +111,11 @@ class Urls {
   static const String aViewerNotificationId = 'viewer_notification_id';
   static const String aTitle = 'title';
   static const String aBody = 'body';
+  static const String aContent = 'content[]';
+  static const String aThumbnail = 'thumbnail[]';
+  static const String aContentType = 'content_type';
+  static const String aInterestIds = 'interest_ids';
+  static const String aHashtags = 'hashtags';
 
   // Social Media
   static const String aMyUserId = 'my_user_id';

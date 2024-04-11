@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:orange_ui/model/chat_and_live_stream/chat.dart';
+import 'package:orange_ui/model/get_interest.dart';
 import 'package:orange_ui/model/setting.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/utils/firebase_res.dart';
@@ -120,9 +121,7 @@ class PrefService {
             .then((value) {
           ChatUser? user = value.data()?.user;
           user?.username = registrationUserData?.fullname ?? '';
-          user?.age = registrationUserData?.age != null
-              ? registrationUserData?.age.toString()
-              : '';
+          user?.age = registrationUserData?.age != null ? registrationUserData?.age.toString() : '';
           user?.image = registrationUserData?.images?[0].image ?? '';
           user?.city = registrationUserData?.live ?? '';
           db
@@ -147,8 +146,15 @@ class PrefService {
 
   static Future<RegistrationUserData?> getUserData() async {
     String? data = await getString(PrefConst.registrationUser);
+    print('Data : ${data}');
     if (data == null || data.isEmpty) return null;
     return RegistrationUserData.fromJson(jsonDecode(data));
+  }
+
+  static Future<GetInterest?> getInterest() async {
+    String? data = await getString(PrefConst.interest);
+    if (data == null || data.isEmpty) return null;
+    return GetInterest.fromJson(jsonDecode(data));
   }
 
   static Future<SettingData?> getSettingData() async {

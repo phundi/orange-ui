@@ -8,6 +8,7 @@ import 'package:orange_ui/api_provider/api_provider.dart';
 import 'package:orange_ui/common/widgets/loader.dart';
 import 'package:orange_ui/common/widgets/snack_bar_widget.dart';
 import 'package:orange_ui/generated/l10n.dart';
+import 'package:orange_ui/model/get_interest.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/service/pref_service.dart';
 import 'package:orange_ui/utils/const_res.dart';
@@ -71,7 +72,7 @@ class EditProfileScreenViewModel extends BaseViewModel {
   }
 
   void getInterestApiCall() async {
-    ApiProvider().getInterest().then((value) {
+    await PrefService.getInterest().then((value) {
       if (value != null && value.status!) {
         hobbiesList = value.data;
         notifyListeners();
@@ -110,9 +111,8 @@ class EditProfileScreenViewModel extends BaseViewModel {
 
   void getPrefUser() {
     PrefService.getUserData().then((value) {
-      value?.interests?.map((e) {
-        selectedList.add(e.id.toString());
-      }).toList();
+      List<String> interestIds = (value?.interests ?? '').split(',');
+      selectedList.addAll(interestIds);
       notifyListeners();
     });
   }
@@ -191,8 +191,8 @@ class EditProfileScreenViewModel extends BaseViewModel {
       }
     }
 
-    final selectedImages = await imagePicker.pickMultiImage(
-        imageQuality: quality, maxHeight: maxHeight, maxWidth: maxWidth);
+    final selectedImages =
+        await imagePicker.pickMultiImage(imageQuality: quality, maxHeight: maxHeight, maxWidth: maxWidth);
     if (selectedImages.isEmpty) return;
     if (selectedImages.isNotEmpty) {
       for (XFile image in selectedImages) {

@@ -23,12 +23,14 @@ class GetStartedScreenViewModel extends BaseViewModel {
   void init() {
     getPref();
     settingApiCall();
+    getInterest();
   }
 
   void getPref() {
     PrefService.getUserData().then((value) {
+      print(value?.id);
       if (value == null) return;
-      PrefService.userId = value.id!;
+      PrefService.userId = value.id ?? -1;
       notifyListeners();
     });
   }
@@ -41,10 +43,8 @@ class GetStartedScreenViewModel extends BaseViewModel {
       PrefService.minThreshold = value.data?.appdata?.minThreshold ?? 0;
       PrefService.coinRate = value.data?.appdata?.coinRate ?? '';
       PrefService.messagePrice = value.data?.appdata?.messagePrice ?? 0;
-      PrefService.liveWatchingPrice =
-          value.data?.appdata?.liveWatchingPrice ?? 0;
-      PrefService.reverseSwipePrice =
-          value.data?.appdata?.reverseSwipePrice ?? 0;
+      PrefService.liveWatchingPrice = value.data?.appdata?.liveWatchingPrice ?? 0;
+      PrefService.reverseSwipePrice = value.data?.appdata?.reverseSwipePrice ?? 0;
       PrefService.isDating == value.data?.appdata?.isDating;
       notifyListeners();
     });
@@ -85,17 +85,16 @@ class GetStartedScreenViewModel extends BaseViewModel {
   }
 
   void loginToNavigateScreen() async {
+    print(PrefService.userId);
     bool isLogin = (await PrefService.getLoginText()) ?? false;
     if (isLogin) {
       ApiProvider().getProfile(userID: PrefService.userId).then(
         (value) {
           if (value?.data?.age == null) {
             Get.off(() => const StartingProfileScreen());
-          } else if (value?.data?.images == null ||
-              value!.data!.images!.isEmpty) {
+          } else if (value?.data?.images == null || value!.data!.images!.isEmpty) {
             Get.off(() => const SelectPhotoScreen());
-          } else if (value.data?.interests == null ||
-              value.data!.interests!.isEmpty) {
+          } else if (value.data?.interests == null || value.data!.interests!.isEmpty) {
             Get.off(() => const SelectHobbiesScreen());
           } else {
             Get.off(() => const DashboardScreen());
@@ -113,8 +112,7 @@ class GetStartedScreenViewModel extends BaseViewModel {
   }
 
   void eulaSheet() {
-    Get.bottomSheet(EulaSheet(eulaAcceptClick: eulaAcceptClick),
-        isScrollControlled: true, isDismissible: false);
+    Get.bottomSheet(EulaSheet(eulaAcceptClick: eulaAcceptClick), isScrollControlled: true, isDismissible: false);
   }
 
   void eulaAcceptClick() async {
@@ -163,8 +161,7 @@ class GetStartedScreenViewModel extends BaseViewModel {
       await Geolocator.openAppSettings();
     }
     Loader().lottieLoader();
-    await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high)
-        .then((value) async {
+    await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high).then((value) async {
       await PrefService.setLatitude(value.latitude.toString());
       await PrefService.setLongitude(value.longitude.toString());
       Get.back();
@@ -190,5 +187,9 @@ class GetStartedScreenViewModel extends BaseViewModel {
     } else {
       Get.off(() => const LoginDashboardScreen());
     }
+  }
+
+  void getInterest() {
+    ApiProvider().getInterest();
   }
 }

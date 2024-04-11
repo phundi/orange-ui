@@ -33,12 +33,8 @@ class StoryViewScreen extends StatelessWidget {
                         controller: model.storyController,
                         repeat: true,
                         indicatorHeight: IndicatorHeight.medium,
-                        onStoryShow: (storyItem, index) {
-                          print('Story Item : ${storyItem.shown} Index :$index');
-                        },
-                        onComplete: () {
-                          print('object');
-                        },
+                        onStoryShow: (storyItem, index) {},
+                        onComplete: () {},
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),

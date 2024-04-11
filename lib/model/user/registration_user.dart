@@ -1,3 +1,5 @@
+import 'package:orange_ui/model/social/feed.dart';
+
 class RegistrationUser {
   RegistrationUser({
     bool? status,
@@ -12,9 +14,7 @@ class RegistrationUser {
   RegistrationUser.fromJson(dynamic json) {
     _status = json['status'];
     _message = json['message'];
-    _data = json['data'] != null
-        ? RegistrationUserData.fromJson(json['data'])
-        : null;
+    _data = json['data'] != null ? RegistrationUserData.fromJson(json['data']) : null;
   }
 
   bool? _status;
@@ -56,7 +56,7 @@ class RegistrationUserData {
     int? gender,
     String? savedprofile,
     String? likedprofile,
-    List<Interest>? interests,
+    String? interests,
     int? age,
     String? identity,
     String? fullname,
@@ -84,6 +84,7 @@ class RegistrationUserData {
     int? isLiveNow,
     int? isFake,
     dynamic password,
+    List<Stories>? story,
     List<Images>? images,
   }) {
     _id = id;
@@ -119,6 +120,7 @@ class RegistrationUserData {
     _isLiveNow = isLiveNow;
     _isFake = isFake;
     _password = password;
+    _story = story;
     _images = images;
   }
 
@@ -128,12 +130,7 @@ class RegistrationUserData {
     _gender = json['gender'];
     _savedprofile = json['savedprofile'];
     _likedprofile = json['likedprofile'];
-    if (json['interests'] != null) {
-      _interests = [];
-      json['interests'].forEach((v) {
-        _interests?.add(Interest.fromJson(v));
-      });
-    }
+    _interests = json['interests'];
     _age = json['age'];
     _identity = json['identity'];
     _fullname = json['fullname'];
@@ -161,6 +158,12 @@ class RegistrationUserData {
     _isLiveNow = json['is_live_now'];
     _isFake = json['is_fake'];
     _password = json['password'];
+    if (json['story'] != null) {
+      _story = [];
+      json['story'].forEach((v) {
+        _story?.add(Stories.fromJson(v));
+      });
+    }
     if (json['images'] != null) {
       _images = [];
       json['images'].forEach((v) {
@@ -174,7 +177,7 @@ class RegistrationUserData {
   int? _gender;
   String? _savedprofile;
   String? _likedprofile;
-  List<Interest>? _interests;
+  String? _interests;
   int? _age;
   String? _identity;
   String? _fullname;
@@ -202,80 +205,8 @@ class RegistrationUserData {
   int? _isLiveNow;
   int? _isFake;
   dynamic _password;
+  List<Stories>? _story;
   List<Images>? _images;
-
-  RegistrationUserData copyWith({
-    int? id,
-    int? isBlock,
-    int? gender,
-    String? savedprofile,
-    String? likedprofile,
-    List<Interest>? interests,
-    int? age,
-    String? identity,
-    String? fullname,
-    String? instagram,
-    String? youtube,
-    String? facebook,
-    String? live,
-    String? bio,
-    String? about,
-    String? lattitude,
-    String? longitude,
-    int? loginType,
-    String? deviceToken,
-    String? blockedUsers,
-    int? wallet,
-    int? totalCollected,
-    int? totalStreams,
-    int? deviceType,
-    int? isNotification,
-    int? isVerified,
-    int? showOnMap,
-    int? anonymous,
-    int? isVideoCall,
-    int? canGoLive,
-    int? isLiveNow,
-    int? isFake,
-    dynamic password,
-    List<Images>? images,
-  }) =>
-      RegistrationUserData(
-        id: id ?? _id,
-        isBlock: isBlock ?? _isBlock,
-        gender: gender ?? _gender,
-        savedprofile: savedprofile ?? _savedprofile,
-        likedprofile: likedprofile ?? _likedprofile,
-        interests: interests ?? _interests,
-        age: age ?? _age,
-        identity: identity ?? _identity,
-        fullname: fullname ?? _fullname,
-        instagram: instagram ?? _instagram,
-        youtube: youtube ?? _youtube,
-        facebook: facebook ?? _facebook,
-        live: live ?? _live,
-        bio: bio ?? _bio,
-        about: about ?? _about,
-        lattitude: lattitude ?? _lattitude,
-        longitude: longitude ?? _longitude,
-        loginType: loginType ?? _loginType,
-        deviceToken: deviceToken ?? _deviceToken,
-        blockedUsers: blockedUsers ?? _blockedUsers,
-        wallet: wallet ?? _wallet,
-        totalCollected: totalCollected ?? _totalCollected,
-        totalStreams: totalStreams ?? _totalStreams,
-        deviceType: deviceType ?? _deviceType,
-        isNotification: isNotification ?? _isNotification,
-        isVerified: isVerified ?? _isVerified,
-        showOnMap: showOnMap ?? _showOnMap,
-        anonymous: anonymous ?? _anonymous,
-        isVideoCall: isVideoCall ?? _isVideoCall,
-        canGoLive: canGoLive ?? _canGoLive,
-        isLiveNow: isLiveNow ?? _isLiveNow,
-        isFake: isFake ?? _isFake,
-        password: password ?? _password,
-        images: images ?? _images,
-      );
 
   int? get id => _id;
 
@@ -287,7 +218,7 @@ class RegistrationUserData {
 
   String? get likedprofile => _likedprofile;
 
-  List<Interest>? get interests => _interests;
+  String? get interests => _interests;
 
   int? get age => _age;
 
@@ -342,7 +273,7 @@ class RegistrationUserData {
   int? get isFake => _isFake;
 
   dynamic get password => _password;
-
+  List<Stories>? get story => _story;
   List<Images>? get images => _images;
 
   Map<String, dynamic> toJson() {
@@ -352,9 +283,7 @@ class RegistrationUserData {
     map['gender'] = _gender;
     map['savedprofile'] = _savedprofile;
     map['likedprofile'] = _likedprofile;
-    if (_interests != null) {
-      map['interests'] = _interests?.map((v) => v.toJson()).toList();
-    }
+    map['interests'] = _interests;
     map['age'] = _age;
     map['identity'] = _identity;
     map['fullname'] = _fullname;
@@ -382,6 +311,9 @@ class RegistrationUserData {
     map['is_live_now'] = _isLiveNow;
     map['is_fake'] = _isFake;
     map['password'] = _password;
+    if (_story != null) {
+      map['story'] = _story?.map((v) => v.toJson()).toList();
+    }
     if (_images != null) {
       map['images'] = _images?.map((v) => v.toJson()).toList();
     }

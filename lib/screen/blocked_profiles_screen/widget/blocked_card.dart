@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:orange_ui/common/widgets/common_fun.dart';
+import 'package:orange_ui/common/widgets/common_ui.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/screen/blocked_profiles_screen/blocked_profiles_screen_view_model.dart';
 import 'package:orange_ui/screen/user_detail_screen/user_detail_screen.dart';
@@ -14,19 +16,13 @@ class BlockedCard extends StatelessWidget {
   final BlockedProfilesScreenViewModel viewModel;
   final bool isBlocked;
 
-  const BlockedCard(
-      {Key? key,
-      required this.userData,
-      required this.viewModel,
-      required this.isBlocked})
-      : super(key: key);
+  const BlockedCard({Key? key, required this.userData, required this.viewModel, required this.isBlocked}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.to(() => const UserDetailScreen(), arguments: userData)
-            ?.then((value) {
+        Get.to(() => const UserDetailScreen(), arguments: userData)?.then((value) {
           viewModel.onBackBlockIds(userData);
         });
       },
@@ -39,14 +35,12 @@ class BlockedCard extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(50),
               child: CachedNetworkImage(
-                imageUrl:
-                    '${ConstRes.aImageBaseUrl}${(userData.images ?? []).isEmpty ? '' : ((userData.images ?? []).first.image ?? '')}',
+                imageUrl: CommonFun.getProfileImage(images: userData.images),
                 width: 40,
                 height: 40,
                 fit: BoxFit.cover,
                 errorWidget: (context, url, error) {
-                  return Image.asset(AssetRes.themeLabel,
-                      height: 40, width: 40);
+                  return CommonUI.profileImagePlaceHolder(name: userData.fullname, heightWeight: 40);
                 },
               ),
             ),
@@ -70,25 +64,14 @@ class BlockedCard extends StatelessWidget {
                       const SizedBox(width: 3),
                       Text(
                         "${userData.age ?? ''}",
-                        style: const TextStyle(
-                            color: ColorRes.darkGrey4,
-                            fontSize: 18,
-                            overflow: TextOverflow.ellipsis),
+                        style: const TextStyle(color: ColorRes.darkGrey4, fontSize: 18, overflow: TextOverflow.ellipsis),
                         maxLines: 1,
                       ),
                       const SizedBox(width: 3),
-                      userData.isVerified == 2
-                          ? Image.asset(AssetRes.tickMark,
-                              height: 18, width: 18)
-                          : const SizedBox(),
+                      userData.isVerified == 2 ? Image.asset(AssetRes.tickMark, height: 18, width: 18) : const SizedBox(),
                     ],
                   ),
-                  Text(userData.live ?? '',
-                      style: const TextStyle(
-                          color: ColorRes.grey6,
-                          fontSize: 13,
-                          overflow: TextOverflow.ellipsis),
-                      maxLines: 1),
+                  Text(userData.live ?? '', style: const TextStyle(color: ColorRes.grey6, fontSize: 13, overflow: TextOverflow.ellipsis), maxLines: 1),
                 ],
               ),
             ),

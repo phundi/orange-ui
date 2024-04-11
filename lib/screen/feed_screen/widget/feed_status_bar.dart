@@ -17,7 +17,7 @@ class FeedStatusBar extends StatelessWidget {
       children: [
         InkWell(
           onTap: () {
-            Get.to(() => CameraScreen());
+            Get.to(() => const CameraScreen());
           },
           child: Container(
             width: 70,
@@ -53,12 +53,10 @@ class FeedStatusBar extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return InkWell(
                     onTap: () {
-                      Get.bottomSheet(
-                        const StoryViewScreen(),
-                        isScrollControlled: true,
-                        barrierColor: ColorRes.white,
-                        shape: SmoothRectangleBorder(borderRadius: SmoothBorderRadius(cornerRadius: 0)),
-                      );
+                      Get.bottomSheet(const StoryViewScreen(),
+                          isScrollControlled: true,
+                          barrierColor: ColorRes.black,
+                          shape: SmoothRectangleBorder(borderRadius: SmoothBorderRadius(cornerRadius: 0)));
                     },
                     child: SizedBox(
                       width: 80,
@@ -74,13 +72,20 @@ class FeedStatusBar extends StatelessWidget {
                               shape: SmoothRectangleBorder(
                                 borderRadius: SmoothBorderRadius(cornerRadius: 15, cornerSmoothing: 1),
                               ),
-                              gradient: const LinearGradient(colors: [ColorRes.lightOrange1, ColorRes.darkOrange], begin: Alignment.topCenter, end: Alignment.bottomCenter),
+                              gradient: const LinearGradient(
+                                  colors: [ColorRes.lightOrange1, ColorRes.darkOrange],
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter),
                             ),
                             child: Container(
                               width: 66,
                               height: 66,
                               margin: const EdgeInsets.all(2.5),
-                              decoration: ShapeDecoration(color: ColorRes.white, shape: SmoothRectangleBorder(side: const BorderSide(color: ColorRes.white), borderRadius: SmoothBorderRadius(cornerRadius: 13, cornerSmoothing: 1))),
+                              decoration: ShapeDecoration(
+                                  color: ColorRes.white,
+                                  shape: SmoothRectangleBorder(
+                                      side: const BorderSide(color: ColorRes.white),
+                                      borderRadius: SmoothBorderRadius(cornerRadius: 13, cornerSmoothing: 1))),
                               child: ClipRRect(
                                 borderRadius: SmoothBorderRadius(cornerRadius: 13, cornerSmoothing: 1),
                                 child: Image.asset(AssetRes.icImage, fit: BoxFit.cover),

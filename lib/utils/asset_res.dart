@@ -70,6 +70,7 @@ class AssetRes {
   static const String icEyeBlack = "${icons}ic_eye_black.png";
   static const String icMedia = "${icons}ic_media.png";
   static const String icCameraFlip = "${icons}ic_camera_flip.png";
+  static const String icPostPlaceholder = "${icons}ic_post_placeholder.png";
 
   /// ----------------- Images --------------
 

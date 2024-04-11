@@ -1,10 +1,10 @@
 import 'package:get/get.dart';
+import 'package:orange_ui/api_provider/api_provider.dart';
 import 'package:orange_ui/common/widgets/loader.dart';
+import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/screen/dashboard/dashboard_screen.dart';
+import 'package:orange_ui/service/pref_service.dart';
 import 'package:stacked/stacked.dart';
-
-import '../../api_provider/api_provider.dart';
-import '../../model/user/registration_user.dart';
 
 class SelectHobbiesScreenViewModel extends BaseViewModel {
   List<Interest>? hobbiesList = [];
@@ -31,7 +31,7 @@ class SelectHobbiesScreenViewModel extends BaseViewModel {
   }
 
   void getInterestApiCall() async {
-    ApiProvider().getInterest().then((value) {
+    await PrefService.getInterest().then((value) {
       if (value != null && value.status!) {
         hobbiesList = value.data;
         notifyListeners();

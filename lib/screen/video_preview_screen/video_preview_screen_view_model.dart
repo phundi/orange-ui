@@ -20,8 +20,8 @@ class VideoPlayerScreenViewModel extends BaseViewModel {
 
   void videoInit() {
     duration = const Duration();
-    videoPlayerController = VideoPlayerController.network(
-      '${ConstRes.aImageBaseUrl}$videoPath',
+    videoPlayerController = VideoPlayerController.networkUrl(
+      Uri.parse('${ConstRes.aImageBaseUrl}$videoPath'),
     )..initialize().then((value) {
         videoPlayerController.play().then((value) {
           isUIVisible = true;

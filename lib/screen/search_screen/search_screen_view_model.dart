@@ -6,6 +6,7 @@ import 'package:orange_ui/common/widgets/common_fun.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/screen/map_screen/map_screen.dart';
 import 'package:orange_ui/screen/user_detail_screen/user_detail_screen.dart';
+import 'package:orange_ui/service/pref_service.dart';
 import 'package:stacked/stacked.dart';
 
 class SearchScreenViewModel extends BaseViewModel {
@@ -26,7 +27,7 @@ class SearchScreenViewModel extends BaseViewModel {
   }
 
   void getInterestApiCall() async {
-    ApiProvider().getInterest().then((value) {
+    await PrefService.getInterest().then((value) {
       if (value != null && value.status!) {
         tabList = value.data ?? [];
         notifyListeners();
@@ -37,8 +38,7 @@ class SearchScreenViewModel extends BaseViewModel {
   void fetchScrollData() {
     userScrollController.addListener(
       () {
-        if (userScrollController.offset ==
-            userScrollController.position.maxScrollExtent) {
+        if (userScrollController.offset == userScrollController.position.maxScrollExtent) {
           if (!isLoading) {
             if (selectedTab.isEmpty) {
               getSearchByUser();
@@ -59,8 +59,7 @@ class SearchScreenViewModel extends BaseViewModel {
       start: searchUsers.length,
     )
         .then((value) {
-      List<String> list =
-          searchUsers.map((e) => e.id?.toString() ?? '').toList();
+      List<String> list = searchUsers.map((e) => e.id?.toString() ?? '').toList();
       value.data?.forEach((element) {
         if (!list.contains(element.id?.toString())) {
           searchUsers.add(element);
@@ -80,8 +79,7 @@ class SearchScreenViewModel extends BaseViewModel {
       start: searchUsers.length,
     )
         .then((value) {
-      List<String> list =
-          searchUsers.map((e) => e.id?.toString() ?? '').toList();
+      List<String> list = searchUsers.map((e) => e.id?.toString() ?? '').toList();
       value.data?.forEach((element) {
         if (!list.contains(element.id?.toString())) {
           searchUsers.add(element);

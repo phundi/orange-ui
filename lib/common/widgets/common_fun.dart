@@ -2,12 +2,14 @@ import 'dart:io';
 
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:intl/intl.dart';
+import 'package:orange_ui/model/social/feed.dart';
+import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/service/pref_service.dart';
+import 'package:orange_ui/utils/const_res.dart';
 import 'package:orange_ui/utils/firebase_res.dart';
 
 class CommonFun {
-  static Future<void> interstitialAd(
-      Function(InterstitialAd ad) onAdLoaded) async {
+  static Future<void> interstitialAd(Function(InterstitialAd ad) onAdLoaded) async {
     InterstitialAd.load(
       adUnitId: Platform.isIOS
           ? "${PrefService.settingData?.appdata?.admobIntIos}"
@@ -68,25 +70,21 @@ class CommonFun {
     var date = DateTime.fromMicrosecondsSinceEpoch(timestamp.toInt() * 1000);
     var time = '';
     if (now.day == date.day) {
-      time = DateFormat('hh:mm a')
-          .format(DateTime.fromMillisecondsSinceEpoch(timestamp.toInt()));
+      time = DateFormat('hh:mm a').format(DateTime.fromMillisecondsSinceEpoch(timestamp.toInt()));
       return time;
     }
     if (now.weekday > date.weekday) {
-      time = DateFormat('EEEE')
-          .format(DateTime.fromMillisecondsSinceEpoch(timestamp.toInt()));
+      time = DateFormat('EEEE').format(DateTime.fromMillisecondsSinceEpoch(timestamp.toInt()));
       return time;
     }
     if (now.month == date.month) {
-      time = DateFormat('dd/MMM/yyyy')
-          .format(DateTime.fromMillisecondsSinceEpoch(timestamp.toInt()));
+      time = DateFormat('dd/MMM/yyyy').format(DateTime.fromMillisecondsSinceEpoch(timestamp.toInt()));
       return time;
     }
     return time;
   }
 
-  static String getConversationID(
-      {required int? myId, required int? otherUserId}) {
+  static String getConversationID({required int? myId, required int? otherUserId}) {
     String conversationID = '${myId}_$otherUserId';
     List<String> v = conversationID.split('_');
     v.sort((a, b) {
@@ -102,5 +100,22 @@ class CommonFun {
         : msgType == FirebaseRes.video
             ? FirebaseRes.videoText
             : msg;
+  }
+
+  static String getProfileImage({List<Images>? images}) {
+    String profileImage = '';
+    List<Images> tempList = images ?? [];
+    if (tempList.isNotEmpty) {
+      profileImage = tempList.first.image ?? '';
+      return '${ConstRes.aImageBaseUrl}$profileImage';
+    }
+    return '';
+  }
+
+  static bool isContentAvailable({List<Content>? content}) {
+    if (content != null || content!.isNotEmpty) {
+      return true;
+    }
+    return false;
   }
 }
