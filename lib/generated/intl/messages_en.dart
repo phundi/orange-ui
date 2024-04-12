@@ -79,6 +79,8 @@ class MessageLookup extends MessageLookupByLibrary {
                 "coins, Please confirm if you to continue or not"),
         "collected": MessageLookupByLibrary.simpleMessage("Collected"),
         "comment": MessageLookupByLibrary.simpleMessage("Comment..."),
+        "commentNotFound":
+            MessageLookupByLibrary.simpleMessage("Comment Not Found"),
         "comments": MessageLookupByLibrary.simpleMessage("Comments"),
         "complete": MessageLookupByLibrary.simpleMessage("Complete"),
         "confirmPassword":
@@ -254,6 +256,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Nearby Profiles on Map"),
         "next": MessageLookupByLibrary.simpleMessage("NEXT"),
         "no": MessageLookupByLibrary.simpleMessage("No"),
+        "noComment": MessageLookupByLibrary.simpleMessage("No Comment"),
         "noData": MessageLookupByLibrary.simpleMessage("No Data"),
         "noDataAvailable":
             MessageLookupByLibrary.simpleMessage("No Data Available"),
@@ -338,6 +341,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "report": MessageLookupByLibrary.simpleMessage("Report"),
         "reportCap": MessageLookupByLibrary.simpleMessage("REPORT "),
         "reportUser": MessageLookupByLibrary.simpleMessage("REPORT USER"),
+        "reportedSubmitted":
+            MessageLookupByLibrary.simpleMessage("Reported Submitted"),
+        "reportedSuccessfully":
+            MessageLookupByLibrary.simpleMessage("Reported Successfully!!"),
         "reqVerification":
             MessageLookupByLibrary.simpleMessage("REQUEST VERIFICATION"),
         "requests": MessageLookupByLibrary.simpleMessage(" REQUESTS"),
@@ -415,6 +422,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("use automatically from next"),
         "userBlock":
             MessageLookupByLibrary.simpleMessage("User block by admin"),
+        "userNotFound":
+            MessageLookupByLibrary.simpleMessage("User Not Found!!"),
         "userNotLive": MessageLookupByLibrary.simpleMessage("User not live"),
         "users": MessageLookupByLibrary.simpleMessage("Users"),
         "validEmail": MessageLookupByLibrary.simpleMessage("Enter Valid Email"),

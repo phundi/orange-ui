@@ -1,28 +1,29 @@
 import 'package:orange_ui/model/social/feed.dart';
+import 'package:orange_ui/model/user/registration_user.dart';
 
-class AddPost {
-  AddPost({
+class AddComment {
+  AddComment({
     bool? status,
     String? message,
-    AddPostData? data,
+    Data? data,
   }) {
     _status = status;
     _message = message;
     _data = data;
   }
 
-  AddPost.fromJson(dynamic json) {
+  AddComment.fromJson(dynamic json) {
     _status = json['status'];
     _message = json['message'];
-    _data = json['data'] != null ? AddPostData.fromJson(json['data']) : null;
+    _data = json['data'] != null ? Data.fromJson(json['data']) : null;
   }
   bool? _status;
   String? _message;
-  AddPostData? _data;
+  Data? _data;
 
   bool? get status => _status;
   String? get message => _message;
-  AddPostData? get data => _data;
+  Data? get data => _data;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -35,8 +36,67 @@ class AddPost {
   }
 }
 
-class AddPostData {
-  AddPostData({
+class Data {
+  Data({
+    int? userId,
+    int? postId,
+    String? description,
+    String? updatedAt,
+    String? createdAt,
+    int? id,
+    Post? post,
+  }) {
+    _userId = userId;
+    _postId = postId;
+    _description = description;
+    _updatedAt = updatedAt;
+    _createdAt = createdAt;
+    _id = id;
+    _post = post;
+  }
+
+  Data.fromJson(dynamic json) {
+    _userId = json['user_id'];
+    _postId = json['post_id'];
+    _description = json['description'];
+    _updatedAt = json['updated_at'];
+    _createdAt = json['created_at'];
+    _id = json['id'];
+    _post = json['post'] != null ? Post.fromJson(json['post']) : null;
+  }
+  int? _userId;
+  int? _postId;
+  String? _description;
+  String? _updatedAt;
+  String? _createdAt;
+  int? _id;
+  Post? _post;
+
+  int? get userId => _userId;
+  int? get postId => _postId;
+  String? get description => _description;
+  String? get updatedAt => _updatedAt;
+  String? get createdAt => _createdAt;
+  int? get id => _id;
+  Post? get post => _post;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['user_id'] = _userId;
+    map['post_id'] = _postId;
+    map['description'] = _description;
+    map['updated_at'] = _updatedAt;
+    map['created_at'] = _createdAt;
+    map['id'] = _id;
+    if (_post != null) {
+      map['post'] = _post?.toJson();
+    }
+    return map;
+  }
+}
+
+class Post {
+  Post({
     int? id,
     int? userId,
     String? description,
@@ -46,6 +106,7 @@ class AddPostData {
     String? hashtags,
     String? createdAt,
     String? updatedAt,
+    RegistrationUserData? user,
     List<Content>? content,
   }) {
     _id = id;
@@ -57,10 +118,11 @@ class AddPostData {
     _hashtags = hashtags;
     _createdAt = createdAt;
     _updatedAt = updatedAt;
+    _user = user;
     _content = content;
   }
 
-  AddPostData.fromJson(dynamic json) {
+  Post.fromJson(dynamic json) {
     _id = json['id'];
     _userId = json['user_id'];
     _description = json['description'];
@@ -70,6 +132,7 @@ class AddPostData {
     _hashtags = json['hashtags'];
     _createdAt = json['created_at'];
     _updatedAt = json['updated_at'];
+    _user = json['user'] != null ? RegistrationUserData.fromJson(json['user']) : null;
     if (json['content'] != null) {
       _content = [];
       json['content'].forEach((v) {
@@ -86,6 +149,7 @@ class AddPostData {
   String? _hashtags;
   String? _createdAt;
   String? _updatedAt;
+  RegistrationUserData? _user;
   List<Content>? _content;
 
   int? get id => _id;
@@ -97,6 +161,7 @@ class AddPostData {
   String? get hashtags => _hashtags;
   String? get createdAt => _createdAt;
   String? get updatedAt => _updatedAt;
+  RegistrationUserData? get user => _user;
   List<Content>? get content => _content;
 
   Map<String, dynamic> toJson() {
@@ -110,6 +175,9 @@ class AddPostData {
     map['hashtags'] = _hashtags;
     map['created_at'] = _createdAt;
     map['updated_at'] = _updatedAt;
+    if (_user != null) {
+      map['user'] = _user?.toJson();
+    }
     if (_content != null) {
       map['content'] = _content?.map((v) => v.toJson()).toList();
     }

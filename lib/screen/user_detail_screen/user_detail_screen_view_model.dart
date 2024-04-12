@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
@@ -17,7 +16,6 @@ import 'package:orange_ui/screen/chat_screen/chat_screen.dart';
 import 'package:orange_ui/screen/person_streaming_screen/person_streaming_screen.dart';
 import 'package:orange_ui/screen/user_report_screen/report_sheet.dart';
 import 'package:orange_ui/service/pref_service.dart';
-import 'package:orange_ui/utils/app_res.dart';
 import 'package:orange_ui/utils/const_res.dart';
 import 'package:orange_ui/utils/firebase_res.dart';
 import 'package:orange_ui/utils/urls.dart';
@@ -271,17 +269,15 @@ class UserDetailScreenViewModel extends BaseViewModel {
 
   void onReportTap() {
     Get.bottomSheet(
-      UserReportSheet(reportId: userData?.id),
+      ReportSheet(
+          reportId: userData?.id,
+          fullName: userData?.fullname,
+          profileImage: CommonFun.getProfileImage(images: userData?.images),
+          age: userData?.age,
+          userData: userData,
+          address: userData?.live,
+          type: 1),
       isScrollControlled: true,
-      settings: RouteSettings(
-        arguments: {
-          AppRes.reportName: userData?.fullname,
-          AppRes.reportImage:
-              userData?.images == null || userData!.images!.isEmpty ? '' : userData?.images?[0].image,
-          AppRes.reportAge: userData?.age ?? '',
-          AppRes.reportAddress: userData?.live
-        },
-      ),
     );
   }
 

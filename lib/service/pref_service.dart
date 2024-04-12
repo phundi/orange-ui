@@ -146,7 +146,6 @@ class PrefService {
 
   static Future<RegistrationUserData?> getUserData() async {
     String? data = await getString(PrefConst.registrationUser);
-    print('Data : ${data}');
     if (data == null || data.isEmpty) return null;
     return RegistrationUserData.fromJson(jsonDecode(data));
   }

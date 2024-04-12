@@ -8,7 +8,6 @@ import 'package:orange_ui/api_provider/api_provider.dart';
 import 'package:orange_ui/common/widgets/loader.dart';
 import 'package:orange_ui/common/widgets/snack_bar_widget.dart';
 import 'package:orange_ui/generated/l10n.dart';
-import 'package:orange_ui/model/get_interest.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/service/pref_service.dart';
 import 'package:orange_ui/utils/const_res.dart';

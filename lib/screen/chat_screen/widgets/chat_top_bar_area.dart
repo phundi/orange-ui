@@ -16,7 +16,14 @@ class ChatTopBarArea extends StatelessWidget {
   final VoidCallback onUserTap;
   final FocusNode msgFocusNode;
 
-  const ChatTopBarArea({Key? key, required this.conversation, required this.onMoreBtnTap, required this.blockUnblock, required this.onUserTap, required this.msgFocusNode}) : super(key: key);
+  const ChatTopBarArea(
+      {Key? key,
+      required this.conversation,
+      required this.onMoreBtnTap,
+      required this.blockUnblock,
+      required this.onUserTap,
+      required this.msgFocusNode})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -43,10 +50,10 @@ class ChatTopBarArea extends StatelessWidget {
                   borderRadius: BorderRadius.circular(30),
                   child: CachedNetworkImage(
                     imageUrl: '${ConstRes.aImageBaseUrl}${conversation?.user?.image}',
+                    cacheKey: '${ConstRes.aImageBaseUrl}${conversation?.user?.image}',
                     height: 37,
                     width: 37,
                     fit: BoxFit.cover,
-                    cacheKey: '${ConstRes.aImageBaseUrl}${conversation?.user?.image}',
                     errorWidget: (context, url, error) {
                       return CommonUI.profileImagePlaceHolder(name: conversation?.user?.username, heightWeight: 37);
                     },
@@ -62,7 +69,9 @@ class ChatTopBarArea extends StatelessWidget {
                         Row(
                           children: [
                             Text(
-                              conversation?.user?.username != null ? '${conversation?.user?.username} ' : ' ',
+                              conversation?.user?.username != null
+                                  ? '${conversation?.user?.username} '.capitalize ?? ''
+                                  : ' ',
                               style: const TextStyle(
                                 color: ColorRes.darkGrey4,
                                 fontSize: 16,
@@ -82,7 +91,10 @@ class ChatTopBarArea extends StatelessWidget {
                             ),
                             const SizedBox(width: 5),
                             Visibility(
-                                visible: conversation != null && conversation?.user != null && conversation?.user?.isHost != null && conversation!.user!.isHost!,
+                                visible: conversation != null &&
+                                    conversation?.user != null &&
+                                    conversation?.user?.isHost != null &&
+                                    conversation!.user!.isHost!,
                                 child: Image.asset(AssetRes.tickMark, height: 15, width: 15)),
                           ],
                         ),

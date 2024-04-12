@@ -1,7 +1,6 @@
 import 'package:detectable_text_field/widgets/detectable_text.dart';
 import 'package:flutter/material.dart';
 import 'package:orange_ui/screen/create_post_screen/create_post_screen_view_model.dart';
-import 'package:orange_ui/screen/create_post_screen/widget/create_post_top_bar_view.dart';
 import 'package:orange_ui/screen/create_post_screen/widget/image_post_view.dart';
 import 'package:orange_ui/screen/create_post_screen/widget/interest_widget.dart';
 import 'package:orange_ui/utils/color_res.dart';

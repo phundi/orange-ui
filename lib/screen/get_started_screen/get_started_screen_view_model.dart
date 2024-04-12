@@ -28,7 +28,6 @@ class GetStartedScreenViewModel extends BaseViewModel {
 
   void getPref() {
     PrefService.getUserData().then((value) {
-      print(value?.id);
       if (value == null) return;
       PrefService.userId = value.id ?? -1;
       notifyListeners();
@@ -85,7 +84,6 @@ class GetStartedScreenViewModel extends BaseViewModel {
   }
 
   void loginToNavigateScreen() async {
-    print(PrefService.userId);
     bool isLogin = (await PrefService.getLoginText()) ?? false;
     if (isLogin) {
       ApiProvider().getProfile(userID: PrefService.userId).then(

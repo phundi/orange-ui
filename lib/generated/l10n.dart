@@ -3249,6 +3249,56 @@ class S {
       args: [],
     );
   }
+
+  /// `Comment Not Found`
+  String get commentNotFound {
+    return Intl.message(
+      'Comment Not Found',
+      name: 'commentNotFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No Comment`
+  String get noComment {
+    return Intl.message(
+      'No Comment',
+      name: 'noComment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reported Submitted`
+  String get reportedSubmitted {
+    return Intl.message(
+      'Reported Submitted',
+      name: 'reportedSubmitted',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reported Successfully!!`
+  String get reportedSuccessfully {
+    return Intl.message(
+      'Reported Successfully!!',
+      name: 'reportedSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `User Not Found!!`
+  String get userNotFound {
+    return Intl.message(
+      'User Not Found!!',
+      name: 'userNotFound',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -80,7 +80,7 @@ class Posts {
   Posts({
     int? id,
     int? userId,
-    dynamic description,
+    String? description,
     String? interestIds,
     int? commentsCount,
     int? likesCount,
@@ -126,7 +126,7 @@ class Posts {
   }
   int? _id;
   int? _userId;
-  dynamic _description;
+  String? _description;
   String? _interestIds;
   int? _commentsCount;
   int? _likesCount;
@@ -139,7 +139,7 @@ class Posts {
 
   int? get id => _id;
   int? get userId => _userId;
-  dynamic get description => _description;
+  String? get description => _description;
   String? get interestIds => _interestIds;
   int? get commentsCount => _commentsCount;
   int? get likesCount => _likesCount;
@@ -149,6 +149,14 @@ class Posts {
   int? get isLike => _isLike;
   List<Content>? get content => _content;
   RegistrationUserData? get user => _user;
+
+  void setLikesCount(int value) {
+    _likesCount = (_likesCount ?? 0) + value;
+  }
+
+  void setCommentCount(int value) {
+    _commentsCount = (_commentsCount ?? 0) + value;
+  }
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};

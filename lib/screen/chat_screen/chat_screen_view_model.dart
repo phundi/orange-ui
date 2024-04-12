@@ -231,16 +231,16 @@ class ChatScreenViewModel extends BaseViewModel {
 
     if (value == AppRes.report) {
       Get.bottomSheet(
-        UserReportSheet(reportId: conversation.user?.userid),
-        isScrollControlled: true,
-        settings: RouteSettings(
-          arguments: {
-            AppRes.reportName: conversation.user?.username,
-            AppRes.reportImage: conversation.user?.image,
-            AppRes.reportAge: conversation.user?.age,
-            AppRes.reportAddress: conversation.user?.city
-          },
+        ReportSheet(
+          reportId: conversation.user?.userid,
+          userData: receiverUserData,
+          fullName: conversation.user?.username,
+          profileImage: conversation.user?.image,
+          age: int.parse(conversation.user?.age ?? '0'),
+          address: conversation.user?.city,
+          type: 1,
         ),
+        isScrollControlled: true,
       );
     }
   }
@@ -696,8 +696,7 @@ class ChatScreenViewModel extends BaseViewModel {
   }
 
   ///Firebase message update method
-  Future<void> firebaseMsgUpdate(
-      {required String msgType, String? textMessage, String? image, String? video}) async {
+  Future<void> firebaseMsgUpdate({required String msgType, String? textMessage, String? image, String? video}) async {
     var time = DateTime.now().millisecondsSinceEpoch;
     notDeletedIdentity = [];
     notDeletedIdentity.addAll(['${registrationUserData?.id}', '${conversation.user?.userid}']);

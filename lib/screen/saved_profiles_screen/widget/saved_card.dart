@@ -8,7 +8,6 @@ import 'package:orange_ui/screen/saved_profiles_screen/saved_profiles_screen_vie
 import 'package:orange_ui/screen/user_detail_screen/user_detail_screen.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
-import 'package:orange_ui/utils/const_res.dart';
 import 'package:orange_ui/utils/font_res.dart';
 
 class SavedCard extends StatelessWidget {
@@ -66,11 +65,14 @@ class SavedCard extends StatelessWidget {
                       const SizedBox(width: 3),
                       Text(
                         "${userData.age ?? ''}",
-                        style: const TextStyle(color: ColorRes.darkGrey4, fontSize: 18, overflow: TextOverflow.ellipsis),
+                        style:
+                            const TextStyle(color: ColorRes.darkGrey4, fontSize: 18, overflow: TextOverflow.ellipsis),
                         maxLines: 1,
                       ),
                       const SizedBox(width: 3),
-                      userData.isVerified == 2 ? Image.asset(AssetRes.tickMark, height: 18, width: 18) : const SizedBox(),
+                      userData.isVerified == 2
+                          ? Image.asset(AssetRes.tickMark, height: 18, width: 18)
+                          : const SizedBox(),
                     ],
                   ),
                   Text(

@@ -1,12 +1,9 @@
 import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:orange_ui/common/widgets/dashboard_top_bar.dart';
 import 'package:orange_ui/common/widgets/loader.dart';
 import 'package:orange_ui/model/social/feed.dart';
-import 'package:orange_ui/screen/create_post_screen/create_post_screen.dart';
 import 'package:orange_ui/screen/feed_screen/feed_screen_view_model.dart';
-import 'package:orange_ui/screen/feed_screen/widget/comment_sheet.dart';
 import 'package:orange_ui/screen/feed_screen/widget/feed_post_card.dart';
 import 'package:orange_ui/screen/feed_screen/widget/feed_status_bar.dart';
 import 'package:orange_ui/utils/color_res.dart';
@@ -35,6 +32,7 @@ class FeedScreen extends StatelessWidget {
               child: model.isLoading
                   ? Loader().lottieWidget()
                   : SingleChildScrollView(
+                      controller: model.scrollController,
                       child: Column(
                         children: [
                           const FeedStatusBar(),
@@ -42,14 +40,16 @@ class FeedScreen extends StatelessWidget {
                             primary: false,
                             shrinkWrap: true,
                             padding: EdgeInsets.zero,
-                            itemCount: model.posts.length,
+                            itemCount: model.postList.length,
                             itemBuilder: (context, index) {
-                              Posts posts = model.posts[index];
+                              Posts posts = model.postList[index];
                               return FeedPostCard(
-                                  onCommentBtnClick: () {
-                                    Get.bottomSheet(const CommentSheet(), isScrollControlled: true);
-                                  },
-                                  posts: posts);
+                                onCommentBtnClick: () => model.onCommentBtnClick(posts),
+                                posts: posts,
+                                onSelected: (value) {
+                                  model.onMoreBtnClick(value, posts);
+                                },
+                              );
                             },
                           ),
                         ],
@@ -59,13 +59,7 @@ class FeedScreen extends StatelessWidget {
           ],
         ),
         floatingActionButton: InkWell(
-          onTap: () {
-            Get.bottomSheet(CreatePostScreen(),
-                isScrollControlled: true,
-                backgroundColor: ColorRes.white,
-                barrierColor: ColorRes.white,
-                enableDrag: false);
-          },
+          onTap: model.onCreatePost,
           child: Container(
             width: 50,
             height: 50,

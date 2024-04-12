@@ -1,14 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/screen/user_report_screen/report_sheet_view_model.dart';
-import 'package:orange_ui/screen/user_report_screen/widget/report_bottomsheet.dart';
-import 'package:orange_ui/utils/app_res.dart';
+import 'package:orange_ui/screen/user_report_screen/widget/report_card.dart';
 import 'package:stacked/stacked.dart';
 
-class UserReportSheet extends StatelessWidget {
+class ReportSheet extends StatelessWidget {
   final int? reportId;
+  final RegistrationUserData? userData;
+  final String? profileImage;
+  final int? age;
+  final String? fullName;
+  final String? address;
+  final int type;
 
-  const UserReportSheet({Key? key, required this.reportId}) : super(key: key);
+  const ReportSheet(
+      {Key? key,
+      required this.reportId,
+      this.userData,
+      required this.profileImage,
+      required this.age,
+      required this.fullName,
+      required this.address,
+      required this.type})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,32 +30,18 @@ class UserReportSheet extends StatelessWidget {
       onViewModelReady: (model) {
         model.init();
       },
-      viewModelBuilder: () => ReportSheetViewModel(),
+      viewModelBuilder: () => ReportSheetViewModel(reportId ?? -1, type),
       builder: (context, model, child) {
         return GestureDetector(
           onTap: () {
             model.explainMoreFocus.unfocus();
           },
-          child: ReportBottomSheet(
-            onBackBtnTap: model.onBackBtnClick,
-            showDropdown: model.isShowDown,
-            onReasonTap: model.onReasonTap,
-            reason: model.reason,
-            checkBoxValue: model.isCheckBox,
-            explainMoreController: model.explainController,
-            reasonList: model.reasonList,
-            onCheckBoxChange: model.onCheckBoxChange,
-            onReasonChange: model.onReasonChange,
-            onSubmitBtnTap: () => model.onSubmitBtnTap(reportId ?? -1),
-            fullName:
-                '${Get.arguments[AppRes.reportName]}  ( ${Get.arguments[AppRes.reportAge]} )',
-            profileImage: Get.arguments[AppRes.reportImage],
-            address: Get.arguments[AppRes.reportAddress] ?? '',
-            explainMoreFocus: model.explainMoreFocus,
-            explainMoreError: model.explainMoreError,
-            onTextFieldTap: model.onAllScreenTap,
-            onTermAndConditionClick: model.onTermAndConditionClick,
-            explainError: model.isExplainError,
+          child: ReportCard(
+            fullName: '$fullName',
+            age: age,
+            profileImage: profileImage,
+            address: address ?? '',
+            model: model,
           ),
         );
       },

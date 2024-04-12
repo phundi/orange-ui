@@ -25,3 +25,6 @@ const int quality = 100;
 
 // max Images for Post
 const int maxImagesForPost = 5;
+
+//pagination data limit
+const int paginationLimit = 10;

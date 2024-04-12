@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:detectable_text_field/detectable_text_field.dart';
 import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
@@ -10,6 +11,7 @@ import 'package:orange_ui/common/widgets/common_ui.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/social/feed.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
+import 'package:orange_ui/screen/feed_screen/feed_screen_view_model.dart';
 import 'package:orange_ui/screen/hashtag_screen/hashtag_screen.dart';
 import 'package:orange_ui/service/pref_service.dart';
 import 'package:orange_ui/utils/asset_res.dart';
@@ -22,11 +24,13 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 class FeedPostCard extends StatelessWidget {
   final VoidCallback onCommentBtnClick;
   final Posts? posts;
+  final Function(MoreBtnValue value)? onSelected;
 
   const FeedPostCard({
     Key? key,
     required this.onCommentBtnClick,
     this.posts,
+    this.onSelected,
   }) : super(key: key);
 
   @override
@@ -34,7 +38,7 @@ class FeedPostCard extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        TopAreaPost(userData: posts?.user),
+        TopAreaPost(userData: posts?.user, onSelected: onSelected),
         TextPost(description: posts?.description),
         posts?.content == null || posts!.content!.isEmpty
             ? const SizedBox()
@@ -56,8 +60,9 @@ class FeedPostCard extends StatelessWidget {
 
 class TopAreaPost extends StatelessWidget {
   final RegistrationUserData? userData;
+  final Function(MoreBtnValue value)? onSelected;
 
-  const TopAreaPost({Key? key, required this.userData}) : super(key: key);
+  const TopAreaPost({Key? key, required this.userData, required this.onSelected}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -94,12 +99,12 @@ class TopAreaPost extends StatelessWidget {
               iconTheme: const IconThemeData(color: Colors.white),
               textTheme: const TextTheme().apply(bodyColor: Colors.white),
             ),
-            child: PopupMenuButton(
-              onSelected: (value) {},
+            child: PopupMenuButton<MoreBtnValue>(
+              onSelected: onSelected,
               itemBuilder: (context) {
-                return <PopupMenuEntry>[
+                return <PopupMenuEntry<MoreBtnValue>>[
                   PopupMenuItem(
-                    value: 'Share',
+                    value: MoreBtnValue.share,
                     padding: const EdgeInsets.symmetric(vertical: 0),
                     child: Center(
                       child: Text(
@@ -113,7 +118,7 @@ class TopAreaPost extends StatelessWidget {
                       padding: EdgeInsets.zero,
                       child: Divider(height: 1, thickness: 1, color: ColorRes.greyShade200)),
                   PopupMenuItem(
-                    value: userData?.id == PrefService.userId ? 'Delete' : 'Report',
+                    value: userData?.id == PrefService.userId ? MoreBtnValue.delete : MoreBtnValue.report,
                     child: Center(
                       child: Text(
                         userData?.id == PrefService.userId ? S.of(context).delete : S.current.report,
@@ -288,16 +293,10 @@ class BottomAreaPost extends StatelessWidget {
             onTap: onCommentBtnClick,
             child: Row(
               children: [
-                Image.asset(
-                  AssetRes.icComment,
-                  height: 22,
-                  width: 22,
-                ),
-                Text(
-                  '  ${NumberFormat.compact().format(posts?.commentsCount ?? 0)}',
-                  style: const TextStyle(
-                      color: ColorRes.veryDarkGrey4, fontFamily: FontRes.medium, letterSpacing: 0.5, fontSize: 15),
-                ),
+                Image.asset(AssetRes.icComment, height: 22, width: 22),
+                Text('  ${NumberFormat.compact().format(posts?.commentsCount ?? 0)}',
+                    style: const TextStyle(
+                        color: ColorRes.veryDarkGrey4, fontFamily: FontRes.medium, letterSpacing: 0.5, fontSize: 15)),
               ],
             ),
           ),
@@ -310,10 +309,8 @@ class BottomAreaPost extends StatelessWidget {
           const SizedBox(width: 10),
           Image.asset(AssetRes.icPostShare, height: 22, width: 22),
           const Spacer(),
-          const Text(
-            '15 mins',
-            style: TextStyle(fontFamily: FontRes.medium, fontSize: 12, color: ColorRes.dimGrey3),
-          )
+          Text(CommonFun.timeAgo(DateTime.parse(posts?.createdAt ?? '')),
+              style: const TextStyle(fontFamily: FontRes.medium, fontSize: 12, color: ColorRes.dimGrey3))
         ],
       ),
     );
@@ -329,8 +326,10 @@ class LikeButton extends StatefulWidget {
   State<LikeButton> createState() => _LikeButtonState();
 }
 
-class _LikeButtonState extends State<LikeButton> {
+class _LikeButtonState extends State<LikeButton> with SingleTickerProviderStateMixin {
   bool isLike = false;
+  late final AnimationController _controller =
+      AnimationController(duration: const Duration(milliseconds: 200), vsync: this, value: 1.0);
 
   @override
   void initState() {
@@ -339,15 +338,24 @@ class _LikeButtonState extends State<LikeButton> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
+        HapticFeedback.lightImpact();
         if (isLike) {
+          widget.posts?.setLikesCount(-1);
           ApiProvider().callPost(completion: (response) {}, url: Urls.aDislikePost, param: {
             Urls.aUserId: PrefService.userId,
             Urls.aPostId: widget.posts?.id,
           });
         } else {
+          widget.posts?.setLikesCount(1);
           ApiProvider().callPost(completion: (response) {}, url: Urls.aLikePost, param: {
             Urls.aUserId: PrefService.userId,
             Urls.aPostId: widget.posts?.id,
@@ -355,15 +363,16 @@ class _LikeButtonState extends State<LikeButton> {
         }
         isLike = !isLike;
         setState(() {});
+        _controller.reverse().then((value) => _controller.forward());
       },
       child: Row(
         children: [
-          Image.asset(isLike ? AssetRes.icFillFav : AssetRes.icFav, height: 22, width: 22),
-          Text(
-            '  ${NumberFormat.compact().format(widget.posts?.likesCount ?? 0)}  ',
-            style: const TextStyle(
-                color: ColorRes.veryDarkGrey4, fontFamily: FontRes.medium, letterSpacing: 0.5, fontSize: 15),
-          ),
+          ScaleTransition(
+              scale: Tween(begin: 0.7, end: 1.0).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut)),
+              child: Image.asset(isLike ? AssetRes.icFillFav : AssetRes.icFav, height: 22, width: 22)),
+          Text('  ${NumberFormat.compact().format(widget.posts?.likesCount ?? 0)}  ',
+              style: const TextStyle(
+                  color: ColorRes.veryDarkGrey4, fontFamily: FontRes.medium, letterSpacing: 0.5, fontSize: 15)),
         ],
       ),
     );

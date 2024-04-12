@@ -318,5 +318,10 @@
   "following": "Following",
   "followingList": "Following List",
   "searchProfile": "Search Profile",
-  "unfollow": "Unfollow"
+  "unfollow": "Unfollow",
+  "commentNotFound": "Comment Not Found",
+  "noComment": "No Comment",
+  "reportedSubmitted": "Reported Submitted",
+  "reportedSuccessfully": "Reported Successfully!!",
+  "userNotFound": "User Not Found!!"
 }

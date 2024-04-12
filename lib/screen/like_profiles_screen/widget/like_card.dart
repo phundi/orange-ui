@@ -8,7 +8,6 @@ import 'package:orange_ui/screen/like_profiles_screen/like_profiles_screen_view_
 import 'package:orange_ui/screen/user_detail_screen/user_detail_screen.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
-import 'package:orange_ui/utils/const_res.dart';
 import 'package:orange_ui/utils/font_res.dart';
 
 class LikeCard extends StatelessWidget {
@@ -64,14 +63,19 @@ class LikeCard extends StatelessWidget {
                       const SizedBox(width: 3),
                       Text(
                         "${userData.age ?? ''}",
-                        style: const TextStyle(color: ColorRes.darkGrey4, fontSize: 18, overflow: TextOverflow.ellipsis),
+                        style:
+                            const TextStyle(color: ColorRes.darkGrey4, fontSize: 18, overflow: TextOverflow.ellipsis),
                         maxLines: 1,
                       ),
                       const SizedBox(width: 3),
-                      userData.isVerified == 2 ? Image.asset(AssetRes.tickMark, height: 18, width: 18) : const SizedBox(),
+                      userData.isVerified == 2
+                          ? Image.asset(AssetRes.tickMark, height: 18, width: 18)
+                          : const SizedBox(),
                     ],
                   ),
-                  Text(userData.live ?? '', style: const TextStyle(color: ColorRes.grey6, fontSize: 13, overflow: TextOverflow.ellipsis), maxLines: 1),
+                  Text(userData.live ?? '',
+                      style: const TextStyle(color: ColorRes.grey6, fontSize: 13, overflow: TextOverflow.ellipsis),
+                      maxLines: 1),
                 ],
               ),
             ),

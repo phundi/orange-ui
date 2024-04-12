@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
+import 'package:orange_ui/common/widgets/loader.dart';
 import 'package:orange_ui/common/widgets/snack_bar_widget.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/screen/webview_screen/webview_screen.dart';
@@ -9,12 +10,12 @@ import 'package:orange_ui/utils/urls.dart';
 import 'package:stacked/stacked.dart';
 
 class ReportSheetViewModel extends BaseViewModel {
+  int reportID = -1;
+  int type;
+
   void init() {}
 
-  String fullName = '';
-  String city = '';
-  String userImage = '';
-  String age = '';
+  ReportSheetViewModel(this.reportID, this.type);
 
   TextEditingController explainController = TextEditingController();
   FocusNode explainMoreFocus = FocusNode();
@@ -29,7 +30,6 @@ class ReportSheetViewModel extends BaseViewModel {
   ];
 
   bool? isCheckBox = false;
-  bool isShowDown = false;
 
   void onCheckBoxChange(bool? value) {
     isCheckBox = value;
@@ -38,19 +38,12 @@ class ReportSheetViewModel extends BaseViewModel {
   }
 
   void onReasonTap() {
-    isShowDown = !isShowDown;
     explainMoreFocus.unfocus();
     notifyListeners();
   }
 
-  void onAllScreenTap() {
-    isShowDown = false;
-    notifyListeners();
-  }
-
   void onTermAndConditionClick() {
-    Get.to(() => WebViewScreen(
-        appBarTitle: S.current.termsOfUse, url: Urls.aTermsOfUse));
+    Get.to(() => WebViewScreen(appBarTitle: S.current.termsOfUse, url: Urls.aTermsOfUse));
   }
 
   bool isValid() {
@@ -80,30 +73,37 @@ class ReportSheetViewModel extends BaseViewModel {
     return i == 0 ? true : false;
   }
 
-  void onSubmitBtnTap(int userId) {
+  void onSubmitBtnTap() {
     bool validation = isValid();
-    if (userId == -1) {
-      SnackBarWidget.snackBar(message: 'User Not Found!!');
-      return;
-    }
-    notifyListeners();
-    if (validation) {
-      ApiProvider().addReport(reason, explainController.text, userId).then(
-        (value) {
-          SnackBarWidget().snackBarWidget('Reported Successfully!!');
-          Get.back();
-        },
-      );
+    if (type == 1) {
+      if (reportID == -1) {
+        SnackBarWidget.snackBar(message: S.current.userNotFound);
+        return;
+      }
+      notifyListeners();
+      if (validation) {
+        ApiProvider().addReport(reason, explainController.text, reportID).then(
+          (value) {
+            SnackBarWidget().snackBarWidget(S.current.reportedSuccessfully);
+            Get.back();
+          },
+        );
+      }
+    } else if (type == 2) {
+      Loader().lottieLoader();
+      ApiProvider().callPost(
+          completion: (response) {
+            Get.back();
+            Get.back();
+            SnackBarWidget().snackBarWidget(S.current.reportedSubmitted);
+          },
+          url: Urls.aReportPost,
+          param: {Urls.aPostId: reportID, Urls.aReason: reason, Urls.aDescription: explainController.text.trim()});
     }
   }
 
-  void onBackBtnClick() {
-    Get.back();
-  }
-
-  void onReasonChange(String value) {
-    reason = value;
-    isShowDown = !isShowDown;
+  void onReasonChange(String? value) {
+    reason = value!;
     notifyListeners();
   }
 }

@@ -1,17 +1,11 @@
 import 'dart:io';
 
-import 'package:detectable_text_field/widgets/detectable_text.dart';
 import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
-import 'package:orange_ui/common/widgets/gradient_widget.dart';
-import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/screen/create_post_screen/create_post_screen_view_model.dart';
-import 'package:orange_ui/screen/create_post_screen/widget/creat_post_page.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
 import 'package:orange_ui/utils/const_res.dart';
-import 'package:orange_ui/utils/font_res.dart';
-import 'package:orange_ui/utils/style_res.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class ImagePostView extends StatelessWidget {

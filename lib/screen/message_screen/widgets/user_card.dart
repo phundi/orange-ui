@@ -75,9 +75,13 @@ class UserCard extends StatelessWidget {
                                 Flexible(
                                   flex: 5,
                                   child: Text(
-                                    '$name',
+                                    (name ?? '').capitalize ?? '',
                                     softWrap: false,
-                                    style: const TextStyle(color: ColorRes.veryDarkGrey3, fontFamily: FontRes.bold, overflow: TextOverflow.ellipsis, fontSize: 16),
+                                    style: const TextStyle(
+                                        color: ColorRes.veryDarkGrey3,
+                                        fontFamily: FontRes.bold,
+                                        overflow: TextOverflow.ellipsis,
+                                        fontSize: 16),
                                   ),
                                 ),
                                 Flexible(

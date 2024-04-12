@@ -5,7 +5,6 @@ import 'package:orange_ui/common/widgets/common_ui.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
-import 'package:orange_ui/utils/const_res.dart';
 import 'package:orange_ui/utils/font_res.dart';
 
 class UserList extends StatelessWidget {
@@ -66,7 +65,9 @@ class UserList extends StatelessWidget {
                             children: [
                               Flexible(
                                 child: Text(
-                                  (userList?[index].fullname == null || userList![index].fullname!.isEmpty) ? 'Unknown' : userList![index].fullname!,
+                                  (userList?[index].fullname == null || userList![index].fullname!.isEmpty)
+                                      ? 'Unknown'
+                                      : userList![index].fullname!,
                                   style: const TextStyle(
                                     color: ColorRes.darkGrey4,
                                     fontSize: 18,
@@ -79,16 +80,20 @@ class UserList extends StatelessWidget {
                               const SizedBox(width: 3),
                               Text(
                                 '${userList?[index].age ?? ''}',
-                                style: const TextStyle(color: ColorRes.darkGrey4, fontSize: 18, overflow: TextOverflow.ellipsis),
+                                style: const TextStyle(
+                                    color: ColorRes.darkGrey4, fontSize: 18, overflow: TextOverflow.ellipsis),
                                 maxLines: 1,
                               ),
                               const SizedBox(width: 3),
-                              userList?[index].isVerified == 2 ? Image.asset(AssetRes.tickMark, height: 18, width: 18) : const SizedBox(),
+                              userList?[index].isVerified == 2
+                                  ? Image.asset(AssetRes.tickMark, height: 18, width: 18)
+                                  : const SizedBox(),
                             ],
                           ),
                           Text(
                             userList?[index].live ?? '',
-                            style: const TextStyle(color: ColorRes.grey6, fontSize: 13, overflow: TextOverflow.ellipsis),
+                            style:
+                                const TextStyle(color: ColorRes.grey6, fontSize: 13, overflow: TextOverflow.ellipsis),
                             maxLines: 1,
                           ),
                         ],

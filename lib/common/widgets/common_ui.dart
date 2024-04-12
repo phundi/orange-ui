@@ -4,11 +4,12 @@ import 'package:orange_ui/utils/color_res.dart';
 import 'package:orange_ui/utils/font_res.dart';
 
 class CommonUI {
-  static Widget profileImagePlaceHolder({required String? name, double heightWeight = 0}) {
+  static Widget profileImagePlaceHolder({required String? name, double heightWeight = 0, double? borderRadius}) {
     return Container(
       width: heightWeight,
       height: heightWeight,
-      decoration: BoxDecoration(color: ColorRes.orange2.withOpacity(0.1), shape: BoxShape.circle),
+      decoration: BoxDecoration(
+          color: ColorRes.orange2.withOpacity(0.1), borderRadius: BorderRadius.circular(borderRadius ?? 50)),
       alignment: Alignment.center,
       child: Text(
         (name ?? 'Unknown')[0].toUpperCase(),
