@@ -88,12 +88,12 @@ class _MyAppState extends State<MyApp> {
       locale: Locale(LanguagesScreenViewModel.selectedLanguage),
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        fontFamily: FontRes.regular,
-        primaryColor: ColorRes.orange,
-        splashColor: ColorRes.transparent,
-        highlightColor: ColorRes.transparent,
-        textSelectionTheme: const TextSelectionThemeData(cursorColor: ColorRes.veryDarkGrey4),
-      ),
+          fontFamily: FontRes.regular,
+          primaryColor: ColorRes.orange,
+          splashColor: ColorRes.transparent,
+          highlightColor: ColorRes.transparent,
+          textSelectionTheme: const TextSelectionThemeData(cursorColor: ColorRes.veryDarkGrey4),
+          useMaterial3: false),
       home: const GetStartedScreen(),
     );
   }

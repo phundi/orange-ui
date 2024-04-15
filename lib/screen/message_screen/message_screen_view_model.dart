@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
 import 'package:orange_ui/common/widgets/common_fun.dart';
-import 'package:orange_ui/common/widgets/confirmation_dialog.dart';
+import 'package:orange_ui/common/widgets/orange_confirmation_dialog.dart';
 import 'package:orange_ui/common/widgets/snack_bar_widget.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/chat_and_live_stream/chat.dart';
@@ -48,9 +48,7 @@ class MessageScreenViewModel extends BaseViewModel {
   }
 
   void onSearchTap() {
-    userData?.isBlock == 1
-        ? SnackBarWidget().snackBarWidget(S.current.userBlock)
-        : Get.to(() => const SearchScreen());
+    userData?.isBlock == 1 ? SnackBarWidget().snackBarWidget(S.current.userBlock) : Get.to(() => const SearchScreen());
   }
 
   void onLivesBtnClick() {
@@ -104,17 +102,8 @@ class MessageScreenViewModel extends BaseViewModel {
 
   void onLongPress(Conversation? conversation) {
     HapticFeedback.vibrate();
-    Get.dialog(
-      ConfirmationDialog(
-        aspectRatio: 1 / 0.6,
-        clickText1: S.current.deleteChat,
-        clickText2: S.current.cancel,
-        heading: S.current.deleteThisChat,
-        subDescription: S.current.messageWillOnlyBeRemoved,
-        onNoBtnClick: () {
-          Get.back();
-        },
-        onYesBtnClick: () {
+    Get.dialog(OrangeConfirmationDialog(
+        onTap: () {
           db
               .collection(FirebaseRes.userChatList)
               .doc(userData?.identity)
@@ -129,9 +118,7 @@ class MessageScreenViewModel extends BaseViewModel {
             Get.back();
           });
         },
-        horizontalPadding: 65,
-      ),
-    );
+        description: S.current.messageWillOnlyBeRemoved));
     notifyListeners();
   }
 }

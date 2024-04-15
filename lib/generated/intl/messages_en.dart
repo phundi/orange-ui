@@ -29,6 +29,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "add": MessageLookupByLibrary.simpleMessage("ADD"),
         "addCoins": MessageLookupByLibrary.simpleMessage("ADD COINS"),
         "addComment": MessageLookupByLibrary.simpleMessage("Add Comment"),
+        "afterDeletingTheChatYouCanNotRestoreOurMessage":
+            MessageLookupByLibrary.simpleMessage(
+                "After deleting the chat, you can not restore our message. Message will be deleted from your account."),
         "age": MessageLookupByLibrary.simpleMessage("AGE"),
         "agreeNContinue":
             MessageLookupByLibrary.simpleMessage("Agree & Continue"),
@@ -114,6 +117,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "diamondCap": MessageLookupByLibrary.simpleMessage("DIAMOND"),
         "diamonds": MessageLookupByLibrary.simpleMessage("DIAMONDS"),
         "diamondsCamel": MessageLookupByLibrary.simpleMessage("Diamonds"),
+        "doYouReallyWantToDeleteThisChatYouWont":
+            MessageLookupByLibrary.simpleMessage(
+                "Do you really want to delete this chat You won’t be able to recover any kind of data after. Hope you are aware of that!"),
         "doYouReallyWantToLive": MessageLookupByLibrary.simpleMessage(
             "Do you really want to live. Please continue to go Live"),
         "docType": MessageLookupByLibrary.simpleMessage("DOCUMENT TYPE"),

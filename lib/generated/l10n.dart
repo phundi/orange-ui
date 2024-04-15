@@ -3299,6 +3299,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Do you really want to delete this chat You won’t be able to recover any kind of data after. Hope you are aware of that!`
+  String get doYouReallyWantToDeleteThisChatYouWont {
+    return Intl.message(
+      'Do you really want to delete this chat You won’t be able to recover any kind of data after. Hope you are aware of that!',
+      name: 'doYouReallyWantToDeleteThisChatYouWont',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `After deleting the chat, you can not restore our message. Message will be deleted from your account.`
+  String get afterDeletingTheChatYouCanNotRestoreOurMessage {
+    return Intl.message(
+      'After deleting the chat, you can not restore our message. Message will be deleted from your account.',
+      name: 'afterDeletingTheChatYouCanNotRestoreOurMessage',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

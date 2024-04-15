@@ -55,12 +55,11 @@ class OptionScreen extends StatelessWidget {
                                   verification: model.verificationProcess,
                                 ),
                                 const SizedBox(height: 20),
-                                LanguageSection(
-                                    navigateLanguage: model.navigateLanguage),
+                                LanguageSection(navigateLanguage: model.navigateLanguage),
                                 const SizedBox(height: 20),
                                 BottomLegalArea(
-                                  onPrivacyPolicyTap: model.onPrivacyPolicyTap,
-                                  onTermsOfUseTap: model.onTermsOfUseTap,
+                                  onPrivacyPolicyTap: () => model.onNavigateWebViewScreen(0),
+                                  onTermsOfUseTap: () => model.onNavigateWebViewScreen(1),
                                   onLogoutTap: model.onLogoutTap,
                                   onDeleteAccountTap: model.onDeleteAccountTap,
                                 ),

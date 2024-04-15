@@ -11,8 +11,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
 import 'package:orange_ui/common/widgets/common_fun.dart';
-import 'package:orange_ui/common/widgets/confirmation_dialog.dart';
 import 'package:orange_ui/common/widgets/loader.dart';
+import 'package:orange_ui/common/widgets/orange_confirmation_dialog.dart';
 import 'package:orange_ui/common/widgets/snack_bar_widget.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/chat_and_live_stream/chat.dart';
@@ -165,20 +165,8 @@ class ChatScreenViewModel extends BaseViewModel {
 
   /// chat item delete method
   void chatDeleteDialog() {
-    Get.dialog(
-      ConfirmationDialog(
-        aspectRatio: 1 / 0.7,
-        clickText1: S.current.delete,
-        clickText2: S.current.cancel,
-        heading: S.current.deleteMessage,
-        subDescription: S.current.areYouSureYouEtc,
-        onNoBtnClick: () {
-          Get.back();
-        },
-        onYesBtnClick: onDeleteBtnClick,
-        horizontalPadding: 65,
-      ),
-    );
+    Get.dialog(OrangeConfirmationDialog(
+        onTap: onDeleteBtnClick, description: S.current.afterDeletingTheChatYouCanNotRestoreOurMessage));
   }
 
   void onDeleteBtnClick() {

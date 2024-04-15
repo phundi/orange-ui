@@ -8,8 +8,8 @@ import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
 import 'package:orange_ui/common/widgets/common_fun.dart';
-import 'package:orange_ui/common/widgets/confirmation_dialog.dart';
 import 'package:orange_ui/common/widgets/loader.dart';
+import 'package:orange_ui/common/widgets/orange_confirmation_dialog.dart';
 import 'package:orange_ui/common/widgets/snack_bar_widget.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/chat_and_live_stream/live_stream.dart';
@@ -74,15 +74,10 @@ class LiveGridScreenViewModel extends BaseViewModel {
     registrationUser?.isBlock == 1
         ? SnackBarWidget().snackBarWidget(S.current.userBlock)
         : Get.dialog(
-            ConfirmationDialog(
-              onYesBtnClick: onGoLiveYesBtnTap,
-              aspectRatio: 1 / 0.6,
-              horizontalPadding: 60,
-              onNoBtnClick: onBackBtnTap,
-              subDescription: S.current.doYouReallyWantToLive,
-              heading: S.current.areYouSure,
-              clickText2: S.current.cancel,
-              clickText1: S.current.continueText,
+            OrangeConfirmationDialog(
+              onTap: onGoLiveYesBtnTap,
+              description: S.current.doYouReallyWantToLive,
+              dialogSize: 2,
             ),
           );
   }
@@ -132,15 +127,10 @@ class LiveGridScreenViewModel extends BaseViewModel {
     } else {
       String authString = '${ConstRes.customerId}:${ConstRes.customerSecret}';
       String authToken = base64.encode(authString.codeUnits);
-      ApiProvider()
-          .agoraListStreamingCheck(
-              user?.hostIdentity ?? '', authToken, ConstRes.agoraAppId)
-          .then((value) {
-        if (value.data?.channelExist == true ||
-            value.data!.broadcasters!.isNotEmpty) {
+      ApiProvider().agoraListStreamingCheck(user?.hostIdentity ?? '', authToken, ConstRes.agoraAppId).then((value) {
+        if (value.data?.channelExist == true || value.data!.broadcasters!.isNotEmpty) {
           if (registrationUser?.isFake != 1) {
-            if (PrefService.liveWatchingPrice <= walletCoin! &&
-                walletCoin != 0) {
+            if (PrefService.liveWatchingPrice <= walletCoin! && walletCoin != 0) {
               Get.dialog(
                 ReverseSwipeDialog(
                     onCancelTap: onBackBtnTap,
@@ -188,15 +178,10 @@ class LiveGridScreenViewModel extends BaseViewModel {
             name: user?.fullName ?? '',
             onExitBtn: () async {
               Get.back();
-              db
-                  .collection(FirebaseRes.liveHostList)
-                  .doc(user?.hostIdentity)
-                  .delete();
+              db.collection(FirebaseRes.liveHostList).doc(user?.hostIdentity).delete();
               final batch = db.batch();
-              var collection = db
-                  .collection(FirebaseRes.liveHostList)
-                  .doc(user?.hostIdentity)
-                  .collection(FirebaseRes.comments);
+              var collection =
+                  db.collection(FirebaseRes.liveHostList).doc(user?.hostIdentity).collection(FirebaseRes.comments);
               var snapshots = await collection.get();
               for (var doc in snapshots.docs) {
                 batch.delete(doc.reference);
@@ -230,11 +215,8 @@ class LiveGridScreenViewModel extends BaseViewModel {
       FirebaseRes.joinedUser: FieldValue.arrayUnion(userEmail)
     }).then((value) {
       Get.back();
-      Get.to(() => const PersonStreamingScreen(), arguments: {
-        Urls.aChannelId: user.hostIdentity,
-        Urls.aIsBroadcasting: false,
-        Urls.aUserInfo: user
-      });
+      Get.to(() => const PersonStreamingScreen(),
+          arguments: {Urls.aChannelId: user.hostIdentity, Urls.aIsBroadcasting: false, Urls.aUserInfo: user});
     }).then((value) {
       getProfileAPi();
     });

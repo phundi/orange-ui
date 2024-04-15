@@ -52,14 +52,18 @@ class FeedScreenViewModel extends BaseViewModel {
 
   void onCommentBtnClick(Posts post) {
     Get.bottomSheet(CommentSheet(post: post), isScrollControlled: true).then((value) {
-      // post.setCommentCount(value);
       notifyListeners();
     });
   }
 
   void onCreatePost() {
-    Get.bottomSheet(const CreatePostScreen(),
-        isScrollControlled: true, backgroundColor: ColorRes.white, barrierColor: ColorRes.white, enableDrag: false);
+    Get.bottomSheet(
+      const CreatePostScreen(),
+      isScrollControlled: true,
+      backgroundColor: ColorRes.white,
+      barrierColor: ColorRes.white,
+      enableDrag: false,
+    );
   }
 
   onMoreBtnClick(MoreBtnValue value, Posts posts) {
@@ -85,10 +89,7 @@ class FeedScreenViewModel extends BaseViewModel {
           notifyListeners();
         },
         url: Urls.aDeleteMyPost,
-        param: {
-          Urls.aUserId: PrefService.userId,
-          Urls.aPostId: posts.id,
-        },
+        param: {Urls.aUserId: PrefService.userId, Urls.aPostId: posts.id},
       );
     }
   }

@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:io';
+
 import 'package:detectable_text_field/detectable_text_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
@@ -12,6 +15,8 @@ import 'package:orange_ui/utils/const_res.dart';
 import 'package:orange_ui/utils/font_res.dart';
 import 'package:orange_ui/utils/urls.dart';
 import 'package:stacked/stacked.dart';
+import 'package:video_player/video_player.dart';
+import 'package:video_thumbnail/video_thumbnail.dart';
 
 class CreatePostScreenViewModel extends BaseViewModel {
   DetectableTextEditingController detectableTextFieldController = DetectableTextEditingController(
@@ -23,12 +28,16 @@ class CreatePostScreenViewModel extends BaseViewModel {
   PageController pageController = PageController();
   int imageIndex = 0;
   List<XFile> imagesFile = [];
-  XFile? thumbnail;
+  XFile? thumbnailFile;
+  String? thumbnail;
   List<Interest> interests = [];
   List<int> selectedInterests = [];
   List<String> hashtagList = [];
   FocusNode detectableTextFieldFocusNode = FocusNode();
   int contentType = 2; // description content byDefault = 2
+
+  VideoPlayerController? videoPlayerController;
+  var currentDuration = Duration().obs;
 
   void init() {
     pageType = 0;
@@ -65,10 +74,26 @@ class CreatePostScreenViewModel extends BaseViewModel {
     });
   }
 
+  Timer? timer;
   void onVideoTap() {
     contentType = 1;
     detectableTextFieldFocusNode.unfocus();
-    _picker.pickVideo(source: ImageSource.gallery);
+    _picker.pickVideo(source: ImageSource.gallery).then((value) async {
+      if (value != null) {
+        imagesFile.add(value);
+        videoPlayerController = VideoPlayerController.file(File(value.path))
+          ..initialize().then((value) {
+            timer = Timer.periodic(const Duration(milliseconds: 10), (timer) async {
+              if (videoPlayerController!.value.position <= videoPlayerController!.value.duration) {
+                currentDuration.value = (await videoPlayerController?.position) ?? const Duration();
+              }
+            });
+            notifyListeners();
+          });
+        thumbnail = await VideoThumbnail.thumbnailFile(video: value.path);
+        notifyListeners();
+      }
+    });
   }
 
   void _getPrefData() {
@@ -98,6 +123,7 @@ class CreatePostScreenViewModel extends BaseViewModel {
 
   void onChangeDetectableTextField(String value) {
     hashtagList = TextPatternDetector.extractDetections(value, hashTagRegExp);
+    notifyListeners();
   }
 
   void onBackTap() {
@@ -114,6 +140,7 @@ class CreatePostScreenViewModel extends BaseViewModel {
     detectableTextFieldController.dispose();
     pageController.dispose();
     detectableTextFieldFocusNode.dispose();
+    timer?.cancel();
     super.dispose();
   }
 
@@ -126,7 +153,7 @@ class CreatePostScreenViewModel extends BaseViewModel {
 
     if (imagesFile.isNotEmpty) {
       if (contentType == 1) {
-        filesMap[Urls.aThumbnail] = [thumbnail];
+        filesMap[Urls.aThumbnail] = [XFile(thumbnail!)];
       }
       filesMap[Urls.aContent] = imagesFile;
     }
@@ -145,5 +172,14 @@ class CreatePostScreenViewModel extends BaseViewModel {
           Urls.aContentType: imagesFile.isEmpty ? 2 : contentType
         },
         filesMap: filesMap);
+  }
+
+  void onChangeSlider(double value) {
+    videoPlayerController?.seekTo(
+      Duration(
+        microseconds: value.toInt(),
+      ),
+    );
+    notifyListeners();
   }
 }

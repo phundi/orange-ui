@@ -26,11 +26,10 @@ class LiveStreamApplicationScreenViewModel extends BaseViewModel {
   FocusNode languageFocus = FocusNode();
   FocusNode socialLinksFocus = FocusNode();
 
-  List<TextEditingController> socialProfileController =
-      <TextEditingController>[];
+  List<TextEditingController> socialProfileController = <TextEditingController>[];
   List<String> socialLinks = [];
   XFile? _pickedFile;
-  final ImagePicker picker = ImagePicker();
+  ImagePicker picker = ImagePicker();
   File? videoFile;
   String? videoImageFile;
   bool isVideoAttach = true;
@@ -60,8 +59,7 @@ class LiveStreamApplicationScreenViewModel extends BaseViewModel {
     if (!isValid()) return;
     Loader().lottieLoader();
     ApiProvider()
-        .applyForLive(videoFile, aboutController.text, languageController.text,
-            socialLinks.join(','))
+        .applyForLive(videoFile, aboutController.text, languageController.text, socialLinks.join(','))
         .then((value) {
       SnackBarWidget().snackBarWidget(value.message!);
       Get.back();

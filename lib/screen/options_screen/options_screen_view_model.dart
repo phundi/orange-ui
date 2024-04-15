@@ -3,8 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
-import 'package:orange_ui/common/widgets/confirmation_dialog.dart';
 import 'package:orange_ui/common/widgets/loader.dart';
+import 'package:orange_ui/common/widgets/orange_confirmation_dialog.dart';
 import 'package:orange_ui/common/widgets/snack_bar_widget.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
@@ -14,6 +14,7 @@ import 'package:orange_ui/screen/login_dashboard_screen/login_dashboard_screen.d
 import 'package:orange_ui/screen/verification_screen/verification_screen.dart';
 import 'package:orange_ui/screen/webview_screen/webview_screen.dart';
 import 'package:orange_ui/service/pref_service.dart';
+import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/firebase_res.dart';
 import 'package:orange_ui/utils/pref_res.dart';
 import 'package:orange_ui/utils/urls.dart';
@@ -29,6 +30,7 @@ class OptionalScreenViewModel extends BaseViewModel {
   int? deleteId;
   RegistrationUserData? userData;
   FirebaseAuth auth = FirebaseAuth.instance;
+  final db = FirebaseFirestore.instance;
 
   void init() {
     getProfileApiCall();
@@ -74,8 +76,7 @@ class OptionalScreenViewModel extends BaseViewModel {
   void onApplyForVerTap() {
     userData?.isBlock == 1
         ? SnackBarWidget().snackBarWidget(S.current.userBlock)
-        : Get.to(() => const VerificationScreen(), arguments: userData)
-            ?.then((value) {
+        : Get.to(() => const VerificationScreen(), arguments: userData)?.then((value) {
             getProfileApiCall();
           });
   }
@@ -83,12 +84,9 @@ class OptionalScreenViewModel extends BaseViewModel {
   void onNotificationTap() {
     userData?.isBlock == 1
         ? SnackBarWidget().snackBarWidget(S.current.userBlock)
-        : ApiProvider()
-            .onOffNotification(notificationEnable ? 0 : 1)
-            .then((value) async {
+        : ApiProvider().onOffNotification(notificationEnable ? 0 : 1).then((value) async {
             if (value.status == true) {
-              notificationEnable =
-                  value.data?.isNotification == 1 ? true : false;
+              notificationEnable = value.data?.isNotification == 1 ? true : false;
               await PrefService.saveUser(value.data);
               notifyListeners();
               SnackBarWidget().snackBarWidget(value.message!);
@@ -99,9 +97,7 @@ class OptionalScreenViewModel extends BaseViewModel {
   void onShowMeOnMapTap() {
     userData?.isBlock == 1
         ? SnackBarWidget().snackBarWidget(S.current.userBlock)
-        : ApiProvider()
-            .onOffShowMeOnMap(showMeOnMap ? 0 : 1)
-            .then((value) async {
+        : ApiProvider().onOffShowMeOnMap(showMeOnMap ? 0 : 1).then((value) async {
             if (value.status == true) {
               showMeOnMap = value.data?.showOnMap == 1 ? true : false;
               await PrefService.saveUser(value.data);
@@ -124,21 +120,11 @@ class OptionalScreenViewModel extends BaseViewModel {
           });
   }
 
-  void onPrivacyPolicyTap() {
+  void onNavigateWebViewScreen(int type) {
     Get.to(
       () => WebViewScreen(
-        appBarTitle: S.current.privacyPolicy,
-        url: Urls.aPrivacyPolicy,
-      ),
-    );
-  }
-
-  void onTermsOfUseTap() {
-    Get.to(
-      () => WebViewScreen(
-        appBarTitle: S.current.termsOfUse,
-        url: Urls.aTermsOfUse,
-      ),
+          appBarTitle: type == 0 ? S.current.privacyPolicy : S.current.termsOfUse,
+          url: type == 0 ? Urls.aPrivacyPolicy : Urls.aTermsOfUse),
     );
   }
 
@@ -163,17 +149,13 @@ class OptionalScreenViewModel extends BaseViewModel {
   }
 
   void onLogoutTap() async {
-    Get.dialog(
-      ConfirmationDialog(
-          onNoBtnClick: onNoBtnClick,
-          onYesBtnClick: onLogOutYesBtnClick,
-          subDescription: S.current.logOutDis,
-          aspectRatio: 1 / 0.7,
-          horizontalPadding: 70,
-          clickText1: S.current.yes,
-          clickText2: S.current.no,
-          heading: S.current.areYouSure),
-    );
+    Get.dialog(OrangeConfirmationDialog(
+      onTap: onLogOutYesBtnClick,
+      description: S.current.logOutDis,
+      textButton: S.current.logOut,
+      textImage: AssetRes.logout,
+      dialogSize: 2,
+    ));
   }
 
   Future googleSignOut() async {
@@ -181,8 +163,6 @@ class OptionalScreenViewModel extends BaseViewModel {
     await googleSignIn.signOut();
     await FirebaseAuth.instance.signOut();
   }
-
-  final db = FirebaseFirestore.instance;
 
   void onDeleteYesBtnClick() async {
     String password = await PrefService.getString(PrefConst.password) ?? '';
@@ -251,17 +231,7 @@ class OptionalScreenViewModel extends BaseViewModel {
   }
 
   void onDeleteAccountTap() {
-    Get.dialog(
-      ConfirmationDialog(
-          onNoBtnClick: onNoBtnClick,
-          onYesBtnClick: onDeleteYesBtnClick,
-          subDescription: S.current.deleteDialogDis,
-          aspectRatio: 1 / 0.8,
-          horizontalPadding: 65,
-          clickText1: S.current.yes,
-          clickText2: S.current.no,
-          heading: S.current.areYouSure),
-    );
+    Get.dialog(OrangeConfirmationDialog(onTap: onDeleteYesBtnClick, description: S.current.deleteDialogDis));
   }
 
   void navigateLanguage() {

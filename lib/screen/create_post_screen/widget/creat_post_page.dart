@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/screen/create_post_screen/create_post_screen_view_model.dart';
 import 'package:orange_ui/screen/create_post_screen/widget/image_post_view.dart';
+import 'package:orange_ui/screen/create_post_screen/widget/video_post_view.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
 import 'package:orange_ui/utils/font_res.dart';
@@ -35,7 +36,11 @@ class CreatePostPage extends StatelessWidget {
                 ),
               )
             : const SizedBox(),
-        ImagePostView(model: model),
+        model.contentType == 0
+            ? ImagePostView(model: model)
+            : model.contentType == 1
+                ? VideoPostView(model: model)
+                : const SizedBox(),
         SizedBox(
           height: 200,
           child: DetectableTextField(
@@ -45,6 +50,7 @@ class CreatePostPage extends StatelessWidget {
             maxLines: null,
             minLines: null,
             expands: true,
+
             decoration: InputDecoration(
               border: InputBorder.none,
               hintText: S.of(context).writeSomethingHere,
