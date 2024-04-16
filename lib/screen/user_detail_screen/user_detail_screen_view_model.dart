@@ -276,7 +276,7 @@ class UserDetailScreenViewModel extends BaseViewModel {
           age: userData?.age,
           userData: userData,
           address: userData?.live,
-          type: 1),
+          reportType: 1),
       isScrollControlled: true,
     );
   }

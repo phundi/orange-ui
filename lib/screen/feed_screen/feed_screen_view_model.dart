@@ -1,11 +1,19 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
 import 'package:orange_ui/common/widgets/common_fun.dart';
+import 'package:orange_ui/common/widgets/confirmation_dialog.dart';
+import 'package:orange_ui/common/widgets/snack_bar_widget.dart';
+import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/social/feed.dart';
-import 'package:orange_ui/model/social/post/delete_post.dart';
+import 'package:orange_ui/model/social/story/fetch_stories.dart';
+import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/screen/comment_sheet/comment_sheet.dart';
 import 'package:orange_ui/screen/create_post_screen/create_post_screen.dart';
+import 'package:orange_ui/screen/live_grid_screen/live_grid_screen.dart';
+import 'package:orange_ui/screen/notification_screen/notification_screen.dart';
+import 'package:orange_ui/screen/search_screen/search_screen.dart';
 import 'package:orange_ui/screen/user_report_screen/report_sheet.dart';
 import 'package:orange_ui/service/pref_service.dart';
 import 'package:orange_ui/utils/color_res.dart';
@@ -22,7 +30,10 @@ class FeedScreenViewModel extends BaseViewModel {
   ScrollController scrollController = ScrollController();
   MoreBtnValue moreBtnValue = MoreBtnValue.share;
 
+  RegistrationUserData? users;
+
   void init() {
+    prefData();
     fetchFeedData();
   }
 
@@ -34,10 +45,33 @@ class FeedScreenViewModel extends BaseViewModel {
           Feed feed = Feed.fromJson(response);
           postList = feed.data?.posts ?? [];
           stories = feed.data?.usersStories ?? [];
+          stories.sort((a, b) {
+            if (CommonFun.isAllStoryShown(a.stories ?? [])) {
+              return 1;
+            }
+            return -1;
+          });
           notifyListeners();
         },
         url: Urls.aFetchHomePageData,
         param: {Urls.aMyUserId: PrefService.userId, Urls.aStart: postList.length, Urls.aLimit: paginationLimit});
+  }
+
+  void fetchStories() {
+    ApiProvider().callPost(
+        completion: (response) {
+          FetchStories fetchStories = FetchStories.fromJson(response);
+          stories = fetchStories.data ?? [];
+          stories.sort((a, b) {
+            if (CommonFun.isAllStoryShown(a.stories ?? [])) {
+              return 1;
+            }
+            return -1;
+          });
+          notifyListeners();
+        },
+        url: Urls.aFetchStories,
+        param: {Urls.aMyUserId: PrefService.userId});
   }
 
   void fetchScrollData() {
@@ -76,21 +110,47 @@ class FeedScreenViewModel extends BaseViewModel {
             age: posts.user?.age,
             fullName: posts.user?.fullname,
             address: posts.user?.live,
-            type: 2,
+            userData: posts.user,
+            reportType: 2,
           ),
           isScrollControlled: true);
     } else if (MoreBtnValue.delete == value) {
-      ApiProvider().callPost(
-        completion: (response) {
-          DeletePost deletePost = DeletePost.fromJson(response);
-          postList.removeWhere((element) {
-            return element.id == deletePost.data?.id;
-          });
-          notifyListeners();
-        },
-        url: Urls.aDeleteMyPost,
-        param: {Urls.aUserId: PrefService.userId, Urls.aPostId: posts.id},
+      Get.dialog(
+        ConfirmationDialog(
+          onTap: () {
+            postList.removeWhere((element) => element.id == posts.id);
+            notifyListeners();
+            ApiProvider().callPost(
+              completion: (response) {},
+              url: Urls.aDeleteMyPost,
+              param: {Urls.aUserId: PrefService.userId, Urls.aPostId: posts.id},
+            );
+          },
+          description: S.current.areYouSureYouWantToDeleteThePost,
+          heading: S.current.deletePost,
+          dialogSize: 2,
+          padding: const EdgeInsets.all(50),
+        ),
       );
     }
+  }
+
+  void onNotificationTap() {
+    users?.isBlock == 1
+        ? SnackBarWidget().snackBarWidget(S.current.userBlock)
+        : Get.to(() => const NotificationScreen());
+  }
+
+  void onLivesBtnClick() {
+    Get.to(() => const LiveGridScreen());
+  }
+
+  void onSearchTap() {
+    users?.isBlock == 1 ? SnackBarWidget().snackBarWidget(S.current.userBlock) : Get.to(() => const SearchScreen());
+  }
+
+  void prefData() async {
+    users = await PrefService.getUserData();
+    notifyListeners();
   }
 }

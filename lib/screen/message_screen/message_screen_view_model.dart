@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
 import 'package:orange_ui/common/widgets/common_fun.dart';
-import 'package:orange_ui/common/widgets/orange_confirmation_dialog.dart';
+import 'package:orange_ui/common/widgets/confirmation_dialog.dart';
 import 'package:orange_ui/common/widgets/snack_bar_widget.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/chat_and_live_stream/chat.dart';
@@ -102,7 +102,7 @@ class MessageScreenViewModel extends BaseViewModel {
 
   void onLongPress(Conversation? conversation) {
     HapticFeedback.vibrate();
-    Get.dialog(OrangeConfirmationDialog(
+    Get.dialog(ConfirmationDialog(
         onTap: () {
           db
               .collection(FirebaseRes.userChatList)

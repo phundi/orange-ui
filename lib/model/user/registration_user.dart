@@ -84,7 +84,7 @@ class RegistrationUserData {
     int? isLiveNow,
     int? isFake,
     dynamic password,
-    List<Stories>? story,
+    List<Story>? story,
     List<Images>? images,
   }) {
     _id = id;
@@ -161,7 +161,7 @@ class RegistrationUserData {
     if (json['story'] != null) {
       _story = [];
       json['story'].forEach((v) {
-        _story?.add(Stories.fromJson(v));
+        _story?.add(Story.fromJson(v));
       });
     }
     if (json['images'] != null) {
@@ -205,7 +205,7 @@ class RegistrationUserData {
   int? _isLiveNow;
   int? _isFake;
   dynamic _password;
-  List<Stories>? _story;
+  List<Story>? _story;
   List<Images>? _images;
 
   int? get id => _id;
@@ -273,7 +273,7 @@ class RegistrationUserData {
   int? get isFake => _isFake;
 
   dynamic get password => _password;
-  List<Stories>? get story => _story;
+  List<Story>? get story => _story;
   List<Images>? get images => _images;
 
   Map<String, dynamic> toJson() {

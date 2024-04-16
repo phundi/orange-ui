@@ -76,6 +76,7 @@ class ColorRes {
   static const Color alabaster = Color(0xFFFBFBFB);
   static const Color grey32 = Color(0xFFE7E7E7);
   static const Color dimGrey1 = Color(0xFF8E8E8E);
+  static const Color dimGrey = Color(0xFFCECECE);
   static const Color dimGrey2 = Color(0xFFADADAD);
   static const Color dimGrey3 = Color(0xFF9E9E9E);
   static const Color dimGrey4 = Color(0xFF999999);

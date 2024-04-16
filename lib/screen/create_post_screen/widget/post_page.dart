@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:orange_ui/screen/create_post_screen/create_post_screen_view_model.dart';
 import 'package:orange_ui/screen/create_post_screen/widget/image_post_view.dart';
 import 'package:orange_ui/screen/create_post_screen/widget/interest_widget.dart';
+import 'package:orange_ui/screen/create_post_screen/widget/video_post_view.dart';
 import 'package:orange_ui/utils/color_res.dart';
 import 'package:orange_ui/utils/font_res.dart';
 
@@ -26,7 +27,7 @@ class PostPage extends StatelessWidget {
                     detectedStyle: const TextStyle(fontFamily: FontRes.bold, color: ColorRes.orange2, fontSize: 16),
                     basicStyle: const TextStyle(color: ColorRes.dimGrey3, fontSize: 16, fontFamily: FontRes.medium)),
               ),
-        ImagePostView(model: model),
+        model.contentType == 0 ? ImagePostView(model: model) : VideoPostView(model: model),
         InterestWidget(model: model)
       ],
     );

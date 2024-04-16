@@ -28,3 +28,6 @@ const int maxImagesForPost = 5;
 
 //pagination data limit
 const int paginationLimit = 10;
+
+// Corner Radius-Smoothing
+const cornerSmoothing = 1.0;

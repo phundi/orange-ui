@@ -49,6 +49,8 @@ class Urls {
   static const String aDeleteComment = '${ConstRes.aBaseUrl}deleteComment';
   static const String aReportPost = '${ConstRes.aBaseUrl}reportPost';
   static const String aDeleteMyPost = '${ConstRes.aBaseUrl}deleteMyPost';
+  static const String aViewStory = '${ConstRes.aBaseUrl}viewStory';
+  static const String aFetchStories = '${ConstRes.aBaseUrl}fetchStories';
 
   ///------------------------ Params ------------------------///
   static const String aApiKeyName = 'apikey';
@@ -125,6 +127,7 @@ class Urls {
   static const String aHashtags = 'hashtags';
   static const String aPostId = 'post_id';
   static const String aCommentId = 'comment_id';
+  static const String aStoryId = 'story_id';
 
   // Social Media
   static const String aMyUserId = 'my_user_id';

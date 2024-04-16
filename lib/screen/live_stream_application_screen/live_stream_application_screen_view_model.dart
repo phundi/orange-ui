@@ -108,7 +108,7 @@ class LiveStreamApplicationScreenViewModel extends BaseViewModel {
     Loader().lottieLoader();
     ApiProvider().getStoreFileGivePath(image: videoFile).then((value) {
       Get.back();
-      Get.to(() => const VideoPreviewScreen(), arguments: value.path);
+      Get.to(() => VideoPreviewScreen(videoUrl: value.path));
     });
   }
 

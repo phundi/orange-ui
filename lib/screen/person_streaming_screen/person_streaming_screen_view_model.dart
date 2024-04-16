@@ -279,7 +279,7 @@ class PersonStreamingScreenViewModel extends BaseViewModel {
           profileImage: liveStreamUser?.userImage,
           age: liveStreamUser?.age,
           address: liveStreamUser?.address,
-          type: 1,
+          reportType: 1,
         ),
         isScrollControlled: true);
   }

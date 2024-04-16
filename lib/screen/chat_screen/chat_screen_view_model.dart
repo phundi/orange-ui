@@ -12,7 +12,7 @@ import 'package:intl/intl.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
 import 'package:orange_ui/common/widgets/common_fun.dart';
 import 'package:orange_ui/common/widgets/loader.dart';
-import 'package:orange_ui/common/widgets/orange_confirmation_dialog.dart';
+import 'package:orange_ui/common/widgets/confirmation_dialog.dart';
 import 'package:orange_ui/common/widgets/snack_bar_widget.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/chat_and_live_stream/chat.dart';
@@ -165,7 +165,7 @@ class ChatScreenViewModel extends BaseViewModel {
 
   /// chat item delete method
   void chatDeleteDialog() {
-    Get.dialog(OrangeConfirmationDialog(
+    Get.dialog(ConfirmationDialog(
         onTap: onDeleteBtnClick, description: S.current.afterDeletingTheChatYouCanNotRestoreOurMessage));
   }
 
@@ -226,7 +226,7 @@ class ChatScreenViewModel extends BaseViewModel {
           profileImage: conversation.user?.image,
           age: int.parse(conversation.user?.age ?? '0'),
           address: conversation.user?.city,
-          type: 1,
+          reportType: 1,
         ),
         isScrollControlled: true,
       );
@@ -541,7 +541,7 @@ class ChatScreenViewModel extends BaseViewModel {
 
   ///  video preview screen navigate
   void onVideoItemClick(ChatMessage? data) {
-    Get.to(() => const VideoPreviewScreen(), arguments: data?.video)?.then((value) {
+    Get.to(() => VideoPreviewScreen(videoUrl: data?.video))?.then((value) {
       SystemChrome.setSystemUIOverlayStyle(
         const SystemUiOverlayStyle(
           statusBarColor: ColorRes.white,

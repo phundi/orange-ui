@@ -19,6 +19,7 @@ class ReportCard extends StatelessWidget {
   final int? age;
   final String address;
   final ReportSheetViewModel model;
+  final int reportType;
 
   const ReportCard(
       {Key? key,
@@ -26,7 +27,8 @@ class ReportCard extends StatelessWidget {
       required this.profileImage,
       required this.address,
       required this.model,
-      required this.age})
+      required this.age,
+      required this.reportType})
       : super(key: key);
 
   @override
@@ -56,12 +58,12 @@ class ReportCard extends StatelessWidget {
                       child: Image.asset(AssetRes.backArrow, height: 25, width: 25),
                     ),
                     Center(
-                      child: Text(S.current.reportUser,
+                      child: Text(reportType == 1 ? S.current.reportUser : S.of(context).reportPost,
                           style: const TextStyle(color: ColorRes.white, fontFamily: FontRes.bold, fontSize: 16)),
                     )
                   ],
                 ),
-                const SizedBox(height: 20),
+                reportType != 1 ? const SizedBox() : const SizedBox(height: 20),
                 Expanded(
                   child: SingleChildScrollView(
                     keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
@@ -69,60 +71,64 @@ class ReportCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Text(
-                          S.current.youAreReporting,
-                          style: const TextStyle(color: ColorRes.white, fontFamily: FontRes.semiBold),
-                        ),
-                        const SizedBox(height: 10),
-                        Container(
-                          height: 70,
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                          decoration: BoxDecoration(
-                              color: ColorRes.white.withOpacity(0.15), borderRadius: BorderRadius.circular(15)),
-                          child: Row(
-                            children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(30),
-                                child: CachedNetworkImage(
-                                  imageUrl:
-                                      '${ConstRes.aImageBaseUrl}${profileImage?.replaceAll(ConstRes.aImageBaseUrl, '')}',
-                                  cacheKey:
-                                      '${ConstRes.aImageBaseUrl}${profileImage?.replaceAll(ConstRes.aImageBaseUrl, '')}',
-                                  fit: BoxFit.cover,
-                                  height: 50,
-                                  width: 50,
-                                  errorWidget: (context, url, error) {
-                                    return CommonUI.profileImagePlaceHolder(
-                                        name: fullName, borderRadius: 30, heightWeight: 50);
-                                  },
-                                ),
+                        reportType != 1
+                            ? const SizedBox()
+                            : Text(
+                                S.current.youAreReporting,
+                                style: const TextStyle(color: ColorRes.white, fontFamily: FontRes.semiBold),
                               ),
-                              const SizedBox(width: 10),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
+                        reportType != 1 ? const SizedBox() : const SizedBox(height: 10),
+                        reportType != 1
+                            ? const SizedBox()
+                            : Container(
+                                height: 70,
+                                padding: const EdgeInsets.symmetric(horizontal: 10),
+                                decoration: BoxDecoration(
+                                    color: ColorRes.white.withOpacity(0.15), borderRadius: BorderRadius.circular(15)),
+                                child: Row(
                                   children: [
-                                    Row(
-                                      children: [
-                                        Flexible(
-                                          child: Text(
-                                            fullName.capitalize ?? '',
-                                            style: const TextStyle(color: ColorRes.white),
-                                            maxLines: 1,
-                                            overflow: TextOverflow.ellipsis,
-                                          ),
-                                        ),
-                                        Text(' ($age) ', style: const TextStyle(color: ColorRes.white)),
-                                      ],
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(30),
+                                      child: CachedNetworkImage(
+                                        imageUrl:
+                                            '${ConstRes.aImageBaseUrl}${profileImage?.replaceAll(ConstRes.aImageBaseUrl, '')}',
+                                        cacheKey:
+                                            '${ConstRes.aImageBaseUrl}${profileImage?.replaceAll(ConstRes.aImageBaseUrl, '')}',
+                                        fit: BoxFit.cover,
+                                        height: 50,
+                                        width: 50,
+                                        errorWidget: (context, url, error) {
+                                          return CommonUI.profileImagePlaceHolder(
+                                              name: fullName, borderRadius: 30, heightWeight: 50);
+                                        },
+                                      ),
                                     ),
-                                    Text(address, style: const TextStyle(color: ColorRes.white))
+                                    const SizedBox(width: 10),
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Flexible(
+                                                child: Text(
+                                                  fullName.capitalize ?? '',
+                                                  style: const TextStyle(color: ColorRes.white),
+                                                  maxLines: 1,
+                                                  overflow: TextOverflow.ellipsis,
+                                                ),
+                                              ),
+                                              Text(' ($age) ', style: const TextStyle(color: ColorRes.white)),
+                                            ],
+                                          ),
+                                          Text(address, style: const TextStyle(color: ColorRes.white))
+                                        ],
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),
-                            ],
-                          ),
-                        ),
                         const SizedBox(height: 15),
                         Text(S.current.selectReason,
                             style: const TextStyle(color: ColorRes.white, fontFamily: FontRes.semiBold)),

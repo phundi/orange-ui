@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:io';
 
 import 'package:detectable_text_field/detectable_text_field.dart';
@@ -35,9 +34,8 @@ class CreatePostScreenViewModel extends BaseViewModel {
   List<String> hashtagList = [];
   FocusNode detectableTextFieldFocusNode = FocusNode();
   int contentType = 2; // description content byDefault = 2
-
-  VideoPlayerController? videoPlayerController;
-  var currentDuration = Duration().obs;
+  late VideoPlayerController videoPlayerController;
+  bool isPlaying = false;
 
   void init() {
     pageType = 0;
@@ -67,14 +65,15 @@ class CreatePostScreenViewModel extends BaseViewModel {
     contentType = 0;
     detectableTextFieldFocusNode.unfocus();
     _picker.pickMultiImage(maxHeight: maxHeight, maxWidth: maxWidth, imageQuality: quality).then((value) {
-      for (int i = 0; i < maxImagesForPost; i++) {
-        imagesFile.add(value[i]);
-        notifyListeners();
+      if (value.isNotEmpty) {
+        for (int i = 0; i < (value.length > maxImagesForPost ? maxImagesForPost : value.length); i++) {
+          imagesFile.add(value[i]);
+          notifyListeners();
+        }
       }
     });
   }
 
-  Timer? timer;
   void onVideoTap() {
     contentType = 1;
     detectableTextFieldFocusNode.unfocus();
@@ -83,17 +82,29 @@ class CreatePostScreenViewModel extends BaseViewModel {
         imagesFile.add(value);
         videoPlayerController = VideoPlayerController.file(File(value.path))
           ..initialize().then((value) {
-            timer = Timer.periodic(const Duration(milliseconds: 10), (timer) async {
-              if (videoPlayerController!.value.position <= videoPlayerController!.value.duration) {
-                currentDuration.value = (await videoPlayerController?.position) ?? const Duration();
-              }
-            });
             notifyListeners();
           });
         thumbnail = await VideoThumbnail.thumbnailFile(video: value.path);
         notifyListeners();
       }
     });
+  }
+
+  void videoPlayPause() {
+    if (videoPlayerController.value.isPlaying) {
+      isPlaying = false;
+      videoPlayerController.pause();
+    } else {
+      isPlaying = true;
+      videoPlayerController.play();
+    }
+    notifyListeners();
+  }
+
+  void onVideoDelete() {
+    imagesFile.removeAt(0);
+    videoPlayerController.dispose();
+    notifyListeners();
   }
 
   void _getPrefData() {
@@ -140,7 +151,6 @@ class CreatePostScreenViewModel extends BaseViewModel {
     detectableTextFieldController.dispose();
     pageController.dispose();
     detectableTextFieldFocusNode.dispose();
-    timer?.cancel();
     super.dispose();
   }
 
@@ -175,11 +185,20 @@ class CreatePostScreenViewModel extends BaseViewModel {
   }
 
   void onChangeSlider(double value) {
-    videoPlayerController?.seekTo(
-      Duration(
-        microseconds: value.toInt(),
-      ),
+    videoPlayerController.seekTo(
+      Duration(microseconds: value.toInt()),
     );
-    notifyListeners();
+  }
+
+  void onChangeSliderEnd(double value) {
+    if (isPlaying) {
+      videoPlayerController.play();
+    }
+  }
+
+  void onChangeSliderStart(double value) {
+    if (isPlaying) {
+      videoPlayerController.pause();
+    }
   }
 }

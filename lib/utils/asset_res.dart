@@ -72,6 +72,7 @@ class AssetRes {
   static const String icCameraFlip = "${icons}ic_camera_flip.png";
   static const String icPostPlaceholder = "${icons}ic_post_placeholder.png";
   static const String logout = "${icons}logout.png";
+  static const String icPause = "${icons}ic_pause.png";
 
   /// ----------------- Images --------------
 

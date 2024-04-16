@@ -11,7 +11,7 @@ class ReportSheet extends StatelessWidget {
   final int? age;
   final String? fullName;
   final String? address;
-  final int type;
+  final int reportType;
 
   const ReportSheet(
       {Key? key,
@@ -21,7 +21,7 @@ class ReportSheet extends StatelessWidget {
       required this.age,
       required this.fullName,
       required this.address,
-      required this.type})
+      required this.reportType})
       : super(key: key);
 
   @override
@@ -30,19 +30,19 @@ class ReportSheet extends StatelessWidget {
       onViewModelReady: (model) {
         model.init();
       },
-      viewModelBuilder: () => ReportSheetViewModel(reportId ?? -1, type),
+      viewModelBuilder: () => ReportSheetViewModel(reportId ?? -1, reportType),
       builder: (context, model, child) {
         return GestureDetector(
           onTap: () {
             model.explainMoreFocus.unfocus();
           },
           child: ReportCard(
-            fullName: '$fullName',
-            age: age,
-            profileImage: profileImage,
-            address: address ?? '',
-            model: model,
-          ),
+              fullName: '$fullName',
+              age: age,
+              profileImage: profileImage,
+              address: address ?? '',
+              model: model,
+              reportType: reportType),
         );
       },
     );

@@ -1,4 +1,9 @@
 import 'package:orange_ui/model/user/registration_user.dart';
+import 'package:orange_ui/service/pref_service.dart';
+import 'package:orange_ui/story_view/controller/story_controller.dart';
+import 'package:orange_ui/story_view/widgets/story_view.dart';
+import 'package:orange_ui/utils/color_res.dart';
+import 'package:orange_ui/utils/const_res.dart';
 
 class Feed {
   Feed({
@@ -276,7 +281,7 @@ class UsersStories {
     int? followers,
     String? createdAt,
     String? updateAt,
-    List<Stories>? stories,
+    List<Story>? stories,
   }) {
     _id = id;
     _isBlock = isBlock;
@@ -359,7 +364,9 @@ class UsersStories {
     if (json['stories'] != null) {
       _stories = [];
       json['stories'].forEach((v) {
-        _stories?.add(Stories.fromJson(v));
+        var s = Story.fromJson(v);
+        s.user = this;
+        _stories?.add(s);
       });
     }
   }
@@ -400,7 +407,7 @@ class UsersStories {
   int? _followers;
   String? _createdAt;
   String? _updateAt;
-  List<Stories>? _stories;
+  List<Story>? _stories;
 
   int? get id => _id;
   int? get isBlock => _isBlock;
@@ -439,7 +446,7 @@ class UsersStories {
   int? get followers => _followers;
   String? get createdAt => _createdAt;
   String? get updateAt => _updateAt;
-  List<Stories>? get stories => _stories;
+  List<Story>? get stories => _stories;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -487,14 +494,14 @@ class UsersStories {
   }
 }
 
-class Stories {
-  Stories({
+class Story {
+  Story({
     int? id,
     int? userId,
     int? type,
     int? duration,
     String? content,
-    dynamic viewByUserIds,
+    String? viewByUserIds,
     String? createdAt,
     String? updatedAt,
     bool? storyView,
@@ -510,7 +517,7 @@ class Stories {
     _storyView = storyView;
   }
 
-  Stories.fromJson(dynamic json) {
+  Story.fromJson(dynamic json) {
     _id = json['id'];
     _userId = json['user_id'];
     _type = json['type'];
@@ -526,17 +533,18 @@ class Stories {
   int? _type;
   int? _duration;
   String? _content;
-  dynamic _viewByUserIds;
+  String? _viewByUserIds;
   String? _createdAt;
   String? _updatedAt;
   bool? _storyView;
+  UsersStories? user;
 
   int? get id => _id;
   int? get userId => _userId;
   int? get type => _type;
   int? get duration => _duration;
   String? get content => _content;
-  dynamic get viewByUserIds => _viewByUserIds;
+  String? get viewByUserIds => _viewByUserIds;
   String? get createdAt => _createdAt;
   String? get updatedAt => _updatedAt;
   bool? get storyView => _storyView;
@@ -554,4 +562,47 @@ class Stories {
     map['storyView'] = _storyView;
     return map;
   }
+
+  bool isWatchedByMe() {
+    var arr = viewByUserIds?.split(',') ?? [];
+    return arr.contains(PrefService.userId.toString());
+  }
+
+  List<String> viewedByUsersIds() {
+    return viewByUserIds?.split(',') ?? [];
+  }
+
+  StoryItem toStoryItem(StoryController controller) {
+    if (type == 1) {
+      return StoryItem.pageVideo(
+        '${ConstRes.aImageBaseUrl}$content',
+        story: this,
+        controller: controller,
+        duration: Duration(seconds: (duration ?? 0).toInt()),
+        shown: isWatchedByMe(),
+        id: id ?? 0,
+        viewedByUsersIds: viewedByUsersIds(),
+      );
+    } else if (type == 0) {
+      return StoryItem.pageImage(
+        story: this,
+        url: '${ConstRes.aImageBaseUrl}$content',
+        controller: controller,
+        shown: isWatchedByMe(),
+        id: id ?? 0,
+        viewedByUsersIds: viewedByUsersIds(),
+      );
+    } else {
+      return StoryItem.text(
+        story: this,
+        title: content ?? '',
+        backgroundColor: ColorRes.black,
+        shown: isWatchedByMe(),
+        id: id ?? 0,
+        viewedByUsersIds: viewedByUsersIds(),
+      );
+    }
+  }
+
+  DateTime get date => DateTime.parse(createdAt ?? '');
 }

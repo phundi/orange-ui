@@ -24,9 +24,9 @@ class FeedScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             DashboardTopBar(
-              onNotificationTap: () {},
-              onSearchTap: () {},
-              onLivesBtnClick: () {},
+              onNotificationTap: model.onNotificationTap,
+              onSearchTap: model.onSearchTap,
+              onLivesBtnClick: model.onLivesBtnClick,
             ),
             Expanded(
               child: model.isLoading
@@ -35,7 +35,7 @@ class FeedScreen extends StatelessWidget {
                       controller: model.scrollController,
                       child: Column(
                         children: [
-                          const FeedStatusBar(),
+                          FeedStatusBar(model: model),
                           ListView.builder(
                             primary: false,
                             shrinkWrap: true,
@@ -49,6 +49,7 @@ class FeedScreen extends StatelessWidget {
                                 onSelected: (value) {
                                   model.onMoreBtnClick(value, posts);
                                 },
+                                model: model,
                               );
                             },
                           ),

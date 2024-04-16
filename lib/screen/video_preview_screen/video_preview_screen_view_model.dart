@@ -6,29 +6,23 @@ import 'package:stacked/stacked.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoPlayerScreenViewModel extends BaseViewModel {
-  String videoPath = '';
+  String? videoPath;
   late VideoPlayerController videoPlayerController;
-  late Timer timer;
-  late Duration duration;
   bool isExceptionError = false;
   bool isUIVisible = false;
 
   void init() {
-    videoPath = Get.arguments;
     videoInit();
   }
 
+  VideoPlayerScreenViewModel(this.videoPath);
+
   void videoInit() {
-    duration = const Duration();
     videoPlayerController = VideoPlayerController.networkUrl(
       Uri.parse('${ConstRes.aImageBaseUrl}$videoPath'),
     )..initialize().then((value) {
         videoPlayerController.play().then((value) {
           isUIVisible = true;
-          notifyListeners();
-        });
-        timer = Timer.periodic(videoPlayerController.value.position, (timer) {
-          duration = videoPlayerController.value.position;
           notifyListeners();
         });
       }).onError((e, e1) {
@@ -57,7 +51,6 @@ class VideoPlayerScreenViewModel extends BaseViewModel {
   @override
   void dispose() {
     videoPlayerController.dispose();
-    isExceptionError ? null : timer.cancel();
     super.dispose();
   }
 }

@@ -107,7 +107,7 @@ class CommonFun {
     List<Images> tempList = images ?? [];
     if (tempList.isNotEmpty) {
       profileImage = tempList.first.image ?? '';
-      return '${ConstRes.aImageBaseUrl}$profileImage';
+      return '${ConstRes.aImageBaseUrl}${profileImage.replaceAll(ConstRes.aImageBaseUrl, ' ')}';
     }
     return '';
   }
@@ -127,5 +127,16 @@ class CommonFun {
       return '$twoDigitMinutes:$twoDigitSeconds';
     }
     return "${twoDigits(duration.inHours)}:$twoDigitMinutes:$twoDigitSeconds";
+  }
+
+  static bool isAllStoryShown(List<Story> story) {
+    var isWatched = true;
+    for (var element in (story)) {
+      if (!element.isWatchedByMe()) {
+        isWatched = false;
+        break;
+      }
+    }
+    return isWatched;
   }
 }

@@ -30,6 +30,7 @@ class ExploreScreenViewModel extends BaseViewModel {
   RegistrationUserData? users;
   bool isSelected = false;
   InterstitialAd? interstitialAd;
+  int count = 0;
 
   void init() {
     exploreScreenApiCall();
@@ -81,16 +82,14 @@ class ExploreScreenViewModel extends BaseViewModel {
     )) throw '${S.current.couldNotLaunch} ';
   }
 
-  void onInstagramTap() {
-    _launchUrl(userData?[currentUserIndex].instagram ?? '');
-  }
-
-  void onFBTap() {
-    _launchUrl(userData?[currentUserIndex].facebook ?? '');
-  }
-
-  void onYoutubeTap() {
-    _launchUrl(userData?[currentUserIndex].youtube ?? '');
+  void onSocialBtnTap(int type) {
+    if (type == 0) {
+      _launchUrl(userData?[currentUserIndex].youtube ?? '');
+    } else if (type == 1) {
+      _launchUrl(userData?[currentUserIndex].facebook ?? '');
+    } else if (type == 2) {
+      _launchUrl(userData?[currentUserIndex].instagram ?? '');
+    }
   }
 
   void onPlayButtonTap() async {
@@ -159,8 +158,6 @@ class ExploreScreenViewModel extends BaseViewModel {
     Get.back();
   }
 
-  int count = 0;
-
   void onNextButtonTap() {
     count++;
     if (count == 5) {
@@ -172,9 +169,7 @@ class ExploreScreenViewModel extends BaseViewModel {
         });
       }
     } else {
-      users?.isBlock == 1
-          ? SnackBarWidget().snackBarWidget(S.current.userBlock)
-          : userController.next(animation: true);
+      users?.isBlock == 1 ? SnackBarWidget().snackBarWidget(S.current.userBlock) : userController.next(animation: true);
     }
   }
 
@@ -195,14 +190,16 @@ class ExploreScreenViewModel extends BaseViewModel {
         : Get.to(() => const NotificationScreen());
   }
 
-  void onTitleTap() {
-    users?.isBlock == 1 ? SnackBarWidget().snackBarWidget(S.current.userBlock) : Get.to(() => const MapScreen());
+  void onLivesBtnClick() {
+    Get.to(() => const LiveGridScreen());
   }
 
   void onSearchTap() {
-    users?.isBlock == 1
-        ? SnackBarWidget().snackBarWidget(S.current.userBlock)
-        : Get.to(() => const SearchScreen());
+    users?.isBlock == 1 ? SnackBarWidget().snackBarWidget(S.current.userBlock) : Get.to(() => const SearchScreen());
+  }
+
+  void onTitleTap() {
+    users?.isBlock == 1 ? SnackBarWidget().snackBarWidget(S.current.userBlock) : Get.to(() => const MapScreen());
   }
 
   void onImageTap() {
@@ -225,9 +222,5 @@ class ExploreScreenViewModel extends BaseViewModel {
   void dispose() {
     userController.dispose();
     super.dispose();
-  }
-
-  void onLivesBtnClick() {
-    Get.to(() => const LiveGridScreen());
   }
 }

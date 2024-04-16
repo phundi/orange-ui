@@ -7,7 +7,7 @@ import 'package:agora_rtc_engine/rtc_remote_view.dart' as rtc_remote_view;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:orange_ui/common/widgets/orange_confirmation_dialog.dart';
+import 'package:orange_ui/common/widgets/confirmation_dialog.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/chat_and_live_stream/live_stream.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
@@ -210,7 +210,7 @@ class RandomStreamingScreenViewModel extends BaseViewModel {
   }
 
   void onEndBtnTap() async {
-    Get.dialog(OrangeConfirmationDialog(onTap: onEndVideoTap, description: S.current.areYouSureYouWantToEnd));
+    Get.dialog(ConfirmationDialog(onTap: onEndVideoTap, description: S.current.areYouSureYouWantToEnd));
   }
 
   void onCameraTap() {

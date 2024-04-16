@@ -9,7 +9,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
 import 'package:orange_ui/common/widgets/common_fun.dart';
 import 'package:orange_ui/common/widgets/loader.dart';
-import 'package:orange_ui/common/widgets/orange_confirmation_dialog.dart';
+import 'package:orange_ui/common/widgets/confirmation_dialog.dart';
 import 'package:orange_ui/common/widgets/snack_bar_widget.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/chat_and_live_stream/live_stream.dart';
@@ -74,7 +74,7 @@ class LiveGridScreenViewModel extends BaseViewModel {
     registrationUser?.isBlock == 1
         ? SnackBarWidget().snackBarWidget(S.current.userBlock)
         : Get.dialog(
-            OrangeConfirmationDialog(
+            ConfirmationDialog(
               onTap: onGoLiveYesBtnTap,
               description: S.current.doYouReallyWantToLive,
               dialogSize: 2,

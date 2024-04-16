@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
 import 'package:orange_ui/common/widgets/loader.dart';
-import 'package:orange_ui/common/widgets/orange_confirmation_dialog.dart';
+import 'package:orange_ui/common/widgets/confirmation_dialog.dart';
 import 'package:orange_ui/common/widgets/snack_bar_widget.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
@@ -149,7 +149,7 @@ class OptionalScreenViewModel extends BaseViewModel {
   }
 
   void onLogoutTap() async {
-    Get.dialog(OrangeConfirmationDialog(
+    Get.dialog(ConfirmationDialog(
       onTap: onLogOutYesBtnClick,
       description: S.current.logOutDis,
       textButton: S.current.logOut,
@@ -231,7 +231,7 @@ class OptionalScreenViewModel extends BaseViewModel {
   }
 
   void onDeleteAccountTap() {
-    Get.dialog(OrangeConfirmationDialog(onTap: onDeleteYesBtnClick, description: S.current.deleteDialogDis));
+    Get.dialog(ConfirmationDialog(onTap: onDeleteYesBtnClick, description: S.current.deleteDialogDis));
   }
 
   void navigateLanguage() {

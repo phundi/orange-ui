@@ -35,12 +35,11 @@ class CreatePostPage extends StatelessWidget {
                   ],
                 ),
               )
-            : const SizedBox(),
-        model.contentType == 0
-            ? ImagePostView(model: model)
-            : model.contentType == 1
-                ? VideoPostView(model: model)
-                : const SizedBox(),
+            : model.contentType == 0
+                ? ImagePostView(model: model)
+                : model.contentType == 1
+                    ? VideoPostView(model: model)
+                    : const SizedBox(),
         SizedBox(
           height: 200,
           child: DetectableTextField(

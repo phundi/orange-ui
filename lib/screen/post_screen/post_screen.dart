@@ -1,6 +1,7 @@
 import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:orange_ui/screen/feed_screen/feed_screen_view_model.dart';
 import 'package:orange_ui/screen/feed_screen/widget/feed_post_card.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
@@ -69,6 +70,7 @@ class PostScreen extends StatelessWidget {
               padding: const EdgeInsets.only(top: 10),
               itemBuilder: (context, index) => FeedPostCard(
                 onCommentBtnClick: () {},
+                model: FeedScreenViewModel(),
               ),
             ))
           ],

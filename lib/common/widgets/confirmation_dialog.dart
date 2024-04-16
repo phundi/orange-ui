@@ -6,21 +6,31 @@ import 'package:orange_ui/utils/color_res.dart';
 import 'package:orange_ui/utils/font_res.dart';
 import 'package:orange_ui/utils/style_res.dart';
 
-class OrangeConfirmationDialog extends StatelessWidget {
+class ConfirmationDialog extends StatelessWidget {
   final VoidCallback? onTap;
   final String description;
   final double? dialogSize;
   final String? textButton;
   final String? textImage;
+  final String? heading;
+  final EdgeInsets? padding;
 
-  const OrangeConfirmationDialog(
-      {Key? key, required this.onTap, required this.description, this.dialogSize, this.textButton, this.textImage})
+  const ConfirmationDialog(
+      {Key? key,
+      required this.onTap,
+      required this.description,
+      this.dialogSize,
+      this.textButton,
+      this.textImage,
+      this.heading,
+      this.padding})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      insetPadding: padding,
       backgroundColor: ColorRes.white,
       child: AspectRatio(
         aspectRatio: dialogSize ?? 1.8,
@@ -32,7 +42,7 @@ class OrangeConfirmationDialog extends StatelessWidget {
             children: [
               const Spacer(),
               Text(
-                '${S.current.areYouSure}?',
+                heading ?? '${S.current.areYouSure}?',
                 style: const TextStyle(fontFamily: FontRes.bold, fontSize: 18, color: ColorRes.veryDarkGrey4),
               ),
               const Spacer(),

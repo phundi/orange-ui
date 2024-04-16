@@ -3319,6 +3319,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Are you sure you want to delete the post?`
+  String get areYouSureYouWantToDeleteThePost {
+    return Intl.message(
+      'Are you sure you want to delete the post?',
+      name: 'areYouSureYouWantToDeleteThePost',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete post`
+  String get deletePost {
+    return Intl.message(
+      'Delete post',
+      name: 'deletePost',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Report post`
+  String get reportPost {
+    return Intl.message(
+      'Report post',
+      name: 'reportPost',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

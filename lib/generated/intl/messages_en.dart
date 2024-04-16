@@ -48,6 +48,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "areYouSure": MessageLookupByLibrary.simpleMessage("Are you sure"),
         "areYouSureYouEtc": MessageLookupByLibrary.simpleMessage(
             "Are you sure you want to delete this message ?"),
+        "areYouSureYouWantToDeleteThePost":
+            MessageLookupByLibrary.simpleMessage(
+                "Are you sure you want to delete the post?"),
         "areYouSureYouWantToEnd": MessageLookupByLibrary.simpleMessage(
             "Are you sure you want to end your live video?"),
         "artist": MessageLookupByLibrary.simpleMessage("Artist"),
@@ -110,6 +113,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "deleteDialogDis": MessageLookupByLibrary.simpleMessage(
             "Do you really want to delete your account? You won\'t be able to recover it later and data will be lost forever"),
         "deleteMessage": MessageLookupByLibrary.simpleMessage("Delete message"),
+        "deletePost": MessageLookupByLibrary.simpleMessage("Delete post"),
         "deleteThisChat":
             MessageLookupByLibrary.simpleMessage("Delete this chat"),
         "diamond": MessageLookupByLibrary.simpleMessage(" Diamonds Collected:"),
@@ -346,6 +350,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Registration Successfully done"),
         "report": MessageLookupByLibrary.simpleMessage("Report"),
         "reportCap": MessageLookupByLibrary.simpleMessage("REPORT "),
+        "reportPost": MessageLookupByLibrary.simpleMessage("Report post"),
         "reportUser": MessageLookupByLibrary.simpleMessage("REPORT USER"),
         "reportedSubmitted":
             MessageLookupByLibrary.simpleMessage("Reported Submitted"),
