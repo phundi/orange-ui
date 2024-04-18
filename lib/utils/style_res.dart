@@ -6,4 +6,9 @@ class StyleRes {
       colors: [ColorRes.lightOrange1, ColorRes.darkOrange],
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter);
+
+  static const Gradient linearDimGrey = LinearGradient(
+      colors: [ColorRes.dimGrey, ColorRes.dimGrey],
+      begin: Alignment.topCenter,
+      end: Alignment.bottomCenter);
 }

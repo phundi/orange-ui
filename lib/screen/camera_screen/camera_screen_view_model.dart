@@ -1,47 +1,71 @@
+import 'dart:async';
+
 import 'package:camera/camera.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:orange_ui/main.dart';
 import 'package:orange_ui/screen/camera_preview_screen/camera_preview_screen.dart';
 import 'package:stacked/stacked.dart';
 
 class CameraScreenViewModel extends BaseViewModel {
-  late CameraController controller;
+  late CameraController cameraController;
+  List<CameraDescription> cameras;
+  bool isLoading = true;
+  Timer? timer;
+  var currentTime = ''.obs;
+  CameraScreenViewModel(this.cameras);
 
   void init() {
     initCamera();
   }
 
-  void initCamera() {
-    controller = CameraController(cameras[0], ResolutionPreset.max);
-    controller.initialize().then((_) {
+  void initCamera() async {
+    isLoading = true;
+    cameraController = CameraController(cameras[0], ResolutionPreset.high);
+    cameraController.initialize().then((_) async {
+      await cameraController
+          .lockCaptureOrientation(DeviceOrientation.portraitUp);
+      await cameraController.prepareForVideoRecording();
+      isLoading = false;
       notifyListeners();
-    }).catchError((Object e) {
-      if (e is CameraException) {
-        switch (e.code) {
-          case 'CameraAccessDenied':
-            // Handle access errors here.
-            break;
-          default:
-            // Handle other errors here.
-            break;
-        }
-      }
     });
   }
 
   void captureImage() {
-    controller.takePicture().then((value) {
-      Get.to(() => CameraPreviewScreen(xFile: value));
+    cameraController.takePicture().then((value) {
+      Get.to(() => CameraPreviewScreen(xFile: value, type: 0));
+    });
+  }
+
+  void onCameraFlip() {
+    cameras[1];
+  }
+
+  void onCaptureVideoStart(LongPressStartDetails details) async {
+    cameraController.startVideoRecording();
+    setCurrentTimerClock();
+  }
+
+  void onCaptureVideoEnd(LongPressEndDetails details) {
+    timer?.cancel();
+    cameraController.stopVideoRecording().then((value) {
+      Get.to(() => CameraPreviewScreen(xFile: value, type: 1))?.then((value) {
+        currentTime = ''.obs;
+        notifyListeners();
+      });
+    });
+  }
+
+  setCurrentTimerClock() {
+    timer = Timer.periodic(const Duration(milliseconds: 10), (timer) {
+      currentTime.value = timer.tick.toString();
     });
   }
 
   @override
   void dispose() {
-    controller.dispose();
+    timer?.cancel();
+    cameraController.dispose();
     super.dispose();
-  }
-
-  void onCameraFlip() {
-    cameras[1];
   }
 }

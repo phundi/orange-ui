@@ -342,13 +342,12 @@ class ChatArea extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(5),
       child: CachedNetworkImage(
-        imageUrl: '${ConstRes.aImageBaseUrl}${data?.image}',
-        height: 171,
-        width: 171,
-        fit: BoxFit.cover,
-        cacheKey: '${ConstRes.aImageBaseUrl}${data?.image}',
-        repeat: ImageRepeat.noRepeat,
-      ),
+          imageUrl: '${ConstRes.aImageBaseUrl}${data?.image}',
+          height: 171,
+          width: 171,
+          fit: BoxFit.cover,
+          cacheKey: '${data?.image}',
+          repeat: ImageRepeat.noRepeat),
     );
   }
 

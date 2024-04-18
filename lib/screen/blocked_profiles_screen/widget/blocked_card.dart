@@ -15,14 +15,19 @@ class BlockedCard extends StatelessWidget {
   final BlockedProfilesScreenViewModel viewModel;
   final bool isBlocked;
 
-  const BlockedCard({Key? key, required this.userData, required this.viewModel, required this.isBlocked})
+  const BlockedCard(
+      {Key? key,
+      required this.userData,
+      required this.viewModel,
+      required this.isBlocked})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.to(() => const UserDetailScreen(), arguments: userData)?.then((value) {
+        Get.to(() => const UserDetailScreen(), arguments: userData)
+            ?.then((value) {
           viewModel.onBackBlockIds(userData);
         });
       },
@@ -36,11 +41,13 @@ class BlockedCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(50),
               child: CachedNetworkImage(
                 imageUrl: CommonFun.getProfileImage(images: userData.images),
+                cacheKey: CommonFun.getProfileImage(images: userData.images),
                 width: 40,
                 height: 40,
                 fit: BoxFit.cover,
                 errorWidget: (context, url, error) {
-                  return CommonUI.profileImagePlaceHolder(name: userData.fullname, heightWeight: 40);
+                  return CommonUI.profileImagePlaceHolder(
+                      name: userData.fullname, heightWeight: 40);
                 },
               ),
             ),
@@ -64,18 +71,24 @@ class BlockedCard extends StatelessWidget {
                       const SizedBox(width: 3),
                       Text(
                         "${userData.age ?? ''}",
-                        style:
-                            const TextStyle(color: ColorRes.darkGrey4, fontSize: 18, overflow: TextOverflow.ellipsis),
+                        style: const TextStyle(
+                            color: ColorRes.darkGrey4,
+                            fontSize: 18,
+                            overflow: TextOverflow.ellipsis),
                         maxLines: 1,
                       ),
                       const SizedBox(width: 3),
                       userData.isVerified == 2
-                          ? Image.asset(AssetRes.tickMark, height: 18, width: 18)
+                          ? Image.asset(AssetRes.tickMark,
+                              height: 18, width: 18)
                           : const SizedBox(),
                     ],
                   ),
                   Text(userData.live ?? '',
-                      style: const TextStyle(color: ColorRes.grey6, fontSize: 13, overflow: TextOverflow.ellipsis),
+                      style: const TextStyle(
+                          color: ColorRes.grey6,
+                          fontSize: 13,
+                          overflow: TextOverflow.ellipsis),
                       maxLines: 1),
                 ],
               ),

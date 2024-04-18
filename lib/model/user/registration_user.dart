@@ -1,4 +1,8 @@
-import 'package:orange_ui/model/social/feed.dart';
+import 'package:orange_ui/service/pref_service.dart';
+import 'package:orange_ui/story_view/controller/story_controller.dart';
+import 'package:orange_ui/story_view/widgets/story_view.dart';
+import 'package:orange_ui/utils/color_res.dart';
+import 'package:orange_ui/utils/const_res.dart';
 
 class RegistrationUser {
   RegistrationUser({
@@ -14,7 +18,9 @@ class RegistrationUser {
   RegistrationUser.fromJson(dynamic json) {
     _status = json['status'];
     _message = json['message'];
-    _data = json['data'] != null ? RegistrationUserData.fromJson(json['data']) : null;
+    _data = json['data'] != null
+        ? RegistrationUserData.fromJson(json['data'])
+        : null;
   }
 
   bool? _status;
@@ -83,7 +89,7 @@ class RegistrationUserData {
     int? canGoLive,
     int? isLiveNow,
     int? isFake,
-    dynamic password,
+    String? password,
     List<Story>? story,
     List<Images>? images,
   }) {
@@ -158,10 +164,12 @@ class RegistrationUserData {
     _isLiveNow = json['is_live_now'];
     _isFake = json['is_fake'];
     _password = json['password'];
-    if (json['story'] != null) {
+    if (json['stories'] != null) {
       _story = [];
-      json['story'].forEach((v) {
-        _story?.add(Story.fromJson(v));
+      json['stories'].forEach((v) {
+        var s = Story.fromJson(v);
+        s.user = this;
+        story?.add(s);
       });
     }
     if (json['images'] != null) {
@@ -204,7 +212,7 @@ class RegistrationUserData {
   int? _canGoLive;
   int? _isLiveNow;
   int? _isFake;
-  dynamic _password;
+  String? _password;
   List<Story>? _story;
   List<Images>? _images;
 
@@ -272,7 +280,7 @@ class RegistrationUserData {
 
   int? get isFake => _isFake;
 
-  dynamic get password => _password;
+  String? get password => _password;
   List<Story>? get story => _story;
   List<Images>? get images => _images;
 
@@ -312,12 +320,23 @@ class RegistrationUserData {
     map['is_fake'] = _isFake;
     map['password'] = _password;
     if (_story != null) {
-      map['story'] = _story?.map((v) => v.toJson()).toList();
+      map['stories'] = _story?.map((v) => v.toJson()).toList();
     }
     if (_images != null) {
       map['images'] = _images?.map((v) => v.toJson()).toList();
     }
     return map;
+  }
+
+  bool isAllStoryShown() {
+    var isWatched = true;
+    for (var element in (story ?? [])) {
+      if (!element.isWatchedByMe()) {
+        isWatched = false;
+        break;
+      }
+    }
+    return isWatched;
   }
 }
 
@@ -413,4 +432,119 @@ class Interest {
     map['image'] = _image;
     return map;
   }
+}
+
+class Story {
+  Story({
+    int? id,
+    int? userId,
+    int? type,
+    int? duration,
+    String? content,
+    String? viewByUserIds,
+    String? createdAt,
+    String? updatedAt,
+    bool? storyView,
+  }) {
+    _id = id;
+    _userId = userId;
+    _type = type;
+    _duration = duration;
+    _content = content;
+    _viewByUserIds = viewByUserIds;
+    _createdAt = createdAt;
+    _updatedAt = updatedAt;
+    _storyView = storyView;
+  }
+
+  Story.fromJson(dynamic json) {
+    _id = json['id'];
+    _userId = json['user_id'];
+    _type = json['type'];
+    _duration = json['duration'];
+    _content = json['content'];
+    _viewByUserIds = json['view_by_user_ids'];
+    _createdAt = json['created_at'];
+    _updatedAt = json['updated_at'];
+    _storyView = json['storyView'];
+  }
+  int? _id;
+  int? _userId;
+  int? _type;
+  int? _duration;
+  String? _content;
+  String? _viewByUserIds;
+  String? _createdAt;
+  String? _updatedAt;
+  bool? _storyView;
+  RegistrationUserData? user;
+
+  int? get id => _id;
+  int? get userId => _userId;
+  int? get type => _type;
+  int? get duration => _duration;
+  String? get content => _content;
+  String? get viewByUserIds => _viewByUserIds;
+  String? get createdAt => _createdAt;
+  String? get updatedAt => _updatedAt;
+  bool? get storyView => _storyView;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['id'] = _id;
+    map['user_id'] = _userId;
+    map['type'] = _type;
+    map['duration'] = _duration;
+    map['content'] = _content;
+    map['view_by_user_ids'] = _viewByUserIds;
+    map['created_at'] = _createdAt;
+    map['updated_at'] = _updatedAt;
+    map['storyView'] = _storyView;
+    return map;
+  }
+
+  bool isWatchedByMe() {
+    var arr = viewByUserIds?.split(',') ?? [];
+    return arr.contains(PrefService.userId.toString());
+  }
+
+  List<String> viewedByUsersIds() {
+    return viewByUserIds?.split(',') ?? [];
+  }
+
+  StoryItem toStoryItem(StoryController controller) {
+    if (type == 1) {
+      return StoryItem.pageVideo(
+        '${ConstRes.aImageBaseUrl}$content',
+        story: this,
+        controller: controller,
+        duration: Duration(seconds: (duration ?? 0).toInt()),
+        shown: isWatchedByMe(),
+        id: id ?? 0,
+        viewedByUsersIds: viewedByUsersIds(),
+      );
+    } else if (type == 0) {
+      return StoryItem.pageImage(
+        story: this,
+        url: '${ConstRes.aImageBaseUrl}$content',
+        controller: controller,
+        duration: const Duration(seconds: storyDuration),
+        shown: isWatchedByMe(),
+        id: id ?? 0,
+        viewedByUsersIds: viewedByUsersIds(),
+      );
+    } else {
+      return StoryItem.text(
+        story: this,
+        title: content ?? '',
+        backgroundColor: ColorRes.black,
+        shown: isWatchedByMe(),
+        id: id ?? 0,
+        duration: const Duration(seconds: storyDuration),
+        viewedByUsersIds: viewedByUsersIds(),
+      );
+    }
+  }
+
+  DateTime get date => DateTime.parse(createdAt ?? '');
 }

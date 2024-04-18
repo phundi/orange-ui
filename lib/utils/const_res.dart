@@ -31,3 +31,6 @@ const int paginationLimit = 10;
 
 // Corner Radius-Smoothing
 const cornerSmoothing = 1.0;
+
+//  story Duration for image
+const int storyDuration = 5;

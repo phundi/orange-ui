@@ -5,7 +5,7 @@ import 'dart:math';
 import 'package:collection/collection.dart' show IterableExtension;
 import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
-import 'package:orange_ui/model/social/feed.dart';
+import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/utils/color_res.dart';
 import 'package:orange_ui/utils/const_res.dart';
 
@@ -159,7 +159,8 @@ class StoryItem {
                       horizontal: 24,
                       vertical: 8,
                     ),
-                    color: caption != null ? Colors.black54 : Colors.transparent,
+                    color:
+                        caption != null ? Colors.black54 : Colors.transparent,
                     child: caption != null
                         ? Text(
                             caption,
@@ -202,8 +203,12 @@ class StoryItem {
     return StoryItem(
         ClipSmoothRect(
           radius: SmoothBorderRadius.vertical(
-              top: SmoothRadius(cornerRadius: roundedTop ? 8 : 0, cornerSmoothing: cornerSmoothing),
-              bottom: SmoothRadius(cornerRadius: roundedBottom ? 8 : 0, cornerSmoothing: cornerSmoothing)),
+              top: SmoothRadius(
+                  cornerRadius: roundedTop ? 8 : 0,
+                  cornerSmoothing: cornerSmoothing),
+              bottom: SmoothRadius(
+                  cornerRadius: roundedBottom ? 8 : 0,
+                  cornerSmoothing: cornerSmoothing)),
           key: key,
           child: Container(
             color: Colors.grey[100],
@@ -219,7 +224,8 @@ class StoryItem {
                   ),
                   Container(
                     margin: const EdgeInsets.only(bottom: 16),
-                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
                     child: Align(
                       alignment: Alignment.bottomLeft,
                       child: SizedBox(
@@ -272,12 +278,15 @@ class StoryItem {
                   child: Container(
                     width: double.infinity,
                     margin: const EdgeInsets.only(bottom: 24),
-                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
-                    color: caption != null ? Colors.black54 : Colors.transparent,
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+                    color:
+                        caption != null ? Colors.black54 : Colors.transparent,
                     child: caption != null
                         ? Text(
                             caption,
-                            style: const TextStyle(fontSize: 15, color: Colors.white),
+                            style: const TextStyle(
+                                fontSize: 15, color: Colors.white),
                             textAlign: TextAlign.center,
                           )
                         : const SizedBox(),
@@ -334,7 +343,8 @@ class StoryItem {
                       horizontal: 24,
                       vertical: 8,
                     ),
-                    color: caption != null ? Colors.black54 : Colors.transparent,
+                    color:
+                        caption != null ? Colors.black54 : Colors.transparent,
                     child: caption != null
                         ? Text(
                             caption,
@@ -491,7 +501,8 @@ class StoryViewState extends State<StoryView> with TickerProviderStateMixin {
     item ??= widget.storyItems.last;
     return SafeArea(
         child: ClipSmoothRect(
-            radius: const SmoothBorderRadius.all(SmoothRadius(cornerRadius: 8, cornerSmoothing: cornerSmoothing)),
+            radius: const SmoothBorderRadius.all(SmoothRadius(
+                cornerRadius: 8, cornerSmoothing: cornerSmoothing)),
             child: item?.view ?? Container()));
   }
 
@@ -513,7 +524,8 @@ class StoryViewState extends State<StoryView> with TickerProviderStateMixin {
       });
     }
 
-    _playbackSubscription = widget.controller.playbackNotifier.listen((playbackStatus) {
+    _playbackSubscription =
+        widget.controller.playbackNotifier.listen((playbackStatus) {
       switch (playbackStatus) {
         case PlaybackState.play:
           _removeNextHold();
@@ -571,7 +583,8 @@ class StoryViewState extends State<StoryView> with TickerProviderStateMixin {
       widget.onStoryShow!(storyItem);
     }
 
-    _animationController = AnimationController(duration: storyItem.duration, vsync: this);
+    _animationController =
+        AnimationController(duration: storyItem.duration, vsync: this);
     _animationController!.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
         storyItem.shown = true;
@@ -584,7 +597,8 @@ class StoryViewState extends State<StoryView> with TickerProviderStateMixin {
       }
     });
 
-    _currentAnimation = Tween(begin: 0.0, end: 1.0).animate(_animationController!);
+    _currentAnimation =
+        Tween(begin: 0.0, end: 1.0).animate(_animationController!);
 
     widget.controller.play();
   }
@@ -648,7 +662,8 @@ class StoryViewState extends State<StoryView> with TickerProviderStateMixin {
       }
     } else {
       // this is the last page, progress animation should skip to end
-      _animationController!.animateTo(1.0, duration: const Duration(milliseconds: 10));
+      _animationController!
+          .animateTo(1.0, duration: const Duration(milliseconds: 10));
     }
   }
 
@@ -690,7 +705,9 @@ class StoryViewState extends State<StoryView> with TickerProviderStateMixin {
           Visibility(
             visible: widget.progressPosition != ProgressPosition.none,
             child: Align(
-              alignment: widget.progressPosition == ProgressPosition.top ? Alignment.topCenter : Alignment.bottomCenter,
+              alignment: widget.progressPosition == ProgressPosition.top
+                  ? Alignment.topCenter
+                  : Alignment.bottomCenter,
               child: SafeArea(
                 bottom: widget.inline ? false : true,
                 // we use SafeArea here for notched and bezels phones
@@ -702,10 +719,14 @@ class StoryViewState extends State<StoryView> with TickerProviderStateMixin {
                         vertical: 8,
                       ),
                       child: PageBar(
-                        widget.storyItems.map((it) => PageData(it!.duration, it.shown)).toList(),
+                        widget.storyItems
+                            .map((it) => PageData(it!.duration, it.shown))
+                            .toList(),
                         _currentAnimation,
                         key: UniqueKey(),
-                        indicatorHeight: widget.inline ? IndicatorHeight.small : IndicatorHeight.large,
+                        indicatorHeight: widget.inline
+                            ? IndicatorHeight.small
+                            : IndicatorHeight.large,
                         indicatorColor: widget.indicatorColor,
                       ),
                     ),
@@ -756,8 +777,10 @@ class StoryViewState extends State<StoryView> with TickerProviderStateMixin {
                     : (details) {
                         widget.controller.play();
                         // finish up drag cycle
-                        if (!verticalDragInfo!.cancel && widget.onVerticalSwipeComplete != null) {
-                          widget.onVerticalSwipeComplete!(verticalDragInfo!.direction);
+                        if (!verticalDragInfo!.cancel &&
+                            widget.onVerticalSwipeComplete != null) {
+                          widget.onVerticalSwipeComplete!(
+                              verticalDragInfo!.direction);
                         }
 
                         verticalDragInfo = null;
@@ -775,7 +798,9 @@ class StoryViewState extends State<StoryView> with TickerProviderStateMixin {
           SafeArea(
             child: Column(
               children: [
-                widget.overlayWidget != null && item != null ? widget.overlayWidget!(item) : Container(),
+                widget.overlayWidget != null && item != null
+                    ? widget.overlayWidget!(item)
+                    : Container(),
                 const Spacer()
               ],
             ),
@@ -849,10 +874,12 @@ class PageBarState extends State<PageBar> {
       children: widget.pages.map((it) {
         return Expanded(
           child: Container(
-            padding: EdgeInsets.only(right: widget.pages.last == it ? 0 : spacing),
+            padding:
+                EdgeInsets.only(right: widget.pages.last == it ? 0 : spacing),
             child: StoryProgressIndicator(
               isPlaying(it) ? widget.animation!.value : (it.shown ? 1 : 0),
-              indicatorHeight: widget.indicatorHeight == IndicatorHeight.large ? 5 : 3,
+              indicatorHeight:
+                  widget.indicatorHeight == IndicatorHeight.large ? 5 : 3,
               indicatorColor: widget.indicatorColor,
             ),
           ),
@@ -905,7 +932,9 @@ class IndicatorOval extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final paint = Paint()..color = color;
     canvas.drawRRect(
-        RRect.fromRectAndRadius(Rect.fromLTWH(0, 0, size.width * widthFactor, size.height), const Radius.circular(3)),
+        RRect.fromRectAndRadius(
+            Rect.fromLTWH(0, 0, size.width * widthFactor, size.height),
+            const Radius.circular(3)),
         paint);
   }
 
@@ -920,13 +949,16 @@ class ContrastHelper {
   static double luminance(int? r, int? g, int? b) {
     final a = [r, g, b].map((it) {
       double value = it!.toDouble() / 255.0;
-      return value <= 0.03928 ? value / 12.92 : pow((value + 0.055) / 1.055, 2.4);
+      return value <= 0.03928
+          ? value / 12.92
+          : pow((value + 0.055) / 1.055, 2.4);
     }).toList();
 
     return a[0] * 0.2126 + a[1] * 0.7152 + a[2] * 0.0722;
   }
 
   static double contrast(rgb1, rgb2) {
-    return luminance(rgb2[0], rgb2[1], rgb2[2]) / luminance(rgb1[0], rgb1[1], rgb1[2]);
+    return luminance(rgb2[0], rgb2[1], rgb2[2]) /
+        luminance(rgb1[0], rgb1[1], rgb1[2]);
   }
 }

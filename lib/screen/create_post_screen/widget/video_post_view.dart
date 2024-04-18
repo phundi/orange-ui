@@ -29,7 +29,8 @@ class VideoPostView extends StatelessWidget {
                   InkWell(
                       onTap: model.videoPlayPause,
                       child: AspectRatio(
-                          aspectRatio: model.videoPlayerController.value.aspectRatio,
+                          aspectRatio:
+                              model.videoPlayerController.value.aspectRatio,
                           child: VideoPlayer(model.videoPlayerController))),
                   ValueListenableBuilder(
                     valueListenable: model.videoPlayerController,
@@ -37,7 +38,10 @@ class VideoPostView extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         model.pageType == 1
-                            ? Container(height: 39, width: 39, margin: const EdgeInsets.all(15))
+                            ? Container(
+                                height: 39,
+                                width: 39,
+                                margin: const EdgeInsets.all(15))
                             : Align(
                                 alignment: Alignment.topRight,
                                 child: InkWell(
@@ -48,12 +52,16 @@ class VideoPostView extends StatelessWidget {
                                       width: 39,
                                       margin: const EdgeInsets.all(15),
                                       decoration: ShapeDecoration(
-                                        shape:
-                                            SmoothRectangleBorder(borderRadius: SmoothBorderRadius(cornerRadius: 30)),
+                                        shape: SmoothRectangleBorder(
+                                            borderRadius: SmoothBorderRadius(
+                                                cornerRadius: 30)),
                                         color: ColorRes.white.withOpacity(0.3),
                                       ),
                                       alignment: Alignment.center,
-                                      child: Image.asset(AssetRes.icBin, color: ColorRes.white, width: 21, height: 21),
+                                      child: Image.asset(AssetRes.icBin,
+                                          color: ColorRes.white,
+                                          width: 21,
+                                          height: 21),
                                     ),
                                   ),
                                 ),
@@ -68,11 +76,19 @@ class VideoPostView extends StatelessWidget {
                               height: 55,
                               margin: const EdgeInsets.all(10),
                               decoration: ShapeDecoration(
-                                  shape: SmoothRectangleBorder(borderRadius: SmoothBorderRadius(cornerRadius: 30)),
+                                  shape: SmoothRectangleBorder(
+                                      borderRadius:
+                                          SmoothBorderRadius(cornerRadius: 30)),
                                   color: ColorRes.black.withOpacity(0.4)),
                               alignment: Alignment.center,
-                              child: Image.asset(value.isPlaying ? AssetRes.icPause : AssetRes.icPlay,
-                                  color: ColorRes.white, width: 20, height: 20, alignment: Alignment.centerRight),
+                              child: Image.asset(
+                                  value.isPlaying
+                                      ? AssetRes.icPause
+                                      : AssetRes.icPlay,
+                                  color: ColorRes.white,
+                                  width: 20,
+                                  height: 20,
+                                  alignment: Alignment.centerRight),
                             ),
                           ),
                         ),
@@ -81,7 +97,8 @@ class VideoPostView extends StatelessWidget {
                           padding: const EdgeInsets.all(10),
                           decoration: ShapeDecoration(
                               shape: SmoothRectangleBorder(
-                                  borderRadius: SmoothBorderRadius(cornerRadius: 5, cornerSmoothing: 1)),
+                                  borderRadius: SmoothBorderRadius(
+                                      cornerRadius: 5, cornerSmoothing: 1)),
                               color: ColorRes.black.withOpacity(0.3)),
                           child: Row(
                             children: [
@@ -100,11 +117,14 @@ class VideoPostView extends StatelessWidget {
                                 child: SliderTheme(
                                   data: SliderThemeData(
                                     trackHeight: 2,
-                                    overlayShape: SliderComponentShape.noOverlay,
+                                    overlayShape:
+                                        SliderComponentShape.noOverlay,
                                   ),
                                   child: Slider(
-                                      value: value.position.inMicroseconds.toDouble(),
-                                      max: value.duration.inMicroseconds.toDouble(),
+                                      value: value.position.inMicroseconds
+                                          .toDouble(),
+                                      max: value.duration.inMicroseconds
+                                          .toDouble(),
                                       activeColor: ColorRes.darkOrange,
                                       onChanged: model.onChangeSlider,
                                       onChangeEnd: model.onChangeSliderEnd,
@@ -116,7 +136,10 @@ class VideoPostView extends StatelessWidget {
                               Text(
                                 CommonFun.printDuration(value.duration),
                                 style: const TextStyle(
-                                    color: ColorRes.white, fontFamily: FontRes.light, fontSize: 12, letterSpacing: 0.5),
+                                    color: ColorRes.white,
+                                    fontFamily: FontRes.light,
+                                    fontSize: 12,
+                                    letterSpacing: 0.5),
                               ),
                             ],
                           ),

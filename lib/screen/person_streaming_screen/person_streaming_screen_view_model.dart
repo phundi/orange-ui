@@ -7,6 +7,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
+import 'package:orange_ui/common/widgets/common_fun.dart';
 import 'package:orange_ui/common/widgets/loader.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/chat_and_live_stream/live_stream.dart';
@@ -75,7 +76,8 @@ class PersonStreamingScreenViewModel extends BaseViewModel {
           countDownValue++;
           if (countDownValue == 60) {
             !isSelected ? timer.cancel() : null;
-            if (PrefService.liveWatchingPrice <= walletCoin! && walletCoin != 0) {
+            if (PrefService.liveWatchingPrice <= walletCoin! &&
+                walletCoin != 0) {
               isSelected
                   ? autoDebitCoin()
                   : Get.dialog(
@@ -90,7 +92,8 @@ class PersonStreamingScreenViewModel extends BaseViewModel {
                             _engine.destroy();
                           },
                           onContinueTap: (isSelected) async {
-                            await PrefService.setDialog(PrefConst.liveStream, isSelected);
+                            await PrefService.setDialog(
+                                PrefConst.liveStream, isSelected);
                             minusCoinApi();
                             countDownValue = 0;
                             countDown();
@@ -231,7 +234,9 @@ class PersonStreamingScreenViewModel extends BaseViewModel {
 
   /// Video view row wrapper
   Widget _expandedVideoView(List<Widget> views) {
-    final wrappedViews = views.map<Widget>((view) => Expanded(child: Container(child: view))).toList();
+    final wrappedViews = views
+        .map<Widget>((view) => Expanded(child: Container(child: view)))
+        .toList();
     return Expanded(
       child: Row(
         children: wrappedViews,
@@ -258,11 +263,17 @@ class PersonStreamingScreenViewModel extends BaseViewModel {
         );
       case 3:
         return Column(
-          children: <Widget>[_expandedVideoView(views.sublist(0, 2)), _expandedVideoView(views.sublist(2, 3))],
+          children: <Widget>[
+            _expandedVideoView(views.sublist(0, 2)),
+            _expandedVideoView(views.sublist(2, 3))
+          ],
         );
       case 4:
         return Column(
-          children: <Widget>[_expandedVideoView(views.sublist(0, 2)), _expandedVideoView(views.sublist(2, 4))],
+          children: <Widget>[
+            _expandedVideoView(views.sublist(0, 2)),
+            _expandedVideoView(views.sublist(2, 4))
+          ],
         );
       default:
     }
@@ -288,9 +299,7 @@ class PersonStreamingScreenViewModel extends BaseViewModel {
     if (commentController.text.trim().isNotEmpty) {
       collectionReference?.add(LiveStreamComment(
         id: DateTime.now().millisecondsSinceEpoch,
-        userImage: registrationUser?.images != null || registrationUser!.images!.isNotEmpty
-            ? registrationUser?.images![0].image
-            : '',
+        userImage: CommonFun.getProfileImage(images: registrationUser?.images),
         userId: registrationUser?.id,
         city: registrationUser?.live ?? '',
         isHost: false,
@@ -349,9 +358,7 @@ class PersonStreamingScreenViewModel extends BaseViewModel {
   Future<void> onGiftTap(Gifts? data) async {
     collectionReference?.add(LiveStreamComment(
       id: DateTime.now().millisecondsSinceEpoch,
-      userImage: registrationUser?.images != null || registrationUser!.images!.isNotEmpty
-          ? registrationUser?.images![0].image
-          : '',
+      userImage: CommonFun.getProfileImage(images: registrationUser?.images),
       userId: registrationUser?.id,
       city: registrationUser?.live ?? '',
       isHost: false,
@@ -363,7 +370,10 @@ class PersonStreamingScreenViewModel extends BaseViewModel {
     db
         .collection(FirebaseRes.liveHostList)
         .doc(liveStreamUser?.hostIdentity)
-        .update({FirebaseRes.collectedDiamond: liveStreamUser!.collectedDiamond! + data!.coinPrice!}).catchError((e) {
+        .update({
+      FirebaseRes.collectedDiamond:
+          liveStreamUser!.collectedDiamond! + data!.coinPrice!
+    }).catchError((e) {
       debugPrint(e);
     });
     await ApiProvider().minusCoinFromWallet(data.coinPrice);
@@ -392,8 +402,10 @@ class PersonStreamingScreenViewModel extends BaseViewModel {
       return false;
     });
 
-    collectionReference =
-        db.collection(FirebaseRes.liveHostList).doc(liveStreamUser?.hostIdentity).collection(FirebaseRes.comments);
+    collectionReference = db
+        .collection(FirebaseRes.liveHostList)
+        .doc(liveStreamUser?.hostIdentity)
+        .collection(FirebaseRes.comments);
 
     collectionReference
         ?.orderBy(FirebaseRes.id, descending: true)
@@ -436,10 +448,15 @@ class PersonStreamingScreenViewModel extends BaseViewModel {
   }
 
   void watchingUserRemove() {
-    db.collection(FirebaseRes.liveHostList).doc(liveStreamUser?.hostIdentity).update(
+    db
+        .collection(FirebaseRes.liveHostList)
+        .doc(liveStreamUser?.hostIdentity)
+        .update(
       {
         FirebaseRes.watchingCount:
-            liveStreamUser != null && liveStreamUser?.watchingCount != null ? liveStreamUser!.watchingCount! - 1 : 0
+            liveStreamUser != null && liveStreamUser?.watchingCount != null
+                ? liveStreamUser!.watchingCount! - 1
+                : 0
       },
     );
   }

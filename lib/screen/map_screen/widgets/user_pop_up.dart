@@ -7,7 +7,6 @@ import 'package:orange_ui/common/widgets/custom_box_shadow.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
-import 'package:orange_ui/utils/const_res.dart';
 import 'package:orange_ui/utils/font_res.dart';
 
 class UserPopUp extends StatelessWidget {
@@ -75,8 +74,8 @@ class UserPopUp extends StatelessWidget {
                       : ClipRRect(
                           borderRadius: BorderRadius.circular(50),
                           child: CachedNetworkImage(
-                            imageUrl: '${ConstRes.aImageBaseUrl}$image',
-                            cacheKey: '${ConstRes.aImageBaseUrl}$image',
+                            imageUrl: '$image',
+                            cacheKey: '$image',
                             errorWidget: (context, url, error) {
                               return Image.asset(
                                 AssetRes.themeLabel,

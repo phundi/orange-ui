@@ -2,11 +2,12 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import 'package:orange_ui/common/widgets/common_fun.dart';
+import 'package:orange_ui/common/widgets/common_ui.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/screen/shimmer_screen/shimmer_screen.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
-import 'package:orange_ui/utils/const_res.dart';
 
 class ProfilePicArea extends StatelessWidget {
   final RegistrationUserData? data;
@@ -62,15 +63,16 @@ class ProfilePicArea extends StatelessWidget {
               : ClipRRect(
                   borderRadius: BorderRadius.circular(360),
                   child: CachedNetworkImage(
-                    imageUrl:
-                        '${ConstRes.aImageBaseUrl}${data?.images?[0].image}',
-                    cacheKey:
-                        '${ConstRes.aImageBaseUrl}${data?.images?[0].image}',
+                    imageUrl: CommonFun.getProfileImage(images: data?.images),
+                    cacheKey: CommonFun.getProfileImage(images: data?.images),
                     height: Get.width / 2.5,
                     width: Get.width / 2.5,
                     fit: BoxFit.cover,
                     errorWidget: (context, url, error) {
-                      return Image.asset(AssetRes.imageWarning);
+                      return CommonUI.profileImagePlaceHolder(
+                          name: data?.fullname ?? 'Unknown',
+                          borderRadius: 360,
+                          heightWeight: Get.width / 2.5);
                     },
                     progressIndicatorBuilder: (context, url, progress) {
                       return ShimmerScreen.circular(

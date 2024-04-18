@@ -62,6 +62,7 @@ dependencies:
   figma_squircle: ^0.5.3
   detectable_text_field: ^3.0.2
   smooth_page_indicator: ^1.1.0
+  rxdart: ^0.27.7
 
 
   #_______________ Networking ___________________#

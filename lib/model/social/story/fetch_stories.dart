@@ -1,10 +1,10 @@
-import 'package:orange_ui/model/social/feed.dart';
+import 'package:orange_ui/model/user/registration_user.dart';
 
 class FetchStories {
   FetchStories({
     bool? status,
     String? message,
-    List<UsersStories>? data,
+    List<RegistrationUserData>? data,
   }) {
     _status = status;
     _message = message;
@@ -17,17 +17,17 @@ class FetchStories {
     if (json['data'] != null) {
       _data = [];
       json['data'].forEach((v) {
-        _data?.add(UsersStories.fromJson(v));
+        _data?.add(RegistrationUserData.fromJson(v));
       });
     }
   }
   bool? _status;
   String? _message;
-  List<UsersStories>? _data;
+  List<RegistrationUserData>? _data;
 
   bool? get status => _status;
   String? get message => _message;
-  List<UsersStories>? get data => _data;
+  List<RegistrationUserData>? get data => _data;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};

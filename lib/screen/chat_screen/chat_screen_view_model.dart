@@ -81,8 +81,10 @@ class ChatScreenViewModel extends BaseViewModel {
   ChatScreenViewModel(this.conversation);
 
   void init() {
-    const MethodChannel(Urls.aBubblyCamera).setMethodCallHandler((payload) async {
-      if (payload.method == AppRes.isSuccessPurchase && (payload.arguments as bool)) {}
+    const MethodChannel(Urls.aBubblyCamera)
+        .setMethodCallHandler((payload) async {
+      if (payload.method == AppRes.isSuccessPurchase &&
+          (payload.arguments as bool)) {}
       return;
     });
     senderId = conversation.conversationId ?? '';
@@ -93,7 +95,8 @@ class ChatScreenViewModel extends BaseViewModel {
   Future<void> getPrefData() async {
     await PrefService.getUserData().then((value) {
       registrationUserData = value;
-      blockUnblock = conversation.block == true ? S.current.unBlock : S.current.block;
+      blockUnblock =
+          conversation.block == true ? S.current.unBlock : S.current.block;
       isBlock = conversation.block == true ? true : false;
       isBlockOther = conversation.blockFromOther == true ? true : false;
     });
@@ -110,10 +113,13 @@ class ChatScreenViewModel extends BaseViewModel {
     ApiProvider().getProfile(userID: PrefService.userId).then((value) async {
       registrationUserData = value?.data;
       walletCoin = value?.data?.wallet;
-      isSelected = await PrefService.getDialog(PrefConst.isMessageDialog) ?? false;
-      blockUnblock = value?.data?.blockedUsers?.contains('${conversation.user?.userid}') == true
-          ? S.current.unBlock
-          : S.current.block;
+      isSelected =
+          await PrefService.getDialog(PrefConst.isMessageDialog) ?? false;
+      blockUnblock =
+          value?.data?.blockedUsers?.contains('${conversation.user?.userid}') ==
+                  true
+              ? S.current.unBlock
+              : S.current.block;
       notifyListeners();
       await PrefService.saveUser(value?.data);
     });
@@ -133,11 +139,15 @@ class ChatScreenViewModel extends BaseViewModel {
         .doc('${conversation.user?.userid}');
 
     if (conversation.conversationId == null) {
-      conversation.setConversationId(
-          CommonFun.getConversationID(myId: registrationUserData?.id, otherUserId: conversation.user?.userid));
+      conversation.setConversationId(CommonFun.getConversationID(
+          myId: registrationUserData?.id,
+          otherUserId: conversation.user?.userid));
     }
 
-    drChatMessages = db.collection(FirebaseRes.chat).doc(conversation.conversationId).collection(FirebaseRes.chat);
+    drChatMessages = db
+        .collection(FirebaseRes.chat)
+        .doc(conversation.conversationId)
+        .collection(FirebaseRes.chat);
 
     getChat();
   }
@@ -148,14 +158,16 @@ class ChatScreenViewModel extends BaseViewModel {
 
   void scrollToGetChat() {
     scrollController.addListener(() {
-      if (scrollController.offset == scrollController.position.maxScrollExtent) {
+      if (scrollController.offset ==
+          scrollController.position.maxScrollExtent) {
         getChat();
       }
     });
   }
 
   void onUserTap() {
-    Get.to(() => const UserDetailScreen(), arguments: conversation.user?.userid);
+    Get.to(() => const UserDetailScreen(),
+        arguments: conversation.user?.userid);
   }
 
   void onCancelBtnClick() {
@@ -166,7 +178,8 @@ class ChatScreenViewModel extends BaseViewModel {
   /// chat item delete method
   void chatDeleteDialog() {
     Get.dialog(ConfirmationDialog(
-        onTap: onDeleteBtnClick, description: S.current.afterDeletingTheChatYouCanNotRestoreOurMessage));
+        onTap: onDeleteBtnClick,
+        description: S.current.afterDeletingTheChatYouCanNotRestoreOurMessage));
   }
 
   void onDeleteBtnClick() {
@@ -315,13 +328,18 @@ class ChatScreenViewModel extends BaseViewModel {
     if (registrationUserData?.isFake != 1) {
       if (textMsgController.text.trim() != '') {
         if (PrefService.reverseSwipePrice <= walletCoin! && walletCoin != 0) {
-          !isSelected ? getChatMsgDialog(onContinueTap: onTextMsgContinueClick) : onMessageSent();
+          !isSelected
+              ? getChatMsgDialog(onContinueTap: onTextMsgContinueClick)
+              : onMessageSent();
         } else {
           emptyDialog();
         }
       }
     } else {
-      firebaseMsgUpdate(msgType: FirebaseRes.msg, textMessage: textMsgController.text.trim()).then((value) {
+      firebaseMsgUpdate(
+              msgType: FirebaseRes.msg,
+              textMessage: textMsgController.text.trim())
+          .then((value) {
         textMsgController.clear();
       });
     }
@@ -363,14 +381,17 @@ class ChatScreenViewModel extends BaseViewModel {
 
   /// send a image method
   void onSendBtnClick(String msg, String? image) {
-    firebaseMsgUpdate(image: image, msgType: FirebaseRes.image, textMessage: msg);
+    firebaseMsgUpdate(
+        image: image, msgType: FirebaseRes.image, textMessage: msg);
     Get.back();
   }
 
   void onPlusBtnClick() {
     if (registrationUserData?.isFake != 1) {
       if (PrefService.reverseSwipePrice <= walletCoin! && walletCoin != 0) {
-        !isSelected ? getChatMsgDialog(onContinueTap: onPlusContinueClick) : onPlusTap();
+        !isSelected
+            ? getChatMsgDialog(onContinueTap: onPlusContinueClick)
+            : onPlusTap();
       } else {
         emptyDialog();
       }
@@ -453,7 +474,10 @@ class ChatScreenViewModel extends BaseViewModel {
   void itemSelectImage() async {
     selectedItem = S.current.image;
     final XFile? photo = await picker.pickImage(
-        source: ImageSource.gallery, imageQuality: quality, maxHeight: maxHeight, maxWidth: maxWidth);
+        source: ImageSource.gallery,
+        imageQuality: quality,
+        maxHeight: maxHeight,
+        maxWidth: maxWidth);
     if (photo == null || photo.path.isEmpty) return;
     cameraImage = File(photo.path);
     ApiProvider().getStoreFileGivePath(image: cameraImage).then(
@@ -461,7 +485,10 @@ class ChatScreenViewModel extends BaseViewModel {
         if (value.status == true) {
           Get.back();
           Get.bottomSheet(
-              ImageVideoMsgSheet(image: value.path, onSendBtnClick: onSendBtnClick, selectedItem: selectedItem),
+              ImageVideoMsgSheet(
+                  image: value.path,
+                  onSendBtnClick: onSendBtnClick,
+                  selectedItem: selectedItem),
               isScrollControlled: true);
         }
         notifyListeners();
@@ -510,7 +537,10 @@ class ChatScreenViewModel extends BaseViewModel {
                     ApiProvider().getStoreFileGivePath(image: videoFile).then(
                       (value) {
                         firebaseMsgUpdate(
-                            video: value.path, msgType: FirebaseRes.video, textMessage: msg, image: imagePath);
+                            video: value.path,
+                            msgType: FirebaseRes.video,
+                            textMessage: msg,
+                            image: imagePath);
                         Get.back();
                         Get.back();
                       },
@@ -564,7 +594,9 @@ class ChatScreenViewModel extends BaseViewModel {
   void cameraClick() {
     if (registrationUserData?.isFake != 1) {
       if (PrefService.reverseSwipePrice <= walletCoin! && walletCoin != 0) {
-        !isSelected ? getChatMsgDialog(onContinueTap: onCameraContinueClick) : prefCameraTap();
+        !isSelected
+            ? getChatMsgDialog(onContinueTap: onCameraContinueClick)
+            : prefCameraTap();
       } else {
         emptyDialog();
       }
@@ -642,8 +674,10 @@ class ChatScreenViewModel extends BaseViewModel {
     });
 
     chatStream = drChatMessages
-        .where(FirebaseRes.noDeleteIdentity, arrayContains: '${registrationUserData?.id}')
-        .where(FirebaseRes.time, isGreaterThan: deletedId.isEmpty ? 0.0 : double.parse(deletedId))
+        .where(FirebaseRes.noDeleteIdentity,
+            arrayContains: '${registrationUserData?.id}')
+        .where(FirebaseRes.time,
+            isGreaterThan: deletedId.isEmpty ? 0.0 : double.parse(deletedId))
         .orderBy(FirebaseRes.time, descending: true)
         .limit(startingNumber)
         .withConverter(
@@ -665,11 +699,14 @@ class ChatScreenViewModel extends BaseViewModel {
           chatData,
           (message) {
             final now = DateTime.now();
-            DateTime time = DateTime.fromMillisecondsSinceEpoch(message.time!.toInt());
-            if (DateFormat(AppRes.dMY).format(DateTime.now()) == DateFormat(AppRes.dMY).format(time)) {
+            DateTime time =
+                DateTime.fromMillisecondsSinceEpoch(message.time!.toInt());
+            if (DateFormat(AppRes.dMY).format(DateTime.now()) ==
+                DateFormat(AppRes.dMY).format(time)) {
               return S.current.today;
             }
-            if (DateFormat(AppRes.dMY).format(DateTime(now.year, now.month, now.day - 1)) ==
+            if (DateFormat(AppRes.dMY)
+                    .format(DateTime(now.year, now.month, now.day - 1)) ==
                 DateFormat(AppRes.dMY).format(time)) {
               return S.current.yesterday;
             } else {
@@ -684,10 +721,15 @@ class ChatScreenViewModel extends BaseViewModel {
   }
 
   ///Firebase message update method
-  Future<void> firebaseMsgUpdate({required String msgType, String? textMessage, String? image, String? video}) async {
+  Future<void> firebaseMsgUpdate(
+      {required String msgType,
+      String? textMessage,
+      String? image,
+      String? video}) async {
     var time = DateTime.now().millisecondsSinceEpoch;
     notDeletedIdentity = [];
-    notDeletedIdentity.addAll(['${registrationUserData?.id}', '${conversation.user?.userid}']);
+    notDeletedIdentity.addAll(
+        ['${registrationUserData?.id}', '${conversation.user?.userid}']);
 
     drChatMessages.doc(time.toString()).set(ChatMessage(
             notDeletedIdentities: notDeletedIdentity,
@@ -698,7 +740,8 @@ class ChatScreenViewModel extends BaseViewModel {
                 isNewMsg: true,
                 userid: registrationUserData?.id,
                 userIdentity: registrationUserData?.identity,
-                image: registrationUserData?.images?[0].image,
+                image: CommonFun.getProfileImage(
+                    images: registrationUserData?.images),
                 city: registrationUserData?.live,
                 age: registrationUserData?.age.toString()),
             msgType: msgType,
@@ -711,7 +754,8 @@ class ChatScreenViewModel extends BaseViewModel {
 
     if (chatData.isEmpty && deletedId.isEmpty) {
       Map con = conversation.toJson();
-      con[FirebaseRes.lastMsg] = CommonFun.getLastMsg(msgType: msgType, msg: textMessage ?? '');
+      con[FirebaseRes.lastMsg] =
+          CommonFun.getLastMsg(msgType: msgType, msg: textMessage ?? '');
       documentSender.set(con);
       documentReceiver.set(
         Conversation(
@@ -721,7 +765,8 @@ class ChatScreenViewModel extends BaseViewModel {
           deletedId: '',
           isDeleted: false,
           isMute: false,
-          lastMsg: CommonFun.getLastMsg(msgType: msgType, msg: textMessage ?? ''),
+          lastMsg:
+              CommonFun.getLastMsg(msgType: msgType, msg: textMessage ?? ''),
           newMsg: textMessage,
           time: time.toDouble(),
           user: ChatUser(
@@ -731,7 +776,8 @@ class ChatScreenViewModel extends BaseViewModel {
             isNewMsg: true,
             userid: registrationUserData?.id,
             userIdentity: registrationUserData?.identity,
-            image: registrationUserData?.images?[0].image,
+            image:
+                CommonFun.getProfileImage(images: registrationUserData?.images),
             city: registrationUserData?.live,
             age: registrationUserData?.age.toString(),
           ),
@@ -752,7 +798,8 @@ class ChatScreenViewModel extends BaseViewModel {
             {
               FirebaseRes.isDeleted: false,
               FirebaseRes.time: time.toDouble(),
-              FirebaseRes.lastMsg: CommonFun.getLastMsg(msgType: msgType, msg: textMessage ?? ''),
+              FirebaseRes.lastMsg: CommonFun.getLastMsg(
+                  msgType: msgType, msg: textMessage ?? ''),
               FirebaseRes.user: receiverUser?.toJson(),
             },
           );
@@ -763,7 +810,8 @@ class ChatScreenViewModel extends BaseViewModel {
         {
           FirebaseRes.isDeleted: false,
           FirebaseRes.time: time.toDouble(),
-          FirebaseRes.lastMsg: CommonFun.getLastMsg(msgType: msgType, msg: textMessage ?? '')
+          FirebaseRes.lastMsg:
+              CommonFun.getLastMsg(msgType: msgType, msg: textMessage ?? '')
         },
       );
     }
@@ -775,7 +823,8 @@ class ChatScreenViewModel extends BaseViewModel {
             data: {
                 Urls.aViewerNotificationId: conversation.conversationId,
                 'title': registrationUserData?.fullname ?? '',
-                'body': CommonFun.getLastMsg(msgType: msgType, msg: textMessage ?? ''),
+                'body': CommonFun.getLastMsg(
+                    msgType: msgType, msg: textMessage ?? ''),
               },
             token: '${receiverUserData?.deviceToken}')
         : null;

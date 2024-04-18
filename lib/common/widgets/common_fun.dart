@@ -9,7 +9,8 @@ import 'package:orange_ui/utils/const_res.dart';
 import 'package:orange_ui/utils/firebase_res.dart';
 
 class CommonFun {
-  static Future<void> interstitialAd(Function(InterstitialAd ad) onAdLoaded) async {
+  static Future<void> interstitialAd(
+      Function(InterstitialAd ad) onAdLoaded) async {
     InterstitialAd.load(
       adUnitId: Platform.isIOS
           ? "${PrefService.settingData?.appdata?.admobIntIos}"
@@ -70,21 +71,25 @@ class CommonFun {
     var date = DateTime.fromMicrosecondsSinceEpoch(timestamp.toInt() * 1000);
     var time = '';
     if (now.day == date.day) {
-      time = DateFormat('hh:mm a').format(DateTime.fromMillisecondsSinceEpoch(timestamp.toInt()));
+      time = DateFormat('hh:mm a')
+          .format(DateTime.fromMillisecondsSinceEpoch(timestamp.toInt()));
       return time;
     }
     if (now.weekday > date.weekday) {
-      time = DateFormat('EEEE').format(DateTime.fromMillisecondsSinceEpoch(timestamp.toInt()));
+      time = DateFormat('EEEE')
+          .format(DateTime.fromMillisecondsSinceEpoch(timestamp.toInt()));
       return time;
     }
     if (now.month == date.month) {
-      time = DateFormat('dd/MMM/yyyy').format(DateTime.fromMillisecondsSinceEpoch(timestamp.toInt()));
+      time = DateFormat('dd/MMM/yyyy')
+          .format(DateTime.fromMillisecondsSinceEpoch(timestamp.toInt()));
       return time;
     }
     return time;
   }
 
-  static String getConversationID({required int? myId, required int? otherUserId}) {
+  static String getConversationID(
+      {required int? myId, required int? otherUserId}) {
     String conversationID = '${myId}_$otherUserId';
     List<String> v = conversationID.split('_');
     v.sort((a, b) {
@@ -107,7 +112,7 @@ class CommonFun {
     List<Images> tempList = images ?? [];
     if (tempList.isNotEmpty) {
       profileImage = tempList.first.image ?? '';
-      return '${ConstRes.aImageBaseUrl}${profileImage.replaceAll(ConstRes.aImageBaseUrl, ' ')}';
+      return '${ConstRes.aImageBaseUrl}${profileImage.replaceAll(ConstRes.aImageBaseUrl, '')}';
     }
     return '';
   }
@@ -127,16 +132,5 @@ class CommonFun {
       return '$twoDigitMinutes:$twoDigitSeconds';
     }
     return "${twoDigits(duration.inHours)}:$twoDigitMinutes:$twoDigitSeconds";
-  }
-
-  static bool isAllStoryShown(List<Story> story) {
-    var isWatched = true;
-    for (var element in (story)) {
-      if (!element.isWatchedByMe()) {
-        isWatched = false;
-        break;
-      }
-    }
-    return isWatched;
   }
 }

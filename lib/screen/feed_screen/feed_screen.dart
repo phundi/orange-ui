@@ -5,7 +5,7 @@ import 'package:orange_ui/common/widgets/loader.dart';
 import 'package:orange_ui/model/social/feed.dart';
 import 'package:orange_ui/screen/feed_screen/feed_screen_view_model.dart';
 import 'package:orange_ui/screen/feed_screen/widget/feed_post_card.dart';
-import 'package:orange_ui/screen/feed_screen/widget/feed_status_bar.dart';
+import 'package:orange_ui/screen/feed_screen/widget/feed_story_bar.dart';
 import 'package:orange_ui/utils/color_res.dart';
 import 'package:orange_ui/utils/style_res.dart';
 import 'package:stacked/stacked.dart';
@@ -35,7 +35,7 @@ class FeedScreen extends StatelessWidget {
                       controller: model.scrollController,
                       child: Column(
                         children: [
-                          FeedStatusBar(model: model),
+                          FeedStoryBar(model: model),
                           ListView.builder(
                             primary: false,
                             shrinkWrap: true,
@@ -44,7 +44,8 @@ class FeedScreen extends StatelessWidget {
                             itemBuilder: (context, index) {
                               Posts posts = model.postList[index];
                               return FeedPostCard(
-                                onCommentBtnClick: () => model.onCommentBtnClick(posts),
+                                onCommentBtnClick: () =>
+                                    model.onCommentBtnClick(posts),
                                 posts: posts,
                                 onSelected: (value) {
                                   model.onMoreBtnClick(value, posts);
@@ -65,7 +66,8 @@ class FeedScreen extends StatelessWidget {
             width: 50,
             height: 50,
             decoration: ShapeDecoration(
-                shape: SmoothRectangleBorder(borderRadius: SmoothBorderRadius(cornerRadius: 30)),
+                shape: SmoothRectangleBorder(
+                    borderRadius: SmoothBorderRadius(cornerRadius: 30)),
                 gradient: StyleRes.linearGradient),
             child: const Icon(Icons.add_rounded, color: ColorRes.white),
           ),

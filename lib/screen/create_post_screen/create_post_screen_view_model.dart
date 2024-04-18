@@ -18,9 +18,13 @@ import 'package:video_player/video_player.dart';
 import 'package:video_thumbnail/video_thumbnail.dart';
 
 class CreatePostScreenViewModel extends BaseViewModel {
-  DetectableTextEditingController detectableTextFieldController = DetectableTextEditingController(
-      detectedStyle: const TextStyle(fontSize: 18, color: ColorRes.orange2, fontFamily: FontRes.medium),
-      regExp: detectionRegExp(atSign: false, url: false));
+  DetectableTextEditingController detectableTextFieldController =
+      DetectableTextEditingController(
+          detectedStyle: const TextStyle(
+              fontSize: 18,
+              color: ColorRes.orange2,
+              fontFamily: FontRes.medium),
+          regExp: detectionRegExp(atSign: false, url: false));
   int pageType = 0;
   final ImagePicker _picker = ImagePicker();
 
@@ -64,9 +68,17 @@ class CreatePostScreenViewModel extends BaseViewModel {
   void onPhotoTap() {
     contentType = 0;
     detectableTextFieldFocusNode.unfocus();
-    _picker.pickMultiImage(maxHeight: maxHeight, maxWidth: maxWidth, imageQuality: quality).then((value) {
+    _picker
+        .pickMultiImage(
+            maxHeight: maxHeight, maxWidth: maxWidth, imageQuality: quality)
+        .then((value) {
       if (value.isNotEmpty) {
-        for (int i = 0; i < (value.length > maxImagesForPost ? maxImagesForPost : value.length); i++) {
+        for (int i = 0;
+            i <
+                (value.length > maxImagesForPost
+                    ? maxImagesForPost
+                    : value.length);
+            i++) {
           imagesFile.add(value[i]);
           notifyListeners();
         }
@@ -88,17 +100,6 @@ class CreatePostScreenViewModel extends BaseViewModel {
         notifyListeners();
       }
     });
-  }
-
-  void videoPlayPause() {
-    if (videoPlayerController.value.isPlaying) {
-      isPlaying = false;
-      videoPlayerController.pause();
-    } else {
-      isPlaying = true;
-      videoPlayerController.play();
-    }
-    notifyListeners();
   }
 
   void onVideoDelete() {
@@ -165,7 +166,7 @@ class CreatePostScreenViewModel extends BaseViewModel {
       if (contentType == 1) {
         filesMap[Urls.aThumbnail] = [XFile(thumbnail!)];
       }
-      filesMap[Urls.aContent] = imagesFile;
+      filesMap[Urls.aContents] = imagesFile;
     }
     Loader().lottieLoader();
     ApiProvider().multiPartCallApi(
@@ -182,6 +183,17 @@ class CreatePostScreenViewModel extends BaseViewModel {
           Urls.aContentType: imagesFile.isEmpty ? 2 : contentType
         },
         filesMap: filesMap);
+  }
+
+  void videoPlayPause() {
+    if (videoPlayerController.value.isPlaying) {
+      isPlaying = false;
+      videoPlayerController.pause();
+    } else {
+      isPlaying = true;
+      videoPlayerController.play();
+    }
+    notifyListeners();
   }
 
   void onChangeSlider(double value) {

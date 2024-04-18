@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:orange_ui/common/widgets/common_fun.dart';
 import 'package:orange_ui/model/chat_and_live_stream/chat.dart';
 import 'package:orange_ui/model/get_interest.dart';
 import 'package:orange_ui/model/setting.dart';
@@ -121,8 +122,11 @@ class PrefService {
             .then((value) {
           ChatUser? user = value.data()?.user;
           user?.username = registrationUserData?.fullname ?? '';
-          user?.age = registrationUserData?.age != null ? registrationUserData?.age.toString() : '';
-          user?.image = registrationUserData?.images?[0].image ?? '';
+          user?.age = registrationUserData?.age != null
+              ? registrationUserData?.age.toString()
+              : '';
+          user?.image =
+              CommonFun.getProfileImage(images: registrationUserData?.images);
           user?.city = registrationUserData?.live ?? '';
           db
               .collection(FirebaseRes.userChatList)

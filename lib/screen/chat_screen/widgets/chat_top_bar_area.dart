@@ -6,7 +6,6 @@ import 'package:orange_ui/model/chat_and_live_stream/chat.dart';
 import 'package:orange_ui/utils/app_res.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
-import 'package:orange_ui/utils/const_res.dart';
 import 'package:orange_ui/utils/font_res.dart';
 
 class ChatTopBarArea extends StatelessWidget {
@@ -49,13 +48,14 @@ class ChatTopBarArea extends StatelessWidget {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(30),
                   child: CachedNetworkImage(
-                    imageUrl: '${ConstRes.aImageBaseUrl}${conversation?.user?.image}',
-                    cacheKey: '${ConstRes.aImageBaseUrl}${conversation?.user?.image}',
+                    imageUrl: '${conversation?.user?.image}',
+                    cacheKey: '${conversation?.user?.image}',
                     height: 37,
                     width: 37,
                     fit: BoxFit.cover,
                     errorWidget: (context, url, error) {
-                      return CommonUI.profileImagePlaceHolder(name: conversation?.user?.username, heightWeight: 37);
+                      return CommonUI.profileImagePlaceHolder(
+                          name: conversation?.user?.username, heightWeight: 37);
                     },
                   ),
                 ),
@@ -70,7 +70,9 @@ class ChatTopBarArea extends StatelessWidget {
                           children: [
                             Text(
                               conversation?.user?.username != null
-                                  ? '${conversation?.user?.username} '.capitalize ?? ''
+                                  ? '${conversation?.user?.username} '
+                                          .capitalize ??
+                                      ''
                                   : ' ',
                               style: const TextStyle(
                                 color: ColorRes.darkGrey4,
@@ -81,7 +83,9 @@ class ChatTopBarArea extends StatelessWidget {
                               overflow: TextOverflow.ellipsis,
                             ),
                             Text(
-                              conversation?.user?.age != null ? "${conversation?.user?.age}" : '',
+                              conversation?.user?.age != null
+                                  ? "${conversation?.user?.age}"
+                                  : '',
                               style: const TextStyle(
                                 color: ColorRes.darkGrey4,
                                 fontSize: 16,
@@ -95,11 +99,14 @@ class ChatTopBarArea extends StatelessWidget {
                                     conversation?.user != null &&
                                     conversation?.user?.isHost != null &&
                                     conversation!.user!.isHost!,
-                                child: Image.asset(AssetRes.tickMark, height: 15, width: 15)),
+                                child: Image.asset(AssetRes.tickMark,
+                                    height: 15, width: 15)),
                           ],
                         ),
                         Text(
-                          conversation?.user?.city != null ? "${conversation?.user?.city}" : '',
+                          conversation?.user?.city != null
+                              ? "${conversation?.user?.city}"
+                              : '',
                           style: const TextStyle(
                             color: ColorRes.grey6,
                             fontSize: 13,

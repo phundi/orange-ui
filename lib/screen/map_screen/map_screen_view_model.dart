@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 import 'package:google_maps_cluster_manager/google_maps_cluster_manager.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
+import 'package:orange_ui/common/widgets/common_fun.dart';
 import 'package:orange_ui/common/widgets/loader.dart';
 import 'package:orange_ui/common/widgets/snack_bar_widget.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
@@ -17,7 +18,6 @@ import 'package:orange_ui/screen/map_screen/widgets/user_pop_up.dart';
 import 'package:orange_ui/screen/user_detail_screen/user_detail_screen.dart';
 import 'package:orange_ui/service/pref_service.dart';
 import 'package:orange_ui/utils/asset_res.dart';
-import 'package:orange_ui/utils/const_res.dart';
 import 'package:stacked/stacked.dart';
 
 class MapScreenViewModel extends BaseViewModel {
@@ -146,9 +146,7 @@ class MapScreenViewModel extends BaseViewModel {
                   onMoreInfoTap(data);
                 },
                 onCancelTap: onBackBtnTap,
-                image: data?.images == null || data!.images!.isEmpty
-                    ? ''
-                    : data.images?[0].image,
+                image: CommonFun.getProfileImage(images: data?.images),
                 userName: data?.fullname,
                 live: data?.live,
                 age: data?.age ?? 0),
@@ -227,7 +225,7 @@ class MapScreenViewModel extends BaseViewModel {
             width: 110, height: 110, assetPath: AssetRes.personLocationPin);
       }
       return await MarkerIcon.downloadResizePictureCircle(
-        ConstRes.aImageBaseUrl + (places[0].userData?.images?[0].image ?? ''),
+        CommonFun.getProfileImage(images: places[0].userData?.images),
         size: 150,
       );
     } else {

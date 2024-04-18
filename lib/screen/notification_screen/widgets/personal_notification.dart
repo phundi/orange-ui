@@ -8,7 +8,6 @@ import 'package:orange_ui/model/notification/user_notification.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
-import 'package:orange_ui/utils/const_res.dart';
 import 'package:orange_ui/utils/font_res.dart';
 
 class PersonalNotificationPage extends StatelessWidget {
@@ -67,10 +66,10 @@ class PersonalNotificationPage extends StatelessWidget {
                           : ClipRRect(
                               borderRadius: BorderRadius.circular(30),
                               child: CachedNetworkImage(
-                                imageUrl:
-                                    '${ConstRes.aImageBaseUrl}${data.images?[0].image}',
-                                cacheKey:
-                                    '${ConstRes.aImageBaseUrl}${data.images?[0].image}',
+                                imageUrl: CommonFun.getProfileImage(
+                                    images: data.images),
+                                cacheKey: CommonFun.getProfileImage(
+                                    images: data.images),
                                 height: 40,
                                 width: 40,
                                 fit: BoxFit.cover,

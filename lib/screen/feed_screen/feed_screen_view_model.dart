@@ -1,3 +1,4 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -25,12 +26,15 @@ enum MoreBtnValue { report, delete, share }
 
 class FeedScreenViewModel extends BaseViewModel {
   List<Posts> postList = [];
-  List<UsersStories> stories = [];
+  List<RegistrationUserData> stories = [];
   bool isLoading = true;
   ScrollController scrollController = ScrollController();
   MoreBtnValue moreBtnValue = MoreBtnValue.share;
 
-  RegistrationUserData? users;
+  RegistrationUserData? userData;
+
+  // For Camera Screen
+  List<CameraDescription> cameras = [];
 
   void init() {
     prefData();
@@ -46,7 +50,7 @@ class FeedScreenViewModel extends BaseViewModel {
           postList = feed.data?.posts ?? [];
           stories = feed.data?.usersStories ?? [];
           stories.sort((a, b) {
-            if (CommonFun.isAllStoryShown(a.stories ?? [])) {
+            if (a.isAllStoryShown()) {
               return 1;
             }
             return -1;
@@ -54,7 +58,11 @@ class FeedScreenViewModel extends BaseViewModel {
           notifyListeners();
         },
         url: Urls.aFetchHomePageData,
-        param: {Urls.aMyUserId: PrefService.userId, Urls.aStart: postList.length, Urls.aLimit: paginationLimit});
+        param: {
+          Urls.aMyUserId: PrefService.userId,
+          Urls.aStart: postList.length,
+          Urls.aLimit: paginationLimit
+        });
   }
 
   void fetchStories() {
@@ -63,7 +71,7 @@ class FeedScreenViewModel extends BaseViewModel {
           FetchStories fetchStories = FetchStories.fromJson(response);
           stories = fetchStories.data ?? [];
           stories.sort((a, b) {
-            if (CommonFun.isAllStoryShown(a.stories ?? [])) {
+            if (a.isAllStoryShown()) {
               return 1;
             }
             return -1;
@@ -74,9 +82,19 @@ class FeedScreenViewModel extends BaseViewModel {
         param: {Urls.aMyUserId: PrefService.userId});
   }
 
+  void getProfile() {
+    ApiProvider()
+        .getProfile(myUserID: PrefService.userId, userID: PrefService.userId)
+        .then((value) {
+      userData = value?.data;
+      notifyListeners();
+    });
+  }
+
   void fetchScrollData() {
     scrollController.addListener(() {
-      if (scrollController.offset == scrollController.position.maxScrollExtent) {
+      if (scrollController.offset ==
+          scrollController.position.maxScrollExtent) {
         if (!isLoading) {
           fetchFeedData();
         }
@@ -85,7 +103,8 @@ class FeedScreenViewModel extends BaseViewModel {
   }
 
   void onCommentBtnClick(Posts post) {
-    Get.bottomSheet(CommentSheet(post: post), isScrollControlled: true).then((value) {
+    Get.bottomSheet(CommentSheet(post: post), isScrollControlled: true)
+        .then((value) {
       notifyListeners();
     });
   }
@@ -136,7 +155,7 @@ class FeedScreenViewModel extends BaseViewModel {
   }
 
   void onNotificationTap() {
-    users?.isBlock == 1
+    userData?.isBlock == 1
         ? SnackBarWidget().snackBarWidget(S.current.userBlock)
         : Get.to(() => const NotificationScreen());
   }
@@ -146,11 +165,16 @@ class FeedScreenViewModel extends BaseViewModel {
   }
 
   void onSearchTap() {
-    users?.isBlock == 1 ? SnackBarWidget().snackBarWidget(S.current.userBlock) : Get.to(() => const SearchScreen());
+    userData?.isBlock == 1
+        ? SnackBarWidget().snackBarWidget(S.current.userBlock)
+        : Get.to(() => const SearchScreen());
   }
 
   void prefData() async {
-    users = await PrefService.getUserData();
+    userData = await PrefService.getUserData();
     notifyListeners();
+    if (cameras.isEmpty) {
+      cameras = await availableCameras();
+    }
   }
 }
