@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
 import 'package:orange_ui/common/widgets/loader.dart';
+import 'package:orange_ui/model/social/post/add_post.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/service/pref_service.dart';
 import 'package:orange_ui/utils/color_res.dart';
@@ -173,7 +174,8 @@ class CreatePostScreenViewModel extends BaseViewModel {
         url: Urls.aAddPost,
         completion: (response) {
           Get.back();
-          Get.back();
+          AddPost postData = AddPost.fromJson(response);
+          Get.back(result: postData.data);
         },
         param: {
           Urls.aUserId: PrefService.userId,

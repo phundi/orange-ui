@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:orange_ui/common/widgets/common_ui.dart';
 import 'package:orange_ui/common/widgets/gradient_widget.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/utils/asset_res.dart';
@@ -41,7 +42,7 @@ class ProfileDetailCard extends StatelessWidget {
                     children: [
                       Flexible(
                         child: Text(
-                          '${userData?.fullname} ',
+                          '${CommonUI.fullName(userData?.fullname)} ',
                           style: const TextStyle(
                               color: ColorRes.white,
                               fontSize: 20,

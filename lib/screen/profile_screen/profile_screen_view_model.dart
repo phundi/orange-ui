@@ -41,8 +41,15 @@ class ProfileScreenViewModel extends BaseViewModel {
   void onEditProfileTap() {
     userData?.isBlock == 1
         ? SnackBarWidget().snackBarWidget(S.current.userBlock)
-        : Get.to(() => const EditProfileScreen())?.then((value) {
-            profileScreenApiCall();
+        : Get.to<RegistrationUserData>(() => EditProfileScreen(
+              userData: userData,
+            ))?.then((value) {
+            if (value != null) {
+              if (value.id == PrefService.userId) {
+                userData = value;
+              }
+            }
+
             notifyListeners();
           });
   }
@@ -103,7 +110,9 @@ class ProfileScreenViewModel extends BaseViewModel {
   void onImageTap() {
     userData?.isBlock == 1
         ? SnackBarWidget().snackBarWidget(S.current.userBlock)
-        : Get.to(() => const UserDetailScreen(), arguments: userData);
+        : Get.to(() => UserDetailScreen(
+              userData: userData,
+            ));
   }
 
   void onMoreBtnTap() {

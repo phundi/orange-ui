@@ -166,8 +166,9 @@ class ChatScreenViewModel extends BaseViewModel {
   }
 
   void onUserTap() {
-    Get.to(() => const UserDetailScreen(),
-        arguments: conversation.user?.userid);
+    Get.to(() => UserDetailScreen(
+          userId: conversation.user?.userid,
+        ));
   }
 
   void onCancelBtnClick() {

@@ -9,6 +9,7 @@ import 'package:orange_ui/screen/dashboard/dashboard_screen.dart';
 import 'package:orange_ui/screen/select_hobbies_screen/select_hobbies_screen.dart';
 import 'package:orange_ui/screen/select_photo_screen/select_photo_screen.dart';
 import 'package:orange_ui/service/pref_service.dart';
+import 'package:orange_ui/utils/app_res.dart';
 import 'package:stacked/stacked.dart';
 
 class StartingProfileScreenViewModel extends BaseViewModel {
@@ -67,7 +68,7 @@ class StartingProfileScreenViewModel extends BaseViewModel {
 
   void onNextTap() async {
     if (ageController.text.isEmpty) {
-      SnackBarWidget.snackBar(message: 'Please enter your age');
+      SnackBarWidget.snackBar(message: S.current.pleaseEnterYourAge);
       ageFocus.requestFocus();
       return;
     }
@@ -82,9 +83,9 @@ class StartingProfileScreenViewModel extends BaseViewModel {
             live: addressController.text,
             bio: bioController.text,
             age: ageController.text,
-            gender: gender == S.current.male
+            gender: gender == AppRes.male
                 ? 1
-                : gender == S.current.female
+                : gender == AppRes.female
                     ? 2
                     : 3,
             latitude: latitude,

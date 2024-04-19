@@ -11,9 +11,12 @@ import 'package:orange_ui/common/widgets/snack_bar_widget.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/chat_and_live_stream/chat.dart';
 import 'package:orange_ui/model/chat_and_live_stream/live_stream.dart';
+import 'package:orange_ui/model/user/follow_user.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/screen/chat_screen/chat_screen.dart';
+import 'package:orange_ui/screen/edit_profile_screen/edit_profile_screen.dart';
 import 'package:orange_ui/screen/person_streaming_screen/person_streaming_screen.dart';
+import 'package:orange_ui/screen/post_screen/post_screen.dart';
 import 'package:orange_ui/screen/user_report_screen/report_sheet.dart';
 import 'package:orange_ui/service/pref_service.dart';
 import 'package:orange_ui/utils/firebase_res.dart';
@@ -40,15 +43,18 @@ class UserDetailScreenViewModel extends BaseViewModel {
   double distance = 0.0;
   String blockUnBlock = S.current.block;
   InterstitialAd? interstitialAd;
+  bool isFollow = true;
+
+  UserDetailScreenViewModel({this.userId, this.userData});
 
   void init(bool? showInfo) {
-    if (Get.arguments is int) {
-      userId = Get.arguments;
-    } else if (Get.arguments is String) {
-      userId = int.parse(Get.arguments);
-    } else {
-      userData = Get.arguments;
-    }
+    // if (Get.arguments is int) {
+    //   userId = Get.arguments;
+    // } else if (Get.arguments is String) {
+    //   userId = int.parse(Get.arguments);
+    // } else {
+    //   userData = Get.arguments;
+    // }
     userDetailApiCall();
     initInterstitialAds();
   }
@@ -90,6 +96,8 @@ class UserDetailScreenViewModel extends BaseViewModel {
             .contains('${userId ?? userData?.id}');
         save = (value?.data?.savedprofile?.split(',') ?? [])
             .contains('${userId ?? userData?.id}');
+        isFollow =
+            (userData?.followingStatus == 2 || userData?.followingStatus == 3);
         isLoading = false;
         notifyListeners();
       },
@@ -97,6 +105,7 @@ class UserDetailScreenViewModel extends BaseViewModel {
   }
 
   Future<void> registrationUserApiCall() async {
+    // Latest userdata
     await ApiProvider().getProfile(userID: PrefService.userId).then((value) {
       _registrationUserData = value?.data;
       blockUnBlock =
@@ -106,6 +115,8 @@ class UserDetailScreenViewModel extends BaseViewModel {
       save = value?.data?.savedprofile?.contains('${userData?.id}') ?? false;
       like = value?.data?.likedprofile?.contains('${userData?.id}') ?? false;
       notifyListeners();
+
+      PrefService.saveUser(value?.data);
     });
   }
 
@@ -310,10 +321,55 @@ class UserDetailScreenViewModel extends BaseViewModel {
     return 12742 * asin(sqrt(a));
   }
 
-  bool isFollow = true;
-
   void onFollowUnfollowBtnClick() {
-    isFollow = !isFollow;
-    notifyListeners();
+    if (isFollow) {
+      ApiProvider().callPost(
+          completion: (response) {
+            FollowUser followUser = FollowUser.fromJson(response);
+            if (followUser.status == true) {
+              userData?.followerCount(-1);
+              notifyListeners();
+            }
+          },
+          url: Urls.aUnfollowUser,
+          param: {
+            Urls.aMyUserId: PrefService.userId,
+            Urls.aUserId: userData?.id
+          });
+      isFollow = false;
+      notifyListeners();
+    } else {
+      ApiProvider().callPost(
+          completion: (response) {
+            FollowUser followUser = FollowUser.fromJson(response);
+            if (followUser.status == true) {
+              userData?.followerCount(1);
+              notifyListeners();
+            }
+          },
+          url: Urls.aFollowUser,
+          param: {
+            Urls.aMyUserId: PrefService.userId,
+            Urls.aUserId: userData?.id
+          });
+      isFollow = true;
+      notifyListeners();
+    }
+  }
+
+  void onEditBtnClick() {
+    Get.to<RegistrationUserData>(() => EditProfileScreen(userData: userData))
+        ?.then((value) {
+      if (value != null) {
+        if (value.id == PrefService.userId) {
+          userData = value;
+        }
+        notifyListeners();
+      }
+    });
+  }
+
+  void onPostBtnClick() {
+    Get.to(() => PostScreen(userData: userData));
   }
 }

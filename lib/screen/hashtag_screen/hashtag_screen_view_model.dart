@@ -1,0 +1,43 @@
+import 'package:flutter/material.dart';
+import 'package:orange_ui/api_provider/api_provider.dart';
+import 'package:orange_ui/model/social/post/add_comment.dart';
+import 'package:orange_ui/model/social/post/fetch_post_by_user.dart';
+import 'package:orange_ui/service/pref_service.dart';
+import 'package:orange_ui/utils/const_res.dart';
+import 'package:orange_ui/utils/urls.dart';
+import 'package:stacked/stacked.dart';
+
+class HashtagScreenViewModel extends BaseViewModel {
+  String hashTag;
+
+  ScrollController scrollController = ScrollController();
+  List<Post> posts = [];
+  bool isLoading = true;
+  HashtagScreenViewModel(this.hashTag);
+
+  init() {
+    fetchPostByHashTag();
+  }
+
+  void fetchPostByHashTag() {
+    isLoading = true;
+    ApiProvider().callPost(
+        completion: (response) {
+          isLoading = false;
+          FetchPostByUser fetchPostByUser = FetchPostByUser.fromJson(response);
+          if (posts.isEmpty) {
+            posts = fetchPostByUser.data ?? [];
+          } else {
+            posts.addAll(fetchPostByUser.data ?? []);
+          }
+          notifyListeners();
+        },
+        url: Urls.aFetchPostsByHashtag,
+        param: {
+          Urls.aUserId: PrefService.userId,
+          Urls.aStart: posts.length,
+          Urls.aLimit: paginationLimit,
+          Urls.aHashtag: hashTag.replaceAll('#', '')
+        });
+  }
+}

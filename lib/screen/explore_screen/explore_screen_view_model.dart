@@ -59,14 +59,16 @@ class ExploreScreenViewModel extends BaseViewModel {
     ApiProvider().getProfile(userID: PrefService.userId).then((value) async {
       users = value?.data;
       walletCoin = value?.data?.wallet;
-      isSelected = await PrefService.getDialog(PrefConst.isDialogDialog) ?? false;
+      isSelected =
+          await PrefService.getDialog(PrefConst.isDialogDialog) ?? false;
       await PrefService.saveUser(value?.data);
     });
   }
 
   bool isSocialBtnVisible(String? socialLink) {
     if (socialLink != null) {
-      return socialLink.contains(AppRes.isHttp) || socialLink.contains(AppRes.isHttps);
+      return socialLink.contains(AppRes.isHttp) ||
+          socialLink.contains(AppRes.isHttps);
     } else {
       return false;
     }
@@ -114,7 +116,8 @@ class ExploreScreenViewModel extends BaseViewModel {
                       onBackBtnTap();
                     },
                     onContinueTap: (isSelected) {
-                      PrefService.setDialog(PrefConst.isDialogDialog, isSelected);
+                      PrefService.setDialog(
+                          PrefConst.isDialogDialog, isSelected);
                       minusCoinApi().then(
                         (value) {
                           onBackBtnTap();
@@ -169,7 +172,9 @@ class ExploreScreenViewModel extends BaseViewModel {
         });
       }
     } else {
-      users?.isBlock == 1 ? SnackBarWidget().snackBarWidget(S.current.userBlock) : userController.next(animation: true);
+      users?.isBlock == 1
+          ? SnackBarWidget().snackBarWidget(S.current.userBlock)
+          : userController.next(animation: true);
     }
   }
 
@@ -195,17 +200,23 @@ class ExploreScreenViewModel extends BaseViewModel {
   }
 
   void onSearchTap() {
-    users?.isBlock == 1 ? SnackBarWidget().snackBarWidget(S.current.userBlock) : Get.to(() => const SearchScreen());
+    users?.isBlock == 1
+        ? SnackBarWidget().snackBarWidget(S.current.userBlock)
+        : Get.to(() => const SearchScreen());
   }
 
   void onTitleTap() {
-    users?.isBlock == 1 ? SnackBarWidget().snackBarWidget(S.current.userBlock) : Get.to(() => const MapScreen());
+    users?.isBlock == 1
+        ? SnackBarWidget().snackBarWidget(S.current.userBlock)
+        : Get.to(() => const MapScreen());
   }
 
   void onImageTap() {
     users?.isBlock == 1
         ? SnackBarWidget().snackBarWidget(S.current.userBlock)
-        : Get.to(() => const UserDetailScreen(), arguments: userData?[currentUserIndex]);
+        : Get.to(
+            () => UserDetailScreen(userData: userData?[currentUserIndex]),
+          );
   }
 
   void onLiveBtnTap() {
@@ -215,7 +226,10 @@ class ExploreScreenViewModel extends BaseViewModel {
   void onEyeButtonTap() {
     users?.isBlock == 1
         ? SnackBarWidget().snackBarWidget(S.current.userBlock)
-        : Get.to(() => const UserDetailScreen(showInfo: true), arguments: userData?[currentUserIndex]);
+        : Get.to(() => UserDetailScreen(
+              showInfo: true,
+              userData: userData?[currentUserIndex],
+            ));
   }
 
   @override

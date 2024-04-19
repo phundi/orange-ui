@@ -16,15 +16,17 @@ class DashboardScreenViewModel extends BaseViewModel {
   void init() {
     FlutterBranchSdk.initSession().listen(
       (data) {
-        if (data.containsKey("+clicked_branch_link") && data["+clicked_branch_link"] == true) {
+        if (data.containsKey("+clicked_branch_link") &&
+            data["+clicked_branch_link"] == true) {
           if (data.containsKey('user_id')) {
-            Get.to(() => const UserDetailScreen(), arguments: data['user_id']);
+            Get.to(() => UserDetailScreen(userId: int.parse(data['user_id'])));
           }
         }
       },
       onError: (error) {
         PlatformException platformException = error as PlatformException;
-        SnackBarWidget().snackBarWidget('InitSession error: ${platformException.code} - ${platformException.message}');
+        SnackBarWidget().snackBarWidget(
+            'InitSession error: ${platformException.code} - ${platformException.message}');
       },
     );
     getProfileApiCall();

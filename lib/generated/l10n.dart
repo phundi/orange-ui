@@ -3349,6 +3349,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Do you want to delete this story?, You can not restore the story it will be permanently deleted.`
+  String get doYouWantToDeleteThisStoryYouCanNot {
+    return Intl.message(
+      'Do you want to delete this story?, You can not restore the story it will be permanently deleted.',
+      name: 'doYouWantToDeleteThisStoryYouCanNot',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete this story?`
+  String get deleteThisStory {
+    return Intl.message(
+      'Delete this story?',
+      name: 'deleteThisStory',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter your age`
+  String get pleaseEnterYourAge {
+    return Intl.message(
+      'Please enter your age',
+      name: 'pleaseEnterYourAge',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

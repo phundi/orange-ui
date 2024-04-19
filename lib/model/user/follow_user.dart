@@ -1,28 +1,28 @@
-import 'package:orange_ui/model/social/post/add_comment.dart';
+import 'package:orange_ui/model/user/registration_user.dart';
 
-class LikePost {
-  LikePost({
+class FollowUser {
+  FollowUser({
     bool? status,
     String? message,
-    LikePostData? data,
+    Data? data,
   }) {
     _status = status;
     _message = message;
     _data = data;
   }
 
-  LikePost.fromJson(dynamic json) {
+  FollowUser.fromJson(dynamic json) {
     _status = json['status'];
     _message = json['message'];
-    _data = json['data'] != null ? LikePostData.fromJson(json['data']) : null;
+    _data = json['data'] != null ? Data.fromJson(json['data']) : null;
   }
   bool? _status;
   String? _message;
-  LikePostData? _data;
+  Data? _data;
 
   bool? get status => _status;
   String? get message => _message;
-  LikePostData? get data => _data;
+  Data? get data => _data;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -35,54 +35,56 @@ class LikePost {
   }
 }
 
-class LikePostData {
-  LikePostData({
+class Data {
+  Data({
+    int? myUserId,
     int? userId,
-    int? postId,
     String? updatedAt,
     String? createdAt,
     int? id,
-    Post? post,
+    RegistrationUserData? user,
   }) {
+    _myUserId = myUserId;
     _userId = userId;
-    _postId = postId;
     _updatedAt = updatedAt;
     _createdAt = createdAt;
     _id = id;
-    _post = post;
+    _user = user;
   }
 
-  LikePostData.fromJson(dynamic json) {
+  Data.fromJson(dynamic json) {
+    _myUserId = json['my_user_id'];
     _userId = json['user_id'];
-    _postId = json['post_id'];
     _updatedAt = json['updated_at'];
     _createdAt = json['created_at'];
     _id = json['id'];
-    _post = json['post'] != null ? Post.fromJson(json['post']) : null;
+    _user = json['user'] != null
+        ? RegistrationUserData.fromJson(json['user'])
+        : null;
   }
+  int? _myUserId;
   int? _userId;
-  int? _postId;
   String? _updatedAt;
   String? _createdAt;
   int? _id;
-  Post? _post;
+  RegistrationUserData? _user;
 
+  int? get myUserId => _myUserId;
   int? get userId => _userId;
-  int? get postId => _postId;
   String? get updatedAt => _updatedAt;
   String? get createdAt => _createdAt;
   int? get id => _id;
-  Post? get post => _post;
+  RegistrationUserData? get user => _user;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
+    map['my_user_id'] = _myUserId;
     map['user_id'] = _userId;
-    map['post_id'] = _postId;
     map['updated_at'] = _updatedAt;
     map['created_at'] = _createdAt;
     map['id'] = _id;
-    if (_post != null) {
-      map['post'] = _post?.toJson();
+    if (_user != null) {
+      map['user'] = _user?.toJson();
     }
     return map;
   }

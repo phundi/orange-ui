@@ -86,11 +86,7 @@ class NotificationScreenViewModel extends BaseViewModel {
   }
 
   void onUserTap(RegistrationUserData? data) {
-    Get.to(() => const UserDetailScreen(), arguments: data);
-  }
-
-  void onBack() {
-    Get.back();
+    Get.to(() => UserDetailScreen(userData: data));
   }
 
   void onTabChange(int index) {

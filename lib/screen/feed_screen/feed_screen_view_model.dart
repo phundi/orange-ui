@@ -8,6 +8,7 @@ import 'package:orange_ui/common/widgets/confirmation_dialog.dart';
 import 'package:orange_ui/common/widgets/snack_bar_widget.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/social/feed.dart';
+import 'package:orange_ui/model/social/post/add_comment.dart';
 import 'package:orange_ui/model/social/story/fetch_stories.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/screen/comment_sheet/comment_sheet.dart';
@@ -25,15 +26,15 @@ import 'package:stacked/stacked.dart';
 enum MoreBtnValue { report, delete, share }
 
 class FeedScreenViewModel extends BaseViewModel {
-  List<Posts> postList = [];
-  List<RegistrationUserData> stories = [];
+  List<Post> postList = [];
+  List<RegistrationUserData> headerStories = [];
   bool isLoading = true;
   ScrollController scrollController = ScrollController();
   MoreBtnValue moreBtnValue = MoreBtnValue.share;
 
   RegistrationUserData? userData;
 
-  // For Camera Screen
+  // init Camera description
   List<CameraDescription> cameras = [];
 
   void init() {
@@ -48,8 +49,8 @@ class FeedScreenViewModel extends BaseViewModel {
           isLoading = false;
           Feed feed = Feed.fromJson(response);
           postList = feed.data?.posts ?? [];
-          stories = feed.data?.usersStories ?? [];
-          stories.sort((a, b) {
+          headerStories = feed.data?.usersStories ?? [];
+          headerStories.sort((a, b) {
             if (a.isAllStoryShown()) {
               return 1;
             }
@@ -65,17 +66,26 @@ class FeedScreenViewModel extends BaseViewModel {
         });
   }
 
-  void fetchStories() {
+  void fetchStories({required RegistrationUserData? userData}) {
     ApiProvider().callPost(
         completion: (response) {
           FetchStories fetchStories = FetchStories.fromJson(response);
-          stories = fetchStories.data ?? [];
-          stories.sort((a, b) {
+          headerStories = fetchStories.data ?? [];
+
+          headerStories.sort((a, b) {
             if (a.isAllStoryShown()) {
               return 1;
             }
             return -1;
           });
+          // Update Other PostUser
+          for (var element in headerStories) {
+            for (var postUser in postList) {
+              if (postUser.userId == element.id) {
+                postUser.user = element;
+              }
+            }
+          }
           notifyListeners();
         },
         url: Urls.aFetchStories,
@@ -83,10 +93,16 @@ class FeedScreenViewModel extends BaseViewModel {
   }
 
   void getProfile() {
-    ApiProvider()
-        .getProfile(myUserID: PrefService.userId, userID: PrefService.userId)
-        .then((value) {
+    ApiProvider().getProfile(userID: PrefService.userId).then((value) {
       userData = value?.data;
+
+      // Update My PostUser
+      for (var element in postList) {
+        Post p = element;
+        if (userData?.id == p.user?.id) {
+          element.user = userData;
+        }
+      }
       notifyListeners();
     });
   }
@@ -102,7 +118,7 @@ class FeedScreenViewModel extends BaseViewModel {
     });
   }
 
-  void onCommentBtnClick(Posts post) {
+  void onCommentBtnClick(Post? post) {
     Get.bottomSheet(CommentSheet(post: post), isScrollControlled: true)
         .then((value) {
       notifyListeners();
@@ -110,16 +126,22 @@ class FeedScreenViewModel extends BaseViewModel {
   }
 
   void onCreatePost() {
-    Get.bottomSheet(
+    Get.bottomSheet<Post>(
       const CreatePostScreen(),
       isScrollControlled: true,
       backgroundColor: ColorRes.white,
       barrierColor: ColorRes.white,
       enableDrag: false,
-    );
+    ).then((value) {
+      if (value != null) {
+        postList.insert(0, value);
+        print(value.isLike);
+        notifyListeners();
+      }
+    });
   }
 
-  onMoreBtnClick(MoreBtnValue value, Posts posts) {
+  onMoreBtnClick(MoreBtnValue value, Post posts) {
     if (MoreBtnValue.share == value) {
     } else if (MoreBtnValue.report == value) {
       Get.bottomSheet(
@@ -172,6 +194,7 @@ class FeedScreenViewModel extends BaseViewModel {
 
   void prefData() async {
     userData = await PrefService.getUserData();
+    getProfile();
     notifyListeners();
     if (cameras.isEmpty) {
       cameras = await availableCameras();

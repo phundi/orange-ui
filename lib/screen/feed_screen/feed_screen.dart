@@ -2,7 +2,7 @@ import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
 import 'package:orange_ui/common/widgets/dashboard_top_bar.dart';
 import 'package:orange_ui/common/widgets/loader.dart';
-import 'package:orange_ui/model/social/feed.dart';
+import 'package:orange_ui/model/social/post/add_comment.dart';
 import 'package:orange_ui/screen/feed_screen/feed_screen_view_model.dart';
 import 'package:orange_ui/screen/feed_screen/widget/feed_post_card.dart';
 import 'package:orange_ui/screen/feed_screen/widget/feed_story_bar.dart';
@@ -42,16 +42,14 @@ class FeedScreen extends StatelessWidget {
                             padding: EdgeInsets.zero,
                             itemCount: model.postList.length,
                             itemBuilder: (context, index) {
-                              Posts posts = model.postList[index];
+                              Post post = model.postList[index];
+
                               return FeedPostCard(
-                                onCommentBtnClick: () =>
-                                    model.onCommentBtnClick(posts),
-                                posts: posts,
-                                onSelected: (value) {
-                                  model.onMoreBtnClick(value, posts);
-                                },
-                                model: model,
-                              );
+                                  post: post,
+                                  onSelected: (value) {
+                                    model.onMoreBtnClick(value, post);
+                                  },
+                                  model: model);
                             },
                           ),
                         ],

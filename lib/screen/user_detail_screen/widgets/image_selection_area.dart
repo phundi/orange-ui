@@ -5,10 +5,10 @@ import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:orange_ui/common/widgets/common_ui.dart';
 import 'package:orange_ui/common/widgets/live_icon.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
-import 'package:orange_ui/screen/post_screen/post_screen.dart';
 import 'package:orange_ui/screen/user_detail_screen/user_detail_screen_view_model.dart';
 import 'package:orange_ui/service/pref_service.dart';
 import 'package:orange_ui/utils/asset_res.dart';
@@ -22,7 +22,9 @@ class ImageSelectionArea extends StatelessWidget {
 
   final UserDetailScreenViewModel model;
 
-  const ImageSelectionArea({Key? key, required this.onMoreInfoTap, required this.model}) : super(key: key);
+  const ImageSelectionArea(
+      {Key? key, required this.onMoreInfoTap, required this.model})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,9 +35,16 @@ class ImageSelectionArea extends StatelessWidget {
         children: [
           joinBtnChip(),
           const Spacer(),
-          Visibility(visible: PrefService.settingData?.appdata?.isDating == 0 ? false : true, child: LikeUnlikeBtn(like: model.like, onLikeBtnTap: model.onLikeBtnTap, userId: model.userData?.id)),
+          Visibility(
+              visible: PrefService.settingData?.appdata?.isDating == 0
+                  ? false
+                  : true,
+              child: LikeUnlikeBtn(
+                  like: model.like,
+                  onLikeBtnTap: model.onLikeBtnTap,
+                  userId: model.userData?.id)),
           const SizedBox(height: 15),
-          imageListArea(model.userData?.images ?? []),
+          imageListArea(model.userData),
           const SizedBox(height: 20),
           BottomMoreBtn(onMoreInfoTap: onMoreInfoTap),
         ],
@@ -63,25 +72,37 @@ class ImageSelectionArea extends StatelessWidget {
                     child: Container(
                       height: 35,
                       padding: const EdgeInsets.all(2),
-                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), color: ColorRes.black.withOpacity(0.33)),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          color: ColorRes.black.withOpacity(0.33)),
                       child: Row(
                         children: [
                           const LiveIcon(),
                           const SizedBox(width: 3),
-                          Text(S.current.liveCap, style: const TextStyle(color: ColorRes.white, fontSize: 12)),
+                          Text(S.current.liveCap,
+                              style: const TextStyle(
+                                  color: ColorRes.white, fontSize: 12)),
                           Text(
                             " ${S.current.nowCap}",
-                            style: const TextStyle(color: ColorRes.white, fontSize: 12, fontFamily: FontRes.bold),
+                            style: const TextStyle(
+                                color: ColorRes.white,
+                                fontSize: 12,
+                                fontFamily: FontRes.bold),
                           ),
                           const SizedBox(width: 10),
                           Container(
                             height: 31,
                             width: 95,
-                            decoration: BoxDecoration(color: ColorRes.white.withOpacity(0.10), borderRadius: BorderRadius.circular(30)),
+                            decoration: BoxDecoration(
+                                color: ColorRes.white.withOpacity(0.10),
+                                borderRadius: BorderRadius.circular(30)),
                             child: Center(
                               child: Text(
                                 S.current.join,
-                                style: const TextStyle(color: ColorRes.white, fontSize: 12, fontFamily: FontRes.bold),
+                                style: const TextStyle(
+                                    color: ColorRes.white,
+                                    fontSize: 12,
+                                    fontFamily: FontRes.bold),
                               ),
                             ),
                           ),
@@ -95,13 +116,14 @@ class ImageSelectionArea extends StatelessWidget {
           ),
         ),
         InkWell(
-          onTap: () {
-            Get.to(() => const PostScreen());
-          },
+          onTap: model.onPostBtnClick,
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 23, vertical: 10),
             margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-            decoration: ShapeDecoration(shape: SmoothRectangleBorder(borderRadius: SmoothBorderRadius(cornerRadius: 30)), gradient: StyleRes.linearGradient),
+            decoration: ShapeDecoration(
+                shape: SmoothRectangleBorder(
+                    borderRadius: SmoothBorderRadius(cornerRadius: 30)),
+                gradient: StyleRes.linearGradient),
             child: Row(
               children: [
                 Image.asset(AssetRes.icPostIcon, width: 15, height: 15),
@@ -109,7 +131,10 @@ class ImageSelectionArea extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 5.0),
                   child: Text(
                     S.current.posts.toUpperCase(),
-                    style: TextStyle(color: ColorRes.white.withOpacity(0.8), fontFamily: FontRes.bold, fontSize: 11),
+                    style: TextStyle(
+                        color: ColorRes.white.withOpacity(0.8),
+                        fontFamily: FontRes.bold,
+                        fontSize: 11),
                   ),
                 )
               ],
@@ -120,18 +145,18 @@ class ImageSelectionArea extends StatelessWidget {
     );
   }
 
-  Widget imageListArea(List<Images> imageList) {
-    return imageList.isEmpty
+  Widget imageListArea(RegistrationUserData? userData) {
+    return (userData?.images ?? []).isEmpty
         ? const SizedBox()
         : SizedBox(
             height: 60,
             child: ListView.builder(
-              itemCount: imageList.length,
+              itemCount: (userData?.images ?? []).length,
               padding: const EdgeInsets.symmetric(horizontal: 20),
               scrollDirection: Axis.horizontal,
               shrinkWrap: true,
               itemBuilder: (context, index) {
-                Images? images = imageList[index];
+                Images? image = (userData?.images ?? [])[index];
                 return InkWell(
                   borderRadius: BorderRadius.circular(10),
                   onTap: () => model.onImageSelect(index),
@@ -139,8 +164,26 @@ class ImageSelectionArea extends StatelessWidget {
                     height: 60,
                     width: 60,
                     margin: const EdgeInsets.symmetric(horizontal: 5),
-                    decoration: BoxDecoration(border: model.selectedImgIndex == index ? Border.all(color: ColorRes.white.withOpacity(0.80), width: 2) : Border.all(color: ColorRes.transparent, width: 2), borderRadius: BorderRadius.circular(10)),
-                    child: ClipRRect(borderRadius: BorderRadius.circular(8), child: CachedNetworkImage(height: 60, width: 60, imageUrl: '${ConstRes.aImageBaseUrl}${images.image}', cacheKey: '${ConstRes.aImageBaseUrl}${images.image}', fit: BoxFit.cover, errorWidget: (context, url, error) => Image.asset(AssetRes.themeLabel, height: 58, width: 58))),
+                    decoration: BoxDecoration(
+                        border: model.selectedImgIndex == index
+                            ? Border.all(
+                                color: ColorRes.white.withOpacity(0.80),
+                                width: 2)
+                            : Border.all(color: ColorRes.transparent, width: 2),
+                        borderRadius: BorderRadius.circular(10)),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: CachedNetworkImage(
+                        height: 60,
+                        width: 60,
+                        imageUrl: '${ConstRes.aImageBaseUrl}${image.image}',
+                        cacheKey: '${ConstRes.aImageBaseUrl}${image.image}',
+                        fit: BoxFit.cover,
+                        errorWidget: (context, url, error) =>
+                            CommonUI.profileImagePlaceHolder(
+                                name: CommonUI.fullName(userData?.fullname)),
+                      ),
+                    ),
                   ),
                 );
               },
@@ -154,14 +197,18 @@ class LikeUnlikeBtn extends StatefulWidget {
   final bool like;
   final int? userId;
 
-  const LikeUnlikeBtn({Key? key, required this.like, required this.onLikeBtnTap, this.userId}) : super(key: key);
+  const LikeUnlikeBtn(
+      {Key? key, required this.like, required this.onLikeBtnTap, this.userId})
+      : super(key: key);
 
   @override
   State<LikeUnlikeBtn> createState() => _LikeUnlikeBtnState();
 }
 
-class _LikeUnlikeBtnState extends State<LikeUnlikeBtn> with SingleTickerProviderStateMixin {
-  late final AnimationController _controller = AnimationController(duration: const Duration(milliseconds: 150), vsync: this, value: 1.0);
+class _LikeUnlikeBtnState extends State<LikeUnlikeBtn>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _controller = AnimationController(
+      duration: const Duration(milliseconds: 150), vsync: this, value: 1.0);
 
   @override
   void dispose() {
@@ -182,19 +229,28 @@ class _LikeUnlikeBtnState extends State<LikeUnlikeBtn> with SingleTickerProvider
         child: Container(
           height: 76,
           width: 76,
-          decoration: BoxDecoration(shape: BoxShape.circle, color: ColorRes.white.withOpacity(0.30)),
+          decoration: BoxDecoration(
+              shape: BoxShape.circle, color: ColorRes.white.withOpacity(0.30)),
           child: Center(
             child: Container(
               height: 66,
               width: 66,
               padding: const EdgeInsets.all(17),
-              decoration: BoxDecoration(shape: BoxShape.circle, color: ColorRes.white.withOpacity(0.50)),
+              decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: ColorRes.white.withOpacity(0.50)),
               child: widget.like
                   ? ScaleTransition(
-                      scale: Tween(begin: 0.7, end: 1.0).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut)),
+                      scale: Tween(begin: 0.7, end: 1.0).animate(
+                          CurvedAnimation(
+                              parent: _controller, curve: Curves.easeOut)),
                       child: Image.asset(AssetRes.icFillFav),
                     )
-                  : ScaleTransition(scale: Tween(begin: 0.7, end: 1.0).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut)), child: Image.asset(AssetRes.icFav)),
+                  : ScaleTransition(
+                      scale: Tween(begin: 0.7, end: 1.0).animate(
+                          CurvedAnimation(
+                              parent: _controller, curve: Curves.easeOut)),
+                      child: Image.asset(AssetRes.icFav)),
               //Image.asset(AssetRes.like, height: 30.23, width: 33),
             ),
           ),
@@ -207,13 +263,15 @@ class _LikeUnlikeBtnState extends State<LikeUnlikeBtn> with SingleTickerProvider
 class BottomMoreBtn extends StatefulWidget {
   final VoidCallback onMoreInfoTap;
 
-  const BottomMoreBtn({Key? key, required this.onMoreInfoTap}) : super(key: key);
+  const BottomMoreBtn({Key? key, required this.onMoreInfoTap})
+      : super(key: key);
 
   @override
   State<BottomMoreBtn> createState() => _BottomMoreBtnState();
 }
 
-class _BottomMoreBtnState extends State<BottomMoreBtn> with SingleTickerProviderStateMixin {
+class _BottomMoreBtnState extends State<BottomMoreBtn>
+    with SingleTickerProviderStateMixin {
   double? _scale;
   AnimationController? _controller;
   double height = AppBar().preferredSize.height;
@@ -327,13 +385,19 @@ class ImageListArea extends StatefulWidget {
   final Function(int index) onImgSelect;
   final int selectedImgIndex;
 
-  const ImageListArea({Key? key, required this.imageList, required this.onImgSelect, required this.selectedImgIndex}) : super(key: key);
+  const ImageListArea(
+      {Key? key,
+      required this.imageList,
+      required this.onImgSelect,
+      required this.selectedImgIndex})
+      : super(key: key);
 
   @override
   State<ImageListArea> createState() => _ImageListAreaState();
 }
 
-class _ImageListAreaState extends State<ImageListArea> with SingleTickerProviderStateMixin {
+class _ImageListAreaState extends State<ImageListArea>
+    with SingleTickerProviderStateMixin {
   double? _scale;
   AnimationController? _controller;
 
@@ -389,7 +453,8 @@ class _ImageListAreaState extends State<ImageListArea> with SingleTickerProvider
               child: Container(
                 height: 58,
                 width: 58,
-                margin: EdgeInsets.only(right: index != (widget.imageList.length - 1) ? 8.33 : 0),
+                margin: EdgeInsets.only(
+                    right: index != (widget.imageList.length - 1) ? 8.33 : 0),
                 decoration: BoxDecoration(
                   border: widget.selectedImgIndex == index
                       ? Border.all(
@@ -400,7 +465,8 @@ class _ImageListAreaState extends State<ImageListArea> with SingleTickerProvider
                   borderRadius: BorderRadius.circular(10),
                   image: DecorationImage(
                     fit: BoxFit.cover,
-                    image: NetworkImage('${ConstRes.aImageBaseUrl}${widget.imageList[index].image}'),
+                    image: NetworkImage(
+                        '${ConstRes.aImageBaseUrl}${widget.imageList[index].image}'),
                   ),
                 ),
               ),

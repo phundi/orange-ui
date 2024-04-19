@@ -6,8 +6,6 @@ import 'package:orange_ui/utils/color_res.dart';
 import 'package:orange_ui/utils/font_res.dart';
 
 class TextPost extends StatelessWidget {
-
-
   final String? description;
 
   const TextPost({Key? key, required this.description}) : super(key: key);
@@ -22,12 +20,14 @@ class TextPost extends StatelessWidget {
           text: description ?? '',
           detectionRegExp: RegExp(r"\B#\w\w+"),
           onTap: (p0) {
-            Get.to(() => HashtagScreen(
-              hashtagName: p0,
-            ));
+            Get.to(() => HashtagScreen(hashtagName: p0));
           },
-          detectedStyle: const TextStyle(fontFamily: FontRes.bold, color: ColorRes.orange2, fontSize: 16),
-          basicStyle: const TextStyle(color: ColorRes.dimGrey3, fontSize: 16, fontFamily: FontRes.medium),
+          detectedStyle: const TextStyle(
+              fontFamily: FontRes.bold, color: ColorRes.orange2, fontSize: 16),
+          basicStyle: const TextStyle(
+              color: ColorRes.dimGrey3,
+              fontSize: 16,
+              fontFamily: FontRes.medium),
         ),
       ),
     );

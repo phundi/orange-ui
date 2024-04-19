@@ -79,6 +79,9 @@ class RegistrationUserData {
     String? blockedUsers,
     int? wallet,
     int? totalCollected,
+    int? following,
+    int? followers,
+    int? followingStatus,
     int? totalStreams,
     int? deviceType,
     int? isNotification,
@@ -108,6 +111,9 @@ class RegistrationUserData {
     _live = live;
     _bio = bio;
     _about = about;
+    _following = following;
+    _followers = followers;
+    _followingStatus = followingStatus;
     _lattitude = lattitude;
     _longitude = longitude;
     _loginType = loginType;
@@ -143,6 +149,9 @@ class RegistrationUserData {
     _instagram = json['instagram'];
     _youtube = json['youtube'];
     _facebook = json['facebook'];
+    _following = json['following'];
+    _followers = json['followers'];
+    _followingStatus = json['followingStatus'];
     _live = json['live'];
     _bio = json['bio'];
     _about = json['about'];
@@ -198,6 +207,9 @@ class RegistrationUserData {
   String? _lattitude;
   String? _longitude;
   int? _loginType;
+  int? _following;
+  int? _followers;
+  int? _followingStatus;
   String? _deviceToken;
   String? _blockedUsers;
   int? _wallet;
@@ -229,6 +241,9 @@ class RegistrationUserData {
   String? get interests => _interests;
 
   int? get age => _age;
+  int? get following => _following;
+  int? get followers => _followers;
+  int? get followingStatus => _followingStatus;
 
   String? get identity => _identity;
 
@@ -284,6 +299,10 @@ class RegistrationUserData {
   List<Story>? get story => _story;
   List<Images>? get images => _images;
 
+  void followerCount(int value) {
+    _followers = (followers ?? 0) + value;
+  }
+
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['id'] = _id;
@@ -300,6 +319,9 @@ class RegistrationUserData {
     map['facebook'] = _facebook;
     map['live'] = _live;
     map['bio'] = _bio;
+    map['following'] = _following;
+    map['followers'] = _followers;
+    map['followingStatus'] = _followingStatus;
     map['about'] = _about;
     map['lattitude'] = _lattitude;
     map['longitude'] = _longitude;

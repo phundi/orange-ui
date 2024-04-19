@@ -116,6 +116,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "deletePost": MessageLookupByLibrary.simpleMessage("Delete post"),
         "deleteThisChat":
             MessageLookupByLibrary.simpleMessage("Delete this chat"),
+        "deleteThisStory":
+            MessageLookupByLibrary.simpleMessage("Delete this story?"),
         "diamond": MessageLookupByLibrary.simpleMessage(" Diamonds Collected:"),
         "diamond1": MessageLookupByLibrary.simpleMessage("Diamonds:"),
         "diamondCap": MessageLookupByLibrary.simpleMessage("DIAMOND"),
@@ -126,6 +128,8 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Do you really want to delete this chat You won’t be able to recover any kind of data after. Hope you are aware of that!"),
         "doYouReallyWantToLive": MessageLookupByLibrary.simpleMessage(
             "Do you really want to live. Please continue to go Live"),
+        "doYouWantToDeleteThisStoryYouCanNot": MessageLookupByLibrary.simpleMessage(
+            "Do you want to delete this story?, You can not restore the story it will be permanently deleted."),
         "docType": MessageLookupByLibrary.simpleMessage("DOCUMENT TYPE"),
         "donTHaveAnAccount":
             MessageLookupByLibrary.simpleMessage("Don\'t have an account?"),
@@ -315,6 +319,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Please Enter Email...!"),
         "pleaseEnterValidEmailAddress": MessageLookupByLibrary.simpleMessage(
             "Please Enter valid email address"),
+        "pleaseEnterYourAge":
+            MessageLookupByLibrary.simpleMessage("Please enter your age"),
         "pleaseSelectImage":
             MessageLookupByLibrary.simpleMessage("Please Select Image"),
         "pleaseValidEmail":

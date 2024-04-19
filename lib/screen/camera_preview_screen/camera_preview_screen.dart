@@ -2,10 +2,7 @@ import 'dart:io';
 
 import 'package:camera/camera.dart';
 import 'package:figma_squircle/figma_squircle.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:orange_ui/common/widgets/common_fun.dart';
 import 'package:orange_ui/screen/camera_preview_screen/camera_preview_screen_view_model.dart';
@@ -64,7 +61,7 @@ class CameraPreviewScreen extends StatelessWidget {
               ),
             ),
             type == 0
-                ? SizedBox()
+                ? const SizedBox()
                 : Align(
                     alignment: Alignment.center,
                     child: ValueListenableBuilder(
@@ -106,7 +103,7 @@ class CameraPreviewScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     type == 0
-                        ? SizedBox()
+                        ? const SizedBox()
                         : ValueListenableBuilder(
                             valueListenable: model.videoPlayerController,
                             builder: (context, VideoPlayerValue value, child) =>

@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:intl/intl.dart';
-import 'package:orange_ui/model/social/feed.dart';
+import 'package:orange_ui/model/social/post/add_comment.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/service/pref_service.dart';
 import 'package:orange_ui/utils/const_res.dart';
@@ -107,9 +107,15 @@ class CommonFun {
             : msg;
   }
 
-  static String getProfileImage({List<Images>? images}) {
+  static String getProfileImage({List<Images>? images, int? index}) {
     String profileImage = '';
     List<Images> tempList = images ?? [];
+    if (index != null) {
+      if (tempList.isNotEmpty) {
+        return '${ConstRes.aImageBaseUrl}${tempList[index].image?.replaceAll(ConstRes.aImageBaseUrl, '')}';
+      }
+      return '';
+    }
     if (tempList.isNotEmpty) {
       profileImage = tempList.first.image ?? '';
       return '${ConstRes.aImageBaseUrl}${profileImage.replaceAll(ConstRes.aImageBaseUrl, '')}';

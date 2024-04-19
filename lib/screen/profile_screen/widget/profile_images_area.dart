@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:orange_ui/common/widgets/common_ui.dart';
 import 'package:orange_ui/common/widgets/gradient_widget.dart';
 import 'package:orange_ui/common/widgets/top_story_line.dart';
 import 'package:orange_ui/generated/l10n.dart';
@@ -151,7 +152,8 @@ class ProfileImageArea extends StatelessWidget {
                                       children: [
                                         Flexible(
                                           child: Text(
-                                            userData?.fullname ?? '',
+                                            CommonUI.fullName(
+                                                userData?.fullname),
                                             style: const TextStyle(
                                               color: ColorRes.white,
                                               fontSize: 20,

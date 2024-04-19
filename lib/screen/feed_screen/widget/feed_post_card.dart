@@ -1,8 +1,9 @@
 import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:orange_ui/common/widgets/common_ui.dart';
 import 'package:orange_ui/generated/l10n.dart';
-import 'package:orange_ui/model/social/feed.dart';
+import 'package:orange_ui/model/social/post/add_comment.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/screen/feed_screen/feed_screen_view_model.dart';
 import 'package:orange_ui/screen/feed_screen/widget/feed_post_bottom.dart';
@@ -11,21 +12,20 @@ import 'package:orange_ui/screen/feed_screen/widget/image_post.dart';
 import 'package:orange_ui/screen/feed_screen/widget/text_post.dart';
 import 'package:orange_ui/screen/feed_screen/widget/video_post.dart';
 import 'package:orange_ui/screen/story_view_screen/story_view_screen.dart';
+import 'package:orange_ui/screen/user_detail_screen/user_detail_screen.dart';
 import 'package:orange_ui/service/pref_service.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
 import 'package:orange_ui/utils/font_res.dart';
 
 class FeedPostCard extends StatelessWidget {
-  final VoidCallback onCommentBtnClick;
-  final Posts? posts;
+  final Post? post;
   final Function(MoreBtnValue value)? onSelected;
   final FeedScreenViewModel model;
 
   const FeedPostCard({
     Key? key,
-    required this.onCommentBtnClick,
-    this.posts,
+    this.post,
     this.onSelected,
     required this.model,
   }) : super(key: key);
@@ -36,32 +36,35 @@ class FeedPostCard extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         TopAreaPost(
-          userData: posts?.user,
+          userData: post?.user,
           onSelected: onSelected,
           onProfilePictureClick: (userData) {
-            Get.bottomSheet(
-              StoryViewScreen(stories: [model.userData!], storyIndex: 0),
-              isScrollControlled: true,
-              barrierColor: ColorRes.black,
-              shape: SmoothRectangleBorder(
-                  borderRadius: SmoothBorderRadius(cornerRadius: 0)),
-            ).then((value) {
-              model.getProfile();
-            });
+            if ((userData?.story ?? []).isEmpty) {
+              return;
+            }
+            if (userData?.story != null || userData!.story!.isNotEmpty) {
+              Get.bottomSheet(
+                StoryViewScreen(stories: [post!.user!], storyIndex: 0),
+                isScrollControlled: true,
+                barrierColor: ColorRes.black,
+                shape: SmoothRectangleBorder(
+                    borderRadius: SmoothBorderRadius(cornerRadius: 0)),
+              ).then((value) {
+                model.getProfile();
+                model.fetchStories(userData: post?.user);
+              });
+            }
           },
         ),
-        TextPost(description: posts?.description),
-        posts?.content == null || posts!.content!.isEmpty
+        TextPost(description: post?.description),
+        post?.content == null || post!.content!.isEmpty
             ? const SizedBox()
-            : posts?.content?.first.contentType == 0
-                ? ImagePost(content: posts?.content ?? [], model: model)
-                : posts?.content?.first.contentType == 1
-                    ? VideoPost(content: posts?.content ?? [])
+            : post?.content?.first.contentType == 0
+                ? ImagePost(content: post?.content ?? [], model: model)
+                : post?.content?.first.contentType == 1
+                    ? VideoPost(content: post?.content ?? [])
                     : const SizedBox(),
-        BottomAreaPost(
-          onCommentBtnClick: onCommentBtnClick,
-          posts: posts,
-        ),
+        BottomAreaPost(post: post, model: model),
         const Divider(color: ColorRes.greyShade200, indent: 15, endIndent: 15),
         const SizedBox(height: 10),
       ],
@@ -98,15 +101,20 @@ class TopAreaPost extends StatelessWidget {
                 borderWidth: 2),
           ),
           Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10.0),
-              child: Text(userData?.fullname ?? '',
-                  style: const TextStyle(
-                      color: ColorRes.veryDarkGrey4,
-                      fontFamily: FontRes.semiBold,
-                      fontSize: 16),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis),
+            child: InkWell(
+              onTap: () {
+                Get.to(() => UserDetailScreen(userData: userData));
+              },
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: Text(CommonUI.fullName(userData?.fullname),
+                    style: const TextStyle(
+                        color: ColorRes.veryDarkGrey4,
+                        fontFamily: FontRes.semiBold,
+                        fontSize: 16),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis),
+              ),
             ),
           ),
           Theme(

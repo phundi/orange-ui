@@ -54,14 +54,6 @@ class CameraPreviewScreenViewModel extends BaseViewModel {
         });
   }
 
-  @override
-  void dispose() {
-    if (type == 1) {
-      videoPlayerController.dispose();
-    }
-    super.dispose();
-  }
-
   void videoPlayPause() {
     if (videoPlayerController.value.isPlaying) {
       isPlaying = false;
@@ -89,5 +81,13 @@ class CameraPreviewScreenViewModel extends BaseViewModel {
     if (isPlaying) {
       videoPlayerController.pause();
     }
+  }
+
+  @override
+  void dispose() {
+    if (type == 1) {
+      videoPlayerController.dispose();
+    }
+    super.dispose();
   }
 }

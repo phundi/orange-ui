@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
 import 'package:orange_ui/common/widgets/confirmation_dialog.dart';
+import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/service/pref_service.dart';
 import 'package:orange_ui/story_view/controller/story_controller.dart';
@@ -72,13 +73,11 @@ class StoryViewScreenViewModel extends BaseViewModel {
       ConfirmationDialog(
         onTap: () {
           Get.back();
-          stories[index].removeWhere((element) {
-            return element.story?.id == story?.id;
-          });
-
           ApiProvider().callPost(
             completion: (response) {
-              print(response);
+              stories[index].removeWhere((element) {
+                return element.story?.id == story?.id;
+              });
             },
             url: Urls.aDeleteStory,
             param: {
@@ -86,12 +85,12 @@ class StoryViewScreenViewModel extends BaseViewModel {
               Urls.aStoryId: story?.id
             },
           );
+
           onNext();
           notifyListeners();
         },
-        description:
-            'Do you want to delete this story?, You can not restore the story it will be permanently deleted.',
-        heading: 'Delete this story?',
+        description: S.current.doYouWantToDeleteThisStoryYouCanNot,
+        heading: S.current.deleteThisStory,
         padding: const EdgeInsets.symmetric(horizontal: 40),
       ),
     ).then((value) {

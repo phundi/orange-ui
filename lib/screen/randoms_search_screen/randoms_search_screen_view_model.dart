@@ -88,7 +88,11 @@ class RandomsSearchScreenViewModel extends BaseViewModel {
   }
 
   void onImageTap() {
-    Get.to(() => const UserDetailScreen(), arguments: userData);
+    Get.to(
+      () => UserDetailScreen(
+        userData: userData,
+      ),
+    );
   }
 
   void _launchUrl(String url) async {

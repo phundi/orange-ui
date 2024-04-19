@@ -428,7 +428,9 @@ class PersonStreamingScreenViewModel extends BaseViewModel {
 
   void onUserTap() {
     watchingUserRemove();
-    Get.off(() => const UserDetailScreen(), arguments: liveStreamUser?.userId);
+    Get.off(() => UserDetailScreen(
+          userId: liveStreamUser?.userId,
+        ));
   }
 
   void onExitTap() async {

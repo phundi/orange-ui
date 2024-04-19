@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:orange_ui/generated/l10n.dart';
+import 'package:orange_ui/utils/app_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
 
 class DropDownBox extends StatelessWidget {
@@ -38,16 +38,16 @@ class DropDownBox extends StatelessWidget {
             children: [
               InkWell(
                 onTap: () {
-                  onChange(S.current.male);
+                  onChange(AppRes.male);
                 },
                 child: Container(
                   height: 30,
                   width: Get.width - 80,
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    S.current.male,
+                    AppRes.male,
                     style: TextStyle(
-                      color: gender == S.current.male
+                      color: gender == AppRes.male
                           ? ColorRes.orange
                           : ColorRes.grey,
                     ),
@@ -56,16 +56,16 @@ class DropDownBox extends StatelessWidget {
               ),
               InkWell(
                 onTap: () {
-                  onChange(S.current.female);
+                  onChange(AppRes.female);
                 },
                 child: Container(
                   height: 30,
                   width: Get.width - 80,
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    S.current.female,
+                    AppRes.female,
                     style: TextStyle(
-                      color: gender == S.current.female
+                      color: gender == AppRes.female
                           ? ColorRes.orange
                           : ColorRes.grey,
                     ),
@@ -74,16 +74,16 @@ class DropDownBox extends StatelessWidget {
               ),
               InkWell(
                 onTap: () {
-                  onChange(S.current.other);
+                  onChange(AppRes.other);
                 },
                 child: Container(
                   height: 30,
                   width: Get.width - 80,
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    S.current.other,
+                    AppRes.other,
                     style: TextStyle(
-                      color: gender == S.current.other
+                      color: gender == AppRes.other
                           ? ColorRes.orange
                           : ColorRes.grey,
                     ),

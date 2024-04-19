@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:orange_ui/common/widgets/top_bar_area.dart';
 import 'package:orange_ui/generated/l10n.dart';
+import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/screen/edit_profile_screen/edit_profile_screen_view_model.dart';
 import 'package:orange_ui/screen/edit_profile_screen/widgets/image_list_area.dart';
 import 'package:orange_ui/screen/edit_profile_screen/widgets/text_field_area/text_fields_area.dart';
@@ -11,7 +12,8 @@ import 'package:orange_ui/utils/color_res.dart';
 import 'package:stacked/stacked.dart';
 
 class EditProfileScreen extends StatelessWidget {
-  const EditProfileScreen({Key? key}) : super(key: key);
+  final RegistrationUserData? userData;
+  const EditProfileScreen({Key? key, required this.userData}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,7 @@ class EditProfileScreen extends StatelessWidget {
       onViewModelReady: (model) {
         model.init();
       },
-      viewModelBuilder: () => EditProfileScreenViewModel(),
+      viewModelBuilder: () => EditProfileScreenViewModel(userData),
       builder: (context, model, child) {
         return Scaffold(
           backgroundColor: ColorRes.white,

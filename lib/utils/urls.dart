@@ -78,6 +78,15 @@ class Urls {
   static const String aFetchMyStories = '${ConstRes.aBaseUrl}fetchMyStories';
   static const String aCreateStory = '${ConstRes.aBaseUrl}createStory';
   static const String aDeleteStory = '${ConstRes.aBaseUrl}deleteStory';
+  static const String aFollowUser = '${ConstRes.aBaseUrl}followUser';
+  static const String aUnfollowUser = '${ConstRes.aBaseUrl}unfollowUser';
+  static const String aFetchPostByUser = '${ConstRes.aBaseUrl}fetchPostByUser';
+  static const String aFetchPostsByHashtag =
+      '${ConstRes.aBaseUrl}fetchPostsByHashtag';
+  static const String aFetchFollowingList =
+      '${ConstRes.aBaseUrl}fetchFollowingList';
+  static const String aFetchFollowersList =
+      '${ConstRes.aBaseUrl}fetchFollowersList';
 
   ///------------------------ Params ------------------------///
   static const String aApiKeyName = 'apikey';
@@ -152,6 +161,7 @@ class Urls {
   static const String aContentType = 'content_type';
   static const String aInterestIds = 'interest_ids';
   static const String aHashtags = 'hashtags';
+  static const String aHashtag = 'hashtag';
   static const String aPostId = 'post_id';
   static const String aCommentId = 'comment_id';
   static const String aStoryId = 'story_id';

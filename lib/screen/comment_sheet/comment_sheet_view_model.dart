@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
 import 'package:orange_ui/common/widgets/snack_bar_widget.dart';
 import 'package:orange_ui/generated/l10n.dart';
-import 'package:orange_ui/model/social/feed.dart';
 import 'package:orange_ui/model/social/post/add_comment.dart';
 import 'package:orange_ui/model/social/post/fetch_comment.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
@@ -17,13 +16,15 @@ import 'package:stacked/stacked.dart';
 class CommentSheetViewModel extends BaseViewModel {
   List<CommentData> comments = [];
   ScrollController scrollController = ScrollController();
-  Posts? post;
+  Post? post;
   bool isLoading = true;
   RegistrationUserData? userData;
 
-  DetectableTextEditingController detectableTextFieldController = DetectableTextEditingController(
-      detectedStyle: const TextStyle(fontFamily: FontRes.bold, color: ColorRes.orange2, fontSize: 14),
-      regExp: detectionRegExp(atSign: false, url: false));
+  DetectableTextEditingController detectableTextFieldController =
+      DetectableTextEditingController(
+          detectedStyle: const TextStyle(
+              fontFamily: FontRes.bold, color: ColorRes.orange2, fontSize: 14),
+          regExp: detectionRegExp(atSign: false, url: false));
 
   init() {
     fetchCommentData();
@@ -43,12 +44,17 @@ class CommentSheetViewModel extends BaseViewModel {
           notifyListeners();
         },
         url: Urls.aFetchComments,
-        param: {Urls.aPostId: post?.id, Urls.aStart: comments.length, Urls.aLimit: paginationLimit});
+        param: {
+          Urls.aPostId: post?.id,
+          Urls.aStart: comments.length,
+          Urls.aLimit: paginationLimit
+        });
   }
 
   void fetchScrollData() {
     scrollController.addListener(() {
-      if (scrollController.offset == scrollController.position.maxScrollExtent) {
+      if (scrollController.offset ==
+          scrollController.position.maxScrollExtent) {
         if (!isLoading) {
           fetchCommentData();
         }

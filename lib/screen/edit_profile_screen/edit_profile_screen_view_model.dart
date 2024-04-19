@@ -10,6 +10,7 @@ import 'package:orange_ui/common/widgets/snack_bar_widget.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/service/pref_service.dart';
+import 'package:orange_ui/utils/app_res.dart';
 import 'package:orange_ui/utils/const_res.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:stacked/stacked.dart';
@@ -19,6 +20,10 @@ class EditProfileScreenViewModel extends BaseViewModel {
     getEditProfileApiCall();
     getInterestApiCall();
   }
+
+  RegistrationUserData? userData;
+
+  EditProfileScreenViewModel(this.userData);
 
   TextEditingController fullNameController = TextEditingController();
   TextEditingController addressController = TextEditingController();
@@ -41,15 +46,12 @@ class EditProfileScreenViewModel extends BaseViewModel {
   List<Interest>? hobbiesList = [];
   List<String> selectedList = [];
 
-  String latitude = '';
-  String longitude = '';
-  String gender = S.current.female;
+  String gender = AppRes.female;
   String fullNameError = '';
   String bioError = '';
   String aboutError = '';
   String addressError = '';
   String ageError = '';
-  String? email;
 
   List<String> deleteIds = [];
   List<String> interestList = [];
@@ -81,31 +83,22 @@ class EditProfileScreenViewModel extends BaseViewModel {
     });
   }
 
-  void getEditProfileApiCall() {
-    isLoading = true;
-    ApiProvider().getProfile(userID: PrefService.userId).then((value) async {
-      imageList = value?.data?.images ?? [];
-      fullNameController.text = value?.data?.fullname ?? '';
-      bioController.text = value?.data?.bio ?? '';
-      aboutController.text = value?.data?.about ?? '';
-      addressController.text = value?.data?.live ?? '';
-      ageController.text = value?.data?.age?.toString() ?? '';
-
-      gender = value?.data?.gender == 1
-          ? S.current.male
-          : value?.data?.gender == 2
-              ? S.current.female
-              : S.current.other;
-      instagramController.text = value?.data?.instagram ?? '';
-      facebookController.text = value?.data?.facebook ?? '';
-      youtubeController.text = value?.data?.youtube ?? '';
-      latitude = await PrefService.getLatitude() ?? '';
-      longitude = await PrefService.getLongitude() ?? '';
-      email = value?.data?.identity;
-      await PrefService.saveUser(value?.data);
-      isLoading = false;
-      notifyListeners();
-    });
+  void getEditProfileApiCall() async {
+    imageList = userData?.images ?? [];
+    fullNameController.text = userData?.fullname ?? '';
+    bioController.text = userData?.bio ?? '';
+    aboutController.text = userData?.about ?? '';
+    addressController.text = userData?.live ?? '';
+    ageController.text = userData?.age?.toString() ?? '';
+    gender = userData?.gender == 1
+        ? AppRes.male
+        : userData?.gender == 2
+            ? AppRes.female
+            : AppRes.other;
+    instagramController.text = userData?.instagram ?? '';
+    facebookController.text = userData?.facebook ?? '';
+    youtubeController.text = userData?.youtube ?? '';
+    notifyListeners();
   }
 
   void getPrefUser() {
@@ -190,8 +183,8 @@ class EditProfileScreenViewModel extends BaseViewModel {
       }
     }
 
-    final selectedImages =
-        await imagePicker.pickMultiImage(imageQuality: quality, maxHeight: maxHeight, maxWidth: maxWidth);
+    final selectedImages = await imagePicker.pickMultiImage(
+        imageQuality: quality, maxHeight: maxHeight, maxWidth: maxWidth);
     if (selectedImages.isEmpty) return;
     if (selectedImages.isNotEmpty) {
       for (XFile image in selectedImages) {
@@ -212,8 +205,6 @@ class EditProfileScreenViewModel extends BaseViewModel {
       Loader().lottieLoader();
       ApiProvider()
           .updateProfile(
-              latitude: latitude,
-              longitude: longitude,
               images: imageFileList,
               bio: bioController.text.trim(),
               age: ageController.text.trim(),
@@ -227,8 +218,11 @@ class EditProfileScreenViewModel extends BaseViewModel {
               deleteImageIds: deleteIds,
               interest: selectedList)
           .then((value) async {
-        Get.back();
-        Get.back();
+        if (value.data?.id == PrefService.userId) {
+          await PrefService.saveUser(value.data);
+        }
+        Get.back(result: value.data);
+        Get.back(result: value.data);
       });
     }
   }

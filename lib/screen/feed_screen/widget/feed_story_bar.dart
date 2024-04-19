@@ -30,22 +30,22 @@ class FeedStoryBar extends StatelessWidget {
             width: 80,
             margin: const EdgeInsets.symmetric(vertical: 15),
             child: ListView.builder(
-              itemCount: model.stories.length,
+              itemCount: model.headerStories.length,
               padding: const EdgeInsets.symmetric(horizontal: 0),
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
-                RegistrationUserData userData = model.stories[index];
+                RegistrationUserData userData = model.headerStories[index];
                 return InkWell(
                   onTap: () {
                     Get.bottomSheet(
                       StoryViewScreen(
-                          stories: model.stories, storyIndex: index),
+                          stories: model.headerStories, storyIndex: index),
                       isScrollControlled: true,
                       barrierColor: ColorRes.black,
                       shape: SmoothRectangleBorder(
                           borderRadius: SmoothBorderRadius(cornerRadius: 0)),
                     ).then((value) {
-                      model.fetchStories();
+                      model.fetchStories(userData: userData);
                     });
                   },
                   child: SizedBox(
@@ -59,7 +59,7 @@ class FeedStoryBar extends StatelessWidget {
                           borderWidth: 2.5,
                         ),
                         Text(
-                          model.stories[index].fullname ?? '',
+                          model.headerStories[index].fullname ?? '',
                           style: const TextStyle(
                               color: ColorRes.dimGrey3,
                               fontSize: 13,
@@ -191,7 +191,7 @@ class StoryProfileView extends StatelessWidget {
             height: double.infinity,
             errorWidget: (context, url, error) {
               return CommonUI.profileImagePlaceHolder(
-                  name: userData?.fullname,
+                  name: CommonUI.fullName(userData?.fullname),
                   heightWeight: 66,
                   borderRadius: imageCorner - 1);
             },

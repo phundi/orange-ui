@@ -15,13 +15,20 @@ class SavedCard extends StatelessWidget {
   final SavedProfilesScreenViewModel viewModel;
   final bool isSaved;
 
-  const SavedCard({Key? key, required this.userData, required this.viewModel, required this.isSaved}) : super(key: key);
+  const SavedCard(
+      {Key? key,
+      required this.userData,
+      required this.viewModel,
+      required this.isSaved})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.to(() => const UserDetailScreen(), arguments: userData)?.then((value) {
+        Get.to(() => UserDetailScreen(
+              userData: userData,
+            ))?.then((value) {
           viewModel.onSavedCardBack(userData);
         });
       },
@@ -39,7 +46,8 @@ class SavedCard extends StatelessWidget {
                 height: 40,
                 fit: BoxFit.cover,
                 errorWidget: (context, url, error) {
-                  return CommonUI.profileImagePlaceHolder(name: userData.fullname, heightWeight: 40);
+                  return CommonUI.profileImagePlaceHolder(
+                      name: userData.fullname, heightWeight: 40);
                 },
               ),
             ),
@@ -65,19 +73,25 @@ class SavedCard extends StatelessWidget {
                       const SizedBox(width: 3),
                       Text(
                         "${userData.age ?? ''}",
-                        style:
-                            const TextStyle(color: ColorRes.darkGrey4, fontSize: 18, overflow: TextOverflow.ellipsis),
+                        style: const TextStyle(
+                            color: ColorRes.darkGrey4,
+                            fontSize: 18,
+                            overflow: TextOverflow.ellipsis),
                         maxLines: 1,
                       ),
                       const SizedBox(width: 3),
                       userData.isVerified == 2
-                          ? Image.asset(AssetRes.tickMark, height: 18, width: 18)
+                          ? Image.asset(AssetRes.tickMark,
+                              height: 18, width: 18)
                           : const SizedBox(),
                     ],
                   ),
                   Text(
                     userData.live ?? '',
-                    style: const TextStyle(color: ColorRes.grey6, fontSize: 13, overflow: TextOverflow.ellipsis),
+                    style: const TextStyle(
+                        color: ColorRes.grey6,
+                        fontSize: 13,
+                        overflow: TextOverflow.ellipsis),
                     maxLines: 1,
                   ),
                 ],

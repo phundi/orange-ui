@@ -1,4 +1,3 @@
-import 'package:orange_ui/model/social/feed.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
 
 class AddComment {
@@ -103,6 +102,7 @@ class Post {
     String? interestIds,
     int? commentsCount,
     int? likesCount,
+    int? isLike,
     String? hashtags,
     String? createdAt,
     String? updatedAt,
@@ -115,6 +115,7 @@ class Post {
     _interestIds = interestIds;
     _commentsCount = commentsCount;
     _likesCount = likesCount;
+    _isLike = isLike;
     _hashtags = hashtags;
     _createdAt = createdAt;
     _updatedAt = updatedAt;
@@ -129,10 +130,13 @@ class Post {
     _interestIds = json['interest_ids'];
     _commentsCount = json['comments_count'];
     _likesCount = json['likes_count'];
+    _isLike = json['isLike'];
     _hashtags = json['hashtags'];
     _createdAt = json['created_at'];
     _updatedAt = json['updated_at'];
-    _user = json['user'] != null ? RegistrationUserData.fromJson(json['user']) : null;
+    _user = json['user'] != null
+        ? RegistrationUserData.fromJson(json['user'])
+        : null;
     if (json['content'] != null) {
       _content = [];
       json['content'].forEach((v) {
@@ -146,6 +150,7 @@ class Post {
   String? _interestIds;
   int? _commentsCount;
   int? _likesCount;
+  int? _isLike;
   String? _hashtags;
   String? _createdAt;
   String? _updatedAt;
@@ -158,6 +163,7 @@ class Post {
   String? get interestIds => _interestIds;
   int? get commentsCount => _commentsCount;
   int? get likesCount => _likesCount;
+  int? get isLike => _isLike;
   String? get hashtags => _hashtags;
   String? get createdAt => _createdAt;
   String? get updatedAt => _updatedAt;
@@ -172,6 +178,7 @@ class Post {
     map['interest_ids'] = _interestIds;
     map['comments_count'] = _commentsCount;
     map['likes_count'] = _likesCount;
+    map['isLike'] = _isLike;
     map['hashtags'] = _hashtags;
     map['created_at'] = _createdAt;
     map['updated_at'] = _updatedAt;
@@ -181,6 +188,75 @@ class Post {
     if (_content != null) {
       map['content'] = _content?.map((v) => v.toJson()).toList();
     }
+    return map;
+  }
+
+  set user(RegistrationUserData? value) {
+    _user = value;
+  }
+
+  void setLikesCount(int value) {
+    _likesCount = (_likesCount ?? 0) + value;
+  }
+
+  void setCommentCount(int value) {
+    _commentsCount = (_commentsCount ?? 0) + value;
+  }
+}
+
+class Content {
+  Content({
+    int? id,
+    int? postId,
+    int? contentType,
+    String? content,
+    String? thumbnail,
+    String? createdAt,
+    String? updatedAt,
+  }) {
+    _id = id;
+    _postId = postId;
+    _contentType = contentType;
+    _content = content;
+    _thumbnail = thumbnail;
+    _createdAt = createdAt;
+    _updatedAt = updatedAt;
+  }
+
+  Content.fromJson(dynamic json) {
+    _id = json['id'];
+    _postId = json['post_id'];
+    _contentType = json['content_type'];
+    _content = json['content'];
+    _thumbnail = json['thumbnail'];
+    _createdAt = json['created_at'];
+    _updatedAt = json['updated_at'];
+  }
+  int? _id;
+  int? _postId;
+  int? _contentType;
+  String? _content;
+  String? _thumbnail;
+  String? _createdAt;
+  String? _updatedAt;
+
+  int? get id => _id;
+  int? get postId => _postId;
+  int? get contentType => _contentType;
+  String? get content => _content;
+  String? get thumbnail => _thumbnail;
+  String? get createdAt => _createdAt;
+  String? get updatedAt => _updatedAt;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['id'] = _id;
+    map['post_id'] = _postId;
+    map['content_type'] = _contentType;
+    map['content'] = _content;
+    map['thumbnail'] = _thumbnail;
+    map['created_at'] = _createdAt;
+    map['updated_at'] = _updatedAt;
     return map;
   }
 }

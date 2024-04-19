@@ -157,7 +157,11 @@ class MapScreenViewModel extends BaseViewModel {
   void onMoreInfoTap(RegistrationUserData? data) {
     // user Detail Screen
     Get.back();
-    Get.to(() => const UserDetailScreen(), arguments: data);
+    Get.to(
+      () => UserDetailScreen(
+        userData: data,
+      ),
+    );
   }
 
   double getZoomLevel(double radius) {

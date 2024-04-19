@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:orange_ui/common/widgets/common_ui.dart';
-import 'package:orange_ui/model/social/feed.dart';
+import 'package:orange_ui/model/social/post/add_comment.dart';
 import 'package:orange_ui/screen/feed_screen/feed_screen_view_model.dart';
 import 'package:orange_ui/utils/color_res.dart';
 import 'package:orange_ui/utils/const_res.dart';
@@ -12,7 +12,8 @@ class ImagePost extends StatelessWidget {
   final List<Content> content;
   final FeedScreenViewModel model;
 
-  const ImagePost({Key? key, required this.content, required this.model}) : super(key: key);
+  const ImagePost({Key? key, required this.content, required this.model})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,11 +27,13 @@ class ImagePost extends StatelessWidget {
               ? Container(
                   constraints: BoxConstraints(maxHeight: Get.height / 1.7),
                   child: CachedNetworkImage(
-                    imageUrl: '${ConstRes.aImageBaseUrl}${content.first.content}',
+                    imageUrl:
+                        '${ConstRes.aImageBaseUrl}${content.first.content}',
                     fit: BoxFit.cover,
                     height: null,
                     width: double.infinity,
-                    errorWidget: (context, url, error) => CommonUI.postPlaceHolder(),
+                    errorWidget: (context, url, error) =>
+                        CommonUI.postPlaceHolder(),
                   ),
                 )
               : Stack(
@@ -44,12 +47,15 @@ class ImagePost extends StatelessWidget {
                         itemCount: content.length,
                         itemBuilder: (context, index) {
                           return CachedNetworkImage(
-                            imageUrl: '${ConstRes.aImageBaseUrl}${content[index].content}',
-                            cacheKey: '${ConstRes.aImageBaseUrl}${content[index].content}',
+                            imageUrl:
+                                '${ConstRes.aImageBaseUrl}${content[index].content}',
+                            cacheKey:
+                                '${ConstRes.aImageBaseUrl}${content[index].content}',
                             fit: BoxFit.cover,
                             height: 390,
                             width: double.infinity,
-                            errorWidget: (context, url, error) => CommonUI.postPlaceHolder(),
+                            errorWidget: (context, url, error) =>
+                                CommonUI.postPlaceHolder(),
                           );
                         },
                       ),
@@ -61,10 +67,13 @@ class ImagePost extends StatelessWidget {
                         child: SmoothPageIndicator(
                           controller: pageController, // PageController
                           effect: CustomizableEffect(
-                              dotDecoration:
-                                  DotDecoration(width: 31, height: 2, color: ColorRes.white.withOpacity(0.3)),
-                              activeDotDecoration: const DotDecoration(
-                                  width: 31, height: 2, color: ColorRes.white)), // your preferred effect
+                            dotDecoration: DotDecoration(
+                                width: 31,
+                                height: 2,
+                                color: ColorRes.white.withOpacity(0.3)),
+                            activeDotDecoration: const DotDecoration(
+                                width: 31, height: 2, color: ColorRes.white),
+                          ), // your preferred effect
                           onDotClicked: (index) {}, count: content.length,
                         ),
                       ),

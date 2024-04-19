@@ -20,14 +20,25 @@ class PostPage extends StatelessWidget {
         model.detectableTextFieldController.text.isEmpty
             ? const SizedBox()
             : Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 15.0, vertical: 10.0),
                 child: DetectableText(
                     text: model.detectableTextFieldController.text,
                     detectionRegExp: RegExp(r"\B#\w\w+"),
-                    detectedStyle: const TextStyle(fontFamily: FontRes.bold, color: ColorRes.orange2, fontSize: 16),
-                    basicStyle: const TextStyle(color: ColorRes.dimGrey3, fontSize: 16, fontFamily: FontRes.medium)),
+                    detectedStyle: const TextStyle(
+                        fontFamily: FontRes.bold,
+                        color: ColorRes.orange2,
+                        fontSize: 16),
+                    basicStyle: const TextStyle(
+                        color: ColorRes.dimGrey3,
+                        fontSize: 16,
+                        fontFamily: FontRes.medium)),
               ),
-        model.contentType == 0 ? ImagePostView(model: model) : VideoPostView(model: model),
+        model.contentType == 0
+            ? ImagePostView(model: model)
+            : model.contentType == 1
+                ? VideoPostView(model: model)
+                : const SizedBox(),
         InterestWidget(model: model)
       ],
     );

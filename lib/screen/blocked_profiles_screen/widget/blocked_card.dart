@@ -26,8 +26,7 @@ class BlockedCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.to(() => const UserDetailScreen(), arguments: userData)
-            ?.then((value) {
+        Get.to(() => UserDetailScreen(userData: userData))?.then((value) {
           viewModel.onBackBlockIds(userData);
         });
       },

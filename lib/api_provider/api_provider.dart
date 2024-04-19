@@ -30,7 +30,6 @@ import 'package:orange_ui/model/update_saved_profile.dart';
 import 'package:orange_ui/model/user/delete_account.dart';
 import 'package:orange_ui/model/user/get_profile.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
-import 'package:orange_ui/model/user/update_profile.dart';
 import 'package:orange_ui/model/user_block_list.dart';
 import 'package:orange_ui/model/verification.dart';
 import 'package:orange_ui/model/wallet/minus_coin_from_wallet.dart';
@@ -105,7 +104,7 @@ class ApiProvider {
     return applyForLive;
   }
 
-  Future<UpdateProfile> updateProfile(
+  Future<RegistrationUser> updateProfile(
       {List<File>? images,
       String? live,
       String? bio,
@@ -186,13 +185,13 @@ class ApiProvider {
     var response = await request.send();
     var respStr = await response.stream.bytesToString();
     final responseJson = jsonDecode(respStr);
-    UpdateProfile updateProfile = UpdateProfile.fromJson(responseJson);
+    RegistrationUser updateProfile = RegistrationUser.fromJson(responseJson);
     await PrefService.saveUser(updateProfile.data);
     PrefService.updateFirebase();
     return updateProfile;
   }
 
-  Future<GetProfile?> getProfile({int? userID, int? myUserID}) async {
+  Future<GetProfile?> getProfile({int? userID}) async {
     http.Response response =
         await http.post(Uri.parse(Urls.aGetProfile), headers: {
       Urls.aApiKeyName: ConstRes.apiKey
@@ -754,13 +753,13 @@ class ApiProvider {
         }
       });
     }
-    log(param.toString());
-    log(filesMap.toString());
+    // log(param.toString());
+    // log(filesMap.toString());
     request.send().then((value) {
-      log('StatusCode :: ${value.statusCode}');
+      // log('StatusCode :: ${value.statusCode}');
       value.stream.bytesToString().then((respStr) {
         var response = jsonDecode(respStr);
-        log(respStr);
+        // log(respStr);
         completion(response);
       });
     });

@@ -1,19 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
 import 'package:orange_ui/utils/font_res.dart';
 
 class CommonUI {
-  static Widget profileImagePlaceHolder({required String? name, double heightWeight = 0, double? borderRadius}) {
+  static Widget profileImagePlaceHolder(
+      {required String? name, double heightWeight = 0, double? borderRadius}) {
     return Container(
       width: heightWeight,
       height: heightWeight,
       decoration: BoxDecoration(
-          color: ColorRes.orange2.withOpacity(0.1), borderRadius: BorderRadius.circular(borderRadius ?? 50)),
+          color: ColorRes.orange2.withOpacity(0.1),
+          borderRadius: BorderRadius.circular(borderRadius ?? 50)),
       alignment: Alignment.center,
       child: Text(
         (name ?? 'Unknown')[0].toUpperCase(),
-        style: TextStyle(fontFamily: FontRes.semiBold, fontSize: heightWeight / 2, color: ColorRes.orange2),
+        style: TextStyle(
+            fontFamily: FontRes.semiBold,
+            fontSize: heightWeight / 2,
+            color: ColorRes.orange2),
       ),
     );
   }
@@ -28,6 +34,22 @@ class CommonUI {
         AssetRes.icPostPlaceholder,
         height: 200 / 3,
         color: ColorRes.grey,
+      ),
+    );
+  }
+
+  static String fullName(String? fullName) {
+    return fullName ?? 'Unknown';
+  }
+
+  static Widget noData() {
+    return Center(
+      child: Text(
+        S.current.noData,
+        style: const TextStyle(
+            fontFamily: FontRes.semiBold,
+            fontSize: 18,
+            color: ColorRes.dimGrey1),
       ),
     );
   }

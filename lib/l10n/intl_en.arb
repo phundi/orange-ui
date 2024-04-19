@@ -328,5 +328,8 @@
   "afterDeletingTheChatYouCanNotRestoreOurMessage": "After deleting the chat, you can not restore our message. Message will be deleted from your account.",
   "areYouSureYouWantToDeleteThePost": "Are you sure you want to delete the post?",
   "deletePost": "Delete post",
-  "reportPost": "Report post"
+  "reportPost": "Report post",
+  "doYouWantToDeleteThisStoryYouCanNot": "Do you want to delete this story?, You can not restore the story it will be permanently deleted.",
+  "deleteThisStory": "Delete this story?",
+  "pleaseEnterYourAge": "Please enter your age"
 }
