@@ -274,8 +274,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "noData": MessageLookupByLibrary.simpleMessage("No Data"),
         "noDataAvailable":
             MessageLookupByLibrary.simpleMessage("No Data Available"),
+        "noLikeData": MessageLookupByLibrary.simpleMessage("No Like Data"),
         "noLocation": MessageLookupByLibrary.simpleMessage("No Location"),
         "noRedeemData": MessageLookupByLibrary.simpleMessage("No redeem data"),
+        "noSavedData": MessageLookupByLibrary.simpleMessage("No Saved Data"),
         "noUsersAreLive":
             MessageLookupByLibrary.simpleMessage("No users are live"),
         "notEligible": MessageLookupByLibrary.simpleMessage("NOT ELIGIBLE"),
@@ -345,6 +347,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pushNotification":
             MessageLookupByLibrary.simpleMessage("Push Notifications"),
         "randoms": MessageLookupByLibrary.simpleMessage("Randoms"),
+        "readLess": MessageLookupByLibrary.simpleMessage("Read Less..."),
+        "readMore": MessageLookupByLibrary.simpleMessage("Read More..."),
         "redeem": MessageLookupByLibrary.simpleMessage("REDEEM"),
         "redeemCap": MessageLookupByLibrary.simpleMessage("REDEEM"),
         "redeemRequests":
@@ -460,6 +464,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "walking": MessageLookupByLibrary.simpleMessage("Walking"),
         "wallet": MessageLookupByLibrary.simpleMessage("DIAMOND WALLET"),
         "walletCap": MessageLookupByLibrary.simpleMessage("WALLET"),
+        "whatDoYouWantToSelect":
+            MessageLookupByLibrary.simpleMessage("What do you want to select?"),
         "whereDoYouLive":
             MessageLookupByLibrary.simpleMessage("WHERE DO YOU LIVE ?"),
         "whichItemWouldYouLikeEtc": MessageLookupByLibrary.simpleMessage(

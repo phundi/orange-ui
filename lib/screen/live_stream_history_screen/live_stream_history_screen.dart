@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:orange_ui/common/widgets/loader.dart';
+import 'package:orange_ui/common/widgets/common_ui.dart';
+
 import 'package:orange_ui/common/widgets/top_bar_area.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/screen/live_stream_history_screen/widgets/center_area_live_stream_history.dart';
@@ -23,7 +24,8 @@ class LiveStreamHistory extends StatelessWidget {
           backgroundColor: ColorRes.white,
           body: Column(
             children: [
-              TopBarArea(title: S.current.liveStreamCap, title2: S.current.history),
+              TopBarArea(
+                  title: S.current.liveStreamCap, title2: S.current.history),
               Container(
                 height: 1,
                 margin: const EdgeInsets.symmetric(horizontal: 7),
@@ -32,8 +34,10 @@ class LiveStreamHistory extends StatelessWidget {
               ),
               const SizedBox(height: 12),
               model.isLoading
-                  ? Expanded(child: Loader().lottieWidget())
-                  : CenterAreaLiveStream(dataList: model.liveStreamHistory, controller: model.scrollController),
+                  ? Expanded(child: CommonUI.lottieWidget())
+                  : CenterAreaLiveStream(
+                      dataList: model.liveStreamHistory,
+                      controller: model.scrollController),
             ],
           ),
         );

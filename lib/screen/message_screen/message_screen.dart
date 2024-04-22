@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:orange_ui/common/widgets/common_ui.dart';
 import 'package:orange_ui/common/widgets/dashboard_top_bar.dart';
-import 'package:orange_ui/common/widgets/loader.dart';
+
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/chat_and_live_stream/chat.dart';
 import 'package:orange_ui/screen/message_screen/message_screen_view_model.dart';
@@ -31,7 +32,7 @@ class MessageScreen extends StatelessWidget {
                   onLivesBtnClick: model.onLivesBtnClick),
               const SizedBox(height: 3),
               if (model.isLoading)
-                Expanded(child: Loader().lottieWidget())
+                Expanded(child: CommonUI.lottieWidget())
               else
                 Expanded(
                   child: model.userList.isEmpty
@@ -39,7 +40,9 @@ class MessageScreen extends StatelessWidget {
                           child: Text(
                             S.of(context).noData,
                             style: const TextStyle(
-                                color: ColorRes.grey14, fontFamily: FontRes.semiBold, fontSize: 17),
+                                color: ColorRes.grey14,
+                                fontFamily: FontRes.semiBold,
+                                fontSize: 17),
                           ),
                         )
                       : ListView.builder(
@@ -59,7 +62,9 @@ class MessageScreen extends StatelessWidget {
                               child: UserCard(
                                 name: chatUser?.username ?? '',
                                 age: chatUser?.age ?? '',
-                                msg: conversation.lastMsg!.isEmpty ? '' : conversation.lastMsg,
+                                msg: conversation.lastMsg!.isEmpty
+                                    ? ''
+                                    : conversation.lastMsg,
                                 time: conversation.time.toString(),
                                 image: chatUser?.image ?? '',
                                 newMsg: chatUser?.isNewMsg ?? false,

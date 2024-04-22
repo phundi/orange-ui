@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
-import 'package:orange_ui/common/widgets/loader.dart';
+import 'package:orange_ui/common/widgets/common_ui.dart';
+
 import 'package:orange_ui/common/widgets/top_bar_area.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/screen/notification_screen/widgets/admin_notificaiton_page.dart';
@@ -112,14 +113,14 @@ class NotificationScreen extends StatelessWidget {
                   : Expanded(
                       child: model.tabIndex == 0
                           ? model.isUserLoading
-                              ? Loader().lottieWidget()
+                              ? CommonUI.lottieWidget()
                               : PersonalNotificationPage(
                                   userNotification: model.userNotification,
                                   controller: model.userScrollController,
                                   onUserTap: model.onUserTap,
                                 )
                           : model.isLoading
-                              ? Loader().lottieWidget()
+                              ? CommonUI.lottieWidget()
                               : AdminNotificationPage(
                                   adminNotification: model.adminNotification,
                                   controller: model.adminScrollController,

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:orange_ui/common/widgets/common_fun.dart';
 import 'package:orange_ui/common/widgets/common_ui.dart';
-import 'package:orange_ui/common/widgets/loader.dart';
+
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/screen/following_list_screen/follow_following_screen_view_model.dart';
@@ -62,7 +62,7 @@ class FollowFollowingScreen extends StatelessWidget {
               ),
               Expanded(
                 child: viewModel.isLoading
-                    ? Loader().lottieWidget()
+                    ? CommonUI.lottieWidget()
                     : viewModel.users.isEmpty
                         ? CommonUI.noData()
                         : ListView.builder(

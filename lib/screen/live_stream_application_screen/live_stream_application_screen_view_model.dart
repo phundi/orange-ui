@@ -6,11 +6,13 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
-import 'package:orange_ui/common/widgets/loader.dart';
+import 'package:orange_ui/common/widgets/common_ui.dart';
+
 import 'package:orange_ui/common/widgets/snack_bar_widget.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/screen/live_stream_application_screen/widgets/video_upload_dialog.dart';
 import 'package:orange_ui/screen/video_preview_screen/video_preview_screen.dart';
+import 'package:orange_ui/screen/video_preview_screen/video_preview_screen_view_model.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:stacked/stacked.dart';
 import 'package:video_thumbnail/video_thumbnail.dart';
@@ -26,7 +28,8 @@ class LiveStreamApplicationScreenViewModel extends BaseViewModel {
   FocusNode languageFocus = FocusNode();
   FocusNode socialLinksFocus = FocusNode();
 
-  List<TextEditingController> socialProfileController = <TextEditingController>[];
+  List<TextEditingController> socialProfileController =
+      <TextEditingController>[];
   List<String> socialLinks = [];
   XFile? _pickedFile;
   ImagePicker picker = ImagePicker();
@@ -57,9 +60,10 @@ class LiveStreamApplicationScreenViewModel extends BaseViewModel {
 
   void onSubmitBtnTap() {
     if (!isValid()) return;
-    Loader().lottieLoader();
+    CommonUI.lottieLoader();
     ApiProvider()
-        .applyForLive(videoFile, aboutController.text, languageController.text, socialLinks.join(','))
+        .applyForLive(videoFile, aboutController.text, languageController.text,
+            socialLinks.join(','))
         .then((value) {
       SnackBarWidget().snackBarWidget(value.message!);
       Get.back();
@@ -105,10 +109,11 @@ class LiveStreamApplicationScreenViewModel extends BaseViewModel {
 
   void onVideoPlayBtnTap() {
     if (videoFile == null || videoFile!.path.isEmpty) return;
-    Loader().lottieLoader();
+    CommonUI.lottieLoader();
     ApiProvider().getStoreFileGivePath(image: videoFile).then((value) {
       Get.back();
-      Get.to(() => VideoPreviewScreen(videoUrl: value.path));
+      Get.to(() =>
+          VideoPreviewScreen(videoUrl: value.path, type: VideoType.other));
     });
   }
 
@@ -163,7 +168,7 @@ class LiveStreamApplicationScreenViewModel extends BaseViewModel {
       showDialog(
           context: Get.context!,
           builder: (context) {
-            return Center(child: Loader().lottieWidget());
+            return Center(child: CommonUI.lottieWidget());
           },
           barrierDismissible: false);
 

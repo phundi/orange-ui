@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
@@ -51,6 +53,23 @@ class CommonUI {
             fontSize: 18,
             color: ColorRes.dimGrey1),
       ),
+    );
+  }
+
+  static Future<void> lottieLoader() {
+    return showDialog(
+        context: Get.context!,
+        builder: (context) {
+          return Center(
+              child: Lottie.asset(AssetRes.loadingLottie,
+                  height: 100, width: 100));
+        },
+        barrierLabel: '');
+  }
+
+  static Widget lottieWidget() {
+    return Center(
+      child: Lottie.asset(AssetRes.loadingLottie, height: 100, width: 100),
     );
   }
 }

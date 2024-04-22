@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:orange_ui/screen/feed_screen/feed_screen_view_model.dart';
-import 'package:orange_ui/screen/feed_screen/widget/feed_post_card.dart';
 import 'package:orange_ui/screen/hashtag_screen/hashtag_screen_view_model.dart';
+import 'package:orange_ui/screen/post_screen/widget/post_card.dart';
 import 'package:orange_ui/utils/color_res.dart';
 import 'package:orange_ui/utils/font_res.dart';
 import 'package:stacked/stacked.dart';
@@ -57,21 +57,20 @@ class HashtagScreen extends StatelessWidget {
             ),
             Expanded(
               child: ViewModelBuilder<FeedScreenViewModel>.nonReactive(
-                  viewModelBuilder: () => FeedScreenViewModel(),
-                  builder: (context, model, child) {
-                    return ListView.builder(
-                      controller: viewModel.scrollController,
-                      itemCount: viewModel.posts.length,
-                      padding: const EdgeInsets.only(top: 10),
-                      itemBuilder: (context, index) => FeedPostCard(
-                        model: model,
-                        onSelected: (value) {
-                          model.onMoreBtnClick(value, viewModel.posts[index]);
-                        },
-                        post: viewModel.posts[index],
-                      ),
-                    );
-                  }),
+                viewModelBuilder: () => FeedScreenViewModel(),
+                builder: (context, model, child) {
+                  return ListView.builder(
+                    controller: viewModel.scrollController,
+                    itemCount: viewModel.posts.length,
+                    padding: const EdgeInsets.only(top: 10),
+                    itemBuilder: (context, index) => PostCard(
+                      model: model,
+                      post: viewModel.posts[index],
+                      onDeleteItem: viewModel.onDeleteItem,
+                    ),
+                  );
+                },
+              ),
             )
           ],
         ),

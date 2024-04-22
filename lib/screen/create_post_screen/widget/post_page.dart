@@ -1,11 +1,9 @@
-import 'package:detectable_text_field/widgets/detectable_text.dart';
 import 'package:flutter/material.dart';
+import 'package:orange_ui/common/widgets/detectable_text_custom.dart';
 import 'package:orange_ui/screen/create_post_screen/create_post_screen_view_model.dart';
 import 'package:orange_ui/screen/create_post_screen/widget/image_post_view.dart';
 import 'package:orange_ui/screen/create_post_screen/widget/interest_widget.dart';
 import 'package:orange_ui/screen/create_post_screen/widget/video_post_view.dart';
-import 'package:orange_ui/utils/color_res.dart';
-import 'package:orange_ui/utils/font_res.dart';
 
 class PostPage extends StatelessWidget {
   final CreatePostScreenViewModel model;
@@ -22,17 +20,7 @@ class PostPage extends StatelessWidget {
             : Padding(
                 padding: const EdgeInsets.symmetric(
                     horizontal: 15.0, vertical: 10.0),
-                child: DetectableText(
-                    text: model.detectableTextFieldController.text,
-                    detectionRegExp: RegExp(r"\B#\w\w+"),
-                    detectedStyle: const TextStyle(
-                        fontFamily: FontRes.bold,
-                        color: ColorRes.orange2,
-                        fontSize: 16),
-                    basicStyle: const TextStyle(
-                        color: ColorRes.dimGrey3,
-                        fontSize: 16,
-                        fontFamily: FontRes.medium)),
+                child: DetectableTextCustom(text: model.detectableTextFieldController.text),
               ),
         model.contentType == 0
             ? ImagePostView(model: model)

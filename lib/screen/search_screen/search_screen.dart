@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:orange_ui/common/widgets/loader.dart';
+import 'package:orange_ui/common/widgets/common_ui.dart';
+
 import 'package:orange_ui/screen/search_screen/search_screen_view_model.dart';
 import 'package:orange_ui/screen/search_screen/widgets/search_bar_area.dart';
 import 'package:orange_ui/screen/search_screen/widgets/user_list.dart';
@@ -33,7 +34,7 @@ class SearchScreen extends StatelessWidget {
               ),
               const SizedBox(height: 11),
               model.isLoading
-                  ? Expanded(child: Loader().lottieWidget())
+                  ? Expanded(child: CommonUI.lottieWidget())
                   : UserList(
                       controller: model.userScrollController,
                       userList: model.searchUsers,

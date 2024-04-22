@@ -3,7 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
-import 'package:orange_ui/common/widgets/loader.dart';
+import 'package:orange_ui/common/widgets/common_ui.dart';
+
 import 'package:orange_ui/common/widgets/confirmation_dialog.dart';
 import 'package:orange_ui/common/widgets/snack_bar_widget.dart';
 import 'package:orange_ui/generated/l10n.dart';
@@ -76,7 +77,8 @@ class OptionalScreenViewModel extends BaseViewModel {
   void onApplyForVerTap() {
     userData?.isBlock == 1
         ? SnackBarWidget().snackBarWidget(S.current.userBlock)
-        : Get.to(() => const VerificationScreen(), arguments: userData)?.then((value) {
+        : Get.to(() => const VerificationScreen(), arguments: userData)
+            ?.then((value) {
             getProfileApiCall();
           });
   }
@@ -84,9 +86,12 @@ class OptionalScreenViewModel extends BaseViewModel {
   void onNotificationTap() {
     userData?.isBlock == 1
         ? SnackBarWidget().snackBarWidget(S.current.userBlock)
-        : ApiProvider().onOffNotification(notificationEnable ? 0 : 1).then((value) async {
+        : ApiProvider()
+            .onOffNotification(notificationEnable ? 0 : 1)
+            .then((value) async {
             if (value.status == true) {
-              notificationEnable = value.data?.isNotification == 1 ? true : false;
+              notificationEnable =
+                  value.data?.isNotification == 1 ? true : false;
               await PrefService.saveUser(value.data);
               notifyListeners();
               SnackBarWidget().snackBarWidget(value.message!);
@@ -97,7 +102,9 @@ class OptionalScreenViewModel extends BaseViewModel {
   void onShowMeOnMapTap() {
     userData?.isBlock == 1
         ? SnackBarWidget().snackBarWidget(S.current.userBlock)
-        : ApiProvider().onOffShowMeOnMap(showMeOnMap ? 0 : 1).then((value) async {
+        : ApiProvider()
+            .onOffShowMeOnMap(showMeOnMap ? 0 : 1)
+            .then((value) async {
             if (value.status == true) {
               showMeOnMap = value.data?.showOnMap == 1 ? true : false;
               await PrefService.saveUser(value.data);
@@ -123,7 +130,8 @@ class OptionalScreenViewModel extends BaseViewModel {
   void onNavigateWebViewScreen(int type) {
     Get.to(
       () => WebViewScreen(
-          appBarTitle: type == 0 ? S.current.privacyPolicy : S.current.termsOfUse,
+          appBarTitle:
+              type == 0 ? S.current.privacyPolicy : S.current.termsOfUse,
           url: type == 0 ? Urls.aPrivacyPolicy : Urls.aTermsOfUse),
     );
   }
@@ -167,7 +175,7 @@ class OptionalScreenViewModel extends BaseViewModel {
   void onDeleteYesBtnClick() async {
     String password = await PrefService.getString(PrefConst.password) ?? '';
     Get.back();
-    Loader().lottieLoader();
+    CommonUI.lottieLoader();
 
     FirebaseAuth.instance.currentUser?.delete();
     await FirebaseAuth.instance.signOut();
@@ -231,7 +239,8 @@ class OptionalScreenViewModel extends BaseViewModel {
   }
 
   void onDeleteAccountTap() {
-    Get.dialog(ConfirmationDialog(onTap: onDeleteYesBtnClick, description: S.current.deleteDialogDis));
+    Get.dialog(ConfirmationDialog(
+        onTap: onDeleteYesBtnClick, description: S.current.deleteDialogDis));
   }
 
   void navigateLanguage() {

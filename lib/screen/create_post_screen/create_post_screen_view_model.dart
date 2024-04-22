@@ -6,7 +6,8 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
-import 'package:orange_ui/common/widgets/loader.dart';
+import 'package:orange_ui/common/widgets/common_ui.dart';
+
 import 'package:orange_ui/model/social/post/add_post.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/service/pref_service.dart';
@@ -169,7 +170,7 @@ class CreatePostScreenViewModel extends BaseViewModel {
       }
       filesMap[Urls.aContents] = imagesFile;
     }
-    Loader().lottieLoader();
+    CommonUI.lottieLoader();
     ApiProvider().multiPartCallApi(
         url: Urls.aAddPost,
         completion: (response) {

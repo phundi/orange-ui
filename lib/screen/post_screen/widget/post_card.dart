@@ -6,28 +6,27 @@ import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/social/post/add_comment.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/screen/feed_screen/feed_screen_view_model.dart';
-import 'package:orange_ui/screen/feed_screen/widget/feed_post_bottom.dart';
+import 'package:orange_ui/screen/post_screen/widget/post_bottom_bar.dart';
 import 'package:orange_ui/screen/feed_screen/widget/feed_story_bar.dart';
-import 'package:orange_ui/screen/feed_screen/widget/image_post.dart';
+import 'package:orange_ui/screen/post_screen/widget/image_post.dart';
 import 'package:orange_ui/screen/feed_screen/widget/text_post.dart';
-import 'package:orange_ui/screen/feed_screen/widget/video_post.dart';
-import 'package:orange_ui/screen/story_view_screen/story_view_screen.dart';
+import 'package:orange_ui/screen/post_screen/widget/video_post.dart';
 import 'package:orange_ui/screen/user_detail_screen/user_detail_screen.dart';
 import 'package:orange_ui/service/pref_service.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
 import 'package:orange_ui/utils/font_res.dart';
 
-class FeedPostCard extends StatelessWidget {
-  final Post? post;
-  final Function(MoreBtnValue value)? onSelected;
+class PostCard extends StatelessWidget {
+  final Post post;
   final FeedScreenViewModel model;
+  final Function(int id)? onDeleteItem;
 
-  const FeedPostCard({
+  const PostCard({
     Key? key,
-    this.post,
-    this.onSelected,
+    required this.post,
     required this.model,
+    this.onDeleteItem,
   }) : super(key: key);
 
   @override
@@ -36,35 +35,20 @@ class FeedPostCard extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         TopAreaPost(
-          userData: post?.user,
-          onSelected: onSelected,
-          onProfilePictureClick: (userData) {
-            if ((userData?.story ?? []).isEmpty) {
-              return;
-            }
-            if (userData?.story != null || userData!.story!.isNotEmpty) {
-              Get.bottomSheet(
-                StoryViewScreen(stories: [post!.user!], storyIndex: 0),
-                isScrollControlled: true,
-                barrierColor: ColorRes.black,
-                shape: SmoothRectangleBorder(
-                    borderRadius: SmoothBorderRadius(cornerRadius: 0)),
-              ).then((value) {
-                model.getProfile();
-                model.fetchStories(userData: post?.user);
-              });
-            }
-          },
-        ),
-        TextPost(description: post?.description),
-        post?.content == null || post!.content!.isEmpty
+            userData: post.user,
+            onSelected: (value) {
+              model.onMoreBtnClick(value, post, onDeleteItem);
+            },
+            onProfilePictureClick: model.onProfilePictureClick),
+        TextPost(description: post.description),
+        post.content == null || post.content!.isEmpty
             ? const SizedBox()
-            : post?.content?.first.contentType == 0
-                ? ImagePost(content: post?.content ?? [], model: model)
-                : post?.content?.first.contentType == 1
-                    ? VideoPost(content: post?.content ?? [])
+            : post.content?.first.contentType == 0
+                ? ImagePost(content: post.content ?? [], model: model)
+                : post.content?.first.contentType == 1
+                    ? VideoPost(post: post)
                     : const SizedBox(),
-        BottomAreaPost(post: post, model: model),
+        PostBottomBar(post: post, model: model),
         const Divider(color: ColorRes.greyShade200, indent: 15, endIndent: 15),
         const SizedBox(height: 10),
       ],

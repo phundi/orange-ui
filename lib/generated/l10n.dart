@@ -3379,6 +3379,56 @@ class S {
       args: [],
     );
   }
+
+  /// `No Like Data`
+  String get noLikeData {
+    return Intl.message(
+      'No Like Data',
+      name: 'noLikeData',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No Saved Data`
+  String get noSavedData {
+    return Intl.message(
+      'No Saved Data',
+      name: 'noSavedData',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `What do you want to select?`
+  String get whatDoYouWantToSelect {
+    return Intl.message(
+      'What do you want to select?',
+      name: 'whatDoYouWantToSelect',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Read Less...`
+  String get readLess {
+    return Intl.message(
+      'Read Less...',
+      name: 'readLess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Read More...`
+  String get readMore {
+    return Intl.message(
+      'Read More...',
+      name: 'readMore',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

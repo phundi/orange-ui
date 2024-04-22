@@ -1,6 +1,8 @@
 import 'package:camera/camera.dart';
+import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:get/get.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
 import 'package:orange_ui/common/widgets/common_fun.dart';
@@ -16,11 +18,13 @@ import 'package:orange_ui/screen/create_post_screen/create_post_screen.dart';
 import 'package:orange_ui/screen/live_grid_screen/live_grid_screen.dart';
 import 'package:orange_ui/screen/notification_screen/notification_screen.dart';
 import 'package:orange_ui/screen/search_screen/search_screen.dart';
+import 'package:orange_ui/screen/story_view_screen/story_view_screen.dart';
 import 'package:orange_ui/screen/user_report_screen/report_sheet.dart';
 import 'package:orange_ui/service/pref_service.dart';
 import 'package:orange_ui/utils/color_res.dart';
 import 'package:orange_ui/utils/const_res.dart';
 import 'package:orange_ui/utils/urls.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:stacked/stacked.dart';
 
 enum MoreBtnValue { report, delete, share }
@@ -31,7 +35,6 @@ class FeedScreenViewModel extends BaseViewModel {
   bool isLoading = true;
   ScrollController scrollController = ScrollController();
   MoreBtnValue moreBtnValue = MoreBtnValue.share;
-
   RegistrationUserData? userData;
 
   // init Camera description
@@ -40,15 +43,20 @@ class FeedScreenViewModel extends BaseViewModel {
   void init() {
     prefData();
     fetchFeedData();
+    fetchScrollData();
   }
 
   void fetchFeedData() {
     isLoading = true;
     ApiProvider().callPost(
         completion: (response) {
-          isLoading = false;
           Feed feed = Feed.fromJson(response);
-          postList = feed.data?.posts ?? [];
+
+          if (postList.isEmpty) {
+            postList = feed.data?.posts ?? [];
+          } else {
+            postList.addAll(feed.data?.posts ?? []);
+          }
           headerStories = feed.data?.usersStories ?? [];
           headerStories.sort((a, b) {
             if (a.isAllStoryShown()) {
@@ -56,13 +64,12 @@ class FeedScreenViewModel extends BaseViewModel {
             }
             return -1;
           });
+          isLoading = false;
           notifyListeners();
         },
         url: Urls.aFetchHomePageData,
         param: {
           Urls.aMyUserId: PrefService.userId,
-          Urls.aStart: postList.length,
-          Urls.aLimit: paginationLimit
         });
   }
 
@@ -71,7 +78,6 @@ class FeedScreenViewModel extends BaseViewModel {
         completion: (response) {
           FetchStories fetchStories = FetchStories.fromJson(response);
           headerStories = fetchStories.data ?? [];
-
           headerStories.sort((a, b) {
             if (a.isAllStoryShown()) {
               return 1;
@@ -95,7 +101,6 @@ class FeedScreenViewModel extends BaseViewModel {
   void getProfile() {
     ApiProvider().getProfile(userID: PrefService.userId).then((value) {
       userData = value?.data;
-
       // Update My PostUser
       for (var element in postList) {
         Post p = element;
@@ -135,36 +140,39 @@ class FeedScreenViewModel extends BaseViewModel {
     ).then((value) {
       if (value != null) {
         postList.insert(0, value);
-        print(value.isLike);
         notifyListeners();
       }
     });
   }
 
-  onMoreBtnClick(MoreBtnValue value, Post posts) {
+  void onMoreBtnClick(
+      MoreBtnValue value, Post post, Function(int id)? onDeleteItem) {
     if (MoreBtnValue.share == value) {
+      sharePost(post);
     } else if (MoreBtnValue.report == value) {
       Get.bottomSheet(
           ReportSheet(
-            reportId: posts.id,
-            profileImage: CommonFun.getProfileImage(images: posts.user?.images),
-            age: posts.user?.age,
-            fullName: posts.user?.fullname,
-            address: posts.user?.live,
-            userData: posts.user,
-            reportType: 2,
-          ),
+              reportId: post.id,
+              profileImage:
+                  CommonFun.getProfileImage(images: post.user?.images),
+              age: post.user?.age,
+              fullName: post.user?.fullname,
+              address: post.user?.live,
+              userData: post.user,
+              reportType: 2),
           isScrollControlled: true);
     } else if (MoreBtnValue.delete == value) {
       Get.dialog(
         ConfirmationDialog(
           onTap: () {
-            postList.removeWhere((element) => element.id == posts.id);
+            onDeleteItem?.call(post.id ?? -1);
+            Get.back();
+            postList.removeWhere((element) => element.id == post.id);
             notifyListeners();
             ApiProvider().callPost(
               completion: (response) {},
               url: Urls.aDeleteMyPost,
-              param: {Urls.aUserId: PrefService.userId, Urls.aPostId: posts.id},
+              param: {Urls.aUserId: PrefService.userId, Urls.aPostId: post.id},
             );
           },
           description: S.current.areYouSureYouWantToDeleteThePost,
@@ -174,6 +182,38 @@ class FeedScreenViewModel extends BaseViewModel {
         ),
       );
     }
+  }
+
+  void sharePost(Post post) async {
+    BranchUniversalObject buo = BranchUniversalObject(
+      canonicalIdentifier: 'flutter/branch',
+      title: userData?.fullname ?? '',
+      imageUrl: (post.content ?? []).isEmpty
+          ? ''
+          : ((post.content ?? []).first.contentType == 1
+              ? '${ConstRes.aImageBaseUrl}${(post.content ?? []).first.thumbnail}'
+              : '${ConstRes.aImageBaseUrl}${(post.content ?? []).first.content ?? ''}'),
+      contentDescription: post.description ?? '',
+      publiclyIndex: true,
+      locallyIndex: true,
+      contentMetadata: BranchContentMetaData()
+        ..addCustomMetadata(Urls.aPostId, post.id),
+    );
+    BranchLinkProperties lp = BranchLinkProperties(
+        channel: 'facebook',
+        feature: 'sharing',
+        stage: 'new share',
+        tags: ['one', 'two', 'three']);
+    lp.addControlParam('url', 'http://www.google.com');
+    lp.addControlParam('url2', 'http://flutter.dev');
+    BranchResponse response =
+        await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
+    if (response.success) {
+      Share.share(
+        '${S.current.checkOutThisProfile} ${response.result}',
+        subject: '${S.current.look} ${post.description ?? ''}',
+      );
+    } else {}
   }
 
   void onNotificationTap() {
@@ -198,6 +238,24 @@ class FeedScreenViewModel extends BaseViewModel {
     notifyListeners();
     if (cameras.isEmpty) {
       cameras = await availableCameras();
+    }
+  }
+
+  onProfilePictureClick(RegistrationUserData? userData) {
+    if ((userData?.story ?? []).isEmpty) {
+      return;
+    }
+    if (userData?.story != null || userData!.story!.isNotEmpty) {
+      Get.bottomSheet(
+        StoryViewScreen(stories: [userData!], userIndex: 0),
+        isScrollControlled: true,
+        barrierColor: ColorRes.black,
+        shape: SmoothRectangleBorder(
+            borderRadius: SmoothBorderRadius(cornerRadius: 0)),
+      ).then((value) {
+        getProfile();
+        fetchStories(userData: userData);
+      });
     }
   }
 }

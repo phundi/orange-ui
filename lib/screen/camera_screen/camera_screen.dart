@@ -2,7 +2,7 @@ import 'package:camera/camera.dart';
 import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:orange_ui/common/widgets/loader.dart';
+import 'package:orange_ui/common/widgets/common_ui.dart';
 import 'package:orange_ui/screen/camera_screen/camera_screen_view_model.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
@@ -25,7 +25,7 @@ class CameraScreen extends StatelessWidget {
               child: Stack(
                 children: [
                   viewModel.isLoading
-                      ? Loader().lottieWidget()
+                      ? CommonUI.lottieWidget()
                       : viewModel.cameraController.value.isInitialized
                           ? Transform.scale(
                               scale: 1 /
@@ -36,7 +36,7 @@ class CameraScreen extends StatelessWidget {
                               child: CameraPreview(viewModel.cameraController))
                           : Align(
                               alignment: Alignment.center,
-                              child: Loader().lottieWidget()),
+                              child: CommonUI.lottieWidget()),
                   SafeArea(
                     child: Column(
                       children: [
@@ -97,8 +97,11 @@ class CameraScreen extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            Image.asset(AssetRes.icMedia,
-                                width: 30, height: 30),
+                            InkWell(
+                              onTap: viewModel.onMediaTap,
+                              child: Image.asset(AssetRes.icMedia,
+                                  width: 30, height: 30),
+                            ),
                             GestureDetector(
                               onTap: viewModel.captureImage,
                               onLongPressStart: viewModel.onCaptureVideoStart,

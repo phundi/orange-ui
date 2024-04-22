@@ -11,7 +11,8 @@ import 'package:google_maps_cluster_manager/google_maps_cluster_manager.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
 import 'package:orange_ui/common/widgets/common_fun.dart';
-import 'package:orange_ui/common/widgets/loader.dart';
+import 'package:orange_ui/common/widgets/common_ui.dart';
+
 import 'package:orange_ui/common/widgets/snack_bar_widget.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/screen/map_screen/widgets/user_pop_up.dart';
@@ -117,7 +118,7 @@ class MapScreenViewModel extends BaseViewModel {
   }
 
   void onDistanceChange(int value) async {
-    Loader().lottieLoader();
+    CommonUI.lottieLoader();
     position = await getUserCurrentLocation();
     selectedDistance = value;
     getUserByCoordinatesApiCall(

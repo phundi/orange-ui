@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:orange_ui/common/widgets/loader.dart';
+import 'package:orange_ui/common/widgets/common_ui.dart';
+
 import 'package:orange_ui/common/widgets/top_bar_area.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/screen/options_screen/widgets/bottom_legal_area.dart';
@@ -36,7 +37,7 @@ class OptionScreen extends StatelessWidget {
                 ),
                 Expanded(
                   child: model.isLoading
-                      ? Center(child: Loader().lottieWidget())
+                      ? Center(child: CommonUI.lottieWidget())
                       : Padding(
                           padding: const EdgeInsets.only(left: 8, right: 9),
                           child: SingleChildScrollView(
@@ -55,11 +56,14 @@ class OptionScreen extends StatelessWidget {
                                   verification: model.verificationProcess,
                                 ),
                                 const SizedBox(height: 20),
-                                LanguageSection(navigateLanguage: model.navigateLanguage),
+                                LanguageSection(
+                                    navigateLanguage: model.navigateLanguage),
                                 const SizedBox(height: 20),
                                 BottomLegalArea(
-                                  onPrivacyPolicyTap: () => model.onNavigateWebViewScreen(0),
-                                  onTermsOfUseTap: () => model.onNavigateWebViewScreen(1),
+                                  onPrivacyPolicyTap: () =>
+                                      model.onNavigateWebViewScreen(0),
+                                  onTermsOfUseTap: () =>
+                                      model.onNavigateWebViewScreen(1),
                                   onLogoutTap: model.onLogoutTap,
                                   onDeleteAccountTap: model.onDeleteAccountTap,
                                 ),

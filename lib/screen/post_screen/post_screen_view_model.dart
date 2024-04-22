@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
 import 'package:orange_ui/model/social/post/add_comment.dart';
 import 'package:orange_ui/model/social/post/fetch_post_by_user.dart';
@@ -11,24 +12,33 @@ class PostScreenViewModel extends BaseViewModel {
   RegistrationUserData? userData;
   List<Post> posts = [];
   bool isLoading = true;
+  ScrollController scrollController = ScrollController();
+  bool hasNoMoreData = false;
 
   init() {
     fetchPostByUse();
+    fetchScrollData();
   }
 
   PostScreenViewModel(this.userData);
 
   void fetchPostByUse() {
+    if (hasNoMoreData) {
+      return;
+    }
     isLoading = true;
     ApiProvider().callPost(
         completion: (response) {
-          isLoading = false;
           FetchPostByUser fetchPostByUser = FetchPostByUser.fromJson(response);
           if (posts.isEmpty) {
             posts = fetchPostByUser.data ?? [];
           } else {
             posts.addAll(fetchPostByUser.data ?? []);
           }
+          if (paginationLimit > (fetchPostByUser.data ?? []).length) {
+            hasNoMoreData = true;
+          }
+          isLoading = false;
           notifyListeners();
         },
         url: Urls.aFetchPostByUser,
@@ -38,5 +48,21 @@ class PostScreenViewModel extends BaseViewModel {
           Urls.aStart: posts.length,
           Urls.aLimit: paginationLimit
         });
+  }
+
+  void fetchScrollData() {
+    scrollController.addListener(() {
+      if (scrollController.offset ==
+          scrollController.position.maxScrollExtent) {
+        if (!isLoading) {
+          fetchPostByUse();
+        }
+      }
+    });
+  }
+
+  onDeleteItem(int id) {
+    posts.removeWhere((element) => element.id == id);
+    notifyListeners();
   }
 }

@@ -3,7 +3,8 @@ import 'dart:io';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
-import 'package:orange_ui/common/widgets/loader.dart';
+import 'package:orange_ui/common/widgets/common_ui.dart';
+
 import 'package:orange_ui/screen/dashboard/dashboard_screen.dart';
 import 'package:orange_ui/screen/get_started_screen/widget/eula_sheet.dart';
 import 'package:orange_ui/screen/login_dashboard_screen/login_dashboard_screen.dart';
@@ -42,8 +43,10 @@ class GetStartedScreenViewModel extends BaseViewModel {
       PrefService.minThreshold = value.data?.appdata?.minThreshold ?? 0;
       PrefService.coinRate = value.data?.appdata?.coinRate ?? '';
       PrefService.messagePrice = value.data?.appdata?.messagePrice ?? 0;
-      PrefService.liveWatchingPrice = value.data?.appdata?.liveWatchingPrice ?? 0;
-      PrefService.reverseSwipePrice = value.data?.appdata?.reverseSwipePrice ?? 0;
+      PrefService.liveWatchingPrice =
+          value.data?.appdata?.liveWatchingPrice ?? 0;
+      PrefService.reverseSwipePrice =
+          value.data?.appdata?.reverseSwipePrice ?? 0;
       PrefService.isDating == value.data?.appdata?.isDating;
       notifyListeners();
     });
@@ -90,9 +93,11 @@ class GetStartedScreenViewModel extends BaseViewModel {
         (value) {
           if (value?.data?.age == null) {
             Get.off(() => const StartingProfileScreen());
-          } else if (value?.data?.images == null || value!.data!.images!.isEmpty) {
+          } else if (value?.data?.images == null ||
+              value!.data!.images!.isEmpty) {
             Get.off(() => const SelectPhotoScreen());
-          } else if (value.data?.interests == null || value.data!.interests!.isEmpty) {
+          } else if (value.data?.interests == null ||
+              value.data!.interests!.isEmpty) {
             Get.off(() => const SelectHobbiesScreen());
           } else {
             Get.off(() => const DashboardScreen());
@@ -110,7 +115,8 @@ class GetStartedScreenViewModel extends BaseViewModel {
   }
 
   void eulaSheet() {
-    Get.bottomSheet(EulaSheet(eulaAcceptClick: eulaAcceptClick), isScrollControlled: true, isDismissible: false);
+    Get.bottomSheet(EulaSheet(eulaAcceptClick: eulaAcceptClick),
+        isScrollControlled: true, isDismissible: false);
   }
 
   void eulaAcceptClick() async {
@@ -158,8 +164,9 @@ class GetStartedScreenViewModel extends BaseViewModel {
     if (permission == LocationPermission.deniedForever) {
       await Geolocator.openAppSettings();
     }
-    Loader().lottieLoader();
-    await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high).then((value) async {
+    CommonUI.lottieLoader();
+    await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high)
+        .then((value) async {
       await PrefService.setLatitude(value.latitude.toString());
       await PrefService.setLongitude(value.longitude.toString());
       Get.back();

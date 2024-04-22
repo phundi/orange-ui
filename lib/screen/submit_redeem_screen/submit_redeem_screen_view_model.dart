@@ -3,7 +3,8 @@ import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
 import 'package:orange_ui/common/widgets/common_fun.dart';
-import 'package:orange_ui/common/widgets/loader.dart';
+import 'package:orange_ui/common/widgets/common_ui.dart';
+
 import 'package:orange_ui/common/widgets/snack_bar_widget.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:stacked/stacked.dart';
@@ -39,7 +40,7 @@ class SubmitRedeemScreenViewModel extends BaseViewModel {
 
   void onSubmitBtnTap() async {
     if (!isValid()) return;
-    Loader().lottieLoader();
+    CommonUI.lottieLoader();
     ApiProvider()
         .placeRedeemRequest(paymentGateway, accountDetailController.text)
         .then((value) {

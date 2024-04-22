@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:orange_ui/common/widgets/loader.dart';
+import 'package:orange_ui/common/widgets/common_ui.dart';
+
 import 'package:orange_ui/screen/live_grid_screen/live_grid_screen_view_model.dart';
 import 'package:orange_ui/screen/live_grid_screen/widgets/custom_grid_view.dart';
 import 'package:orange_ui/screen/live_grid_screen/widgets/live_grid_top_area.dart';
@@ -34,7 +35,7 @@ class LiveGridScreen extends StatelessWidget {
                 )
               else
                 Expanded(
-                  child: Loader().lottieWidget(),
+                  child: CommonUI.lottieWidget(),
                 ),
               const SizedBox(
                 height: 10,

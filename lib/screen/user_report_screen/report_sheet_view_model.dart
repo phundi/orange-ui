@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
-import 'package:orange_ui/common/widgets/loader.dart';
+import 'package:orange_ui/common/widgets/common_ui.dart';
+
 import 'package:orange_ui/common/widgets/snack_bar_widget.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/screen/webview_screen/webview_screen.dart';
@@ -43,7 +44,8 @@ class ReportSheetViewModel extends BaseViewModel {
   }
 
   void onTermAndConditionClick() {
-    Get.to(() => WebViewScreen(appBarTitle: S.current.termsOfUse, url: Urls.aTermsOfUse));
+    Get.to(() => WebViewScreen(
+        appBarTitle: S.current.termsOfUse, url: Urls.aTermsOfUse));
   }
 
   bool isValid() {
@@ -90,7 +92,7 @@ class ReportSheetViewModel extends BaseViewModel {
         );
       }
     } else if (type == 2) {
-      Loader().lottieLoader();
+      CommonUI.lottieLoader();
       ApiProvider().callPost(
           completion: (response) {
             Get.back();
@@ -98,7 +100,11 @@ class ReportSheetViewModel extends BaseViewModel {
             SnackBarWidget().snackBarWidget(S.current.reportedSubmitted);
           },
           url: Urls.aReportPost,
-          param: {Urls.aPostId: reportID, Urls.aReason: reason, Urls.aDescription: explainController.text.trim()});
+          param: {
+            Urls.aPostId: reportID,
+            Urls.aReason: reason,
+            Urls.aDescription: explainController.text.trim()
+          });
     }
   }
 

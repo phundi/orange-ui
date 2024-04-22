@@ -11,7 +11,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
 import 'package:orange_ui/common/widgets/common_fun.dart';
-import 'package:orange_ui/common/widgets/loader.dart';
+import 'package:orange_ui/common/widgets/common_ui.dart';
 import 'package:orange_ui/common/widgets/confirmation_dialog.dart';
 import 'package:orange_ui/common/widgets/snack_bar_widget.dart';
 import 'package:orange_ui/generated/l10n.dart';
@@ -28,6 +28,7 @@ import 'package:orange_ui/screen/live_stream_application_screen/widgets/video_up
 import 'package:orange_ui/screen/user_detail_screen/user_detail_screen.dart';
 import 'package:orange_ui/screen/user_report_screen/report_sheet.dart';
 import 'package:orange_ui/screen/video_preview_screen/video_preview_screen.dart';
+import 'package:orange_ui/screen/video_preview_screen/video_preview_screen_view_model.dart';
 import 'package:orange_ui/service/pref_service.dart';
 import 'package:orange_ui/utils/app_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
@@ -525,7 +526,7 @@ class ChatScreenViewModel extends BaseViewModel {
                 showDialog(
                   context: Get.context!,
                   builder: (context) {
-                    return Loader().lottieWidget();
+                    return CommonUI.lottieWidget();
                   },
                 );
                 ApiProvider()
@@ -572,7 +573,10 @@ class ChatScreenViewModel extends BaseViewModel {
 
   ///  video preview screen navigate
   void onVideoItemClick(ChatMessage? data) {
-    Get.to(() => VideoPreviewScreen(videoUrl: data?.video))?.then((value) {
+    Get.to(() => VideoPreviewScreen(
+          videoUrl: data?.video,
+          type: VideoType.other,
+        ))?.then((value) {
       SystemChrome.setSystemUIOverlayStyle(
         const SystemUiOverlayStyle(
           statusBarColor: ColorRes.white,

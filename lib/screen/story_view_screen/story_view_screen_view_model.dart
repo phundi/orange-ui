@@ -16,9 +16,10 @@ class StoryViewScreenViewModel extends BaseViewModel {
   List<List<StoryItem>> stories = [];
   List<RegistrationUserData> userStories = [];
   PageController pageController;
-  int index = 0;
+  int userIndex = 0;
 
-  StoryViewScreenViewModel(this.userStories, this.index, this.pageController) {
+  StoryViewScreenViewModel(
+      this.userStories, this.userIndex, this.pageController) {
     for (var user in userStories) {
       List<StoryItem> userStories =
           user.story?.map((e) => e.toStoryItem(storyController)).toList() ?? [];
@@ -39,26 +40,26 @@ class StoryViewScreenViewModel extends BaseViewModel {
   }
 
   void onPreviousUser() {
-    if (index == 0) {
+    if (userIndex == 0) {
       return;
     }
-    pageController.animateToPage(index - 1,
+    pageController.animateToPage(userIndex - 1,
         duration: const Duration(milliseconds: 500), curve: Curves.ease);
     notifyListeners();
   }
 
   void onNext() {
-    if (index == (stories.length - 1)) {
+    if (userIndex == (stories.length - 1)) {
       Get.back();
       return;
     }
-    pageController.animateToPage(index + 1,
+    pageController.animateToPage(userIndex + 1,
         duration: const Duration(milliseconds: 500), curve: Curves.ease);
     notifyListeners();
   }
 
   void onPageChange(int value) {
-    index = value;
+    userIndex = value;
     notifyListeners();
   }
 
@@ -75,7 +76,7 @@ class StoryViewScreenViewModel extends BaseViewModel {
           Get.back();
           ApiProvider().callPost(
             completion: (response) {
-              stories[index].removeWhere((element) {
+              stories[userIndex].removeWhere((element) {
                 return element.story?.id == story?.id;
               });
             },

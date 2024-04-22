@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
-import 'package:orange_ui/common/widgets/loader.dart';
+import 'package:orange_ui/common/widgets/common_ui.dart';
+
 import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/screen/dashboard/dashboard_screen.dart';
 import 'package:orange_ui/service/pref_service.dart';
@@ -41,7 +42,7 @@ class SelectHobbiesScreenViewModel extends BaseViewModel {
 
   void onNextTap() {
     if (selectedList.isEmpty) return;
-    Loader().lottieLoader();
+    CommonUI.lottieLoader();
     ApiProvider().updateProfile(interest: selectedList).then((value) async {
       Get.back();
       Get.offAll(() => const DashboardScreen());

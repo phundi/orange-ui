@@ -29,6 +29,11 @@ class ImagePost extends StatelessWidget {
                   child: CachedNetworkImage(
                     imageUrl:
                         '${ConstRes.aImageBaseUrl}${content.first.content}',
+                    cacheKey:
+                        '${ConstRes.aImageBaseUrl}${content.first.content}',
+                    placeholder: (context, url) {
+                      return CommonUI.postPlaceHolder();
+                    },
                     fit: BoxFit.cover,
                     height: null,
                     width: double.infinity,

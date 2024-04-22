@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:orange_ui/common/widgets/loader.dart';
+import 'package:orange_ui/common/widgets/common_ui.dart';
+
 import 'package:orange_ui/common/widgets/top_bar_area.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/screen/redeem_screen/redeem_screen_view_model.dart';
@@ -35,7 +36,7 @@ class RedeemScreen extends StatelessWidget {
               !model.isLoading
                   ? CenterAreaRedeemScreen(redeemData: model.redeemData)
                   : Expanded(
-                      child: Loader().lottieWidget(),
+                      child: CommonUI.lottieWidget(),
                     ),
             ],
           ),

@@ -39,7 +39,7 @@ class FeedStoryBar extends StatelessWidget {
                   onTap: () {
                     Get.bottomSheet(
                       StoryViewScreen(
-                          stories: model.headerStories, storyIndex: index),
+                          stories: model.headerStories, userIndex: index),
                       isScrollControlled: true,
                       barrierColor: ColorRes.black,
                       shape: SmoothRectangleBorder(
@@ -92,7 +92,7 @@ class MyStoryBox extends StatelessWidget {
       onTap: () {
         if (isStoryAvailable) {
           Get.bottomSheet(
-            StoryViewScreen(stories: [model.userData!], storyIndex: 0),
+            StoryViewScreen(stories: [model.userData!], userIndex: 0),
             isScrollControlled: true,
             barrierColor: ColorRes.black,
             shape: SmoothRectangleBorder(

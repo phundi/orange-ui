@@ -709,11 +709,11 @@ class ApiProvider {
     param?.forEach((key, value) {
       params[key] = "$value";
     });
-    // log("❗️{URL}:  $url");
-    // log("❗️{PARAMETERS}:  $params");
+    log("❗️{URL}:  $url");
+    log("❗️{PARAMETERS}:  $params");
     http.post(Uri.parse(url), headers: headers, body: params).then(
       (value) {
-        // log('❗️RESPONSE:  ${value.body}');
+        log('❗️RESPONSE:  ${value.body}');
         var response = jsonDecode(value.body);
         completion.call(response);
       },

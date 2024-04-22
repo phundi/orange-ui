@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:orange_ui/common/widgets/loader.dart';
+import 'package:orange_ui/common/widgets/common_ui.dart';
+
 import 'package:orange_ui/common/widgets/top_bar_area.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/screen/livestream_dashboard_screen/livestream_dashboard_screen_view_model.dart';
@@ -32,7 +33,7 @@ class LiveStreamDashBoard extends StatelessWidget {
                 color: ColorRes.grey5,
               ),
               model.isLoading
-                  ? Expanded(child: Loader().lottieWidget())
+                  ? Expanded(child: CommonUI.lottieWidget())
                   : CenterAreaLiveStreamDashBoard(
                       onRedeemTap: model.onRedeemTap,
                       eligible: model.eligible,

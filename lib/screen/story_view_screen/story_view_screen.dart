@@ -16,10 +16,10 @@ import 'package:stacked/stacked.dart';
 
 class StoryViewScreen extends StatelessWidget {
   final List<RegistrationUserData> stories;
-  final int storyIndex;
+  final int userIndex;
 
   const StoryViewScreen(
-      {Key? key, required this.stories, required this.storyIndex})
+      {Key? key, required this.stories, required this.userIndex})
       : super(key: key);
 
   @override
@@ -27,7 +27,7 @@ class StoryViewScreen extends StatelessWidget {
     return ViewModelBuilder<StoryViewScreenViewModel>.reactive(
       onViewModelReady: (viewModel) => viewModel.init(),
       viewModelBuilder: () => StoryViewScreenViewModel(
-          stories, storyIndex, PageController(initialPage: storyIndex)),
+          stories, userIndex, PageController(initialPage: userIndex)),
       builder: (context, model, child) {
         return SafeArea(
           bottom: false,
@@ -37,9 +37,9 @@ class StoryViewScreen extends StatelessWidget {
                 controller: model.pageController,
                 itemCount: stories.length,
                 onPageChanged: model.onPageChange,
-                itemBuilder: (context, index) {
+                itemBuilder: (context, storyIndex) {
                   return StoryView(
-                    storyItems: model.stories[index],
+                    storyItems: model.stories[storyIndex],
                     inline: true,
                     onStoryShow: model.onStoryShow,
                     onBack: model.onPreviousUser,
@@ -74,7 +74,8 @@ class StoryViewScreen extends StatelessWidget {
                               child: Row(
                                 children: [
                                   Flexible(
-                                      child: Text(user?.fullname ?? 'Unknown',
+                                      child: Text(
+                                          CommonUI.fullName(user?.fullname),
                                           style: const TextStyle(
                                               fontFamily: FontRes.bold,
                                               color: ColorRes.white,
@@ -111,7 +112,7 @@ class StoryViewScreen extends StatelessWidget {
                                 children: [
                                   Image.asset(AssetRes.icEyeBlack, width: 16),
                                   Text(
-                                    ' ${NumberFormat.compact().format(stories[storyIndex].story?[index].viewByUserIds?.split(',').length ?? 0)}',
+                                    ' ${NumberFormat.compact().format(stories[userIndex].story?[storyIndex].viewByUserIds?.split(',').length ?? 0)}',
                                     style: const TextStyle(
                                         fontFamily: FontRes.medium,
                                         fontSize: 12,

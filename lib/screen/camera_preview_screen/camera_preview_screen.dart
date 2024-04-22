@@ -31,10 +31,7 @@ class CameraPreviewScreen extends StatelessWidget {
           alignment: Alignment.center,
           children: [
             type == 0
-                ? Image.file(File(xFile.path),
-                    height: double.infinity,
-                    width: double.infinity,
-                    fit: BoxFit.cover)
+                ? Image.file(File(xFile.path))
                 : !model.videoPlayerController.value.isInitialized
                     ? const SizedBox()
                     : AspectRatio(

@@ -14,7 +14,7 @@ class FollowFollowingScreenViewModel extends BaseViewModel {
   int userId;
   ScrollController scrollController = ScrollController();
   FollowFollowingScreenViewModel(this.followFollowingType, this.userId);
-
+  bool hasNoMoreData = false;
   bool isLoading = true;
 
   void init() {
@@ -23,6 +23,9 @@ class FollowFollowingScreenViewModel extends BaseViewModel {
   }
 
   void fetchFollowingList() {
+    if (hasNoMoreData) {
+      return;
+    }
     isLoading = true;
 
     Map<String, dynamic> param = {};
@@ -38,13 +41,16 @@ class FollowFollowingScreenViewModel extends BaseViewModel {
 
     ApiProvider().callPost(
         completion: (response) {
-          isLoading = false;
           FetchUsers fetchUsers = FetchUsers.fromJson(response);
           if (users.isEmpty) {
             users = fetchUsers.data ?? [];
           } else {
             users.addAll(fetchUsers.data ?? []);
           }
+          if (paginationLimit > (fetchUsers.data ?? []).length) {
+            hasNoMoreData = true;
+          }
+          isLoading = false;
           notifyListeners();
         },
         url: followFollowingType == FollowFollowingType.following

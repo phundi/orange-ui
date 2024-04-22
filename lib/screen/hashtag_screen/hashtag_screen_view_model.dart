@@ -40,4 +40,9 @@ class HashtagScreenViewModel extends BaseViewModel {
           Urls.aHashtag: hashTag.replaceAll('#', '')
         });
   }
+
+  onDeleteItem(int id) {
+    posts.removeWhere((element) => element.id == id);
+    notifyListeners();
+  }
 }

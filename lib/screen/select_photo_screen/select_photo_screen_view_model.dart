@@ -4,7 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
-import 'package:orange_ui/common/widgets/loader.dart';
+import 'package:orange_ui/common/widgets/common_ui.dart';
+
 import 'package:orange_ui/common/widgets/snack_bar_widget.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
@@ -66,7 +67,7 @@ class SelectPhotoScreenViewModel extends BaseViewModel {
       SnackBarWidget().snackBarWidget(S.current.pleaseSelectImage);
       return;
     }
-    Loader().lottieLoader();
+    CommonUI.lottieLoader();
     for (int i = 0; i < imageFileList!.length; i++) {
       String image = imageFileList![i].path;
       imageList.add(image);

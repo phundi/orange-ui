@@ -6,7 +6,8 @@ import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
 import 'package:orange_ui/common/widgets/common_fun.dart';
-import 'package:orange_ui/common/widgets/loader.dart';
+import 'package:orange_ui/common/widgets/common_ui.dart';
+
 import 'package:orange_ui/common/widgets/snack_bar_widget.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/chat_and_live_stream/chat.dart';
@@ -233,7 +234,7 @@ class UserDetailScreenViewModel extends BaseViewModel {
   }
 
   Future<void> blockUnblockApi({int? blockProfileId}) async {
-    Loader().lottieLoader();
+    CommonUI.lottieLoader();
     await ApiProvider().updateBlockList(blockProfileId);
     onBackTap();
   }

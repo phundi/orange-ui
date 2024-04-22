@@ -11,11 +11,11 @@ import 'package:orange_ui/utils/color_res.dart';
 import 'package:orange_ui/utils/font_res.dart';
 import 'package:orange_ui/utils/urls.dart';
 
-class BottomAreaPost extends StatelessWidget {
+class PostBottomBar extends StatelessWidget {
   final Post? post;
   final FeedScreenViewModel model;
 
-  const BottomAreaPost({
+  const PostBottomBar({
     Key? key,
     required this.post,
     required this.model,
@@ -49,7 +49,9 @@ class BottomAreaPost extends StatelessWidget {
           const SizedBox(width: 5),
           Container(height: 20, width: 1, color: ColorRes.lightGrey),
           const SizedBox(width: 10),
-          Image.asset(AssetRes.icPostShare, height: 22, width: 22),
+          InkWell(
+              onTap: () => model.sharePost(post!),
+              child: Image.asset(AssetRes.icPostShare, height: 22, width: 22)),
           const Spacer(),
           Text(CommonFun.timeAgo(DateTime.parse(post?.createdAt ?? '')),
               style: const TextStyle(
@@ -73,15 +75,8 @@ class LikeButton extends StatefulWidget {
 
 class _LikeButtonState extends State<LikeButton>
     with SingleTickerProviderStateMixin {
-  bool isLike = false;
   late final AnimationController _controller = AnimationController(
       duration: const Duration(milliseconds: 200), vsync: this, value: 1.0);
-
-  @override
-  void initState() {
-    fetchLikePost();
-    super.initState();
-  }
 
   @override
   void dispose() {
@@ -94,34 +89,40 @@ class _LikeButtonState extends State<LikeButton>
     return InkWell(
       onTap: () {
         HapticFeedback.lightImpact();
-        if (isLike) {
+        if (widget.posts?.isLike == 1) {
           widget.posts?.setLikesCount(-1);
+          widget.posts?.isLike = 0;
           ApiProvider().callPost(
               completion: (response) {},
               url: Urls.aDislikePost,
               param: {
                 Urls.aUserId: PrefService.userId,
-                Urls.aPostId: widget.posts?.id,
+                Urls.aPostId: widget.posts?.id
               });
         } else {
           widget.posts?.setLikesCount(1);
-          ApiProvider()
-              .callPost(completion: (response) {}, url: Urls.aLikePost, param: {
-            Urls.aUserId: PrefService.userId,
-            Urls.aPostId: widget.posts?.id,
-          });
+          widget.posts?.isLike = 1;
+          ApiProvider().callPost(
+              completion: (response) {},
+              url: Urls.aLikePost,
+              param: {
+                Urls.aUserId: PrefService.userId,
+                Urls.aPostId: widget.posts?.id
+              });
         }
-        isLike = !isLike;
         setState(() {});
         _controller.reverse().then((value) => _controller.forward());
       },
       child: Row(
         children: [
           ScaleTransition(
-              scale: Tween(begin: 0.7, end: 1.0).animate(
-                  CurvedAnimation(parent: _controller, curve: Curves.easeOut)),
-              child: Image.asset(isLike ? AssetRes.icFillFav : AssetRes.icFav,
-                  height: 22, width: 22)),
+            scale: Tween(begin: 0.7, end: 1.0).animate(
+                CurvedAnimation(parent: _controller, curve: Curves.easeOut)),
+            child: Image.asset(
+                widget.posts?.isLike == 1 ? AssetRes.icFillFav : AssetRes.icFav,
+                height: 22,
+                width: 22),
+          ),
           Text(
               '  ${NumberFormat.compact().format(widget.posts?.likesCount ?? 0)}  ',
               style: const TextStyle(
@@ -132,10 +133,5 @@ class _LikeButtonState extends State<LikeButton>
         ],
       ),
     );
-  }
-
-  void fetchLikePost() {
-    isLike = widget.posts?.isLike == 1;
-    setState(() {});
   }
 }

@@ -3,7 +3,8 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
-import 'package:orange_ui/common/widgets/loader.dart';
+import 'package:orange_ui/common/widgets/common_ui.dart';
+
 import 'package:orange_ui/common/widgets/snack_bar_widget.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
@@ -51,7 +52,7 @@ class LoginPwdScreenViewModel extends BaseViewModel {
     pwdFocus.unfocus();
     if (validation) {
       if (!GetUtils.isEmail(email)) {
-        Loader().lottieLoader();
+        CommonUI.lottieLoader();
         ApiProvider()
             .registration(
                 email: email,
@@ -78,10 +79,10 @@ class LoginPwdScreenViewModel extends BaseViewModel {
       } else {
         signIn(email: email, password: pwdController.text).then((value) async {
           if (value?.user?.email == email) {
-            Loader().lottieLoader();
+            CommonUI.lottieLoader();
             if (value?.user?.emailVerified == true) {
               Get.back();
-              Loader().lottieLoader();
+              CommonUI.lottieLoader();
               ApiProvider()
                   .registration(
                       email: email,
@@ -127,7 +128,7 @@ class LoginPwdScreenViewModel extends BaseViewModel {
       return;
     }
     Get.back();
-    Loader().lottieLoader();
+    CommonUI.lottieLoader();
     try {
       await _auth.sendPasswordResetEmail(email: controller.text);
       controller.clear();

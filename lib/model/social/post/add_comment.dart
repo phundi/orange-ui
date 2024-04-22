@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_getters_setters
+
 import 'package:orange_ui/model/user/registration_user.dart';
 
 class AddComment {
@@ -130,7 +132,7 @@ class Post {
     _interestIds = json['interest_ids'];
     _commentsCount = json['comments_count'];
     _likesCount = json['likes_count'];
-    _isLike = json['isLike'];
+    _isLike = json['is_like'];
     _hashtags = json['hashtags'];
     _createdAt = json['created_at'];
     _updatedAt = json['updated_at'];
@@ -178,7 +180,7 @@ class Post {
     map['interest_ids'] = _interestIds;
     map['comments_count'] = _commentsCount;
     map['likes_count'] = _likesCount;
-    map['isLike'] = _isLike;
+    map['is_like'] = _isLike;
     map['hashtags'] = _hashtags;
     map['created_at'] = _createdAt;
     map['updated_at'] = _updatedAt;
@@ -193,6 +195,10 @@ class Post {
 
   set user(RegistrationUserData? value) {
     _user = value;
+  }
+
+  set isLike(int? value) {
+    _isLike = value;
   }
 
   void setLikesCount(int value) {
@@ -210,6 +216,7 @@ class Content {
     int? postId,
     int? contentType,
     String? content,
+    int? viewCount,
     String? thumbnail,
     String? createdAt,
     String? updatedAt,
@@ -219,6 +226,7 @@ class Content {
     _contentType = contentType;
     _content = content;
     _thumbnail = thumbnail;
+    _viewCount = viewCount;
     _createdAt = createdAt;
     _updatedAt = updatedAt;
   }
@@ -229,6 +237,7 @@ class Content {
     _contentType = json['content_type'];
     _content = json['content'];
     _thumbnail = json['thumbnail'];
+    _viewCount = json['view_count'];
     _createdAt = json['created_at'];
     _updatedAt = json['updated_at'];
   }
@@ -237,6 +246,7 @@ class Content {
   int? _contentType;
   String? _content;
   String? _thumbnail;
+  int? _viewCount;
   String? _createdAt;
   String? _updatedAt;
 
@@ -245,6 +255,7 @@ class Content {
   int? get contentType => _contentType;
   String? get content => _content;
   String? get thumbnail => _thumbnail;
+  int? get viewCount => _viewCount;
   String? get createdAt => _createdAt;
   String? get updatedAt => _updatedAt;
 
@@ -255,6 +266,7 @@ class Content {
     map['content_type'] = _contentType;
     map['content'] = _content;
     map['thumbnail'] = _thumbnail;
+    map['view_count'] = _viewCount;
     map['created_at'] = _createdAt;
     map['updated_at'] = _updatedAt;
     return map;

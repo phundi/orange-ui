@@ -4,7 +4,7 @@ import 'package:bubbly_camera/bubbly_camera.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
-import 'package:orange_ui/common/widgets/loader.dart';
+import 'package:orange_ui/common/widgets/common_ui.dart';
 import 'package:orange_ui/common/widgets/snack_bar_widget.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/get_diamond_pack.dart';
@@ -29,7 +29,7 @@ class BottomDiamondShopViewModel extends BaseViewModel {
   }
 
   void addCoinApiCall() {
-    Loader().lottieLoader();
+    CommonUI.lottieLoader();
     ApiProvider().addCoinFromWallet(coinValue).then((value) {
       if (Get.isBottomSheetOpen == true) {
         Get.back();
@@ -46,8 +46,9 @@ class BottomDiamondShopViewModel extends BaseViewModel {
   }
 
   void onDiamondPurchase(GetDiamondPackData? data) async {
-    Loader().lottieLoader();
+    CommonUI.lottieLoader();
     coinValue = data?.amount;
-    BubblyCamera.inAppPurchase(Platform.isAndroid ? data?.androidProductId : data?.iosProductId);
+    BubblyCamera.inAppPurchase(
+        Platform.isAndroid ? data?.androidProductId : data?.iosProductId);
   }
 }
