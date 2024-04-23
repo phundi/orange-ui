@@ -72,7 +72,7 @@ class ProfilePicArea extends StatelessWidget {
                       return CommonUI.profileImagePlaceHolder(
                           name: data?.fullname ?? 'Unknown',
                           borderRadius: 360,
-                          heightWeight: Get.width / 2.5);
+                          heightWidth: Get.width / 2.5);
                     },
                     progressIndicatorBuilder: (context, url, progress) {
                       return ShimmerScreen.circular(

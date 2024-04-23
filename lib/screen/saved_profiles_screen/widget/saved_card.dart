@@ -47,7 +47,7 @@ class SavedCard extends StatelessWidget {
                 fit: BoxFit.cover,
                 errorWidget: (context, url, error) {
                   return CommonUI.profileImagePlaceHolder(
-                      name: userData.fullname, heightWeight: 40);
+                      name: userData.fullname, heightWidth: 40);
                 },
               ),
             ),

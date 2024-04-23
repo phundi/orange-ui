@@ -78,7 +78,7 @@ class FullImageView extends StatelessWidget {
                             child: PageView.builder(
                               controller: pageController,
                               itemCount:
-                                  userData?[currentProfileIndex].images?.length,
+                                  userData?[currentProfileIndex].images.length,
                               physics: const NeverScrollableScrollPhysics(),
                               itemBuilder: (context, currentImageIndex) {
                                 return Stack(

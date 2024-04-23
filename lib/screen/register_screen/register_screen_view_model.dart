@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
 import 'package:orange_ui/common/widgets/common_ui.dart';
 
-import 'package:orange_ui/common/widgets/snack_bar_widget.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/screen/login_dashboard_screen/login_dashboard_screen.dart';
 import 'package:orange_ui/screen/webview_screen/webview_screen.dart';
@@ -73,7 +72,7 @@ class RegisterScreenViewModel extends BaseViewModel {
                 deviceToken: tokenId,
                 loginType: 5)
             .then((value) async {
-          SnackBarWidget().snackBarWidget(S.current.registrationSuccessfully);
+          CommonUI.snackBarWidget(S.current.registrationSuccessfully);
           PrefService.userId = value.data?.id ?? -1;
           await PrefService.saveUser(value.data);
           Get.back();
@@ -94,7 +93,7 @@ class RegisterScreenViewModel extends BaseViewModel {
     } else {
       bool isEmailValid = GetUtils.isEmail(emailController.text);
       if (!isEmailValid) {
-        SnackBarWidget().snackBarWidget(S.current.pleaseValidEmail);
+        CommonUI.snackBarWidget(S.current.pleaseValidEmail);
         return false;
       } else {
         emailFocus.unfocus();
@@ -140,7 +139,7 @@ class RegisterScreenViewModel extends BaseViewModel {
       return false;
     } else if (int.parse(ageController.text) < 18) {
       count++;
-      SnackBarWidget.snackBar(message: S.current.youMust18);
+      CommonUI.snackBar(message: S.current.youMust18);
       ageFocus.unfocus();
     }
 
@@ -153,7 +152,7 @@ class RegisterScreenViewModel extends BaseViewModel {
       return await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
     } on FirebaseAuthException catch (e) {
-      SnackBarWidget().snackBarWidget('${e.message}');
+      CommonUI.snackBarWidget('${e.message}');
       Get.offAll(() => const LoginDashboardScreen());
       return null;
     }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:orange_ui/common/widgets/common_fun.dart';
+import 'package:orange_ui/common/widgets/common_ui.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/notification/user_notification.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
@@ -47,7 +48,7 @@ class PersonalNotificationPage extends StatelessWidget {
                       const EdgeInsets.only(left: 16, right: 19, bottom: 18),
                   child: Row(
                     children: [
-                      data?.images == null || data!.images!.isEmpty
+                      data!.images.isEmpty
                           ? Container(
                               height: 40,
                               width: 40,
@@ -91,7 +92,7 @@ class PersonalNotificationPage extends StatelessWidget {
                             Row(
                               children: [
                                 Text(
-                                  '${data?.fullname}',
+                                  CommonUI.fullName(data.fullname),
                                   style: const TextStyle(
                                     fontFamily: FontRes.bold,
                                     fontSize: 15,
@@ -99,7 +100,7 @@ class PersonalNotificationPage extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  ' ${data?.age}',
+                                  ' ${data.age}',
                                   style: const TextStyle(
                                     fontSize: 15,
                                     color: ColorRes.darkGrey4,
@@ -109,7 +110,7 @@ class PersonalNotificationPage extends StatelessWidget {
                                   width: 4,
                                 ),
                                 Visibility(
-                                  visible: data?.isVerified == 2 ? true : false,
+                                  visible: data.isVerified == 2 ? true : false,
                                   child: Image.asset(
                                     AssetRes.tickMark,
                                     height: 14.87,
@@ -133,7 +134,7 @@ class PersonalNotificationPage extends StatelessWidget {
                             ),
                             Text(
                               userNotification?[index].type == 1
-                                  ? '${data?.fullname} ${S.of(context).hasLikedYourProfileYouShouldCheckTheirProfile}'
+                                  ? '${data.fullname} ${S.of(context).hasLikedYourProfileYouShouldCheckTheirProfile}'
                                   : '',
                               style: const TextStyle(
                                   fontSize: 13,

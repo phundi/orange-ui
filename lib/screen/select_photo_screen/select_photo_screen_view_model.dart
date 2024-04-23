@@ -6,7 +6,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
 import 'package:orange_ui/common/widgets/common_ui.dart';
 
-import 'package:orange_ui/common/widgets/snack_bar_widget.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/screen/dashboard/dashboard_screen.dart';
@@ -64,7 +63,7 @@ class SelectPhotoScreenViewModel extends BaseViewModel {
 
   void onPlayButtonTap() {
     if (imageFileList == null || imageFileList!.isEmpty) {
-      SnackBarWidget().snackBarWidget(S.current.pleaseSelectImage);
+      CommonUI.snackBarWidget(S.current.pleaseSelectImage);
       return;
     }
     CommonUI.lottieLoader();
@@ -74,7 +73,7 @@ class SelectPhotoScreenViewModel extends BaseViewModel {
     }
     ApiProvider().updateProfile(images: imageFileList).then((value) {
       Get.back();
-      checkScreenCondition(value.data);
+      checkScreenCondition(value.data!);
     });
   }
 
@@ -92,8 +91,8 @@ class SelectPhotoScreenViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  void checkScreenCondition(RegistrationUserData? data) {
-    if (data!.images == null || data.images!.isEmpty) {
+  void checkScreenCondition(RegistrationUserData data) {
+    if (data.images.isEmpty) {
       return;
     } else if (data.interests!.isEmpty || data.interests == null) {
       Get.offAll(() => const SelectHobbiesScreen());

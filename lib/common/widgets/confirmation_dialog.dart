@@ -36,19 +36,26 @@ class ConfirmationDialog extends StatelessWidget {
         aspectRatio: dialogSize ?? 1.8,
         child: Container(
           padding: const EdgeInsets.all(15),
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: ColorRes.white),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10), color: ColorRes.white),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Spacer(),
               Text(
                 heading ?? '${S.current.areYouSure}?',
-                style: const TextStyle(fontFamily: FontRes.bold, fontSize: 18, color: ColorRes.veryDarkGrey4),
+                style: const TextStyle(
+                    fontFamily: FontRes.bold,
+                    fontSize: 18,
+                    color: ColorRes.veryDarkGrey4),
               ),
               const Spacer(),
               Text(
                 description,
-                style: const TextStyle(color: ColorRes.dimGrey3, fontFamily: FontRes.regular, fontSize: 14),
+                style: const TextStyle(
+                    color: ColorRes.dimGrey3,
+                    fontFamily: FontRes.regular,
+                    fontSize: 14),
               ),
               const Spacer(flex: 2),
               Row(
@@ -59,7 +66,8 @@ class ConfirmationDialog extends StatelessWidget {
                       Get.back();
                     },
                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 8),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(7),
                       ),
@@ -69,7 +77,9 @@ class ConfirmationDialog extends StatelessWidget {
                           Text(
                             S.current.cancel,
                             style: const TextStyle(
-                                fontFamily: FontRes.semiBold, fontSize: 13, color: ColorRes.veryDarkGrey4),
+                                fontFamily: FontRes.semiBold,
+                                fontSize: 13,
+                                color: ColorRes.veryDarkGrey4),
                           ),
                           const SizedBox(width: 9),
                         ],
@@ -79,14 +89,19 @@ class ConfirmationDialog extends StatelessWidget {
                   InkWell(
                     onTap: onTap,
                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-                      decoration:
-                          BoxDecoration(borderRadius: BorderRadius.circular(7), gradient: StyleRes.linearGradient),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 8),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(7),
+                          gradient: StyleRes.linearGradient),
                       child: Row(
                         children: [
                           Text(
                             textButton ?? S.current.delete,
-                            style: const TextStyle(fontFamily: FontRes.semiBold, fontSize: 13, color: ColorRes.white),
+                            style: const TextStyle(
+                                fontFamily: FontRes.semiBold,
+                                fontSize: 13,
+                                color: ColorRes.white),
                           ),
                           const SizedBox(width: 2),
                           Image.asset(
@@ -94,6 +109,9 @@ class ConfirmationDialog extends StatelessWidget {
                             color: ColorRes.white,
                             height: 17,
                             width: 17,
+                            errorBuilder: (context, error, stackTrace) {
+                              return Container();
+                            },
                           ),
                         ],
                       ),

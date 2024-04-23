@@ -192,7 +192,7 @@ class StoryProfileView extends StatelessWidget {
             errorWidget: (context, url, error) {
               return CommonUI.profileImagePlaceHolder(
                   name: CommonUI.fullName(userData?.fullname),
-                  heightWeight: 66,
+                  heightWidth: 66,
                   borderRadius: imageCorner - 1);
             },
           ),

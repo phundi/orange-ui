@@ -102,7 +102,7 @@ class FollowFollowingScreen extends StatelessWidget {
                                                 .profileImagePlaceHolder(
                                                     name: user.fullname,
                                                     borderRadius: 7,
-                                                    heightWeight: 50);
+                                                    heightWidth: 50);
                                           },
                                         )),
                                     const SizedBox(width: 10),

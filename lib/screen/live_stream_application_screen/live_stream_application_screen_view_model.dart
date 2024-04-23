@@ -8,7 +8,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
 import 'package:orange_ui/common/widgets/common_ui.dart';
 
-import 'package:orange_ui/common/widgets/snack_bar_widget.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/screen/live_stream_application_screen/widgets/video_upload_dialog.dart';
 import 'package:orange_ui/screen/video_preview_screen/video_preview_screen.dart';
@@ -65,7 +64,7 @@ class LiveStreamApplicationScreenViewModel extends BaseViewModel {
         .applyForLive(videoFile, aboutController.text, languageController.text,
             socialLinks.join(','))
         .then((value) {
-      SnackBarWidget().snackBarWidget(value.message!);
+      CommonUI.snackBarWidget(value.message!);
       Get.back();
       Get.back();
     });
@@ -94,7 +93,7 @@ class LiveStreamApplicationScreenViewModel extends BaseViewModel {
       i++;
       return false;
     } else if (socialLinks.isEmpty) {
-      SnackBarWidget().snackBarWidget(S.current.pleaseAddSocialLinks);
+      CommonUI.snackBarWidget(S.current.pleaseAddSocialLinks);
       socialProfileController.clear();
       isSocialLink = true;
       i++;
@@ -157,7 +156,7 @@ class LiveStreamApplicationScreenViewModel extends BaseViewModel {
       maxDuration: const Duration(seconds: 60),
     )
         .onError((PlatformException error, stackTrace) {
-      SnackBarWidget().snackBarWidget(error.message ?? '');
+      CommonUI.snackBarWidget(error.message ?? '');
       return null;
     });
     if (_pickedFile == null || _pickedFile!.path.isEmpty) return;

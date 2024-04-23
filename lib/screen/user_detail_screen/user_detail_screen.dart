@@ -78,7 +78,7 @@ class _UserDetailScreenState extends State<UserDetailScreen>
                         errorWidget: (context, error, stackTrace) {
                           return CommonUI.profileImagePlaceHolder(
                               name: CommonUI.fullName(model.userData?.fullname),
-                              heightWeight: Get.height,
+                              heightWidth: Get.height,
                               borderRadius: 0);
                         },
                       ),

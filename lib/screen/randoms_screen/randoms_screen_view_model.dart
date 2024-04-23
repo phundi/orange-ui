@@ -1,7 +1,8 @@
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:orange_ui/common/widgets/common_fun.dart';
-import 'package:orange_ui/common/widgets/snack_bar_widget.dart';
+import 'package:orange_ui/common/widgets/common_ui.dart';
+
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/screen/live_grid_screen/live_grid_screen.dart';
@@ -36,13 +37,13 @@ class RandomsScreenViewModel extends BaseViewModel {
 
   void onNotificationTap() {
     data?.isBlock == 1
-        ? SnackBarWidget().snackBarWidget(S.current.userBlock)
+        ? CommonUI.snackBarWidget(S.current.userBlock)
         : Get.to(() => const NotificationScreen());
   }
 
   void onSearchBtnTap() {
     data?.isBlock == 1
-        ? SnackBarWidget().snackBarWidget(S.current.userBlock)
+        ? CommonUI.snackBarWidget(S.current.userBlock)
         : Get.to(() => const SearchScreen());
   }
 
@@ -52,14 +53,14 @@ class RandomsScreenViewModel extends BaseViewModel {
 
   void onGenderChange(String value) {
     data?.isBlock == 1
-        ? SnackBarWidget().snackBarWidget(S.current.userBlock)
+        ? CommonUI.snackBarWidget(S.current.userBlock)
         : selectedGender = value;
     notifyListeners();
   }
 
   void onStartMatchingTap() {
     data?.isBlock == 1
-        ? SnackBarWidget().snackBarWidget(S.current.userBlock)
+        ? CommonUI.snackBarWidget(S.current.userBlock)
         : Get.to(() => const RandomsSearchScreen(), arguments: [
             {
               Urls.aGender: selectedGender,

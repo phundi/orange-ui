@@ -1,13 +1,15 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
 import 'package:orange_ui/common/widgets/common_fun.dart';
+import 'package:orange_ui/common/widgets/common_ui.dart';
 import 'package:orange_ui/common/widgets/confirmation_dialog.dart';
-import 'package:orange_ui/common/widgets/snack_bar_widget.dart';
+
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/chat_and_live_stream/chat.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
@@ -36,7 +38,7 @@ class MessageScreenViewModel extends BaseViewModel {
 
   void onNotificationTap() {
     userData?.isBlock == 1
-        ? SnackBarWidget().snackBarWidget(S.current.userBlock)
+        ? CommonUI.snackBarWidget(S.current.userBlock)
         : Get.to(() => const NotificationScreen());
   }
 
@@ -48,7 +50,9 @@ class MessageScreenViewModel extends BaseViewModel {
   }
 
   void onSearchTap() {
-    userData?.isBlock == 1 ? SnackBarWidget().snackBarWidget(S.current.userBlock) : Get.to(() => const SearchScreen());
+    userData?.isBlock == 1
+        ? CommonUI.snackBarWidget(S.current.userBlock)
+        : Get.to(() => const SearchScreen());
   }
 
   void onLivesBtnClick() {
@@ -57,7 +61,7 @@ class MessageScreenViewModel extends BaseViewModel {
 
   void onUserTap(Conversation conversation) {
     userData?.isBlock == 1
-        ? SnackBarWidget().snackBarWidget(S.current.userBlock)
+        ? CommonUI.snackBarWidget(S.current.userBlock)
         : Get.to(() => ChatScreen(conversation: conversation));
   }
 
@@ -103,22 +107,25 @@ class MessageScreenViewModel extends BaseViewModel {
   void onLongPress(Conversation? conversation) {
     HapticFeedback.vibrate();
     Get.dialog(ConfirmationDialog(
-        onTap: () {
-          db
-              .collection(FirebaseRes.userChatList)
-              .doc(userData?.identity)
-              .collection(FirebaseRes.userList)
-              .doc(conversation?.user?.userIdentity)
-              .update({
-            FirebaseRes.isDeleted: true,
-            FirebaseRes.deletedId: '${DateTime.now().millisecondsSinceEpoch}',
-            FirebaseRes.block: false,
-            FirebaseRes.blockFromOther: false,
-          }).then((value) {
-            Get.back();
-          });
-        },
-        description: S.current.messageWillOnlyBeRemoved));
+      onTap: () {
+        db
+            .collection(FirebaseRes.userChatList)
+            .doc(userData?.identity)
+            .collection(FirebaseRes.userList)
+            .doc(conversation?.user?.userIdentity)
+            .update({
+          FirebaseRes.isDeleted: true,
+          FirebaseRes.deletedId: '${DateTime.now().millisecondsSinceEpoch}',
+          FirebaseRes.block: false,
+          FirebaseRes.blockFromOther: false,
+        }).then((value) {
+          Get.back();
+        });
+      },
+      description: S.current.messageWillOnlyBeRemoved,
+      dialogSize: 1.9,
+      padding: EdgeInsets.symmetric(horizontal: 40),
+    ));
     notifyListeners();
   }
 }

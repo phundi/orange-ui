@@ -6,8 +6,9 @@ import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:get/get.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
 import 'package:orange_ui/common/widgets/common_fun.dart';
+import 'package:orange_ui/common/widgets/common_ui.dart';
 import 'package:orange_ui/common/widgets/confirmation_dialog.dart';
-import 'package:orange_ui/common/widgets/snack_bar_widget.dart';
+
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/social/feed.dart';
 import 'package:orange_ui/model/social/post/add_comment.dart';
@@ -218,7 +219,7 @@ class FeedScreenViewModel extends BaseViewModel {
 
   void onNotificationTap() {
     userData?.isBlock == 1
-        ? SnackBarWidget().snackBarWidget(S.current.userBlock)
+        ? CommonUI.snackBarWidget(S.current.userBlock)
         : Get.to(() => const NotificationScreen());
   }
 
@@ -228,7 +229,7 @@ class FeedScreenViewModel extends BaseViewModel {
 
   void onSearchTap() {
     userData?.isBlock == 1
-        ? SnackBarWidget().snackBarWidget(S.current.userBlock)
+        ? CommonUI.snackBarWidget(S.current.userBlock)
         : Get.to(() => const SearchScreen());
   }
 

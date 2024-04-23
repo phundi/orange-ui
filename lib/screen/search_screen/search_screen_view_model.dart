@@ -62,6 +62,7 @@ class SearchScreenViewModel extends BaseViewModel {
         .then((value) {
       List<String> list =
           searchUsers.map((e) => e.id?.toString() ?? '').toList();
+      print(list);
       value.data?.forEach((element) {
         if (!list.contains(element.id?.toString())) {
           searchUsers.add(element);

@@ -1,7 +1,8 @@
 import 'package:detectable_text_field/detectable_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
-import 'package:orange_ui/common/widgets/snack_bar_widget.dart';
+import 'package:orange_ui/common/widgets/common_ui.dart';
+
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/social/post/add_comment.dart';
 import 'package:orange_ui/model/social/post/fetch_comment.dart';
@@ -89,7 +90,7 @@ class CommentSheetViewModel extends BaseViewModel {
 
   void deleteComment(int commentId) {
     if (commentId == -1) {
-      SnackBarWidget.snackBar(message: S.current.commentNotFound);
+      CommonUI.snackBar(message: S.current.commentNotFound);
     }
     comments.removeWhere((element) {
       return element.id == commentId;

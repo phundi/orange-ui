@@ -44,7 +44,8 @@ class ReportCard extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(21, 20, 21, 0),
             decoration: BoxDecoration(
               color: ColorRes.black.withOpacity(0.33),
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(30)),
+              borderRadius:
+                  const BorderRadius.vertical(top: Radius.circular(30)),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -55,18 +56,26 @@ class ReportCard extends StatelessWidget {
                       onTap: () {
                         Get.back();
                       },
-                      child: Image.asset(AssetRes.backArrow, height: 25, width: 25),
+                      child: Image.asset(AssetRes.backArrow,
+                          height: 25, width: 25),
                     ),
                     Center(
-                      child: Text(reportType == 1 ? S.current.reportUser : S.of(context).reportPost,
-                          style: const TextStyle(color: ColorRes.white, fontFamily: FontRes.bold, fontSize: 16)),
+                      child: Text(
+                          reportType == 1
+                              ? S.current.reportUser
+                              : S.of(context).reportPost,
+                          style: const TextStyle(
+                              color: ColorRes.white,
+                              fontFamily: FontRes.bold,
+                              fontSize: 16)),
                     )
                   ],
                 ),
                 reportType != 1 ? const SizedBox() : const SizedBox(height: 20),
                 Expanded(
                   child: SingleChildScrollView(
-                    keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+                    keyboardDismissBehavior:
+                        ScrollViewKeyboardDismissBehavior.onDrag,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
@@ -75,16 +84,22 @@ class ReportCard extends StatelessWidget {
                             ? const SizedBox()
                             : Text(
                                 S.current.youAreReporting,
-                                style: const TextStyle(color: ColorRes.white, fontFamily: FontRes.semiBold),
+                                style: const TextStyle(
+                                    color: ColorRes.white,
+                                    fontFamily: FontRes.semiBold),
                               ),
-                        reportType != 1 ? const SizedBox() : const SizedBox(height: 10),
+                        reportType != 1
+                            ? const SizedBox()
+                            : const SizedBox(height: 10),
                         reportType != 1
                             ? const SizedBox()
                             : Container(
                                 height: 70,
-                                padding: const EdgeInsets.symmetric(horizontal: 10),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 10),
                                 decoration: BoxDecoration(
-                                    color: ColorRes.white.withOpacity(0.15), borderRadius: BorderRadius.circular(15)),
+                                    color: ColorRes.white.withOpacity(0.15),
+                                    borderRadius: BorderRadius.circular(15)),
                                 child: Row(
                                   children: [
                                     ClipRRect(
@@ -98,31 +113,42 @@ class ReportCard extends StatelessWidget {
                                         height: 50,
                                         width: 50,
                                         errorWidget: (context, url, error) {
-                                          return CommonUI.profileImagePlaceHolder(
-                                              name: fullName, borderRadius: 30, heightWeight: 50);
+                                          return CommonUI
+                                              .profileImagePlaceHolder(
+                                                  name: fullName,
+                                                  borderRadius: 30,
+                                                  heightWidth: 50);
                                         },
                                       ),
                                     ),
                                     const SizedBox(width: 10),
                                     Expanded(
                                       child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
                                         children: [
                                           Row(
                                             children: [
                                               Flexible(
                                                 child: Text(
                                                   fullName.capitalize ?? '',
-                                                  style: const TextStyle(color: ColorRes.white),
+                                                  style: const TextStyle(
+                                                      color: ColorRes.white),
                                                   maxLines: 1,
-                                                  overflow: TextOverflow.ellipsis,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
                                                 ),
                                               ),
-                                              Text(' ($age) ', style: const TextStyle(color: ColorRes.white)),
+                                              Text(' ($age) ',
+                                                  style: const TextStyle(
+                                                      color: ColorRes.white)),
                                             ],
                                           ),
-                                          Text(address, style: const TextStyle(color: ColorRes.white))
+                                          Text(address,
+                                              style: const TextStyle(
+                                                  color: ColorRes.white))
                                         ],
                                       ),
                                     ),
@@ -131,25 +157,33 @@ class ReportCard extends StatelessWidget {
                               ),
                         const SizedBox(height: 15),
                         Text(S.current.selectReason,
-                            style: const TextStyle(color: ColorRes.white, fontFamily: FontRes.semiBold)),
+                            style: const TextStyle(
+                                color: ColorRes.white,
+                                fontFamily: FontRes.semiBold)),
                         const SizedBox(height: 10),
                         Container(
                           decoration: BoxDecoration(
-                              color: ColorRes.white.withOpacity(0.15), borderRadius: BorderRadius.circular(10)),
+                              color: ColorRes.white.withOpacity(0.15),
+                              borderRadius: BorderRadius.circular(10)),
                           child: DropdownButton<String>(
                             value: model.reason,
-                            icon: const Icon(Icons.keyboard_arrow_down_outlined, color: ColorRes.orange2, size: 29),
+                            icon: const Icon(Icons.keyboard_arrow_down_outlined,
+                                color: ColorRes.orange2, size: 29),
                             isExpanded: true,
-                            style: const TextStyle(color: ColorRes.dimGrey7, fontSize: 14),
+                            style: const TextStyle(
+                                color: ColorRes.dimGrey7, fontSize: 14),
                             padding: const EdgeInsets.symmetric(horizontal: 10),
                             underline: const SizedBox(),
                             onChanged: model.onReasonChange,
                             dropdownColor: ColorRes.davyGrey,
                             borderRadius: BorderRadius.circular(15),
-                            items: model.reasonList.map<DropdownMenuItem<String>>((String value) {
+                            items: model.reasonList
+                                .map<DropdownMenuItem<String>>((String value) {
                               return DropdownMenuItem<String>(
                                 value: value,
-                                child: Text(value, style: const TextStyle(color: ColorRes.white, fontSize: 14)),
+                                child: Text(value,
+                                    style: const TextStyle(
+                                        color: ColorRes.white, fontSize: 14)),
                               );
                             }).toList(),
                           ),
@@ -157,7 +191,9 @@ class ReportCard extends StatelessWidget {
                         const SizedBox(height: 10),
                         Text(
                           S.current.explainMore,
-                          style: const TextStyle(color: ColorRes.white, fontFamily: FontRes.semiBold),
+                          style: const TextStyle(
+                              color: ColorRes.white,
+                              fontFamily: FontRes.semiBold),
                         ),
                         const SizedBox(height: 7),
                         Container(
@@ -166,22 +202,30 @@ class ReportCard extends StatelessWidget {
                               color: ColorRes.white.withOpacity(0.15),
                               borderRadius: BorderRadius.circular(10),
                               border: Border.all(
-                                  color: model.explainMoreError.isEmpty ? ColorRes.transparent : ColorRes.red)),
+                                  color: model.explainMoreError.isEmpty
+                                      ? ColorRes.transparent
+                                      : ColorRes.red)),
                           child: TextField(
                             controller: model.explainController,
                             focusNode: model.explainMoreFocus,
                             maxLines: null,
                             minLines: null,
                             expands: true,
-                            style: const TextStyle(color: ColorRes.white, fontSize: 15),
+                            style: const TextStyle(
+                                color: ColorRes.white, fontSize: 15),
                             textCapitalization: TextCapitalization.sentences,
                             decoration: InputDecoration(
-                              hintText: model.explainMoreError == '' ? S.current.explainMore : model.explainMoreError,
+                              hintText: model.explainMoreError == ''
+                                  ? S.current.explainMore
+                                  : model.explainMoreError,
                               hintStyle: TextStyle(
-                                color: model.explainMoreError == "" ? ColorRes.dimGrey2 : ColorRes.red,
+                                color: model.explainMoreError == ""
+                                    ? ColorRes.dimGrey2
+                                    : ColorRes.red,
                               ),
                               border: InputBorder.none,
-                              contentPadding: const EdgeInsets.only(bottom: 10, left: 10, top: 9),
+                              contentPadding: const EdgeInsets.only(
+                                  bottom: 10, left: 10, top: 9),
                               counterText: "",
                             ),
                           ),
@@ -193,7 +237,8 @@ class ReportCard extends StatelessWidget {
                               onChanged: model.onCheckBoxChange,
                               activeColor: ColorRes.orange,
                               side: MaterialStateBorderSide.resolveWith(
-                                (states) => const BorderSide(width: 1.5, color: ColorRes.orange),
+                                (states) => const BorderSide(
+                                    width: 1.5, color: ColorRes.orange),
                               ),
                             ),
                             RichText(
@@ -210,7 +255,8 @@ class ReportCard extends StatelessWidget {
                                   ),
                                   TextSpan(
                                     text: S.current.termAndCondition,
-                                    recognizer: TapGestureRecognizer()..onTap = model.onTermAndConditionClick,
+                                    recognizer: TapGestureRecognizer()
+                                      ..onTap = model.onTermAndConditionClick,
                                     style: const TextStyle(
                                       color: ColorRes.white,
                                       fontSize: 13,
@@ -220,7 +266,9 @@ class ReportCard extends StatelessWidget {
                                   TextSpan(
                                     text: S.current.continuePlease,
                                     style: const TextStyle(
-                                        color: ColorRes.dimGrey2, fontSize: 13, fontFamily: FontRes.regular),
+                                        color: ColorRes.dimGrey2,
+                                        fontSize: 13,
+                                        fontFamily: FontRes.regular),
                                   ),
                                 ],
                               ),
@@ -241,7 +289,10 @@ class ReportCard extends StatelessWidget {
                             child: Text(
                               S.current.submit,
                               style: const TextStyle(
-                                  color: ColorRes.white, fontFamily: FontRes.bold, fontSize: 16, letterSpacing: 1),
+                                  color: ColorRes.white,
+                                  fontFamily: FontRes.bold,
+                                  fontSize: 16,
+                                  letterSpacing: 1),
                             ),
                           ),
                         ),

@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
 import 'package:orange_ui/common/widgets/common_ui.dart';
 
-import 'package:orange_ui/common/widgets/snack_bar_widget.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/screen/webview_screen/webview_screen.dart';
 import 'package:orange_ui/utils/color_res.dart';
@@ -79,14 +78,14 @@ class ReportSheetViewModel extends BaseViewModel {
     bool validation = isValid();
     if (type == 1) {
       if (reportID == -1) {
-        SnackBarWidget.snackBar(message: S.current.userNotFound);
+        CommonUI.snackBar(message: S.current.userNotFound);
         return;
       }
       notifyListeners();
       if (validation) {
         ApiProvider().addReport(reason, explainController.text, reportID).then(
           (value) {
-            SnackBarWidget().snackBarWidget(S.current.reportedSuccessfully);
+            CommonUI.snackBarWidget(S.current.reportedSuccessfully);
             Get.back();
           },
         );
@@ -97,7 +96,7 @@ class ReportSheetViewModel extends BaseViewModel {
           completion: (response) {
             Get.back();
             Get.back();
-            SnackBarWidget().snackBarWidget(S.current.reportedSubmitted);
+            CommonUI.snackBarWidget(S.current.reportedSubmitted);
           },
           url: Urls.aReportPost,
           param: {

@@ -46,7 +46,7 @@ dependencies:
   geolocator: ^9.0.1
   geocode: ^1.0.2
   flutter_cache_manager: ^3.3.0
-  google_maps_cluster_manager: ^3.0.0+1
+  google_maps_cluster_manager_2: ^3.1.0
 
 
   #_______________ ui and animation___________________#
@@ -106,7 +106,7 @@ dependencies:
 
   #_____________ Share _________________#
   share_plus: ^6.0.0
-  flutter_branch_sdk: ^6.1.0
+  flutter_branch_sdk: ^6.2.1
 
   #_____________ Camera _________________#
   camera: ^0.10.5+9

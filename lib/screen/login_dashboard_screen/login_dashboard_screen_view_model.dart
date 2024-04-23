@@ -8,7 +8,6 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
 import 'package:orange_ui/common/widgets/common_ui.dart';
 
-import 'package:orange_ui/common/widgets/snack_bar_widget.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/screen/dashboard/dashboard_screen.dart';
@@ -97,10 +96,10 @@ class LoginDashboardScreenViewModel extends BaseViewModel {
   void resetBtnClick(TextEditingController controller) async {
     resetFocusNode.unfocus();
     if (controller.text.isEmpty) {
-      SnackBarWidget.snackBar(message: S.current.pleaseEnterEmail);
+      CommonUI.snackBar(message: S.current.pleaseEnterEmail);
       return;
     } else if (!GetUtils.isEmail(controller.text)) {
-      SnackBarWidget.snackBar(message: S.current.pleaseEnterValidEmailAddress);
+      CommonUI.snackBar(message: S.current.pleaseEnterValidEmailAddress);
       return;
     }
     Get.back();
@@ -109,10 +108,10 @@ class LoginDashboardScreenViewModel extends BaseViewModel {
       await _auth.sendPasswordResetEmail(email: controller.text);
       controller.clear();
       Get.back();
-      SnackBarWidget.snackBar(message: S.current.emailSentSuccessfully);
+      CommonUI.snackBar(message: S.current.emailSentSuccessfully);
     } on FirebaseAuthException catch (e) {
       Get.back();
-      SnackBarWidget.snackBar(message: "${e.message}");
+      CommonUI.snackBar(message: "${e.message}");
     }
   }
 
@@ -215,7 +214,7 @@ class LoginDashboardScreenViewModel extends BaseViewModel {
       Get.offAll(
         () => const StartingProfileScreen(),
       );
-    } else if (data.images == null || data.images!.isEmpty) {
+    } else if (data.images.isEmpty) {
       Get.off(() => const SelectPhotoScreen());
     } else if (data.interests!.isEmpty || data.interests == null) {
       Get.off(() => const SelectHobbiesScreen());

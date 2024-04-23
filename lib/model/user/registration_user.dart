@@ -133,7 +133,7 @@ class RegistrationUserData {
     _isFake = isFake;
     _password = password;
     _story = story;
-    _images = images;
+    _images = images ?? [];
   }
 
   RegistrationUserData.fromJson(dynamic json) {
@@ -184,7 +184,7 @@ class RegistrationUserData {
     if (json['images'] != null) {
       _images = [];
       json['images'].forEach((v) {
-        _images?.add(Images.fromJson(v));
+        _images.add(Images.fromJson(v));
       });
     }
   }
@@ -226,7 +226,7 @@ class RegistrationUserData {
   int? _isFake;
   String? _password;
   List<Story>? _story;
-  List<Images>? _images;
+  List<Images> _images = [];
 
   int? get id => _id;
 
@@ -297,7 +297,7 @@ class RegistrationUserData {
 
   String? get password => _password;
   List<Story>? get story => _story;
-  List<Images>? get images => _images;
+  List<Images> get images => _images;
 
   void followerCount(int value) {
     _followers = (followers ?? 0) + value;
@@ -344,8 +344,8 @@ class RegistrationUserData {
     if (_story != null) {
       map['stories'] = _story?.map((v) => v.toJson()).toList();
     }
-    if (_images != null) {
-      map['images'] = _images?.map((v) => v.toJson()).toList();
+    if (_images.isNotEmpty) {
+      map['images'] = _images.map((v) => v.toJson()).toList();
     }
     return map;
   }

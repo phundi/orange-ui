@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
-import 'package:orange_ui/common/widgets/snack_bar_widget.dart';
+import 'package:orange_ui/common/widgets/common_ui.dart';
+
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/screen/edit_profile_screen/edit_profile_screen.dart';
@@ -40,7 +41,7 @@ class ProfileScreenViewModel extends BaseViewModel {
 
   void onEditProfileTap() {
     userData?.isBlock == 1
-        ? SnackBarWidget().snackBarWidget(S.current.userBlock)
+        ? CommonUI.snackBarWidget(S.current.userBlock)
         : Get.to<RegistrationUserData>(() => EditProfileScreen(
               userData: userData,
             ))?.then((value) {
@@ -68,25 +69,25 @@ class ProfileScreenViewModel extends BaseViewModel {
 
   void onInstagramTap() {
     userData?.isBlock == 1
-        ? SnackBarWidget().snackBarWidget(S.current.userBlock)
+        ? CommonUI.snackBarWidget(S.current.userBlock)
         : _launchUrl(userData?.instagram ?? '');
   }
 
   void onFBTap() {
     userData?.isBlock == 1
-        ? SnackBarWidget().snackBarWidget(S.current.userBlock)
+        ? CommonUI.snackBarWidget(S.current.userBlock)
         : _launchUrl(userData?.facebook ?? '');
   }
 
   void onYoutubeTap() {
     userData?.isBlock == 1
-        ? SnackBarWidget().snackBarWidget(S.current.userBlock)
+        ? CommonUI.snackBarWidget(S.current.userBlock)
         : _launchUrl(userData?.youtube ?? '');
   }
 
   void onSearchBtnTap() {
     userData?.isBlock == 1
-        ? SnackBarWidget().snackBarWidget(S.current.userBlock)
+        ? CommonUI.snackBarWidget(S.current.userBlock)
         : Get.to(() => const SearchScreen());
   }
 
@@ -103,13 +104,13 @@ class ProfileScreenViewModel extends BaseViewModel {
 
   void onNotificationTap() {
     userData?.isBlock == 1
-        ? SnackBarWidget().snackBarWidget(S.current.userBlock)
+        ? CommonUI.snackBarWidget(S.current.userBlock)
         : Get.to(() => const NotificationScreen());
   }
 
   void onImageTap() {
     userData?.isBlock == 1
-        ? SnackBarWidget().snackBarWidget(S.current.userBlock)
+        ? CommonUI.snackBarWidget(S.current.userBlock)
         : Get.to(() => UserDetailScreen(
               userData: userData,
             ));

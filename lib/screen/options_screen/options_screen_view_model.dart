@@ -1,12 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
 import 'package:orange_ui/common/widgets/common_ui.dart';
-
 import 'package:orange_ui/common/widgets/confirmation_dialog.dart';
-import 'package:orange_ui/common/widgets/snack_bar_widget.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/screen/languages_screen/languages_screen.dart';
@@ -70,13 +69,13 @@ class OptionalScreenViewModel extends BaseViewModel {
 
   void onLiveStreamTap() {
     userData?.isBlock == 1
-        ? SnackBarWidget().snackBarWidget(S.current.userBlock)
+        ? CommonUI.snackBarWidget(S.current.userBlock)
         : Get.to(() => const LiveStreamDashBoard());
   }
 
   void onApplyForVerTap() {
     userData?.isBlock == 1
-        ? SnackBarWidget().snackBarWidget(S.current.userBlock)
+        ? CommonUI.snackBarWidget(S.current.userBlock)
         : Get.to(() => const VerificationScreen(), arguments: userData)
             ?.then((value) {
             getProfileApiCall();
@@ -85,7 +84,7 @@ class OptionalScreenViewModel extends BaseViewModel {
 
   void onNotificationTap() {
     userData?.isBlock == 1
-        ? SnackBarWidget().snackBarWidget(S.current.userBlock)
+        ? CommonUI.snackBarWidget(S.current.userBlock)
         : ApiProvider()
             .onOffNotification(notificationEnable ? 0 : 1)
             .then((value) async {
@@ -94,21 +93,21 @@ class OptionalScreenViewModel extends BaseViewModel {
                   value.data?.isNotification == 1 ? true : false;
               await PrefService.saveUser(value.data);
               notifyListeners();
-              SnackBarWidget().snackBarWidget(value.message!);
+              CommonUI.snackBarWidget(value.message!);
             }
           });
   }
 
   void onShowMeOnMapTap() {
     userData?.isBlock == 1
-        ? SnackBarWidget().snackBarWidget(S.current.userBlock)
+        ? CommonUI.snackBarWidget(S.current.userBlock)
         : ApiProvider()
             .onOffShowMeOnMap(showMeOnMap ? 0 : 1)
             .then((value) async {
             if (value.status == true) {
               showMeOnMap = value.data?.showOnMap == 1 ? true : false;
               await PrefService.saveUser(value.data);
-              SnackBarWidget().snackBarWidget(value.message!);
+              CommonUI.snackBarWidget(value.message!);
               notifyListeners();
             }
           });
@@ -116,13 +115,13 @@ class OptionalScreenViewModel extends BaseViewModel {
 
   void onGoAnonymousTap() {
     userData?.isBlock == 1
-        ? SnackBarWidget().snackBarWidget(S.current.userBlock)
+        ? CommonUI.snackBarWidget(S.current.userBlock)
         : ApiProvider().onOffAnonymous(goAnonymous ? 0 : 1).then((value) async {
             if (value.status == true) {
               goAnonymous = value.data?.anonymous == 1 ? true : false;
               await PrefService.saveUser(value.data);
               notifyListeners();
-              SnackBarWidget().snackBarWidget(value.message!);
+              CommonUI.snackBarWidget(value.message!);
             }
           });
   }
@@ -151,7 +150,7 @@ class OptionalScreenViewModel extends BaseViewModel {
     }
     ApiProvider().logoutUser().then((value) {
       PrefService.setLoginText(false);
-      SnackBarWidget().snackBarWidget('${value.message}');
+      CommonUI.snackBarWidget('${value.message}');
       Get.offAll(() => const LoginDashboardScreen());
     });
   }
@@ -160,9 +159,10 @@ class OptionalScreenViewModel extends BaseViewModel {
     Get.dialog(ConfirmationDialog(
       onTap: onLogOutYesBtnClick,
       description: S.current.logOutDis,
-      textButton: S.current.logOut,
+      textButton: '${S.current.logOut} ',
       textImage: AssetRes.logout,
-      dialogSize: 2,
+      dialogSize: 1.9,
+      padding: EdgeInsets.symmetric(horizontal: 40),
     ));
   }
 
@@ -190,7 +190,7 @@ class OptionalScreenViewModel extends BaseViewModel {
           value.user?.delete();
         });
         await deleteFirebaseUser();
-        SnackBarWidget().snackBarWidget(value.message ?? '');
+        CommonUI.snackBarWidget(value.message ?? '');
         PrefService.setLoginText(false);
 
         Get.offAll(() => const LoginDashboardScreen());
@@ -240,7 +240,11 @@ class OptionalScreenViewModel extends BaseViewModel {
 
   void onDeleteAccountTap() {
     Get.dialog(ConfirmationDialog(
-        onTap: onDeleteYesBtnClick, description: S.current.deleteDialogDis));
+      onTap: onDeleteYesBtnClick,
+      description: S.current.deleteDialogDis,
+      dialogSize: 1.6,
+      padding: EdgeInsets.symmetric(horizontal: 40),
+    ));
   }
 
   void navigateLanguage() {

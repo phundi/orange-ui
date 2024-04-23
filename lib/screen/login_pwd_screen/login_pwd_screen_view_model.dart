@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
 import 'package:orange_ui/common/widgets/common_ui.dart';
 
-import 'package:orange_ui/common/widgets/snack_bar_widget.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/screen/dashboard/dashboard_screen.dart';
@@ -72,8 +71,7 @@ class LoginPwdScreenViewModel extends BaseViewModel {
             checkScreenCondition(value.data);
           } else {
             Get.back();
-            SnackBarWidget()
-                .snackBarWidget(S.current.incorrectPasswordOrUserid);
+            CommonUI.snackBarWidget(S.current.incorrectPasswordOrUserid);
           }
         });
       } else {
@@ -100,8 +98,8 @@ class LoginPwdScreenViewModel extends BaseViewModel {
               });
             } else {
               Get.back();
-              SnackBarWidget()
-                  .snackBarWidget(S.current.pleaseVerifyYourEmailFromYourInbox);
+              CommonUI.snackBarWidget(
+                  S.current.pleaseVerifyYourEmailFromYourInbox);
             }
           }
         });
@@ -121,10 +119,10 @@ class LoginPwdScreenViewModel extends BaseViewModel {
   void resetBtnClick(TextEditingController controller) async {
     resetFocusNode.unfocus();
     if (controller.text.isEmpty) {
-      SnackBarWidget.snackBar(message: S.current.pleaseEnterEmail);
+      CommonUI.snackBar(message: S.current.pleaseEnterEmail);
       return;
     } else if (!GetUtils.isEmail(controller.text)) {
-      SnackBarWidget.snackBar(message: S.current.pleaseEnterValidEmailAddress);
+      CommonUI.snackBar(message: S.current.pleaseEnterValidEmailAddress);
       return;
     }
     Get.back();
@@ -133,10 +131,10 @@ class LoginPwdScreenViewModel extends BaseViewModel {
       await _auth.sendPasswordResetEmail(email: controller.text);
       controller.clear();
       Get.back();
-      SnackBarWidget.snackBar(message: S.current.emailSentSuccessfully);
+      CommonUI.snackBar(message: S.current.emailSentSuccessfully);
     } on FirebaseAuthException catch (e) {
       Get.back();
-      SnackBarWidget.snackBar(message: "${e.message}");
+      CommonUI.snackBar(message: "${e.message}");
     }
   }
 
@@ -156,7 +154,7 @@ class LoginPwdScreenViewModel extends BaseViewModel {
       return await _auth.signInWithEmailAndPassword(
           email: email, password: password);
     } on FirebaseAuthException catch (e) {
-      SnackBarWidget().snackBarWidget('${e.message}');
+      CommonUI.snackBarWidget('${e.message}');
       return null;
     }
   }
@@ -164,7 +162,7 @@ class LoginPwdScreenViewModel extends BaseViewModel {
   void checkScreenCondition(RegistrationUserData? data) {
     if (data?.age == null) {
       Get.offAll(() => const StartingProfileScreen());
-    } else if (data!.images!.isEmpty || data.images == null) {
+    } else if (data!.images.isEmpty) {
       Get.off(() => const SelectPhotoScreen());
     } else if (data.interests!.isEmpty || data.interests == null) {
       Get.off(() => const SelectHobbiesScreen());

@@ -94,7 +94,7 @@ class GetStartedScreenViewModel extends BaseViewModel {
           if (value?.data?.age == null) {
             Get.off(() => const StartingProfileScreen());
           } else if (value?.data?.images == null ||
-              value!.data!.images!.isEmpty) {
+              value!.data!.images.isEmpty) {
             Get.off(() => const SelectPhotoScreen());
           } else if (value.data?.interests == null ||
               value.data!.interests!.isEmpty) {

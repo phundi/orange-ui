@@ -1,12 +1,15 @@
+import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import 'package:orange_ui/common/widgets/common_ui.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/screen/livestream_end_screen/livestream_end_screen_view_model.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
 import 'package:orange_ui/utils/const_res.dart';
 import 'package:orange_ui/utils/font_res.dart';
+import 'package:orange_ui/utils/style_res.dart';
 import 'package:stacked/stacked.dart';
 
 class LivestreamEndScreen extends StatefulWidget {
@@ -22,10 +25,8 @@ class _LivestreamEndScreenState extends State<LivestreamEndScreen>
     duration: const Duration(seconds: 1),
     vsync: this,
   );
-  late final Animation<double> _animation = CurvedAnimation(
-    parent: _controller,
-    curve: Curves.fastOutSlowIn,
-  );
+  late final Animation<double> _animation =
+      CurvedAnimation(parent: _controller, curve: Curves.fastOutSlowIn);
 
   @override
   Widget build(BuildContext context) {
@@ -80,21 +81,26 @@ class _LivestreamEndScreenState extends State<LivestreamEndScreen>
                             },
                           ),
                           ClipRRect(
-                            borderRadius: BorderRadius.circular(100),
-                            child: model.image.isNotEmpty
-                                ? Image.network(
-                                    '${ConstRes.aImageBaseUrl}${model.image}',
-                                    height: Get.width / 2.5,
-                                    width: Get.width / 2.5,
-                                    fit: BoxFit.cover,
-                                  )
-                                : Image.asset(
-                                    AssetRes.themeLabel,
-                                    height: Get.width / 2.5,
-                                    width: Get.width / 2.5,
-                                    fit: BoxFit.cover,
-                                  ),
-                          ),
+                              borderRadius: BorderRadius.circular(100),
+                              child: Image.network(
+                                '${ConstRes.aImageBaseUrl}${model.image}',
+                                height: Get.width / 2.5,
+                                width: Get.width / 2.5,
+                                fit: BoxFit.cover,
+                                errorBuilder: (context, error, stackTrace) {
+                                  return Container(
+                                    decoration: ShapeDecoration(
+                                        shape: SmoothRectangleBorder(
+                                            borderRadius: SmoothBorderRadius(
+                                                cornerRadius: 30)),
+                                        gradient: StyleRes.linearGradient),
+                                    child: CommonUI.profileImagePlaceHolder(
+                                        name: model.fullName,
+                                        color: ColorRes.white,
+                                        heightWidth: Get.width / 2.5),
+                                  );
+                                },
+                              )),
                         ],
                       ),
                     ),

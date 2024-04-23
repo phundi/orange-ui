@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:orange_ui/common/widgets/common_fun.dart';
 import 'package:orange_ui/common/widgets/common_ui.dart';
 import 'package:orange_ui/common/widgets/gradient_widget.dart';
 import 'package:orange_ui/common/widgets/top_story_line.dart';
@@ -11,7 +12,6 @@ import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/screen/shimmer_screen/shimmer_screen.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
-import 'package:orange_ui/utils/const_res.dart';
 import 'package:orange_ui/utils/font_res.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -55,7 +55,7 @@ class ProfileImageArea extends StatelessWidget {
                 onTap: onImageTap,
                 child: Stack(
                   children: [
-                    userData?.images == null || userData!.images!.isEmpty
+                    userData?.images == null || userData!.images.isEmpty
                         ? Container(
                             width: Get.width,
                             height: Get.height,
@@ -69,14 +69,14 @@ class ProfileImageArea extends StatelessWidget {
                             borderRadius: BorderRadius.circular(20),
                             child: PageView.builder(
                               controller: pageController,
-                              itemCount: userData?.images?.length,
+                              itemCount: userData?.images.length,
                               physics: const ClampingScrollPhysics(),
                               itemBuilder: (context, index) {
                                 return CachedNetworkImage(
-                                  imageUrl:
-                                      '${ConstRes.aImageBaseUrl}${userData?.images?[index].image}',
-                                  cacheKey:
-                                      '${ConstRes.aImageBaseUrl}${userData?.images?[index].image}',
+                                  imageUrl: CommonFun.getProfileImage(
+                                      images: userData?.images, index: index),
+                                  cacheKey: CommonFun.getProfileImage(
+                                      images: userData?.images, index: index),
                                   fit: BoxFit.cover,
                                   filterQuality: FilterQuality.medium,
                                   progressIndicatorBuilder:

@@ -13,7 +13,6 @@ import 'package:orange_ui/api_provider/api_provider.dart';
 import 'package:orange_ui/common/widgets/common_fun.dart';
 import 'package:orange_ui/common/widgets/common_ui.dart';
 import 'package:orange_ui/common/widgets/confirmation_dialog.dart';
-import 'package:orange_ui/common/widgets/snack_bar_widget.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/chat_and_live_stream/chat.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
@@ -180,8 +179,11 @@ class ChatScreenViewModel extends BaseViewModel {
   /// chat item delete method
   void chatDeleteDialog() {
     Get.dialog(ConfirmationDialog(
-        onTap: onDeleteBtnClick,
-        description: S.current.afterDeletingTheChatYouCanNotRestoreOurMessage));
+      onTap: onDeleteBtnClick,
+      description: S.current.afterDeletingTheChatYouCanNotRestoreOurMessage,
+      dialogSize: 1.6,
+      padding: EdgeInsets.symmetric(horizontal: 40),
+    ));
   }
 
   void onDeleteBtnClick() {
@@ -323,7 +325,7 @@ class ChatScreenViewModel extends BaseViewModel {
   /// send a text message
   void onSendBtnTap() {
     if (conversation.blockFromOther == true) {
-      SnackBarWidget().snackBarWidget(S.current.thisUserBlockYou);
+      CommonUI.snackBarWidget(S.current.thisUserBlockYou);
       textMsgController.clear();
       return;
     }
@@ -416,7 +418,7 @@ class ChatScreenViewModel extends BaseViewModel {
   void onAddBtnTap() async {
     msgFocusNode.unfocus();
     if (conversation.blockFromOther == true) {
-      SnackBarWidget().snackBarWidget(S.current.thisUserBlockYou);
+      CommonUI.snackBarWidget(S.current.thisUserBlockYou);
       return;
     }
     if (Platform.isAndroid) {
@@ -623,7 +625,7 @@ class ChatScreenViewModel extends BaseViewModel {
   /// camera button tap
   Future<void> onCameraTap() async {
     if (conversation.blockFromOther == true) {
-      SnackBarWidget().snackBarWidget(S.current.thisUserBlockYou);
+      CommonUI.snackBarWidget(S.current.thisUserBlockYou);
       textMsgController.clear();
       return;
     }
@@ -659,7 +661,7 @@ class ChatScreenViewModel extends BaseViewModel {
         },
       );
     } on PlatformException catch (e) {
-      SnackBarWidget().snackBarWidget('${e.message}');
+      CommonUI.snackBarWidget('${e.message}');
     }
   }
 

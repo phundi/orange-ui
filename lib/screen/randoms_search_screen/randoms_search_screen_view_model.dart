@@ -69,7 +69,7 @@ class RandomsSearchScreenViewModel extends BaseViewModel {
   }
 
   void onRightBtnClick() {
-    if (userData!.images!.length - 1 == currentPageIndex) return;
+    if (userData!.images.length - 1 == currentPageIndex) return;
     currentPageIndex++;
     pageController.animateToPage(currentPageIndex,
         duration: const Duration(milliseconds: 200), curve: Curves.easeIn);

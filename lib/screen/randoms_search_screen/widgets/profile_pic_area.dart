@@ -100,7 +100,7 @@ class ProfilePicArea extends StatelessWidget {
             height: Get.height / 1.6,
             child: Stack(
               children: [
-                userData?.images == null || userData!.images!.isEmpty
+                userData?.images == null || userData!.images.isEmpty
                     ? Stack(
                         children: [
                           Container(
@@ -127,11 +127,11 @@ class ProfilePicArea extends StatelessWidget {
                         borderRadius: BorderRadius.circular(20),
                         child: PageView.builder(
                           controller: pageController,
-                          itemCount: userData?.images?.length,
+                          itemCount: userData?.images.length,
                           physics: const NeverScrollableScrollPhysics(),
                           itemBuilder: (context, index) {
                             String? profileImage =
-                                userData?.images?[index].image;
+                                userData?.images[index].image;
                             return FractionallySizedBox(
                               widthFactor: 1 / pageController.viewportFraction,
                               child: Stack(

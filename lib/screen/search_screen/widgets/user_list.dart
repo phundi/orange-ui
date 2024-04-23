@@ -36,7 +36,8 @@ class UserList extends StatelessWidget {
                 onUserTap(userList?[index]);
               },
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 10),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 13, vertical: 10),
                 decoration: BoxDecoration(
                   color: ColorRes.lightGrey2,
                   borderRadius: BorderRadius.circular(12),
@@ -52,7 +53,8 @@ class UserList extends StatelessWidget {
                         fit: BoxFit.cover,
                         cacheKey: CommonFun.getProfileImage(images: images),
                         errorWidget: (context, url, error) {
-                          return CommonUI.profileImagePlaceHolder(name: userList?[index].fullname, heightWeight: 40);
+                          return CommonUI.profileImagePlaceHolder(
+                              name: userList?[index].fullname, heightWidth: 40);
                         },
                       ),
                     ),
@@ -65,9 +67,7 @@ class UserList extends StatelessWidget {
                             children: [
                               Flexible(
                                 child: Text(
-                                  (userList?[index].fullname == null || userList![index].fullname!.isEmpty)
-                                      ? 'Unknown'
-                                      : userList![index].fullname!,
+                                  CommonUI.fullName(userList?[index].fullname),
                                   style: const TextStyle(
                                     color: ColorRes.darkGrey4,
                                     fontSize: 18,
@@ -81,19 +81,24 @@ class UserList extends StatelessWidget {
                               Text(
                                 '${userList?[index].age ?? ''}',
                                 style: const TextStyle(
-                                    color: ColorRes.darkGrey4, fontSize: 18, overflow: TextOverflow.ellipsis),
+                                    color: ColorRes.darkGrey4,
+                                    fontSize: 18,
+                                    overflow: TextOverflow.ellipsis),
                                 maxLines: 1,
                               ),
                               const SizedBox(width: 3),
                               userList?[index].isVerified == 2
-                                  ? Image.asset(AssetRes.tickMark, height: 18, width: 18)
+                                  ? Image.asset(AssetRes.tickMark,
+                                      height: 18, width: 18)
                                   : const SizedBox(),
                             ],
                           ),
                           Text(
                             userList?[index].live ?? '',
-                            style:
-                                const TextStyle(color: ColorRes.grey6, fontSize: 13, overflow: TextOverflow.ellipsis),
+                            style: const TextStyle(
+                                color: ColorRes.grey6,
+                                fontSize: 13,
+                                overflow: TextOverflow.ellipsis),
                             maxLines: 1,
                           ),
                         ],

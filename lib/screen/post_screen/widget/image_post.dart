@@ -34,6 +34,9 @@ class ImagePost extends StatelessWidget {
                     placeholder: (context, url) {
                       return CommonUI.postPlaceHolder();
                     },
+                    fadeInDuration: Duration.zero,
+                    fadeOutDuration: Duration.zero,
+                    placeholderFadeInDuration: Duration.zero,
                     fit: BoxFit.cover,
                     height: null,
                     width: double.infinity,

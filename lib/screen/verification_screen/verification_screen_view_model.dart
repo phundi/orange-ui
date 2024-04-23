@@ -8,7 +8,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
 import 'package:orange_ui/common/widgets/common_ui.dart';
 
-import 'package:orange_ui/common/widgets/snack_bar_widget.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -63,7 +62,7 @@ class VerificationScreenViewModel extends BaseViewModel {
     final XFile? photo =
         await picker.pickImage(source: ImageSource.camera).onError(
       (PlatformException error, stackTrace) {
-        SnackBarWidget().snackBarWidget(error.message ?? '');
+        CommonUI.snackBarWidget(error.message ?? '');
         return null;
       },
     );
@@ -103,7 +102,7 @@ class VerificationScreenViewModel extends BaseViewModel {
     final XFile? photo = await picker
         .pickImage(source: ImageSource.gallery)
         .onError((PlatformException error, stackTrace) {
-      SnackBarWidget().snackBarWidget(error.message ?? '');
+      CommonUI.snackBarWidget(error.message ?? '');
       return null;
     });
     if (photo == null || photo.path.isEmpty) return;
@@ -119,7 +118,7 @@ class VerificationScreenViewModel extends BaseViewModel {
           .applyForVerification(
               selfieImage, docFile, fullNameController.text, docType)
           .then((value) {
-        SnackBarWidget().snackBarWidget(value.message ?? '');
+        CommonUI.snackBarWidget(value.message ?? '');
         Get.back();
         Get.back();
       });
@@ -140,7 +139,7 @@ class VerificationScreenViewModel extends BaseViewModel {
       i++;
     }
     if (selfieImage == null || selfieImage!.path.isEmpty) {
-      SnackBarWidget().snackBarWidget(S.current.pleaseAddSelfiePhoto);
+      CommonUI.snackBarWidget(S.current.pleaseAddSelfiePhoto);
       isSelfie = true;
       i++;
     }

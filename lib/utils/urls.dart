@@ -81,6 +81,8 @@ class Urls {
   static const String aFollowUser = '${ConstRes.aBaseUrl}followUser';
   static const String aUnfollowUser = '${ConstRes.aBaseUrl}unfollowUser';
   static const String aFetchPostByUser = '${ConstRes.aBaseUrl}fetchPostByUser';
+  static const String aFetchPostByPostId =
+      '${ConstRes.aBaseUrl}fetchPostByPostId';
   static const String aIncreasePostViewCount =
       '${ConstRes.aBaseUrl}increasePostViewCount';
   static const String aFetchPostsByHashtag =

@@ -55,7 +55,7 @@ class ChatTopBarArea extends StatelessWidget {
                     fit: BoxFit.cover,
                     errorWidget: (context, url, error) {
                       return CommonUI.profileImagePlaceHolder(
-                          name: conversation?.user?.username, heightWeight: 37);
+                          name: conversation?.user?.username, heightWidth: 37);
                     },
                   ),
                 ),

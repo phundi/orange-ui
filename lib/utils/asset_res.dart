@@ -55,7 +55,8 @@ class AssetRes {
   static const String icBookMark = "${icons}ic_book_mark.png";
   static const String icBlock = "${icons}ic_block.png";
   static const String icFeed = "${icons}ic_feed.png";
-  static const String icHorizontalThreeDot = "${icons}ic_horizontal_three_dot.png";
+  static const String icHorizontalThreeDot =
+      "${icons}ic_horizontal_three_dot.png";
   static const String icComment = "${icons}ic_comment.png";
   static const String icPostShare = "${icons}ic_post_share.png";
   static const String icPlay = "${icons}ic_play.png";
@@ -73,6 +74,7 @@ class AssetRes {
   static const String icPostPlaceholder = "${icons}ic_post_placeholder.png";
   static const String logout = "${icons}logout.png";
   static const String icPause = "${icons}ic_pause.png";
+  static const String icLocationPin = "${icons}ic_location_pin.png";
 
   /// ----------------- Images --------------
 

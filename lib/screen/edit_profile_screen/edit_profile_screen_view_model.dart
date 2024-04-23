@@ -7,7 +7,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
 import 'package:orange_ui/common/widgets/common_ui.dart';
 
-import 'package:orange_ui/common/widgets/snack_bar_widget.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/service/pref_service.dart';
@@ -232,10 +231,10 @@ class EditProfileScreenViewModel extends BaseViewModel {
     int i = 0;
     if (imageList.isEmpty) {
       if (imageFileList.isEmpty) {
-        SnackBarWidget().snackBarWidget(S.current.pleaseAddAtLeastEtc);
+        CommonUI.snackBarWidget(S.current.pleaseAddAtLeastEtc);
         i++;
       }
-      SnackBarWidget().snackBarWidget(S.current.imageIsEmpty);
+      CommonUI.snackBarWidget(S.current.imageIsEmpty);
       i++;
     }
     if (fullNameController.text == '') {
@@ -251,11 +250,11 @@ class EditProfileScreenViewModel extends BaseViewModel {
       i++;
     } else if (int.parse(ageController.text) < 18) {
       ageFocus.requestFocus();
-      SnackBarWidget.snackBar(message: S.current.youMustBe18);
+      CommonUI.snackBar(message: S.current.youMustBe18);
       return false;
     }
     if (selectedList.isEmpty) {
-      SnackBarWidget().snackBarWidget(S.current.pleaseAddAtLeastInterest);
+      CommonUI.snackBarWidget(S.current.pleaseAddAtLeastInterest);
       i++;
     }
     notifyListeners();

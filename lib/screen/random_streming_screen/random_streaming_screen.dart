@@ -27,7 +27,7 @@ class RandomStreamingScreen extends StatelessWidget {
       viewModelBuilder: () => RandomStreamingScreenViewModel(),
       builder: (context, model, child) {
         return PopScope(
-          onPopInvoked: (didPop) => model.onEndBtnTap(),
+          onPopInvoked: (didPop) => model.onEndVideoTap(),
           canPop: false,
           child: Scaffold(
             body: Stack(

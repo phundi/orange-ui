@@ -1,6 +1,8 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:orange_ui/common/widgets/dashboard_top_bar.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
@@ -9,14 +11,12 @@ import 'package:orange_ui/utils/font_res.dart';
 class MapTopBarArea extends StatelessWidget {
   final List<int> distanceList;
   final int selectedDistance;
-  final VoidCallback onBackBtnTap;
   final Function(int value) onDistanceChange;
 
   const MapTopBarArea({
     Key? key,
     required this.distanceList,
     required this.selectedDistance,
-    required this.onBackBtnTap,
     required this.onDistanceChange,
   }) : super(key: key);
 
@@ -39,32 +39,18 @@ class MapTopBarArea extends StatelessWidget {
               ),
               child: Row(
                 children: [
-                  InkWell(
-                    onTap: onBackBtnTap,
-                    borderRadius: BorderRadius.circular(30),
-                    child: Container(
-                      height: 37,
-                      width: 37,
-                      padding: const EdgeInsets.all(5),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: ColorRes.red4.withOpacity(0.10),
-                      ),
-                      child: Image.asset(
-                        AssetRes.backArrow,
-                      ),
-                    ),
+                  RoundedImage(
+                    onTap: () {
+                      Get.back();
+                    },
+                    image: AssetRes.backArrow,
                   ),
                   const SizedBox(width: 10),
                   Image.asset(AssetRes.themeLabel, height: 25, width: 75),
                   const SizedBox(width: 4),
-                  Text(
-                    S.current.map,
-                    style: const TextStyle(
-                      color: ColorRes.black2,
-                      fontSize: 15,
-                    ),
-                  ),
+                  Text(S.current.map,
+                      style: const TextStyle(
+                          color: ColorRes.black2, fontSize: 15)),
                   const Spacer(),
                   Container(
                     padding: const EdgeInsets.fromLTRB(11, 9, 11, 13),
@@ -78,12 +64,8 @@ class MapTopBarArea extends StatelessWidget {
                         padding: const EdgeInsets.only(top: 5.0, left: 16),
                         child: Transform.rotate(
                           angle: 4.7,
-                          child: Image.asset(
-                            AssetRes.backArrow,
-                            color: ColorRes.grey14,
-                            height: 20,
-                            width: 20,
-                          ),
+                          child: Image.asset(AssetRes.backArrow,
+                              color: ColorRes.grey14, height: 20, width: 20),
                         ),
                       ),
                       isDense: true,

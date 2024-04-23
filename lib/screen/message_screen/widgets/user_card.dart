@@ -35,7 +35,8 @@ class UserCard extends StatelessWidget {
       children: [
         Container(
           margin: const EdgeInsets.only(bottom: 6),
-          padding: const EdgeInsets.only(top: 8, left: 12, right: 12, bottom: 11),
+          padding:
+              const EdgeInsets.only(top: 8, left: 12, right: 12, bottom: 11),
           height: 74,
           width: Get.width,
           decoration: BoxDecoration(
@@ -48,13 +49,14 @@ class UserCard extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(30),
                 child: CachedNetworkImage(
-                  imageUrl: '${ConstRes.aImageBaseUrl}$image',
+                  imageUrl: '$image',
                   height: 53,
                   width: 53,
                   fit: BoxFit.cover,
-                  cacheKey: '${ConstRes.aImageBaseUrl}$image',
+                  cacheKey: '$image',
                   errorWidget: (context, url, error) {
-                    return CommonUI.profileImagePlaceHolder(name: name, heightWeight: 53);
+                    return CommonUI.profileImagePlaceHolder(
+                        name: name, heightWidth: 53);
                   },
                 ),
               ),
@@ -109,7 +111,8 @@ class UserCard extends StatelessWidget {
                             CommonFun.readTimestamp(
                               double.parse(time ?? ''),
                             ),
-                            style: const TextStyle(fontSize: 12, color: ColorRes.grey4),
+                            style: const TextStyle(
+                                fontSize: 12, color: ColorRes.grey4),
                           ),
                         ],
                       ),

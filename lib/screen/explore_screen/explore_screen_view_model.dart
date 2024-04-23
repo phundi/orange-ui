@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
 import 'package:orange_ui/common/widgets/common_fun.dart';
-import 'package:orange_ui/common/widgets/snack_bar_widget.dart';
+import 'package:orange_ui/common/widgets/common_ui.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/screen/bottom_diamond_shop/bottom_diamond_shop.dart';
@@ -99,7 +99,7 @@ class ExploreScreenViewModel extends BaseViewModel {
       return;
     }
     if (users?.isBlock == 1) {
-      return SnackBarWidget().snackBarWidget(S.current.userBlock);
+      return CommonUI.snackBarWidget(S.current.userBlock);
     } else {
       if (users?.isFake != 1) {
         if (PrefService.reverseSwipePrice <= walletCoin! && walletCoin != 0) {
@@ -173,7 +173,7 @@ class ExploreScreenViewModel extends BaseViewModel {
       }
     } else {
       users?.isBlock == 1
-          ? SnackBarWidget().snackBarWidget(S.current.userBlock)
+          ? CommonUI.snackBarWidget(S.current.userBlock)
           : userController.next(animation: true);
     }
   }
@@ -191,7 +191,7 @@ class ExploreScreenViewModel extends BaseViewModel {
 
   void onNotificationTap() {
     users?.isBlock == 1
-        ? SnackBarWidget().snackBarWidget(S.current.userBlock)
+        ? CommonUI.snackBarWidget(S.current.userBlock)
         : Get.to(() => const NotificationScreen());
   }
 
@@ -201,19 +201,19 @@ class ExploreScreenViewModel extends BaseViewModel {
 
   void onSearchTap() {
     users?.isBlock == 1
-        ? SnackBarWidget().snackBarWidget(S.current.userBlock)
+        ? CommonUI.snackBarWidget(S.current.userBlock)
         : Get.to(() => const SearchScreen());
   }
 
   void onTitleTap() {
     users?.isBlock == 1
-        ? SnackBarWidget().snackBarWidget(S.current.userBlock)
+        ? CommonUI.snackBarWidget(S.current.userBlock)
         : Get.to(() => const MapScreen());
   }
 
   void onImageTap() {
     users?.isBlock == 1
-        ? SnackBarWidget().snackBarWidget(S.current.userBlock)
+        ? CommonUI.snackBarWidget(S.current.userBlock)
         : Get.to(
             () => UserDetailScreen(userData: userData?[currentUserIndex]),
           );
@@ -225,7 +225,7 @@ class ExploreScreenViewModel extends BaseViewModel {
 
   void onEyeButtonTap() {
     users?.isBlock == 1
-        ? SnackBarWidget().snackBarWidget(S.current.userBlock)
+        ? CommonUI.snackBarWidget(S.current.userBlock)
         : Get.to(() => UserDetailScreen(
               showInfo: true,
               userData: userData?[currentUserIndex],

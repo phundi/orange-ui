@@ -8,10 +8,13 @@ import 'package:orange_ui/utils/font_res.dart';
 
 class CommonUI {
   static Widget profileImagePlaceHolder(
-      {required String? name, double heightWeight = 0, double? borderRadius}) {
+      {required String? name,
+      double heightWidth = 0,
+      double? borderRadius,
+      Color? color}) {
     return Container(
-      width: heightWeight,
-      height: heightWeight,
+      width: heightWidth,
+      height: heightWidth,
       decoration: BoxDecoration(
           color: ColorRes.orange2.withOpacity(0.1),
           borderRadius: BorderRadius.circular(borderRadius ?? 50)),
@@ -20,8 +23,8 @@ class CommonUI {
         (name ?? 'Unknown')[0].toUpperCase(),
         style: TextStyle(
             fontFamily: FontRes.semiBold,
-            fontSize: heightWeight / 2,
-            color: ColorRes.orange2),
+            fontSize: heightWidth / 2,
+            color: color ?? ColorRes.orange2),
       ),
     );
   }
@@ -70,6 +73,37 @@ class CommonUI {
   static Widget lottieWidget() {
     return Center(
       child: Lottie.asset(AssetRes.loadingLottie, height: 100, width: 100),
+    );
+  }
+
+  static void snackBarWidget(String? titleName) {
+    ScaffoldMessenger.of(Get.context!)
+        .showSnackBar(
+          SnackBar(
+            content: Text(
+              (titleName ?? '').capitalizeFirst ?? '',
+              style: const TextStyle(overflow: TextOverflow.ellipsis),
+              maxLines: 2,
+            ),
+            backgroundColor: ColorRes.black,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            elevation: 5,
+            behavior: SnackBarBehavior.floating,
+            duration: const Duration(milliseconds: 2500),
+          ),
+        )
+        .closed
+        .then((value) => ScaffoldMessenger.of(Get.context!).clearSnackBars());
+  }
+
+  static void snackBar({required String message}) {
+    Get.rawSnackbar(
+      messageText: Text(
+        message,
+        style: const TextStyle(color: ColorRes.white),
+      ),
+      backgroundColor: ColorRes.black,
     );
   }
 }

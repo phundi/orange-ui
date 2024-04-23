@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
 import 'package:orange_ui/common/widgets/common_ui.dart';
 
-import 'package:orange_ui/common/widgets/snack_bar_widget.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/screen/dashboard/dashboard_screen.dart';
@@ -69,12 +68,12 @@ class StartingProfileScreenViewModel extends BaseViewModel {
 
   void onNextTap() async {
     if (ageController.text.isEmpty) {
-      SnackBarWidget.snackBar(message: S.current.pleaseEnterYourAge);
+      CommonUI.snackBar(message: S.current.pleaseEnterYourAge);
       ageFocus.requestFocus();
       return;
     }
     if (int.parse(ageController.text) < 18) {
-      SnackBarWidget.snackBar(message: S.current.youMustBe18);
+      CommonUI.snackBar(message: S.current.youMustBe18);
       return;
     }
     CommonUI.lottieLoader();
@@ -98,7 +97,7 @@ class StartingProfileScreenViewModel extends BaseViewModel {
   }
 
   void checkScreenCondition(RegistrationUserData? data) {
-    if (data?.images == null || data!.images!.isEmpty) {
+    if (data?.images == null || data!.images.isEmpty) {
       Get.to(() => const SelectPhotoScreen());
     } else if (data.interests == null || data.interests!.isEmpty) {
       Get.to(() => const SelectHobbiesScreen());

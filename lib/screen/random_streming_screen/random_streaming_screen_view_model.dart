@@ -8,6 +8,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:orange_ui/common/widgets/common_fun.dart';
+import 'package:orange_ui/common/widgets/common_ui.dart';
 import 'package:orange_ui/common/widgets/confirmation_dialog.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/chat_and_live_stream/live_stream.dart';
@@ -202,9 +203,7 @@ class RandomStreamingScreenViewModel extends BaseViewModel {
         if (Get.isDialogOpen == true) {
           Get.back();
         }
-        Get.off(
-          () => const LivestreamEndScreen(),
-        );
+        Get.off(() => const LivestreamEndScreen());
       },
     );
   }
@@ -224,11 +223,19 @@ class RandomStreamingScreenViewModel extends BaseViewModel {
     PrefService.saveString(
         PrefConst.userImage, liveStreamUser?.userImage ?? '');
     PrefService.saveString(PrefConst.date, dateTime.toString());
+    PrefService.saveString(
+        PrefConst.fullName, CommonUI.fullName(liveStreamUser?.fullName));
   }
 
   void onEndBtnTap() async {
     Get.dialog(ConfirmationDialog(
-        onTap: onEndVideoTap, description: S.current.areYouSureYouWantToEnd));
+      onTap: onEndVideoTap,
+      description: S.current.areYouSureYouWantToEnd,
+      textImage: '',
+      textButton: S.current.end,
+      dialogSize: 1.9,
+      padding: EdgeInsets.symmetric(horizontal: 40),
+    ));
   }
 
   void onCameraTap() {

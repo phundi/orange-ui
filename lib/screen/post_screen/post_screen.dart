@@ -59,7 +59,7 @@ class PostScreen extends StatelessWidget {
                                   return CommonUI.profileImagePlaceHolder(
                                       name:
                                           CommonUI.fullName(userData?.fullname),
-                                      heightWeight: 35,
+                                      heightWidth: 35,
                                       borderRadius: 7);
                                 },
                               )),
@@ -80,7 +80,7 @@ class PostScreen extends StatelessWidget {
                                   fontFamily: FontRes.regular,
                                   color: ColorRes.dimGrey3,
                                   fontSize: 16)),
-                          userData?.isVerified == 1
+                          userData?.isVerified == 2
                               ? Image.asset(
                                   AssetRes.icBlueTick,
                                   width: 18,

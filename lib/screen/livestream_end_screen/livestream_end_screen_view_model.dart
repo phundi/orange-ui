@@ -13,6 +13,7 @@ class LivestreamEndScreenViewModel extends BaseViewModel {
   String watching = '0';
   String diamond = '0';
   String image = '';
+  String fullName = '';
   String time = '';
   String date = '';
 
@@ -22,6 +23,7 @@ class LivestreamEndScreenViewModel extends BaseViewModel {
     image = await PrefService.getString(PrefConst.userImage) ?? '';
     time = await PrefService.getString(PrefConst.time) ?? '';
     date = await PrefService.getString(PrefConst.date) ?? '';
+    fullName = await PrefService.getString(PrefConst.fullName) ?? '';
     notifyListeners();
   }
 

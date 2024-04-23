@@ -302,7 +302,7 @@ class ApiProvider {
     }, body: {
       Urls.aKeyword: searchKeyword,
       Urls.aStart: start.toString(),
-      Urls.aCount: Urls.aFifteen
+      Urls.aCount: '$paginationLimit'
     });
     return SearchUser.fromJson(jsonDecode(response.body));
   }

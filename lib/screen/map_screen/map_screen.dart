@@ -21,6 +21,12 @@ class MapScreen extends StatelessWidget {
           backgroundColor: ColorRes.white,
           body: Stack(
             children: [
+              Visibility(
+                visible: true,
+                child: Column(
+                  children: model.widgets,
+                ),
+              ),
               SizedBox(
                 height: Get.height,
                 width: Get.width,
@@ -40,10 +46,8 @@ class MapScreen extends StatelessWidget {
                   compassEnabled: false,
                   myLocationButtonEnabled: false,
                   indoorViewEnabled: true,
-                  initialCameraPosition: CameraPosition(
-                    target: model.center,
-                    zoom: 15.4746,
-                  ),
+                  initialCameraPosition:
+                      CameraPosition(target: model.center, zoom: 15.4746),
                 ),
               ),
               SizedBox(
@@ -55,7 +59,6 @@ class MapScreen extends StatelessWidget {
                     MapTopBarArea(
                       distanceList: model.distanceList,
                       selectedDistance: model.selectedDistance,
-                      onBackBtnTap: model.onBackBtnTap,
                       onDistanceChange: model.onDistanceChange,
                     ),
                     const Spacer(),

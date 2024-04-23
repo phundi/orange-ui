@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:orange_ui/common/widgets/snack_bar_widget.dart';
+import 'package:orange_ui/common/widgets/common_ui.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/setting.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
@@ -89,8 +89,8 @@ class BottomPurchaseShirt extends StatelessWidget {
                             if (Get.isBottomSheetOpen == true) {
                               Get.back();
                             }
-                            SnackBarWidget()
-                                .snackBarWidget(S.of(context).youAreFakeUser);
+                            CommonUI.snackBarWidget(
+                                S.of(context).youAreFakeUser);
                           }
                         },
                         child: Container(

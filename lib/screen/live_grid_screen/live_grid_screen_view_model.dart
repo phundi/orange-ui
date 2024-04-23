@@ -11,7 +11,7 @@ import 'package:orange_ui/common/widgets/common_fun.dart';
 import 'package:orange_ui/common/widgets/common_ui.dart';
 
 import 'package:orange_ui/common/widgets/confirmation_dialog.dart';
-import 'package:orange_ui/common/widgets/snack_bar_widget.dart';
+
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/chat_and_live_stream/live_stream.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
@@ -73,12 +73,15 @@ class LiveGridScreenViewModel extends BaseViewModel {
 
   void goLiveBtnClick() {
     registrationUser?.isBlock == 1
-        ? SnackBarWidget().snackBarWidget(S.current.userBlock)
+        ? CommonUI.snackBarWidget(S.current.userBlock)
         : Get.dialog(
             ConfirmationDialog(
               onTap: onGoLiveYesBtnTap,
               description: S.current.doYouReallyWantToLive,
               dialogSize: 2,
+              textButton: S.current.goLive,
+              textImage: '',
+              padding: const EdgeInsets.symmetric(horizontal: 40),
             ),
           );
   }
@@ -124,7 +127,7 @@ class LiveGridScreenViewModel extends BaseViewModel {
 
   void onLiveStreamProfileTap(LiveStreamUser? user) {
     if (registrationUser?.isBlock == 1) {
-      return SnackBarWidget().snackBarWidget(S.current.userBlock);
+      return CommonUI.snackBarWidget(S.current.userBlock);
     } else {
       String authString = '${ConstRes.customerId}:${ConstRes.customerSecret}';
       String authToken = base64.encode(authString.codeUnits);

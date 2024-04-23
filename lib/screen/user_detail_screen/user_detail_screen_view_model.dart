@@ -8,7 +8,6 @@ import 'package:orange_ui/api_provider/api_provider.dart';
 import 'package:orange_ui/common/widgets/common_fun.dart';
 import 'package:orange_ui/common/widgets/common_ui.dart';
 
-import 'package:orange_ui/common/widgets/snack_bar_widget.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/chat_and_live_stream/chat.dart';
 import 'package:orange_ui/model/chat_and_live_stream/live_stream.dart';
@@ -189,7 +188,7 @@ class UserDetailScreenViewModel extends BaseViewModel {
         Urls.aUserInfo: liveStreamUser
       });
     }).catchError((e) {
-      SnackBarWidget().snackBarWidget(S.current.userNotLive);
+      CommonUI.snackBarWidget(S.current.userNotLive);
     });
   }
 

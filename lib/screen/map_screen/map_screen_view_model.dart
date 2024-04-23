@@ -7,43 +7,39 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
-import 'package:google_maps_cluster_manager/google_maps_cluster_manager.dart';
+import 'package:google_maps_cluster_manager_2/google_maps_cluster_manager_2.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
 import 'package:orange_ui/common/widgets/common_fun.dart';
 import 'package:orange_ui/common/widgets/common_ui.dart';
-
-import 'package:orange_ui/common/widgets/snack_bar_widget.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
+import 'package:orange_ui/screen/map_screen/widgets/custom_marker.dart';
 import 'package:orange_ui/screen/map_screen/widgets/user_pop_up.dart';
 import 'package:orange_ui/screen/user_detail_screen/user_detail_screen.dart';
 import 'package:orange_ui/service/pref_service.dart';
-import 'package:orange_ui/utils/asset_res.dart';
+import 'package:orange_ui/utils/color_res.dart';
 import 'package:stacked/stacked.dart';
 
 class MapScreenViewModel extends BaseViewModel {
   int selectedDistance = 10;
   List<int> distanceList = [1, 5, 10, 20, 50, 500];
   LatLng center = const LatLng(21.2408, 72.8806);
-  List<RegistrationUserData>? userData = [];
+  List<RegistrationUserData> userData = [];
   Set<Marker> marker = {};
   List<Place> items = [];
   late GoogleMapController mapController;
   late ClusterManager manager;
   late Position position;
+  List<Widget> widgets = [];
+  Map<String, GlobalKey> globalKey = <String, GlobalKey>{};
 
   void init(context) {
     manager = _initClusterManager();
   }
 
   ClusterManager _initClusterManager() {
-    return ClusterManager<Place>(
-      items,
-      _updateMarkers,
-      markerBuilder: _markerBuilder,
-      levels: [1, 4.25, 6.75, 8.25, 11.5, 14.5, 16.0, 16.5, 20.0],
-      extraPercent: 0.2,
-    );
+    return ClusterManager<Place>(items, _updateMarkers,
+        markerBuilder: _markerBuilder);
   }
 
   void _updateMarkers(Set<Marker> markers) {
@@ -58,17 +54,32 @@ class MapScreenViewModel extends BaseViewModel {
     ApiProvider()
         .getUserByLatLong(latitude: latitude, longitude: longitude, km: km)
         .then((value) async {
-      userData = value.data;
+      userData = value.data ?? [];
       items = [];
-
-      for (int i = 0; i < userData!.length; i++) {
+      widgets = List.generate(
+        userData.length,
+        (index) {
+          String imageUrl =
+              CommonFun.getProfileImage(images: userData[index].images);
+          GlobalKey globalKey1 = GlobalKey();
+          if (imageUrl.isEmpty) {
+            globalKey[userData[index].fullname ?? '$index'] = globalKey1;
+          } else {
+            globalKey[imageUrl] = globalKey1;
+          }
+          return CustomMarker(
+            imageUrl: imageUrl,
+            globalKey: globalKey1,
+            name: CommonUI.fullName(userData[index].fullname),
+          );
+        },
+      );
+      for (int i = 0; i < userData.length; i++) {
         items.add(
           Place(
-            userData: userData?[i],
-            latLng: LatLng(
-              double.parse(userData?[i].lattitude ?? '0.0'),
-              double.parse(userData?[i].longitude ?? '0.0'),
-            ),
+            userData: userData[i],
+            latLng: LatLng(double.parse(userData[i].lattitude ?? '0.0'),
+                double.parse(userData[i].longitude ?? '0.0')),
           ),
         );
       }
@@ -78,10 +89,6 @@ class MapScreenViewModel extends BaseViewModel {
     });
   }
 
-  void onBackBtnTap() {
-    Get.back();
-  }
-
   void onMapCreated(GoogleMapController controller) async {
     position = await getUserCurrentLocation();
     getUserByCoordinatesApiCall(
@@ -89,25 +96,15 @@ class MapScreenViewModel extends BaseViewModel {
         longitude: position.longitude,
         km: selectedDistance);
     updateProfileApiCall();
-    await PrefService.setLatitude(
-      position.latitude.toString(),
-    );
-    await PrefService.setLongitude(
-      position.longitude.toString(),
-    );
+    await PrefService.setLatitude(position.latitude.toString());
+    await PrefService.setLongitude(position.longitude.toString());
     center = LatLng(position.latitude, position.longitude);
     await controller.animateCamera(
       CameraUpdate.newCameraPosition(
-        CameraPosition(
-          target: center,
-          zoom: 15.09,
-        ),
-      ),
+          CameraPosition(target: center, zoom: 15.09)),
     );
     mapController = controller;
-    mapController.animateCamera(
-      CameraUpdate.newLatLng(center),
-    );
+    mapController.animateCamera(CameraUpdate.newLatLng(center));
     notifyListeners();
   }
 
@@ -125,14 +122,10 @@ class MapScreenViewModel extends BaseViewModel {
         latitude: position.latitude,
         longitude: position.longitude,
         km: selectedDistance);
-    mapController.animateCamera(
-      CameraUpdate.newCameraPosition(
-        CameraPosition(
-          target: LatLng(position.latitude, position.longitude),
-          zoom: getZoomLevel(value.toDouble()),
-        ),
-      ),
-    );
+    mapController.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
+      target: LatLng(position.latitude, position.longitude),
+      zoom: getZoomLevel(value.toDouble()),
+    )));
     Get.back();
     notifyListeners();
   }
@@ -140,36 +133,22 @@ class MapScreenViewModel extends BaseViewModel {
   void onUserProfileTap(
       {RegistrationUserData? data, required bool isMultiple}) {
     isMultiple
-        ? null
+        ? mapController.animateCamera(CameraUpdate.zoomIn())
         : Get.dialog(
-            UserPopUp(
-                onMoreInfoTap: () {
-                  onMoreInfoTap(data);
-                },
-                onCancelTap: onBackBtnTap,
-                image: CommonFun.getProfileImage(images: data?.images),
-                userName: data?.fullname,
-                live: data?.live,
-                age: data?.age ?? 0),
-            barrierColor: Colors.transparent,
-          );
+            UserPopUp(onMoreInfoTap: () => onMoreInfoTap(data), user: data),
+            barrierColor: Colors.transparent);
   }
 
   void onMoreInfoTap(RegistrationUserData? data) {
     // user Detail Screen
     Get.back();
-    Get.to(
-      () => UserDetailScreen(
-        userData: data,
-      ),
-    );
+    Get.to(() => UserDetailScreen(userData: data));
   }
 
   double getZoomLevel(double radius) {
     double zoomLevel = 11;
     if (radius > 0) {
       double radiusElevated = radius + radius;
-      // double scale = radiusElevated / 5;
       zoomLevel = 16 - log(radiusElevated) / log(2);
     }
     zoomLevel = double.parse(zoomLevel.toStringAsFixed(2));
@@ -189,17 +168,19 @@ class MapScreenViewModel extends BaseViewModel {
           },
           icon: await _getMarkerBitmap(
               cluster.isMultiple ? 125 : 75, cluster.items.toList(),
-              text: cluster.isMultiple ? cluster.count.toString() : null),
+              text: cluster.isMultiple ? cluster.count.toString() : null,
+              isMultiple: cluster.isMultiple),
         );
       };
 
   Future<BitmapDescriptor> _getMarkerBitmap(int size, List<Place> places,
-      {String? text}) async {
+      {String? text, bool? isMultiple}) async {
+    if (kIsWeb) size = (size / 2).floor();
+
     final PictureRecorder pictureRecorder = PictureRecorder();
     final Canvas canvas = Canvas(pictureRecorder);
-    final Paint paint1 = Paint()..color = Colors.deepOrange;
+    final Paint paint1 = Paint()..color = ColorRes.orange2;
     final Paint paint2 = Paint()..color = Colors.white;
-
     canvas.drawCircle(Offset(size / 2, size / 2), size / 2.0, paint1);
     canvas.drawCircle(Offset(size / 2, size / 2), size / 2.2, paint2);
     canvas.drawCircle(Offset(size / 2, size / 2), size / 2.8, paint1);
@@ -214,28 +195,19 @@ class MapScreenViewModel extends BaseViewModel {
             fontWeight: FontWeight.normal),
       );
       painter.layout();
-      painter.paint(
-        canvas,
-        Offset(size / 2 - painter.width / 2, size / 2 - painter.height / 2),
-      );
+      painter.paint(canvas,
+          Offset(size / 2 - painter.width / 2, size / 2 - painter.height / 2));
     }
-
     final img = await pictureRecorder.endRecording().toImage(size, size);
     final data = await img.toByteData(format: ImageByteFormat.png) as ByteData;
-
     if (size == 75) {
-      if (places[0].userData?.images == null ||
-          places[0].userData!.images!.isEmpty) {
-        return await MarkerIcon.pictureAsset(
-            width: 110, height: 110, assetPath: AssetRes.personLocationPin);
-      }
-      return await MarkerIcon.downloadResizePictureCircle(
-        CommonFun.getProfileImage(images: places[0].userData?.images),
-        size: 150,
-      );
-    } else {
-      return BitmapDescriptor.fromBytes(data.buffer.asUint8List());
+      return await MarkerIcon.widgetToIcon(globalKey[
+          CommonFun.getProfileImage(images: places[0].userData!.images).isEmpty
+              ? places[0].userData!.fullname
+              : CommonFun.getProfileImage(
+                  images: places[0].userData!.images)]!);
     }
+    return BitmapDescriptor.fromBytes(data.buffer.asUint8List());
   }
 
   Future<Position> getUserCurrentLocation() async {
@@ -243,7 +215,7 @@ class MapScreenViewModel extends BaseViewModel {
         .then((value) {})
         .onError((error, stackTrace) async {
       await Geolocator.requestPermission();
-      SnackBarWidget().snackBarWidget('$error');
+      CommonUI.snackBarWidget('$error');
     });
     return await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.best);

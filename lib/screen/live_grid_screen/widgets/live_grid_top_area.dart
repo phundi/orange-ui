@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:orange_ui/common/widgets/snack_bar_widget.dart';
+import 'package:orange_ui/common/widgets/common_ui.dart';
+
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/utils/asset_res.dart';
@@ -56,11 +57,11 @@ class LiveGridTopArea extends StatelessWidget {
               onTap: () {
                 if (userData?.isFake != 1) {
                   userData?.canGoLive == 0
-                      ? SnackBarWidget().snackBarWidget(S
+                      ? CommonUI.snackBarWidget(S
                           .of(context)
                           .pleaseApplyForLiveStreamFromLivestreamDashboardFromProfile)
                       : userData?.canGoLive == 1
-                          ? SnackBarWidget().snackBarWidget(
+                          ? CommonUI.snackBarWidget(
                               S.of(context).yourApplicationIsPendingPleaseWait)
                           : onGoLiveTap();
                 } else {

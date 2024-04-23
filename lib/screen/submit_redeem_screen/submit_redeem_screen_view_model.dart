@@ -5,7 +5,6 @@ import 'package:orange_ui/api_provider/api_provider.dart';
 import 'package:orange_ui/common/widgets/common_fun.dart';
 import 'package:orange_ui/common/widgets/common_ui.dart';
 
-import 'package:orange_ui/common/widgets/snack_bar_widget.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:stacked/stacked.dart';
 
@@ -55,7 +54,7 @@ class SubmitRedeemScreenViewModel extends BaseViewModel {
         }
       } else {
         Get.back();
-        SnackBarWidget.snackBar(message: '${value.message}');
+        CommonUI.snackBar(message: '${value.message}');
       }
     });
   }
