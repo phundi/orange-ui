@@ -336,5 +336,11 @@
   "noSavedData": "No Saved Data",
   "whatDoYouWantToSelect": "What do you want to select?",
   "readLess": "Read Less...",
-  "readMore": "Read More..."
+  "readMore": "Read More...",
+  "videoDurationIs": "Video duration is",
+  "large": "Large",
+  "commentDelete": "Comment delete ?",
+  "areYouSureYouWantToDeleteTheComment": "Are you sure you want to delete the comment ?",
+  "enterUsername": "Enter UserName",
+  "username": "UserName"
 }

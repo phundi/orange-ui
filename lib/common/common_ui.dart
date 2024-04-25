@@ -24,7 +24,7 @@ class CommonUI {
         style: TextStyle(
             fontFamily: FontRes.semiBold,
             fontSize: heightWidth / 2,
-            color: color ?? ColorRes.orange2),
+            color: (color ?? ColorRes.orange2).withOpacity(.5)),
       ),
     );
   }
@@ -47,10 +47,14 @@ class CommonUI {
     return fullName ?? 'Unknown';
   }
 
-  static Widget noData() {
+  static String userName(String? userName) {
+    return '@${userName ?? 'unknown'}';
+  }
+
+  static Widget noData({String? title}) {
     return Center(
       child: Text(
-        S.current.noData,
+        title ?? S.current.noData,
         style: const TextStyle(
             fontFamily: FontRes.semiBold,
             fontSize: 18,

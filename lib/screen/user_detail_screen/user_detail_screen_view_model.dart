@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -5,12 +6,13 @@ import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
-import 'package:orange_ui/common/widgets/common_fun.dart';
-import 'package:orange_ui/common/widgets/common_ui.dart';
+import 'package:orange_ui/common/common_fun.dart';
+import 'package:orange_ui/common/common_ui.dart';
 
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/chat_and_live_stream/chat.dart';
 import 'package:orange_ui/model/chat_and_live_stream/live_stream.dart';
+import 'package:orange_ui/model/setting.dart';
 import 'package:orange_ui/model/user/follow_user.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/screen/chat_screen/chat_screen.dart';
@@ -45,6 +47,8 @@ class UserDetailScreenViewModel extends BaseViewModel {
   InterstitialAd? interstitialAd;
   bool isFollow = true;
 
+  Appdata? settingAppData;
+
   UserDetailScreenViewModel({this.userId, this.userData});
 
   void init(bool? showInfo) {
@@ -55,6 +59,7 @@ class UserDetailScreenViewModel extends BaseViewModel {
     // } else {
     //   userData = Get.arguments;
     // }
+    getSettingData();
     userDetailApiCall();
     initInterstitialAds();
   }
@@ -87,6 +92,8 @@ class UserDetailScreenViewModel extends BaseViewModel {
     } else {}
   }
 
+  List<String> interestList = [];
+
   Future<void> userProfileApiCall() async {
     isLoading = true;
     await ApiProvider().getProfile(userID: userId ?? userData?.id).then(
@@ -98,6 +105,16 @@ class UserDetailScreenViewModel extends BaseViewModel {
             .contains('${userId ?? userData?.id}');
         isFollow =
             (userData?.followingStatus == 2 || userData?.followingStatus == 3);
+        List<String> interestID = (userData?.interests ?? '').split(',');
+        PrefService.getInterest().then((value) {
+          value?.data?.forEach((element) {
+            if (interestID.contains('${element.id}')) {
+              if (element.title != null || element.title!.isEmpty) {
+                interestList.add(element.title ?? '');
+              }
+            }
+          });
+        });
         isLoading = false;
         notifyListeners();
       },
@@ -215,7 +232,10 @@ class UserDetailScreenViewModel extends BaseViewModel {
   void initInterstitialAds() {
     CommonFun.interstitialAd((ad) {
       interstitialAd = ad;
-    });
+    },
+        adMobIntId: Platform.isIOS
+            ? settingAppData?.admobIntIos
+            : settingAppData?.admobInt);
   }
 
   void onMoreBtnTap(String value) {
@@ -371,5 +391,12 @@ class UserDetailScreenViewModel extends BaseViewModel {
 
   void onPostBtnClick() {
     Get.to(() => PostScreen(userData: userData));
+  }
+
+  void getSettingData() {
+    PrefService.getSettingData().then((value) {
+      settingAppData = value?.appdata;
+      notifyListeners();
+    });
   }
 }

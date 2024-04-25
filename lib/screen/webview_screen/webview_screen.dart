@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:orange_ui/common/widgets/top_bar_area.dart';
+import 'package:orange_ui/common/top_bar_area.dart';
 import 'package:orange_ui/screen/webview_screen/webview_screen_view_model.dart';
 import 'package:stacked/stacked.dart';
 import 'package:webview_flutter/webview_flutter.dart';

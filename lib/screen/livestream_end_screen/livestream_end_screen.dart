@@ -2,7 +2,7 @@ import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
-import 'package:orange_ui/common/widgets/common_ui.dart';
+import 'package:orange_ui/common/common_ui.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/screen/livestream_end_screen/livestream_end_screen_view_model.dart';
 import 'package:orange_ui/utils/asset_res.dart';

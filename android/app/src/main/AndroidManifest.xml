@@ -1,6 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.orange_ui">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.VIBRATE" />
@@ -33,8 +32,9 @@
     <application
         android:name=".MyApplication"
         android:icon="@mipmap/ic_launcher"
-        android:label="Orange Flutter"
-        android:usesCleartextTraffic="true">
+        android:label="Orange"
+        android:usesCleartextTraffic="true"
+        android:enableOnBackInvokedCallback="true">
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDMku6zGXg_EWPZgT2aVxnqXgQmm55tPr4" />
@@ -52,6 +52,7 @@
             android:theme="@style/LaunchTheme"
             android:windowSoftInputMode="adjustResize">
 
+            <!-- A custom Android Notification Channel to deliver FCM notifications on a non-default channel -->
             <meta-data
                 android:name="com.google.firebase.messaging.default_notification_channel_id"
                 android:value="high_importance_channel" />

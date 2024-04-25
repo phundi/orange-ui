@@ -1,10 +1,13 @@
+import 'dart:io';
+
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
-import 'package:orange_ui/common/widgets/common_fun.dart';
-import 'package:orange_ui/common/widgets/common_ui.dart';
+import 'package:orange_ui/common/common_fun.dart';
+import 'package:orange_ui/common/common_ui.dart';
 import 'package:orange_ui/generated/l10n.dart';
+import 'package:orange_ui/model/setting.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/screen/bottom_diamond_shop/bottom_diamond_shop.dart';
 import 'package:orange_ui/screen/live_grid_screen/live_grid_screen.dart';
@@ -32,6 +35,8 @@ class ExploreScreenViewModel extends BaseViewModel {
   InterstitialAd? interstitialAd;
   int count = 0;
 
+  Appdata? settingAppData;
+
   void init() {
     exploreScreenApiCall();
     prefSetting();
@@ -39,7 +44,7 @@ class ExploreScreenViewModel extends BaseViewModel {
 
   void prefSetting() {
     PrefService.getSettingData().then((value) {
-      PrefService.settingData = value;
+      settingAppData = value?.appdata;
       notifyListeners();
     });
     initInterstitialAds();
@@ -75,7 +80,7 @@ class ExploreScreenViewModel extends BaseViewModel {
   }
 
   Future<void> minusCoinApi() async {
-    await ApiProvider().minusCoinFromWallet(PrefService.reverseSwipePrice);
+    await ApiProvider().minusCoinFromWallet(settingAppData?.reverseSwipePrice);
   }
 
   void _launchUrl(String url) async {
@@ -102,7 +107,8 @@ class ExploreScreenViewModel extends BaseViewModel {
       return CommonUI.snackBarWidget(S.current.userBlock);
     } else {
       if (users?.isFake != 1) {
-        if (PrefService.reverseSwipePrice <= walletCoin! && walletCoin != 0) {
+        if ((settingAppData?.reverseSwipePrice ?? 0) <= walletCoin! &&
+            walletCoin != 0) {
           !isSelected
               ? Get.dialog(
                   ReverseSwipeDialog(
@@ -110,8 +116,9 @@ class ExploreScreenViewModel extends BaseViewModel {
                     walletCoin: walletCoin,
                     title1: S.current.reverse,
                     title2: S.current.swipe,
-                    dialogDisc: AppRes.reverseSwipeDisc,
-                    coinPrice: '${PrefService.reverseSwipePrice}',
+                    dialogDisc: AppRes.reverseSwipeDisc(
+                        settingAppData?.reverseSwipePrice ?? 0),
+                    coinPrice: '${settingAppData?.reverseSwipePrice ?? 0}',
                     onCancelTap: () {
                       onBackBtnTap();
                     },
@@ -181,7 +188,10 @@ class ExploreScreenViewModel extends BaseViewModel {
   void initInterstitialAds() {
     CommonFun.interstitialAd((ad) {
       interstitialAd = ad;
-    });
+    },
+        adMobIntId: Platform.isIOS
+            ? settingAppData?.admobIntIos
+            : settingAppData?.admobInt);
   }
 
   void onIndexChange(int index) {

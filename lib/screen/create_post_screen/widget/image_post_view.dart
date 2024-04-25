@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:orange_ui/screen/create_post_screen/create_post_screen_view_model.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
@@ -23,8 +24,14 @@ class ImagePostView extends StatelessWidget {
               alignment: Alignment.bottomCenter,
               children: [
                 model.imagesFile.length <= 1
-                    ? Image.file(File(model.imagesFile.first.path),
-                        fit: BoxFit.cover, height: null, width: double.infinity)
+                    ? Container(
+                        constraints:
+                            BoxConstraints(maxHeight: Get.height / 1.7),
+                        child: Image.file(File(model.imagesFile.first.path),
+                            fit: BoxFit.cover,
+                            height: null,
+                            width: double.infinity),
+                      )
                     : SizedBox(
                         height: 390,
                         child: PageView.builder(
@@ -32,8 +39,11 @@ class ImagePostView extends StatelessWidget {
                           itemCount: model.imagesFile.length,
                           onPageChanged: model.onPageChanged,
                           itemBuilder: (context, index) {
-                            return Image.file(File(model.imagesFile[index].path),
-                                fit: BoxFit.cover, height: 390, width: double.infinity);
+                            return Image.file(
+                                File(model.imagesFile[index].path),
+                                fit: BoxFit.cover,
+                                height: 390,
+                                width: double.infinity);
                           },
                         ),
                       ),
@@ -52,28 +62,38 @@ class ImagePostView extends StatelessWidget {
                                   : InkWell(
                                       onTap: model.onPhotoTap,
                                       child: Container(
-                                        margin: const EdgeInsets.symmetric(horizontal: 5),
+                                        margin: const EdgeInsets.symmetric(
+                                            horizontal: 5),
                                         padding: const EdgeInsets.all(10),
                                         decoration: ShapeDecoration(
-                                          shape:
-                                              SmoothRectangleBorder(borderRadius: SmoothBorderRadius(cornerRadius: 30)),
-                                          color: ColorRes.white.withOpacity(0.3),
+                                          shape: SmoothRectangleBorder(
+                                              borderRadius: SmoothBorderRadius(
+                                                  cornerRadius: 30)),
+                                          color:
+                                              ColorRes.white.withOpacity(0.3),
                                         ),
                                         alignment: Alignment.center,
-                                        child: const Icon(Icons.add_rounded, color: ColorRes.white),
+                                        child: const Icon(Icons.add_rounded,
+                                            color: ColorRes.white),
                                       ),
                                     ),
                               InkWell(
                                 onTap: model.onImageDelete,
                                 child: Container(
-                                  margin: const EdgeInsets.symmetric(horizontal: 5),
+                                  margin:
+                                      const EdgeInsets.symmetric(horizontal: 5),
                                   padding: const EdgeInsets.all(10),
                                   decoration: ShapeDecoration(
-                                    shape: SmoothRectangleBorder(borderRadius: SmoothBorderRadius(cornerRadius: 30)),
+                                    shape: SmoothRectangleBorder(
+                                        borderRadius: SmoothBorderRadius(
+                                            cornerRadius: 30)),
                                     color: ColorRes.white.withOpacity(0.3),
                                   ),
                                   alignment: Alignment.center,
-                                  child: Image.asset(AssetRes.icBin, color: ColorRes.white, width: 21, height: 21),
+                                  child: Image.asset(AssetRes.icBin,
+                                      color: ColorRes.white,
+                                      width: 21,
+                                      height: 21),
                                 ),
                               ),
                             ],
@@ -88,9 +108,14 @@ class ImagePostView extends StatelessWidget {
                           child: SmoothPageIndicator(
                             controller: model.pageController,
                             effect: CustomizableEffect(
-                                dotDecoration:
-                                    DotDecoration(width: 31, height: 2, color: ColorRes.white.withOpacity(0.3)),
-                                activeDotDecoration: const DotDecoration(width: 31, height: 2, color: ColorRes.white)),
+                                dotDecoration: DotDecoration(
+                                    width: 31,
+                                    height: 2,
+                                    color: ColorRes.white.withOpacity(0.3)),
+                                activeDotDecoration: const DotDecoration(
+                                    width: 31,
+                                    height: 2,
+                                    color: ColorRes.white)),
                             onDotClicked: (index) {},
                             count: model.imagesFile.length,
                           ),

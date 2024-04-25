@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:orange_ui/common/widgets/dashboard_top_bar.dart';
+import 'package:orange_ui/common/dashboard_top_bar.dart';
 import 'package:orange_ui/screen/profile_screen/profile_screen_view_model.dart';
 import 'package:orange_ui/screen/profile_screen/widget/profile_images_area.dart';
 import 'package:stacked/stacked.dart';
@@ -21,7 +21,8 @@ class ProfileScreen extends StatelessWidget {
               DashboardTopBar(
                   onNotificationTap: model.onNotificationTap,
                   onSearchTap: model.onSearchBtnTap,
-                  onLivesBtnClick: model.onLivesBtnClick),
+                  onLivesBtnClick: model.onLivesBtnClick,
+                  isDating: model.settingAppData?.isDating),
               ProfileImageArea(
                 userData: model.userData,
                 pageController: model.pageController,

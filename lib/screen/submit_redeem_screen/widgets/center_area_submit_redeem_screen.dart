@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:orange_ui/generated/l10n.dart';
-import 'package:orange_ui/service/pref_service.dart';
+import 'package:orange_ui/screen/submit_redeem_screen/submit_redeem_screen_view_model.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
 import 'package:orange_ui/utils/font_res.dart';
@@ -18,6 +18,7 @@ class CenterAreaSubmitRedeemScreen extends StatelessWidget {
   final List<String> paymentList;
   final String accountError;
   final bool isEmpty;
+  final SubmitRedeemScreenViewModel model;
 
   const CenterAreaSubmitRedeemScreen(
       {Key? key,
@@ -28,7 +29,8 @@ class CenterAreaSubmitRedeemScreen extends StatelessWidget {
       required this.onPaymentChange,
       required this.paymentList,
       required this.accountError,
-      required this.isEmpty})
+      required this.isEmpty,
+      required this.model})
       : super(key: key);
 
   @override
@@ -103,7 +105,9 @@ class CenterAreaSubmitRedeemScreen extends StatelessWidget {
                               Text(
                                 '(${NumberFormat.compactCurrency(decimalDigits: 0, locale: 'en_US', symbol: '\$').format(
                                   int.parse(wallet) *
-                                      double.parse(PrefService.coinRate),
+                                      double.parse(
+                                          model.settingAppData?.coinRate ??
+                                              '0'),
                                 )})',
                                 style: const TextStyle(
                                     color: ColorRes.lightGrey5,
@@ -134,7 +138,7 @@ class CenterAreaSubmitRedeemScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               Text(
-                                '${S.current.threshold} ${PrefService.minThreshold}',
+                                '${S.current.threshold} ${model.settingAppData?.minThreshold ?? 0}',
                                 style: const TextStyle(
                                   color: ColorRes.lightGrey4,
                                   fontSize: 13,
@@ -147,7 +151,7 @@ class CenterAreaSubmitRedeemScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               Text(
-                                '1 Diamond = ${PrefService.currency} ${PrefService.coinRate}',
+                                '1 Diamond = ${model.settingAppData?.currency} ${model.settingAppData?.coinRate ?? 0}',
                                 style: const TextStyle(
                                   color: ColorRes.lightGrey4,
                                   fontSize: 13,

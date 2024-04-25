@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:orange_ui/common/widgets/buttons.dart';
-import 'package:orange_ui/common/widgets/starting_profile_top_text.dart';
+import 'package:orange_ui/common/buttons.dart';
+import 'package:orange_ui/common/starting_profile_top_text.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/screen/starting_profile_screen/starting_profile_screen_view_model.dart';
 import 'package:orange_ui/screen/starting_profile_screen/widet/text_field_area/text_fields_area.dart';

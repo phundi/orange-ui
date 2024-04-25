@@ -5,10 +5,10 @@ packages:
     dependency: transitive
     description:
       name: _flutterfire_internals
-      sha256: "99b5dec989287c1aca71bf27339e0022b4dc3679225f442fb75790ef44535bf8"
+      sha256: "1639d96851f9e9e215dd39c9baad56846488aef3df392cb3221f37f70beac686"
       url: "https://pub.dev"
     source: hosted
-    version: "1.3.30"
+    version: "1.3.31"
   agora_rtc_engine:
     dependency: "direct main"
     description:
@@ -288,6 +288,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.2"
+  ffmpeg_kit_flutter:
+    dependency: "direct main"
+    description:
+      name: ffmpeg_kit_flutter
+      sha256: "843aae41823ca94a0988d975b4b6cdc6948744b9b7e2707d81a3a9cd237b0100"
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.0.3"
+  ffmpeg_kit_flutter_platform_interface:
+    dependency: transitive
+    description:
+      name: ffmpeg_kit_flutter_platform_interface
+      sha256: addf046ae44e190ad0101b2fde2ad909a3cd08a2a109f6106d2f7048b7abedee
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.1"
   figma_squircle:
     dependency: "direct main"
     description:
@@ -372,10 +388,10 @@ packages:
     dependency: "direct main"
     description:
       name: firebase_core
-      sha256: "6b1152a5af3b1cfe7e45309e96fc1aa14873f410f7aadb3878aa7812acfa7531"
+      sha256: "4aef2a23d0f3265545807d68fbc2f76a6b994ca3c778d88453b99325abd63284"
       url: "https://pub.dev"
     source: hosted
-    version: "2.30.0"
+    version: "2.30.1"
   firebase_core_platform_interface:
     dependency: transitive
     description:
@@ -388,34 +404,34 @@ packages:
     dependency: transitive
     description:
       name: firebase_core_web
-      sha256: c8b02226e548f35aace298e2bb2e6c24e34e8a203d614e742bb1146e5a4ad3c8
+      sha256: "67f2fcc600fc78c2f731c370a3a5e6c87ee862e3a2fba6f951eca6d5dafe5c29"
       url: "https://pub.dev"
     source: hosted
-    version: "2.15.0"
+    version: "2.16.0"
   firebase_messaging:
     dependency: "direct main"
     description:
       name: firebase_messaging
-      sha256: d01e454837b1ce221791682051fd584e4827bdff5fdad3595708a917db01ad0a
+      sha256: d8b12bcfe535f9bf8e24b4f9685036a8614f11b6fdcdff54ce9758ea8585a8a9
       url: "https://pub.dev"
     source: hosted
-    version: "14.8.2"
+    version: "14.9.0"
   firebase_messaging_platform_interface:
     dependency: transitive
     description:
       name: firebase_messaging_platform_interface
-      sha256: e459eb4eb0aef67833843f474e8697e091086d71aa186253b93eb141eec3ee2f
+      sha256: "8355f089bfc06691f00e0bc01c4214bc0aeff22acabdb5090b734a551d33ca43"
       url: "https://pub.dev"
     source: hosted
-    version: "4.5.32"
+    version: "4.5.33"
   firebase_messaging_web:
     dependency: transitive
     description:
       name: firebase_messaging_web
-      sha256: f0600d25c1c710338d568d200164fa791ce8d390d141d04408908615834a0db6
+      sha256: d6f3ea91e0aae479a09355af91e65b19cfbc485d596c5448a87356af4923e582
       url: "https://pub.dev"
     source: hosted
-    version: "3.8.2"
+    version: "3.8.3"
   fixnum:
     dependency: transitive
     description:
@@ -473,10 +489,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_local_notifications
-      sha256: "55b9b229307a10974b26296ff29f2e132256ba4bd74266939118eaefa941cb00"
+      sha256: "8cdc719114ab1c86c64bb7a86d3a679674c3637edd229e3a994797d4a1504ce4"
       url: "https://pub.dev"
     source: hosted
-    version: "16.3.3"
+    version: "17.1.0"
   flutter_local_notifications_linux:
     dependency: transitive
     description:

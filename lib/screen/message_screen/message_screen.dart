@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:orange_ui/common/widgets/common_ui.dart';
-import 'package:orange_ui/common/widgets/dashboard_top_bar.dart';
+import 'package:orange_ui/common/common_ui.dart';
+import 'package:orange_ui/common/dashboard_top_bar.dart';
 
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/chat_and_live_stream/chat.dart';
@@ -29,7 +29,8 @@ class MessageScreen extends StatelessWidget {
               DashboardTopBar(
                   onNotificationTap: model.onNotificationTap,
                   onSearchTap: model.onSearchTap,
-                  onLivesBtnClick: model.onLivesBtnClick),
+                  onLivesBtnClick: model.onLivesBtnClick,
+                  isDating: model.settingAppData?.isDating),
               const SizedBox(height: 3),
               if (model.isLoading)
                 Expanded(child: CommonUI.lottieWidget())

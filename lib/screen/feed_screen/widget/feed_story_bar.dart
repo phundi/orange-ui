@@ -2,8 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:orange_ui/common/widgets/common_fun.dart';
-import 'package:orange_ui/common/widgets/common_ui.dart';
+import 'package:orange_ui/common/common_fun.dart';
+import 'package:orange_ui/common/common_ui.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/screen/camera_screen/camera_screen.dart';
 import 'package:orange_ui/screen/feed_screen/feed_screen_view_model.dart';
@@ -126,7 +126,7 @@ class MyStoryBox extends StatelessWidget {
                 child: Container(
                     decoration: const BoxDecoration(
                         color: Colors.white, shape: BoxShape.circle),
-                    child: Image.asset(AssetRes.add, height: 30, width: 30)),
+                    child: Image.asset(AssetRes.add, height: 25, width: 25)),
               ),
             )
           ],

@@ -1,7 +1,7 @@
 import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:orange_ui/common/widgets/common_fun.dart';
+import 'package:orange_ui/common/common_fun.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/social/post/add_comment.dart';
 import 'package:orange_ui/screen/video_preview_screen/video_preview_screen_view_model.dart';

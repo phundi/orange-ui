@@ -7,13 +7,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
-import 'package:orange_ui/common/widgets/common_fun.dart';
-import 'package:orange_ui/common/widgets/common_ui.dart';
-
-import 'package:orange_ui/common/widgets/confirmation_dialog.dart';
+import 'package:orange_ui/common/common_fun.dart';
+import 'package:orange_ui/common/common_ui.dart';
+import 'package:orange_ui/common/confirmation_dialog.dart';
 
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/chat_and_live_stream/live_stream.dart';
+import 'package:orange_ui/model/setting.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/screen/bottom_diamond_shop/bottom_diamond_shop.dart';
 import 'package:orange_ui/screen/explore_screen/widgets/reverse_swipe_dialog.dart';
@@ -41,11 +41,14 @@ class LiveGridScreenViewModel extends BaseViewModel {
   BannerAd? bannerAd;
   InterstitialAd? interstitialAd;
 
+  Appdata? settingAppData;
+
   void init() {
     db = FirebaseFirestore.instance;
     getProfileAPi();
     getBannerAd();
     initInterstitialAds();
+    getSettingData();
   }
 
   void onBackBtnTap() {
@@ -61,14 +64,20 @@ class LiveGridScreenViewModel extends BaseViewModel {
   void initInterstitialAds() {
     CommonFun.interstitialAd((ad) {
       interstitialAd = ad;
-    });
+    },
+        adMobIntId: Platform.isIOS
+            ? settingAppData?.admobIntIos
+            : settingAppData?.admobInt);
   }
 
   void getBannerAd() {
     CommonFun.bannerAd((ad) {
       bannerAd = ad as BannerAd;
       notifyListeners();
-    });
+    },
+        bannerId: Platform.isIOS
+            ? settingAppData?.admobBannerIos
+            : settingAppData?.admobBanner);
   }
 
   void goLiveBtnClick() {
@@ -138,7 +147,7 @@ class LiveGridScreenViewModel extends BaseViewModel {
         if (value.data?.channelExist == true ||
             value.data!.broadcasters!.isNotEmpty) {
           if (registrationUser?.isFake != 1) {
-            if (PrefService.liveWatchingPrice <= walletCoin! &&
+            if ((settingAppData?.liveWatchingPrice ?? 0) <= walletCoin! &&
                 walletCoin != 0) {
               Get.dialog(
                 ReverseSwipeDialog(
@@ -162,8 +171,9 @@ class LiveGridScreenViewModel extends BaseViewModel {
                     walletCoin: walletCoin,
                     title1: S.current.liveCap,
                     title2: S.current.streamCap,
-                    dialogDisc: AppRes.liveStreamDisc,
-                    coinPrice: '${PrefService.liveWatchingPrice}'),
+                    dialogDisc: AppRes.liveStreamDisc(
+                        settingAppData?.liveWatchingPrice ?? 0),
+                    coinPrice: '${settingAppData?.liveWatchingPrice ?? 0}'),
               );
             } else {
               Get.dialog(
@@ -218,7 +228,8 @@ class LiveGridScreenViewModel extends BaseViewModel {
   }
 
   Future<void> minusCoinApi() async {
-    await ApiProvider().minusCoinFromWallet(PrefService.liveWatchingPrice);
+    await ApiProvider()
+        .minusCoinFromWallet(settingAppData?.liveWatchingPrice ?? 0);
     getProfileAPi();
   }
 
@@ -243,5 +254,12 @@ class LiveGridScreenViewModel extends BaseViewModel {
   void dispose() {
     subscription?.cancel();
     super.dispose();
+  }
+
+  void getSettingData() {
+    PrefService.getSettingData().then((value) {
+      settingAppData = value?.appdata;
+      notifyListeners();
+    });
   }
 }

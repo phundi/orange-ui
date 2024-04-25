@@ -1,6 +1,6 @@
 import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
-import 'package:orange_ui/common/widgets/common_fun.dart';
+import 'package:orange_ui/common/common_fun.dart';
 import 'package:orange_ui/screen/create_post_screen/create_post_screen_view_model.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';

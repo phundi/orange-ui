@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:orange_ui/common/widgets/drop_down_box.dart';
+import 'package:orange_ui/common/drop_down_box.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/screen/starting_profile_screen/widet/text_field_area/text_field_controller.dart';
 import 'package:orange_ui/utils/asset_res.dart';

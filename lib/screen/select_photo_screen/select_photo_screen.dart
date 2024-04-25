@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:orange_ui/common/widgets/starting_profile_top_text.dart';
+import 'package:orange_ui/common/starting_profile_top_text.dart';
 import 'package:orange_ui/screen/select_photo_screen/select_photo_screen_view_model.dart';
 import 'package:orange_ui/screen/select_photo_screen/widgets/bottom_selection_list.dart';
 import 'package:orange_ui/screen/select_photo_screen/widgets/full_image_view.dart';

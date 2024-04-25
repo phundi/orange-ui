@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:orange_ui/common/widgets/common_ui.dart';
+import 'package:orange_ui/common/common_ui.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/setting.dart';
 import 'package:orange_ui/model/user/registration_user.dart';

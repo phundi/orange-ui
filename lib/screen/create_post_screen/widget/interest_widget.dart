@@ -1,6 +1,6 @@
 import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
-import 'package:orange_ui/common/widgets/gradient_widget.dart';
+import 'package:orange_ui/common/gradient_widget.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/screen/create_post_screen/create_post_screen_view_model.dart';
 import 'package:orange_ui/utils/color_res.dart';
@@ -21,7 +21,10 @@ class InterestWidget extends StatelessWidget {
           padding: const EdgeInsets.only(left: 15.0, right: 15.0, bottom: 10.0),
           child: Text(
             S.of(context).selectInterestsToContinue,
-            style: const TextStyle(fontFamily: FontRes.semiBold, fontSize: 18, color: ColorRes.darkGrey),
+            style: const TextStyle(
+                fontFamily: FontRes.semiBold,
+                fontSize: 18,
+                color: ColorRes.darkGrey),
           ),
         ),
         Center(
@@ -33,9 +36,11 @@ class InterestWidget extends StatelessWidget {
               children: List.generate(
                 model.interests.length,
                 (index) {
-                  bool isSelected = model.selectedInterests.contains(model.interests[index].id);
+                  bool isSelected = model.selectedInterests
+                      .contains(model.interests[index].id);
                   return InkWell(
-                    onTap: () => model.onInterestTap(model.interests[index].id ?? -1),
+                    onTap: () =>
+                        model.onInterestTap(model.interests[index].id ?? -1),
                     child: isSelected
                         ? Padding(
                             padding: const EdgeInsets.all(5.0),
@@ -43,28 +48,40 @@ class InterestWidget extends StatelessWidget {
                               strokeWidth: 3,
                               radius: 30,
                               gradient: StyleRes.linearGradient,
-                              onPressed: () => model.onInterestTap(model.interests[index].id ?? -1),
+                              onPressed: () => model.onInterestTap(
+                                  model.interests[index].id ?? -1),
                               margin: EdgeInsets.zero,
-                              padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 12),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 25, vertical: 12),
                               child: GradientText(
-                                (model.interests[index].title ?? '').toUpperCase(),
+                                (model.interests[index].title ?? '')
+                                    .toUpperCase(),
                                 gradient: StyleRes.linearGradient,
-                                style: const TextStyle(fontFamily: FontRes.bold, fontSize: 12, letterSpacing: 0.5),
+                                style: const TextStyle(
+                                    fontFamily: FontRes.bold,
+                                    fontSize: 12,
+                                    letterSpacing: 0.5),
                               ),
                             ),
                           )
                         : Container(
                             margin: const EdgeInsets.all(5),
-                            padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 12),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 25, vertical: 12),
                             decoration: ShapeDecoration(
                                 shape: SmoothRectangleBorder(
                                     borderRadius: SmoothBorderRadius(
                                   cornerRadius: 30,
                                 )),
                                 color: ColorRes.aquaHaze),
-                            child: Text((model.interests[index].title ?? '').toUpperCase(),
+                            child: Text(
+                                (model.interests[index].title ?? '')
+                                    .toUpperCase(),
                                 style: const TextStyle(
-                                    color: ColorRes.grey19, fontFamily: FontRes.bold, fontSize: 12, letterSpacing: 0.5),
+                                    color: ColorRes.grey19,
+                                    fontFamily: FontRes.bold,
+                                    fontSize: 12,
+                                    letterSpacing: 0.5),
                                 textAlign: TextAlign.center),
                           ),
                   );

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:orange_ui/common/widgets/buttons.dart';
-import 'package:orange_ui/common/widgets/starting_profile_top_text.dart';
+import 'package:orange_ui/common/buttons.dart';
+import 'package:orange_ui/common/starting_profile_top_text.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/screen/select_hobbies_screen/select_hobbies_screen_view_model.dart';
 import 'package:orange_ui/screen/select_hobbies_screen/widgets/hobbies_clips.dart';

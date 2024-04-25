@@ -19,9 +19,15 @@ class DetectableTextCustom extends StatelessWidget {
       },
       detectionRegExp: RegExp(r"\B#\w\w+"),
       detectedStyle: const TextStyle(
-          fontFamily: FontRes.bold, color: ColorRes.orange2, fontSize: 16),
+          fontFamily: FontRes.bold,
+          color: ColorRes.orange2,
+          fontSize: 16,
+          height: 1.12),
       basicStyle: const TextStyle(
-          color: ColorRes.dimGrey3, fontSize: 16, fontFamily: FontRes.medium),
+          color: ColorRes.dimGrey3,
+          fontSize: 16,
+          fontFamily: FontRes.medium,
+          height: 1.1),
       trimExpandedText: ' ${S.of(context).readLess}',
       trimCollapsedText: S.of(context).readMore,
       moreStyle: const TextStyle(

@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:orange_ui/generated/l10n.dart';
-import 'package:orange_ui/service/pref_service.dart';
+import 'package:orange_ui/screen/get_started_screen/get_started_screen_view_model.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
 import 'package:orange_ui/utils/font_res.dart';
 
 class Screen1 extends StatelessWidget {
   final VoidCallback onTap;
+  final GetStartedScreenViewModel model;
 
-  const Screen1({Key? key, required this.onTap}) : super(key: key);
+  const Screen1({Key? key, required this.onTap, required this.model})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,16 +33,10 @@ class Screen1 extends StatelessWidget {
                   width: Get.width / 1.7,
                   fit: BoxFit.cover,
                 ),
-                Visibility(
-                  visible: PrefService.settingData?.appdata?.isDating == 1,
-                  child: Text(
-                    S.current.getStarted1Subtitle,
-                    style: const TextStyle(
-                      color: ColorRes.grey,
-                      fontSize: 16,
-                    ),
-                  ),
-                ),
+                if (model.settingAppData?.isDating == 1)
+                  Text(S.current.getStarted1Subtitle,
+                      style:
+                          const TextStyle(color: ColorRes.grey, fontSize: 16)),
               ],
             ),
           ),

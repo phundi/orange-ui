@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:orange_ui/common/widgets/common_fun.dart';
-import 'package:orange_ui/common/widgets/common_ui.dart';
+import 'package:orange_ui/common/common_fun.dart';
+import 'package:orange_ui/common/common_ui.dart';
 
 import 'package:orange_ui/generated/l10n.dart';
+import 'package:orange_ui/model/setting.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/screen/live_grid_screen/live_grid_screen.dart';
 import 'package:orange_ui/screen/notification_screen/notification_screen.dart';
@@ -21,9 +24,12 @@ class RandomsScreenViewModel extends BaseViewModel {
   bool isLoading = false;
   BannerAd? bannerAd;
 
+  Appdata? settingAppData;
+
   void init() {
     getProfileApiCall();
     getBannerAd();
+    getSettingData();
   }
 
   void getProfileApiCall() async {
@@ -72,6 +78,16 @@ class RandomsScreenViewModel extends BaseViewModel {
   void getBannerAd() {
     CommonFun.bannerAd((ad) {
       bannerAd = ad as BannerAd;
+      notifyListeners();
+    },
+        bannerId: Platform.isIOS
+            ? settingAppData?.admobBannerIos
+            : settingAppData?.admobBanner);
+  }
+
+  void getSettingData() {
+    PrefService.getSettingData().then((value) {
+      settingAppData = value?.appdata;
       notifyListeners();
     });
   }

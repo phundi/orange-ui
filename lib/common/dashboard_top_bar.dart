@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:orange_ui/generated/l10n.dart';
-import 'package:orange_ui/service/pref_service.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
 import 'package:orange_ui/utils/font_res.dart';
@@ -10,13 +9,15 @@ class DashboardTopBar extends StatelessWidget {
   final VoidCallback? onTitleTap;
   final VoidCallback onSearchTap;
   final VoidCallback onLivesBtnClick;
+  final int? isDating;
 
   const DashboardTopBar(
       {Key? key,
       required this.onNotificationTap,
       this.onTitleTap,
       required this.onSearchTap,
-      required this.onLivesBtnClick})
+      required this.onLivesBtnClick,
+      required this.isDating})
       : super(key: key);
 
   @override
@@ -35,8 +36,9 @@ class DashboardTopBar extends StatelessWidget {
             child: Container(
               height: 37,
               margin: const EdgeInsets.symmetric(horizontal: 3),
-              decoration:
-                  BoxDecoration(color: ColorRes.orange3.withOpacity(0.1), borderRadius: BorderRadius.circular(30)),
+              decoration: BoxDecoration(
+                  color: ColorRes.orange3.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(30)),
               padding: const EdgeInsets.symmetric(horizontal: 15),
               child: Row(
                 children: [
@@ -47,15 +49,16 @@ class DashboardTopBar extends StatelessWidget {
                   ),
                   const SizedBox(width: 5),
                   Text(S.of(context).lives,
-                      style: const TextStyle(fontFamily: FontRes.regular, fontSize: 12, color: ColorRes.orange2))
+                      style: const TextStyle(
+                          fontFamily: FontRes.regular,
+                          fontSize: 12,
+                          color: ColorRes.orange2))
                 ],
               ),
             ),
           ),
-          Visibility(
-            visible: PrefService.settingData?.appdata?.isDating == 0 ? false : true,
-            child: RoundedImage(onTap: onNotificationTap, image: AssetRes.bell),
-          ),
+          if (isDating == 1)
+            RoundedImage(onTap: onNotificationTap, image: AssetRes.bell),
           RoundedImage(onTap: onSearchTap, image: AssetRes.search),
         ],
       ),
@@ -67,7 +70,8 @@ class RoundedImage extends StatelessWidget {
   final VoidCallback onTap;
   final String image;
 
-  const RoundedImage({Key? key, required this.onTap, required this.image}) : super(key: key);
+  const RoundedImage({Key? key, required this.onTap, required this.image})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +82,8 @@ class RoundedImage extends StatelessWidget {
         height: 37,
         width: 37,
         margin: const EdgeInsets.symmetric(horizontal: 3),
-        decoration: BoxDecoration(color: ColorRes.orange3.withOpacity(0.1), shape: BoxShape.circle),
+        decoration: BoxDecoration(
+            color: ColorRes.orange3.withOpacity(0.1), shape: BoxShape.circle),
         child: Center(child: Image.asset(image, height: 20, width: 20)),
       ),
     );

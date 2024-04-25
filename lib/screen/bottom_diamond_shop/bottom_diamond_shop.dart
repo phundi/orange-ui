@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/screen/bottom_diamond_shop/bottom_diamond_shop_view_model.dart';
-import 'package:orange_ui/service/pref_service.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
 import 'package:orange_ui/utils/font_res.dart';
@@ -114,7 +113,7 @@ class BottomDiamondShop extends StatelessWidget {
                                         ),
                                         child: Center(
                                           child: Text(
-                                            "${PrefService.currency} ${model.diamondPriceList?[index].price}",
+                                            "${model.settingAppData?.currency} ${model.diamondPriceList?[index].price}",
                                             style: const TextStyle(
                                               color: ColorRes.white,
                                               fontSize: 15,

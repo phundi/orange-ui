@@ -1,20 +1,17 @@
-import 'dart:io';
-
+import 'package:camera/camera.dart';
+import 'package:ffmpeg_kit_flutter/ffprobe_kit.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:intl/intl.dart';
 import 'package:orange_ui/model/social/post/add_comment.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
-import 'package:orange_ui/service/pref_service.dart';
 import 'package:orange_ui/utils/const_res.dart';
 import 'package:orange_ui/utils/firebase_res.dart';
 
 class CommonFun {
-  static Future<void> interstitialAd(
-      Function(InterstitialAd ad) onAdLoaded) async {
+  static Future<void> interstitialAd(Function(InterstitialAd ad) onAdLoaded,
+      {required String? adMobIntId}) async {
     InterstitialAd.load(
-      adUnitId: Platform.isIOS
-          ? "${PrefService.settingData?.appdata?.admobIntIos}"
-          : "${PrefService.settingData?.appdata?.admobInt}",
+      adUnitId: adMobIntId ?? '',
       request: const AdRequest(),
       adLoadCallback: InterstitialAdLoadCallback(
         onAdLoaded: onAdLoaded,
@@ -23,11 +20,9 @@ class CommonFun {
     );
   }
 
-  static void bannerAd(Function(Ad ad) ad) {
+  static void bannerAd(Function(Ad ad) ad, {required String? bannerId}) {
     BannerAd(
-      adUnitId: Platform.isIOS
-          ? "${PrefService.settingData?.appdata?.admobBannerIos}"
-          : "${PrefService.settingData?.appdata?.admobBanner}",
+      adUnitId: bannerId ?? '',
       request: const AdRequest(),
       size: AdSize.banner,
       listener: BannerAdListener(
@@ -138,5 +133,53 @@ class CommonFun {
       return '$twoDigitMinutes:$twoDigitSeconds';
     }
     return "${twoDigits(duration.inHours)}:$twoDigitMinutes:$twoDigitSeconds";
+  }
+
+  static String formatHHMMSS(int second) {
+    int seconds = second;
+
+    int hours = (seconds / 3600).truncate();
+    seconds = (seconds % 3600).truncate();
+    int minutes = (seconds / 60).truncate();
+
+    String hoursStr = (hours).toString().padLeft(2, '0');
+    String minutesStr = (minutes).toString().padLeft(2, '0');
+    String secondsStr = (seconds % 60).toString().padLeft(2, '0');
+
+    if (hours == 0) {
+      return "$minutesStr:$secondsStr";
+    }
+
+    return "$hoursStr:$minutesStr:$secondsStr";
+  }
+
+  static Future<Duration> getDuration(XFile file) async {
+    final data = await FFprobeKit.getMediaInformation(file.path);
+    final media = data.getMediaInformation();
+    final secondsStr = media?.getDuration();
+
+    final milliseconds = _secondsStrToMilliseconds(secondsStr);
+    if (milliseconds == null) return Duration.zero;
+    return Duration(milliseconds: milliseconds);
+  }
+
+  static int? _secondsStrToMilliseconds(String? secondsStr) {
+    if (secondsStr == null) return null;
+    final seconds = double.tryParse(secondsStr);
+    if (seconds == null) return null;
+    final milliseconds = (seconds * 1000).toInt();
+    return milliseconds;
+  }
+
+  static double getWidth(int? count) {
+    String value = NumberFormat.compact().format(count ?? 0);
+    if (value.length == 3) {
+      return 58.0;
+    } else if (value.length == 4) {
+      return 68.0;
+    } else if (value.length == 2) {
+      return 50.0;
+    }
+    return 43.0;
   }
 }

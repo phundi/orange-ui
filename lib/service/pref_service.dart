@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:orange_ui/common/widgets/common_fun.dart';
+import 'package:orange_ui/common/common_fun.dart';
 import 'package:orange_ui/model/chat_and_live_stream/chat.dart';
 import 'package:orange_ui/model/get_interest.dart';
 import 'package:orange_ui/model/setting.dart';
@@ -12,20 +12,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class PrefService {
   static int userId = -1;
-  static String currency = '';
-  static String coinRate = '';
-  static int minThreshold = 0;
-  static int reverseSwipePrice = 0;
-  static int liveWatchingPrice = 0;
-  static int messagePrice = 0;
-  static int minimumUserLive = 0;
-  static int maximumMinutes = 0;
-  static String iosBannerAd = "";
-  static String androidBannerAd = "";
-  static String iosInterstitialAd = "";
-  static String androidInterstitialAd = "";
-  static int isDating = 0;
-  static SettingData? settingData;
 
   static Future<bool?> getLoginText() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();

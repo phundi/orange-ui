@@ -12,7 +12,6 @@ import 'package:orange_ui/model/fetch_redeem_request.dart';
 import 'package:orange_ui/model/get_diamond_pack.dart';
 import 'package:orange_ui/model/get_explore_screen.dart';
 import 'package:orange_ui/model/get_interest.dart';
-import 'package:orange_ui/model/get_package.dart';
 import 'package:orange_ui/model/map/fetch_user_coordinate.dart';
 import 'package:orange_ui/model/notification/admin_notification.dart';
 import 'package:orange_ui/model/notification/notify_like_user.dart';
@@ -20,7 +19,6 @@ import 'package:orange_ui/model/notification/on_off_anonymous.dart';
 import 'package:orange_ui/model/notification/on_off_notification.dart';
 import 'package:orange_ui/model/notification/on_off_show_me_map.dart';
 import 'package:orange_ui/model/notification/user_notification.dart';
-import 'package:orange_ui/model/place_redeem_request.dart';
 import 'package:orange_ui/model/report.dart';
 import 'package:orange_ui/model/search/search_user.dart';
 import 'package:orange_ui/model/search/search_user_by_id.dart';
@@ -70,12 +68,6 @@ class ApiProvider {
     return GetInterest.fromJson(jsonDecode(response.body));
   }
 
-  Future<GetPackage> getPackage() async {
-    http.Response response = await http.post(Uri.parse(Urls.aGetPackage),
-        headers: {Urls.aApiKeyName: ConstRes.apiKey});
-    return GetPackage.fromJson(jsonDecode(response.body));
-  }
-
   Future<ApplyForLive> applyForLive(File? introVideo, String aboutYou,
       String languages, String socialLinks) async {
     var request = http.MultipartRequest(
@@ -116,6 +108,7 @@ class ApiProvider {
       String? facebook,
       String? youtube,
       String? fullName,
+      String? userName,
       List<String>? deleteImageIds,
       int? gender,
       String? about}) async {
@@ -138,6 +131,9 @@ class ApiProvider {
     }
     if (fullName != null) {
       request.fields[Urls.aFullName] = fullName;
+    }
+    if (userName != null) {
+      request.fields[Urls.aUserName] = userName;
     }
     if (instagram != null) {
       request.fields[Urls.aInstagram] = instagram;
@@ -269,19 +265,6 @@ class ApiProvider {
       Urls.aCount: Urls.aFifteen
     });
     return UserNotification.fromJson(jsonDecode(response.body));
-  }
-
-  Future<PlaceRedeemRequest> placeRedeemRequest(
-      String? paymentGateway, String accountDetails) async {
-    http.Response response =
-        await http.post(Uri.parse(Urls.aPlaceRedeemRequest), headers: {
-      Urls.aApiKeyName: ConstRes.apiKey
-    }, body: {
-      Urls.aUserId: PrefService.userId.toString(),
-      Urls.aAccountDetails: paymentGateway,
-      Urls.aPaymentGateway: accountDetails,
-    });
-    return PlaceRedeemRequest.fromJson(jsonDecode(response.body));
   }
 
   Future<Setting> getSettingData() async {
@@ -630,9 +613,8 @@ class ApiProvider {
   }
 
   Future pushNotification(
-      {
-      //   required String title,
-      // required String body,
+      {required String title,
+      required String body,
       required Map<String, dynamic> data,
       required String token}) async {
     await http
@@ -644,11 +626,8 @@ class ApiProvider {
             body: json.encode({
               'message': {
                 'token': token,
-                'data': data
-                // 'notification': {
-                //   'title': title,
-                //   'body': body,
-                // },
+                'data': data,
+                // 'notification': {'title': title, 'body': body},
               }
             }))
         .then((value) {

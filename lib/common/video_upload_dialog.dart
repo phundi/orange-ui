@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
@@ -8,10 +9,16 @@ import 'package:orange_ui/utils/font_res.dart';
 
 class VideoUploadDialog extends StatelessWidget {
   final VoidCallback selectAnother;
-  final VoidCallback cancelBtnTap;
+  final String? text1;
+  final String? text2;
+  final String? description;
 
   const VideoUploadDialog(
-      {Key? key, required this.cancelBtnTap, required this.selectAnother})
+      {Key? key,
+      required this.selectAnother,
+      this.text1,
+      this.text2,
+      this.description})
       : super(key: key);
 
   @override
@@ -32,11 +39,11 @@ class VideoUploadDialog extends StatelessWidget {
                       fontFamily: FontRes.semiBold, fontSize: 18),
                   children: [
                     TextSpan(
-                      text: S.of(context).tooLarge,
+                      text: text1 ?? S.of(context).tooLarge,
                       style: const TextStyle(color: ColorRes.grey15),
                     ),
                     TextSpan(
-                      text: ' ${S.of(context).video}',
+                      text: ' ${text2 ?? S.of(context).video}',
                       style: const TextStyle(color: ColorRes.darkGrey),
                     ),
                   ],
@@ -45,15 +52,16 @@ class VideoUploadDialog extends StatelessWidget {
               const Spacer(),
               const Image(
                 image: AssetImage(AssetRes.themeLabel),
-                width: 100,
+                height: 30,
               ),
-              const Spacer(
-                flex: 2,
-              ),
+              const Spacer(),
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 16),
                 child: Text(
-                  S.of(context).thisVideoIsGreaterThan50MbnpleaseSelectAnother,
+                  description ??
+                      S
+                          .of(context)
+                          .thisVideoIsGreaterThan50MbnpleaseSelectAnother,
                   style: const TextStyle(
                       fontFamily: FontRes.semiBold, color: ColorRes.grey15),
                   textAlign: TextAlign.center,
@@ -86,11 +94,12 @@ class VideoUploadDialog extends StatelessWidget {
                   ),
                 ),
               ),
-              const Spacer(),
               InkWell(
                 highlightColor: ColorRes.transparent,
                 splashColor: ColorRes.transparent,
-                onTap: cancelBtnTap,
+                onTap: () {
+                  Get.back();
+                },
                 child: Container(
                   height: 40,
                   margin: const EdgeInsets.symmetric(horizontal: 15),

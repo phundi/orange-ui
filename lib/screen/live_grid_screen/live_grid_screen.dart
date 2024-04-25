@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:orange_ui/common/widgets/common_ui.dart';
+import 'package:orange_ui/common/common_ui.dart';
 
 import 'package:orange_ui/screen/live_grid_screen/live_grid_screen_view_model.dart';
 import 'package:orange_ui/screen/live_grid_screen/widgets/custom_grid_view.dart';

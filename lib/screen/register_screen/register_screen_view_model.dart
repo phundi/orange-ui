@@ -3,7 +3,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
-import 'package:orange_ui/common/widgets/common_ui.dart';
+import 'package:orange_ui/common/common_ui.dart';
 
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/screen/login_dashboard_screen/login_dashboard_screen.dart';

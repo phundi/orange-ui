@@ -2,8 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:detectable_text_field/detectable_text_field.dart';
 import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
-import 'package:orange_ui/common/widgets/common_fun.dart';
-import 'package:orange_ui/common/widgets/common_ui.dart';
+import 'package:orange_ui/common/common_fun.dart';
+import 'package:orange_ui/common/common_ui.dart';
 import 'package:orange_ui/model/social/post/fetch_comment.dart';
 import 'package:orange_ui/screen/comment_sheet/comment_sheet_view_model.dart';
 import 'package:orange_ui/service/pref_service.dart';
@@ -23,7 +23,7 @@ class CommentCard extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -37,8 +37,8 @@ class CommentCard extends StatelessWidget {
                           images: commentData.user?.images),
                       cacheKey: CommonFun.getProfileImage(
                           images: commentData.user?.images),
-                      width: 30,
-                      height: 30,
+                      width: 35,
+                      height: 35,
                       fit: BoxFit.cover,
                       errorWidget: (context, url, error) {
                         return CommonUI.profileImagePlaceHolder(
@@ -48,33 +48,25 @@ class CommentCard extends StatelessWidget {
                       },
                     ),
                   ),
+                  const SizedBox(width: 10),
                   Expanded(
-                    child: Row(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                          child: Text(
-                            commentData.user?.fullname ?? '',
-                            style: const TextStyle(
-                                color: ColorRes.veryDarkGrey4,
-                                fontFamily: FontRes.semiBold,
-                                fontSize: 16),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                        Container(
-                          width: 6,
-                          height: 6,
-                          decoration: const BoxDecoration(
-                            color: ColorRes.dimGrey6,
-                            shape: BoxShape.circle,
-                          ),
+                        Text(
+                          CommonUI.userName(commentData.user?.username),
+                          style: const TextStyle(
+                              color: ColorRes.veryDarkGrey4,
+                              fontFamily: FontRes.bold,
+                              fontSize: 16),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                         ),
                         Text(
-                          '  ${CommonFun.timeAgo(DateTime.parse(commentData.createdAt ?? ''))}',
+                          CommonFun.timeAgo(
+                              DateTime.parse(commentData.createdAt ?? '')),
                           style: const TextStyle(
-                            fontSize: 13,
+                            fontSize: 12,
                             color: ColorRes.dimGrey3,
                           ),
                         ),
@@ -86,7 +78,7 @@ class CommentCard extends StatelessWidget {
                           onTap: () =>
                               model.deleteComment(commentData.id ?? -1),
                           child: Image.asset(AssetRes.icBin,
-                              height: 22, width: 22),
+                              height: 25, width: 25),
                         )
                       : const SizedBox()
                 ],
@@ -110,11 +102,6 @@ class CommentCard extends StatelessWidget {
             ],
           ),
         ),
-        const Divider(
-          color: ColorRes.greyShade200,
-          thickness: 1,
-          height: 1,
-        )
       ],
     );
   }

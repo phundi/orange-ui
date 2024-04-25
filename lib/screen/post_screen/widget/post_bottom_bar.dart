@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
-import 'package:orange_ui/common/widgets/common_fun.dart';
+import 'package:orange_ui/common/common_fun.dart';
 import 'package:orange_ui/model/social/post/add_comment.dart';
 import 'package:orange_ui/screen/feed_screen/feed_screen_view_model.dart';
 import 'package:orange_ui/service/pref_service.dart';
@@ -27,28 +27,18 @@ class PostBottomBar extends StatelessWidget {
       padding: const EdgeInsets.only(left: 15.0, right: 15, bottom: 10),
       child: Row(
         children: [
-          InkWell(
-            onTap: () => model.onCommentBtnClick(post),
-            child: Row(
-              children: [
-                Image.asset(AssetRes.icComment, height: 22, width: 22),
-                Text(
-                    '  ${NumberFormat.compact().format(post?.commentsCount ?? 0)}',
-                    style: const TextStyle(
-                        color: ColorRes.veryDarkGrey4,
-                        fontFamily: FontRes.medium,
-                        letterSpacing: 0.5,
-                        fontSize: 15)),
-              ],
-            ),
+          ImageWithTextRow(
+            onTap: (p0) {
+              model.onCommentBtnClick(p0);
+            },
+            post: post,
+            image: AssetRes.icComment,
+            count: post?.commentsCount,
           ),
-          const SizedBox(width: 15),
+          const SizedBox(width: 6),
+          LikeButton(post: post),
           Container(height: 20, width: 1, color: ColorRes.lightGrey),
-          const SizedBox(width: 15),
-          LikeButton(posts: post),
-          const SizedBox(width: 5),
-          Container(height: 20, width: 1, color: ColorRes.lightGrey),
-          const SizedBox(width: 10),
+          const SizedBox(width: 6),
           InkWell(
               onTap: () => model.sharePost(post!),
               child: Image.asset(AssetRes.icPostShare, height: 22, width: 22)),
@@ -65,9 +55,9 @@ class PostBottomBar extends StatelessWidget {
 }
 
 class LikeButton extends StatefulWidget {
-  final Post? posts;
+  final Post? post;
 
-  const LikeButton({Key? key, required this.posts}) : super(key: key);
+  const LikeButton({Key? key, required this.post}) : super(key: key);
 
   @override
   State<LikeButton> createState() => _LikeButtonState();
@@ -86,52 +76,109 @@ class _LikeButtonState extends State<LikeButton>
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        HapticFeedback.lightImpact();
-        if (widget.posts?.isLike == 1) {
-          widget.posts?.setLikesCount(-1);
-          widget.posts?.isLike = 0;
-          ApiProvider().callPost(
-              completion: (response) {},
-              url: Urls.aDislikePost,
-              param: {
-                Urls.aUserId: PrefService.userId,
-                Urls.aPostId: widget.posts?.id
-              });
-        } else {
-          widget.posts?.setLikesCount(1);
-          widget.posts?.isLike = 1;
-          ApiProvider().callPost(
-              completion: (response) {},
-              url: Urls.aLikePost,
-              param: {
-                Urls.aUserId: PrefService.userId,
-                Urls.aPostId: widget.posts?.id
-              });
-        }
-        setState(() {});
-        _controller.reverse().then((value) => _controller.forward());
-      },
-      child: Row(
-        children: [
-          ScaleTransition(
-            scale: Tween(begin: 0.7, end: 1.0).animate(
-                CurvedAnimation(parent: _controller, curve: Curves.easeOut)),
-            child: Image.asset(
-                widget.posts?.isLike == 1 ? AssetRes.icFillFav : AssetRes.icFav,
+    return SizedBox(
+      width: CommonFun.getWidth(widget.post?.likesCount),
+      child: InkWell(
+        onTap: () {
+          HapticFeedback.lightImpact();
+          if (widget.post?.isLike == 1) {
+            widget.post?.setLikesCount(-1);
+            widget.post?.isLike = 0;
+            ApiProvider().callPost(
+                completion: (response) {},
+                url: Urls.aDislikePost,
+                param: {
+                  Urls.aUserId: PrefService.userId,
+                  Urls.aPostId: widget.post?.id
+                });
+          } else {
+            widget.post?.setLikesCount(1);
+            widget.post?.isLike = 1;
+            ApiProvider().callPost(
+                completion: (response) {},
+                url: Urls.aLikePost,
+                param: {
+                  Urls.aUserId: PrefService.userId,
+                  Urls.aPostId: widget.post?.id
+                });
+          }
+          setState(() {});
+          _controller.reverse().then((value) => _controller.forward());
+        },
+        child: Row(
+          children: [
+            ScaleTransition(
+              scale: Tween(begin: 0.7, end: 1.0).animate(
+                  CurvedAnimation(parent: _controller, curve: Curves.easeOut)),
+              child: Image.asset(
+                widget.post?.isLike == 1 ? AssetRes.icFillFav : AssetRes.icFav,
                 height: 22,
-                width: 22),
-          ),
-          Text(
-              '  ${NumberFormat.compact().format(widget.posts?.likesCount ?? 0)}  ',
+                width: 22,
+                color: widget.post?.isLike == 0 ? ColorRes.veryDarkGrey4 : null,
+              ),
+            ),
+            const SizedBox(width: 3),
+            Text(
+              NumberFormat.compact().format(widget.post?.likesCount ?? 0),
               style: const TextStyle(
                   color: ColorRes.veryDarkGrey4,
                   fontFamily: FontRes.medium,
                   letterSpacing: 0.5,
-                  fontSize: 15)),
-        ],
+                  fontSize: 15),
+            ),
+          ],
+        ),
       ),
+    );
+  }
+}
+
+class ImageWithTextRow extends StatelessWidget {
+  final Post? post;
+  final Function(Post?) onTap;
+  final String image;
+  final bool isLineVisible;
+  final int? count;
+
+  const ImageWithTextRow(
+      {Key? key,
+      required this.post,
+      required this.onTap,
+      required this.image,
+      this.isLineVisible = true,
+      required this.count})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        SizedBox(
+          width: CommonFun.getWidth(count),
+          child: InkWell(
+            onTap: () => onTap(post),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Image.asset(image, height: 22, width: 22),
+                const SizedBox(width: 3),
+                Text(
+                  NumberFormat.compact().format(count ?? 0),
+                  style: const TextStyle(
+                      color: ColorRes.veryDarkGrey4,
+                      fontFamily: FontRes.medium,
+                      letterSpacing: 0.5,
+                      fontSize: 15),
+                ),
+              ],
+            ),
+          ),
+        ),
+        Visibility(
+          visible: isLineVisible,
+          child: Container(height: 20, width: 1, color: ColorRes.lightGrey),
+        ),
+      ],
     );
   }
 }

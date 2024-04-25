@@ -1,8 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
-import 'package:orange_ui/common/widgets/common_fun.dart';
+import 'package:orange_ui/common/common_fun.dart';
+import 'package:orange_ui/model/setting.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/screen/map_screen/map_screen.dart';
 import 'package:orange_ui/screen/user_detail_screen/user_detail_screen.dart';
@@ -19,7 +22,10 @@ class SearchScreenViewModel extends BaseViewModel {
   BannerAd? bannerAd;
   ScrollController userScrollController = ScrollController();
 
+  Appdata? settingAppData;
+
   void init() {
+    getSettingData();
     getInterestApiCall();
     getSearchByUser();
     getBannerAd();
@@ -62,7 +68,6 @@ class SearchScreenViewModel extends BaseViewModel {
         .then((value) {
       List<String> list =
           searchUsers.map((e) => e.id?.toString() ?? '').toList();
-      print(list);
       value.data?.forEach((element) {
         if (!list.contains(element.id?.toString())) {
           searchUsers.add(element);
@@ -141,12 +146,22 @@ class SearchScreenViewModel extends BaseViewModel {
     CommonFun.bannerAd((ad) {
       bannerAd = ad as BannerAd;
       notifyListeners();
-    });
+    },
+        bannerId: Platform.isIOS
+            ? settingAppData?.admobBannerIos
+            : settingAppData?.admobBanner);
   }
 
   @override
   void dispose() {
     userScrollController.dispose();
     super.dispose();
+  }
+
+  void getSettingData() {
+    PrefService.getSettingData().then((value) {
+      settingAppData = value?.appdata;
+      notifyListeners();
+    });
   }
 }

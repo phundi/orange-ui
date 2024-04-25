@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:orange_ui/common/widgets/detectable_text_custom.dart';
+import 'package:orange_ui/common/detectable_text_custom.dart';
 import 'package:orange_ui/screen/create_post_screen/create_post_screen_view_model.dart';
 import 'package:orange_ui/screen/create_post_screen/widget/image_post_view.dart';
 import 'package:orange_ui/screen/create_post_screen/widget/interest_widget.dart';
@@ -20,7 +20,8 @@ class PostPage extends StatelessWidget {
             : Padding(
                 padding: const EdgeInsets.symmetric(
                     horizontal: 15.0, vertical: 10.0),
-                child: DetectableTextCustom(text: model.detectableTextFieldController.text),
+                child: DetectableTextCustom(
+                    text: model.detectableTextFieldController.text),
               ),
         model.contentType == 0
             ? ImagePostView(model: model)

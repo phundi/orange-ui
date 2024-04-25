@@ -4,8 +4,9 @@ import 'package:bubbly_camera/bubbly_camera.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
-import 'package:orange_ui/common/widgets/common_fun.dart';
+import 'package:orange_ui/common/common_fun.dart';
 import 'package:orange_ui/model/get_diamond_pack.dart';
+import 'package:orange_ui/model/setting.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/screen/bottom_diamond_shop/bottom_diamond_shop.dart';
 import 'package:orange_ui/screen/live_stream_application_screen/live_stream_application_screen.dart';
@@ -23,9 +24,12 @@ class LiveStreamDashBoardViewModel extends BaseViewModel {
   String? coinValue;
   BannerAd? bannerAd;
 
+  Appdata? settingAppData;
+
   void init() {
     getProfileApiCall();
     getBannerAd();
+    getSettingData();
   }
 
   void getProfileApiCall() {
@@ -80,12 +84,22 @@ class LiveStreamDashBoardViewModel extends BaseViewModel {
     CommonFun.bannerAd((ad) {
       bannerAd = ad as BannerAd;
       notifyListeners();
-    });
+    },
+        bannerId: Platform.isIOS
+            ? settingAppData?.admobBannerIos
+            : settingAppData?.admobBanner);
   }
 
   void onApplyBtnTap() {
     Get.to(() => const LiveStreamApplicationScreen())?.then((value) {
       getProfileApiCall();
+    });
+  }
+
+  void getSettingData() {
+    PrefService.getSettingData().then((value) {
+      settingAppData = value?.appdata;
+      notifyListeners();
     });
   }
 }

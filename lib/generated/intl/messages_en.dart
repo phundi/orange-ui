@@ -48,6 +48,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "areYouSure": MessageLookupByLibrary.simpleMessage("Are you sure"),
         "areYouSureYouEtc": MessageLookupByLibrary.simpleMessage(
             "Are you sure you want to delete this message ?"),
+        "areYouSureYouWantToDeleteTheComment":
+            MessageLookupByLibrary.simpleMessage(
+                "Are you sure you want to delete the comment ?"),
         "areYouSureYouWantToDeleteThePost":
             MessageLookupByLibrary.simpleMessage(
                 "Are you sure you want to delete the post?"),
@@ -85,6 +88,8 @@ class MessageLookup extends MessageLookupByLibrary {
                 "coins, Please confirm if you to continue or not"),
         "collected": MessageLookupByLibrary.simpleMessage("Collected"),
         "comment": MessageLookupByLibrary.simpleMessage("Comment..."),
+        "commentDelete":
+            MessageLookupByLibrary.simpleMessage("Comment delete ?"),
         "commentNotFound":
             MessageLookupByLibrary.simpleMessage("Comment Not Found"),
         "comments": MessageLookupByLibrary.simpleMessage("Comments"),
@@ -163,6 +168,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterThePasswordForTheAccountNwithTheEmailBelow":
             MessageLookupByLibrary.simpleMessage(
                 "Enter the password for the account \nwith the email below"),
+        "enterUsername": MessageLookupByLibrary.simpleMessage("Enter UserName"),
         "enterYourMailOnWhichYouHaveNcreatedAnAccount":
             MessageLookupByLibrary.simpleMessage(
                 "Enter your mail on which you have \ncreated an account. We will send a link \nto reset your password"),
@@ -234,6 +240,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Languages you will speak while streaming.."),
         "languagesYouEtc":
             MessageLookupByLibrary.simpleMessage("LANGUAGES YOU WILL SPEAK"),
+        "large": MessageLookupByLibrary.simpleMessage("Large"),
         "legal": MessageLookupByLibrary.simpleMessage("LEGAL"),
         "likeProfiles": MessageLookupByLibrary.simpleMessage("Like Profiles"),
         "live": MessageLookupByLibrary.simpleMessage("Live"),
@@ -446,6 +453,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "userNotFound":
             MessageLookupByLibrary.simpleMessage("User Not Found!!"),
         "userNotLive": MessageLookupByLibrary.simpleMessage("User not live"),
+        "username": MessageLookupByLibrary.simpleMessage("UserName"),
         "users": MessageLookupByLibrary.simpleMessage("Users"),
         "validEmail": MessageLookupByLibrary.simpleMessage("Enter Valid Email"),
         "verification":
@@ -456,6 +464,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "video": MessageLookupByLibrary.simpleMessage("Video?"),
         "videoCall": MessageLookupByLibrary.simpleMessage("Video Call"),
         "videoCap": MessageLookupByLibrary.simpleMessage("VIDEO"),
+        "videoDurationIs":
+            MessageLookupByLibrary.simpleMessage("Video duration is"),
         "videoPreview":
             MessageLookupByLibrary.simpleMessage("Video Preview Screen"),
         "videos": MessageLookupByLibrary.simpleMessage("Videos"),

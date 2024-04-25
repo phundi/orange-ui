@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:orange_ui/common/widgets/common_ui.dart';
+import 'package:orange_ui/common/common_ui.dart';
 
-import 'package:orange_ui/common/widgets/top_bar_area.dart';
+import 'package:orange_ui/common/top_bar_area.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/screen/options_screen/widgets/bottom_legal_area.dart';
 import 'package:orange_ui/screen/options_screen/widgets/language_section.dart';

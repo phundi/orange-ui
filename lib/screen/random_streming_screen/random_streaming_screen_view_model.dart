@@ -7,11 +7,12 @@ import 'package:agora_rtc_engine/rtc_remote_view.dart' as rtc_remote_view;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:orange_ui/common/widgets/common_fun.dart';
-import 'package:orange_ui/common/widgets/common_ui.dart';
-import 'package:orange_ui/common/widgets/confirmation_dialog.dart';
+import 'package:orange_ui/common/common_fun.dart';
+import 'package:orange_ui/common/common_ui.dart';
+import 'package:orange_ui/common/confirmation_dialog.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/chat_and_live_stream/live_stream.dart';
+import 'package:orange_ui/model/setting.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/screen/livestream_end_screen/livestream_end_screen.dart';
 import 'package:orange_ui/service/pref_service.dart';
@@ -44,10 +45,11 @@ class RandomStreamingScreenViewModel extends BaseViewModel {
   List<String> timeAdd = [];
   ScrollController scrollController = ScrollController();
   DateTime? dateTime;
-  int count = PrefService.maximumMinutes * PrefService.minimumUserLive;
   Timer? minimumUserLiveTimer;
   int countTimer = 0;
-  int maxMinutes = PrefService.maximumMinutes * 60;
+  int maxMinutes = 0;
+
+  Appdata? settingAppData;
 
   void init() {
     Wakelock.enable();
@@ -181,6 +183,12 @@ class RandomStreamingScreenViewModel extends BaseViewModel {
     PrefService.getUserData().then((value) {
       identity = value?.identity;
     });
+
+    PrefService.getSettingData().then((value) {
+      settingAppData = value?.appdata;
+      maxMinutes = (settingAppData?.maxMinuteLive ?? 0) * 60;
+      notifyListeners();
+    });
     initializeFireStore();
   }
 
@@ -234,7 +242,7 @@ class RandomStreamingScreenViewModel extends BaseViewModel {
       textImage: '',
       textButton: S.current.end,
       dialogSize: 1.9,
-      padding: EdgeInsets.symmetric(horizontal: 40),
+      padding: const EdgeInsets.symmetric(horizontal: 40),
     ));
   }
 
@@ -294,7 +302,8 @@ class RandomStreamingScreenViewModel extends BaseViewModel {
             Timer.periodic(const Duration(seconds: 1), (timer) {
           countTimer++;
           if (countTimer == maxMinutes &&
-              liveStreamUser!.watchingCount! <= PrefService.minimumUserLive) {
+              liveStreamUser!.watchingCount! <=
+                  (settingAppData?.minUserLive ?? 0)) {
             timer.cancel();
             onEndVideoTap();
           }

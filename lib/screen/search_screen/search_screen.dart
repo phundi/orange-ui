@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:orange_ui/common/widgets/common_ui.dart';
+import 'package:orange_ui/common/common_ui.dart';
 
 import 'package:orange_ui/screen/search_screen/search_screen_view_model.dart';
 import 'package:orange_ui/screen/search_screen/widgets/search_bar_area.dart';

@@ -7,8 +7,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
-import 'package:orange_ui/common/widgets/common_fun.dart';
-import 'package:orange_ui/common/widgets/common_ui.dart';
+import 'package:orange_ui/common/common_fun.dart';
+import 'package:orange_ui/common/common_ui.dart';
 
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/chat_and_live_stream/live_stream.dart';
@@ -59,6 +59,8 @@ class PersonStreamingScreenViewModel extends BaseViewModel {
   BottomController bottomController = Get.put(BottomController());
   StringBuffer concatenate = StringBuffer();
 
+  Appdata? settingAppData;
+
   void init() {
     Wakelock.enable();
     channel = Get.arguments[Urls.aChannelId];
@@ -77,7 +79,7 @@ class PersonStreamingScreenViewModel extends BaseViewModel {
           countDownValue++;
           if (countDownValue == 60) {
             !isSelected ? timer.cancel() : null;
-            if (PrefService.liveWatchingPrice <= walletCoin! &&
+            if ((settingAppData?.liveWatchingPrice ?? 0) <= walletCoin! &&
                 walletCoin != 0) {
               isSelected
                   ? autoDebitCoin()
@@ -104,8 +106,10 @@ class PersonStreamingScreenViewModel extends BaseViewModel {
                           walletCoin: walletCoin,
                           title1: S.current.liveCap,
                           title2: S.current.streamCap,
-                          dialogDisc: AppRes.liveStreamDisc,
-                          coinPrice: '${PrefService.liveWatchingPrice}'),
+                          dialogDisc: AppRes.liveStreamDisc(
+                              settingAppData?.liveWatchingPrice ?? 0),
+                          coinPrice:
+                              '${settingAppData?.liveWatchingPrice ?? 0}'),
                       barrierColor: ColorRes.black3.withOpacity(0.44),
                     );
             } else {
@@ -145,7 +149,7 @@ class PersonStreamingScreenViewModel extends BaseViewModel {
   }
 
   Future<void> minusCoinApi() async {
-    await ApiProvider().minusCoinFromWallet(PrefService.liveWatchingPrice);
+    await ApiProvider().minusCoinFromWallet(settingAppData?.liveWatchingPrice);
     getProfileApiCall();
   }
 
@@ -160,6 +164,7 @@ class PersonStreamingScreenViewModel extends BaseViewModel {
   void giftApiCall() {
     ApiProvider().getSettingData().then((value) {
       diamondList = value.data?.gifts;
+      settingAppData = value.data?.appdata;
       notifyListeners();
     });
     getProfileApiCall();

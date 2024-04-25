@@ -3,7 +3,8 @@ import 'dart:io';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
-import 'package:orange_ui/common/widgets/common_ui.dart';
+import 'package:orange_ui/common/common_ui.dart';
+import 'package:orange_ui/model/setting.dart';
 
 import 'package:orange_ui/screen/dashboard/dashboard_screen.dart';
 import 'package:orange_ui/screen/get_started_screen/widget/eula_sheet.dart';
@@ -12,6 +13,7 @@ import 'package:orange_ui/screen/select_hobbies_screen/select_hobbies_screen.dar
 import 'package:orange_ui/screen/select_photo_screen/select_photo_screen.dart';
 import 'package:orange_ui/screen/starting_profile_screen/starting_profile_screen.dart';
 import 'package:orange_ui/service/pref_service.dart';
+import 'package:orange_ui/utils/urls.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:stacked/stacked.dart';
 
@@ -20,6 +22,7 @@ class GetStartedScreenViewModel extends BaseViewModel {
   String? coinRate = '';
   int? minThreshold = 0;
   int screenIndex = 0;
+  Appdata? settingAppData;
 
   void init() {
     getPref();
@@ -36,41 +39,15 @@ class GetStartedScreenViewModel extends BaseViewModel {
   }
 
   void settingApiCall() async {
-    await ApiProvider().getSettingData().then((value) async {
-      if (value.data == null) return;
-      PrefService.settingData = value.data;
-      PrefService.currency = value.data?.appdata?.currency ?? '';
-      PrefService.minThreshold = value.data?.appdata?.minThreshold ?? 0;
-      PrefService.coinRate = value.data?.appdata?.coinRate ?? '';
-      PrefService.messagePrice = value.data?.appdata?.messagePrice ?? 0;
-      PrefService.liveWatchingPrice =
-          value.data?.appdata?.liveWatchingPrice ?? 0;
-      PrefService.reverseSwipePrice =
-          value.data?.appdata?.reverseSwipePrice ?? 0;
-      PrefService.isDating == value.data?.appdata?.isDating;
-      notifyListeners();
-    });
-    getPrefSettingData();
-  }
+    ApiProvider().callPost(
+        completion: (response) async {
+          Setting setting = Setting.fromJson(response);
+          settingAppData = setting.data?.appdata;
 
-  void getPrefSettingData() async {
-    await PrefService.getSettingData().then((value) {
-      if (value == null) return;
-      PrefService.settingData = value;
-      PrefService.currency = value.appdata?.currency ?? '';
-      PrefService.minThreshold = value.appdata?.minThreshold ?? 0;
-      PrefService.coinRate = value.appdata?.coinRate ?? '';
-      PrefService.messagePrice = value.appdata?.messagePrice ?? 0;
-      PrefService.liveWatchingPrice = value.appdata?.liveWatchingPrice ?? 0;
-      PrefService.reverseSwipePrice = value.appdata?.reverseSwipePrice ?? 0;
-      PrefService.maximumMinutes = value.appdata?.maxMinuteLive ?? 0;
-      PrefService.minimumUserLive = value.appdata?.minUserLive ?? 0;
-      PrefService.iosBannerAd = value.appdata?.admobBannerIos ?? '';
-      PrefService.androidBannerAd = value.appdata?.admobBanner ?? '';
-      PrefService.iosInterstitialAd = value.appdata?.admobIntIos ?? '';
-      PrefService.androidInterstitialAd = value.appdata?.admobInt ?? '';
-      notifyListeners();
-    });
+          notifyListeners();
+          await PrefService.saveSettingData(setting.data);
+        },
+        url: Urls.aGetSettingData);
   }
 
   Future<void> screen1NextTap() async {
@@ -105,7 +82,7 @@ class GetStartedScreenViewModel extends BaseViewModel {
         },
       );
     } else {
-      if (PrefService.settingData?.appdata?.isDating == 0) {
+      if (settingAppData?.isDating == 1) {
         screenIndex = 3;
       } else {
         screenIndex = 1;
@@ -164,6 +141,7 @@ class GetStartedScreenViewModel extends BaseViewModel {
     if (permission == LocationPermission.deniedForever) {
       await Geolocator.openAppSettings();
     }
+
     CommonUI.lottieLoader();
     await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high)
         .then((value) async {

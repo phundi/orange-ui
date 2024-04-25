@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:orange_ui/common/widgets/gradient_widget.dart';
+import 'package:orange_ui/common/gradient_widget.dart';
 import 'package:orange_ui/generated/l10n.dart';
-import 'package:orange_ui/service/pref_service.dart';
+import 'package:orange_ui/model/setting.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
 import 'package:orange_ui/utils/font_res.dart';
@@ -11,12 +11,14 @@ class BottomButtons extends StatelessWidget {
   final VoidCallback onPlayBtnTap;
   final VoidCallback onNextBtnTap;
   final VoidCallback onEyeTap;
+  final Appdata? settingData;
 
   const BottomButtons({
     Key? key,
     required this.onPlayBtnTap,
     required this.onNextBtnTap,
     required this.onEyeTap,
+    this.settingData,
   }) : super(key: key);
 
   @override
@@ -24,9 +26,8 @@ class BottomButtons extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        Visibility(
-            visible: PrefService.settingData?.appdata?.isDating == 0 ? false : true,
-            child: PlayBtnClick(onPlayBtnClick: onPlayBtnTap)),
+        if (settingData?.isDating == 1)
+          PlayBtnClick(onPlayBtnClick: onPlayBtnTap),
         UnicornOutlineButton(
           onPressed: onNextBtnTap,
           padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
@@ -38,16 +39,14 @@ class BottomButtons extends StatelessWidget {
             child: Text(
               S.current.next,
               style: const TextStyle(
-                color: ColorRes.orange2,
-                fontSize: 17,
-                fontFamily: FontRes.bold,
-              ),
+                  color: ColorRes.orange2,
+                  fontSize: 17,
+                  fontFamily: FontRes.bold),
             ),
           ),
         ),
-        Visibility(
-          visible: PrefService.settingData?.appdata?.isDating == 0 ? false : true,
-          child: InkWell(
+        if (settingData?.isDating == 1)
+          InkWell(
             onTap: onEyeTap,
             borderRadius: BorderRadius.circular(10),
             child: Container(
@@ -73,7 +72,6 @@ class BottomButtons extends StatelessWidget {
               ),
             ),
           ),
-        ),
       ],
     );
   }
@@ -82,13 +80,15 @@ class BottomButtons extends StatelessWidget {
 class PlayBtnClick extends StatefulWidget {
   final VoidCallback onPlayBtnClick;
 
-  const PlayBtnClick({Key? key, required this.onPlayBtnClick}) : super(key: key);
+  const PlayBtnClick({Key? key, required this.onPlayBtnClick})
+      : super(key: key);
 
   @override
   State<PlayBtnClick> createState() => _PlayBtnClickState();
 }
 
-class _PlayBtnClickState extends State<PlayBtnClick> with SingleTickerProviderStateMixin {
+class _PlayBtnClickState extends State<PlayBtnClick>
+    with SingleTickerProviderStateMixin {
   late double _scale;
   late AnimationController _controller;
 

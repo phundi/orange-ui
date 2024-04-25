@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
-import 'package:orange_ui/common/widgets/common_ui.dart';
+import 'package:orange_ui/common/common_ui.dart';
 
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
@@ -26,6 +26,7 @@ class EditProfileScreenViewModel extends BaseViewModel {
   EditProfileScreenViewModel(this.userData);
 
   TextEditingController fullNameController = TextEditingController();
+  TextEditingController userNameController = TextEditingController();
   TextEditingController addressController = TextEditingController();
   TextEditingController bioController = TextEditingController();
   TextEditingController aboutController = TextEditingController();
@@ -41,6 +42,7 @@ class EditProfileScreenViewModel extends BaseViewModel {
   FocusNode youtubeFocus = FocusNode();
   FocusNode facebookFocus = FocusNode();
   FocusNode fullNameFocus = FocusNode();
+  FocusNode userNameFocus = FocusNode();
   FocusNode instagramFocus = FocusNode();
 
   List<Interest>? hobbiesList = [];
@@ -48,6 +50,7 @@ class EditProfileScreenViewModel extends BaseViewModel {
 
   String gender = AppRes.female;
   String fullNameError = '';
+  String userNameError = '';
   String bioError = '';
   String aboutError = '';
   String addressError = '';
@@ -86,6 +89,7 @@ class EditProfileScreenViewModel extends BaseViewModel {
   void getEditProfileApiCall() async {
     imageList = userData?.images ?? [];
     fullNameController.text = userData?.fullname ?? '';
+    userNameController.text = userData?.username ?? '';
     bioController.text = userData?.bio ?? '';
     aboutController.text = userData?.about ?? '';
     addressController.text = userData?.live ?? '';
@@ -215,6 +219,7 @@ class EditProfileScreenViewModel extends BaseViewModel {
               live: addressController.text.trim(),
               gender: gender == S.current.male ? 1 : 2,
               fullName: fullNameController.text.trim(),
+              userName: userNameController.text.trim(),
               deleteImageIds: deleteIds,
               interest: selectedList)
           .then((value) async {
@@ -241,8 +246,14 @@ class EditProfileScreenViewModel extends BaseViewModel {
       fullNameError = S.current.enterFullName;
       i++;
     }
+    if (userNameController.text == '') {
+      userNameFocus.requestFocus();
+      userNameError = S.current.enterUsername;
+      i++;
+    }
     if (aboutController.text == '') {
-      aboutError = S.current.enterAbout;
+      aboutFocus.requestFocus();
+      CommonUI.snackBarWidget(S.current.enterAbout);
       i++;
     }
     if (ageController.text == '') {

@@ -171,6 +171,7 @@ class Urls {
   static const String aStoryId = 'story_id';
   static const String aDuration = 'duration';
   static const String aContent = 'content';
+  static const String aUserName = 'username';
 
   // Social Media
   static const String aMyUserId = 'my_user_id';

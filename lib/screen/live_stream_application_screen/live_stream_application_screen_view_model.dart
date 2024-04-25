@@ -6,10 +6,10 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
-import 'package:orange_ui/common/widgets/common_ui.dart';
+import 'package:orange_ui/common/common_ui.dart';
 
 import 'package:orange_ui/generated/l10n.dart';
-import 'package:orange_ui/screen/live_stream_application_screen/widgets/video_upload_dialog.dart';
+import 'package:orange_ui/common/video_upload_dialog.dart';
 import 'package:orange_ui/screen/video_preview_screen/video_preview_screen.dart';
 import 'package:orange_ui/screen/video_preview_screen/video_preview_screen_view_model.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -102,10 +102,6 @@ class LiveStreamApplicationScreenViewModel extends BaseViewModel {
     return i == 0 ? true : false;
   }
 
-  void onBackBtnTap() {
-    Get.back();
-  }
-
   void onVideoPlayBtnTap() {
     if (videoFile == null || videoFile!.path.isEmpty) return;
     CommonUI.lottieLoader();
@@ -185,7 +181,6 @@ class LiveStreamApplicationScreenViewModel extends BaseViewModel {
         context: Get.context!,
         builder: (context) {
           return VideoUploadDialog(
-            cancelBtnTap: onBackBtnTap,
             selectAnother: () {
               Get.back();
               imagePicker();

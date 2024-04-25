@@ -1,7 +1,7 @@
 import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
-import 'package:orange_ui/common/widgets/common_ui.dart';
-import 'package:orange_ui/common/widgets/dashboard_top_bar.dart';
+import 'package:orange_ui/common/common_ui.dart';
+import 'package:orange_ui/common/dashboard_top_bar.dart';
 
 import 'package:orange_ui/model/social/post/add_comment.dart';
 import 'package:orange_ui/screen/feed_screen/feed_screen_view_model.dart';
@@ -29,6 +29,7 @@ class FeedScreen extends StatelessWidget {
               onNotificationTap: model.onNotificationTap,
               onSearchTap: model.onSearchTap,
               onLivesBtnClick: model.onLivesBtnClick,
+              isDating: model.settingAppData?.isDating,
             ),
             Expanded(
               child: model.isLoading

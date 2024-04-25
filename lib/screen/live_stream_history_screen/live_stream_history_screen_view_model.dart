@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
@@ -38,7 +36,6 @@ class LiveStreamHistoryViewModel extends BaseViewModel {
       }
       currentPage = liveStreamHistory!.length;
       isLoading = false;
-      log('$currentPage');
       notifyListeners();
     });
   }

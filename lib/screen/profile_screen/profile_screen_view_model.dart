@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
-import 'package:orange_ui/common/widgets/common_ui.dart';
+import 'package:orange_ui/common/common_ui.dart';
 
 import 'package:orange_ui/generated/l10n.dart';
+import 'package:orange_ui/model/setting.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/screen/edit_profile_screen/edit_profile_screen.dart';
 import 'package:orange_ui/screen/live_grid_screen/live_grid_screen.dart';
@@ -21,11 +22,14 @@ class ProfileScreenViewModel extends BaseViewModel {
   int currentImageIndex = 0;
   late PageController pageController;
 
+  Appdata? settingAppData;
+
   void init() {
     pageController = PageController(initialPage: 0, viewportFraction: 1.01)
       ..addListener(() {
         onMainImageChange();
       });
+    getSettingData();
     profileScreenApiCall();
   }
 
@@ -50,7 +54,6 @@ class ProfileScreenViewModel extends BaseViewModel {
                 userData = value;
               }
             }
-
             notifyListeners();
           });
   }
@@ -118,5 +121,12 @@ class ProfileScreenViewModel extends BaseViewModel {
 
   void onMoreBtnTap() {
     Get.to(() => const OptionScreen());
+  }
+
+  void getSettingData() {
+    PrefService.getSettingData().then((value) {
+      settingAppData = value?.appdata;
+      notifyListeners();
+    });
   }
 }

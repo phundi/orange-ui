@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
-import 'package:orange_ui/common/widgets/common_ui.dart';
+import 'package:orange_ui/common/common_ui.dart';
 
 import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/screen/dashboard/dashboard_screen.dart';

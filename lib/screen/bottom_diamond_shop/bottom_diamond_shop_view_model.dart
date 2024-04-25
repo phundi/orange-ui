@@ -4,14 +4,18 @@ import 'package:bubbly_camera/bubbly_camera.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
-import 'package:orange_ui/common/widgets/common_ui.dart';
+import 'package:orange_ui/common/common_ui.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/get_diamond_pack.dart';
+import 'package:orange_ui/model/setting.dart';
+import 'package:orange_ui/service/pref_service.dart';
 import 'package:stacked/stacked.dart';
 
 class BottomDiamondShopViewModel extends BaseViewModel {
   List<GetDiamondPackData>? diamondPriceList = [];
   int? coinValue = 100;
+
+  Appdata? settingAppData;
 
   void init() {
     const MethodChannel('bubbly_camera').setMethodCallHandler((call) async {
@@ -25,6 +29,7 @@ class BottomDiamondShopViewModel extends BaseViewModel {
       return;
     });
     getDiamondPackApiCall();
+    getSettingData();
   }
 
   void addCoinApiCall() {
@@ -49,5 +54,12 @@ class BottomDiamondShopViewModel extends BaseViewModel {
     coinValue = data?.amount;
     BubblyCamera.inAppPurchase(
         Platform.isAndroid ? data?.androidProductId : data?.iosProductId);
+  }
+
+  void getSettingData() {
+    PrefService.getSettingData().then((value) {
+      settingAppData = value?.appdata;
+      notifyListeners();
+    });
   }
 }

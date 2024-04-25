@@ -25,6 +25,7 @@ class DashboardScreen extends StatelessWidget {
           bottomNavigationBar: BottomBar(
             pageIndex: model.pageIndex,
             onBottomBarTap: model.onBottomBarTap,
+            settingAppData: model.settingAppData,
           ),
           body: SafeArea(
             bottom: false,

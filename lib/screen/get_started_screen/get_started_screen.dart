@@ -19,7 +19,7 @@ class GetStartedScreen extends StatelessWidget {
       builder: (context, model, child) {
         return Scaffold(
           body: model.screenIndex == 0
-              ? Screen1(onTap: model.screen1NextTap)
+              ? Screen1(onTap: model.screen1NextTap, model: model)
               : model.screenIndex == 1
                   ? Screen2(
                       onNextTap: model.screen2NextTap,

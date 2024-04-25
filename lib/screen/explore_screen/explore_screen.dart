@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:orange_ui/common/widgets/dashboard_top_bar.dart';
+import 'package:orange_ui/common/dashboard_top_bar.dart';
 import 'package:orange_ui/screen/explore_screen/explore_screen_view_model.dart';
 import 'package:orange_ui/screen/explore_screen/widgets/bottom_bottons.dart';
 import 'package:orange_ui/screen/explore_screen/widgets/full_image_view.dart';
@@ -23,7 +23,8 @@ class ExploreScreen extends StatelessWidget {
                 onNotificationTap: model.onNotificationTap,
                 // onTitleTap: model.onTitleTap,
                 onSearchTap: model.onSearchTap,
-                onLivesBtnClick: model.onLivesBtnClick),
+                onLivesBtnClick: model.onLivesBtnClick,
+                isDating: model.settingAppData?.isDating),
             const SizedBox(height: 20),
             FullImageView(
               userData: model.userData,
@@ -39,10 +40,10 @@ class ExploreScreen extends StatelessWidget {
             ),
             const SizedBox(height: 26),
             BottomButtons(
-              onPlayBtnTap: model.onPlayButtonTap,
-              onNextBtnTap: model.onNextButtonTap,
-              onEyeTap: model.onEyeButtonTap,
-            ),
+                onPlayBtnTap: model.onPlayButtonTap,
+                onNextBtnTap: model.onNextButtonTap,
+                onEyeTap: model.onEyeButtonTap,
+                settingData: model.settingAppData),
             const SizedBox(height: 26),
           ],
         );

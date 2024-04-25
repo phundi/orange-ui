@@ -10,11 +10,12 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
-import 'package:orange_ui/common/widgets/common_fun.dart';
-import 'package:orange_ui/common/widgets/common_ui.dart';
-import 'package:orange_ui/common/widgets/confirmation_dialog.dart';
+import 'package:orange_ui/common/common_fun.dart';
+import 'package:orange_ui/common/common_ui.dart';
+import 'package:orange_ui/common/confirmation_dialog.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/chat_and_live_stream/chat.dart';
+import 'package:orange_ui/model/setting.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/screen/bottom_diamond_shop/bottom_diamond_shop.dart';
 import 'package:orange_ui/screen/chat_screen/widgets/image_video_msg_sheet.dart';
@@ -23,7 +24,7 @@ import 'package:orange_ui/screen/chat_screen/widgets/item_selection_dialog_andro
 import 'package:orange_ui/screen/chat_screen/widgets/item_selection_dialog_ios.dart';
 import 'package:orange_ui/screen/chat_screen/widgets/unblock_user_dialog.dart';
 import 'package:orange_ui/screen/explore_screen/widgets/reverse_swipe_dialog.dart';
-import 'package:orange_ui/screen/live_stream_application_screen/widgets/video_upload_dialog.dart';
+import 'package:orange_ui/common/video_upload_dialog.dart';
 import 'package:orange_ui/screen/user_detail_screen/user_detail_screen.dart';
 import 'package:orange_ui/screen/user_report_screen/report_sheet.dart';
 import 'package:orange_ui/screen/video_preview_screen/video_preview_screen.dart';
@@ -78,6 +79,8 @@ class ChatScreenViewModel extends BaseViewModel {
   bool isBlockOther = false;
   static String senderId = '';
 
+  Appdata? settingAppData;
+
   ChatScreenViewModel(this.conversation);
 
   void init() {
@@ -99,6 +102,10 @@ class ChatScreenViewModel extends BaseViewModel {
           conversation.block == true ? S.current.unBlock : S.current.block;
       isBlock = conversation.block == true ? true : false;
       isBlockOther = conversation.blockFromOther == true ? true : false;
+    });
+    PrefService.getSettingData().then((value) {
+      settingAppData = value?.appdata;
+      notifyListeners();
     });
     getProfileAPi();
     initFireBaseData();
@@ -153,7 +160,7 @@ class ChatScreenViewModel extends BaseViewModel {
   }
 
   Future<void> minusCoinApi() async {
-    await ApiProvider().minusCoinFromWallet(PrefService.messagePrice);
+    await ApiProvider().minusCoinFromWallet(settingAppData?.messagePrice);
   }
 
   void scrollToGetChat() {
@@ -182,7 +189,7 @@ class ChatScreenViewModel extends BaseViewModel {
       onTap: onDeleteBtnClick,
       description: S.current.afterDeletingTheChatYouCanNotRestoreOurMessage,
       dialogSize: 1.6,
-      padding: EdgeInsets.symmetric(horizontal: 40),
+      padding: const EdgeInsets.symmetric(horizontal: 40),
     ));
   }
 
@@ -331,7 +338,8 @@ class ChatScreenViewModel extends BaseViewModel {
     }
     if (registrationUserData?.isFake != 1) {
       if (textMsgController.text.trim() != '') {
-        if (PrefService.reverseSwipePrice <= walletCoin! && walletCoin != 0) {
+        if ((settingAppData?.reverseSwipePrice ?? 0) <= walletCoin! &&
+            walletCoin != 0) {
           !isSelected
               ? getChatMsgDialog(onContinueTap: onTextMsgContinueClick)
               : onMessageSent();
@@ -392,7 +400,8 @@ class ChatScreenViewModel extends BaseViewModel {
 
   void onPlusBtnClick() {
     if (registrationUserData?.isFake != 1) {
-      if (PrefService.reverseSwipePrice <= walletCoin! && walletCoin != 0) {
+      if ((settingAppData?.reverseSwipePrice ?? 0) <= walletCoin! &&
+          walletCoin != 0) {
         !isSelected
             ? getChatMsgDialog(onContinueTap: onPlusContinueClick)
             : onPlusTap();
@@ -562,7 +571,6 @@ class ChatScreenViewModel extends BaseViewModel {
         context: Get.context!,
         builder: (context) {
           return VideoUploadDialog(
-            cancelBtnTap: () {},
             selectAnother: () {
               Get.back();
               itemSelectVideo();
@@ -600,7 +608,8 @@ class ChatScreenViewModel extends BaseViewModel {
 
   void cameraClick() {
     if (registrationUserData?.isFake != 1) {
-      if (PrefService.reverseSwipePrice <= walletCoin! && walletCoin != 0) {
+      if ((settingAppData?.reverseSwipePrice ?? 0) <= walletCoin! &&
+          walletCoin != 0) {
         !isSelected
             ? getChatMsgDialog(onContinueTap: onCameraContinueClick)
             : prefCameraTap();
@@ -822,17 +831,17 @@ class ChatScreenViewModel extends BaseViewModel {
         },
       );
     }
-
     receiverUserData?.isNotification == 1
         ? ApiProvider().pushNotification(
-            // title: registrationUserData?.fullname ?? '',
-            // body: CommonFun.getLastMsg(msgType: msgType, msg: textMessage ?? ''),
+            title: registrationUserData?.fullname ?? '',
+            body:
+                CommonFun.getLastMsg(msgType: msgType, msg: textMessage ?? ''),
             data: {
-                Urls.aViewerNotificationId: conversation.conversationId,
-                'title': registrationUserData?.fullname ?? '',
-                'body': CommonFun.getLastMsg(
-                    msgType: msgType, msg: textMessage ?? ''),
-              },
+              Urls.aViewerNotificationId: conversation.conversationId,
+              'title': registrationUserData?.fullname ?? '',
+              'body': CommonFun.getLastMsg(
+                  msgType: msgType, msg: textMessage ?? ''),
+            },
             token: '${receiverUserData?.deviceToken}')
         : null;
   }
@@ -862,8 +871,8 @@ class ChatScreenViewModel extends BaseViewModel {
           walletCoin: walletCoin,
           title1: S.current.message.toUpperCase(),
           title2: S.current.priceCap,
-          dialogDisc: AppRes.messageDisc,
-          coinPrice: '${PrefService.messagePrice}'),
+          dialogDisc: AppRes.messageDisc(settingAppData?.messagePrice),
+          coinPrice: '${settingAppData?.messagePrice ?? 0}'),
     ).then((value) {
       getProfileAPi();
     });

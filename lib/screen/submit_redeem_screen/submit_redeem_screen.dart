@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:orange_ui/common/widgets/top_bar_area.dart';
+import 'package:orange_ui/common/top_bar_area.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/screen/submit_redeem_screen/submit_redeem_screen_view_model.dart';
 import 'package:orange_ui/screen/submit_redeem_screen/widgets/center_area_submit_redeem_screen.dart';
@@ -39,6 +39,7 @@ class SubmitRedeemScreen extends StatelessWidget {
                   payment: model.paymentGateway,
                   accountError: model.accountError,
                   isEmpty: model.isEmpty,
+                  model: model,
                 ),
               ],
             ),

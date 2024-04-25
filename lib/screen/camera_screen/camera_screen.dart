@@ -2,7 +2,8 @@ import 'package:camera/camera.dart';
 import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:orange_ui/common/widgets/common_ui.dart';
+import 'package:orange_ui/common/common_fun.dart';
+import 'package:orange_ui/common/common_ui.dart';
 import 'package:orange_ui/screen/camera_screen/camera_screen_view_model.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
@@ -63,7 +64,7 @@ class CameraScreen extends StatelessWidget {
                                           color: ColorRes.red),
                                       alignment: Alignment.center,
                                       child: Text(
-                                        formatHHMMSS(int.parse(
+                                        CommonFun.formatHHMMSS(int.parse(
                                             viewModel.currentTime.value)),
                                         style: const TextStyle(
                                             color: ColorRes.white,
@@ -143,23 +144,5 @@ class CameraScreen extends StatelessWidget {
             ),
           );
         });
-  }
-
-  String formatHHMMSS(int milliseconds) {
-    int seconds = milliseconds ~/ 100;
-
-    int hours = (seconds / 3600).truncate();
-    seconds = (seconds % 3600).truncate();
-    int minutes = (seconds / 60).truncate();
-
-    String hoursStr = (hours).toString().padLeft(2, '0');
-    String minutesStr = (minutes).toString().padLeft(2, '0');
-    String secondsStr = (seconds % 60).toString().padLeft(2, '0');
-
-    if (hours == 0) {
-      return "$minutesStr:$secondsStr";
-    }
-
-    return "$hoursStr:$minutesStr:$secondsStr";
   }
 }

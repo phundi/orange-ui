@@ -176,6 +176,7 @@ class Appdata {
     String? admobInt,
     String? admobBanner,
     int? isDating,
+    int? isSocialMedia,
   }) {
     _id = id;
     _currency = currency;
@@ -191,6 +192,7 @@ class Appdata {
     _admobInt = admobInt;
     _admobBanner = admobBanner;
     _isDating = isDating;
+    _isSocialMedia = isSocialMedia;
   }
 
   Appdata.fromJson(dynamic json) {
@@ -208,6 +210,7 @@ class Appdata {
     _admobInt = json['admob_int'];
     _admobBanner = json['admob_banner'];
     _isDating = json['is_dating'];
+    _isSocialMedia = json['is_social_media'];
   }
 
   int? _id;
@@ -224,6 +227,7 @@ class Appdata {
   String? _admobInt;
   String? _admobBanner;
   int? _isDating;
+  int? _isSocialMedia;
 
   Appdata copyWith({
     int? id,
@@ -240,6 +244,7 @@ class Appdata {
     String? admobInt,
     String? admobBanner,
     int? isDating,
+    int? isSocialMedia,
   }) =>
       Appdata(
         id: id ?? _id,
@@ -256,25 +261,26 @@ class Appdata {
         admobInt: admobInt ?? _admobInt,
         admobBanner: admobBanner ?? _admobBanner,
         isDating: isDating ?? _isDating,
+        isSocialMedia: isSocialMedia ?? _isSocialMedia,
       );
 
   int? get id => _id;
 
   String? get currency => _currency;
 
-  int? get minThreshold => _minThreshold;
+  int get minThreshold => _minThreshold ?? 0;
 
   String? get coinRate => _coinRate;
 
-  int? get minUserLive => _minUserLive;
+  int get minUserLive => _minUserLive ?? 0;
 
-  int? get maxMinuteLive => _maxMinuteLive;
+  int get maxMinuteLive => _maxMinuteLive ?? 0;
 
-  int? get messagePrice => _messagePrice;
+  int get messagePrice => _messagePrice ?? 0;
 
-  int? get reverseSwipePrice => _reverseSwipePrice;
+  int get reverseSwipePrice => _reverseSwipePrice ?? 0;
 
-  int? get liveWatchingPrice => _liveWatchingPrice;
+  int get liveWatchingPrice => _liveWatchingPrice ?? 0;
 
   String? get admobIntIos => _admobIntIos;
 
@@ -284,7 +290,8 @@ class Appdata {
 
   String? get admobBanner => _admobBanner;
 
-  int? get isDating => _isDating;
+  int get isDating => _isDating ?? 0;
+  int get isSocialMedia => _isSocialMedia ?? 0;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -302,6 +309,7 @@ class Appdata {
     map['admob_int'] = _admobInt;
     map['admob_banner'] = _admobBanner;
     map['is_dating'] = _isDating;
+    map['is_social_media'] = _isSocialMedia;
     return map;
   }
 }

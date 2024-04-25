@@ -34,3 +34,8 @@ const cornerSmoothing = 1.0;
 
 //  story Duration for image
 const int storyDuration = 5;
+
+// Capture story video duration in second
+const int storyVideoDuration = 30;
+
+int isDating = 0;

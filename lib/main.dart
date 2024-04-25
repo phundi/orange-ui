@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:app_tracking_transparency/app_tracking_transparency.dart';
@@ -31,6 +32,13 @@ class MyHttpOverrides extends HttpOverrides {
   }
 }
 
+@pragma('vm:entry-point')
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp();
+  showNotification(message);
+  log('Handling a background message ${message.data}');
+}
+
 Future<void> main() async {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     // Status bar color
@@ -45,7 +53,8 @@ Future<void> main() async {
       await PrefService.getString(PrefConst.languageCode) ??
           Platform.localeName.split('_')[0];
   await Firebase.initializeApp();
-
+  // Set the background messaging handler early on, as a named top-level function
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 
@@ -60,11 +69,12 @@ class MyApp extends StatefulWidget {
   State<MyApp> createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
-  FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
-  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-      FlutterLocalNotificationsPlugin();
+FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
+late AndroidNotificationChannel channel;
 
+class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     initPlugin();
@@ -115,7 +125,7 @@ class _MyAppState extends State<MyApp> {
     await firebaseMessaging.requestPermission(
         alert: true, badge: false, sound: true);
 
-    const AndroidNotificationChannel channel = AndroidNotificationChannel(
+    channel = const AndroidNotificationChannel(
         'orange_flutter', // id
         'Orange', // title
         playSound: true,
@@ -141,17 +151,7 @@ class _MyAppState extends State<MyApp> {
           ChatScreenViewModel.senderId) {
         return;
       }
-
-      flutterLocalNotificationsPlugin.show(
-        1,
-        message.data['title'],
-        message.data['body'],
-        NotificationDetails(
-            iOS: const DarwinNotificationDetails(
-                presentSound: true, presentAlert: true, presentBadge: false),
-            android: AndroidNotificationDetails(channel.id, channel.name,
-                channelDescription: channel.description)),
-      );
+      showNotification(message);
     });
 
     await flutterLocalNotificationsPlugin
@@ -174,6 +174,18 @@ class _MyAppState extends State<MyApp> {
     }
     await AppTrackingTransparency.getAdvertisingIdentifier();
   }
+}
+
+void showNotification(RemoteMessage message) {
+  flutterLocalNotificationsPlugin.show(
+    1,
+    message.data['title'],
+    message.data['body'],
+    const NotificationDetails(
+        iOS: DarwinNotificationDetails(
+            presentSound: true, presentAlert: true, presentBadge: false),
+        android: AndroidNotificationDetails('orange_flutter', 'Orange')),
+  );
 }
 
 class MyBehavior extends ScrollBehavior {

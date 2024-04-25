@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:orange_ui/common/widgets/common_ui.dart';
+import 'package:orange_ui/common/common_ui.dart';
 
-import 'package:orange_ui/common/widgets/top_bar_area.dart';
+import 'package:orange_ui/common/top_bar_area.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/screen/livestream_dashboard_screen/livestream_dashboard_screen_view_model.dart';
 import 'package:orange_ui/screen/livestream_dashboard_screen/widgets/center_area_livestream_dashboard.dart';
@@ -45,6 +45,7 @@ class LiveStreamDashBoard extends StatelessWidget {
                       totalCollection:
                           model.userData?.totalCollected.toString(),
                       totalStream: model.userData?.totalStreams.toString(),
+                      appdata: model.settingAppData,
                     ),
               const SizedBox(height: 10),
               if (model.bannerAd != null)

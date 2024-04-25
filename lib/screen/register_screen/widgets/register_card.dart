@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:orange_ui/common/widgets/buttons.dart';
+import 'package:orange_ui/common/buttons.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/screen/register_screen/register_screen_view_model.dart';
 import 'package:orange_ui/utils/color_res.dart';

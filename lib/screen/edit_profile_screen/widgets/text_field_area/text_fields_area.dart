@@ -3,7 +3,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:orange_ui/common/widgets/drop_down_box.dart';
+import 'package:orange_ui/common/drop_down_box.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/screen/edit_profile_screen/edit_profile_screen_view_model.dart';
 import 'package:orange_ui/screen/edit_profile_screen/widgets/interest_list.dart';
@@ -34,6 +34,15 @@ class TextFieldsArea extends StatelessWidget {
             model: model,
             focusNode: model.fullNameFocus,
             title: S.current.fullName,
+            isExpand: false,
+          ),
+          ExpandedTextFieldCustom(
+            controller: model.userNameController,
+            error: model.userNameError,
+            hint: S.current.enterUsername,
+            model: model,
+            focusNode: model.userNameFocus,
+            title: S.of(context).username,
             isExpand: false,
           ),
           ExpandedTextFieldCustom(

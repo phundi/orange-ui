@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:orange_ui/common/widgets/common_ui.dart';
+import 'package:orange_ui/common/common_ui.dart';
 import 'package:orange_ui/model/social/post/add_comment.dart';
 import 'package:orange_ui/screen/feed_screen/feed_screen_view_model.dart';
 import 'package:orange_ui/utils/color_res.dart';

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -6,12 +7,13 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
-import 'package:orange_ui/common/widgets/common_fun.dart';
-import 'package:orange_ui/common/widgets/common_ui.dart';
-import 'package:orange_ui/common/widgets/confirmation_dialog.dart';
+import 'package:orange_ui/common/common_fun.dart';
+import 'package:orange_ui/common/common_ui.dart';
+import 'package:orange_ui/common/confirmation_dialog.dart';
 
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/chat_and_live_stream/chat.dart';
+import 'package:orange_ui/model/setting.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/screen/chat_screen/chat_screen.dart';
 import 'package:orange_ui/screen/live_grid_screen/live_grid_screen.dart';
@@ -30,7 +32,10 @@ class MessageScreenViewModel extends BaseViewModel {
   RegistrationUserData? userData;
   BannerAd? bannerAd;
 
+  Appdata? settingAppData;
+
   void init() {
+    getSettingData();
     getChatUsers();
     getProfileApi();
     getBannerAd();
@@ -95,7 +100,10 @@ class MessageScreenViewModel extends BaseViewModel {
     CommonFun.bannerAd((ad) {
       bannerAd = ad as BannerAd;
       notifyListeners();
-    });
+    },
+        bannerId: Platform.isIOS
+            ? settingAppData?.admobBannerIos
+            : settingAppData?.admobBanner);
   }
 
   @override
@@ -124,8 +132,15 @@ class MessageScreenViewModel extends BaseViewModel {
       },
       description: S.current.messageWillOnlyBeRemoved,
       dialogSize: 1.9,
-      padding: EdgeInsets.symmetric(horizontal: 40),
+      padding: const EdgeInsets.symmetric(horizontal: 40),
     ));
     notifyListeners();
+  }
+
+  void getSettingData() {
+    PrefService.getSettingData().then((value) {
+      settingAppData = value?.appdata;
+      notifyListeners();
+    });
   }
 }

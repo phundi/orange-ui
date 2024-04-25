@@ -2,9 +2,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:get/get.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
-import 'package:orange_ui/common/widgets/common_ui.dart';
+import 'package:orange_ui/common/common_ui.dart';
 
 import 'package:orange_ui/generated/l10n.dart';
+import 'package:orange_ui/model/setting.dart';
 import 'package:orange_ui/model/social/post/add_post.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/screen/single_post_screen/single_post_screen.dart';
@@ -17,6 +18,8 @@ class DashboardScreenViewModel extends BaseViewModel {
   int pageIndex = 0;
   RegistrationUserData? userData;
 
+  Appdata? settingAppData;
+
   void init() {
     initBranch();
     getProfileApiCall();
@@ -25,6 +28,10 @@ class DashboardScreenViewModel extends BaseViewModel {
   void getProfileApiCall() {
     ApiProvider().getProfile(userID: PrefService.userId).then((value) {
       userData = value?.data;
+      notifyListeners();
+    });
+    PrefService.getSettingData().then((value) {
+      settingAppData = value?.appdata;
       notifyListeners();
     });
   }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:orange_ui/common/widgets/detectable_text_custom.dart';
+import 'package:orange_ui/common/detectable_text_custom.dart';
 
 class TextPost extends StatelessWidget {
   final String? description;
@@ -12,7 +12,9 @@ class TextPost extends StatelessWidget {
       visible: description != null,
       child: Padding(
         padding: const EdgeInsets.only(left: 15.0, right: 15, bottom: 10),
-        child: DetectableTextCustom(text: description ?? ''),
+        child: DetectableTextCustom(
+          text: description ?? '',
+        ),
       ),
     );
   }

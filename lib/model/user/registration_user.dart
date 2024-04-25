@@ -66,6 +66,7 @@ class RegistrationUserData {
     int? age,
     String? identity,
     String? fullname,
+    String? username,
     String? instagram,
     String? youtube,
     String? facebook,
@@ -105,6 +106,7 @@ class RegistrationUserData {
     _age = age;
     _identity = identity;
     _fullname = fullname;
+    _username = username;
     _instagram = instagram;
     _youtube = youtube;
     _facebook = facebook;
@@ -146,6 +148,7 @@ class RegistrationUserData {
     _age = json['age'];
     _identity = json['identity'];
     _fullname = json['fullname'];
+    _username = json['username'];
     _instagram = json['instagram'];
     _youtube = json['youtube'];
     _facebook = json['facebook'];
@@ -198,6 +201,7 @@ class RegistrationUserData {
   int? _age;
   String? _identity;
   String? _fullname;
+  String? _username;
   String? _instagram;
   String? _youtube;
   String? _facebook;
@@ -248,6 +252,7 @@ class RegistrationUserData {
   String? get identity => _identity;
 
   String? get fullname => _fullname;
+  String? get username => _username;
 
   String? get instagram => _instagram;
 
@@ -314,6 +319,7 @@ class RegistrationUserData {
     map['age'] = _age;
     map['identity'] = _identity;
     map['fullname'] = _fullname;
+    map['username'] = _username;
     map['instagram'] = _instagram;
     map['youtube'] = _youtube;
     map['facebook'] = _facebook;

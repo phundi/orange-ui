@@ -1,9 +1,6 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:orange_ui/common/widgets/common_fun.dart';
-import 'package:orange_ui/common/widgets/common_ui.dart';
+import 'package:orange_ui/common/common_ui.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/screen/feed_screen/feed_screen_view_model.dart';
 import 'package:orange_ui/screen/post_screen/post_screen_view_model.dart';
@@ -44,29 +41,10 @@ class PostScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          ClipRRect(
-                              borderRadius: SmoothBorderRadius(
-                                  cornerRadius: 7, cornerSmoothing: 1),
-                              child: CachedNetworkImage(
-                                imageUrl: CommonFun.getProfileImage(
-                                    images: userData?.images),
-                                cacheKey: CommonFun.getProfileImage(
-                                    images: userData?.images),
-                                width: 35,
-                                height: 35,
-                                fit: BoxFit.cover,
-                                errorWidget: (context, url, error) {
-                                  return CommonUI.profileImagePlaceHolder(
-                                      name:
-                                          CommonUI.fullName(userData?.fullname),
-                                      heightWidth: 35,
-                                      borderRadius: 7);
-                                },
-                              )),
                           const SizedBox(width: 10),
                           Flexible(
                             child: Text(
-                              CommonUI.fullName(userData?.fullname),
+                              CommonUI.userName(userData?.username),
                               style: const TextStyle(
                                   fontFamily: FontRes.bold,
                                   fontSize: 16,
@@ -96,17 +74,21 @@ class PostScreen extends StatelessWidget {
             Expanded(
               child: ViewModelBuilder<FeedScreenViewModel>.nonReactive(
                 viewModelBuilder: () => FeedScreenViewModel(),
-                builder: (context, model, child) => ListView.builder(
-                  controller: viewModel.scrollController,
-                  itemCount: viewModel.posts.length,
-                  padding: const EdgeInsets.only(top: 10),
-                  itemBuilder: (context, index) {
-                    return PostCard(
-                        post: viewModel.posts[index],
-                        model: model,
-                        onDeleteItem: viewModel.onDeleteItem);
-                  },
-                ),
+                builder: (context, model, child) => viewModel.isLoading
+                    ? CommonUI.lottieWidget()
+                    : viewModel.posts.isEmpty
+                        ? CommonUI.noData()
+                        : ListView.builder(
+                            controller: viewModel.scrollController,
+                            itemCount: viewModel.posts.length,
+                            padding: const EdgeInsets.only(top: 10),
+                            itemBuilder: (context, index) {
+                              return PostCard(
+                                  post: viewModel.posts[index],
+                                  model: model,
+                                  onDeleteItem: viewModel.onDeleteItem);
+                            },
+                          ),
               ),
             )
           ],

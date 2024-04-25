@@ -5,11 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:get/get.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
-import 'package:orange_ui/common/widgets/common_fun.dart';
-import 'package:orange_ui/common/widgets/common_ui.dart';
-import 'package:orange_ui/common/widgets/confirmation_dialog.dart';
+import 'package:orange_ui/common/common_fun.dart';
+import 'package:orange_ui/common/common_ui.dart';
+import 'package:orange_ui/common/confirmation_dialog.dart';
 
 import 'package:orange_ui/generated/l10n.dart';
+import 'package:orange_ui/model/setting.dart';
 import 'package:orange_ui/model/social/feed.dart';
 import 'package:orange_ui/model/social/post/add_comment.dart';
 import 'package:orange_ui/model/social/story/fetch_stories.dart';
@@ -40,6 +41,8 @@ class FeedScreenViewModel extends BaseViewModel {
 
   // init Camera description
   List<CameraDescription> cameras = [];
+
+  Appdata? settingAppData;
 
   void init() {
     prefData();
@@ -235,6 +238,10 @@ class FeedScreenViewModel extends BaseViewModel {
 
   void prefData() async {
     userData = await PrefService.getUserData();
+    PrefService.getSettingData().then((value) {
+      settingAppData = value?.appdata;
+      notifyListeners();
+    });
     getProfile();
     notifyListeners();
     if (cameras.isEmpty) {

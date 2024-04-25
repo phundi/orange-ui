@@ -3,7 +3,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:orange_ui/common/widgets/gradient_widget.dart';
+import 'package:orange_ui/common/gradient_widget.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
 import 'package:orange_ui/utils/font_res.dart';
@@ -74,7 +74,7 @@ class FullImageView extends StatelessWidget {
             child: Column(
               children: [
                 const SizedBox(height: 14),
-                TopStoryLine(
+                TopFileStoryLine(
                     pageController: pageController, images: imageList ?? []),
                 const Spacer(),
                 Padding(
@@ -184,19 +184,19 @@ class FullImageView extends StatelessWidget {
   }
 }
 
-class TopStoryLine extends StatefulWidget {
+class TopFileStoryLine extends StatefulWidget {
   final List<File> images;
   final PageController pageController;
 
-  const TopStoryLine(
+  const TopFileStoryLine(
       {Key? key, required this.images, required this.pageController})
       : super(key: key);
 
   @override
-  State<TopStoryLine> createState() => _TopStoryLineState();
+  State<TopFileStoryLine> createState() => _TopFileStoryLineState();
 }
 
-class _TopStoryLineState extends State<TopStoryLine> {
+class _TopFileStoryLineState extends State<TopFileStoryLine> {
   int currentPosition = 0;
   int lastCurrentPosition = 0;
 

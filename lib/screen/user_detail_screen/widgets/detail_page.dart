@@ -6,7 +6,6 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:orange_ui/generated/l10n.dart';
-import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/screen/following_list_screen/follow_following_screen.dart';
 import 'package:orange_ui/screen/following_list_screen/follow_following_screen_view_model.dart';
 import 'package:orange_ui/screen/user_detail_screen/user_detail_screen_view_model.dart';
@@ -229,91 +228,99 @@ class DetailPage extends StatelessWidget {
                               fontSize: 17),
                         ),
                         const SizedBox(height: 11),
-                        // interestButtons(model.userData?.interests ?? []),
-                        Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 10.0),
-                            child: ClipRect(
-                              child: BackdropFilter(
-                                filter: ImageFilter.blur(
-                                    sigmaX: 10.0, sigmaY: 10.0),
-                                child: Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 15, vertical: 10),
-                                  decoration: BoxDecoration(
-                                      color:
-                                          ColorRes.davyGrey.withOpacity(0.15),
-                                      border: Border.all(
-                                          color: ColorRes.dimGrey7
-                                              .withOpacity(0.15)),
-                                      borderRadius: BorderRadius.circular(50)),
-                                  child: Row(
-                                    children: [
-                                      VerticalColumnText(
-                                        count: NumberFormat.compact().format(
-                                            model.userData?.following ?? 0),
-                                        title: S.of(context).following,
-                                        onTap: () {
-                                          Get.to(() => FollowFollowingScreen(
-                                                followFollowingType:
-                                                    FollowFollowingType
-                                                        .following,
-                                                userId:
-                                                    model.userData?.id ?? -1,
-                                              ));
-                                        },
-                                      ),
-                                      const SizedBox(width: 20),
-                                      VerticalColumnText(
-                                        count: NumberFormat.compact().format(
-                                            model.userData?.followers ?? 0),
-                                        title: S.of(context).followers,
-                                        onTap: () {
-                                          Get.to(() => FollowFollowingScreen(
-                                                followFollowingType:
-                                                    FollowFollowingType
-                                                        .follower,
-                                                userId:
-                                                    model.userData?.id ?? -1,
-                                              ));
-                                        },
-                                      ),
-                                      const SizedBox(width: 20),
-                                      Expanded(
-                                        child: model.userData?.id ==
-                                                PrefService.userId
-                                            ? InkWell(
-                                                onTap: model.onEditBtnClick,
-                                                child: Container(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            15),
-                                                    alignment: Alignment.center,
-                                                    decoration: ShapeDecoration(
-                                                        shape: SmoothRectangleBorder(
-                                                            borderRadius:
-                                                                SmoothBorderRadius(
-                                                                    cornerRadius:
-                                                                        30)),
-                                                        color: ColorRes.dimGrey7
-                                                            .withOpacity(0.15)),
-                                                    child: Text(
-                                                      S.current.edit
-                                                          .toUpperCase(),
-                                                      style: const TextStyle(
-                                                          fontFamily:
-                                                              FontRes.bold,
-                                                          color: ColorRes.white,
-                                                          fontSize: 12,
-                                                          letterSpacing: 1.33),
-                                                    )),
-                                              )
-                                            : FollowUnFollowBtn(model: model),
-                                      )
-                                    ],
+                        interestButtons(model.interestList),
+                        if (model.settingAppData?.isSocialMedia == 1)
+                          Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 10.0),
+                              child: ClipRect(
+                                child: BackdropFilter(
+                                  filter: ImageFilter.blur(
+                                      sigmaX: 10.0, sigmaY: 10.0),
+                                  child: Container(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 15, vertical: 10),
+                                    decoration: BoxDecoration(
+                                        color:
+                                            ColorRes.davyGrey.withOpacity(0.15),
+                                        border: Border.all(
+                                            color: ColorRes.dimGrey7
+                                                .withOpacity(0.15)),
+                                        borderRadius:
+                                            BorderRadius.circular(50)),
+                                    child: Row(
+                                      children: [
+                                        VerticalColumnText(
+                                          count: NumberFormat.compact().format(
+                                              model.userData?.following ?? 0),
+                                          title: S.of(context).following,
+                                          onTap: () {
+                                            Get.to(() => FollowFollowingScreen(
+                                                  followFollowingType:
+                                                      FollowFollowingType
+                                                          .following,
+                                                  userId:
+                                                      model.userData?.id ?? -1,
+                                                ));
+                                          },
+                                        ),
+                                        const SizedBox(width: 20),
+                                        VerticalColumnText(
+                                          count: NumberFormat.compact().format(
+                                              model.userData?.followers ?? 0),
+                                          title: S.of(context).followers,
+                                          onTap: () {
+                                            Get.to(() => FollowFollowingScreen(
+                                                  followFollowingType:
+                                                      FollowFollowingType
+                                                          .follower,
+                                                  userId:
+                                                      model.userData?.id ?? -1,
+                                                ));
+                                          },
+                                        ),
+                                        const SizedBox(width: 20),
+                                        Expanded(
+                                          child: model.userData?.id ==
+                                                  PrefService.userId
+                                              ? InkWell(
+                                                  onTap: model.onEditBtnClick,
+                                                  child: Container(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              15),
+                                                      alignment:
+                                                          Alignment.center,
+                                                      decoration: ShapeDecoration(
+                                                          shape: SmoothRectangleBorder(
+                                                              borderRadius:
+                                                                  SmoothBorderRadius(
+                                                                      cornerRadius:
+                                                                          30)),
+                                                          color: ColorRes
+                                                              .dimGrey7
+                                                              .withOpacity(
+                                                                  0.15)),
+                                                      child: Text(
+                                                        S.current.edit
+                                                            .toUpperCase(),
+                                                        style: const TextStyle(
+                                                            fontFamily:
+                                                                FontRes.bold,
+                                                            color:
+                                                                ColorRes.white,
+                                                            fontSize: 12,
+                                                            letterSpacing:
+                                                                1.33),
+                                                      )),
+                                                )
+                                              : FollowUnFollowBtn(model: model),
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 ),
-                              ),
-                            )),
+                              )),
                         const SizedBox(height: 6),
                         Visibility(
                           visible: PrefService.userId != model.userData?.id,
@@ -397,7 +404,7 @@ class DetailPage extends StatelessWidget {
     );
   }
 
-  Widget interestButtons(List<Interest> interests) {
+  Widget interestButtons(List<String> interests) {
     return Wrap(
       children: interests.map<Widget>((e) {
         return Container(
@@ -407,7 +414,7 @@ class DetailPage extends StatelessWidget {
               color: ColorRes.white.withOpacity(0.15),
               borderRadius: BorderRadius.circular(50)),
           child: Text(
-            '${e.title?.toUpperCase()}',
+            e.toUpperCase(),
             style: const TextStyle(
                 fontSize: 12,
                 color: ColorRes.white,

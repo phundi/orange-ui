@@ -5,8 +5,8 @@ import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:orange_ui/common/widgets/common_ui.dart';
-import 'package:orange_ui/common/widgets/live_icon.dart';
+import 'package:orange_ui/common/common_ui.dart';
+import 'package:orange_ui/common/live_icon.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/screen/user_detail_screen/user_detail_screen_view_model.dart';
@@ -35,14 +35,11 @@ class ImageSelectionArea extends StatelessWidget {
         children: [
           joinBtnChip(),
           const Spacer(),
-          Visibility(
-              visible: PrefService.settingData?.appdata?.isDating == 0
-                  ? false
-                  : true,
-              child: LikeUnlikeBtn(
-                  like: model.like,
-                  onLikeBtnTap: model.onLikeBtnTap,
-                  userId: model.userData?.id)),
+          if (model.settingAppData?.isDating == 1)
+            LikeUnlikeBtn(
+                like: model.like,
+                onLikeBtnTap: model.onLikeBtnTap,
+                userId: model.userData?.id),
           const SizedBox(height: 15),
           imageListArea(model.userData),
           const SizedBox(height: 20),
@@ -115,32 +112,33 @@ class ImageSelectionArea extends StatelessWidget {
             ),
           ),
         ),
-        InkWell(
-          onTap: model.onPostBtnClick,
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 23, vertical: 10),
-            margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-            decoration: ShapeDecoration(
-                shape: SmoothRectangleBorder(
-                    borderRadius: SmoothBorderRadius(cornerRadius: 30)),
-                gradient: StyleRes.linearGradient),
-            child: Row(
-              children: [
-                Image.asset(AssetRes.icPostIcon, width: 15, height: 15),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                  child: Text(
-                    S.current.posts.toUpperCase(),
-                    style: TextStyle(
-                        color: ColorRes.white.withOpacity(0.8),
-                        fontFamily: FontRes.bold,
-                        fontSize: 11),
-                  ),
-                )
-              ],
+        if (model.settingAppData?.isSocialMedia == 1)
+          InkWell(
+            onTap: model.onPostBtnClick,
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 23, vertical: 10),
+              margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+              decoration: ShapeDecoration(
+                  shape: SmoothRectangleBorder(
+                      borderRadius: SmoothBorderRadius(cornerRadius: 30)),
+                  gradient: StyleRes.linearGradient),
+              child: Row(
+                children: [
+                  Image.asset(AssetRes.icPostIcon, width: 15, height: 15),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                    child: Text(
+                      S.current.posts.toUpperCase(),
+                      style: TextStyle(
+                          color: ColorRes.white.withOpacity(0.8),
+                          fontFamily: FontRes.bold,
+                          fontSize: 11),
+                    ),
+                  )
+                ],
+              ),
             ),
-          ),
-        )
+          )
       ],
     );
   }

@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
-import 'package:orange_ui/common/widgets/common_ui.dart';
+import 'package:orange_ui/common/common_ui.dart';
 
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
@@ -94,7 +94,7 @@ class SelectPhotoScreenViewModel extends BaseViewModel {
   void checkScreenCondition(RegistrationUserData data) {
     if (data.images.isEmpty) {
       return;
-    } else if (data.interests!.isEmpty || data.interests == null) {
+    } else if (data.interests == null || data.interests!.isEmpty) {
       Get.offAll(() => const SelectHobbiesScreen());
     } else {
       Get.offAll(() => const DashboardScreen());
