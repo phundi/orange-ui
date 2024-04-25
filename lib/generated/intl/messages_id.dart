@@ -27,6 +27,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "accountDetails": MessageLookupByLibrary.simpleMessage("DETAIL AKUN"),
         "add": MessageLookupByLibrary.simpleMessage("MENAMBAHKAN"),
         "addCoins": MessageLookupByLibrary.simpleMessage("TAMBAH KOIN"),
+        "addComment":
+            MessageLookupByLibrary.simpleMessage("Tambahkan komentar"),
+        "afterDeletingTheChatYouCanNotRestoreOurMessage":
+            MessageLookupByLibrary.simpleMessage(
+                "Setelah menghapus obrolan, Anda tidak dapat memulihkan pesan kami. Pesan akan dihapus dari akun Anda."),
         "age": MessageLookupByLibrary.simpleMessage("USIA"),
         "agreeNContinue":
             MessageLookupByLibrary.simpleMessage("Setuju & Lanjutkan"),
@@ -44,6 +49,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "areYouSure": MessageLookupByLibrary.simpleMessage("Apa kamu yakin"),
         "areYouSureYouEtc": MessageLookupByLibrary.simpleMessage(
             "Apakah Anda yakin ingin menghapus pesan ini?"),
+        "areYouSureYouWantToDeleteTheComment":
+            MessageLookupByLibrary.simpleMessage(
+                "Apakah Anda yakin ingin menghapus komentar tersebut?"),
+        "areYouSureYouWantToDeleteThePost":
+            MessageLookupByLibrary.simpleMessage(
+                "Apakah Anda yakin ingin menghapus postingan tersebut?"),
         "areYouSureYouWantToEnd": MessageLookupByLibrary.simpleMessage(
             "Yakin ingin mengakhiri video siaran langsung Anda?"),
         "artist": MessageLookupByLibrary.simpleMessage("Artis"),
@@ -79,6 +90,11 @@ class MessageLookup extends MessageLookupByLibrary {
                 "koin, Harap konfirmasi apakah Anda ingin melanjutkan atau tidak"),
         "collected": MessageLookupByLibrary.simpleMessage("Dikumpulkan"),
         "comment": MessageLookupByLibrary.simpleMessage("Komentar..."),
+        "commentDelete":
+            MessageLookupByLibrary.simpleMessage("Hapus komentar?"),
+        "commentNotFound":
+            MessageLookupByLibrary.simpleMessage("Komentar Tidak Ditemukan"),
+        "comments": MessageLookupByLibrary.simpleMessage("Komentar"),
         "complete": MessageLookupByLibrary.simpleMessage("Menyelesaikan"),
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("konfirmasi sandi"),
@@ -94,6 +110,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Lanjutkan Dengan Google"),
         "couldNotLaunch":
             MessageLookupByLibrary.simpleMessage("Tidak dapat diluncurkan"),
+        "createPost": MessageLookupByLibrary.simpleMessage("Buat Postingan"),
         "cyberbullying":
             MessageLookupByLibrary.simpleMessage("Perundungan siber"),
         "dashboard": MessageLookupByLibrary.simpleMessage("  DASBOR"),
@@ -104,16 +121,24 @@ class MessageLookup extends MessageLookupByLibrary {
         "deleteDialogDis": MessageLookupByLibrary.simpleMessage(
             "Apakah Anda benar-benar ingin menghapus akun Anda? Anda tidak akan dapat memulihkannya nanti dan data akan hilang selamanya"),
         "deleteMessage": MessageLookupByLibrary.simpleMessage("Hapus pesan"),
+        "deletePost": MessageLookupByLibrary.simpleMessage("Hapus postingan"),
         "deleteThisChat":
             MessageLookupByLibrary.simpleMessage("Hapus obrolan ini"),
+        "deleteThisStory":
+            MessageLookupByLibrary.simpleMessage("Hapus cerita ini?"),
         "diamond":
             MessageLookupByLibrary.simpleMessage("  Berlian yang Dikumpulkan:"),
         "diamond1": MessageLookupByLibrary.simpleMessage("Berlian:"),
         "diamondCap": MessageLookupByLibrary.simpleMessage("BERLIAN"),
         "diamonds": MessageLookupByLibrary.simpleMessage("BERLIAN"),
         "diamondsCamel": MessageLookupByLibrary.simpleMessage("Berlian"),
+        "doYouReallyWantToDeleteThisChatYouWont":
+            MessageLookupByLibrary.simpleMessage(
+                "Apakah Anda benar-benar ingin menghapus obrolan ini? Anda tidak akan dapat memulihkan data apa pun setelahnya. Semoga Anda menyadarinya!"),
         "doYouReallyWantToLive": MessageLookupByLibrary.simpleMessage(
             "Apakah Anda benar-benar ingin hidup. Silakan lanjutkan siaran langsung"),
+        "doYouWantToDeleteThisStoryYouCanNot": MessageLookupByLibrary.simpleMessage(
+            "Apakah Anda ingin menghapus cerita ini?, Anda tidak dapat memulihkan cerita ini karena akan dihapus secara permanen."),
         "docType": MessageLookupByLibrary.simpleMessage("TIPE DOKUMEN"),
         "donTHaveAnAccount":
             MessageLookupByLibrary.simpleMessage("Belum punya akun?"),
@@ -147,6 +172,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterThePasswordForTheAccountNwithTheEmailBelow":
             MessageLookupByLibrary.simpleMessage(
                 "Masukkan kata sandi untuk akun \ndengan email di bawah ini"),
+        "enterUsername":
+            MessageLookupByLibrary.simpleMessage("Masukkan nama pengguna"),
         "enterYourMailOnWhichYouHaveNcreatedAnAccount":
             MessageLookupByLibrary.simpleMessage(
                 "Masukkan surat Anda yang Anda miliki\nmembuat akun. Kami akan mengirimkan tautan\nuntuk mengatur ulang kata sandi Anda"),
@@ -160,10 +187,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Pembayaran gagal"),
         "failedToLoadVideo": MessageLookupByLibrary.simpleMessage(
             "Gagal memuat video: Tidak Dapat Dibuka"),
+        "feed": MessageLookupByLibrary.simpleMessage("Memberi makan"),
         "female": MessageLookupByLibrary.simpleMessage("Perempuan"),
         "findSomeoneRandomly": MessageLookupByLibrary.simpleMessage(
             "Temukan Seseorang Secara Acak\nDan periksa profilnya"),
         "fitness": MessageLookupByLibrary.simpleMessage("Kebugaran"),
+        "follow": MessageLookupByLibrary.simpleMessage("Mengikuti"),
+        "followers": MessageLookupByLibrary.simpleMessage("Pengikut"),
+        "following": MessageLookupByLibrary.simpleMessage("Mengikuti"),
+        "followingList": MessageLookupByLibrary.simpleMessage("Daftar Berikut"),
         "foodies": MessageLookupByLibrary.simpleMessage("Pecinta kuliner"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("Tidak ingat kata sandi?"),
@@ -215,6 +247,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Bahasa yang akan Anda gunakan saat streaming.."),
         "languagesYouEtc":
             MessageLookupByLibrary.simpleMessage("BAHASA ANDA AKAN BERBICARA"),
+        "large": MessageLookupByLibrary.simpleMessage("Besar"),
         "legal": MessageLookupByLibrary.simpleMessage("HUKUM"),
         "likeProfiles": MessageLookupByLibrary.simpleMessage("Seperti Profil"),
         "live": MessageLookupByLibrary.simpleMessage("Hidup"),
@@ -228,6 +261,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Harga streaming langsung akan dikenakan biaya"),
         "liveVerification":
             MessageLookupByLibrary.simpleMessage("VERIFIKASI LANGSUNG"),
+        "lives": MessageLookupByLibrary.simpleMessage("Hidup"),
         "livestream":
             MessageLookupByLibrary.simpleMessage("Dasbor Wallet / Livestream"),
         "logIn": MessageLookupByLibrary.simpleMessage("GABUNG"),
@@ -251,12 +285,17 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Profil Terdekat di Peta"),
         "next": MessageLookupByLibrary.simpleMessage("BERIKUTNYA"),
         "no": MessageLookupByLibrary.simpleMessage("TIDAK"),
+        "noComment": MessageLookupByLibrary.simpleMessage("Tidak ada komentar"),
         "noData": MessageLookupByLibrary.simpleMessage("Tidak ada data"),
         "noDataAvailable": MessageLookupByLibrary.simpleMessage(
             "Tidak ada data yang tersedia"),
+        "noLikeData":
+            MessageLookupByLibrary.simpleMessage("Tidak Ada Data Suka"),
         "noLocation": MessageLookupByLibrary.simpleMessage("Tidak ada Lokasi"),
         "noRedeemData":
             MessageLookupByLibrary.simpleMessage("Tidak ada data penebusan"),
+        "noSavedData":
+            MessageLookupByLibrary.simpleMessage("Tidak Ada Data Tersimpan"),
         "noUsersAreLive": MessageLookupByLibrary.simpleMessage(
             "Tidak ada pengguna yang aktif"),
         "notEligible":
@@ -280,6 +319,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "personal": MessageLookupByLibrary.simpleMessage("Pribadi"),
         "personalHarassment":
             MessageLookupByLibrary.simpleMessage("Pelecehan Pribadi"),
+        "photo": MessageLookupByLibrary.simpleMessage("Foto"),
         "photos": MessageLookupByLibrary.simpleMessage("Foto"),
         "photosCap": MessageLookupByLibrary.simpleMessage("FOTO"),
         "platform": MessageLookupByLibrary.simpleMessage("Platform"),
@@ -300,6 +340,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Silahkan Masukkan Email...!"),
         "pleaseEnterValidEmailAddress": MessageLookupByLibrary.simpleMessage(
             "Harap Masukkan alamat email yang valid"),
+        "pleaseEnterYourAge":
+            MessageLookupByLibrary.simpleMessage("Silakan masukkan usia Anda"),
         "pleaseSelectImage":
             MessageLookupByLibrary.simpleMessage("Silahkan Pilih Gambar"),
         "pleaseValidEmail":
@@ -312,6 +354,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "policy2": MessageLookupByLibrary.simpleMessage("Syarat Penggunaan"),
         "policy3": MessageLookupByLibrary.simpleMessage("  Dan"),
         "policy4": MessageLookupByLibrary.simpleMessage("Kebijakan pribadi"),
+        "post": MessageLookupByLibrary.simpleMessage("Pos"),
+        "posts": MessageLookupByLibrary.simpleMessage("Postingan"),
         "priceCap": MessageLookupByLibrary.simpleMessage("HARGA"),
         "privacy": MessageLookupByLibrary.simpleMessage("PENGATURAN PRIVASI"),
         "privacyPolicy":
@@ -323,6 +367,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "pushNotification":
             MessageLookupByLibrary.simpleMessage("Pemberitahuan Dorong"),
         "randoms": MessageLookupByLibrary.simpleMessage("Acak"),
+        "readLess":
+            MessageLookupByLibrary.simpleMessage("Baca Lebih Sedikit..."),
+        "readMore":
+            MessageLookupByLibrary.simpleMessage("Baca selengkapnya..."),
         "redeem": MessageLookupByLibrary.simpleMessage("MENUKARKAN"),
         "redeemCap": MessageLookupByLibrary.simpleMessage("MENUKARKAN"),
         "redeemRequests":
@@ -334,7 +382,13 @@ class MessageLookup extends MessageLookupByLibrary {
             "Pendaftaran Berhasil dilakukan"),
         "report": MessageLookupByLibrary.simpleMessage("Laporan"),
         "reportCap": MessageLookupByLibrary.simpleMessage("LAPORAN"),
+        "reportPost":
+            MessageLookupByLibrary.simpleMessage("Laporkan postingan"),
         "reportUser": MessageLookupByLibrary.simpleMessage("LAPORAN PENGGUNA"),
+        "reportedSubmitted":
+            MessageLookupByLibrary.simpleMessage("Dilaporkan Dikirim"),
+        "reportedSuccessfully":
+            MessageLookupByLibrary.simpleMessage("Dilaporkan Berhasil!!"),
         "reqVerification":
             MessageLookupByLibrary.simpleMessage("PERMINTAAN VERIFIKASI"),
         "requests": MessageLookupByLibrary.simpleMessage("  PERMINTAAN"),
@@ -345,10 +399,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "save": MessageLookupByLibrary.simpleMessage("MENYIMPAN"),
         "savedProfiles":
             MessageLookupByLibrary.simpleMessage("Profil Tersimpan"),
+        "searchProfile":
+            MessageLookupByLibrary.simpleMessage("Profil Pencarian"),
         "searching": MessageLookupByLibrary.simpleMessage("Mencari..."),
         "selectAnother":
             MessageLookupByLibrary.simpleMessage("Pilih yang lain"),
         "selectDocument": MessageLookupByLibrary.simpleMessage("Pilih Dokumen"),
+        "selectInterestsToContinue": MessageLookupByLibrary.simpleMessage(
+            "Pilih minat untuk melanjutkan"),
         "selectReason": MessageLookupByLibrary.simpleMessage("Pilih Alasan"),
         "selected": MessageLookupByLibrary.simpleMessage("Terpilih"),
         "send": MessageLookupByLibrary.simpleMessage("Mengirim"),
@@ -406,12 +464,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "travel": MessageLookupByLibrary.simpleMessage("Bepergian"),
         "unBlock": MessageLookupByLibrary.simpleMessage("Buka blokir"),
         "unblockCap": MessageLookupByLibrary.simpleMessage("BUKA BLOK"),
+        "unfollow": MessageLookupByLibrary.simpleMessage("Berhenti mengikuti"),
         "useAutomaticallyEtc": MessageLookupByLibrary.simpleMessage(
             "gunakan secara otomatis dari berikutnya"),
         "userBlock":
             MessageLookupByLibrary.simpleMessage("Blok pengguna oleh admin"),
+        "userNotFound":
+            MessageLookupByLibrary.simpleMessage("Pengguna tidak ditemukan!!"),
         "userNotLive":
             MessageLookupByLibrary.simpleMessage("Pengguna tidak aktif"),
+        "username": MessageLookupByLibrary.simpleMessage("Nama belakang"),
         "users": MessageLookupByLibrary.simpleMessage("Pengguna"),
         "validEmail":
             MessageLookupByLibrary.simpleMessage("Masuk kan email yang benar"),
@@ -423,6 +485,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "video": MessageLookupByLibrary.simpleMessage("Video?"),
         "videoCall": MessageLookupByLibrary.simpleMessage("Panggilan video"),
         "videoCap": MessageLookupByLibrary.simpleMessage("VIDEO"),
+        "videoDurationIs":
+            MessageLookupByLibrary.simpleMessage("Durasi video adalah"),
         "videoPreview":
             MessageLookupByLibrary.simpleMessage("Layar Pratinjau Video"),
         "videos": MessageLookupByLibrary.simpleMessage("Video"),
@@ -431,11 +495,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "walking": MessageLookupByLibrary.simpleMessage("Sedang berjalan"),
         "wallet": MessageLookupByLibrary.simpleMessage("DOMPET BERLIAN"),
         "walletCap": MessageLookupByLibrary.simpleMessage("DOMPET"),
+        "whatDoYouWantToSelect":
+            MessageLookupByLibrary.simpleMessage("Apa yang ingin Anda pilih?"),
         "whereDoYouLive":
             MessageLookupByLibrary.simpleMessage("KAMU TINGGAL DI MANA ?"),
         "whichItemWouldYouLikeEtc": MessageLookupByLibrary.simpleMessage(
             "Item mana yang ingin Anda pilih?\nPilih item"),
         "writeMessage": MessageLookupByLibrary.simpleMessage("Menulis pesan"),
+        "writeSomethingHere":
+            MessageLookupByLibrary.simpleMessage("Tulis sesuatu di sini..."),
         "yes": MessageLookupByLibrary.simpleMessage("Ya"),
         "yesterday": MessageLookupByLibrary.simpleMessage("Kemarin"),
         "you": MessageLookupByLibrary.simpleMessage("Anda"),

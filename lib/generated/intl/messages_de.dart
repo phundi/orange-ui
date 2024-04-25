@@ -27,6 +27,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "accountDetails": MessageLookupByLibrary.simpleMessage("KONTODETAILS"),
         "add": MessageLookupByLibrary.simpleMessage("HINZUFÜGEN"),
         "addCoins": MessageLookupByLibrary.simpleMessage("FÜGE MÜNZEN HINZU"),
+        "addComment":
+            MessageLookupByLibrary.simpleMessage("Einen Kommentar hinzufügen"),
+        "afterDeletingTheChatYouCanNotRestoreOurMessage":
+            MessageLookupByLibrary.simpleMessage(
+                "Nach dem Löschen des Chats können Sie unsere Nachricht nicht wiederherstellen. Die Nachricht wird aus Ihrem Konto gelöscht."),
         "age": MessageLookupByLibrary.simpleMessage("ALTER"),
         "agreeNContinue":
             MessageLookupByLibrary.simpleMessage("Zustimmen und fortfahren"),
@@ -44,6 +49,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Bist du dir sicher"),
         "areYouSureYouEtc": MessageLookupByLibrary.simpleMessage(
             "Sind Sie sicher, dass Sie diese Nachricht löschen möchten?"),
+        "areYouSureYouWantToDeleteTheComment":
+            MessageLookupByLibrary.simpleMessage(
+                "Sind Sie sicher, dass Sie den Kommentar löschen möchten?"),
+        "areYouSureYouWantToDeleteThePost":
+            MessageLookupByLibrary.simpleMessage(
+                "Sind Sie sicher, dass Sie den Beitrag löschen möchten?"),
         "areYouSureYouWantToEnd": MessageLookupByLibrary.simpleMessage(
             "Möchten Sie Ihr Live-Video wirklich beenden?"),
         "artist": MessageLookupByLibrary.simpleMessage("Künstler"),
@@ -78,6 +89,11 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Münzen, bitte bestätigen Sie, ob Sie fortfahren möchten oder nicht"),
         "collected": MessageLookupByLibrary.simpleMessage("Gesammelt"),
         "comment": MessageLookupByLibrary.simpleMessage("Kommentar..."),
+        "commentDelete":
+            MessageLookupByLibrary.simpleMessage("Kommentar löschen?"),
+        "commentNotFound":
+            MessageLookupByLibrary.simpleMessage("Kommentar nicht gefunden"),
+        "comments": MessageLookupByLibrary.simpleMessage("Kommentare"),
         "complete": MessageLookupByLibrary.simpleMessage("Vollständig"),
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("Bestätige das Passwort"),
@@ -93,6 +109,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Weiter mit Google"),
         "couldNotLaunch": MessageLookupByLibrary.simpleMessage(
             "Konnte nicht gestartet werden"),
+        "createPost": MessageLookupByLibrary.simpleMessage("Beitrag erstellen"),
         "cyberbullying": MessageLookupByLibrary.simpleMessage("Cyber-Mobbing"),
         "dashboard": MessageLookupByLibrary.simpleMessage("  ARMATURENBRETT"),
         "delete": MessageLookupByLibrary.simpleMessage("Löschen"),
@@ -103,16 +120,24 @@ class MessageLookup extends MessageLookupByLibrary {
             "Möchten Sie Ihr Konto wirklich löschen? Sie können es später nicht mehr wiederherstellen und die Daten gehen für immer verloren"),
         "deleteMessage":
             MessageLookupByLibrary.simpleMessage("Nachricht löschen"),
+        "deletePost": MessageLookupByLibrary.simpleMessage("Beitrag entfernen"),
         "deleteThisChat":
             MessageLookupByLibrary.simpleMessage("Löschen Sie diesen Chat"),
+        "deleteThisStory":
+            MessageLookupByLibrary.simpleMessage("Diese Geschichte löschen?"),
         "diamond":
             MessageLookupByLibrary.simpleMessage("  Gesammelte Diamanten:"),
         "diamond1": MessageLookupByLibrary.simpleMessage("Diamanten:"),
         "diamondCap": MessageLookupByLibrary.simpleMessage("DIAMANT"),
         "diamonds": MessageLookupByLibrary.simpleMessage("DIAMANTEN"),
         "diamondsCamel": MessageLookupByLibrary.simpleMessage("Diamanten"),
+        "doYouReallyWantToDeleteThisChatYouWont":
+            MessageLookupByLibrary.simpleMessage(
+                "Möchten Sie diesen Chat wirklich löschen? Danach können Sie keine Daten mehr wiederherstellen. Ich hoffe, Sie sind sich dessen bewusst!"),
         "doYouReallyWantToLive": MessageLookupByLibrary.simpleMessage(
             "Willst du wirklich leben? Bitte gehen Sie weiterhin live"),
+        "doYouWantToDeleteThisStoryYouCanNot": MessageLookupByLibrary.simpleMessage(
+            "Möchten Sie diese Geschichte löschen? Sie können die Geschichte nicht wiederherstellen, sie wird dauerhaft gelöscht."),
         "docType": MessageLookupByLibrary.simpleMessage("ART DES DOKUMENTS"),
         "donTHaveAnAccount":
             MessageLookupByLibrary.simpleMessage("Sie haben noch kein Konto?"),
@@ -148,6 +173,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterThePasswordForTheAccountNwithTheEmailBelow":
             MessageLookupByLibrary.simpleMessage(
                 "Geben Sie das Passwort für das Konto \nmit der E-Mail-Adresse unten ein"),
+        "enterUsername": MessageLookupByLibrary.simpleMessage(
+            "Geben Sie den Benutzernamen ein"),
         "enterYourMailOnWhichYouHaveNcreatedAnAccount":
             MessageLookupByLibrary.simpleMessage(
                 "Geben Sie Ihre E-Mail-Adresse ein, für die Sie ein Konto erstellt haben. Wir senden Ihnen einen Link zum Zurücksetzen Ihres Passworts"),
@@ -161,10 +188,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Zahlung fehlgeschlagen"),
         "failedToLoadVideo": MessageLookupByLibrary.simpleMessage(
             "Video konnte nicht geladen werden: Kann nicht geöffnet werden"),
+        "feed": MessageLookupByLibrary.simpleMessage("Füttern"),
         "female": MessageLookupByLibrary.simpleMessage("Weiblich"),
         "findSomeoneRandomly": MessageLookupByLibrary.simpleMessage(
             "Finden Sie zufällig jemanden\nUnd überprüfen Sie sein Profil"),
         "fitness": MessageLookupByLibrary.simpleMessage("Fitness"),
+        "follow": MessageLookupByLibrary.simpleMessage("Folgen"),
+        "followers": MessageLookupByLibrary.simpleMessage("Anhänger"),
+        "following": MessageLookupByLibrary.simpleMessage("Nachfolgend"),
+        "followingList": MessageLookupByLibrary.simpleMessage("Folgende Liste"),
         "foodies": MessageLookupByLibrary.simpleMessage("Feinschmecker"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("Passwort vergessen?"),
@@ -217,6 +249,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Sprachen, die Sie beim Streamen sprechen werden."),
         "languagesYouEtc": MessageLookupByLibrary.simpleMessage(
             "Sprachen, die Sie sprechen werden"),
+        "large": MessageLookupByLibrary.simpleMessage("Groß"),
         "legal": MessageLookupByLibrary.simpleMessage("RECHTLICH"),
         "likeProfiles": MessageLookupByLibrary.simpleMessage("Like-Profile"),
         "live": MessageLookupByLibrary.simpleMessage("Live"),
@@ -230,6 +263,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Der Preis für den Live-Stream kostet Sie"),
         "liveVerification":
             MessageLookupByLibrary.simpleMessage("LIVE-VERIFIZIERUNG"),
+        "lives": MessageLookupByLibrary.simpleMessage("Leben"),
         "livestream": MessageLookupByLibrary.simpleMessage(
             "Wallet-/Livestream-Dashboard"),
         "logIn": MessageLookupByLibrary.simpleMessage("ANMELDUNG"),
@@ -253,12 +287,16 @@ class MessageLookup extends MessageLookupByLibrary {
             "Profile in der Nähe auf der Karte"),
         "next": MessageLookupByLibrary.simpleMessage("NÄCHSTE"),
         "no": MessageLookupByLibrary.simpleMessage("NEIN"),
+        "noComment": MessageLookupByLibrary.simpleMessage("Kein Kommentar"),
         "noData": MessageLookupByLibrary.simpleMessage("Keine Daten"),
         "noDataAvailable":
             MessageLookupByLibrary.simpleMessage("Keine Daten verfügbar"),
+        "noLikeData": MessageLookupByLibrary.simpleMessage("Keine Like-Daten"),
         "noLocation": MessageLookupByLibrary.simpleMessage("Kein Standort"),
         "noRedeemData":
             MessageLookupByLibrary.simpleMessage("Keine Einlösedaten"),
+        "noSavedData":
+            MessageLookupByLibrary.simpleMessage("Keine gespeicherten Daten"),
         "noUsersAreLive": MessageLookupByLibrary.simpleMessage(
             "Es sind keine Benutzer aktiv"),
         "notEligible": MessageLookupByLibrary.simpleMessage("NICHT BERECHTIGT"),
@@ -281,6 +319,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "personal": MessageLookupByLibrary.simpleMessage("persönlich"),
         "personalHarassment":
             MessageLookupByLibrary.simpleMessage("Persönliche Belästigung"),
+        "photo": MessageLookupByLibrary.simpleMessage("Foto"),
         "photos": MessageLookupByLibrary.simpleMessage("Fotos"),
         "photosCap": MessageLookupByLibrary.simpleMessage("FOTOS"),
         "platform": MessageLookupByLibrary.simpleMessage("Plattform"),
@@ -301,6 +340,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Bitte E-Mail eingeben...!"),
         "pleaseEnterValidEmailAddress": MessageLookupByLibrary.simpleMessage(
             "Bitte geben Sie eine gültige Email Adresse an"),
+        "pleaseEnterYourAge": MessageLookupByLibrary.simpleMessage(
+            "Bitte geben sie ihr alter ein"),
         "pleaseSelectImage":
             MessageLookupByLibrary.simpleMessage("Bitte Bild auswählen"),
         "pleaseValidEmail": MessageLookupByLibrary.simpleMessage(
@@ -314,6 +355,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "policy3": MessageLookupByLibrary.simpleMessage("  Und"),
         "policy4":
             MessageLookupByLibrary.simpleMessage("Datenschutz-Bestimmungen"),
+        "post": MessageLookupByLibrary.simpleMessage("Post"),
+        "posts": MessageLookupByLibrary.simpleMessage("Beiträge"),
         "priceCap": MessageLookupByLibrary.simpleMessage("PREIS"),
         "privacy":
             MessageLookupByLibrary.simpleMessage("DATENSCHUTZEINSTELLUNGEN"),
@@ -326,6 +369,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pushNotification":
             MessageLookupByLibrary.simpleMessage("Mitteilungen"),
         "randoms": MessageLookupByLibrary.simpleMessage("Zufällig"),
+        "readLess": MessageLookupByLibrary.simpleMessage("Lese weniger..."),
+        "readMore": MessageLookupByLibrary.simpleMessage("Mehr lesen..."),
         "redeem": MessageLookupByLibrary.simpleMessage("TILGEN"),
         "redeemCap": MessageLookupByLibrary.simpleMessage("TILGEN"),
         "redeemRequests":
@@ -337,7 +382,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Registrierung erfolgreich durchgeführt"),
         "report": MessageLookupByLibrary.simpleMessage("Bericht"),
         "reportCap": MessageLookupByLibrary.simpleMessage("BERICHT"),
+        "reportPost": MessageLookupByLibrary.simpleMessage("Beitrag melden"),
         "reportUser": MessageLookupByLibrary.simpleMessage("BENUTZER MELDEN"),
+        "reportedSubmitted":
+            MessageLookupByLibrary.simpleMessage("Gemeldet Eingereicht"),
+        "reportedSuccessfully":
+            MessageLookupByLibrary.simpleMessage("Erfolgreich gemeldet!!"),
         "reqVerification":
             MessageLookupByLibrary.simpleMessage("VERIFIZIERUNG ANFRAGEN"),
         "requests": MessageLookupByLibrary.simpleMessage("  ANFRAGEN"),
@@ -348,11 +398,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "save": MessageLookupByLibrary.simpleMessage("SPEICHERN"),
         "savedProfiles":
             MessageLookupByLibrary.simpleMessage("Gespeicherte Profile"),
+        "searchProfile": MessageLookupByLibrary.simpleMessage("Suchprofil"),
         "searching": MessageLookupByLibrary.simpleMessage("Suche..."),
         "selectAnother":
             MessageLookupByLibrary.simpleMessage("Wählen Sie ein anderes aus"),
         "selectDocument":
             MessageLookupByLibrary.simpleMessage("Wählen Sie Dokument aus"),
+        "selectInterestsToContinue": MessageLookupByLibrary.simpleMessage(
+            "Wählen Sie Interessen aus, um fortzufahren"),
         "selectReason":
             MessageLookupByLibrary.simpleMessage("Wählen Sie Grund aus"),
         "selected": MessageLookupByLibrary.simpleMessage("Ausgewählt"),
@@ -412,12 +465,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "travel": MessageLookupByLibrary.simpleMessage("Reisen"),
         "unBlock": MessageLookupByLibrary.simpleMessage("Entsperren"),
         "unblockCap": MessageLookupByLibrary.simpleMessage("ENTSPERREN"),
+        "unfollow": MessageLookupByLibrary.simpleMessage("Nicht mehr folgen"),
         "useAutomaticallyEtc": MessageLookupByLibrary.simpleMessage(
             "ab nächster Zeit automatisch verwenden"),
         "userBlock":
             MessageLookupByLibrary.simpleMessage("Benutzersperre durch Admin"),
+        "userNotFound":
+            MessageLookupByLibrary.simpleMessage("Benutzer nicht gefunden!!"),
         "userNotLive":
             MessageLookupByLibrary.simpleMessage("Benutzer nicht live"),
+        "username": MessageLookupByLibrary.simpleMessage("Nutzername"),
         "users": MessageLookupByLibrary.simpleMessage("Benutzer"),
         "validEmail": MessageLookupByLibrary.simpleMessage(
             "Geben Sie eine gültige E-Mail-Adresse ein"),
@@ -429,6 +486,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "video": MessageLookupByLibrary.simpleMessage("Video?"),
         "videoCall": MessageLookupByLibrary.simpleMessage("Videoanruf"),
         "videoCap": MessageLookupByLibrary.simpleMessage("VIDEO"),
+        "videoDurationIs":
+            MessageLookupByLibrary.simpleMessage("Die Videodauer beträgt"),
         "videoPreview":
             MessageLookupByLibrary.simpleMessage("Videovorschaubildschirm"),
         "videos": MessageLookupByLibrary.simpleMessage("Videos"),
@@ -437,12 +496,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "walking": MessageLookupByLibrary.simpleMessage("Gehen"),
         "wallet": MessageLookupByLibrary.simpleMessage("DIAMANT-GELDBÖRSE"),
         "walletCap": MessageLookupByLibrary.simpleMessage("GELDBÖRSE"),
+        "whatDoYouWantToSelect":
+            MessageLookupByLibrary.simpleMessage("Was möchten Sie auswählen?"),
         "whereDoYouLive":
             MessageLookupByLibrary.simpleMessage("WO WOHNST DU ?"),
         "whichItemWouldYouLikeEtc": MessageLookupByLibrary.simpleMessage(
             "Welchen Artikel möchten Sie auswählen?\nWählen Sie einen Artikel aus"),
         "writeMessage":
             MessageLookupByLibrary.simpleMessage("Nachricht schreiben"),
+        "writeSomethingHere":
+            MessageLookupByLibrary.simpleMessage("Schreiben Sie hier etwas..."),
         "yes": MessageLookupByLibrary.simpleMessage("Ja"),
         "yesterday": MessageLookupByLibrary.simpleMessage("Gestern"),
         "you": MessageLookupByLibrary.simpleMessage("Du"),

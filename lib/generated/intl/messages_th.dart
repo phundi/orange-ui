@@ -28,6 +28,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("รายละเอียดบัญชี"),
         "add": MessageLookupByLibrary.simpleMessage("เพิ่ม"),
         "addCoins": MessageLookupByLibrary.simpleMessage("เพิ่มเหรียญ"),
+        "addComment": MessageLookupByLibrary.simpleMessage("เพิ่มความเห็น"),
+        "afterDeletingTheChatYouCanNotRestoreOurMessage":
+            MessageLookupByLibrary.simpleMessage(
+                "หลังจากลบแชทแล้ว คุณจะไม่สามารถกู้คืนข้อความของเราได้ ข้อความจะถูกลบออกจากบัญชีของคุณ"),
         "age": MessageLookupByLibrary.simpleMessage("อายุ"),
         "agreeNContinue":
             MessageLookupByLibrary.simpleMessage("ตกลงและดำเนินการต่อ"),
@@ -44,6 +48,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "areYouSure": MessageLookupByLibrary.simpleMessage("คุณแน่ใจไหม"),
         "areYouSureYouEtc": MessageLookupByLibrary.simpleMessage(
             "คุณแน่ใจหรือไม่ว่าต้องการลบข้อความนี้"),
+        "areYouSureYouWantToDeleteTheComment":
+            MessageLookupByLibrary.simpleMessage(
+                "คุณแน่ใจหรือไม่ว่าต้องการลบความคิดเห็นนี้"),
+        "areYouSureYouWantToDeleteThePost":
+            MessageLookupByLibrary.simpleMessage(
+                "คุณแน่ใจหรือไม่ว่าต้องการลบโพสต์นี้?"),
         "areYouSureYouWantToEnd": MessageLookupByLibrary.simpleMessage(
             "คุณแน่ใจหรือไม่ว่าต้องการจบวิดีโอถ่ายทอดสด"),
         "artist": MessageLookupByLibrary.simpleMessage("ศิลปิน"),
@@ -79,6 +89,11 @@ class MessageLookup extends MessageLookupByLibrary {
                 "เหรียญ โปรดยืนยันว่าคุณจะดำเนินการต่อหรือไม่"),
         "collected": MessageLookupByLibrary.simpleMessage("รวบรวม"),
         "comment": MessageLookupByLibrary.simpleMessage("ความคิดเห็น..."),
+        "commentDelete":
+            MessageLookupByLibrary.simpleMessage("แสดงความคิดเห็น ลบ ?"),
+        "commentNotFound":
+            MessageLookupByLibrary.simpleMessage("ไม่พบความคิดเห็น"),
+        "comments": MessageLookupByLibrary.simpleMessage("ความคิดเห็น"),
         "complete": MessageLookupByLibrary.simpleMessage("สมบูรณ์"),
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("ยืนยันรหัสผ่าน"),
@@ -94,6 +109,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("ดำเนินการต่อด้วย Google"),
         "couldNotLaunch":
             MessageLookupByLibrary.simpleMessage("ไม่สามารถเปิดใช้"),
+        "createPost": MessageLookupByLibrary.simpleMessage("สร้างโพสต์"),
         "cyberbullying": MessageLookupByLibrary.simpleMessage(
             "การกลั่นแกล้งทางอินเทอร์เน็ต"),
         "dashboard": MessageLookupByLibrary.simpleMessage("  แผงควบคุม"),
@@ -104,14 +120,22 @@ class MessageLookup extends MessageLookupByLibrary {
         "deleteDialogDis": MessageLookupByLibrary.simpleMessage(
             "คุณต้องการลบบัญชีของคุณจริงหรือ คุณจะไม่สามารถกู้คืนได้ในภายหลัง และข้อมูลจะสูญหายไปตลอดกาล"),
         "deleteMessage": MessageLookupByLibrary.simpleMessage("ลบข้อความ"),
+        "deletePost": MessageLookupByLibrary.simpleMessage("ลบโพสต์"),
         "deleteThisChat": MessageLookupByLibrary.simpleMessage("ลบแชทนี้"),
+        "deleteThisStory":
+            MessageLookupByLibrary.simpleMessage("ลบเรื่องราวนี้ใช่ไหม"),
         "diamond": MessageLookupByLibrary.simpleMessage("  เพชรที่รวบรวม:"),
         "diamond1": MessageLookupByLibrary.simpleMessage("เพชร:"),
         "diamondCap": MessageLookupByLibrary.simpleMessage("เพชร"),
         "diamonds": MessageLookupByLibrary.simpleMessage("เพชร"),
         "diamondsCamel": MessageLookupByLibrary.simpleMessage("เพชร"),
+        "doYouReallyWantToDeleteThisChatYouWont":
+            MessageLookupByLibrary.simpleMessage(
+                "คุณต้องการลบแชทนี้จริง ๆ หรือไม่ คุณจะไม่สามารถกู้คืนข้อมูลประเภทใด ๆ ได้หลังจากนั้น หวังว่าคุณจะทราบเรื่องนี้!"),
         "doYouReallyWantToLive": MessageLookupByLibrary.simpleMessage(
             "คุณต้องการที่จะมีชีวิตอยู่จริงๆ โปรดดำเนินการถ่ายทอดสดต่อไป"),
+        "doYouWantToDeleteThisStoryYouCanNot": MessageLookupByLibrary.simpleMessage(
+            "คุณต้องการลบเรื่องราวนี้หรือไม่ คุณไม่สามารถกู้คืนเรื่องราวที่จะถูกลบอย่างถาวรได้"),
         "docType": MessageLookupByLibrary.simpleMessage("ประเภทเอกสาร"),
         "donTHaveAnAccount":
             MessageLookupByLibrary.simpleMessage("ไม่มีบัญชี?"),
@@ -142,6 +166,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterThePasswordForTheAccountNwithTheEmailBelow":
             MessageLookupByLibrary.simpleMessage(
                 "ป้อนรหัสผ่านสำหรับบัญชี \nด้วยอีเมลด้านล่าง"),
+        "enterUsername": MessageLookupByLibrary.simpleMessage("กรอกชื่อผู้ใช้"),
         "enterYourMailOnWhichYouHaveNcreatedAnAccount":
             MessageLookupByLibrary.simpleMessage(
                 "ป้อนอีเมลที่คุณ \nสร้างบัญชีไว้ เราจะส่งลิงก์ \nเพื่อรีเซ็ตรหัสผ่านของคุณ"),
@@ -154,10 +179,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("การชำระเงินล้มเหลว"),
         "failedToLoadVideo": MessageLookupByLibrary.simpleMessage(
             "โหลดวิดีโอไม่สำเร็จ: ไม่สามารถเปิดได้"),
+        "feed": MessageLookupByLibrary.simpleMessage("ให้อาหาร"),
         "female": MessageLookupByLibrary.simpleMessage("หญิง"),
         "findSomeoneRandomly": MessageLookupByLibrary.simpleMessage(
             "ค้นหาใครบางคนแบบสุ่ม\nและตรวจสอบโปรไฟล์ของพวกเขา"),
         "fitness": MessageLookupByLibrary.simpleMessage("ฟิตเนส"),
+        "follow": MessageLookupByLibrary.simpleMessage("ติดตาม"),
+        "followers": MessageLookupByLibrary.simpleMessage("ผู้ติดตาม"),
+        "following": MessageLookupByLibrary.simpleMessage("กำลังติดตาม"),
+        "followingList": MessageLookupByLibrary.simpleMessage("รายการต่อไปนี้"),
         "foodies": MessageLookupByLibrary.simpleMessage("นักชิม"),
         "forgotPassword": MessageLookupByLibrary.simpleMessage("ลืมรหัสผ่าน?"),
         "forgotYourPassword":
@@ -207,6 +237,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("ภาษาที่คุณจะพูดในขณะสตรีม.."),
         "languagesYouEtc":
             MessageLookupByLibrary.simpleMessage("ภาษาที่คุณจะพูด"),
+        "large": MessageLookupByLibrary.simpleMessage("ใหญ่"),
         "legal": MessageLookupByLibrary.simpleMessage("ถูกกฎหมาย"),
         "likeProfiles": MessageLookupByLibrary.simpleMessage("ชอบโปรไฟล์"),
         "live": MessageLookupByLibrary.simpleMessage("สด"),
@@ -218,6 +249,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "liveStreamPriceWillCostYou": MessageLookupByLibrary.simpleMessage(
             "ราคาสตรีมสดจะทำให้คุณเสียค่าใช้จ่าย"),
         "liveVerification": MessageLookupByLibrary.simpleMessage("การยืนยันสด"),
+        "lives": MessageLookupByLibrary.simpleMessage("ชีวิต"),
         "livestream":
             MessageLookupByLibrary.simpleMessage("Wallet / แดชบอร์ดสตรีมสด"),
         "logIn": MessageLookupByLibrary.simpleMessage("เข้าสู่ระบบ"),
@@ -241,12 +273,17 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("โปรไฟล์ใกล้เคียงบนแผนที่"),
         "next": MessageLookupByLibrary.simpleMessage("ต่อไป"),
         "no": MessageLookupByLibrary.simpleMessage("เลขที่"),
+        "noComment": MessageLookupByLibrary.simpleMessage("ไม่มีความเห็น"),
         "noData": MessageLookupByLibrary.simpleMessage("ไม่มีข้อมูล"),
         "noDataAvailable":
             MessageLookupByLibrary.simpleMessage("ไม่มีข้อมูลที่สามารถใช้ได้"),
+        "noLikeData":
+            MessageLookupByLibrary.simpleMessage("ไม่มีข้อมูลการกดไลค์"),
         "noLocation": MessageLookupByLibrary.simpleMessage("ไม่มีที่ตั้ง"),
         "noRedeemData":
             MessageLookupByLibrary.simpleMessage("ไม่มีข้อมูลการแลก"),
+        "noSavedData":
+            MessageLookupByLibrary.simpleMessage("ไม่มีข้อมูลที่บันทึกไว้"),
         "noUsersAreLive":
             MessageLookupByLibrary.simpleMessage("ไม่มีผู้ใช้งานอยู่"),
         "notEligible": MessageLookupByLibrary.simpleMessage("ไม่มีสิทธิ์"),
@@ -269,6 +306,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "personal": MessageLookupByLibrary.simpleMessage("ส่วนตัว"),
         "personalHarassment":
             MessageLookupByLibrary.simpleMessage("การล่วงละเมิดส่วนบุคคล"),
+        "photo": MessageLookupByLibrary.simpleMessage("รูปถ่าย"),
         "photos": MessageLookupByLibrary.simpleMessage("ภาพถ่าย"),
         "photosCap": MessageLookupByLibrary.simpleMessage("ภาพถ่าย"),
         "platform": MessageLookupByLibrary.simpleMessage("แพลตฟอร์ม"),
@@ -289,6 +327,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("กรุณาใส่อีเมล์...!"),
         "pleaseEnterValidEmailAddress": MessageLookupByLibrary.simpleMessage(
             "กรุณาใส่ที่อยู่อีเมลที่ถูกต้อง"),
+        "pleaseEnterYourAge":
+            MessageLookupByLibrary.simpleMessage("กรุณากรอกอายุของคุณ"),
         "pleaseSelectImage":
             MessageLookupByLibrary.simpleMessage("กรุณาเลือกรูปภาพ"),
         "pleaseValidEmail":
@@ -302,6 +342,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "policy3": MessageLookupByLibrary.simpleMessage("  และ"),
         "policy4":
             MessageLookupByLibrary.simpleMessage("นโยบายความเป็นส่วนตัว"),
+        "post": MessageLookupByLibrary.simpleMessage("โพสต์"),
+        "posts": MessageLookupByLibrary.simpleMessage("กระทู้"),
         "priceCap": MessageLookupByLibrary.simpleMessage("ราคา"),
         "privacy":
             MessageLookupByLibrary.simpleMessage("การตั้งค่าความเป็นส่วนตัว"),
@@ -314,6 +356,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pushNotification":
             MessageLookupByLibrary.simpleMessage("การแจ้งเตือนแบบพุช"),
         "randoms": MessageLookupByLibrary.simpleMessage("สุ่ม"),
+        "readLess": MessageLookupByLibrary.simpleMessage("อ่านน้อยลง..."),
+        "readMore": MessageLookupByLibrary.simpleMessage("อ่านเพิ่มเติม..."),
         "redeem": MessageLookupByLibrary.simpleMessage("ไถ่ถอน"),
         "redeemCap": MessageLookupByLibrary.simpleMessage("ไถ่ถอน"),
         "redeemRequests": MessageLookupByLibrary.simpleMessage("แลกคำขอ"),
@@ -324,7 +368,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("การลงทะเบียนสำเร็จแล้ว"),
         "report": MessageLookupByLibrary.simpleMessage("รายงาน"),
         "reportCap": MessageLookupByLibrary.simpleMessage("รายงาน"),
+        "reportPost": MessageLookupByLibrary.simpleMessage("รายงานโพสต์"),
         "reportUser": MessageLookupByLibrary.simpleMessage("รายงานผู้ใช้"),
+        "reportedSubmitted":
+            MessageLookupByLibrary.simpleMessage("รายงานแล้ว ส่งแล้ว"),
+        "reportedSuccessfully":
+            MessageLookupByLibrary.simpleMessage("รายงานสำเร็จแล้ว!!"),
         "reqVerification": MessageLookupByLibrary.simpleMessage("ขอการยืนยัน"),
         "requests": MessageLookupByLibrary.simpleMessage("  คำขอ"),
         "reset": MessageLookupByLibrary.simpleMessage("รีเซ็ต"),
@@ -334,10 +383,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "save": MessageLookupByLibrary.simpleMessage("บันทึก"),
         "savedProfiles":
             MessageLookupByLibrary.simpleMessage("โปรไฟล์ที่บันทึกไว้"),
+        "searchProfile": MessageLookupByLibrary.simpleMessage("ค้นหาโปรไฟล์"),
         "searching": MessageLookupByLibrary.simpleMessage("กำลังค้นหา..."),
         "selectAnother":
             MessageLookupByLibrary.simpleMessage("เลือกรายการอื่น"),
         "selectDocument": MessageLookupByLibrary.simpleMessage("เลือกเอกสาร"),
+        "selectInterestsToContinue": MessageLookupByLibrary.simpleMessage(
+            "เลือกความสนใจเพื่อดำเนินการต่อ"),
         "selectReason": MessageLookupByLibrary.simpleMessage("เลือกเหตุผล"),
         "selected": MessageLookupByLibrary.simpleMessage("เลือกแล้ว"),
         "send": MessageLookupByLibrary.simpleMessage("ส่ง"),
@@ -394,11 +446,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "travel": MessageLookupByLibrary.simpleMessage("การท่องเที่ยว"),
         "unBlock": MessageLookupByLibrary.simpleMessage("เลิกบล็อก"),
         "unblockCap": MessageLookupByLibrary.simpleMessage("ปลดบล็อก"),
+        "unfollow": MessageLookupByLibrary.simpleMessage("เลิกติดตาม"),
         "useAutomaticallyEtc":
             MessageLookupByLibrary.simpleMessage("ใช้โดยอัตโนมัติจากถัดไป"),
         "userBlock":
             MessageLookupByLibrary.simpleMessage("บล็อกผู้ใช้โดยผู้ดูแลระบบ"),
+        "userNotFound":
+            MessageLookupByLibrary.simpleMessage("ไม่พบชื่อผู้ใช้!!"),
         "userNotLive": MessageLookupByLibrary.simpleMessage("ผู้ใช้ไม่อยู่"),
+        "username": MessageLookupByLibrary.simpleMessage("ชื่อผู้ใช้"),
         "users": MessageLookupByLibrary.simpleMessage("ผู้ใช้"),
         "validEmail":
             MessageLookupByLibrary.simpleMessage("ป้อนอีเมลที่ถูกต้อง"),
@@ -410,6 +466,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "video": MessageLookupByLibrary.simpleMessage("วิดีโอ?"),
         "videoCall": MessageLookupByLibrary.simpleMessage("การสนทนาทางวิดีโอ"),
         "videoCap": MessageLookupByLibrary.simpleMessage("วิดีโอ"),
+        "videoDurationIs":
+            MessageLookupByLibrary.simpleMessage("ระยะเวลาของวิดีโอคือ"),
         "videoPreview":
             MessageLookupByLibrary.simpleMessage("หน้าจอแสดงตัวอย่างวิดีโอ"),
         "videos": MessageLookupByLibrary.simpleMessage("วิดีโอ"),
@@ -418,11 +476,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "walking": MessageLookupByLibrary.simpleMessage("ที่เดิน"),
         "wallet": MessageLookupByLibrary.simpleMessage("กระเป๋าสตางค์เพชร"),
         "walletCap": MessageLookupByLibrary.simpleMessage("กระเป๋าสตางค์"),
+        "whatDoYouWantToSelect":
+            MessageLookupByLibrary.simpleMessage("คุณต้องการเลือกอะไร?"),
         "whereDoYouLive":
             MessageLookupByLibrary.simpleMessage("คุณอาศัยอยู่ที่ใด ?"),
         "whichItemWouldYouLikeEtc": MessageLookupByLibrary.simpleMessage(
             "คุณต้องการเลือกรายการใด\nเลือกรายการ"),
         "writeMessage": MessageLookupByLibrary.simpleMessage("เขียนข้อความ"),
+        "writeSomethingHere":
+            MessageLookupByLibrary.simpleMessage("เขียนอะไรบางอย่างที่นี่..."),
         "yes": MessageLookupByLibrary.simpleMessage("ใช่"),
         "yesterday": MessageLookupByLibrary.simpleMessage("เมื่อวาน"),
         "you": MessageLookupByLibrary.simpleMessage("คุณ"),

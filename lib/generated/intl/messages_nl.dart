@@ -28,6 +28,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("ACCOUNTGEGEVENS"),
         "add": MessageLookupByLibrary.simpleMessage("TOEVOEGEN"),
         "addCoins": MessageLookupByLibrary.simpleMessage("VOEG MUNTEN TOE"),
+        "addComment":
+            MessageLookupByLibrary.simpleMessage("Voeg commentaar toe"),
+        "afterDeletingTheChatYouCanNotRestoreOurMessage":
+            MessageLookupByLibrary.simpleMessage(
+                "Na het verwijderen van de chat kunt u ons bericht niet meer herstellen. Het bericht wordt uit uw account verwijderd."),
         "age": MessageLookupByLibrary.simpleMessage("LEEFTIJD"),
         "agreeNContinue":
             MessageLookupByLibrary.simpleMessage("Akkoord & doorgaan"),
@@ -44,6 +49,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "areYouSure": MessageLookupByLibrary.simpleMessage("Weet je het zeker"),
         "areYouSureYouEtc": MessageLookupByLibrary.simpleMessage(
             "Weet je zeker dat je dit bericht wilt verwijderen?"),
+        "areYouSureYouWantToDeleteTheComment":
+            MessageLookupByLibrary.simpleMessage(
+                "Weet je zeker dat je de reactie wilt verwijderen?"),
+        "areYouSureYouWantToDeleteThePost":
+            MessageLookupByLibrary.simpleMessage(
+                "Weet je zeker dat je het bericht wilt verwijderen?"),
         "areYouSureYouWantToEnd": MessageLookupByLibrary.simpleMessage(
             "Weet je zeker dat je je live video wilt beëindigen?"),
         "artist": MessageLookupByLibrary.simpleMessage("Artiest"),
@@ -78,6 +89,11 @@ class MessageLookup extends MessageLookupByLibrary {
                 "munten, bevestig alstublieft of u door wilt gaan of niet"),
         "collected": MessageLookupByLibrary.simpleMessage("Verzameld"),
         "comment": MessageLookupByLibrary.simpleMessage("Opmerking..."),
+        "commentDelete":
+            MessageLookupByLibrary.simpleMessage("Reactie verwijderen?"),
+        "commentNotFound":
+            MessageLookupByLibrary.simpleMessage("Reactie niet gevonden"),
+        "comments": MessageLookupByLibrary.simpleMessage("Opmerkingen"),
         "complete": MessageLookupByLibrary.simpleMessage("Compleet"),
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("bevestig wachtwoord"),
@@ -93,6 +109,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Ga verder met Google"),
         "couldNotLaunch":
             MessageLookupByLibrary.simpleMessage("Kan niet starten"),
+        "createPost": MessageLookupByLibrary.simpleMessage("Bericht maken"),
         "cyberbullying": MessageLookupByLibrary.simpleMessage("Cyberpesten"),
         "dashboard": MessageLookupByLibrary.simpleMessage("  DASHBOARD"),
         "delete": MessageLookupByLibrary.simpleMessage("Verwijderen"),
@@ -104,16 +121,25 @@ class MessageLookup extends MessageLookupByLibrary {
             "Wil je echt je account verwijderen? U kunt het later niet meer herstellen en gegevens gaan voor altijd verloren"),
         "deleteMessage":
             MessageLookupByLibrary.simpleMessage("Verwijder bericht"),
+        "deletePost":
+            MessageLookupByLibrary.simpleMessage("Verwijder gepost bericht"),
         "deleteThisChat":
             MessageLookupByLibrary.simpleMessage("Verwijder deze chat"),
+        "deleteThisStory":
+            MessageLookupByLibrary.simpleMessage("Dit verhaal verwijderen?"),
         "diamond":
             MessageLookupByLibrary.simpleMessage("  Diamanten verzameld:"),
         "diamond1": MessageLookupByLibrary.simpleMessage("diamanten:"),
         "diamondCap": MessageLookupByLibrary.simpleMessage("DIAMANT"),
         "diamonds": MessageLookupByLibrary.simpleMessage("DIAMANTEN"),
         "diamondsCamel": MessageLookupByLibrary.simpleMessage("diamanten"),
+        "doYouReallyWantToDeleteThisChatYouWont":
+            MessageLookupByLibrary.simpleMessage(
+                "Wil je deze chat echt verwijderen? Je kunt daarna geen enkele gegevens meer herstellen. Ik hoop dat je je daarvan bewust bent!"),
         "doYouReallyWantToLive": MessageLookupByLibrary.simpleMessage(
             "Wil je echt leven. Ga alsjeblieft door met live gaan"),
+        "doYouWantToDeleteThisStoryYouCanNot": MessageLookupByLibrary.simpleMessage(
+            "Wil je dit verhaal verwijderen? Je kunt het verhaal niet herstellen. Het wordt dan definitief verwijderd."),
         "docType": MessageLookupByLibrary.simpleMessage("TYPE DOCUMENT"),
         "donTHaveAnAccount":
             MessageLookupByLibrary.simpleMessage("Heb je geen account?"),
@@ -147,6 +173,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterThePasswordForTheAccountNwithTheEmailBelow":
             MessageLookupByLibrary.simpleMessage(
                 "Voer het wachtwoord in voor het account \nmet onderstaande e-mail"),
+        "enterUsername":
+            MessageLookupByLibrary.simpleMessage("Vul je gebruikersnaam in"),
         "enterYourMailOnWhichYouHaveNcreatedAnAccount":
             MessageLookupByLibrary.simpleMessage(
                 "Vul uw e-mailadres in waarop u een \naccount hebt aangemaakt. We sturen een link \nom je wachtwoord opnieuw in te stellen"),
@@ -160,10 +188,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Mislukte betaling"),
         "failedToLoadVideo": MessageLookupByLibrary.simpleMessage(
             "Kan video niet laden: kan niet openen"),
+        "feed": MessageLookupByLibrary.simpleMessage("Voer"),
         "female": MessageLookupByLibrary.simpleMessage("Vrouwelijk"),
         "findSomeoneRandomly": MessageLookupByLibrary.simpleMessage(
             "Zoek willekeurig iemand\nEn controleer hun profiel"),
         "fitness": MessageLookupByLibrary.simpleMessage("Geschiktheid"),
+        "follow": MessageLookupByLibrary.simpleMessage("Volgen"),
+        "followers": MessageLookupByLibrary.simpleMessage("Volgers"),
+        "following": MessageLookupByLibrary.simpleMessage("Als vervolg op"),
+        "followingList": MessageLookupByLibrary.simpleMessage("Volgende lijst"),
         "foodies": MessageLookupByLibrary.simpleMessage("Fijnproevers"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("Wachtwoord vergeten?"),
@@ -217,6 +250,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Talen die je spreekt tijdens het streamen.."),
         "languagesYouEtc":
             MessageLookupByLibrary.simpleMessage("TALEN DIE JE ZULT SPREKEN"),
+        "large": MessageLookupByLibrary.simpleMessage("Groot"),
         "legal": MessageLookupByLibrary.simpleMessage("WETTELIJK"),
         "likeProfiles": MessageLookupByLibrary.simpleMessage("Zoals profielen"),
         "live": MessageLookupByLibrary.simpleMessage("Live"),
@@ -229,6 +263,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "De prijs van de livestream zal u kosten"),
         "liveVerification":
             MessageLookupByLibrary.simpleMessage("LIVE VERIFICATIE"),
+        "lives": MessageLookupByLibrary.simpleMessage("Levens"),
         "livestream": MessageLookupByLibrary.simpleMessage(
             "Portefeuille / Livestream-dashboard"),
         "logIn": MessageLookupByLibrary.simpleMessage("LOG IN"),
@@ -252,12 +287,17 @@ class MessageLookup extends MessageLookupByLibrary {
             "Profielen in de buurt op de kaart"),
         "next": MessageLookupByLibrary.simpleMessage("VOLGENDE"),
         "no": MessageLookupByLibrary.simpleMessage("Nee"),
+        "noComment": MessageLookupByLibrary.simpleMessage("Geen commentaar"),
         "noData": MessageLookupByLibrary.simpleMessage("Geen gegevens"),
         "noDataAvailable":
             MessageLookupByLibrary.simpleMessage("Geen gegevens beschikbaar"),
+        "noLikeData":
+            MessageLookupByLibrary.simpleMessage("Geen like-gegevens"),
         "noLocation": MessageLookupByLibrary.simpleMessage("Geen locatie"),
         "noRedeemData":
             MessageLookupByLibrary.simpleMessage("Geen inwisselgegevens"),
+        "noSavedData":
+            MessageLookupByLibrary.simpleMessage("Geen opgeslagen gegevens"),
         "noUsersAreLive": MessageLookupByLibrary.simpleMessage(
             "Er zijn geen gebruikers live"),
         "notEligible":
@@ -281,6 +321,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "personal": MessageLookupByLibrary.simpleMessage("Persoonlijk"),
         "personalHarassment":
             MessageLookupByLibrary.simpleMessage("Persoonlijke intimidatie"),
+        "photo": MessageLookupByLibrary.simpleMessage("Foto"),
         "photos": MessageLookupByLibrary.simpleMessage("Foto\'s"),
         "photosCap": MessageLookupByLibrary.simpleMessage("FOTO\'S"),
         "platform": MessageLookupByLibrary.simpleMessage("Platform"),
@@ -301,6 +342,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Voer e-mailadres in...!"),
         "pleaseEnterValidEmailAddress": MessageLookupByLibrary.simpleMessage(
             "Vul alstublieft een geldig e-mailadres in"),
+        "pleaseEnterYourAge": MessageLookupByLibrary.simpleMessage(
+            "Vul alstublieft uw leeftijd in"),
         "pleaseSelectImage":
             MessageLookupByLibrary.simpleMessage("Selecteer afbeelding"),
         "pleaseValidEmail": MessageLookupByLibrary.simpleMessage(
@@ -313,6 +356,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "policy2": MessageLookupByLibrary.simpleMessage("Gebruiksvoorwaarden"),
         "policy3": MessageLookupByLibrary.simpleMessage("  En"),
         "policy4": MessageLookupByLibrary.simpleMessage("Privacybeleid"),
+        "post": MessageLookupByLibrary.simpleMessage("Na"),
+        "posts": MessageLookupByLibrary.simpleMessage("Berichten"),
         "priceCap": MessageLookupByLibrary.simpleMessage("PRIJS"),
         "privacy": MessageLookupByLibrary.simpleMessage("PRIVACY INSTELLINGEN"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("Privacybeleid"),
@@ -323,6 +368,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pushNotification":
             MessageLookupByLibrary.simpleMessage("Push-meldingen"),
         "randoms": MessageLookupByLibrary.simpleMessage("Willekeurig"),
+        "readLess": MessageLookupByLibrary.simpleMessage("Lees minder..."),
+        "readMore": MessageLookupByLibrary.simpleMessage("Lees verder..."),
         "redeem": MessageLookupByLibrary.simpleMessage("INWISSELEN"),
         "redeemCap": MessageLookupByLibrary.simpleMessage("INWISSELEN"),
         "redeemRequests":
@@ -334,8 +381,13 @@ class MessageLookup extends MessageLookupByLibrary {
             "Registratie succesvol afgerond"),
         "report": MessageLookupByLibrary.simpleMessage("Rapport"),
         "reportCap": MessageLookupByLibrary.simpleMessage("RAPPORT"),
+        "reportPost": MessageLookupByLibrary.simpleMessage("Bericht melden"),
         "reportUser":
             MessageLookupByLibrary.simpleMessage("RAPPORTEER GEBRUIKER"),
+        "reportedSubmitted":
+            MessageLookupByLibrary.simpleMessage("Gerapporteerd Ingediend"),
+        "reportedSuccessfully":
+            MessageLookupByLibrary.simpleMessage("Succesvol gerapporteerd!!"),
         "reqVerification":
             MessageLookupByLibrary.simpleMessage("VERIFICATIE AANVRAGEN"),
         "requests": MessageLookupByLibrary.simpleMessage("  VERZOEKEN"),
@@ -346,11 +398,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "save": MessageLookupByLibrary.simpleMessage("REDDEN"),
         "savedProfiles":
             MessageLookupByLibrary.simpleMessage("Opgeslagen profielen"),
+        "searchProfile": MessageLookupByLibrary.simpleMessage("Zoek profiel"),
         "searching": MessageLookupByLibrary.simpleMessage("Zoeken..."),
         "selectAnother":
             MessageLookupByLibrary.simpleMessage("Selecteer een andere"),
         "selectDocument":
             MessageLookupByLibrary.simpleMessage("Selecteer document"),
+        "selectInterestsToContinue": MessageLookupByLibrary.simpleMessage(
+            "Selecteer interesses om door te gaan"),
         "selectReason": MessageLookupByLibrary.simpleMessage("Selecteer Reden"),
         "selected": MessageLookupByLibrary.simpleMessage("Geselecteerd"),
         "send": MessageLookupByLibrary.simpleMessage("Versturen"),
@@ -407,12 +462,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "travel": MessageLookupByLibrary.simpleMessage("Reis"),
         "unBlock": MessageLookupByLibrary.simpleMessage("Deblokkeren"),
         "unblockCap": MessageLookupByLibrary.simpleMessage("ONTGRENDELEN"),
+        "unfollow": MessageLookupByLibrary.simpleMessage("Ontvolgen"),
         "useAutomaticallyEtc": MessageLookupByLibrary.simpleMessage(
             "automatisch vanaf volgende gebruiken"),
         "userBlock": MessageLookupByLibrary.simpleMessage(
             "Gebruikersblokkering door admin"),
+        "userNotFound":
+            MessageLookupByLibrary.simpleMessage("Gebruiker niet gevonden!!"),
         "userNotLive":
             MessageLookupByLibrary.simpleMessage("Gebruiker niet live"),
+        "username": MessageLookupByLibrary.simpleMessage("Gebruikersnaam"),
         "users": MessageLookupByLibrary.simpleMessage("Gebruikers"),
         "validEmail": MessageLookupByLibrary.simpleMessage(
             "Vul een geldig emailadres in"),
@@ -424,6 +483,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "video": MessageLookupByLibrary.simpleMessage("Video?"),
         "videoCall": MessageLookupByLibrary.simpleMessage("Video-oproep"),
         "videoCap": MessageLookupByLibrary.simpleMessage("VIDEO"),
+        "videoDurationIs": MessageLookupByLibrary.simpleMessage("Videoduur is"),
         "videoPreview":
             MessageLookupByLibrary.simpleMessage("Videovoorbeeldscherm"),
         "videos": MessageLookupByLibrary.simpleMessage("Videos"),
@@ -433,12 +493,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "wallet":
             MessageLookupByLibrary.simpleMessage("DIAMANTEN PORTEFEUILLE"),
         "walletCap": MessageLookupByLibrary.simpleMessage("PORTEMONNEE"),
+        "whatDoYouWantToSelect":
+            MessageLookupByLibrary.simpleMessage("Wat wil je selecteren?"),
         "whereDoYouLive":
             MessageLookupByLibrary.simpleMessage("WAAR WOON JE ?"),
         "whichItemWouldYouLikeEtc": MessageLookupByLibrary.simpleMessage(
             "Welk item wil je selecteren?\nSelecteer een item"),
         "writeMessage":
             MessageLookupByLibrary.simpleMessage("Schrijf een bericht"),
+        "writeSomethingHere":
+            MessageLookupByLibrary.simpleMessage("Schrijf hier iets..."),
         "yes": MessageLookupByLibrary.simpleMessage("Ja"),
         "yesterday": MessageLookupByLibrary.simpleMessage("Gisteren"),
         "you": MessageLookupByLibrary.simpleMessage("Jij"),

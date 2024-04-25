@@ -28,6 +28,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("HESAP DETAYLARI"),
         "add": MessageLookupByLibrary.simpleMessage("EKLEMEK"),
         "addCoins": MessageLookupByLibrary.simpleMessage("PARA EKLEYİN"),
+        "addComment": MessageLookupByLibrary.simpleMessage("Yorum ekle"),
+        "afterDeletingTheChatYouCanNotRestoreOurMessage":
+            MessageLookupByLibrary.simpleMessage(
+                "Sohbeti sildikten sonra mesajımızı geri yükleyemezsiniz. Mesaj hesabınızdan silinecek."),
         "age": MessageLookupByLibrary.simpleMessage("YAŞ"),
         "agreeNContinue":
             MessageLookupByLibrary.simpleMessage("Kabul Et ve Devam Et"),
@@ -45,6 +49,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "areYouSure": MessageLookupByLibrary.simpleMessage("Emin misin"),
         "areYouSureYouEtc": MessageLookupByLibrary.simpleMessage(
             "Bu mesajı silmek istediğinizden emin misiniz?"),
+        "areYouSureYouWantToDeleteTheComment":
+            MessageLookupByLibrary.simpleMessage(
+                "Yorumu silmek istediğinizden emin misiniz?"),
+        "areYouSureYouWantToDeleteThePost":
+            MessageLookupByLibrary.simpleMessage(
+                "Gönderiyi silmek istediğinizden emin misiniz?"),
         "areYouSureYouWantToEnd": MessageLookupByLibrary.simpleMessage(
             "Canlı videonuzu sonlandırmak istediğinizden emin misiniz?"),
         "artist": MessageLookupByLibrary.simpleMessage("Sanatçı"),
@@ -80,6 +90,11 @@ class MessageLookup extends MessageLookupByLibrary {
                 "madeni paralar, lütfen devam edip etmeyeceğinizi onaylayın"),
         "collected": MessageLookupByLibrary.simpleMessage("Toplanmış"),
         "comment": MessageLookupByLibrary.simpleMessage("Yorum..."),
+        "commentDelete":
+            MessageLookupByLibrary.simpleMessage("Yorum silinsin mi?"),
+        "commentNotFound":
+            MessageLookupByLibrary.simpleMessage("Yorum Bulunamadı"),
+        "comments": MessageLookupByLibrary.simpleMessage("Yorumlar"),
         "complete": MessageLookupByLibrary.simpleMessage("Tamamlamak"),
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("Şifreyi Onayla"),
@@ -94,6 +109,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "continueWithGoogle":
             MessageLookupByLibrary.simpleMessage("Google ile devam"),
         "couldNotLaunch": MessageLookupByLibrary.simpleMessage("başlatılamadı"),
+        "createPost": MessageLookupByLibrary.simpleMessage("Gönderi Oluştur"),
         "cyberbullying": MessageLookupByLibrary.simpleMessage("siber zorbalık"),
         "dashboard": MessageLookupByLibrary.simpleMessage("  GÖSTERGE PANELİ"),
         "delete": MessageLookupByLibrary.simpleMessage("Silmek"),
@@ -103,15 +119,23 @@ class MessageLookup extends MessageLookupByLibrary {
         "deleteDialogDis": MessageLookupByLibrary.simpleMessage(
             "Hesabınızı gerçekten silmek istiyor musunuz? Daha sonra kurtaramayacaksınız ve veriler sonsuza kadar kaybolacak"),
         "deleteMessage": MessageLookupByLibrary.simpleMessage("Mesajı sil"),
+        "deletePost": MessageLookupByLibrary.simpleMessage("Gönderiyi sil"),
         "deleteThisChat":
             MessageLookupByLibrary.simpleMessage("Bu sohbeti sil"),
+        "deleteThisStory":
+            MessageLookupByLibrary.simpleMessage("Bu hikaye silinsin mi?"),
         "diamond": MessageLookupByLibrary.simpleMessage("  Toplanan Elmaslar:"),
         "diamond1": MessageLookupByLibrary.simpleMessage("Elmaslar:"),
         "diamondCap": MessageLookupByLibrary.simpleMessage("ELMAS"),
         "diamonds": MessageLookupByLibrary.simpleMessage("ELMASLAR"),
         "diamondsCamel": MessageLookupByLibrary.simpleMessage("Elmaslar"),
+        "doYouReallyWantToDeleteThisChatYouWont":
+            MessageLookupByLibrary.simpleMessage(
+                "Bu sohbeti gerçekten silmek istiyor musunuz? Daha sonra hiçbir veriyi kurtaramayacaksınız. Umarım bunun farkındasınızdır!"),
         "doYouReallyWantToLive": MessageLookupByLibrary.simpleMessage(
             "Gerçekten yaşamak istiyor musun? Lütfen canlı yayına devam edin"),
+        "doYouWantToDeleteThisStoryYouCanNot": MessageLookupByLibrary.simpleMessage(
+            "Bu hikayeyi silmek istiyor musunuz? Hikayeyi geri yükleyemezsiniz, kalıcı olarak silinecektir."),
         "docType": MessageLookupByLibrary.simpleMessage("BELGE TÜRÜ"),
         "donTHaveAnAccount":
             MessageLookupByLibrary.simpleMessage("Hesabınız yok mu?"),
@@ -143,6 +167,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterThePasswordForTheAccountNwithTheEmailBelow":
             MessageLookupByLibrary.simpleMessage(
                 "Hesabın şifresini \naşağıdaki e-posta ile girin"),
+        "enterUsername":
+            MessageLookupByLibrary.simpleMessage("Kullanıcı adı girin"),
         "enterYourMailOnWhichYouHaveNcreatedAnAccount":
             MessageLookupByLibrary.simpleMessage(
                 "Hesap oluşturduğunuz \npostanızı girin. Parolanızı sıfırlamak için \nbir bağlantı göndereceğiz"),
@@ -157,10 +183,16 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Başarısız ödeme"),
         "failedToLoadVideo": MessageLookupByLibrary.simpleMessage(
             "Video yüklenemedi: Açılamıyor"),
+        "feed": MessageLookupByLibrary.simpleMessage("Beslemek"),
         "female": MessageLookupByLibrary.simpleMessage("Dişi"),
         "findSomeoneRandomly": MessageLookupByLibrary.simpleMessage(
             "Rastgele Birini Bulun\nVe profilini kontrol edin"),
         "fitness": MessageLookupByLibrary.simpleMessage("Fitness"),
+        "follow": MessageLookupByLibrary.simpleMessage("Takip etmek"),
+        "followers": MessageLookupByLibrary.simpleMessage("Takipçiler"),
+        "following": MessageLookupByLibrary.simpleMessage("Takip etme"),
+        "followingList":
+            MessageLookupByLibrary.simpleMessage("Takip Edilenler Listesi"),
         "foodies": MessageLookupByLibrary.simpleMessage("gurmeler"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("Parolanızı mı unuttunuz?"),
@@ -211,6 +243,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Akış sırasında konuşacağınız diller.."),
         "languagesYouEtc":
             MessageLookupByLibrary.simpleMessage("KONUŞACAĞINIZ DİLLER"),
+        "large": MessageLookupByLibrary.simpleMessage("Büyük"),
         "legal": MessageLookupByLibrary.simpleMessage("YASAL"),
         "likeProfiles":
             MessageLookupByLibrary.simpleMessage("Profilleri Beğen"),
@@ -224,6 +257,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Canlı yayın fiyatı size mal olacak"),
         "liveVerification":
             MessageLookupByLibrary.simpleMessage("CANLI DOĞRULAMA"),
+        "lives": MessageLookupByLibrary.simpleMessage("Hayatları"),
         "livestream": MessageLookupByLibrary.simpleMessage(
             "Cüzdan / Canlı Akış Kontrol Paneli"),
         "logIn": MessageLookupByLibrary.simpleMessage("GİRİŞ YAPMAK"),
@@ -247,11 +281,14 @@ class MessageLookup extends MessageLookupByLibrary {
             "Haritada Yakındaki Profiller"),
         "next": MessageLookupByLibrary.simpleMessage("SONRAKİ"),
         "no": MessageLookupByLibrary.simpleMessage("HAYIR"),
+        "noComment": MessageLookupByLibrary.simpleMessage("Yorum yok"),
         "noData": MessageLookupByLibrary.simpleMessage("Veri yok"),
         "noDataAvailable": MessageLookupByLibrary.simpleMessage("Veri Yok"),
+        "noLikeData": MessageLookupByLibrary.simpleMessage("Beğeni Verisi Yok"),
         "noLocation": MessageLookupByLibrary.simpleMessage("Konum Yok"),
         "noRedeemData":
             MessageLookupByLibrary.simpleMessage("Kullanılacak veri yok"),
+        "noSavedData": MessageLookupByLibrary.simpleMessage("Kayıtlı Veri Yok"),
         "noUsersAreLive":
             MessageLookupByLibrary.simpleMessage("Canlı kullanıcı yok"),
         "notEligible": MessageLookupByLibrary.simpleMessage("UYGUN DEĞİL"),
@@ -274,6 +311,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "personal": MessageLookupByLibrary.simpleMessage("Kişisel"),
         "personalHarassment":
             MessageLookupByLibrary.simpleMessage("Kişisel Taciz"),
+        "photo": MessageLookupByLibrary.simpleMessage("Fotoğraf"),
         "photos": MessageLookupByLibrary.simpleMessage("Fotoğraflar"),
         "photosCap": MessageLookupByLibrary.simpleMessage("FOTOĞRAFLAR"),
         "platform": MessageLookupByLibrary.simpleMessage("platformu"),
@@ -294,6 +332,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Lütfen e-posta giriniz...!"),
         "pleaseEnterValidEmailAddress": MessageLookupByLibrary.simpleMessage(
             "Lütfen geçerli bir e-posta adresi girin"),
+        "pleaseEnterYourAge":
+            MessageLookupByLibrary.simpleMessage("Lütfen yaşını gir"),
         "pleaseSelectImage":
             MessageLookupByLibrary.simpleMessage("Lütfen Resim Seçiniz"),
         "pleaseValidEmail":
@@ -306,6 +346,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "policy2": MessageLookupByLibrary.simpleMessage("Kullanım Şartları"),
         "policy3": MessageLookupByLibrary.simpleMessage("  Ve"),
         "policy4": MessageLookupByLibrary.simpleMessage("Gizlilik Politikası"),
+        "post": MessageLookupByLibrary.simpleMessage("Postalamak"),
+        "posts": MessageLookupByLibrary.simpleMessage("Gönderiler"),
         "priceCap": MessageLookupByLibrary.simpleMessage("FİYAT"),
         "privacy": MessageLookupByLibrary.simpleMessage("GİZLİLİK AYARLARI"),
         "privacyPolicy":
@@ -317,6 +359,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pushNotification":
             MessageLookupByLibrary.simpleMessage("Push bildirimleri"),
         "randoms": MessageLookupByLibrary.simpleMessage("Rastgele"),
+        "readLess": MessageLookupByLibrary.simpleMessage("Az oku..."),
+        "readMore": MessageLookupByLibrary.simpleMessage("Devamını oku..."),
         "redeem": MessageLookupByLibrary.simpleMessage("TAZMİN ETMEK"),
         "redeemCap": MessageLookupByLibrary.simpleMessage("TAZMİN ETMEK"),
         "redeemRequests":
@@ -328,8 +372,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Kayıt başarıyla tamamlandı"),
         "report": MessageLookupByLibrary.simpleMessage("Rapor"),
         "reportCap": MessageLookupByLibrary.simpleMessage("RAPOR"),
+        "reportPost": MessageLookupByLibrary.simpleMessage("Gönderiyi bildir"),
         "reportUser":
             MessageLookupByLibrary.simpleMessage("KULLANICIYI BİLDİR"),
+        "reportedSubmitted":
+            MessageLookupByLibrary.simpleMessage("Bildirildi Gönderildi"),
+        "reportedSuccessfully":
+            MessageLookupByLibrary.simpleMessage("Başarıyla Rapor Edildi!!"),
         "reqVerification":
             MessageLookupByLibrary.simpleMessage("DOĞRULAMA İSTE"),
         "requests": MessageLookupByLibrary.simpleMessage("  TALEPLER"),
@@ -340,9 +389,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "save": MessageLookupByLibrary.simpleMessage("KAYDETMEK"),
         "savedProfiles":
             MessageLookupByLibrary.simpleMessage("Kayıtlı Profiller"),
+        "searchProfile": MessageLookupByLibrary.simpleMessage("Profil Ara"),
         "searching": MessageLookupByLibrary.simpleMessage("Aranıyor..."),
         "selectAnother": MessageLookupByLibrary.simpleMessage("başka seç"),
         "selectDocument": MessageLookupByLibrary.simpleMessage("Belge Seç"),
+        "selectInterestsToContinue": MessageLookupByLibrary.simpleMessage(
+            "Devam etmek için ilgi alanlarını seçin"),
         "selectReason": MessageLookupByLibrary.simpleMessage("Sebep Seçin"),
         "selected": MessageLookupByLibrary.simpleMessage("Seçildi"),
         "send": MessageLookupByLibrary.simpleMessage("Göndermek"),
@@ -401,12 +453,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "travel": MessageLookupByLibrary.simpleMessage("Seyahat"),
         "unBlock": MessageLookupByLibrary.simpleMessage("engeli kaldırmak"),
         "unblockCap": MessageLookupByLibrary.simpleMessage("ENGELİ KALDIRMAK"),
+        "unfollow": MessageLookupByLibrary.simpleMessage("Takibi bırak"),
         "useAutomaticallyEtc": MessageLookupByLibrary.simpleMessage(
             "sonraki otomatik olarak kullan"),
         "userBlock": MessageLookupByLibrary.simpleMessage(
             "yönetici tarafından kullanıcı engelleme"),
+        "userNotFound":
+            MessageLookupByLibrary.simpleMessage("Kullanıcı bulunamadı!!"),
         "userNotLive":
             MessageLookupByLibrary.simpleMessage("Kullanıcı canlı değil"),
+        "username": MessageLookupByLibrary.simpleMessage("Kullanıcı adı"),
         "users": MessageLookupByLibrary.simpleMessage("Kullanıcılar"),
         "validEmail":
             MessageLookupByLibrary.simpleMessage("Geçerli e-posta girin"),
@@ -418,6 +474,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "video": MessageLookupByLibrary.simpleMessage("Video?"),
         "videoCall": MessageLookupByLibrary.simpleMessage("Görüntülü arama"),
         "videoCap": MessageLookupByLibrary.simpleMessage("VİDEO"),
+        "videoDurationIs":
+            MessageLookupByLibrary.simpleMessage("Video süresi:"),
         "videoPreview":
             MessageLookupByLibrary.simpleMessage("Video Önizleme Ekranı"),
         "videos": MessageLookupByLibrary.simpleMessage("videolar"),
@@ -426,11 +484,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "walking": MessageLookupByLibrary.simpleMessage("Yürüme"),
         "wallet": MessageLookupByLibrary.simpleMessage("ELMAS CÜZDAN"),
         "walletCap": MessageLookupByLibrary.simpleMessage("CÜZDAN"),
+        "whatDoYouWantToSelect":
+            MessageLookupByLibrary.simpleMessage("Neyi seçmek istiyorsunuz?"),
         "whereDoYouLive":
             MessageLookupByLibrary.simpleMessage("NEREDE YAŞIYORSUN ?"),
         "whichItemWouldYouLikeEtc": MessageLookupByLibrary.simpleMessage(
             "Hangi öğeyi seçmek istersiniz?\nBir öğe seçin"),
         "writeMessage": MessageLookupByLibrary.simpleMessage("Mesaj Yaz"),
+        "writeSomethingHere":
+            MessageLookupByLibrary.simpleMessage("Buraya bir şeyler yaz..."),
         "yes": MessageLookupByLibrary.simpleMessage("Evet"),
         "yesterday": MessageLookupByLibrary.simpleMessage("Dün"),
         "you": MessageLookupByLibrary.simpleMessage("Sen"),

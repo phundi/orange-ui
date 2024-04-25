@@ -28,6 +28,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("ΛΕΠΤΟΜΕΡΕΙΕΣ ΛΟΓΑΡΙΑΣΜΟΥ"),
         "add": MessageLookupByLibrary.simpleMessage("ΠΡΟΣΘΗΚΗ"),
         "addCoins": MessageLookupByLibrary.simpleMessage("ΠΡΟΣΘΗΚΗ ΝΟΜΙΣΜΑΤΩΝ"),
+        "addComment": MessageLookupByLibrary.simpleMessage("Πρόσθεσε σχόλιο"),
+        "afterDeletingTheChatYouCanNotRestoreOurMessage":
+            MessageLookupByLibrary.simpleMessage(
+                "Μετά τη διαγραφή της συνομιλίας, δεν μπορείτε να επαναφέρετε το μήνυμά μας. Το μήνυμα θα διαγραφεί από τον λογαριασμό σας."),
         "age": MessageLookupByLibrary.simpleMessage("ΗΛΙΚΙΑ"),
         "agreeNContinue":
             MessageLookupByLibrary.simpleMessage("Συμφωνώ & Συνέχεια"),
@@ -46,6 +50,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "areYouSure": MessageLookupByLibrary.simpleMessage("Είσαι σίγουρος"),
         "areYouSureYouEtc": MessageLookupByLibrary.simpleMessage(
             "Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτό το μήνυμα;"),
+        "areYouSureYouWantToDeleteTheComment":
+            MessageLookupByLibrary.simpleMessage(
+                "Είστε βέβαιοι ότι θέλετε να διαγράψετε το σχόλιο;"),
+        "areYouSureYouWantToDeleteThePost":
+            MessageLookupByLibrary.simpleMessage(
+                "Είστε βέβαιοι ότι θέλετε να διαγράψετε την ανάρτηση;"),
         "areYouSureYouWantToEnd": MessageLookupByLibrary.simpleMessage(
             "Είστε βέβαιοι ότι θέλετε να τερματίσετε το ζωντανό βίντεό σας;"),
         "artist": MessageLookupByLibrary.simpleMessage("Καλλιτέχνης"),
@@ -82,6 +92,11 @@ class MessageLookup extends MessageLookupByLibrary {
                 "νομίσματα, Επιβεβαιώστε εάν θέλετε να συνεχίσετε ή όχι"),
         "collected": MessageLookupByLibrary.simpleMessage("Συγκεντρωμένος"),
         "comment": MessageLookupByLibrary.simpleMessage("Σχόλιο..."),
+        "commentDelete":
+            MessageLookupByLibrary.simpleMessage("Διαγραφή σχολίου;"),
+        "commentNotFound":
+            MessageLookupByLibrary.simpleMessage("Το σχόλιο δεν βρέθηκε"),
+        "comments": MessageLookupByLibrary.simpleMessage("Σχόλια"),
         "complete": MessageLookupByLibrary.simpleMessage("Πλήρης"),
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("Επιβεβαίωση Κωδικού"),
@@ -97,6 +112,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Συνέχεια με την Google"),
         "couldNotLaunch":
             MessageLookupByLibrary.simpleMessage("Δεν ήταν δυνατή η εκκίνηση"),
+        "createPost":
+            MessageLookupByLibrary.simpleMessage("Δημιουργία ανάρτησης"),
         "cyberbullying":
             MessageLookupByLibrary.simpleMessage("Κυβερνοεκφοβισμός"),
         "dashboard": MessageLookupByLibrary.simpleMessage("  ΤΑΜΠΛΟ"),
@@ -110,16 +127,25 @@ class MessageLookup extends MessageLookupByLibrary {
             "Θέλετε πραγματικά να διαγράψετε τον λογαριασμό σας; Δεν θα μπορείτε να το ανακτήσετε αργότερα και τα δεδομένα θα χαθούν για πάντα"),
         "deleteMessage":
             MessageLookupByLibrary.simpleMessage("Διαγραφή μηνύματος"),
+        "deletePost":
+            MessageLookupByLibrary.simpleMessage("Διαγραφή ανάρτησης"),
         "deleteThisChat": MessageLookupByLibrary.simpleMessage(
             "Διαγραφή αυτής της συνομιλίας"),
+        "deleteThisStory": MessageLookupByLibrary.simpleMessage(
+            "Διαγραφή αυτής της ιστορίας;"),
         "diamond": MessageLookupByLibrary.simpleMessage(
             "  Διαμάντια που συλλέγονται:"),
         "diamond1": MessageLookupByLibrary.simpleMessage("Διαμάντια:"),
         "diamondCap": MessageLookupByLibrary.simpleMessage("ΔΙΑΜΑΝΤΙ"),
         "diamonds": MessageLookupByLibrary.simpleMessage("ΔΙΑΜΑΝΤΙΑ"),
         "diamondsCamel": MessageLookupByLibrary.simpleMessage("Διαμάντια"),
+        "doYouReallyWantToDeleteThisChatYouWont":
+            MessageLookupByLibrary.simpleMessage(
+                "Θέλετε πραγματικά να διαγράψετε αυτήν τη συνομιλία Δεν θα μπορείτε να ανακτήσετε κανένα είδος δεδομένων μετά. Ελπίζω να το γνωρίζετε!"),
         "doYouReallyWantToLive": MessageLookupByLibrary.simpleMessage(
             "Θέλεις πραγματικά να ζήσεις. Συνεχίστε να μεταβείτε ζωντανά"),
+        "doYouWantToDeleteThisStoryYouCanNot": MessageLookupByLibrary.simpleMessage(
+            "Θέλετε να διαγράψετε αυτήν την ιστορία; Δεν μπορείτε να επαναφέρετε την ιστορία, θα διαγραφεί οριστικά."),
         "docType": MessageLookupByLibrary.simpleMessage("ΕΙΔΟΣ ΑΡΧΕΙΟΥ"),
         "donTHaveAnAccount":
             MessageLookupByLibrary.simpleMessage("Δεν έχετε λογαριασμό;"),
@@ -156,6 +182,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterThePasswordForTheAccountNwithTheEmailBelow":
             MessageLookupByLibrary.simpleMessage(
                 "Εισαγάγετε τον κωδικό πρόσβασης για το λογαριασμό \nμε το παρακάτω email"),
+        "enterUsername":
+            MessageLookupByLibrary.simpleMessage("Εισάγετε όνομα χρήστη"),
         "enterYourMailOnWhichYouHaveNcreatedAnAccount":
             MessageLookupByLibrary.simpleMessage(
                 "Εισαγάγετε την αλληλογραφία σας στην οποία έχετε \nδημιουργήσει λογαριασμό. Θα στείλουμε έναν σύνδεσμο \nγια να επαναφέρετε τον κωδικό πρόσβασής σας"),
@@ -170,10 +198,16 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Αποτυχία πληρωμής"),
         "failedToLoadVideo": MessageLookupByLibrary.simpleMessage(
             "Η φόρτωση του βίντεο απέτυχε: Δεν είναι δυνατό το άνοιγμα"),
+        "feed": MessageLookupByLibrary.simpleMessage("Ταίζω"),
         "female": MessageLookupByLibrary.simpleMessage("Θηλυκός"),
         "findSomeoneRandomly": MessageLookupByLibrary.simpleMessage(
             "Βρείτε κάποιον Τυχαία\nΚαι ελέγξτε το προφίλ του"),
         "fitness": MessageLookupByLibrary.simpleMessage("Καταλληλότητα"),
+        "follow": MessageLookupByLibrary.simpleMessage("Ακολουθηστε"),
+        "followers": MessageLookupByLibrary.simpleMessage("Οπαδοί"),
+        "following": MessageLookupByLibrary.simpleMessage("ΕΠΟΜΕΝΟ"),
+        "followingList":
+            MessageLookupByLibrary.simpleMessage("Λίστα που ακολουθεί"),
         "foodies": MessageLookupByLibrary.simpleMessage("Foodies"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("Ξεχάσατε τον κωδικό;"),
@@ -227,6 +261,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Γλώσσες που θα μιλάτε κατά τη ροή.."),
         "languagesYouEtc":
             MessageLookupByLibrary.simpleMessage("ΓΛΩΣΣΕΣ ΠΟΥ ΘΑ ΜΙΛΑΣ"),
+        "large": MessageLookupByLibrary.simpleMessage("Μεγάλο"),
         "legal": MessageLookupByLibrary.simpleMessage("ΝΟΜΙΚΟΣ"),
         "likeProfiles": MessageLookupByLibrary.simpleMessage("Όπως τα προφίλ"),
         "live": MessageLookupByLibrary.simpleMessage("Ζω"),
@@ -240,6 +275,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Η τιμή της ζωντανής ροής θα σας κοστίσει"),
         "liveVerification":
             MessageLookupByLibrary.simpleMessage("ΖΩΝΤΑΝΗ ΕΠΑΛΗΘΕΥΣΗ"),
+        "lives": MessageLookupByLibrary.simpleMessage("Ζωές"),
         "livestream": MessageLookupByLibrary.simpleMessage(
             "Πορτοφόλι / Πίνακας ελέγχου ζωντανής ροής"),
         "logIn": MessageLookupByLibrary.simpleMessage("ΣΥΝΔΕΣΗ"),
@@ -264,13 +300,17 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Κοντινά προφίλ στο χάρτη"),
         "next": MessageLookupByLibrary.simpleMessage("ΕΠΟΜΕΝΟ"),
         "no": MessageLookupByLibrary.simpleMessage("Οχι"),
+        "noComment": MessageLookupByLibrary.simpleMessage("Κανένα σχόλιο"),
         "noData": MessageLookupByLibrary.simpleMessage("Χωρίς δεδομένα"),
         "noDataAvailable": MessageLookupByLibrary.simpleMessage(
             "Δεν υπάρχουν διαθέσιμα δεδομένα"),
+        "noLikeData": MessageLookupByLibrary.simpleMessage("Όχι σαν δεδομένα"),
         "noLocation":
             MessageLookupByLibrary.simpleMessage("Δεν υπάρχει τοποθεσία"),
         "noRedeemData": MessageLookupByLibrary.simpleMessage(
             "Δεν υπάρχουν δεδομένα εξαργύρωσης"),
+        "noSavedData": MessageLookupByLibrary.simpleMessage(
+            "Δεν υπάρχουν αποθηκευμένα δεδομένα"),
         "noUsersAreLive": MessageLookupByLibrary.simpleMessage(
             "Κανένας χρήστης δεν είναι ζωντανός"),
         "notEligible":
@@ -293,6 +333,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "personal": MessageLookupByLibrary.simpleMessage("Προσωπικός"),
         "personalHarassment":
             MessageLookupByLibrary.simpleMessage("Προσωπική παρενόχληση"),
+        "photo": MessageLookupByLibrary.simpleMessage("φωτογραφία"),
         "photos": MessageLookupByLibrary.simpleMessage("Φωτογραφίες"),
         "photosCap": MessageLookupByLibrary.simpleMessage("ΦΩΤΟΓΡΑΦΙΕΣ"),
         "platform": MessageLookupByLibrary.simpleMessage("Πλατφόρμα"),
@@ -313,6 +354,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Παρακαλώ εισάγετε email...!"),
         "pleaseEnterValidEmailAddress": MessageLookupByLibrary.simpleMessage(
             "Εισαγάγετε έγκυρη διεύθυνση email"),
+        "pleaseEnterYourAge": MessageLookupByLibrary.simpleMessage(
+            "Παρακαλώ εισάγετε την ηλικία σας"),
         "pleaseSelectImage":
             MessageLookupByLibrary.simpleMessage("Επιλέξτε Εικόνα"),
         "pleaseValidEmail":
@@ -325,6 +368,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "policy2": MessageLookupByLibrary.simpleMessage("Οροι χρήσης"),
         "policy3": MessageLookupByLibrary.simpleMessage("  και"),
         "policy4": MessageLookupByLibrary.simpleMessage("Πολιτική Απορρήτου"),
+        "post": MessageLookupByLibrary.simpleMessage("Θέση"),
+        "posts": MessageLookupByLibrary.simpleMessage("Αναρτήσεις"),
         "priceCap": MessageLookupByLibrary.simpleMessage("ΤΙΜΗ"),
         "privacy": MessageLookupByLibrary.simpleMessage("ΡΥΘΜΙΣΕΙΣ ΑΠΟΡΡΗΤΟΥ"),
         "privacyPolicy":
@@ -336,6 +381,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "pushNotification":
             MessageLookupByLibrary.simpleMessage("Push Notifications"),
         "randoms": MessageLookupByLibrary.simpleMessage("Τυχαία"),
+        "readLess":
+            MessageLookupByLibrary.simpleMessage("Διαβάστε Λιγότερα..."),
+        "readMore":
+            MessageLookupByLibrary.simpleMessage("Διαβάστε περισσότερα..."),
         "redeem": MessageLookupByLibrary.simpleMessage("ΕΞΑΡΓΥΡΩΝΩ"),
         "redeemCap": MessageLookupByLibrary.simpleMessage("ΕΞΑΡΓΥΡΩΝΩ"),
         "redeemRequests":
@@ -347,7 +396,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Η εγγραφή ολοκληρώθηκε με επιτυχία"),
         "report": MessageLookupByLibrary.simpleMessage("Κανω ΑΝΑΦΟΡΑ"),
         "reportCap": MessageLookupByLibrary.simpleMessage("ΚΑΝΩ ΑΝΑΦΟΡΑ"),
+        "reportPost": MessageLookupByLibrary.simpleMessage("Αναφορά ανάρτησης"),
         "reportUser": MessageLookupByLibrary.simpleMessage("ΑΝΑΦΟΡΑ ΧΡΗΣΤΗ"),
+        "reportedSubmitted":
+            MessageLookupByLibrary.simpleMessage("Η αναφορά υποβλήθηκε"),
+        "reportedSuccessfully":
+            MessageLookupByLibrary.simpleMessage("Αναφέρθηκε με επιτυχία!!"),
         "reqVerification":
             MessageLookupByLibrary.simpleMessage("ΑΙΤΗΣΗ ΕΠΑΛΗΘΕΥΣΗΣ"),
         "requests": MessageLookupByLibrary.simpleMessage("  ΑΙΤΗΣΕΩΝ"),
@@ -358,10 +412,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "save": MessageLookupByLibrary.simpleMessage("ΑΠΟΘΗΚΕΥΣΕΤΕ"),
         "savedProfiles":
             MessageLookupByLibrary.simpleMessage("Αποθηκευμένα Προφίλ"),
+        "searchProfile":
+            MessageLookupByLibrary.simpleMessage("Αναζήτηση προφίλ"),
         "searching": MessageLookupByLibrary.simpleMessage("Ερευνητικός..."),
         "selectAnother": MessageLookupByLibrary.simpleMessage("Επιλέξτε άλλο"),
         "selectDocument":
             MessageLookupByLibrary.simpleMessage("Επιλέξτε Έγγραφο"),
+        "selectInterestsToContinue": MessageLookupByLibrary.simpleMessage(
+            "Επιλέξτε ενδιαφέροντα για να συνεχίσετε"),
         "selectReason": MessageLookupByLibrary.simpleMessage("Επιλέξτε Αιτία"),
         "selected": MessageLookupByLibrary.simpleMessage("Επιλεγμένο"),
         "send": MessageLookupByLibrary.simpleMessage("Στείλετε"),
@@ -420,12 +478,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "travel": MessageLookupByLibrary.simpleMessage("Ταξίδι"),
         "unBlock": MessageLookupByLibrary.simpleMessage("Ξεβουλώνω"),
         "unblockCap": MessageLookupByLibrary.simpleMessage("ΞΕΒΟΥΛΩΝΩ"),
+        "unfollow":
+            MessageLookupByLibrary.simpleMessage("Κατάργηση παρακολούθησης"),
         "useAutomaticallyEtc": MessageLookupByLibrary.simpleMessage(
             "χρήση αυτόματα από την επόμενη"),
         "userBlock": MessageLookupByLibrary.simpleMessage(
             "Αποκλεισμός χρήστη από τον διαχειριστή"),
+        "userNotFound":
+            MessageLookupByLibrary.simpleMessage("Ο χρήστης δεν βρέθηκε!!"),
         "userNotLive": MessageLookupByLibrary.simpleMessage(
             "Ο χρήστης δεν είναι ζωντανός"),
+        "username": MessageLookupByLibrary.simpleMessage("Όνομα χρήστη"),
         "users": MessageLookupByLibrary.simpleMessage("Χρήστες"),
         "validEmail":
             MessageLookupByLibrary.simpleMessage("Εισαγάγετε έγκυρο email"),
@@ -437,6 +500,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "video": MessageLookupByLibrary.simpleMessage("Βίντεο?"),
         "videoCall": MessageLookupByLibrary.simpleMessage("Κλήση βίντεο"),
         "videoCap": MessageLookupByLibrary.simpleMessage("ΒΙΝΤΕΟ"),
+        "videoDurationIs":
+            MessageLookupByLibrary.simpleMessage("Η διάρκεια του βίντεο είναι"),
         "videoPreview":
             MessageLookupByLibrary.simpleMessage("Οθόνη προεπισκόπησης βίντεο"),
         "videos": MessageLookupByLibrary.simpleMessage("Βίντεο"),
@@ -445,10 +510,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "walking": MessageLookupByLibrary.simpleMessage("Το περπάτημα"),
         "wallet": MessageLookupByLibrary.simpleMessage("ΔΙΑΜΑΝΤΙ ΠΟΡΤΟΦΟΛΙ"),
         "walletCap": MessageLookupByLibrary.simpleMessage("ΠΟΡΤΟΦΟΛΙ"),
+        "whatDoYouWantToSelect":
+            MessageLookupByLibrary.simpleMessage("Τι θέλετε να επιλέξετε;"),
         "whereDoYouLive": MessageLookupByLibrary.simpleMessage("ΠΟΥ ΜΕΝΕΙΣ ?"),
         "whichItemWouldYouLikeEtc": MessageLookupByLibrary.simpleMessage(
             "Ποιο στοιχείο θα θέλατε να επιλέξετε;\nΕπιλέξτε ένα στοιχείο"),
         "writeMessage": MessageLookupByLibrary.simpleMessage("Γράψε μήνυμα"),
+        "writeSomethingHere":
+            MessageLookupByLibrary.simpleMessage("Γράψε κάτι εδώ..."),
         "yes": MessageLookupByLibrary.simpleMessage("Ναί"),
         "yesterday": MessageLookupByLibrary.simpleMessage("Εχθές"),
         "you": MessageLookupByLibrary.simpleMessage("εσείς"),

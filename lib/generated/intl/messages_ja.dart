@@ -27,6 +27,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "accountDetails": MessageLookupByLibrary.simpleMessage("アカウント詳細"),
         "add": MessageLookupByLibrary.simpleMessage("追加"),
         "addCoins": MessageLookupByLibrary.simpleMessage("コインを追加する"),
+        "addComment": MessageLookupByLibrary.simpleMessage("コメントを追加"),
+        "afterDeletingTheChatYouCanNotRestoreOurMessage":
+            MessageLookupByLibrary.simpleMessage(
+                "チャットを削除すると、メッセージを復元することはできません。メッセージはアカウントから削除されます。"),
         "age": MessageLookupByLibrary.simpleMessage("年"),
         "agreeNContinue": MessageLookupByLibrary.simpleMessage("同意して続行"),
         "allow": MessageLookupByLibrary.simpleMessage("許可する"),
@@ -42,6 +46,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "areYouSure": MessageLookupByLibrary.simpleMessage("本気ですか"),
         "areYouSureYouEtc":
             MessageLookupByLibrary.simpleMessage("このメッセージを削除してもよろしいですか?"),
+        "areYouSureYouWantToDeleteTheComment":
+            MessageLookupByLibrary.simpleMessage("コメントを削除してもよろしいですか?"),
+        "areYouSureYouWantToDeleteThePost":
+            MessageLookupByLibrary.simpleMessage("投稿を削除してもよろしいですか?"),
         "areYouSureYouWantToEnd":
             MessageLookupByLibrary.simpleMessage("ライブビデオを終了してもよろしいですか?"),
         "artist": MessageLookupByLibrary.simpleMessage("アーティスト"),
@@ -74,6 +82,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("コイン、続行するかどうかを確認してください"),
         "collected": MessageLookupByLibrary.simpleMessage("集めました"),
         "comment": MessageLookupByLibrary.simpleMessage("コメント..."),
+        "commentDelete": MessageLookupByLibrary.simpleMessage("コメント削除しますか？"),
+        "commentNotFound": MessageLookupByLibrary.simpleMessage("コメントが見つかりません"),
+        "comments": MessageLookupByLibrary.simpleMessage("コメント"),
         "complete": MessageLookupByLibrary.simpleMessage("完了"),
         "confirmPassword": MessageLookupByLibrary.simpleMessage("パスワードを認証する"),
         "continueCap": MessageLookupByLibrary.simpleMessage("続く"),
@@ -85,6 +96,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "continueWithGoogle":
             MessageLookupByLibrary.simpleMessage("Google を続ける"),
         "couldNotLaunch": MessageLookupByLibrary.simpleMessage("起動できませんでした"),
+        "createPost": MessageLookupByLibrary.simpleMessage("投稿の作成"),
         "cyberbullying": MessageLookupByLibrary.simpleMessage("ネットいじめ"),
         "dashboard": MessageLookupByLibrary.simpleMessage("  ダッシュボード"),
         "delete": MessageLookupByLibrary.simpleMessage("消去"),
@@ -94,14 +106,23 @@ class MessageLookup extends MessageLookupByLibrary {
         "deleteDialogDis": MessageLookupByLibrary.simpleMessage(
             "本当にアカウントを削除してもよろしいですか? 後で復元することはできず、データは永久に失われます"),
         "deleteMessage": MessageLookupByLibrary.simpleMessage("メッセージを削除する"),
+        "deletePost": MessageLookupByLibrary.simpleMessage("投稿を削除する"),
         "deleteThisChat": MessageLookupByLibrary.simpleMessage("このチャットを削除"),
+        "deleteThisStory":
+            MessageLookupByLibrary.simpleMessage("このストーリーを削除しますか?"),
         "diamond": MessageLookupByLibrary.simpleMessage("  集めたダイヤモンド:"),
         "diamond1": MessageLookupByLibrary.simpleMessage("ダイヤモンド:"),
         "diamondCap": MessageLookupByLibrary.simpleMessage("ダイヤモンド"),
         "diamonds": MessageLookupByLibrary.simpleMessage("ダイヤモンド"),
         "diamondsCamel": MessageLookupByLibrary.simpleMessage("ダイヤモンド"),
+        "doYouReallyWantToDeleteThisChatYouWont":
+            MessageLookupByLibrary.simpleMessage(
+                "このチャットを削除してもよろしいですか。削除すると、いかなる種類のデータも復元できなくなります。ご了承いただければ幸いです。"),
         "doYouReallyWantToLive": MessageLookupByLibrary.simpleMessage(
             "本当に生きたいのですか。 これからもライブを続けてください"),
+        "doYouWantToDeleteThisStoryYouCanNot":
+            MessageLookupByLibrary.simpleMessage(
+                "このストーリーを削除しますか?、完全に削除されるため、ストーリーを復元することはできません。"),
         "docType": MessageLookupByLibrary.simpleMessage("ドキュメントタイプ"),
         "donTHaveAnAccount":
             MessageLookupByLibrary.simpleMessage("アカウントをお持ちでない場合は、"),
@@ -131,6 +152,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterThePasswordForTheAccountNwithTheEmailBelow":
             MessageLookupByLibrary.simpleMessage(
                 "アカウントのパスワードを\n以下のメールアドレスに入力してください"),
+        "enterUsername":
+            MessageLookupByLibrary.simpleMessage("ユーザーネームを入力してください"),
         "enterYourMailOnWhichYouHaveNcreatedAnAccount":
             MessageLookupByLibrary.simpleMessage(
                 "アカウントを作成した\nメールアドレスを入力してください。 パスワードをリセットするための\nリンクを送信します"),
@@ -142,10 +165,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "failedPayment": MessageLookupByLibrary.simpleMessage("支払いの失敗"),
         "failedToLoadVideo":
             MessageLookupByLibrary.simpleMessage("ビデオのロードに失敗しました: 開けません"),
+        "feed": MessageLookupByLibrary.simpleMessage("餌"),
         "female": MessageLookupByLibrary.simpleMessage("女性"),
         "findSomeoneRandomly": MessageLookupByLibrary.simpleMessage(
             "ランダムに誰かを見つけて\nプロフィールを確認してください"),
         "fitness": MessageLookupByLibrary.simpleMessage("フィットネス"),
+        "follow": MessageLookupByLibrary.simpleMessage("フォローする"),
+        "followers": MessageLookupByLibrary.simpleMessage("フォロワー"),
+        "following": MessageLookupByLibrary.simpleMessage("続く"),
+        "followingList": MessageLookupByLibrary.simpleMessage("フォローリスト"),
         "foodies": MessageLookupByLibrary.simpleMessage("グルメ"),
         "forgotPassword": MessageLookupByLibrary.simpleMessage("パスワードをお忘れですか？"),
         "forgotYourPassword":
@@ -193,6 +221,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "languagesDetail":
             MessageLookupByLibrary.simpleMessage("ストリーミング中に話す言語.."),
         "languagesYouEtc": MessageLookupByLibrary.simpleMessage("あなたが話す言語"),
+        "large": MessageLookupByLibrary.simpleMessage("大きい"),
         "legal": MessageLookupByLibrary.simpleMessage("法的"),
         "likeProfiles": MessageLookupByLibrary.simpleMessage("プロフィールが好き"),
         "live": MessageLookupByLibrary.simpleMessage("ライブ"),
@@ -204,6 +233,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "liveStreamPriceWillCostYou":
             MessageLookupByLibrary.simpleMessage("ライブストリームの料金がかかります"),
         "liveVerification": MessageLookupByLibrary.simpleMessage("ライブ検証"),
+        "lives": MessageLookupByLibrary.simpleMessage("生きる"),
         "livestream":
             MessageLookupByLibrary.simpleMessage("ウォレット / ライブストリーム ダッシュボード"),
         "logIn": MessageLookupByLibrary.simpleMessage("ログイン"),
@@ -227,10 +257,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("地図上の近くのプロフィール"),
         "next": MessageLookupByLibrary.simpleMessage("次"),
         "no": MessageLookupByLibrary.simpleMessage("いいえ"),
+        "noComment": MessageLookupByLibrary.simpleMessage("ノーコメント"),
         "noData": MessageLookupByLibrary.simpleMessage("データなし"),
         "noDataAvailable": MessageLookupByLibrary.simpleMessage("データなし"),
+        "noLikeData": MessageLookupByLibrary.simpleMessage("類似データなし"),
         "noLocation": MessageLookupByLibrary.simpleMessage("場所がありません"),
         "noRedeemData": MessageLookupByLibrary.simpleMessage("引き換えデータなし"),
+        "noSavedData": MessageLookupByLibrary.simpleMessage("保存されたデータがありません"),
         "noUsersAreLive":
             MessageLookupByLibrary.simpleMessage("ライブ中のユーザーはいません"),
         "notEligible": MessageLookupByLibrary.simpleMessage("不適格"),
@@ -251,6 +284,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "personal": MessageLookupByLibrary.simpleMessage("個人的"),
         "personalHarassment":
             MessageLookupByLibrary.simpleMessage("パーソナルハラスメント"),
+        "photo": MessageLookupByLibrary.simpleMessage("写真"),
         "photos": MessageLookupByLibrary.simpleMessage("写真"),
         "photosCap": MessageLookupByLibrary.simpleMessage("写真"),
         "platform": MessageLookupByLibrary.simpleMessage("プラットホーム"),
@@ -270,6 +304,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("メールアドレスを入力してください...!"),
         "pleaseEnterValidEmailAddress":
             MessageLookupByLibrary.simpleMessage("有効なメールアドレスを入力してください"),
+        "pleaseEnterYourAge":
+            MessageLookupByLibrary.simpleMessage("あなたの年齢を入力してください"),
         "pleaseSelectImage":
             MessageLookupByLibrary.simpleMessage("画像を選択してください"),
         "pleaseValidEmail":
@@ -281,6 +317,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "policy2": MessageLookupByLibrary.simpleMessage("利用規約"),
         "policy3": MessageLookupByLibrary.simpleMessage("  と"),
         "policy4": MessageLookupByLibrary.simpleMessage("プライバシーポリシー"),
+        "post": MessageLookupByLibrary.simpleMessage("役職"),
+        "posts": MessageLookupByLibrary.simpleMessage("投稿"),
         "priceCap": MessageLookupByLibrary.simpleMessage("価格"),
         "privacy": MessageLookupByLibrary.simpleMessage("プライバシー設定"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("プライバシーポリシー"),
@@ -290,6 +328,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "profileCap": MessageLookupByLibrary.simpleMessage("プロフィール"),
         "pushNotification": MessageLookupByLibrary.simpleMessage("プッシュ通知"),
         "randoms": MessageLookupByLibrary.simpleMessage("ランダム"),
+        "readLess": MessageLookupByLibrary.simpleMessage("もっと読む..."),
+        "readMore": MessageLookupByLibrary.simpleMessage("続きを読む..."),
         "redeem": MessageLookupByLibrary.simpleMessage("償還"),
         "redeemCap": MessageLookupByLibrary.simpleMessage("償還"),
         "redeemRequests": MessageLookupByLibrary.simpleMessage("引き換えリクエスト"),
@@ -300,7 +340,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("登録が正常に完了しました"),
         "report": MessageLookupByLibrary.simpleMessage("報告"),
         "reportCap": MessageLookupByLibrary.simpleMessage("報告"),
+        "reportPost": MessageLookupByLibrary.simpleMessage("レポート投稿"),
         "reportUser": MessageLookupByLibrary.simpleMessage("レポートユーザー"),
+        "reportedSubmitted": MessageLookupByLibrary.simpleMessage("報告済み 提出済み"),
+        "reportedSuccessfully":
+            MessageLookupByLibrary.simpleMessage("無事報告完了しました！！"),
         "reqVerification": MessageLookupByLibrary.simpleMessage("検証のリクエスト"),
         "requests": MessageLookupByLibrary.simpleMessage("  リクエスト"),
         "reset": MessageLookupByLibrary.simpleMessage("リセット"),
@@ -309,9 +353,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("逆スワイプには費用がかかります"),
         "save": MessageLookupByLibrary.simpleMessage("保存"),
         "savedProfiles": MessageLookupByLibrary.simpleMessage("保存されたプロファイル"),
+        "searchProfile": MessageLookupByLibrary.simpleMessage("プロフィールの検索"),
         "searching": MessageLookupByLibrary.simpleMessage("検索中..."),
         "selectAnother": MessageLookupByLibrary.simpleMessage("別のを選択してください"),
         "selectDocument": MessageLookupByLibrary.simpleMessage("ドキュメントの選択"),
+        "selectInterestsToContinue":
+            MessageLookupByLibrary.simpleMessage("続行するには興味を選択してください"),
         "selectReason": MessageLookupByLibrary.simpleMessage("理由を選択してください"),
         "selected": MessageLookupByLibrary.simpleMessage("選択済み"),
         "send": MessageLookupByLibrary.simpleMessage("送信"),
@@ -362,10 +409,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "travel": MessageLookupByLibrary.simpleMessage("旅行"),
         "unBlock": MessageLookupByLibrary.simpleMessage("ブロックを解除する"),
         "unblockCap": MessageLookupByLibrary.simpleMessage("ブロックを解除する"),
+        "unfollow": MessageLookupByLibrary.simpleMessage("フォローを解除する"),
         "useAutomaticallyEtc":
             MessageLookupByLibrary.simpleMessage("次から自動的に使用する"),
         "userBlock": MessageLookupByLibrary.simpleMessage("管理者によるユーザーのブロック"),
+        "userNotFound": MessageLookupByLibrary.simpleMessage("ユーザーが見つかりません！！"),
         "userNotLive": MessageLookupByLibrary.simpleMessage("ユーザーが生きていない"),
+        "username": MessageLookupByLibrary.simpleMessage("ユーザー名"),
         "users": MessageLookupByLibrary.simpleMessage("ユーザー"),
         "validEmail": MessageLookupByLibrary.simpleMessage("有効な電子メールを入力してください"),
         "verification": MessageLookupByLibrary.simpleMessage("検証を申請する"),
@@ -375,6 +425,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "video": MessageLookupByLibrary.simpleMessage("ビデオ？"),
         "videoCall": MessageLookupByLibrary.simpleMessage("ビデオ通話"),
         "videoCap": MessageLookupByLibrary.simpleMessage("ビデオ"),
+        "videoDurationIs": MessageLookupByLibrary.simpleMessage("動画の長さは"),
         "videoPreview": MessageLookupByLibrary.simpleMessage("ビデオプレビュー画面"),
         "videos": MessageLookupByLibrary.simpleMessage("動画"),
         "view": MessageLookupByLibrary.simpleMessage("意見"),
@@ -382,10 +433,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "walking": MessageLookupByLibrary.simpleMessage("ウォーキング"),
         "wallet": MessageLookupByLibrary.simpleMessage("ダイヤモンドウォレット"),
         "walletCap": MessageLookupByLibrary.simpleMessage("財布"),
+        "whatDoYouWantToSelect":
+            MessageLookupByLibrary.simpleMessage("何を選択しますか?"),
         "whereDoYouLive": MessageLookupByLibrary.simpleMessage("どこに住んでいますか ？"),
         "whichItemWouldYouLikeEtc":
             MessageLookupByLibrary.simpleMessage("どの項目を選択しますか?\n項目を選択してください"),
         "writeMessage": MessageLookupByLibrary.simpleMessage("メッセージを書く"),
+        "writeSomethingHere":
+            MessageLookupByLibrary.simpleMessage("ここに何か書いてください..."),
         "yes": MessageLookupByLibrary.simpleMessage("はい"),
         "yesterday": MessageLookupByLibrary.simpleMessage("昨日"),
         "you": MessageLookupByLibrary.simpleMessage("あなた"),

@@ -27,6 +27,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "accountDetails": MessageLookupByLibrary.simpleMessage("खाता विवरण"),
         "add": MessageLookupByLibrary.simpleMessage("जोड़ना"),
         "addCoins": MessageLookupByLibrary.simpleMessage("सिक्के जोडो"),
+        "addComment": MessageLookupByLibrary.simpleMessage("टिप्पणी जोड़ना"),
+        "afterDeletingTheChatYouCanNotRestoreOurMessage":
+            MessageLookupByLibrary.simpleMessage(
+                "चैट डिलीट करने के बाद आप हमारे मैसेज को रिस्टोर नहीं कर सकते. संदेश आपके खाते से हटा दिया जाएगा."),
         "age": MessageLookupByLibrary.simpleMessage("आयु"),
         "agreeNContinue":
             MessageLookupByLibrary.simpleMessage("सहमत और जारी रखें"),
@@ -43,6 +47,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "areYouSure": MessageLookupByLibrary.simpleMessage("क्या आपको यकीन है"),
         "areYouSureYouEtc": MessageLookupByLibrary.simpleMessage(
             "क्या आप निश्चित रूप से यह संदेश हटाना चाहते हैं ?"),
+        "areYouSureYouWantToDeleteTheComment":
+            MessageLookupByLibrary.simpleMessage(
+                "क्या आप वाकई टिप्पणी हटाना चाहते हैं?"),
+        "areYouSureYouWantToDeleteThePost":
+            MessageLookupByLibrary.simpleMessage(
+                "क्या आप वाकई पोस्ट हटाना चाहते हैं?"),
         "areYouSureYouWantToEnd": MessageLookupByLibrary.simpleMessage(
             "क्या आप वाकई अपना लाइव वीडियो समाप्त करना चाहते हैं?"),
         "artist": MessageLookupByLibrary.simpleMessage("कलाकार"),
@@ -77,6 +87,10 @@ class MessageLookup extends MessageLookupByLibrary {
                 "सिक्के, कृपया पुष्टि करें कि आपको जारी रखना है या नहीं"),
         "collected": MessageLookupByLibrary.simpleMessage("एकत्र किया हुआ"),
         "comment": MessageLookupByLibrary.simpleMessage("टिप्पणी..."),
+        "commentDelete": MessageLookupByLibrary.simpleMessage("टिप्पणी हटाएं?"),
+        "commentNotFound":
+            MessageLookupByLibrary.simpleMessage("टिप्पणी नहीं मिली"),
+        "comments": MessageLookupByLibrary.simpleMessage("टिप्पणियाँ"),
         "complete": MessageLookupByLibrary.simpleMessage("पूरा"),
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("पासवर्ड की पुष्टि कीजिये"),
@@ -92,6 +106,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Google के साथ जारी रखें"),
         "couldNotLaunch":
             MessageLookupByLibrary.simpleMessage("लॉन्च नहीं हो सका"),
+        "createPost": MessageLookupByLibrary.simpleMessage("पोस्ट बनाएं"),
         "cyberbullying": MessageLookupByLibrary.simpleMessage("साइबर-धमकी"),
         "dashboard": MessageLookupByLibrary.simpleMessage("  डैशबोर्ड"),
         "delete": MessageLookupByLibrary.simpleMessage("मिटाना"),
@@ -101,15 +116,23 @@ class MessageLookup extends MessageLookupByLibrary {
         "deleteDialogDis": MessageLookupByLibrary.simpleMessage(
             "क्या आप वाकई अपना खाता हटाना चाहते हैं? आप इसे बाद में पुनर्प्राप्त नहीं कर पाएंगे और डेटा हमेशा के लिए खो जाएगा"),
         "deleteMessage": MessageLookupByLibrary.simpleMessage("संदेश को हटाएं"),
+        "deletePost": MessageLookupByLibrary.simpleMessage("पोस्ट को हटाएं"),
         "deleteThisChat":
             MessageLookupByLibrary.simpleMessage("इस चैट को हटा दें"),
+        "deleteThisStory":
+            MessageLookupByLibrary.simpleMessage("यह कहानी हटाएं?"),
         "diamond": MessageLookupByLibrary.simpleMessage("  हीरे एकत्रित:"),
         "diamond1": MessageLookupByLibrary.simpleMessage("हीरे:"),
         "diamondCap": MessageLookupByLibrary.simpleMessage("डायमंड"),
         "diamonds": MessageLookupByLibrary.simpleMessage("हीरे"),
         "diamondsCamel": MessageLookupByLibrary.simpleMessage("हीरे"),
+        "doYouReallyWantToDeleteThisChatYouWont":
+            MessageLookupByLibrary.simpleMessage(
+                "क्या आप वाकई इस चैट को डिलीट करना चाहते हैं? इसके बाद आप किसी भी तरह का डेटा रिकवर नहीं कर पाएंगे। आशा है आप इससे अवगत होंगे!"),
         "doYouReallyWantToLive": MessageLookupByLibrary.simpleMessage(
             "क्या तुम सच में जीना चाहते हो। कृपया लाइव जाना जारी रखें"),
+        "doYouWantToDeleteThisStoryYouCanNot": MessageLookupByLibrary.simpleMessage(
+            "क्या आप इस कहानी को हटाना चाहते हैं?, आप कहानी को पुनर्स्थापित नहीं कर सकते, यह स्थायी रूप से हटा दी जाएगी।"),
         "docType": MessageLookupByLibrary.simpleMessage("दस्तावेज़ का प्रकार"),
         "donTHaveAnAccount":
             MessageLookupByLibrary.simpleMessage("खाता नहीं है?"),
@@ -145,6 +168,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterThePasswordForTheAccountNwithTheEmailBelow":
             MessageLookupByLibrary.simpleMessage(
                 "नीचे दिए गए ईमेल के साथ खाते का पासवर्ड \n दर्ज करें"),
+        "enterUsername":
+            MessageLookupByLibrary.simpleMessage("उपयोगकर्ता नाम दर्ज करें"),
         "enterYourMailOnWhichYouHaveNcreatedAnAccount":
             MessageLookupByLibrary.simpleMessage(
                 "अपना मेल दर्ज करें जिस पर आपने \nखाता बनाया है। हम आपका पासवर्ड रीसेट करने के लिए एक लिंक \nभेजेंगे"),
@@ -157,10 +182,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "failedPayment": MessageLookupByLibrary.simpleMessage("विफल भुगतान"),
         "failedToLoadVideo": MessageLookupByLibrary.simpleMessage(
             "वीडियो लोड करने में विफल: खोला नहीं जा सकता"),
+        "feed": MessageLookupByLibrary.simpleMessage("खिलाना"),
         "female": MessageLookupByLibrary.simpleMessage("महिला"),
         "findSomeoneRandomly": MessageLookupByLibrary.simpleMessage(
             "किसी को बेतरतीब ढंग से ढूंढें\nऔर उनकी प्रोफ़ाइल जांचें"),
         "fitness": MessageLookupByLibrary.simpleMessage("स्वास्थ्य"),
+        "follow": MessageLookupByLibrary.simpleMessage("अनुसरण करना"),
+        "followers": MessageLookupByLibrary.simpleMessage("समर्थक"),
+        "following": MessageLookupByLibrary.simpleMessage("अगले"),
+        "followingList":
+            MessageLookupByLibrary.simpleMessage("निम्नलिखित सूची"),
         "foodies": MessageLookupByLibrary.simpleMessage("भोजन करने के शौकीन"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("पासवर्ड भूल गए?"),
@@ -212,6 +243,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "स्ट्रीमिंग के दौरान आप जो भाषाएं बोलेंगे.."),
         "languagesYouEtc":
             MessageLookupByLibrary.simpleMessage("आप जो भाषाएँ बोलेंगे"),
+        "large": MessageLookupByLibrary.simpleMessage("बड़ा"),
         "legal": MessageLookupByLibrary.simpleMessage("कानूनी"),
         "likeProfiles":
             MessageLookupByLibrary.simpleMessage("प्रोफ़ाइल की तरह"),
@@ -225,6 +257,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "लाइव स्ट्रीम की कीमत आपको महंगी पड़ेगी"),
         "liveVerification":
             MessageLookupByLibrary.simpleMessage("लाइव सत्यापन"),
+        "lives": MessageLookupByLibrary.simpleMessage("ज़िंदगियाँ"),
         "livestream": MessageLookupByLibrary.simpleMessage(
             "वॉलेट / लाइवस्ट्रीम डैशबोर्ड"),
         "logIn": MessageLookupByLibrary.simpleMessage("लॉग इन करें"),
@@ -248,12 +281,17 @@ class MessageLookup extends MessageLookupByLibrary {
             "मानचित्र पर आस-पास के प्रोफाइल"),
         "next": MessageLookupByLibrary.simpleMessage("अगला"),
         "no": MessageLookupByLibrary.simpleMessage("नहीं"),
+        "noComment": MessageLookupByLibrary.simpleMessage("कोई टिप्पणी नहीं"),
         "noData": MessageLookupByLibrary.simpleMessage("कोई डेटा नहीं"),
         "noDataAvailable":
             MessageLookupByLibrary.simpleMessage("कोई डेटा मौजूद नहीं"),
+        "noLikeData":
+            MessageLookupByLibrary.simpleMessage("कोई लाइक डेटा नहीं"),
         "noLocation": MessageLookupByLibrary.simpleMessage("कोई स्थान नहीं"),
         "noRedeemData":
             MessageLookupByLibrary.simpleMessage("कोई रिडीम डेटा नहीं"),
+        "noSavedData":
+            MessageLookupByLibrary.simpleMessage("कोई सहेजा गया डेटा नहीं"),
         "noUsersAreLive":
             MessageLookupByLibrary.simpleMessage("कोई उपयोगकर्ता लाइव नहीं है"),
         "notEligible": MessageLookupByLibrary.simpleMessage("पात्र नहीं है"),
@@ -275,6 +313,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "personal": MessageLookupByLibrary.simpleMessage("निजी"),
         "personalHarassment":
             MessageLookupByLibrary.simpleMessage("व्यक्तिगत उत्पीड़न"),
+        "photo": MessageLookupByLibrary.simpleMessage("तस्वीर"),
         "photos": MessageLookupByLibrary.simpleMessage("तस्वीरें"),
         "photosCap": MessageLookupByLibrary.simpleMessage("तस्वीरें"),
         "platform": MessageLookupByLibrary.simpleMessage("प्लैटफ़ॉर्म"),
@@ -295,6 +334,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("कृपया ईमेल दर्ज करें...!"),
         "pleaseEnterValidEmailAddress":
             MessageLookupByLibrary.simpleMessage("कृपया सही ईमेल पता दें"),
+        "pleaseEnterYourAge":
+            MessageLookupByLibrary.simpleMessage("कृपया अपनी उम्र दर्ज करें"),
         "pleaseSelectImage":
             MessageLookupByLibrary.simpleMessage("कृपया छवि का चयन करें"),
         "pleaseValidEmail":
@@ -307,6 +348,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "policy2": MessageLookupByLibrary.simpleMessage("उपयोग की शर्तें"),
         "policy3": MessageLookupByLibrary.simpleMessage("  और"),
         "policy4": MessageLookupByLibrary.simpleMessage("गोपनीयता नीति"),
+        "post": MessageLookupByLibrary.simpleMessage("डाक"),
+        "posts": MessageLookupByLibrary.simpleMessage("पदों"),
         "priceCap": MessageLookupByLibrary.simpleMessage("कीमत"),
         "privacy": MessageLookupByLibrary.simpleMessage("गोपनीय सेटिंग"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("गोपनीयता नीति"),
@@ -317,6 +360,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pushNotification":
             MessageLookupByLibrary.simpleMessage("सूचनाएं धक्का"),
         "randoms": MessageLookupByLibrary.simpleMessage("यादृच्छिक"),
+        "readLess": MessageLookupByLibrary.simpleMessage("कम पढ़ें..."),
+        "readMore": MessageLookupByLibrary.simpleMessage("और पढ़ें..."),
         "redeem": MessageLookupByLibrary.simpleMessage("भुनाना"),
         "redeemCap": MessageLookupByLibrary.simpleMessage("भुनाना"),
         "redeemRequests":
@@ -328,8 +373,13 @@ class MessageLookup extends MessageLookupByLibrary {
             "पंजीकरण सफलतापूर्वक किया गया"),
         "report": MessageLookupByLibrary.simpleMessage("प्रतिवेदन"),
         "reportCap": MessageLookupByLibrary.simpleMessage("प्रतिवेदन"),
+        "reportPost": MessageLookupByLibrary.simpleMessage("रिपोर्ट पोस्ट"),
         "reportUser":
             MessageLookupByLibrary.simpleMessage("उपयोगकर्ता को रिपोर्ट करें"),
+        "reportedSubmitted":
+            MessageLookupByLibrary.simpleMessage("रिपोर्ट प्रस्तुत की गई"),
+        "reportedSuccessfully": MessageLookupByLibrary.simpleMessage(
+            "सफलतापूर्वक रिपोर्ट किया गया!!"),
         "reqVerification":
             MessageLookupByLibrary.simpleMessage("अनुरोध सत्यापन"),
         "requests": MessageLookupByLibrary.simpleMessage("  अनुरोधों"),
@@ -340,10 +390,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "save": MessageLookupByLibrary.simpleMessage("बचाना"),
         "savedProfiles":
             MessageLookupByLibrary.simpleMessage("सहेजे गए प्रोफ़ाइल"),
+        "searchProfile":
+            MessageLookupByLibrary.simpleMessage("प्रोफ़ाइल खोजें"),
         "searching": MessageLookupByLibrary.simpleMessage("खोज कर..."),
         "selectAnother": MessageLookupByLibrary.simpleMessage("दूसरा चुनें"),
         "selectDocument":
             MessageLookupByLibrary.simpleMessage("दस्तावेज़ का चयन करें"),
+        "selectInterestsToContinue": MessageLookupByLibrary.simpleMessage(
+            "जारी रखने के लिए रुचियाँ चुनें"),
         "selectReason": MessageLookupByLibrary.simpleMessage("कारण चुनें"),
         "selected": MessageLookupByLibrary.simpleMessage("गिने चुने"),
         "send": MessageLookupByLibrary.simpleMessage("भेजना"),
@@ -403,12 +457,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "travel": MessageLookupByLibrary.simpleMessage("यात्रा"),
         "unBlock": MessageLookupByLibrary.simpleMessage("अनब्लॉक"),
         "unblockCap": MessageLookupByLibrary.simpleMessage("अनब्लॉ"),
+        "unfollow": MessageLookupByLibrary.simpleMessage("करें"),
         "useAutomaticallyEtc": MessageLookupByLibrary.simpleMessage(
             "अगले से स्वचालित रूप से उपयोग करें"),
         "userBlock": MessageLookupByLibrary.simpleMessage(
             "व्यवस्थापक द्वारा उपयोगकर्ता ब्लॉक"),
+        "userNotFound":
+            MessageLookupByLibrary.simpleMessage("उपयोगकर्ता नहीं मिला!!"),
         "userNotLive":
             MessageLookupByLibrary.simpleMessage("उपयोगकर्ता लाइव नहीं है"),
+        "username": MessageLookupByLibrary.simpleMessage("उपयोगकर्ता नाम"),
         "users": MessageLookupByLibrary.simpleMessage("उपयोगकर्ताओं"),
         "validEmail":
             MessageLookupByLibrary.simpleMessage("मान्य ईमेल दर्ज करें"),
@@ -420,6 +478,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "video": MessageLookupByLibrary.simpleMessage("वीडियो?"),
         "videoCall": MessageLookupByLibrary.simpleMessage("वीडियो कॉल"),
         "videoCap": MessageLookupByLibrary.simpleMessage("वीडियो"),
+        "videoDurationIs":
+            MessageLookupByLibrary.simpleMessage("वीडियो की अवधि है"),
         "videoPreview":
             MessageLookupByLibrary.simpleMessage("वीडियो पूर्वावलोकन स्क्रीन"),
         "videos": MessageLookupByLibrary.simpleMessage("वीडियो"),
@@ -428,11 +488,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "walking": MessageLookupByLibrary.simpleMessage("टहलना"),
         "wallet": MessageLookupByLibrary.simpleMessage("डायमंड वॉलेट"),
         "walletCap": MessageLookupByLibrary.simpleMessage("बटुआ"),
+        "whatDoYouWantToSelect":
+            MessageLookupByLibrary.simpleMessage("आप क्या चुनना चाहते हैं?"),
         "whereDoYouLive":
             MessageLookupByLibrary.simpleMessage("आप कहाँ रहते हैं ?"),
         "whichItemWouldYouLikeEtc": MessageLookupByLibrary.simpleMessage(
             "आप कौन सा आइटम चुनना चाहेंगे?\nएक आइटम चुनें"),
         "writeMessage": MessageLookupByLibrary.simpleMessage("संदेश लिखना"),
+        "writeSomethingHere":
+            MessageLookupByLibrary.simpleMessage("यहां कुछ लिखें..."),
         "yes": MessageLookupByLibrary.simpleMessage("हाँ"),
         "yesterday": MessageLookupByLibrary.simpleMessage("कल"),
         "you": MessageLookupByLibrary.simpleMessage("आप"),

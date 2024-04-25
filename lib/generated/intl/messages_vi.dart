@@ -28,6 +28,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("CHI TIẾT TÀI KHOẢN"),
         "add": MessageLookupByLibrary.simpleMessage("THÊM VÀO"),
         "addCoins": MessageLookupByLibrary.simpleMessage("THÊM XU"),
+        "addComment": MessageLookupByLibrary.simpleMessage("Thêm bình luận"),
+        "afterDeletingTheChatYouCanNotRestoreOurMessage":
+            MessageLookupByLibrary.simpleMessage(
+                "Sau khi xóa cuộc trò chuyện, bạn không thể khôi phục tin nhắn của chúng tôi. Tin nhắn sẽ bị xóa khỏi tài khoản của bạn."),
         "age": MessageLookupByLibrary.simpleMessage("TUỔI"),
         "agreeNContinue":
             MessageLookupByLibrary.simpleMessage("Đồng ý & Tiếp tục"),
@@ -46,6 +50,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "areYouSure": MessageLookupByLibrary.simpleMessage("Bạn có chắc không"),
         "areYouSureYouEtc": MessageLookupByLibrary.simpleMessage(
             "Bạn có chắc chắn muốn xóa tin nhắn này ?"),
+        "areYouSureYouWantToDeleteTheComment":
+            MessageLookupByLibrary.simpleMessage(
+                "Bạn có chắc chắn muốn xóa bình luận?"),
+        "areYouSureYouWantToDeleteThePost":
+            MessageLookupByLibrary.simpleMessage(
+                "Bạn có chắc chắn muốn xóa bài viết?"),
         "areYouSureYouWantToEnd": MessageLookupByLibrary.simpleMessage(
             "Bạn có chắc chắn muốn kết thúc video trực tiếp của mình không?"),
         "artist": MessageLookupByLibrary.simpleMessage("Nghệ sĩ"),
@@ -82,6 +92,10 @@ class MessageLookup extends MessageLookupByLibrary {
                 "xu, Vui lòng xác nhận xem bạn có tiếp tục hay không"),
         "collected": MessageLookupByLibrary.simpleMessage("thu thập"),
         "comment": MessageLookupByLibrary.simpleMessage("Bình luận..."),
+        "commentDelete": MessageLookupByLibrary.simpleMessage("Xóa bình luận?"),
+        "commentNotFound":
+            MessageLookupByLibrary.simpleMessage("Không tìm thấy bình luận"),
+        "comments": MessageLookupByLibrary.simpleMessage("Bình luận"),
         "complete": MessageLookupByLibrary.simpleMessage("Hoàn thành"),
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("Xác nhận mật khẩu"),
@@ -97,6 +111,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Tiếp tục với Google"),
         "couldNotLaunch":
             MessageLookupByLibrary.simpleMessage("Không thể khởi chạy"),
+        "createPost": MessageLookupByLibrary.simpleMessage("Tạo bài đăng"),
         "cyberbullying":
             MessageLookupByLibrary.simpleMessage("Bắt nạt trên mạng"),
         "dashboard": MessageLookupByLibrary.simpleMessage("  BẢNG ĐIỀU KHIỂN"),
@@ -107,16 +122,24 @@ class MessageLookup extends MessageLookupByLibrary {
         "deleteDialogDis": MessageLookupByLibrary.simpleMessage(
             "Bạn có thực sự muốn xóa tài khoản của mình? Bạn sẽ không thể khôi phục nó sau này và dữ liệu sẽ bị mất vĩnh viễn"),
         "deleteMessage": MessageLookupByLibrary.simpleMessage("Xóa tin nhắn"),
+        "deletePost": MessageLookupByLibrary.simpleMessage("Xóa bài đăng"),
         "deleteThisChat":
             MessageLookupByLibrary.simpleMessage("Xóa cuộc trò chuyện này"),
+        "deleteThisStory":
+            MessageLookupByLibrary.simpleMessage("Xóa câu chuyện này?"),
         "diamond":
             MessageLookupByLibrary.simpleMessage("  Kim cương được thu thập:"),
         "diamond1": MessageLookupByLibrary.simpleMessage("kim cương:"),
         "diamondCap": MessageLookupByLibrary.simpleMessage("KIM CƯƠNG"),
         "diamonds": MessageLookupByLibrary.simpleMessage("KIM CƯƠNG"),
         "diamondsCamel": MessageLookupByLibrary.simpleMessage("kim cương"),
+        "doYouReallyWantToDeleteThisChatYouWont":
+            MessageLookupByLibrary.simpleMessage(
+                "Bạn có thực sự muốn xóa cuộc trò chuyện này không. Bạn sẽ không thể khôi phục bất kỳ loại dữ liệu nào sau đó. Hy vọng bạn nhận thức được điều đó!"),
         "doYouReallyWantToLive": MessageLookupByLibrary.simpleMessage(
             "Bạn có thực sự muốn sống. Hãy tiếp tục phát trực tiếp"),
+        "doYouWantToDeleteThisStoryYouCanNot": MessageLookupByLibrary.simpleMessage(
+            "Bạn có muốn xóa câu chuyện này không?, Bạn không thể khôi phục câu chuyện, nó sẽ bị xóa vĩnh viễn."),
         "docType": MessageLookupByLibrary.simpleMessage("LOẠI TÀI LIỆU"),
         "donTHaveAnAccount":
             MessageLookupByLibrary.simpleMessage("Không có một tài khoản?"),
@@ -150,6 +173,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterThePasswordForTheAccountNwithTheEmailBelow":
             MessageLookupByLibrary.simpleMessage(
                 "Nhập mật khẩu cho tài khoản \nvới email bên dưới"),
+        "enterUsername":
+            MessageLookupByLibrary.simpleMessage("Điền tên đăng nhập"),
         "enterYourMailOnWhichYouHaveNcreatedAnAccount":
             MessageLookupByLibrary.simpleMessage(
                 "Nhập thư của bạn mà bạn đã \ntạo một tài khoản. Chúng tôi sẽ gửi một liên kết \nđể đặt lại mật khẩu của bạn"),
@@ -163,10 +188,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Thanh toán không thành công"),
         "failedToLoadVideo": MessageLookupByLibrary.simpleMessage(
             "Không thể tải video: Không thể mở"),
+        "feed": MessageLookupByLibrary.simpleMessage("Cho ăn"),
         "female": MessageLookupByLibrary.simpleMessage("Nữ giới"),
         "findSomeoneRandomly": MessageLookupByLibrary.simpleMessage(
             "Tìm ai đó ngẫu nhiên\nVà kiểm tra hồ sơ của họ"),
         "fitness": MessageLookupByLibrary.simpleMessage("Sự thích hợp"),
+        "follow": MessageLookupByLibrary.simpleMessage("Theo"),
+        "followers": MessageLookupByLibrary.simpleMessage("Người theo dõi"),
+        "following": MessageLookupByLibrary.simpleMessage("Tiếp theo"),
+        "followingList": MessageLookupByLibrary.simpleMessage("Theo danh sach"),
         "foodies": MessageLookupByLibrary.simpleMessage("người sành ăn"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("Quên mật khẩu?"),
@@ -218,6 +248,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ngôn ngữ bạn sẽ nói trong khi phát trực tuyến.."),
         "languagesYouEtc":
             MessageLookupByLibrary.simpleMessage("NGÔN NGỮ BẠN SẼ NÓI"),
+        "large": MessageLookupByLibrary.simpleMessage("Lớn"),
         "legal": MessageLookupByLibrary.simpleMessage("HỢP PHÁP"),
         "likeProfiles": MessageLookupByLibrary.simpleMessage("Thích hồ sơ"),
         "live": MessageLookupByLibrary.simpleMessage("Sống"),
@@ -230,6 +261,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Giá phát trực tiếp sẽ khiến bạn phải trả giá"),
         "liveVerification":
             MessageLookupByLibrary.simpleMessage("XÁC MINH TRỰC TIẾP"),
+        "lives": MessageLookupByLibrary.simpleMessage("Cuộc sống"),
         "livestream": MessageLookupByLibrary.simpleMessage(
             "Bảng điều khiển ví / phát trực tiếp"),
         "logIn": MessageLookupByLibrary.simpleMessage("ĐĂNG NHẬP"),
@@ -253,12 +285,17 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Hồ sơ lân cận trên bản đồ"),
         "next": MessageLookupByLibrary.simpleMessage("KẾ TIẾP"),
         "no": MessageLookupByLibrary.simpleMessage("KHÔNG"),
+        "noComment": MessageLookupByLibrary.simpleMessage("Miễn bình luận"),
         "noData": MessageLookupByLibrary.simpleMessage("Không có dữ liệu"),
         "noDataAvailable":
             MessageLookupByLibrary.simpleMessage("Không có dữ liệu"),
+        "noLikeData":
+            MessageLookupByLibrary.simpleMessage("Không có dữ liệu thích"),
         "noLocation": MessageLookupByLibrary.simpleMessage("không có vị trí"),
         "noRedeemData":
             MessageLookupByLibrary.simpleMessage("Không đổi dữ liệu"),
+        "noSavedData":
+            MessageLookupByLibrary.simpleMessage("Không có dữ liệu đã lưu"),
         "noUsersAreLive": MessageLookupByLibrary.simpleMessage(
             "Không có người dùng nào đang hoạt động"),
         "notEligible":
@@ -282,6 +319,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "personal": MessageLookupByLibrary.simpleMessage("Riêng tư"),
         "personalHarassment":
             MessageLookupByLibrary.simpleMessage("Quấy rối cá nhân"),
+        "photo": MessageLookupByLibrary.simpleMessage("hình chụp"),
         "photos": MessageLookupByLibrary.simpleMessage("ảnh"),
         "photosCap": MessageLookupByLibrary.simpleMessage("HÌNH ẢNH"),
         "platform": MessageLookupByLibrary.simpleMessage("Nền tảng"),
@@ -302,6 +340,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Vui Lòng Nhập Email...!"),
         "pleaseEnterValidEmailAddress": MessageLookupByLibrary.simpleMessage(
             "Vui lòng nhập địa chỉ email hợp lệ"),
+        "pleaseEnterYourAge":
+            MessageLookupByLibrary.simpleMessage("Làm ơn viết tuổi của bạn"),
         "pleaseSelectImage":
             MessageLookupByLibrary.simpleMessage("Vui lòng chọn hình ảnh"),
         "pleaseValidEmail":
@@ -314,6 +354,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "policy2": MessageLookupByLibrary.simpleMessage("Điều khoản sử dụng"),
         "policy3": MessageLookupByLibrary.simpleMessage("  Và"),
         "policy4": MessageLookupByLibrary.simpleMessage("Chính sách bảo mật"),
+        "post": MessageLookupByLibrary.simpleMessage("Bưu kiện"),
+        "posts": MessageLookupByLibrary.simpleMessage("bài viết"),
         "priceCap": MessageLookupByLibrary.simpleMessage("GIÁ"),
         "privacy":
             MessageLookupByLibrary.simpleMessage("NHỮNG THIẾT LẬP RIÊNG TƯ"),
@@ -326,6 +368,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pushNotification":
             MessageLookupByLibrary.simpleMessage("thông báo đẩy"),
         "randoms": MessageLookupByLibrary.simpleMessage("Ngẫu nhiên"),
+        "readLess": MessageLookupByLibrary.simpleMessage("Đọc ít hơn..."),
+        "readMore": MessageLookupByLibrary.simpleMessage("Đọc thêm..."),
         "redeem": MessageLookupByLibrary.simpleMessage("CHUỘC LẠI"),
         "redeemCap": MessageLookupByLibrary.simpleMessage("CHUỘC LẠI"),
         "redeemRequests": MessageLookupByLibrary.simpleMessage("YÊU CẦU ĐỔI"),
@@ -336,8 +380,14 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Đăng ký thành công"),
         "report": MessageLookupByLibrary.simpleMessage("Báo cáo"),
         "reportCap": MessageLookupByLibrary.simpleMessage("BÁO CÁO"),
+        "reportPost":
+            MessageLookupByLibrary.simpleMessage("Báo cáo về bài đăng"),
         "reportUser":
             MessageLookupByLibrary.simpleMessage("BÁO CÁO NGƯỜI DÙNG"),
+        "reportedSubmitted":
+            MessageLookupByLibrary.simpleMessage("Đã gửi báo cáo"),
+        "reportedSuccessfully":
+            MessageLookupByLibrary.simpleMessage("Đã báo cáo thành công!!"),
         "reqVerification":
             MessageLookupByLibrary.simpleMessage("YÊU CẦU XÁC MINH"),
         "requests": MessageLookupByLibrary.simpleMessage("  YÊU CẦU"),
@@ -347,9 +397,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Reverse Swipe sẽ khiến bạn phải trả giá"),
         "save": MessageLookupByLibrary.simpleMessage("CỨU"),
         "savedProfiles": MessageLookupByLibrary.simpleMessage("Hồ sơ đã lưu"),
+        "searchProfile": MessageLookupByLibrary.simpleMessage("Tìm kiếm hồ sơ"),
         "searching": MessageLookupByLibrary.simpleMessage("Đang tìm kiếm..."),
         "selectAnother": MessageLookupByLibrary.simpleMessage("Chọn cái khác"),
         "selectDocument": MessageLookupByLibrary.simpleMessage("Chọn tài liệu"),
+        "selectInterestsToContinue":
+            MessageLookupByLibrary.simpleMessage("Chọn sở thích để tiếp tục"),
         "selectReason": MessageLookupByLibrary.simpleMessage("Chọn lý do"),
         "selected": MessageLookupByLibrary.simpleMessage("Đã chọn"),
         "send": MessageLookupByLibrary.simpleMessage("Gửi"),
@@ -405,12 +458,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "travel": MessageLookupByLibrary.simpleMessage("Du lịch"),
         "unBlock": MessageLookupByLibrary.simpleMessage("Mở khóa"),
         "unblockCap": MessageLookupByLibrary.simpleMessage("MỞ KHÓA"),
+        "unfollow": MessageLookupByLibrary.simpleMessage("Hủy theo dõi"),
         "useAutomaticallyEtc": MessageLookupByLibrary.simpleMessage(
             "sử dụng tự động từ tiếp theo"),
         "userBlock": MessageLookupByLibrary.simpleMessage(
             "Quản trị viên chặn người dùng"),
+        "userNotFound":
+            MessageLookupByLibrary.simpleMessage("Không tìm thấy người dùng!!"),
         "userNotLive":
             MessageLookupByLibrary.simpleMessage("Người dùng không hoạt động"),
+        "username": MessageLookupByLibrary.simpleMessage("Tên tài khoản"),
         "users": MessageLookupByLibrary.simpleMessage("người dùng"),
         "validEmail": MessageLookupByLibrary.simpleMessage("Nhập email hợp lệ"),
         "verification":
@@ -421,6 +478,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "video": MessageLookupByLibrary.simpleMessage("Băng hình?"),
         "videoCall": MessageLookupByLibrary.simpleMessage("Cuộc gọi video"),
         "videoCap": MessageLookupByLibrary.simpleMessage("BĂNG HÌNH"),
+        "videoDurationIs":
+            MessageLookupByLibrary.simpleMessage("Thời lượng video là"),
         "videoPreview":
             MessageLookupByLibrary.simpleMessage("Màn hình xem trước video"),
         "videos": MessageLookupByLibrary.simpleMessage("Video"),
@@ -429,11 +488,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "walking": MessageLookupByLibrary.simpleMessage("Đi dạo"),
         "wallet": MessageLookupByLibrary.simpleMessage("VÍ KIM CƯƠNG"),
         "walletCap": MessageLookupByLibrary.simpleMessage("CÁI VÍ"),
+        "whatDoYouWantToSelect":
+            MessageLookupByLibrary.simpleMessage("Bạn muốn chọn gì?"),
         "whereDoYouLive":
             MessageLookupByLibrary.simpleMessage("BẠN SỐNG Ở ĐÂU ?"),
         "whichItemWouldYouLikeEtc": MessageLookupByLibrary.simpleMessage(
             "Bạn muốn chọn mục nào?\nChọn một mục"),
         "writeMessage": MessageLookupByLibrary.simpleMessage("Viết tin nhắn"),
+        "writeSomethingHere":
+            MessageLookupByLibrary.simpleMessage("Viết gì đó vào đây..."),
         "yes": MessageLookupByLibrary.simpleMessage("Đúng"),
         "yesterday": MessageLookupByLibrary.simpleMessage("Hôm qua"),
         "you": MessageLookupByLibrary.simpleMessage("Bạn"),

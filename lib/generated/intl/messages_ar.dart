@@ -27,6 +27,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "accountDetails": MessageLookupByLibrary.simpleMessage("تفاصيل الحساب"),
         "add": MessageLookupByLibrary.simpleMessage("يضيف"),
         "addCoins": MessageLookupByLibrary.simpleMessage("إضافة النقود"),
+        "addComment": MessageLookupByLibrary.simpleMessage("أضف تعليق"),
+        "afterDeletingTheChatYouCanNotRestoreOurMessage":
+            MessageLookupByLibrary.simpleMessage(
+                "بعد حذف الدردشة، لا يمكنك استعادة رسالتنا. سيتم حذف الرسالة من حسابك."),
         "age": MessageLookupByLibrary.simpleMessage("عمر"),
         "agreeNContinue":
             MessageLookupByLibrary.simpleMessage("موافقة ومتابعة"),
@@ -43,6 +47,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "areYouSure": MessageLookupByLibrary.simpleMessage("هل أنت متأكد"),
         "areYouSureYouEtc": MessageLookupByLibrary.simpleMessage(
             "هل أنت متأكد أنك تريد حذف هذه الرسالة ؟"),
+        "areYouSureYouWantToDeleteTheComment":
+            MessageLookupByLibrary.simpleMessage(
+                "هل أنت متأكد أنك تريد حذف التعليق؟"),
+        "areYouSureYouWantToDeleteThePost":
+            MessageLookupByLibrary.simpleMessage(
+                "هل أنت متأكد أنك تريد حذف المشاركة؟"),
         "areYouSureYouWantToEnd": MessageLookupByLibrary.simpleMessage(
             "هل أنت متأكد أنك تريد إنهاء الفيديو المباشر الخاص بك؟"),
         "artist": MessageLookupByLibrary.simpleMessage("فنان"),
@@ -77,6 +87,10 @@ class MessageLookup extends MessageLookupByLibrary {
                 "العملات المعدنية ، يرجى تأكيد ما إذا كنت ستستمر أم لا"),
         "collected": MessageLookupByLibrary.simpleMessage("جمعت"),
         "comment": MessageLookupByLibrary.simpleMessage("تعليق..."),
+        "commentDelete": MessageLookupByLibrary.simpleMessage("حذف التعليق؟"),
+        "commentNotFound":
+            MessageLookupByLibrary.simpleMessage("لم يتم العثور على التعليق"),
+        "comments": MessageLookupByLibrary.simpleMessage("تعليقات"),
         "complete": MessageLookupByLibrary.simpleMessage("مكتمل"),
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("تأكيد كلمة المرور"),
@@ -91,6 +105,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "continueWithGoogle":
             MessageLookupByLibrary.simpleMessage("تواصل مع جوجل"),
         "couldNotLaunch": MessageLookupByLibrary.simpleMessage("تعذر الإطلاق"),
+        "createPost": MessageLookupByLibrary.simpleMessage("إنشاء مشاركة"),
         "cyberbullying":
             MessageLookupByLibrary.simpleMessage("التنمر الإلكتروني"),
         "dashboard": MessageLookupByLibrary.simpleMessage("  لوحة القيادة"),
@@ -101,15 +116,23 @@ class MessageLookup extends MessageLookupByLibrary {
         "deleteDialogDis": MessageLookupByLibrary.simpleMessage(
             "هل تريد حقا حذف حسابك؟ لن تتمكن من استعادتها لاحقًا وستفقد البيانات إلى الأبد"),
         "deleteMessage": MessageLookupByLibrary.simpleMessage("حذف رسالة"),
+        "deletePost": MessageLookupByLibrary.simpleMessage("حذف آخر"),
         "deleteThisChat":
             MessageLookupByLibrary.simpleMessage("احذف هذه الدردشة"),
+        "deleteThisStory":
+            MessageLookupByLibrary.simpleMessage("هل تريد حذف هذه القصة؟"),
         "diamond": MessageLookupByLibrary.simpleMessage("  جمع الماس:"),
         "diamond1": MessageLookupByLibrary.simpleMessage("الماس:"),
         "diamondCap": MessageLookupByLibrary.simpleMessage("الماس"),
         "diamonds": MessageLookupByLibrary.simpleMessage("الماس"),
         "diamondsCamel": MessageLookupByLibrary.simpleMessage("الماس"),
+        "doYouReallyWantToDeleteThisChatYouWont":
+            MessageLookupByLibrary.simpleMessage(
+                "هل تريد حقًا حذف هذه الدردشة، فلن تتمكن من استعادة أي نوع من البيانات بعد ذلك. أتمنى أن تكون على علم بذلك!"),
         "doYouReallyWantToLive": MessageLookupByLibrary.simpleMessage(
             "هل تريد حقا ان تعيش. يرجى الاستمرار في البث المباشر"),
+        "doYouWantToDeleteThisStoryYouCanNot": MessageLookupByLibrary.simpleMessage(
+            "هل تريد حذف هذه القصة؟، لا يمكنك استعادة القصة سيتم حذفها نهائيا."),
         "docType": MessageLookupByLibrary.simpleMessage("نوع الوثيقة"),
         "donTHaveAnAccount":
             MessageLookupByLibrary.simpleMessage("ليس لديك حساب؟"),
@@ -144,6 +167,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterThePasswordForTheAccountNwithTheEmailBelow":
             MessageLookupByLibrary.simpleMessage(
                 "أدخل كلمة المرور للحساب \n بالبريد الإلكتروني أدناه"),
+        "enterUsername":
+            MessageLookupByLibrary.simpleMessage("ادخل اسم المستخدم"),
         "enterYourMailOnWhichYouHaveNcreatedAnAccount":
             MessageLookupByLibrary.simpleMessage(
                 "أدخل بريدك الذي قمت \n بإنشاء حساب عليه. سنرسل ارتباطًا \n لإعادة تعيين كلمة المرور الخاصة بك"),
@@ -156,10 +181,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "failedPayment": MessageLookupByLibrary.simpleMessage("دفع فاشل"),
         "failedToLoadVideo": MessageLookupByLibrary.simpleMessage(
             "فشل تحميل الفيديو: لا يمكن فتح"),
+        "feed": MessageLookupByLibrary.simpleMessage("يٌطعم"),
         "female": MessageLookupByLibrary.simpleMessage("أنثى"),
         "findSomeoneRandomly": MessageLookupByLibrary.simpleMessage(
             "ابحث عن شخص ما بشكل عشوائي \n وتحقق من ملفه الشخصي"),
         "fitness": MessageLookupByLibrary.simpleMessage("لياقة بدنية"),
+        "follow": MessageLookupByLibrary.simpleMessage("يتبع"),
+        "followers": MessageLookupByLibrary.simpleMessage("متابعون"),
+        "following": MessageLookupByLibrary.simpleMessage("التالي"),
+        "followingList":
+            MessageLookupByLibrary.simpleMessage("القائمة التالية"),
         "foodies": MessageLookupByLibrary.simpleMessage("عشاق الطعام"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("هل نسيت كلمة السر؟"),
@@ -210,6 +241,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "اللغات التي ستتحدثها أثناء البث .."),
         "languagesYouEtc":
             MessageLookupByLibrary.simpleMessage("اللغات التي ستتحدثها"),
+        "large": MessageLookupByLibrary.simpleMessage("كبير"),
         "legal": MessageLookupByLibrary.simpleMessage("قانوني"),
         "likeProfiles":
             MessageLookupByLibrary.simpleMessage("مثل الملفات الشخصية"),
@@ -223,6 +255,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("سعر البث المباشر سيكلفك"),
         "liveVerification":
             MessageLookupByLibrary.simpleMessage("التحقق المباشر"),
+        "lives": MessageLookupByLibrary.simpleMessage("الأرواح"),
         "livestream": MessageLookupByLibrary.simpleMessage(
             "لوحة معلومات المحفظة / البث المباشر"),
         "logIn": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
@@ -246,12 +279,17 @@ class MessageLookup extends MessageLookupByLibrary {
             "الملفات الشخصية القريبة على الخريطة"),
         "next": MessageLookupByLibrary.simpleMessage("التالي"),
         "no": MessageLookupByLibrary.simpleMessage("لا"),
+        "noComment": MessageLookupByLibrary.simpleMessage("لا تعليق"),
         "noData": MessageLookupByLibrary.simpleMessage("لايوجد بيانات"),
         "noDataAvailable":
             MessageLookupByLibrary.simpleMessage("لا تتوافر بيانات"),
+        "noLikeData":
+            MessageLookupByLibrary.simpleMessage("لا يوجد مثل البيانات"),
         "noLocation": MessageLookupByLibrary.simpleMessage("لا موقع"),
         "noRedeemData":
             MessageLookupByLibrary.simpleMessage("لا توجد بيانات استرداد"),
+        "noSavedData":
+            MessageLookupByLibrary.simpleMessage("لا توجد بيانات محفوظة"),
         "noUsersAreLive":
             MessageLookupByLibrary.simpleMessage("لا يوجد مستخدمون مباشرون"),
         "notEligible": MessageLookupByLibrary.simpleMessage("غير مؤهلة"),
@@ -273,6 +311,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "personal": MessageLookupByLibrary.simpleMessage("شخصي"),
         "personalHarassment":
             MessageLookupByLibrary.simpleMessage("المضايقات الشخصية"),
+        "photo": MessageLookupByLibrary.simpleMessage("صورة"),
         "photos": MessageLookupByLibrary.simpleMessage("الصور"),
         "photosCap": MessageLookupByLibrary.simpleMessage("الصور"),
         "platform": MessageLookupByLibrary.simpleMessage("منصة"),
@@ -293,6 +332,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "الرجاء إدخال البريد الإلكتروني ...!"),
         "pleaseEnterValidEmailAddress": MessageLookupByLibrary.simpleMessage(
             "الرجاء إدخال عنوان بريد إلكتروني صالح"),
+        "pleaseEnterYourAge":
+            MessageLookupByLibrary.simpleMessage("يرجى إدخال عمرك"),
         "pleaseSelectImage":
             MessageLookupByLibrary.simpleMessage("الرجاء تحديد الصورة"),
         "pleaseValidEmail": MessageLookupByLibrary.simpleMessage(
@@ -305,6 +346,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "policy2": MessageLookupByLibrary.simpleMessage("شروط الاستخدام"),
         "policy3": MessageLookupByLibrary.simpleMessage("  و"),
         "policy4": MessageLookupByLibrary.simpleMessage("سياسة الخصوصية"),
+        "post": MessageLookupByLibrary.simpleMessage("بريد"),
+        "posts": MessageLookupByLibrary.simpleMessage("دعامات"),
         "priceCap": MessageLookupByLibrary.simpleMessage("سعر"),
         "privacy": MessageLookupByLibrary.simpleMessage("إعدادات الخصوصية"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("سياسة الخصوصية"),
@@ -315,6 +358,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pushNotification":
             MessageLookupByLibrary.simpleMessage("دفع الإخطارات"),
         "randoms": MessageLookupByLibrary.simpleMessage("العشوائيات"),
+        "readLess": MessageLookupByLibrary.simpleMessage("أقرأ أقل..."),
+        "readMore": MessageLookupByLibrary.simpleMessage("اقرأ أكثر..."),
         "redeem": MessageLookupByLibrary.simpleMessage("يسترد"),
         "redeemCap": MessageLookupByLibrary.simpleMessage("يسترد"),
         "redeemRequests":
@@ -326,7 +371,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("تم التسجيل بنجاح"),
         "report": MessageLookupByLibrary.simpleMessage("تقرير"),
         "reportCap": MessageLookupByLibrary.simpleMessage("تقرير"),
+        "reportPost": MessageLookupByLibrary.simpleMessage("الإبلاغ عن مشاركة"),
         "reportUser": MessageLookupByLibrary.simpleMessage("أبلغ عن مستخدم"),
+        "reportedSubmitted":
+            MessageLookupByLibrary.simpleMessage("تم الإبلاغ عنها"),
+        "reportedSuccessfully":
+            MessageLookupByLibrary.simpleMessage("تم التبليغ بنجاح!!"),
         "reqVerification": MessageLookupByLibrary.simpleMessage("طلب التحقق"),
         "requests": MessageLookupByLibrary.simpleMessage("  الطلبات"),
         "reset": MessageLookupByLibrary.simpleMessage("إعادة ضبط"),
@@ -336,9 +386,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "save": MessageLookupByLibrary.simpleMessage("يحفظ"),
         "savedProfiles":
             MessageLookupByLibrary.simpleMessage("الملفات الشخصية المحفوظة"),
+        "searchProfile":
+            MessageLookupByLibrary.simpleMessage("البحث في الملف الشخصي"),
         "searching": MessageLookupByLibrary.simpleMessage("يبحث..."),
         "selectAnother": MessageLookupByLibrary.simpleMessage("اختر آخر"),
         "selectDocument": MessageLookupByLibrary.simpleMessage("حدد المستند"),
+        "selectInterestsToContinue":
+            MessageLookupByLibrary.simpleMessage("حدد الاهتمامات للمتابعة"),
         "selectReason": MessageLookupByLibrary.simpleMessage("حدد السبب"),
         "selected": MessageLookupByLibrary.simpleMessage("المحدد"),
         "send": MessageLookupByLibrary.simpleMessage("يرسل"),
@@ -392,11 +446,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "travel": MessageLookupByLibrary.simpleMessage("يسافر"),
         "unBlock": MessageLookupByLibrary.simpleMessage("رفع الحظر"),
         "unblockCap": MessageLookupByLibrary.simpleMessage("رفع الحظر"),
+        "unfollow": MessageLookupByLibrary.simpleMessage("الغاء المتابعة"),
         "useAutomaticallyEtc":
             MessageLookupByLibrary.simpleMessage("استخدم تلقائيًا من التالي"),
         "userBlock":
             MessageLookupByLibrary.simpleMessage("حظر المستخدم من قبل المشرف"),
+        "userNotFound": MessageLookupByLibrary.simpleMessage(
+            "لم يتم العثور على المستخدم!!"),
         "userNotLive": MessageLookupByLibrary.simpleMessage("المستخدم لا يعيش"),
+        "username": MessageLookupByLibrary.simpleMessage("اسم المستخدم"),
         "users": MessageLookupByLibrary.simpleMessage("المستخدمون"),
         "validEmail":
             MessageLookupByLibrary.simpleMessage("أدخل بريد إلكتروني صالح"),
@@ -408,6 +466,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "video": MessageLookupByLibrary.simpleMessage("فيديو؟"),
         "videoCall": MessageLookupByLibrary.simpleMessage("مكالمة فيديو"),
         "videoCap": MessageLookupByLibrary.simpleMessage("فيديو"),
+        "videoDurationIs":
+            MessageLookupByLibrary.simpleMessage("مدة الفيديو هي"),
         "videoPreview":
             MessageLookupByLibrary.simpleMessage("شاشة معاينة الفيديو"),
         "videos": MessageLookupByLibrary.simpleMessage("أشرطة فيديو"),
@@ -416,10 +476,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "walking": MessageLookupByLibrary.simpleMessage("المشي"),
         "wallet": MessageLookupByLibrary.simpleMessage("المحفظة الماسية"),
         "walletCap": MessageLookupByLibrary.simpleMessage("محفظة"),
+        "whatDoYouWantToSelect":
+            MessageLookupByLibrary.simpleMessage("ماذا تريد أن تختار؟"),
         "whereDoYouLive": MessageLookupByLibrary.simpleMessage("أين تعيش ؟"),
         "whichItemWouldYouLikeEtc": MessageLookupByLibrary.simpleMessage(
             "ما هو العنصر الذي تريد تحديده؟ \n حدد عنصرًا"),
         "writeMessage": MessageLookupByLibrary.simpleMessage("اكتب رسالة"),
+        "writeSomethingHere":
+            MessageLookupByLibrary.simpleMessage("أكتب شيئا هنا..."),
         "yes": MessageLookupByLibrary.simpleMessage("نعم"),
         "yesterday": MessageLookupByLibrary.simpleMessage("أمس"),
         "you": MessageLookupByLibrary.simpleMessage("أنت"),

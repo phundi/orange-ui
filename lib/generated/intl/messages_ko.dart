@@ -27,6 +27,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "accountDetails": MessageLookupByLibrary.simpleMessage("계정 세부 정보"),
         "add": MessageLookupByLibrary.simpleMessage("추가하다"),
         "addCoins": MessageLookupByLibrary.simpleMessage("코인 추가"),
+        "addComment": MessageLookupByLibrary.simpleMessage("댓글 추가"),
+        "afterDeletingTheChatYouCanNotRestoreOurMessage":
+            MessageLookupByLibrary.simpleMessage(
+                "채팅을 삭제한 후에는 메시지를 복원할 수 없습니다. 메시지가 귀하의 계정에서 삭제됩니다."),
         "age": MessageLookupByLibrary.simpleMessage("나이"),
         "agreeNContinue": MessageLookupByLibrary.simpleMessage("동의 및 계속"),
         "allow": MessageLookupByLibrary.simpleMessage("허용하다"),
@@ -42,6 +46,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "areYouSure": MessageLookupByLibrary.simpleMessage("확실합니까"),
         "areYouSureYouEtc":
             MessageLookupByLibrary.simpleMessage("이 메시지를 삭제하시겠습니까?"),
+        "areYouSureYouWantToDeleteTheComment":
+            MessageLookupByLibrary.simpleMessage("댓글을 삭제하시겠습니까?"),
+        "areYouSureYouWantToDeleteThePost":
+            MessageLookupByLibrary.simpleMessage("게시물을 삭제하시겠습니까?"),
         "areYouSureYouWantToEnd":
             MessageLookupByLibrary.simpleMessage("라이브 비디오를 종료하시겠습니까?"),
         "artist": MessageLookupByLibrary.simpleMessage("아티스트"),
@@ -72,6 +80,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("동전, 계속할지 여부를 확인하십시오"),
         "collected": MessageLookupByLibrary.simpleMessage("모은"),
         "comment": MessageLookupByLibrary.simpleMessage("논평..."),
+        "commentDelete": MessageLookupByLibrary.simpleMessage("댓글 삭제 ?"),
+        "commentNotFound":
+            MessageLookupByLibrary.simpleMessage("댓글을 찾을 수 없습니다"),
+        "comments": MessageLookupByLibrary.simpleMessage("코멘트"),
         "complete": MessageLookupByLibrary.simpleMessage("완벽한"),
         "confirmPassword": MessageLookupByLibrary.simpleMessage("비밀번호 확인"),
         "continueCap": MessageLookupByLibrary.simpleMessage("계속하다"),
@@ -83,6 +95,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "continueWithGoogle":
             MessageLookupByLibrary.simpleMessage("Google로 계속하기"),
         "couldNotLaunch": MessageLookupByLibrary.simpleMessage("시작할 수 없습니다"),
+        "createPost": MessageLookupByLibrary.simpleMessage("게시물 작성"),
         "cyberbullying": MessageLookupByLibrary.simpleMessage("사이버 괴롭힘"),
         "dashboard": MessageLookupByLibrary.simpleMessage("  계기반"),
         "delete": MessageLookupByLibrary.simpleMessage("삭제"),
@@ -92,14 +105,23 @@ class MessageLookup extends MessageLookupByLibrary {
         "deleteDialogDis": MessageLookupByLibrary.simpleMessage(
             "정말로 계정을 삭제하시겠습니까? 나중에 복구할 수 없으며 데이터가 영원히 손실됩니다."),
         "deleteMessage": MessageLookupByLibrary.simpleMessage("메시지 삭제"),
+        "deletePost": MessageLookupByLibrary.simpleMessage("게시물 삭제"),
         "deleteThisChat": MessageLookupByLibrary.simpleMessage("이 채팅 삭제"),
+        "deleteThisStory":
+            MessageLookupByLibrary.simpleMessage("이 스토리를 삭제하시겠습니까?"),
         "diamond": MessageLookupByLibrary.simpleMessage("  수집된 다이아몬드:"),
         "diamond1": MessageLookupByLibrary.simpleMessage("다이아 패 한 벌:"),
         "diamondCap": MessageLookupByLibrary.simpleMessage("다이아몬드"),
         "diamonds": MessageLookupByLibrary.simpleMessage("다이아 패 한 벌"),
         "diamondsCamel": MessageLookupByLibrary.simpleMessage("다이아 패 한 벌"),
+        "doYouReallyWantToDeleteThisChatYouWont":
+            MessageLookupByLibrary.simpleMessage(
+                "정말로 이 채팅을 삭제하시겠습니까? 이후에는 어떤 종류의 데이터도 복구할 수 없습니다. 당신이 그것을 알고 있기를 바랍니다!"),
         "doYouReallyWantToLive":
             MessageLookupByLibrary.simpleMessage("정말 살고 싶습니까? 계속 라이브 진행해주세요"),
+        "doYouWantToDeleteThisStoryYouCanNot":
+            MessageLookupByLibrary.simpleMessage(
+                "이 스토리를 삭제하시겠습니까?, 스토리는 복원할 수 없으며 영구 삭제됩니다."),
         "docType": MessageLookupByLibrary.simpleMessage("문서 유형"),
         "donTHaveAnAccount": MessageLookupByLibrary.simpleMessage("계정이 없습니까?"),
         "drivingLicence": MessageLookupByLibrary.simpleMessage("운전 면허증"),
@@ -126,6 +148,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterThePasswordForTheAccountNwithTheEmailBelow":
             MessageLookupByLibrary.simpleMessage(
                 "아래 이메일을 사용하여 \n계정 암호를 입력하십시오."),
+        "enterUsername": MessageLookupByLibrary.simpleMessage("사용자 이름을 입력하세요"),
         "enterYourMailOnWhichYouHaveNcreatedAnAccount":
             MessageLookupByLibrary.simpleMessage(
                 "계정을 만든 \n메일을 입력하십시오. 비밀번호를 재설정할 \n링크를 보내드립니다."),
@@ -137,10 +160,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "failedPayment": MessageLookupByLibrary.simpleMessage("결제 실패"),
         "failedToLoadVideo":
             MessageLookupByLibrary.simpleMessage("동영상 로드 실패: 열 수 없음"),
+        "feed": MessageLookupByLibrary.simpleMessage("밥을 먹이다"),
         "female": MessageLookupByLibrary.simpleMessage("여성"),
         "findSomeoneRandomly":
             MessageLookupByLibrary.simpleMessage("누군가를 무작위로 찾아\n프로필을 확인하세요."),
         "fitness": MessageLookupByLibrary.simpleMessage("적합"),
+        "follow": MessageLookupByLibrary.simpleMessage("따르다"),
+        "followers": MessageLookupByLibrary.simpleMessage("추종자"),
+        "following": MessageLookupByLibrary.simpleMessage("수행원"),
+        "followingList": MessageLookupByLibrary.simpleMessage("팔로잉 목록"),
         "foodies": MessageLookupByLibrary.simpleMessage("식도락가"),
         "forgotPassword": MessageLookupByLibrary.simpleMessage("비밀번호를 잊으 셨나요?"),
         "forgotYourPassword":
@@ -188,6 +216,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "languagesDetail":
             MessageLookupByLibrary.simpleMessage("스트리밍하는 동안 말할 언어 .."),
         "languagesYouEtc": MessageLookupByLibrary.simpleMessage("당신이 말할 언어"),
+        "large": MessageLookupByLibrary.simpleMessage("크기가 큰"),
         "legal": MessageLookupByLibrary.simpleMessage("합법적인"),
         "likeProfiles": MessageLookupByLibrary.simpleMessage("프로필처럼"),
         "live": MessageLookupByLibrary.simpleMessage("살다"),
@@ -198,6 +227,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "liveStreamPriceWillCostYou":
             MessageLookupByLibrary.simpleMessage("라이브 스트림 가격은 비용이 듭니다"),
         "liveVerification": MessageLookupByLibrary.simpleMessage("실시간 검증"),
+        "lives": MessageLookupByLibrary.simpleMessage("생활"),
         "livestream": MessageLookupByLibrary.simpleMessage("월렛 / 라이브스트림 대시보드"),
         "logIn": MessageLookupByLibrary.simpleMessage("로그인"),
         "logOut": MessageLookupByLibrary.simpleMessage("로그 아웃"),
@@ -219,10 +249,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("지도상의 주변 프로필"),
         "next": MessageLookupByLibrary.simpleMessage("다음"),
         "no": MessageLookupByLibrary.simpleMessage("아니요"),
+        "noComment": MessageLookupByLibrary.simpleMessage("코멘트 없음"),
         "noData": MessageLookupByLibrary.simpleMessage("데이터 없음"),
         "noDataAvailable": MessageLookupByLibrary.simpleMessage("자료 없음"),
+        "noLikeData": MessageLookupByLibrary.simpleMessage("좋아요 데이터 없음"),
         "noLocation": MessageLookupByLibrary.simpleMessage("위치 없음"),
         "noRedeemData": MessageLookupByLibrary.simpleMessage("교환 데이터 없음"),
+        "noSavedData": MessageLookupByLibrary.simpleMessage("저장된 데이터 없음"),
         "noUsersAreLive":
             MessageLookupByLibrary.simpleMessage("실시간 사용자가 없습니다."),
         "notEligible": MessageLookupByLibrary.simpleMessage("자격 없음"),
@@ -242,6 +275,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "pending": MessageLookupByLibrary.simpleMessage("보류 중"),
         "personal": MessageLookupByLibrary.simpleMessage("개인의"),
         "personalHarassment": MessageLookupByLibrary.simpleMessage("개인적인 괴롭힘"),
+        "photo": MessageLookupByLibrary.simpleMessage("사진"),
         "photos": MessageLookupByLibrary.simpleMessage("사진"),
         "photosCap": MessageLookupByLibrary.simpleMessage("사진"),
         "platform": MessageLookupByLibrary.simpleMessage("플랫폼"),
@@ -261,6 +295,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("이메일을 입력하세요...!"),
         "pleaseEnterValidEmailAddress":
             MessageLookupByLibrary.simpleMessage("유효한 이메일 주소를 입력하십시오"),
+        "pleaseEnterYourAge":
+            MessageLookupByLibrary.simpleMessage("나이를 입력해주세요"),
         "pleaseSelectImage":
             MessageLookupByLibrary.simpleMessage("이미지를 선택하세요."),
         "pleaseValidEmail":
@@ -272,6 +308,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "policy2": MessageLookupByLibrary.simpleMessage("이용약관"),
         "policy3": MessageLookupByLibrary.simpleMessage("  그리고"),
         "policy4": MessageLookupByLibrary.simpleMessage("개인 정보 정책"),
+        "post": MessageLookupByLibrary.simpleMessage("우편"),
+        "posts": MessageLookupByLibrary.simpleMessage("게시물"),
         "priceCap": MessageLookupByLibrary.simpleMessage("가격"),
         "privacy": MessageLookupByLibrary.simpleMessage("개인 정보 설정"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("개인 정보 정책"),
@@ -281,6 +319,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "profileCap": MessageLookupByLibrary.simpleMessage("프로필"),
         "pushNotification": MessageLookupByLibrary.simpleMessage("푸시 알림"),
         "randoms": MessageLookupByLibrary.simpleMessage("무작위"),
+        "readLess": MessageLookupByLibrary.simpleMessage("간략히 읽기..."),
+        "readMore": MessageLookupByLibrary.simpleMessage("더 읽기..."),
         "redeem": MessageLookupByLibrary.simpleMessage("상환하다"),
         "redeemCap": MessageLookupByLibrary.simpleMessage("상환하다"),
         "redeemRequests": MessageLookupByLibrary.simpleMessage("교환 요청"),
@@ -291,7 +331,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("등록 완료"),
         "report": MessageLookupByLibrary.simpleMessage("보고서"),
         "reportCap": MessageLookupByLibrary.simpleMessage("보고서"),
+        "reportPost": MessageLookupByLibrary.simpleMessage("게시물 신고"),
         "reportUser": MessageLookupByLibrary.simpleMessage("보고서 사용자"),
+        "reportedSubmitted": MessageLookupByLibrary.simpleMessage("신고 제출"),
+        "reportedSuccessfully": MessageLookupByLibrary.simpleMessage("신고 성공!!"),
         "reqVerification": MessageLookupByLibrary.simpleMessage("확인 요청"),
         "requests": MessageLookupByLibrary.simpleMessage("  요청"),
         "reset": MessageLookupByLibrary.simpleMessage("초기화"),
@@ -300,9 +343,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("리버스 스와이프를 하면 비용이 발생합니다."),
         "save": MessageLookupByLibrary.simpleMessage("구하다"),
         "savedProfiles": MessageLookupByLibrary.simpleMessage("저장된 프로필"),
+        "searchProfile": MessageLookupByLibrary.simpleMessage("프로필 검색"),
         "searching": MessageLookupByLibrary.simpleMessage("수색..."),
         "selectAnother": MessageLookupByLibrary.simpleMessage("다른 선택"),
         "selectDocument": MessageLookupByLibrary.simpleMessage("문서 선택"),
+        "selectInterestsToContinue":
+            MessageLookupByLibrary.simpleMessage("계속하려면 관심분야를 선택하세요."),
         "selectReason": MessageLookupByLibrary.simpleMessage("이유 선택"),
         "selected": MessageLookupByLibrary.simpleMessage("선택된"),
         "send": MessageLookupByLibrary.simpleMessage("보내다"),
@@ -352,10 +398,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "travel": MessageLookupByLibrary.simpleMessage("여행하다"),
         "unBlock": MessageLookupByLibrary.simpleMessage("차단 해제"),
         "unblockCap": MessageLookupByLibrary.simpleMessage("차단 해제"),
+        "unfollow": MessageLookupByLibrary.simpleMessage("언팔로우"),
         "useAutomaticallyEtc":
             MessageLookupByLibrary.simpleMessage("다음부터 자동으로 사용"),
         "userBlock": MessageLookupByLibrary.simpleMessage("관리자에 의한 사용자 차단"),
+        "userNotFound":
+            MessageLookupByLibrary.simpleMessage("사용자를 찾을 수 없습니다!!"),
         "userNotLive": MessageLookupByLibrary.simpleMessage("사용자가 살고 있지 않음"),
+        "username": MessageLookupByLibrary.simpleMessage("사용자 이름"),
         "users": MessageLookupByLibrary.simpleMessage("사용자"),
         "validEmail": MessageLookupByLibrary.simpleMessage("유효한 이메일을 입력하세요"),
         "verification": MessageLookupByLibrary.simpleMessage("인증 신청"),
@@ -365,6 +415,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "video": MessageLookupByLibrary.simpleMessage("동영상?"),
         "videoCall": MessageLookupByLibrary.simpleMessage("영상 통화"),
         "videoCap": MessageLookupByLibrary.simpleMessage("동영상"),
+        "videoDurationIs": MessageLookupByLibrary.simpleMessage("동영상 재생 시간은"),
         "videoPreview": MessageLookupByLibrary.simpleMessage("비디오 미리보기 화면"),
         "videos": MessageLookupByLibrary.simpleMessage("비디오"),
         "view": MessageLookupByLibrary.simpleMessage("보다"),
@@ -372,10 +423,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "walking": MessageLookupByLibrary.simpleMessage("걷는"),
         "wallet": MessageLookupByLibrary.simpleMessage("다이아몬드 지갑"),
         "walletCap": MessageLookupByLibrary.simpleMessage("지갑"),
+        "whatDoYouWantToSelect":
+            MessageLookupByLibrary.simpleMessage("무엇을 선택하시겠습니까?"),
         "whereDoYouLive": MessageLookupByLibrary.simpleMessage("어디 살아요 ?"),
         "whichItemWouldYouLikeEtc":
             MessageLookupByLibrary.simpleMessage("어떤 항목을 선택하시겠습니까?\n항목 선택"),
         "writeMessage": MessageLookupByLibrary.simpleMessage("메시지 쓰기"),
+        "writeSomethingHere":
+            MessageLookupByLibrary.simpleMessage("여기에 뭔가를 쓰세요..."),
         "yes": MessageLookupByLibrary.simpleMessage("예"),
         "yesterday": MessageLookupByLibrary.simpleMessage("어제"),
         "you": MessageLookupByLibrary.simpleMessage("너"),

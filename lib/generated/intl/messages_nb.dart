@@ -27,6 +27,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "accountDetails": MessageLookupByLibrary.simpleMessage("KONTODETALJER"),
         "add": MessageLookupByLibrary.simpleMessage("LEGG TIL"),
         "addCoins": MessageLookupByLibrary.simpleMessage("LEGG TIL MYNTER"),
+        "addComment":
+            MessageLookupByLibrary.simpleMessage("Legg til en kommentar"),
+        "afterDeletingTheChatYouCanNotRestoreOurMessage":
+            MessageLookupByLibrary.simpleMessage(
+                "Etter å ha slettet chatten kan du ikke gjenopprette meldingen vår. Meldingen vil bli slettet fra kontoen din."),
         "age": MessageLookupByLibrary.simpleMessage("ALDER"),
         "agreeNContinue":
             MessageLookupByLibrary.simpleMessage("Enig og fortsett"),
@@ -43,6 +48,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "areYouSure": MessageLookupByLibrary.simpleMessage("Er du sikker"),
         "areYouSureYouEtc": MessageLookupByLibrary.simpleMessage(
             "Er du sikker på at du vil slette denne meldingen?"),
+        "areYouSureYouWantToDeleteTheComment":
+            MessageLookupByLibrary.simpleMessage(
+                "Er du sikker på at du vil slette kommentaren?"),
+        "areYouSureYouWantToDeleteThePost":
+            MessageLookupByLibrary.simpleMessage(
+                "Er du sikker på at du vil slette innlegget?"),
         "areYouSureYouWantToEnd": MessageLookupByLibrary.simpleMessage(
             "Er du sikker på at du vil avslutte livevideoen din?"),
         "artist": MessageLookupByLibrary.simpleMessage("kunstner"),
@@ -77,6 +88,11 @@ class MessageLookup extends MessageLookupByLibrary {
                 "mynter, Vennligst bekreft om du vil fortsette eller ikke"),
         "collected": MessageLookupByLibrary.simpleMessage("Samlet"),
         "comment": MessageLookupByLibrary.simpleMessage("Kommentar..."),
+        "commentDelete":
+            MessageLookupByLibrary.simpleMessage("Slett kommentar?"),
+        "commentNotFound":
+            MessageLookupByLibrary.simpleMessage("Kommentar ikke funnet"),
+        "comments": MessageLookupByLibrary.simpleMessage("Kommentarer"),
         "complete": MessageLookupByLibrary.simpleMessage("Fullstendig"),
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("bekreft passord"),
@@ -92,6 +108,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Fortsett med Google"),
         "couldNotLaunch":
             MessageLookupByLibrary.simpleMessage("Kunne ikke starte"),
+        "createPost": MessageLookupByLibrary.simpleMessage("Opprett innlegg"),
         "cyberbullying": MessageLookupByLibrary.simpleMessage("Nettmobbing"),
         "dashboard": MessageLookupByLibrary.simpleMessage("  Dashboard"),
         "delete": MessageLookupByLibrary.simpleMessage("Slett"),
@@ -101,16 +118,24 @@ class MessageLookup extends MessageLookupByLibrary {
         "deleteDialogDis": MessageLookupByLibrary.simpleMessage(
             "Vil du virkelig slette kontoen din? Du vil ikke kunne gjenopprette det senere, og data vil gå tapt for alltid"),
         "deleteMessage": MessageLookupByLibrary.simpleMessage("Slett melding"),
+        "deletePost": MessageLookupByLibrary.simpleMessage("Slett innlegget"),
         "deleteThisChat":
             MessageLookupByLibrary.simpleMessage("Slett denne chatten"),
+        "deleteThisStory": MessageLookupByLibrary.simpleMessage(
+            "Vil du slette denne historien?"),
         "diamond":
             MessageLookupByLibrary.simpleMessage("  Innsamlede diamanter:"),
         "diamond1": MessageLookupByLibrary.simpleMessage("Diamanter:"),
         "diamondCap": MessageLookupByLibrary.simpleMessage("DIAMANT"),
         "diamonds": MessageLookupByLibrary.simpleMessage("DIAMANTER"),
         "diamondsCamel": MessageLookupByLibrary.simpleMessage("Diamanter"),
+        "doYouReallyWantToDeleteThisChatYouWont":
+            MessageLookupByLibrary.simpleMessage(
+                "Vil du virkelig slette denne chatten Du vil ikke kunne gjenopprette noen form for data etterpå. Håper du er klar over det!"),
         "doYouReallyWantToLive": MessageLookupByLibrary.simpleMessage(
             "Vil du virkelig leve. Fortsett å gå live"),
+        "doYouWantToDeleteThisStoryYouCanNot": MessageLookupByLibrary.simpleMessage(
+            "Vil du slette denne historien?, Du kan ikke gjenopprette historien den vil bli slettet permanent."),
         "docType": MessageLookupByLibrary.simpleMessage("DOKUMENTTYPE"),
         "donTHaveAnAccount":
             MessageLookupByLibrary.simpleMessage("Har du ikke en konto?"),
@@ -144,6 +169,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterThePasswordForTheAccountNwithTheEmailBelow":
             MessageLookupByLibrary.simpleMessage(
                 "Skriv inn passordet for kontoen \nmed e-posten nedenfor"),
+        "enterUsername":
+            MessageLookupByLibrary.simpleMessage("Skriv inn brukernavn"),
         "enterYourMailOnWhichYouHaveNcreatedAnAccount":
             MessageLookupByLibrary.simpleMessage(
                 "Skriv inn e-posten din som du har \nopprettet en konto på. Vi sender en lenke \nfor å tilbakestille passordet ditt"),
@@ -157,10 +184,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Mislykket betaling"),
         "failedToLoadVideo": MessageLookupByLibrary.simpleMessage(
             "Kunne ikke laste inn video: Kan ikke åpne"),
+        "feed": MessageLookupByLibrary.simpleMessage("Mate"),
         "female": MessageLookupByLibrary.simpleMessage("Hunn"),
         "findSomeoneRandomly": MessageLookupByLibrary.simpleMessage(
             "Finn noen tilfeldig\nOg sjekk profilen deres"),
         "fitness": MessageLookupByLibrary.simpleMessage("Fitness"),
+        "follow": MessageLookupByLibrary.simpleMessage("Følg"),
+        "followers": MessageLookupByLibrary.simpleMessage("Følgere"),
+        "following": MessageLookupByLibrary.simpleMessage("Følgende"),
+        "followingList": MessageLookupByLibrary.simpleMessage("Følgende liste"),
         "foodies": MessageLookupByLibrary.simpleMessage("Matelskere"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("Glemt passord?"),
@@ -211,6 +243,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Språk du snakker mens du streamer.."),
         "languagesYouEtc":
             MessageLookupByLibrary.simpleMessage("SPRÅK DU SKAL SNAKE"),
+        "large": MessageLookupByLibrary.simpleMessage("Stor"),
         "legal": MessageLookupByLibrary.simpleMessage("LOVLIG"),
         "likeProfiles": MessageLookupByLibrary.simpleMessage("Som profiler"),
         "live": MessageLookupByLibrary.simpleMessage("Bo"),
@@ -224,6 +257,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Prisen for direktesending vil koste deg"),
         "liveVerification":
             MessageLookupByLibrary.simpleMessage("LIVE VERIFIKASJON"),
+        "lives": MessageLookupByLibrary.simpleMessage("Bor"),
         "livestream": MessageLookupByLibrary.simpleMessage(
             "Lommebok / Livestream Dashboard"),
         "logIn": MessageLookupByLibrary.simpleMessage("LOGG INN"),
@@ -247,12 +281,16 @@ class MessageLookup extends MessageLookupByLibrary {
             "Nærliggende profiler på kartet"),
         "next": MessageLookupByLibrary.simpleMessage("NESTE"),
         "no": MessageLookupByLibrary.simpleMessage("Nei"),
+        "noComment": MessageLookupByLibrary.simpleMessage("Ingen kommentar"),
         "noData": MessageLookupByLibrary.simpleMessage("Ingen data"),
         "noDataAvailable":
             MessageLookupByLibrary.simpleMessage("Ingen data tilgjengelig"),
+        "noLikeData": MessageLookupByLibrary.simpleMessage("Ingen like-data"),
         "noLocation": MessageLookupByLibrary.simpleMessage("Ingen plassering"),
         "noRedeemData":
             MessageLookupByLibrary.simpleMessage("Ingen innløsingsdata"),
+        "noSavedData":
+            MessageLookupByLibrary.simpleMessage("Ingen lagrede data"),
         "noUsersAreLive":
             MessageLookupByLibrary.simpleMessage("Ingen brukere er aktive"),
         "notEligible": MessageLookupByLibrary.simpleMessage("IKKE KVALIFISERT"),
@@ -275,6 +313,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "personal": MessageLookupByLibrary.simpleMessage("Personlig"),
         "personalHarassment":
             MessageLookupByLibrary.simpleMessage("Personlig trakassering"),
+        "photo": MessageLookupByLibrary.simpleMessage("Foto"),
         "photos": MessageLookupByLibrary.simpleMessage("Bilder"),
         "photosCap": MessageLookupByLibrary.simpleMessage("BILDER"),
         "platform": MessageLookupByLibrary.simpleMessage("Plattform"),
@@ -295,6 +334,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Vennligst skriv inn e-post...!"),
         "pleaseEnterValidEmailAddress": MessageLookupByLibrary.simpleMessage(
             "Vennligst skriv inn gyldig e-postadresse"),
+        "pleaseEnterYourAge": MessageLookupByLibrary.simpleMessage(
+            "Vennligst skriv inn alderen din"),
         "pleaseSelectImage":
             MessageLookupByLibrary.simpleMessage("Vennligst velg bilde"),
         "pleaseValidEmail":
@@ -307,6 +348,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "policy2": MessageLookupByLibrary.simpleMessage("Vilkår for bruk"),
         "policy3": MessageLookupByLibrary.simpleMessage("  og"),
         "policy4": MessageLookupByLibrary.simpleMessage("Personvernerklæring"),
+        "post": MessageLookupByLibrary.simpleMessage("Post"),
+        "posts": MessageLookupByLibrary.simpleMessage("Innlegg"),
         "priceCap": MessageLookupByLibrary.simpleMessage("PRIS"),
         "privacy":
             MessageLookupByLibrary.simpleMessage("PERSONVERNINNSTILLINGER"),
@@ -319,6 +362,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pushNotification":
             MessageLookupByLibrary.simpleMessage("Push-varsler"),
         "randoms": MessageLookupByLibrary.simpleMessage("Tilfeldigheter"),
+        "readLess": MessageLookupByLibrary.simpleMessage("Les mindre..."),
+        "readMore": MessageLookupByLibrary.simpleMessage("Les mer..."),
         "redeem": MessageLookupByLibrary.simpleMessage("LØS inn"),
         "redeemCap": MessageLookupByLibrary.simpleMessage("LØS inn"),
         "redeemRequests":
@@ -330,7 +375,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Registrering fullført"),
         "report": MessageLookupByLibrary.simpleMessage("Rapportere"),
         "reportCap": MessageLookupByLibrary.simpleMessage("RAPPORTERE"),
+        "reportPost": MessageLookupByLibrary.simpleMessage("Rapporter innlegg"),
         "reportUser": MessageLookupByLibrary.simpleMessage("RAPPORTER BRUKER"),
+        "reportedSubmitted":
+            MessageLookupByLibrary.simpleMessage("Rapportert Sendt"),
+        "reportedSuccessfully":
+            MessageLookupByLibrary.simpleMessage("Rapportert vellykket!!"),
         "reqVerification":
             MessageLookupByLibrary.simpleMessage("BE VERIFIKASJON"),
         "requests": MessageLookupByLibrary.simpleMessage("  FORESPØRSLER"),
@@ -341,9 +391,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "save": MessageLookupByLibrary.simpleMessage("LAGRE"),
         "savedProfiles":
             MessageLookupByLibrary.simpleMessage("Lagrede profiler"),
+        "searchProfile": MessageLookupByLibrary.simpleMessage("Søk profil"),
         "searching": MessageLookupByLibrary.simpleMessage("Søker..."),
         "selectAnother": MessageLookupByLibrary.simpleMessage("Velg en annen"),
         "selectDocument": MessageLookupByLibrary.simpleMessage("Velg Dokument"),
+        "selectInterestsToContinue": MessageLookupByLibrary.simpleMessage(
+            "Velg interesser for å fortsette"),
         "selectReason": MessageLookupByLibrary.simpleMessage("Velg Årsak"),
         "selected": MessageLookupByLibrary.simpleMessage("Valgt"),
         "send": MessageLookupByLibrary.simpleMessage("Sende"),
@@ -398,11 +451,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "travel": MessageLookupByLibrary.simpleMessage("Reise"),
         "unBlock": MessageLookupByLibrary.simpleMessage("Fjern blokkering"),
         "unblockCap": MessageLookupByLibrary.simpleMessage("LØS OPP"),
+        "unfollow": MessageLookupByLibrary.simpleMessage("Slutt å følge"),
         "useAutomaticallyEtc":
             MessageLookupByLibrary.simpleMessage("bruk automatisk fra neste"),
         "userBlock":
             MessageLookupByLibrary.simpleMessage("Brukerblokkering av admin"),
+        "userNotFound":
+            MessageLookupByLibrary.simpleMessage("Bruker ikke funnet!!"),
         "userNotLive": MessageLookupByLibrary.simpleMessage("Bruker ikke live"),
+        "username": MessageLookupByLibrary.simpleMessage("Brukernavn"),
         "users": MessageLookupByLibrary.simpleMessage("Brukere"),
         "validEmail":
             MessageLookupByLibrary.simpleMessage("Skriv inn gyldig e-post"),
@@ -414,6 +471,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "video": MessageLookupByLibrary.simpleMessage("Video?"),
         "videoCall": MessageLookupByLibrary.simpleMessage("Videosamtale"),
         "videoCap": MessageLookupByLibrary.simpleMessage("VIDEO"),
+        "videoDurationIs":
+            MessageLookupByLibrary.simpleMessage("Videoens varighet er"),
         "videoPreview": MessageLookupByLibrary.simpleMessage(
             "Skjerm for forhåndsvisning av video"),
         "videos": MessageLookupByLibrary.simpleMessage("Videoer"),
@@ -422,10 +481,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "walking": MessageLookupByLibrary.simpleMessage("Går"),
         "wallet": MessageLookupByLibrary.simpleMessage("DIAMANT LOKKEFON"),
         "walletCap": MessageLookupByLibrary.simpleMessage("LOMMEBOK"),
+        "whatDoYouWantToSelect":
+            MessageLookupByLibrary.simpleMessage("Hva vil du velge?"),
         "whereDoYouLive": MessageLookupByLibrary.simpleMessage("HVOR BOR DU ?"),
         "whichItemWouldYouLikeEtc": MessageLookupByLibrary.simpleMessage(
             "Hvilket element vil du velge?\nVelg et element"),
         "writeMessage": MessageLookupByLibrary.simpleMessage("Skriv melding"),
+        "writeSomethingHere":
+            MessageLookupByLibrary.simpleMessage("Skriv noe her..."),
         "yes": MessageLookupByLibrary.simpleMessage("Ja"),
         "yesterday": MessageLookupByLibrary.simpleMessage("I går"),
         "you": MessageLookupByLibrary.simpleMessage("du"),
