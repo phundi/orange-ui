@@ -54,15 +54,7 @@ class FeedScreen extends StatelessWidget {
                             ],
                           ),
                         ),
-                        model.postList.isEmpty
-                            ? const Center(
-                                child: Text(
-                                  'No Posts',
-                                  style: TextStyle(
-                                      fontFamily: FontRes.medium, fontSize: 20),
-                                ),
-                              )
-                            : Container()
+                        model.postList.isEmpty ? CommonUI.noData() : Container()
                       ],
                     ),
             )
