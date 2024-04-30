@@ -193,7 +193,7 @@ class UserDetailScreenViewModel extends BaseViewModel {
         fullName: userData?.fullname ?? '',
         age: userData?.age ?? 0,
         address: userData?.live ?? '');
-    db.collection(FirebaseRes.liveHostList).doc(userData?.identity).update(
+    db.collection(FirebaseRes.liveHostList).doc('${userData?.id}').update(
       {
         FirebaseRes.joinedUser: FieldValue.arrayUnion(joinedUsers),
         FirebaseRes.watchingCount: liveStreamUser!.watchingCount! + 1

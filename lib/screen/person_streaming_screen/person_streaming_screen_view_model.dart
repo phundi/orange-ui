@@ -375,7 +375,7 @@ class PersonStreamingScreenViewModel extends BaseViewModel {
 
     db
         .collection(FirebaseRes.liveHostList)
-        .doc(liveStreamUser?.hostIdentity)
+        .doc('${liveStreamUser?.userId}')
         .update({
       FirebaseRes.collectedDiamond:
           liveStreamUser!.collectedDiamond! + data!.coinPrice!
@@ -394,7 +394,7 @@ class PersonStreamingScreenViewModel extends BaseViewModel {
     countDown();
     db
         .collection(FirebaseRes.liveHostList)
-        .doc(liveStreamUser?.hostIdentity)
+        .doc('${liveStreamUser?.userId}')
         .withConverter(
           fromFirestore: LiveStreamUser.fromFirestore,
           toFirestore: (value, options) {
@@ -410,7 +410,7 @@ class PersonStreamingScreenViewModel extends BaseViewModel {
 
     collectionReference = db
         .collection(FirebaseRes.liveHostList)
-        .doc(liveStreamUser?.hostIdentity)
+        .doc('${liveStreamUser?.userId}')
         .collection(FirebaseRes.comments);
 
     collectionReference
@@ -458,7 +458,7 @@ class PersonStreamingScreenViewModel extends BaseViewModel {
   void watchingUserRemove() {
     db
         .collection(FirebaseRes.liveHostList)
-        .doc(liveStreamUser?.hostIdentity)
+        .doc('${liveStreamUser?.userId}')
         .update(
       {
         FirebaseRes.watchingCount:

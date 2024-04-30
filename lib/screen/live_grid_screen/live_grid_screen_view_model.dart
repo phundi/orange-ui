@@ -34,7 +34,7 @@ class LiveGridScreenViewModel extends BaseViewModel {
   List<LiveStreamUser> userData = [];
   List<String?> userEmail = [];
   bool isLoading = false;
-  late FirebaseFirestore db;
+  FirebaseFirestore db = FirebaseFirestore.instance;
   late CollectionReference collection;
   StreamSubscription<QuerySnapshot<LiveStreamUser>>? subscription;
   int? walletCoin;
@@ -44,7 +44,6 @@ class LiveGridScreenViewModel extends BaseViewModel {
   Appdata? settingAppData;
 
   void init() {
-    db = FirebaseFirestore.instance;
     getProfileAPi();
     getBannerAd();
     initInterstitialAds();
@@ -199,12 +198,12 @@ class LiveGridScreenViewModel extends BaseViewModel {
               Get.back();
               db
                   .collection(FirebaseRes.liveHostList)
-                  .doc(user?.hostIdentity)
+                  .doc('${user?.userId}')
                   .delete();
               final batch = db.batch();
               var collection = db
                   .collection(FirebaseRes.liveHostList)
-                  .doc(user?.hostIdentity)
+                  .doc('${user?.userId}')
                   .collection(FirebaseRes.comments);
               var snapshots = await collection.get();
               for (var doc in snapshots.docs) {
@@ -235,7 +234,7 @@ class LiveGridScreenViewModel extends BaseViewModel {
 
   void onImageTap(LiveStreamUser? user) {
     userEmail.add(registrationUser?.identity);
-    db.collection(FirebaseRes.liveHostList).doc(user?.hostIdentity).update({
+    db.collection(FirebaseRes.liveHostList).doc('${user?.userId}').update({
       FirebaseRes.watchingCount: user!.watchingCount! + 1,
       FirebaseRes.joinedUser: FieldValue.arrayUnion(userEmail)
     }).then((value) {

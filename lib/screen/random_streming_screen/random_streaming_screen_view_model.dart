@@ -68,7 +68,7 @@ class RandomStreamingScreenViewModel extends BaseViewModel {
     engine.setEventHandler(RtcEngineEventHandler(
       joinChannelSuccess: (channel, uid, elapsed) {
         PrefService.getUserData().then((value) {
-          db.collection(FirebaseRes.liveHostList).doc(value?.identity).set(
+          db.collection(FirebaseRes.liveHostList).doc('${value?.id}').set(
               LiveStreamUser(
                       userId: value?.id,
                       fullName: value?.fullname,
@@ -197,11 +197,14 @@ class RandomStreamingScreenViewModel extends BaseViewModel {
     savePrefData().then(
       (value) async {
         disClosed();
-        db.collection(FirebaseRes.liveHostList).doc(identity).delete();
+        db
+            .collection(FirebaseRes.liveHostList)
+            .doc('${registrationUserData?.id}')
+            .delete();
         final batch = db.batch();
         var collection = db
             .collection(FirebaseRes.liveHostList)
-            .doc(identity)
+            .doc('${registrationUserData?.id}')
             .collection(FirebaseRes.comments);
         var snapshots = await collection.get();
         for (var doc in snapshots.docs) {
@@ -285,8 +288,9 @@ class RandomStreamingScreenViewModel extends BaseViewModel {
   void initializeFireStore() {
     PrefService.getUserData().then((value) {
       registrationUserData = value;
-      collectionReference =
-          db.collection(FirebaseRes.liveHostList).doc(value?.identity);
+      collectionReference = db
+          .collection(FirebaseRes.liveHostList)
+          .doc('${registrationUserData?.id}');
 
       collectionReference
           ?.withConverter(
