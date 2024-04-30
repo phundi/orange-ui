@@ -288,6 +288,7 @@ class RandomStreamingScreenViewModel extends BaseViewModel {
   void initializeFireStore() {
     PrefService.getUserData().then((value) {
       registrationUserData = value;
+
       collectionReference = db
           .collection(FirebaseRes.liveHostList)
           .doc('${registrationUserData?.id}');
