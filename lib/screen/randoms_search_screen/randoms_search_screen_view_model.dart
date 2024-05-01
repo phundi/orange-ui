@@ -3,22 +3,19 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
-import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/screen/user_detail_screen/user_detail_screen.dart';
-import 'package:orange_ui/utils/urls.dart';
 import 'package:stacked/stacked.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class RandomsSearchScreenViewModel extends BaseViewModel {
   bool isLoading = false;
   RegistrationUserData? userData;
-  String selectedGender = S.current.both;
+  int selectedGender = 3;
   PageController pageController = PageController();
   int currentPageIndex = 0;
 
   void init() {
-    selectedGender = Get.arguments[0][Urls.aGender];
     pageController = PageController(initialPage: 0, viewportFraction: 1.01)
       ..addListener(() {
         changeMainImage();
@@ -26,23 +23,23 @@ class RandomsSearchScreenViewModel extends BaseViewModel {
     getRandomApiCall();
   }
 
+  RandomsSearchScreenViewModel(this.selectedGender);
+
   void getRandomApiCall() async {
     isLoading = true;
-    await Future.delayed(
-      Duration(
-        seconds: Random().nextInt(5),
-      ),
-    );
+    await Future.delayed(Duration(seconds: Random().nextInt(5)));
     ApiProvider()
         .getRandomProfile(
-            gender: selectedGender == S.current.boys
+            gender: selectedGender == 1
                 ? 1
-                : selectedGender == S.current.girls
+                : selectedGender == 2
                     ? 2
                     : 3)
         .then((value) {
-      userData = value.data;
       isLoading = false;
+      if (value.status == true) {
+        userData = value.data;
+      }
       notifyListeners();
     });
   }

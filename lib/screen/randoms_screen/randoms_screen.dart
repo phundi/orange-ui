@@ -30,7 +30,9 @@ class RandomsScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     ProfilePicArea(
-                        data: model.data, isLoading: model.isLoading),
+                      data: model.data,
+                      isLoading: model.isLoading,
+                    ),
                     BottomButtons(
                       bannerAd: model.bannerAd,
                       genderList: model.genderList,

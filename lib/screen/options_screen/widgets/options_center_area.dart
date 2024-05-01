@@ -92,7 +92,8 @@ class OptionsCenterArea extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(15),
                   child: BackdropFilter(
-                    filter: ImageFilter.blur(sigmaY: 15, sigmaX: 15, tileMode: TileMode.mirror),
+                    filter: ImageFilter.blur(
+                        sigmaY: 15, sigmaX: 15, tileMode: TileMode.mirror),
                     child: Row(
                       children: [
                         Padding(
@@ -218,7 +219,8 @@ class CircleImage extends StatelessWidget {
       height: 28,
       width: 28,
       margin: const EdgeInsets.symmetric(horizontal: 10),
-      decoration: BoxDecoration(color: ColorRes.orange2.withOpacity(0.1), shape: BoxShape.circle),
+      decoration: BoxDecoration(
+          color: ColorRes.orange2.withOpacity(0.1), shape: BoxShape.circle),
       child: Image.asset(image),
     );
   }
@@ -230,7 +232,13 @@ class PermissionTiles extends StatelessWidget {
   final bool enable;
   final VoidCallback onTap;
 
-  const PermissionTiles({Key? key, required this.title, required this.subTitle, required this.enable, required this.onTap}) : super(key: key);
+  const PermissionTiles(
+      {Key? key,
+      required this.title,
+      required this.subTitle,
+      required this.enable,
+      required this.onTap})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -283,10 +291,7 @@ class PermissionTiles extends StatelessWidget {
                     ? const LinearGradient(
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
-                        colors: [
-                          ColorRes.lightOrange1,
-                          ColorRes.darkOrange,
-                        ],
+                        colors: [ColorRes.lightOrange1, ColorRes.darkOrange],
                       )
                     : null,
               ),

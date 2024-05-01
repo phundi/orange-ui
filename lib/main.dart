@@ -11,6 +11,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:orange_ui/common/common_fun.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/screen/chat_screen/chat_screen_view_model.dart';
 import 'package:orange_ui/screen/get_started_screen/get_started_screen.dart';
@@ -18,7 +19,6 @@ import 'package:orange_ui/screen/languages_screen/languages_screen_view_model.da
 import 'package:orange_ui/screen/restart_app/restart_app.dart';
 import 'package:orange_ui/service/pref_service.dart';
 import 'package:orange_ui/utils/color_res.dart';
-import 'package:orange_ui/utils/const_res.dart';
 import 'package:orange_ui/utils/font_res.dart';
 import 'package:orange_ui/utils/pref_res.dart';
 import 'package:orange_ui/utils/urls.dart';
@@ -110,7 +110,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   void saveTokenUpdate() async {
-    await firebaseMessaging.subscribeToTopic(ConstRes.subscribeToTopic);
+    CommonFun.subscribeTopic(null);
 
     flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
@@ -147,8 +147,7 @@ class _MyAppState extends State<MyApp> {
     flutterLocalNotificationsPlugin.initialize(initializationSettings);
 
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      if (message.data[Urls.aViewerNotificationId] ==
-          ChatScreenViewModel.senderId) {
+      if (message.data[Urls.aConversationId] == ChatScreenViewModel.senderId) {
         return;
       }
       showNotification(message);
@@ -179,8 +178,8 @@ class _MyAppState extends State<MyApp> {
 void showNotification(RemoteMessage message) {
   flutterLocalNotificationsPlugin.show(
     1,
-    message.data['title'],
-    message.data['body'],
+    message.notification?.title ?? message.data['title'],
+    message.notification?.body ?? message.data['body'],
     const NotificationDetails(
         iOS: DarwinNotificationDetails(
             presentSound: true, presentAlert: true, presentBadge: false),

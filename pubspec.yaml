@@ -58,7 +58,6 @@ dependencies:
   carousel_slider: ^4.1.1
   wakelock: ^0.6.2
   dotted_border: ^2.0.0+2
-  device_info_plus: ^8.1.0
   figma_squircle: ^0.5.3
   detectable_text_field: ^3.0.2
   smooth_page_indicator: ^1.1.0
@@ -79,7 +78,7 @@ dependencies:
 
   #_______________ sign in  ___________________#
   google_sign_in: ^5.3.2
-  sign_in_with_apple: ^4.0.0
+  sign_in_with_apple: ^6.1.0
 
   #_______________ permission ___________________#
   permission_handler: ^10.0.0
@@ -106,7 +105,7 @@ dependencies:
   webview_flutter: ^4.0.5
 
   #_____________ Share _________________#
-  share_plus: ^6.0.0
+  share_plus: ^6.3.4
   flutter_branch_sdk: ^6.2.1
 
   #_____________ Camera _________________#

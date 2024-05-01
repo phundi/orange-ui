@@ -9,7 +9,11 @@ import 'package:orange_ui/utils/font_res.dart';
 import 'package:stacked/stacked.dart';
 
 class RandomsSearchScreen extends StatelessWidget {
-  const RandomsSearchScreen({Key? key}) : super(key: key);
+  final int selectedGender;
+  final String profileImage;
+  const RandomsSearchScreen(
+      {Key? key, required this.selectedGender, required this.profileImage})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,41 +21,25 @@ class RandomsSearchScreen extends StatelessWidget {
       onViewModelReady: (model) {
         model.init();
       },
-      viewModelBuilder: () => RandomsSearchScreenViewModel(),
+      viewModelBuilder: () => RandomsSearchScreenViewModel(selectedGender),
       builder: (context, model, child) {
         return Scaffold(
           backgroundColor: ColorRes.white,
           body: Column(
             children: [
-              RandomSearchTopBarArea(
-                onBackBtnTap: model.onBackBtnTap,
-              ),
+              RandomSearchTopBarArea(onBackBtnTap: model.onBackBtnTap),
               const SizedBox(height: 27),
-              ProfilePicArea(
-                isLoading: model.isLoading,
-                userData: model.userData,
-                pageController: model.pageController,
-                onLeftBtnClick: model.onLeftBtnClick,
-                onRightBtnClick: model.onRightBtnClick,
-                onYoutubeTap: model.onYoutubeTap,
-                onFacebookTap: model.onFBTap,
-                onInstagramTap: model.onInstagramTap,
-                onLiveBtnTap: model.onLiveBtnTap,
-                onImageTap: model.onImageTap,
-                isSocialBtnVisible: model.isSocialBtnVisible,
-              ),
-              Visibility(
-                visible: model.isLoading == true ? true : false,
-                child: Text(
-                  S.current.searching,
-                  style: const TextStyle(
-                    fontFamily: FontRes.bold,
-                    fontSize: 22,
-                    color: ColorRes.darkGrey7,
-                  ),
-                ),
-              ),
-              const Spacer(),
+              ProfilePicArea(profileImage: profileImage, model: model),
+              model.isLoading
+                  ? Text(
+                      S.current.searching,
+                      style: const TextStyle(
+                        fontFamily: FontRes.bold,
+                        fontSize: 22,
+                        color: ColorRes.darkGrey7,
+                      ),
+                    )
+                  : const SizedBox(),
               BottomArea(
                 onCancelTap: model.onCancelTap,
                 onNextTap: model.onNextTap,

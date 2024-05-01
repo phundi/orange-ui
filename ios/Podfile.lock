@@ -997,8 +997,6 @@ PODS:
     - Firebase/Firestore (= 10.24.0)
     - firebase_core
     - Flutter
-  - device_info_plus (0.0.1):
-    - Flutter
   - DKImagePickerController/Core (4.3.8):
     - DKImagePickerController/ImageDataManager
     - DKImagePickerController/Resource
@@ -1347,7 +1345,6 @@ DEPENDENCIES:
   - bubbly_camera (from `.symlinks/plugins/bubbly_camera/ios`)
   - camera_avfoundation (from `.symlinks/plugins/camera_avfoundation/ios`)
   - cloud_firestore (from `.symlinks/plugins/cloud_firestore/ios`)
-  - device_info_plus (from `.symlinks/plugins/device_info_plus/ios`)
   - ffmpeg_kit_flutter (from `.symlinks/plugins/ffmpeg_kit_flutter/ios`)
   - file_picker (from `.symlinks/plugins/file_picker/ios`)
   - firebase_auth (from `.symlinks/plugins/firebase_auth/ios`)
@@ -1426,8 +1423,6 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/camera_avfoundation/ios"
   cloud_firestore:
     :path: ".symlinks/plugins/cloud_firestore/ios"
-  device_info_plus:
-    :path: ".symlinks/plugins/device_info_plus/ios"
   ffmpeg_kit_flutter:
     :path: ".symlinks/plugins/ffmpeg_kit_flutter/ios"
   file_picker:
@@ -1491,7 +1486,6 @@ SPEC CHECKSUMS:
   bubbly_camera: 1be5f537e6a9aa6fd5bcb2a463aceae6ecdb8137
   camera_avfoundation: 759172d1a77ae7be0de08fc104cfb79738b8a59e
   cloud_firestore: ec5623634fc3b82f7b23a6e87f116c953eae714d
-  device_info_plus: e5c5da33f982a436e103237c0c85f9031142abed
   DKImagePickerController: a7836546cfdfe014171694f643a7d575bc8ace7f
   DKPhotoGallery: fdfad5125a9fdda9cc57df834d49df790dbb4179
   ffmpeg-kit-ios-https: f9c838aa5400a6c5ba12324c6b798f52197ba354

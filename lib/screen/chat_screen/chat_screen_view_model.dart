@@ -3,7 +3,6 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collection/collection.dart';
-import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -13,6 +12,7 @@ import 'package:orange_ui/api_provider/api_provider.dart';
 import 'package:orange_ui/common/common_fun.dart';
 import 'package:orange_ui/common/common_ui.dart';
 import 'package:orange_ui/common/confirmation_dialog.dart';
+import 'package:orange_ui/common/video_upload_dialog.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/chat_and_live_stream/chat.dart';
 import 'package:orange_ui/model/setting.dart';
@@ -24,7 +24,6 @@ import 'package:orange_ui/screen/chat_screen/widgets/item_selection_dialog_andro
 import 'package:orange_ui/screen/chat_screen/widgets/item_selection_dialog_ios.dart';
 import 'package:orange_ui/screen/chat_screen/widgets/unblock_user_dialog.dart';
 import 'package:orange_ui/screen/explore_screen/widgets/reverse_swipe_dialog.dart';
-import 'package:orange_ui/common/video_upload_dialog.dart';
 import 'package:orange_ui/screen/user_detail_screen/user_detail_screen.dart';
 import 'package:orange_ui/screen/user_report_screen/report_sheet.dart';
 import 'package:orange_ui/screen/video_preview_screen/video_preview_screen.dart';
@@ -430,32 +429,6 @@ class ChatScreenViewModel extends BaseViewModel {
       CommonUI.snackBarWidget(S.current.thisUserBlockYou);
       return;
     }
-    if (Platform.isAndroid) {
-      final androidInfo = await DeviceInfoPlugin().androidInfo;
-      late final Map<Permission, PermissionStatus> statusess;
-
-      if (androidInfo.version.sdkInt <= 32) {
-        statusess = await [
-          Permission.storage,
-        ].request();
-      } else {
-        statusess = await [
-          Permission.photos,
-          Permission.videos,
-        ].request();
-      }
-
-      var allAccepted = true;
-      statusess.forEach((permission, status) {
-        if (status != PermissionStatus.granted) {
-          allAccepted = false;
-        }
-      });
-      if (!allAccepted) {
-        openAppSettings();
-        return;
-      }
-    }
     Platform.isIOS
         ? Get.bottomSheet(
             ItemSelectionDialogIos(
@@ -836,13 +809,10 @@ class ChatScreenViewModel extends BaseViewModel {
             title: registrationUserData?.fullname ?? '',
             body:
                 CommonFun.getLastMsg(msgType: msgType, msg: textMessage ?? ''),
-            data: {
-              Urls.aViewerNotificationId: conversation.conversationId,
-              'title': registrationUserData?.fullname ?? '',
-              'body': CommonFun.getLastMsg(
-                  msgType: msgType, msg: textMessage ?? ''),
-            },
-            token: '${receiverUserData?.deviceToken}')
+            conversationId: conversation.conversationId ?? '',
+            deviceType: receiverUserData?.deviceType,
+            token: '${receiverUserData?.deviceToken}',
+          )
         : null;
   }
 

@@ -10,7 +10,7 @@ class ConstRes {
 
   ///------------------------ Firebase FCM token And Token Id ------------------------///
 
-  static const String subscribeToTopic = 'Orange';
+  static const String subscribeTopic = 'orange';
 
   ///------------------------ Agora app Id ------------------------///
   static const String agoraAppId = "6e660987f7c541309c0c45a133fde8c7";
@@ -19,9 +19,9 @@ class ConstRes {
 }
 
 ///_____________________________ Image Quality _______________________///
-const double maxWidth = 720;
-const double maxHeight = 720;
-const int quality = 100;
+const double maxWidth = 1080;
+const double maxHeight = 1080;
+const int quality = 80;
 
 // max Images for Post
 const int maxImagesForPost = 5;

@@ -15,7 +15,7 @@ class DetectableTextCustom extends StatelessWidget {
     return DetectableText(
       text: text,
       onTap: (p0) {
-        Get.to(() => HashtagScreen(hashtagName: p0));
+        Get.to(() => HashtagScreen(hashtagName: p0), preventDuplicates: false);
       },
       detectionRegExp: RegExp(r"\B#\w\w+"),
       detectedStyle: const TextStyle(

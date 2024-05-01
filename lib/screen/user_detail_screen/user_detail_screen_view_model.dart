@@ -38,7 +38,7 @@ class UserDetailScreenViewModel extends BaseViewModel {
   LiveStreamUser? liveStreamUser;
   List<String?> joinedUsers = [];
   RegistrationUserData? userData;
-  RegistrationUserData? _registrationUserData;
+  RegistrationUserData? myUserData;
   int? userId;
   String? latitude = '';
   String? longitude = '';
@@ -99,8 +99,7 @@ class UserDetailScreenViewModel extends BaseViewModel {
     await ApiProvider().getProfile(userID: userId ?? userData?.id).then(
       (value) async {
         userData = value?.data;
-        like = (value?.data?.likedprofile?.split(',') ?? [])
-            .contains('${userId ?? userData?.id}');
+        like = value?.data?.isLiked ?? false;
         save = (value?.data?.savedprofile?.split(',') ?? [])
             .contains('${userId ?? userData?.id}');
         isFollow =
@@ -124,13 +123,13 @@ class UserDetailScreenViewModel extends BaseViewModel {
   Future<void> registrationUserApiCall() async {
     // Latest userdata
     await ApiProvider().getProfile(userID: PrefService.userId).then((value) {
-      _registrationUserData = value?.data;
+      myUserData = value?.data;
       blockUnBlock =
           value?.data?.blockedUsers?.contains('${userData?.id}') == true
               ? S.current.unBlock
               : S.current.block;
       save = value?.data?.savedprofile?.contains('${userData?.id}') ?? false;
-      like = value?.data?.likedprofile?.contains('${userData?.id}') ?? false;
+      // like = value?.data?.likedprofile?.contains('${userData?.id}') ?? false;
       notifyListeners();
 
       PrefService.saveUser(value?.data);
@@ -260,12 +259,12 @@ class UserDetailScreenViewModel extends BaseViewModel {
 
   void onLikeBtnTap() async {
     like = !like;
-    await ApiProvider().updateLikedProfile(userData?.id);
     notifyListeners();
-    like != true
-        ? null
-        : await ApiProvider()
-            .notifyLikeUser(userId: userData?.id ?? 0, type: 1);
+    await ApiProvider().updateLikedProfile(userData?.id);
+    // like != true
+    //     ? null
+    //     : await ApiProvider()
+    //         .notifyLikeUser(userId: userData?.id ?? 0, type: 1);
   }
 
   void onSaveTap() {
@@ -288,14 +287,11 @@ class UserDetailScreenViewModel extends BaseViewModel {
         username: userData?.fullname,
       );
       Conversation conversation = Conversation(
-        block:
-            _registrationUserData?.blockedUsers?.contains('${userData?.id}') ==
-                    true
-                ? true
-                : false,
+        block: myUserData?.blockedUsers?.contains('${userData?.id}') == true
+            ? true
+            : false,
         blockFromOther:
-            userData?.blockedUsers?.contains('${_registrationUserData?.id}') ==
-                    true
+            userData?.blockedUsers?.contains('${myUserData?.id}') == true
                 ? true
                 : false,
         conversationId: CommonFun.getConversationID(

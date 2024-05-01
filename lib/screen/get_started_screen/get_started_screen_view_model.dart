@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
+import 'package:orange_ui/common/common_fun.dart';
 import 'package:orange_ui/common/common_ui.dart';
 import 'package:orange_ui/model/setting.dart';
 
@@ -13,6 +14,7 @@ import 'package:orange_ui/screen/select_hobbies_screen/select_hobbies_screen.dar
 import 'package:orange_ui/screen/select_photo_screen/select_photo_screen.dart';
 import 'package:orange_ui/screen/starting_profile_screen/starting_profile_screen.dart';
 import 'package:orange_ui/service/pref_service.dart';
+import 'package:orange_ui/utils/pref_res.dart';
 import 'package:orange_ui/utils/urls.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:stacked/stacked.dart';
@@ -43,7 +45,6 @@ class GetStartedScreenViewModel extends BaseViewModel {
         completion: (response) async {
           Setting setting = Setting.fromJson(response);
           settingAppData = setting.data?.appdata;
-
           notifyListeners();
           await PrefService.saveSettingData(setting.data);
         },
@@ -51,7 +52,8 @@ class GetStartedScreenViewModel extends BaseViewModel {
   }
 
   Future<void> screen1NextTap() async {
-    bool isEulaSheetAccept = (await PrefService.getDialog('EULA')) ?? false;
+    bool isEulaSheetAccept =
+        (await PrefService.getDialog(PrefConst.eULA)) ?? false;
     if (Platform.isIOS) {
       if (!isEulaSheetAccept) {
         eulaSheet();
@@ -65,24 +67,35 @@ class GetStartedScreenViewModel extends BaseViewModel {
 
   void loginToNavigateScreen() async {
     bool isLogin = (await PrefService.getLoginText()) ?? false;
-    if (isLogin) {
+
+    if (isLogin && PrefService.userId != -1) {
       ApiProvider().getProfile(userID: PrefService.userId).then(
         (value) {
-          if (value?.data?.age == null) {
-            Get.off(() => const StartingProfileScreen());
-          } else if (value?.data?.images == null ||
-              value!.data!.images.isEmpty) {
-            Get.off(() => const SelectPhotoScreen());
-          } else if (value.data?.interests == null ||
-              value.data!.interests!.isEmpty) {
-            Get.off(() => const SelectHobbiesScreen());
+          if (value?.status == true) {
+            CommonFun.subscribeTopic(value?.data);
+            if (value?.data?.age == null) {
+              Get.off(() => const StartingProfileScreen());
+            } else if (value?.data?.images == null ||
+                value!.data!.images.isEmpty) {
+              Get.off(() => const SelectPhotoScreen());
+            } else if (value.data?.interests == null ||
+                value.data!.interests!.isEmpty) {
+              Get.off(() => const SelectHobbiesScreen());
+            } else {
+              Get.off(() => const DashboardScreen());
+            }
           } else {
-            Get.off(() => const DashboardScreen());
+            if (settingAppData?.isDating != 1) {
+              screenIndex = 3;
+            } else {
+              screenIndex = 1;
+            }
+            notifyListeners();
           }
         },
       );
     } else {
-      if (settingAppData?.isDating == 1) {
+      if (settingAppData?.isDating != 1) {
         screenIndex = 3;
       } else {
         screenIndex = 1;
@@ -97,7 +110,7 @@ class GetStartedScreenViewModel extends BaseViewModel {
   }
 
   void eulaAcceptClick() async {
-    PrefService.setDialog('EULA', true);
+    PrefService.setDialog(PrefConst.eULA, true);
     Get.back();
     loginToNavigateScreen();
   }

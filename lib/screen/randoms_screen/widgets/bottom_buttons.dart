@@ -7,8 +7,8 @@ import 'package:orange_ui/utils/font_res.dart';
 
 class BottomButtons extends StatelessWidget {
   final List<String> genderList;
-  final String selectedGender;
-  final Function(String value) onGenderSelect;
+  final int selectedGender;
+  final Function(int value) onGenderSelect;
   final VoidCallback onMatchingStart;
   final BannerAd? bannerAd;
 
@@ -30,9 +30,7 @@ class BottomButtons extends StatelessWidget {
           textAlign: TextAlign.center,
           style: const TextStyle(color: ColorRes.darkGrey3, fontSize: 16),
         ),
-        const SizedBox(
-          height: 10,
-        ),
+        const SizedBox(height: 10),
         if (bannerAd != null)
           Container(
             alignment: Alignment.center,
@@ -40,9 +38,7 @@ class BottomButtons extends StatelessWidget {
             height: bannerAd?.size.height.toDouble(),
             child: AdWidget(ad: bannerAd!),
           ),
-        const SizedBox(
-          height: 10,
-        ),
+        const SizedBox(height: 10),
         Container(
           height: 50,
           margin: const EdgeInsets.symmetric(horizontal: 28),
@@ -54,9 +50,9 @@ class BottomButtons extends StatelessWidget {
             children: [
               AnimatedAlign(
                 duration: const Duration(milliseconds: 200),
-                alignment: selectedGender == S.current.boys
+                alignment: selectedGender == 1
                     ? Alignment.centerLeft
-                    : selectedGender == S.current.both
+                    : selectedGender == 3
                         ? Alignment.center
                         : Alignment.centerRight,
                 child: Container(
@@ -69,10 +65,7 @@ class BottomButtons extends StatelessWidget {
                     gradient: const LinearGradient(
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
-                        colors: [
-                          ColorRes.lightOrange1,
-                          ColorRes.darkOrange,
-                        ]),
+                        colors: [ColorRes.lightOrange1, ColorRes.darkOrange]),
                   ),
                 ),
               ),
@@ -83,7 +76,7 @@ class BottomButtons extends StatelessWidget {
                     child: InkWell(
                       borderRadius: BorderRadius.circular(7),
                       onTap: () {
-                        onGenderSelect(S.current.boys);
+                        onGenderSelect(1);
                       },
                       child: SizedBox(
                         width: (Get.width / genderList.length) -
@@ -93,7 +86,7 @@ class BottomButtons extends StatelessWidget {
                           child: AnimatedDefaultTextStyle(
                             duration: const Duration(milliseconds: 200),
                             style: TextStyle(
-                              color: selectedGender == S.current.boys
+                              color: selectedGender == 1
                                   ? ColorRes.white
                                   : ColorRes.darkGrey3,
                               fontSize: 13,
@@ -110,7 +103,7 @@ class BottomButtons extends StatelessWidget {
                     child: InkWell(
                       borderRadius: BorderRadius.circular(7),
                       onTap: () {
-                        onGenderSelect(S.current.both);
+                        onGenderSelect(3);
                       },
                       child: SizedBox(
                         width: (Get.width / genderList.length) -
@@ -120,7 +113,7 @@ class BottomButtons extends StatelessWidget {
                           child: AnimatedDefaultTextStyle(
                             duration: const Duration(milliseconds: 200),
                             style: TextStyle(
-                              color: selectedGender == S.current.both
+                              color: selectedGender == 3
                                   ? ColorRes.white
                                   : ColorRes.darkGrey3,
                               fontSize: 13,
@@ -137,7 +130,7 @@ class BottomButtons extends StatelessWidget {
                     child: InkWell(
                       borderRadius: BorderRadius.circular(7),
                       onTap: () {
-                        onGenderSelect(S.current.girls);
+                        onGenderSelect(2);
                       },
                       child: SizedBox(
                         width: (Get.width / genderList.length) -
@@ -147,7 +140,7 @@ class BottomButtons extends StatelessWidget {
                           child: AnimatedDefaultTextStyle(
                             duration: const Duration(milliseconds: 200),
                             style: TextStyle(
-                              color: selectedGender == S.current.girls
+                              color: selectedGender == 2
                                   ? ColorRes.white
                                   : ColorRes.darkGrey3,
                               fontSize: 13,

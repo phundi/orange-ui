@@ -8,7 +8,7 @@ import 'package:orange_ui/service/pref_service.dart';
 import 'package:stacked/stacked.dart';
 
 class SelectHobbiesScreenViewModel extends BaseViewModel {
-  List<Interest>? hobbiesList = [];
+  List<Interest> hobbiesList = [];
   List<String> selectedList = [];
   String fullName = '';
   int age = 0;
@@ -31,17 +31,18 @@ class SelectHobbiesScreenViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  void getInterestApiCall() async {
-    await PrefService.getInterest().then((value) {
-      if (value != null && value.status!) {
-        hobbiesList = value.data;
+  void getInterestApiCall() {
+    PrefService.getInterest().then((value) {
+      if (value?.data != null && value!.data!.isNotEmpty) {
+        hobbiesList = value.data ?? [];
         notifyListeners();
+      } else {
+        Get.offAll(() => const DashboardScreen());
       }
     });
   }
 
   void onNextTap() {
-    if (selectedList.isEmpty) return;
     CommonUI.lottieLoader();
     ApiProvider().updateProfile(interest: selectedList).then((value) async {
       Get.back();

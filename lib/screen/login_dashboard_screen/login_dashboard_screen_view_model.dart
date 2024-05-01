@@ -192,6 +192,7 @@ class LoginDashboardScreenViewModel extends BaseViewModel {
             loginType: loginType,
             password: '')
         .then((value) async {
+      Get.back();
       if (value.status == true) {
         PrefService.userId = value.data!.id!;
         await PrefService.setLoginText(true);
@@ -200,10 +201,7 @@ class LoginDashboardScreenViewModel extends BaseViewModel {
           await PrefService.setLongitude("${value.data?.longitude}");
         }
         await PrefService.saveUser(value.data);
-        Get.back();
         await checkScreenCondition(value.data);
-      } else {
-        Get.back();
       }
     });
   }
@@ -216,7 +214,7 @@ class LoginDashboardScreenViewModel extends BaseViewModel {
       );
     } else if (data.images.isEmpty) {
       Get.off(() => const SelectPhotoScreen());
-    } else if (data.interests!.isEmpty || data.interests == null) {
+    } else if (data.interests == null || data.interests!.isEmpty) {
       Get.off(() => const SelectHobbiesScreen());
     } else {
       Get.offAll(() => const DashboardScreen());

@@ -13,14 +13,12 @@ import 'package:orange_ui/screen/notification_screen/notification_screen.dart';
 import 'package:orange_ui/screen/randoms_search_screen/randoms_search_screen.dart';
 import 'package:orange_ui/screen/search_screen/search_screen.dart';
 import 'package:orange_ui/service/pref_service.dart';
-import 'package:orange_ui/utils/firebase_res.dart';
-import 'package:orange_ui/utils/urls.dart';
 import 'package:stacked/stacked.dart';
 
 class RandomsScreenViewModel extends BaseViewModel {
   RegistrationUserData? data;
   List<String> genderList = [S.current.boys, S.current.both, S.current.girls];
-  String selectedGender = S.current.both;
+  int selectedGender = 3;
   bool isLoading = false;
   BannerAd? bannerAd;
 
@@ -57,7 +55,7 @@ class RandomsScreenViewModel extends BaseViewModel {
     Get.to(() => const LiveGridScreen());
   }
 
-  void onGenderChange(String value) {
+  void onGenderChange(int value) {
     data?.isBlock == 1
         ? CommonUI.snackBarWidget(S.current.userBlock)
         : selectedGender = value;
@@ -67,12 +65,9 @@ class RandomsScreenViewModel extends BaseViewModel {
   void onStartMatchingTap() {
     data?.isBlock == 1
         ? CommonUI.snackBarWidget(S.current.userBlock)
-        : Get.to(() => const RandomsSearchScreen(), arguments: [
-            {
-              Urls.aGender: selectedGender,
-              FirebaseRes.image: CommonFun.getProfileImage(images: data?.images)
-            }
-          ]);
+        : Get.to(() => RandomsSearchScreen(
+            selectedGender: selectedGender,
+            profileImage: CommonFun.getProfileImage(images: data?.images)));
   }
 
   void getBannerAd() {

@@ -2,13 +2,11 @@ import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
 import 'package:orange_ui/common/common_ui.dart';
 import 'package:orange_ui/common/dashboard_top_bar.dart';
-
 import 'package:orange_ui/model/social/post/add_comment.dart';
 import 'package:orange_ui/screen/feed_screen/feed_screen_view_model.dart';
 import 'package:orange_ui/screen/feed_screen/widget/feed_story_bar.dart';
 import 'package:orange_ui/screen/post_screen/widget/post_card.dart';
 import 'package:orange_ui/utils/color_res.dart';
-import 'package:orange_ui/utils/font_res.dart';
 import 'package:orange_ui/utils/style_res.dart';
 import 'package:stacked/stacked.dart';
 
@@ -26,11 +24,10 @@ class FeedScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             DashboardTopBar(
-              onNotificationTap: model.onNotificationTap,
-              onSearchTap: model.onSearchTap,
-              onLivesBtnClick: model.onLivesBtnClick,
-              isDating: model.settingAppData?.isDating,
-            ),
+                onNotificationTap: model.onNotificationTap,
+                onSearchTap: model.onSearchTap,
+                onLivesBtnClick: model.onLivesBtnClick,
+                isDating: model.settingAppData?.isDating),
             Expanded(
               child: model.isLoading
                   ? CommonUI.lottieWidget()
@@ -41,16 +38,21 @@ class FeedScreen extends StatelessWidget {
                           child: Column(
                             children: [
                               FeedStoryBar(model: model),
-                              ListView.builder(
-                                primary: false,
-                                shrinkWrap: true,
-                                padding: EdgeInsets.zero,
-                                itemCount: model.postList.length,
-                                itemBuilder: (context, index) {
-                                  Post post = model.postList[index];
-                                  return PostCard(post: post, model: model);
-                                },
-                              ),
+                              model.postList.isEmpty
+                                  ? CommonUI.noData()
+                                  : ListView.builder(
+                                      primary: false,
+                                      shrinkWrap: true,
+                                      padding: EdgeInsets.zero,
+                                      itemCount: model.postList.length,
+                                      itemBuilder: (context, index) {
+                                        Post post = model.postList[index];
+                                        return PostCard(
+                                          post: post,
+                                          model: model,
+                                        );
+                                      },
+                                    ),
                             ],
                           ),
                         ),

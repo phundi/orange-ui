@@ -61,7 +61,7 @@ class RegistrationUserData {
     int? isBlock,
     int? gender,
     String? savedprofile,
-    String? likedprofile,
+    // String? likedprofile,
     String? interests,
     int? age,
     String? identity,
@@ -94,6 +94,7 @@ class RegistrationUserData {
     int? isLiveNow,
     int? isFake,
     String? password,
+    bool? isLiked,
     List<Story>? story,
     List<Images>? images,
   }) {
@@ -135,6 +136,7 @@ class RegistrationUserData {
     _isFake = isFake;
     _password = password;
     _story = story;
+    _isLiked = isLiked;
     _images = images ?? [];
   }
 
@@ -175,6 +177,7 @@ class RegistrationUserData {
     _canGoLive = json['can_go_live'];
     _isLiveNow = json['is_live_now'];
     _isFake = json['is_fake'];
+    _isLiked = json['is_like'];
     _password = json['password'];
     if (json['stories'] != null) {
       _story = [];
@@ -229,6 +232,7 @@ class RegistrationUserData {
   int? _isLiveNow;
   int? _isFake;
   String? _password;
+  bool? _isLiked;
   List<Story>? _story;
   List<Images> _images = [];
 
@@ -299,6 +303,7 @@ class RegistrationUserData {
   int? get isLiveNow => _isLiveNow;
 
   int? get isFake => _isFake;
+  bool? get isLiked => _isLiked;
 
   String? get password => _password;
   List<Story>? get story => _story;
@@ -347,6 +352,7 @@ class RegistrationUserData {
     map['is_live_now'] = _isLiveNow;
     map['is_fake'] = _isFake;
     map['password'] = _password;
+    map['is_like'] = _isLiked;
     if (_story != null) {
       map['stories'] = _story?.map((v) => v.toJson()).toList();
     }

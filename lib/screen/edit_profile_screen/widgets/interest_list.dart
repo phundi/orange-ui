@@ -14,18 +14,20 @@ class InterestList extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          S.current.interest,
-          style: const TextStyle(
-            color: ColorRes.darkGrey3,
-            fontSize: 15,
-            fontFamily: FontRes.extraBold,
-          ),
-        ),
+        model.hobbiesList.isEmpty
+            ? const SizedBox()
+            : Text(
+                S.current.interest,
+                style: const TextStyle(
+                  color: ColorRes.darkGrey3,
+                  fontSize: 15,
+                  fontFamily: FontRes.extraBold,
+                ),
+              ),
         const SizedBox(height: 15),
         Wrap(
           alignment: WrapAlignment.center,
-          children: model.hobbiesList!.map<Widget>((e) {
+          children: model.hobbiesList.map<Widget>((e) {
             bool selected = model.selectedList.contains(e.id.toString());
             return InkWell(
               onTap: () {

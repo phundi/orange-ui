@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:orange_ui/common/dashboard_top_bar.dart';
 import 'package:orange_ui/screen/explore_screen/explore_screen_view_model.dart';
@@ -27,7 +28,7 @@ class ExploreScreen extends StatelessWidget {
                 isDating: model.settingAppData?.isDating),
             const SizedBox(height: 20),
             FullImageView(
-              userData: model.userData,
+              userList: model.userList,
               userController: model.userController,
               onLiveBtnTap: model.onLiveBtnTap,
               onImageTap: model.onImageTap,
@@ -39,12 +40,13 @@ class ExploreScreen extends StatelessWidget {
               isSocialBtnVisible: model.isSocialBtnVisible,
             ),
             const SizedBox(height: 26),
-            BottomButtons(
-                onPlayBtnTap: model.onPlayButtonTap,
-                onNextBtnTap: model.onNextButtonTap,
-                onEyeTap: model.onEyeButtonTap,
-                settingData: model.settingAppData),
-            const SizedBox(height: 26),
+            if (model.userList.isNotEmpty)
+              BottomButtons(
+                  onPlayBtnTap: model.onPlayButtonTap,
+                  onNextBtnTap: model.onNextButtonTap,
+                  onEyeTap: model.onEyeButtonTap,
+                  settingData: model.settingAppData),
+            if (model.userList.isNotEmpty) const SizedBox(height: 26),
           ],
         );
       },

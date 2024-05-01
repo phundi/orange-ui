@@ -18,8 +18,8 @@ class NotificationScreenViewModel extends BaseViewModel {
   ScrollController adminScrollController = ScrollController();
   bool isLoading = false;
   bool isUserLoading = false;
-  List<AdminNotificationData>? adminNotification = [];
-  List<UserNotificationData>? userNotification = [];
+  List<AdminNotificationData> adminNotification = [];
+  List<UserNotificationData> userNotification = [];
 
   void init() {
     FlutterAppBadger.removeBadge();
@@ -38,11 +38,11 @@ class NotificationScreenViewModel extends BaseViewModel {
     isLoading = true;
     await ApiProvider().adminNotification(adminStart).then((value) {
       if (adminStart == 0) {
-        adminNotification = value.data;
+        adminNotification = value.data ?? [];
       } else {
-        adminNotification?.addAll(value.data!);
+        adminNotification.addAll(value.data!);
       }
-      adminStart = adminNotification!.length;
+      adminStart = adminNotification.length;
       isLoading = false;
       notifyListeners();
     });
@@ -74,12 +74,13 @@ class NotificationScreenViewModel extends BaseViewModel {
   void getUserNotificationApiCall() {
     isUserLoading = true;
     ApiProvider().getUserNotification(start).then((value) async {
+      value.data?.forEach((element) {});
       if (start == 0) {
-        userNotification = value.data;
+        userNotification = value.data ?? [];
       } else {
-        userNotification?.addAll(value.data!);
+        userNotification.addAll(value.data!);
       }
-      start = userNotification!.length;
+      start = userNotification.length;
       isUserLoading = false;
       notifyListeners();
     });

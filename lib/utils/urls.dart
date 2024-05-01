@@ -157,7 +157,7 @@ class Urls {
   static const String aChannelId = 'channelId';
   static const String aTopicName = 'Orange';
   static const String aDataUserId = 'data_user_id';
-  static const String aViewerNotificationId = 'viewer_notification_id';
+  static const String aConversationId = 'conversation_id';
   static const String aTitle = 'title';
   static const String aBody = 'body';
   static const String aContents = 'content[]';

@@ -28,4 +28,5 @@ class PrefConst {
   static const String time = 'time';
   static const String password = 'Password';
   static const String interest = 'interest';
+  static const String eULA = 'EULA';
 }

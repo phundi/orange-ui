@@ -25,7 +25,8 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 34
+
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin/com/retrytech/bubbly_camera'
@@ -34,8 +35,8 @@ android {
         minSdkVersion 24
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_9
-        targetCompatibility JavaVersion.VERSION_1_9
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
     buildFeatures.dataBinding = true
 }

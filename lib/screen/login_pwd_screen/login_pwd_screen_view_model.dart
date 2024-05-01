@@ -164,7 +164,7 @@ class LoginPwdScreenViewModel extends BaseViewModel {
       Get.offAll(() => const StartingProfileScreen());
     } else if (data!.images.isEmpty) {
       Get.off(() => const SelectPhotoScreen());
-    } else if (data.interests!.isEmpty || data.interests == null) {
+    } else if (data.interests == null || data.interests!.isEmpty) {
       Get.off(() => const SelectHobbiesScreen());
     } else {
       Get.offAll(() => const DashboardScreen());

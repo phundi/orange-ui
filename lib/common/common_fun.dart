@@ -1,7 +1,13 @@
+import 'dart:developer';
+import 'dart:io';
+
 import 'package:camera/camera.dart';
 import 'package:ffmpeg_kit_flutter/ffprobe_kit.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:intl/intl.dart';
+import 'package:orange_ui/generated/l10n.dart';
+import 'package:orange_ui/model/notification/user_notification.dart';
 import 'package:orange_ui/model/social/post/add_comment.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/utils/const_res.dart';
@@ -181,5 +187,41 @@ class CommonFun {
       return 50.0;
     }
     return 43.0;
+  }
+
+  static void subscribeTopic(RegistrationUserData? user) async {
+    if (user != null && user.isNotification == 1) {
+      log('Topic Subscribe');
+      if (Platform.isAndroid) {
+        await FirebaseMessaging.instance
+            .subscribeToTopic('${ConstRes.subscribeTopic}_android');
+      } else {
+        await FirebaseMessaging.instance
+            .subscribeToTopic('${ConstRes.subscribeTopic}_ios');
+      }
+    }
+  }
+
+  static void unSubscribeTopic() async {
+    log('Topic unSubscribe');
+    if (Platform.isAndroid) {
+      await FirebaseMessaging.instance
+          .unsubscribeFromTopic('${ConstRes.subscribeTopic}_android');
+    } else {
+      await FirebaseMessaging.instance
+          .unsubscribeFromTopic('${ConstRes.subscribeTopic}_ios');
+    }
+  }
+
+  static String getNotificationType(UserNotificationData? notificationData) {
+    return notificationData?.type == 1
+        ? '${notificationData?.dataUser?.fullname} has started following you.'
+        : notificationData?.type == 2
+            ? '${notificationData?.dataUser?.fullname} has commented on your post.'
+            : notificationData?.type == 3
+                ? '${notificationData?.dataUser?.fullname} has liked your post.'
+                : notificationData?.type == 4
+                    ? '${notificationData?.dataUser?.fullname} ${S.current.hasLikedYourProfileYouShouldCheckTheirProfile}'
+                    : '';
   }
 }

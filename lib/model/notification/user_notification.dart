@@ -80,8 +80,8 @@ class UserNotificationData {
     _type = json['type'];
     _createdAt = json['created_at'];
     _updatedAt = json['updated_at'];
-    _dataUser = json['data_user'] != null
-        ? RegistrationUserData.fromJson(json['data_user'])
+    _dataUser = json['user'] != null
+        ? RegistrationUserData.fromJson(json['user'])
         : null;
   }
 
@@ -135,7 +135,7 @@ class UserNotificationData {
     map['created_at'] = _createdAt;
     map['updated_at'] = _updatedAt;
     if (_dataUser != null) {
-      map['data_user'] = _dataUser?.toJson();
+      map['user'] = _dataUser?.toJson();
     }
     return map;
   }

@@ -220,14 +220,17 @@ class DetailPage extends StatelessWidget {
                               fontSize: 14),
                         ),
                         const SizedBox(height: 15),
-                        Text(
-                          S.current.interest,
-                          style: const TextStyle(
-                              color: ColorRes.white,
-                              fontFamily: FontRes.bold,
-                              fontSize: 17),
-                        ),
-                        const SizedBox(height: 11),
+                        model.interestList.isNotEmpty
+                            ? Text(
+                                S.current.interest,
+                                style: const TextStyle(
+                                    color: ColorRes.white,
+                                    fontFamily: FontRes.bold,
+                                    fontSize: 17),
+                              )
+                            : const SizedBox(),
+                        if (model.interestList.isNotEmpty)
+                          const SizedBox(height: 11),
                         interestButtons(model.interestList),
                         if (model.settingAppData?.isSocialMedia == 1)
                           Padding(

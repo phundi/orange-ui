@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -73,38 +72,17 @@ class VerificationScreenViewModel extends BaseViewModel {
   }
 
   void onDocumentTap() async {
-    if (Platform.isAndroid) {
-      final androidInfo = await DeviceInfoPlugin().androidInfo;
-      late final Map<Permission, PermissionStatus> statusess;
-      if (androidInfo.version.sdkInt <= 32) {
-        statusess = await [
-          Permission.storage,
-        ].request();
-      } else {
-        statusess = await [
-          Permission.photos,
-        ].request();
-      }
-
-      var allAccepted = true;
-      statusess.forEach((permission, status) {
-        if (status != PermissionStatus.granted) {
-          allAccepted = false;
-        }
-      });
-      if (!allAccepted) {
-        openAppSettings();
-        return;
-      }
-    }
     fullNameFocus.unfocus();
     final ImagePicker picker = ImagePicker();
-    final XFile? photo = await picker
+    XFile? photo;
+
+    photo = await picker
         .pickImage(source: ImageSource.gallery)
         .onError((PlatformException error, stackTrace) {
       CommonUI.snackBarWidget(error.message ?? '');
       return null;
     });
+
     if (photo == null || photo.path.isEmpty) return;
     docFile = File(photo.path);
     documentName = photo.name;

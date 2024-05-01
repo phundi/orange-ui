@@ -27,10 +27,10 @@ class ExploreScreenViewModel extends BaseViewModel {
   int imageIndex = 0;
   bool isLoading = false;
   SwiperController userController = SwiperController();
-  List<RegistrationUserData>? userData;
+  List<RegistrationUserData> userList = [];
   int currentUserIndex = 0;
   int? walletCoin = 0;
-  RegistrationUserData? users;
+  RegistrationUserData? userData;
   bool isSelected = false;
   InterstitialAd? interstitialAd;
   int count = 0;
@@ -53,7 +53,7 @@ class ExploreScreenViewModel extends BaseViewModel {
   Future<void> exploreScreenApiCall() async {
     isLoading = true;
     ApiProvider().getExplorePageProfileList().then((value) async {
-      userData = value.data;
+      userList = value.data ?? [];
       isLoading = false;
       getProfileAPi();
       notifyListeners();
@@ -62,7 +62,7 @@ class ExploreScreenViewModel extends BaseViewModel {
 
   Future<void> getProfileAPi() async {
     ApiProvider().getProfile(userID: PrefService.userId).then((value) async {
-      users = value?.data;
+      userData = value?.data;
       walletCoin = value?.data?.wallet;
       isSelected =
           await PrefService.getDialog(PrefConst.isDialogDialog) ?? false;
@@ -91,22 +91,22 @@ class ExploreScreenViewModel extends BaseViewModel {
 
   void onSocialBtnTap(int type) {
     if (type == 0) {
-      _launchUrl(userData?[currentUserIndex].youtube ?? '');
+      _launchUrl(userList[currentUserIndex].youtube ?? '');
     } else if (type == 1) {
-      _launchUrl(userData?[currentUserIndex].facebook ?? '');
+      _launchUrl(userList[currentUserIndex].facebook ?? '');
     } else if (type == 2) {
-      _launchUrl(userData?[currentUserIndex].instagram ?? '');
+      _launchUrl(userList[currentUserIndex].instagram ?? '');
     }
   }
 
   void onPlayButtonTap() async {
-    if (users == null) {
+    if (userData == null) {
       return;
     }
-    if (users?.isBlock == 1) {
+    if (userData?.isBlock == 1) {
       return CommonUI.snackBarWidget(S.current.userBlock);
     } else {
-      if (users?.isFake != 1) {
+      if (userData?.isFake != 1) {
         if ((settingAppData?.reverseSwipePrice ?? 0) <= walletCoin! &&
             walletCoin != 0) {
           !isSelected
@@ -179,7 +179,7 @@ class ExploreScreenViewModel extends BaseViewModel {
         });
       }
     } else {
-      users?.isBlock == 1
+      userData?.isBlock == 1
           ? CommonUI.snackBarWidget(S.current.userBlock)
           : userController.next(animation: true);
     }
@@ -200,7 +200,7 @@ class ExploreScreenViewModel extends BaseViewModel {
   }
 
   void onNotificationTap() {
-    users?.isBlock == 1
+    userData?.isBlock == 1
         ? CommonUI.snackBarWidget(S.current.userBlock)
         : Get.to(() => const NotificationScreen());
   }
@@ -210,22 +210,22 @@ class ExploreScreenViewModel extends BaseViewModel {
   }
 
   void onSearchTap() {
-    users?.isBlock == 1
+    userData?.isBlock == 1
         ? CommonUI.snackBarWidget(S.current.userBlock)
         : Get.to(() => const SearchScreen());
   }
 
   void onTitleTap() {
-    users?.isBlock == 1
+    userData?.isBlock == 1
         ? CommonUI.snackBarWidget(S.current.userBlock)
         : Get.to(() => const MapScreen());
   }
 
   void onImageTap() {
-    users?.isBlock == 1
+    userData?.isBlock == 1
         ? CommonUI.snackBarWidget(S.current.userBlock)
         : Get.to(
-            () => UserDetailScreen(userData: userData?[currentUserIndex]),
+            () => UserDetailScreen(userData: userList[currentUserIndex]),
           );
   }
 
@@ -234,11 +234,11 @@ class ExploreScreenViewModel extends BaseViewModel {
   }
 
   void onEyeButtonTap() {
-    users?.isBlock == 1
+    userData?.isBlock == 1
         ? CommonUI.snackBarWidget(S.current.userBlock)
         : Get.to(() => UserDetailScreen(
               showInfo: true,
-              userData: userData?[currentUserIndex],
+              userData: userList[currentUserIndex],
             ));
   }
 

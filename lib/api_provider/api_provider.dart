@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
+import 'package:orange_ui/common/common_fun.dart';
 import 'package:orange_ui/model/chat_and_live_stream/add_live_stream_history.dart';
 import 'package:orange_ui/model/chat_and_live_stream/agora.dart';
 import 'package:orange_ui/model/chat_and_live_stream/apply_for_live.dart';
@@ -58,7 +59,12 @@ class ApiProvider {
     }
     http.Response response = await http.post(Uri.parse(Urls.aRegister),
         headers: {Urls.aApiKeyName: ConstRes.apiKey}, body: map);
-    return RegistrationUser.fromJson(jsonDecode(response.body));
+    RegistrationUser user =
+        RegistrationUser.fromJson(jsonDecode(response.body));
+    if (user.data != null) {
+      CommonFun.subscribeTopic(user.data);
+    }
+    return user;
   }
 
   Future<GetInterest?> getInterest() async {
@@ -195,6 +201,7 @@ class ApiProvider {
       Urls.aUserId: userID.toString(),
       Urls.aMyUserId: PrefService.userId.toString(),
     });
+
     return GetProfile.fromJson(jsonDecode(response.body));
   }
 
@@ -262,8 +269,9 @@ class ApiProvider {
     }, body: {
       Urls.aUserId: PrefService.userId.toString(),
       Urls.aStart: start.toString(),
-      Urls.aCount: Urls.aFifteen
+      Urls.aCount: Urls.aFifteen,
     });
+    // print('error : ${response.body}');
     return UserNotification.fromJson(jsonDecode(response.body));
   }
 
@@ -334,8 +342,10 @@ class ApiProvider {
         await http.post(Uri.parse(Urls.aUpdateLikedProfile), headers: {
       Urls.aApiKeyName: ConstRes.apiKey
     }, body: {
-      Urls.aUserId: PrefService.userId.toString(),
-      Urls.aProfiles: likedProfile,
+      Urls.aUserId: profileId.toString(),
+      Urls.aMyUserId: PrefService.userId.toString(),
+      Urls.aType: '4'
+      // Urls.aProfiles: likedProfile,
     });
 
     UpdateSavedProfile updateSavedProfile =
@@ -432,6 +442,7 @@ class ApiProvider {
     http.Response response = await http.post(Uri.parse(Urls.aDeleteMyAccount),
         headers: {Urls.aApiKeyName: ConstRes.apiKey},
         body: {Urls.aUserId: deleteId.toString()});
+    CommonFun.unSubscribeTopic();
     return DeleteAccount.fromJson(jsonDecode(response.body));
   }
 
@@ -519,6 +530,7 @@ class ApiProvider {
           Urls.aUserId: PrefService.userId.toString(),
           Urls.aGender: gender.toString()
         });
+
     return GetProfile.fromJson(jsonDecode(response.body));
   }
 
@@ -592,13 +604,6 @@ class ApiProvider {
     return FetchUserCoordinate.fromJson(jsonDecode(response.body));
   }
 
-  Future<GetProfile> getUserDetail({required String email}) async {
-    http.Response response = await http.post(Uri.parse(Urls.aGetUserDetails),
-        headers: {Urls.aApiKeyName: ConstRes.apiKey},
-        body: {Urls.aEmail: email});
-    return GetProfile.fromJson(jsonDecode(response.body));
-  }
-
   Future<NotifyLikeUser> notifyLikeUser(
       {required int? userId, required int type}) async {
     http.Response response =
@@ -612,24 +617,50 @@ class ApiProvider {
     return NotifyLikeUser.fromJson(jsonDecode(response.body));
   }
 
-  Future pushNotification(
-      {required String title,
-      required String body,
-      required Map<String, dynamic> data,
-      required String token}) async {
+  Future pushNotification({
+    String? token,
+    num? deviceType,
+    required String title,
+    required String body,
+    required String conversationId,
+  }) async {
+    bool isIOS = deviceType == 2;
+
+    Map<String, dynamic> messageData = {
+      "apns": {
+        "payload": {
+          "aps": {
+            "sound": "default",
+          }
+        }
+      },
+      "data": {
+        Urls.aConversationId: conversationId,
+        "body": body,
+        "title": title
+      }
+    };
+
+    if (isIOS) {
+      messageData["notification"] = {
+        "body": body,
+        "title": title,
+      };
+    }
+
+    if (token != null) {
+      messageData["token"] = token;
+    } else {
+      return;
+    }
+    Map<String, dynamic> inputData = {"message": messageData};
     await http
         .post(Uri.parse(Urls.aNotificationUrl),
             headers: {
               Urls.aApiKeyName: ConstRes.apiKey,
-              'content-type': 'application/json'
+              // 'content-type': 'application/json'
             },
-            body: json.encode({
-              'message': {
-                'token': token,
-                'data': data,
-                // 'notification': {'title': title, 'body': body},
-              }
-            }))
+            body: json.encode(inputData))
         .then((value) {
       log('Notification : ${value.body}');
     });
@@ -639,6 +670,7 @@ class ApiProvider {
     http.Response response = await http.post(Uri.parse(Urls.aLogoutUser),
         headers: {Urls.aApiKeyName: ConstRes.apiKey},
         body: {Urls.aUserId: PrefService.userId.toString()});
+    CommonFun.unSubscribeTopic();
     return Report.fromJson(jsonDecode(response.body));
   }
 

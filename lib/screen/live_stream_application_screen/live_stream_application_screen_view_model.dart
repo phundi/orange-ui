@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -12,7 +11,6 @@ import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/common/video_upload_dialog.dart';
 import 'package:orange_ui/screen/video_preview_screen/video_preview_screen.dart';
 import 'package:orange_ui/screen/video_preview_screen/video_preview_screen_view_model.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:stacked/stacked.dart';
 import 'package:video_thumbnail/video_thumbnail.dart';
 
@@ -121,31 +119,6 @@ class LiveStreamApplicationScreenViewModel extends BaseViewModel {
   }
 
   void imagePicker() async {
-    if (Platform.isAndroid) {
-      final androidInfo = await DeviceInfoPlugin().androidInfo;
-      late final Map<Permission, PermissionStatus> statusess;
-
-      if (androidInfo.version.sdkInt <= 32) {
-        statusess = await [
-          Permission.storage,
-        ].request();
-      } else {
-        statusess = await [
-          Permission.photos,
-        ].request();
-      }
-
-      var allAccepted = true;
-      statusess.forEach((permission, status) {
-        if (status != PermissionStatus.granted) {
-          allAccepted = false;
-        }
-      });
-      if (!allAccepted) {
-        openAppSettings();
-        return;
-      }
-    }
     _pickedFile = await picker
         .pickVideo(
       source: ImageSource.gallery,
