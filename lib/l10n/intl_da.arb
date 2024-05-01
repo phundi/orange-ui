@@ -342,5 +342,6 @@
   "commentDelete": "Slet kommentar?",
   "areYouSureYouWantToDeleteTheComment": "Er du sikker på, at du vil slette kommentaren?",
   "enterUsername": "Indtast brugernavn",
-  "username": "Brugernavn"
+  "username": "Brugernavn",
+  "followerList": "Følgerliste"
 }

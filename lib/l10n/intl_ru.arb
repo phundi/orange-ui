@@ -342,5 +342,6 @@
   "commentDelete": "Комментарий удалить?",
   "areYouSureYouWantToDeleteTheComment": "Вы уверены, что хотите удалить комментарий?",
   "enterUsername": "Введите имя пользователя",
-  "username": "Имя пользователя"
+  "username": "Имя пользователя",
+  "followerList": "Список подписчиков"
 }

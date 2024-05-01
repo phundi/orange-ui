@@ -342,5 +342,6 @@
   "commentDelete": "评论删除？",
   "areYouSureYouWantToDeleteTheComment": "您确定要删除评论吗？",
   "enterUsername": "输入用户名",
-  "username": "用户名"
+  "username": "用户名",
+  "followerList": "关注者列表"
 }

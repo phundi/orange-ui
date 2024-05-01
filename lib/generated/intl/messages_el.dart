@@ -204,6 +204,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Βρείτε κάποιον Τυχαία\nΚαι ελέγξτε το προφίλ του"),
         "fitness": MessageLookupByLibrary.simpleMessage("Καταλληλότητα"),
         "follow": MessageLookupByLibrary.simpleMessage("Ακολουθηστε"),
+        "followerList": MessageLookupByLibrary.simpleMessage("Λίστα ακολούθων"),
         "followers": MessageLookupByLibrary.simpleMessage("Οπαδοί"),
         "following": MessageLookupByLibrary.simpleMessage("ΕΠΟΜΕΝΟ"),
         "followingList":

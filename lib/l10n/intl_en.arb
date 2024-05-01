@@ -342,5 +342,6 @@
   "commentDelete": "Comment delete ?",
   "areYouSureYouWantToDeleteTheComment": "Are you sure you want to delete the comment ?",
   "enterUsername": "Enter UserName",
-  "username": "UserName"
+  "username": "UserName",
+  "followerList": "Follower List"
 }

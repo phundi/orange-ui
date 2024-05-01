@@ -188,6 +188,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "किसी को बेतरतीब ढंग से ढूंढें\nऔर उनकी प्रोफ़ाइल जांचें"),
         "fitness": MessageLookupByLibrary.simpleMessage("स्वास्थ्य"),
         "follow": MessageLookupByLibrary.simpleMessage("अनुसरण करना"),
+        "followerList": MessageLookupByLibrary.simpleMessage("अनुयायी सूची"),
         "followers": MessageLookupByLibrary.simpleMessage("समर्थक"),
         "following": MessageLookupByLibrary.simpleMessage("अगले"),
         "followingList":

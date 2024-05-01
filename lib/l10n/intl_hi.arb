@@ -342,5 +342,6 @@
   "commentDelete": "टिप्पणी हटाएं?",
   "areYouSureYouWantToDeleteTheComment": "क्या आप वाकई टिप्पणी हटाना चाहते हैं?",
   "enterUsername": "उपयोगकर्ता नाम दर्ज करें",
-  "username": "उपयोगकर्ता नाम"
+  "username": "उपयोगकर्ता नाम",
+  "followerList": "अनुयायी सूची"
 }

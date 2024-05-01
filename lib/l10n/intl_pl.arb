@@ -342,5 +342,6 @@
   "commentDelete": "Komentarz usunąć?",
   "areYouSureYouWantToDeleteTheComment": "Czy na pewno chcesz usunąć komentarz?",
   "enterUsername": "Wpisz nazwę użytkownika",
-  "username": "Nazwa użytkownika"
+  "username": "Nazwa użytkownika",
+  "followerList": "Lista obserwujących"
 }

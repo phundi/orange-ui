@@ -49,7 +49,9 @@ class FollowFollowingScreen extends StatelessWidget {
                       Align(
                         alignment: Alignment.center,
                         child: Text(
-                          S.of(context).followingList,
+                          FollowFollowingType.following == followFollowingType
+                              ? S.of(context).followingList
+                              : S.of(context).followerList,
                           style: const TextStyle(
                               color: ColorRes.veryDarkGrey4,
                               fontFamily: FontRes.semiBold,

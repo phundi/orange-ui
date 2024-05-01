@@ -199,6 +199,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Trova qualcuno a caso\nE controlla il suo profilo"),
         "fitness": MessageLookupByLibrary.simpleMessage("Fitness"),
         "follow": MessageLookupByLibrary.simpleMessage("Seguire"),
+        "followerList":
+            MessageLookupByLibrary.simpleMessage("Elenco dei follower"),
         "followers": MessageLookupByLibrary.simpleMessage("Seguaci"),
         "following": MessageLookupByLibrary.simpleMessage("Seguente"),
         "followingList":

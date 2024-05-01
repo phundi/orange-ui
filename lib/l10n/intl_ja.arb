@@ -342,5 +342,6 @@
   "commentDelete": "コメント削除しますか？",
   "areYouSureYouWantToDeleteTheComment": "コメントを削除してもよろしいですか?",
   "enterUsername": "ユーザーネームを入力してください",
-  "username": "ユーザー名"
+  "username": "ユーザー名",
+  "followerList": "フォロワーリスト"
 }

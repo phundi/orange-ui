@@ -342,5 +342,6 @@
   "commentDelete": "Yorum silinsin mi?",
   "areYouSureYouWantToDeleteTheComment": "Yorumu silmek istediğinizden emin misiniz?",
   "enterUsername": "Kullanıcı adı girin",
-  "username": "Kullanıcı adı"
+  "username": "Kullanıcı adı",
+  "followerList": "Takipçi Listesi"
 }

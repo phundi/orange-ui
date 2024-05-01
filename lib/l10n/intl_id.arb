@@ -342,5 +342,6 @@
   "commentDelete": "Hapus komentar?",
   "areYouSureYouWantToDeleteTheComment": "Apakah Anda yakin ingin menghapus komentar tersebut?",
   "enterUsername": "Masukkan nama pengguna",
-  "username": "Nama belakang"
+  "username": "Nama belakang",
+  "followerList": "Daftar Pengikut"
 }

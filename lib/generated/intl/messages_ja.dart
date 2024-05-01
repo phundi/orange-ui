@@ -171,6 +171,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "ランダムに誰かを見つけて\nプロフィールを確認してください"),
         "fitness": MessageLookupByLibrary.simpleMessage("フィットネス"),
         "follow": MessageLookupByLibrary.simpleMessage("フォローする"),
+        "followerList": MessageLookupByLibrary.simpleMessage("フォロワーリスト"),
         "followers": MessageLookupByLibrary.simpleMessage("フォロワー"),
         "following": MessageLookupByLibrary.simpleMessage("続く"),
         "followingList": MessageLookupByLibrary.simpleMessage("フォローリスト"),

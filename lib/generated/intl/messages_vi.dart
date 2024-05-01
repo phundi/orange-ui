@@ -194,6 +194,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Tìm ai đó ngẫu nhiên\nVà kiểm tra hồ sơ của họ"),
         "fitness": MessageLookupByLibrary.simpleMessage("Sự thích hợp"),
         "follow": MessageLookupByLibrary.simpleMessage("Theo"),
+        "followerList":
+            MessageLookupByLibrary.simpleMessage("Danh sách người theo dõi"),
         "followers": MessageLookupByLibrary.simpleMessage("Người theo dõi"),
         "following": MessageLookupByLibrary.simpleMessage("Tiếp theo"),
         "followingList": MessageLookupByLibrary.simpleMessage("Theo danh sach"),

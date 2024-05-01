@@ -342,5 +342,6 @@
   "commentDelete": "แสดงความคิดเห็น ลบ ?",
   "areYouSureYouWantToDeleteTheComment": "คุณแน่ใจหรือไม่ว่าต้องการลบความคิดเห็นนี้",
   "enterUsername": "กรอกชื่อผู้ใช้",
-  "username": "ชื่อผู้ใช้"
+  "username": "ชื่อผู้ใช้",
+  "followerList": "รายชื่อผู้ติดตาม"
 }

@@ -160,6 +160,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("随机找人\n并检查他们的个人资料"),
         "fitness": MessageLookupByLibrary.simpleMessage("健康"),
         "follow": MessageLookupByLibrary.simpleMessage("跟随"),
+        "followerList": MessageLookupByLibrary.simpleMessage("关注者列表"),
         "followers": MessageLookupByLibrary.simpleMessage("追随者"),
         "following": MessageLookupByLibrary.simpleMessage("下列的"),
         "followingList": MessageLookupByLibrary.simpleMessage("关注列表"),

@@ -342,5 +342,6 @@
   "commentDelete": "Διαγραφή σχολίου;",
   "areYouSureYouWantToDeleteTheComment": "Είστε βέβαιοι ότι θέλετε να διαγράψετε το σχόλιο;",
   "enterUsername": "Εισάγετε όνομα χρήστη",
-  "username": "Όνομα χρήστη"
+  "username": "Όνομα χρήστη",
+  "followerList": "Λίστα ακολούθων"
 }

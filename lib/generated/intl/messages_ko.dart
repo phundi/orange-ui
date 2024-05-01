@@ -166,6 +166,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("누군가를 무작위로 찾아\n프로필을 확인하세요."),
         "fitness": MessageLookupByLibrary.simpleMessage("적합"),
         "follow": MessageLookupByLibrary.simpleMessage("따르다"),
+        "followerList": MessageLookupByLibrary.simpleMessage("팔로어 목록"),
         "followers": MessageLookupByLibrary.simpleMessage("추종자"),
         "following": MessageLookupByLibrary.simpleMessage("수행원"),
         "followingList": MessageLookupByLibrary.simpleMessage("팔로잉 목록"),

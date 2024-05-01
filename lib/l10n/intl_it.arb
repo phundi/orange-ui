@@ -342,5 +342,6 @@
   "commentDelete": "Eliminare il commento?",
   "areYouSureYouWantToDeleteTheComment": "Sei sicuro di voler eliminare il commento?",
   "enterUsername": "Inserire username",
-  "username": "Nome utente"
+  "username": "Nome utente",
+  "followerList": "Elenco dei follower"
 }

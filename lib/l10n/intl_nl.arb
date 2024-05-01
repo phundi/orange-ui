@@ -342,5 +342,6 @@
   "commentDelete": "Reactie verwijderen?",
   "areYouSureYouWantToDeleteTheComment": "Weet je zeker dat je de reactie wilt verwijderen?",
   "enterUsername": "Vul je gebruikersnaam in",
-  "username": "Gebruikersnaam"
+  "username": "Gebruikersnaam",
+  "followerList": "Volgerslijst"
 }

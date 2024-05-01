@@ -342,5 +342,6 @@
   "commentDelete": "حذف التعليق؟",
   "areYouSureYouWantToDeleteTheComment": "هل أنت متأكد أنك تريد حذف التعليق؟",
   "enterUsername": "ادخل اسم المستخدم",
-  "username": "اسم المستخدم"
+  "username": "اسم المستخدم",
+  "followerList": "قائمة المتابعين"
 }

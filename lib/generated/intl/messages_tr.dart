@@ -189,6 +189,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Rastgele Birini Bulun\nVe profilini kontrol edin"),
         "fitness": MessageLookupByLibrary.simpleMessage("Fitness"),
         "follow": MessageLookupByLibrary.simpleMessage("Takip etmek"),
+        "followerList": MessageLookupByLibrary.simpleMessage("Takipçi Listesi"),
         "followers": MessageLookupByLibrary.simpleMessage("Takipçiler"),
         "following": MessageLookupByLibrary.simpleMessage("Takip etme"),
         "followingList":

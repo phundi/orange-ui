@@ -193,6 +193,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Temukan Seseorang Secara Acak\nDan periksa profilnya"),
         "fitness": MessageLookupByLibrary.simpleMessage("Kebugaran"),
         "follow": MessageLookupByLibrary.simpleMessage("Mengikuti"),
+        "followerList": MessageLookupByLibrary.simpleMessage("Daftar Pengikut"),
         "followers": MessageLookupByLibrary.simpleMessage("Pengikut"),
         "following": MessageLookupByLibrary.simpleMessage("Mengikuti"),
         "followingList": MessageLookupByLibrary.simpleMessage("Daftar Berikut"),

@@ -342,5 +342,6 @@
   "commentDelete": "댓글 삭제 ?",
   "areYouSureYouWantToDeleteTheComment": "댓글을 삭제하시겠습니까?",
   "enterUsername": "사용자 이름을 입력하세요",
-  "username": "사용자 이름"
+  "username": "사용자 이름",
+  "followerList": "팔로어 목록"
 }
