@@ -1,8 +1,9 @@
 # Orange Flutter
 
 
-# Date 01-05-2024
- - Add Social Media Part
+***** Date 01-05-2024 *****
+
+- Add Social Media Part
 
 # Add Icons
 - ic_bin.png
@@ -142,18 +143,18 @@ ic_black_bg_shadow.png
 # Add Files and Folder
 
 - story_view
-  - controller
-     story_controller.dart
-  - widgets
-     story_image.dart
-     story_video.dart
-     story_view.dart
-   story_view.dart
-   utils.dart
+    - controller
+      story_controller.dart
+    - widgets
+      story_image.dart
+      story_video.dart
+      story_view.dart
+      story_view.dart
+      utils.dart
 
 model
- - social
-   - post
+- social
+    - post
       add_comment.dart
       add_post.dart
       delete_comment.dart
@@ -161,41 +162,41 @@ model
       fetch_comment.dart
       fetch_post_by_user.dart
       like_post.dart
-   - story
+    - story
       fetch_stories.dart
-   feed.dart
+      feed.dart
 
- - notification
-    user_notification.dart
+- notification
+  user_notification.dart
 
 
 - common/widgets
-   common_ui.dart
-   detectable_text_custom.dart
+  common_ui.dart
+  detectable_text_custom.dart
 
 - feed_screen
- - widget
-    feed_story_bar.dart
+- widget
+  feed_story_bar.dart
   feed_screen.dart
   feed_screen_view_model.dart
 
 - map_screen
-  - widgets
-     custom_marker.dart
+    - widgets
+      custom_marker.dart
 
 - camera_preview_screen
   camera_preview_screen.dart
   camera_preview_screen_view_model.dart
 
 - camera_screen
-  - widget
-     media_sheet.dart
-   camera_screen.dart
-   camera_screen_view_model.dart
+    - widget
+      media_sheet.dart
+      camera_screen.dart
+      camera_screen_view_model.dart
 
 - story_view_screen
-   story_view_screen.dart
-   story_view_screen_view_model.dart
+  story_view_screen.dart
+  story_view_screen_view_model.dart
 
 
 - following_list_screen
@@ -206,49 +207,49 @@ model
   hashtag_screen.dart
   hashtag_screen_view_model.dart
 
-- create_post_screen 
- - widget
-    creat_post_page.dart
-    post_page.dart
-    create_post_top_bar_view.dart
-    image_post_view.dart
-    interest_widget.dart
-    video_post_view.dart
- create_post_screen.dart
- create_post_screen_view_model.dart
+- create_post_screen
+- widget
+  creat_post_page.dart
+  post_page.dart
+  create_post_top_bar_view.dart
+  image_post_view.dart
+  interest_widget.dart
+  video_post_view.dart
+  create_post_screen.dart
+  create_post_screen_view_model.dart
 
 - single_post_screen
-   single_post_screen.dart
+  single_post_screen.dart
 
 - starting_profile_screen
-  - widet/text_field_area
-     text_fields_area.dart
-  starting_profile_screen.dart
-  starting_profile_screen_view_model.dart
+    - widet/text_field_area
+      text_fields_area.dart
+      starting_profile_screen.dart
+      starting_profile_screen_view_model.dart
 
 - submit_redeem_screen
-  - widgets
-     center_area_submit_redeem_screen.dart
-  submit_redeem_screen.dart
-  submit_redeem_screen_view_model.dart
+    - widgets
+      center_area_submit_redeem_screen.dart
+      submit_redeem_screen.dart
+      submit_redeem_screen_view_model.dart
 
 - post_screen
-  - widget
-     image_post.dart
-     post_bottom_bar.dart
-     post_card.dart
-     text_post.dart
-     video_post.dart
-     post_top_area.dart
-   post_screen.dart
-   post_screen_view_model.dart
+    - widget
+      image_post.dart
+      post_bottom_bar.dart
+      post_card.dart
+      text_post.dart
+      video_post.dart
+      post_top_area.dart
+      post_screen.dart
+      post_screen_view_model.dart
 
 - live_stream_application_screen
-   live_stream_application_screen_view_model.dart
+  live_stream_application_screen_view_model.dart
 
 
 - service
-   pref_service.dart
+  pref_service.dart
 
 
 - utils
@@ -264,257 +265,253 @@ main.dart
 
 
 - model
- - user
-    registration_user.dart
- setting.dart
+- user
+  registration_user.dart
+  setting.dart
 
 - api_provider
   api_provider.dart
-dashboard_top_bar.dart
+  dashboard_top_bar.dart
 
 
 - map_screen
-  - widgets
-     map_top_bar_area.dart
-     user_pop_up.dart
-map_screen.dart
-map_screen_view_model.dart
+    - widgets
+      map_top_bar_area.dart
+      user_pop_up.dart
+      map_screen.dart
+      map_screen_view_model.dart
 
 - common/widgets
- gradient_widget.dart
- live_icon.dart
- confirmation_dialog.dart
+  gradient_widget.dart
+  live_icon.dart
+  confirmation_dialog.dart
 
 intl_en.arb
-   - dashboard
-        - widgets
-            bottom_bar.dart
-    dashboard_screen.dart
-    dashboard_screen_view_model.dart
+- dashboard
+    - widgets
+      bottom_bar.dart
+      dashboard_screen.dart
+      dashboard_screen_view_model.dart
 
 - blocked_profiles_screen
-  - widget
-     blocked_card.dart
-  blocked_profiles_screen.dart
+    - widget
+      blocked_card.dart
+      blocked_profiles_screen.dart
 
 - chat_screen
-  - widgets
-     chat_delete_dialog.dart //  Remove This
-     chat_top_bar_area.dart
-  chat_screen_view_model.dart
+    - widgets
+      chat_delete_dialog.dart //  Remove This
+      chat_top_bar_area.dart
+      chat_screen_view_model.dart
 
 - comment_sheet
-  - widget
-     bottom_comment_field.dart
-     comment_card.dart
-comment_sheet.dart
-comment_sheet_view_model.dart
+    - widget
+      bottom_comment_field.dart
+      comment_card.dart
+      comment_sheet.dart
+      comment_sheet_view_model.dart
 
 - chat_screen
-   chat_screen_view_model.dart
+  chat_screen_view_model.dart
 
 - edit_profile_screen
-  - widgets
-     interest_list.dart
-  edit_profile_screen_view_model.dart
+    - widgets
+      interest_list.dart
+      edit_profile_screen_view_model.dart
 
 - explore_screen
-  - widgets
-    explore_top_area.dart  // Remove file
-    bottom_bottons.dart
-    full_image_view.dart
-  explore_screen.dart
-  explore_screen_view_model.dart
+    - widgets
+      explore_top_area.dart  // Remove file
+      bottom_bottons.dart
+      full_image_view.dart
+      explore_screen.dart
+      explore_screen_view_model.dart
 
 - get_started_screen/widget
-   screen1.dart
+  screen1.dart
 
 - live_stream_application_screen/widgets
     - center_area_livestream.dart
 
 - live_stream_history_screen
-   live_stream_history_screen.dart
+  live_stream_history_screen.dart
 
 
 - livestream_dashboard_screen
-  - widgets
-     add_coin_sheet.dart
-     center_area_livestream_dashboard.dart
-  livestream_dashboard_screen.dart
-  livestream_dashboard_screen_view_model.dart 
-  
+    - widgets
+      add_coin_sheet.dart
+      center_area_livestream_dashboard.dart
+      livestream_dashboard_screen.dart
+      livestream_dashboard_screen_view_model.dart
+
 
 - login_pwd_screen
-  - widgets
-     password_card.dart
-  login_pwd_screen_view_model.dart
+    - widgets
+      password_card.dart
+      login_pwd_screen_view_model.dart
 
 - login_dashboard_screen
-  - widgets
-     auth_card.dart
-  login_dashboard_screen_view_model.dart
+    - widgets
+      auth_card.dart
+      login_dashboard_screen_view_model.dart
 
 - livestream_end_screen
-   livestream_end_screen.dart
+  livestream_end_screen.dart
 
 - message_screen
-  - widgets
-    message_top_area.dart  // Remove This
-    user_card.dart
-  message_screen.dart
-  message_screen_view_model.dart
+    - widgets
+      message_top_area.dart  // Remove This
+      user_card.dart
+      message_screen.dart
+      message_screen_view_model.dart
 
 - options_screen
-  - widgets
-     options_center_area.dart
-  options_screen.dart
-  options_screen_view_model.dart
+    - widgets
+      options_center_area.dart
+      options_screen.dart
+      options_screen_view_model.dart
 
 - profile_screen
-  - widget
-    profile_images_area.dart
-    profile_top_area.dart  // Remove This
-  profile_screen.dart
-  profile_screen_view_model.dart
+    - widget
+      profile_images_area.dart
+      profile_top_area.dart  // Remove This
+      profile_screen.dart
+      profile_screen_view_model.dart
 
 - randoms_screen
-   - widgets
-     profile_pic_area.dart
-     random_top_bar_area.dart  // Remove File
-  randoms_screen.dart
-  randoms_screen_view_model.dart
+    - widgets
+      profile_pic_area.dart
+      random_top_bar_area.dart  // Remove File
+      randoms_screen.dart
+      randoms_screen_view_model.dart
 
 - register_screen
-  - widgets
-    register_card.dart
-  register_screen_view_model.dart
+    - widgets
+      register_card.dart
+      register_screen_view_model.dart
 
 - randoms_search_screen
-  - widgets
-     profile_pic_area.dart
-    randoms_search_screen.dart
-    randoms_search_screen_view_model.dart
+    - widgets
+      profile_pic_area.dart
+      randoms_search_screen.dart
+      randoms_search_screen_view_model.dart
 
 - redeem_screen
-  - widgets
-     center_area_redeem_screen.dart
-  redeem_screen.dart
-  redeem_screen_view_model.dart
+    - widgets
+      center_area_redeem_screen.dart
+      redeem_screen.dart
+      redeem_screen_view_model.dart
 
 - user_detail_screen
-   widgets
-     detail_page.dart
-     image_selection_area.dart
-     top_bar.dart
-   user_detail_screen.dart
-   user_detail_screen_view_model.dart
+  widgets
+  detail_page.dart
+  image_selection_area.dart
+  top_bar.dart
+  user_detail_screen.dart
+  user_detail_screen_view_model.dart
 
 - bottom_diamond_shop
   bottom_diamond_shop.dart
   bottom_diamond_shop_view_model.dart
 
 - like_profiles_screen/widget
-   like_card.dart
+  like_card.dart
 
 - random_streming_screen
   random_streaming_screen.dart
   random_streaming_screen_view_model.dart
 
 - options_screen
-  - widget
-    options_center_area.dart
-  options_screen.dart
-  options_screen_view_model.dart
+    - widget
+      options_center_area.dart
+      options_screen.dart
+      options_screen_view_model.dart
 
 - message_screen/widgets
-   user_card.dart
-   message_screen_view_model.dart
+  user_card.dart
+  message_screen_view_model.dart
 
 - saved_profiles_screen
-  - widget
-    saved_card.dart
-  saved_profiles_screen.dart
+    - widget
+      saved_card.dart
+      saved_profiles_screen.dart
 
 - live_grid_screen
-   live_grid_screen_view_model.dart
+  live_grid_screen_view_model.dart
 
 - search_screen
-  - widgets
-     user_list.dart
-  search_screen.dart
-  search_screen_view_model.dart
-  
+    - widgets
+      user_list.dart
+      search_screen.dart
+      search_screen_view_model.dart
+
 
 - select_photo_screen
-  - widgets
-     full_image_view.dart
-  select_photo_screen.dart
-  select_photo_screen_view_model.dart
+    - widgets
+      full_image_view.dart
+      select_photo_screen.dart
+      select_photo_screen_view_model.dart
 
 - select_hobbies_screen
   select_hobbies_screen.dart
   select_hobbies_screen_view_model.dart
 
 - notification_screen
-  - widgets
-     admin_notificaiton_page.dart
-     personal_notification.dart
-  notification_screen.dart
+    - widgets
+      admin_notificaiton_page.dart
+      personal_notification.dart
+      notification_screen.dart
 
 - person_streaming_screen
-  - widgets
-    bottom_diamond_shop.dart
-    bottom_purchase_shit.dart
-   person_streaming_screen_view_model.dart
+    - widgets
+      bottom_diamond_shop.dart
+      bottom_purchase_shit.dart
+      person_streaming_screen_view_model.dart
 
 - story_view_screen
   story_view_screen.dart
   story_view_screen_view_model.dart
 
 - user_detail_screen
-  - widgets
-    detail_page.dart
-  user_detail_screen_view_model.dart
+    - widgets
+      detail_page.dart
+      user_detail_screen_view_model.dart
 
 - video_preview_screen
   video_preview_screen_view_model.dart
 
 - webview_screen
-   webview_screen.dart
+  webview_screen.dart
 
 - user_report_screen
-  - widget
-     report_bottomsheet.dart  // Remove This
-     report_card.dart
-     report_reason_drop_down_box.dart  // Remove This
-report_sheet.dart
-report_sheet_view_model.dart
+    - widget
+      report_bottomsheet.dart  // Remove This
+      report_card.dart
+      report_reason_drop_down_box.dart  // Remove This
+      report_sheet.dart
+      report_sheet_view_model.dart
 
 - verification_screen
   verification_screen.dart
   verification_screen_view_model.dart
 
 - utils
- asset_res.dart
- color_res.dart
- const_res.dart
- urls.dart
-  
+  asset_res.dart
+  color_res.dart
+  const_res.dart
+  urls.dart
+
 
 pubspec.lock
 pubspec.yaml
+
+- ios
+- Runner
+  Info.plist
+
 
 # Remove Files and Folder
 
 custom_marker.dart
 dashed_rect.dart
 loader.dart
-
-
-
-
-- ios/Runner
- Info.plist
-Podfile.lock
-- Runner
-   Info.plist
