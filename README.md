@@ -1,5 +1,39 @@
 # Orange Flutter
 
+***** Date 07-05-2024 *****
+- Add In app purchase
+
+# File Changes
+- api_provider.dart
+- bottom_diamond_shop.dart
+- bottom_diamond_shop_view_model.dart
+- camera_preview_screen_view_model.dart
+- comment_sheet_view_model.dart
+- const_res.dart
+- create_post_screen_view_model.dart
+- dashboard_screen_view_model.dart
+- feed_screen_view_model.dart
+- follow_following_screen_view_model.dart
+- full_image_view.dart
+- get_diamond_pack.dart
+- hashtag_screen_view_model.dart
+- Info.plist
+- livestream_dashboard_screen_view_model.dart
+- options_screen_view_model.dart
+- person_streaming_screen_view_model.dart
+- post_bottom_bar.dart
+- post_screen_view_model.dart
+- search_screen_view_model.dart
+- story_view_screen_view_model.dart
+- submit_redeem_screen_view_model.dart
+- urls.dart
+- user_detail_screen_view_model.dart
+- video_preview_screen_view_model.dart
+- [pubspec.yaml](/pubspec.yaml)
+
+
+
+
 
 ***** Date 01-05-2024 *****
 
