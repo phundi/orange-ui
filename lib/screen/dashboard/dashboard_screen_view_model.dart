@@ -69,7 +69,7 @@ class DashboardScreenViewModel extends BaseViewModel {
                   },
                   url: Urls.aFetchPostByPostId,
                   param: {
-                    Urls.aUserId: PrefService.userId,
+                    Urls.userId: PrefService.userId,
                     Urls.aPostId: data[Urls.aPostId]
                   });
             });

@@ -62,9 +62,7 @@ class SearchScreenViewModel extends BaseViewModel {
     isLoading = true;
     ApiProvider()
         .searchUser(
-      searchKeyword: searchController.text,
-      start: searchUsers.length,
-    )
+            searchKeyword: searchController.text, start: searchUsers.length)
         .then((value) {
       List<String> list =
           searchUsers.map((e) => e.id?.toString() ?? '').toList();
@@ -82,10 +80,9 @@ class SearchScreenViewModel extends BaseViewModel {
     isLoading = true;
     ApiProvider()
         .searchUserById(
-      searchKeyword: searchController.text,
-      interestId: interestId,
-      start: searchUsers.length,
-    )
+            searchKeyword: searchController.text,
+            interestId: interestId,
+            start: searchUsers.length)
         .then((value) {
       List<String> list =
           searchUsers.map((e) => e.id?.toString() ?? '').toList();

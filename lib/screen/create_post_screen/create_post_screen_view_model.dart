@@ -179,7 +179,7 @@ class CreatePostScreenViewModel extends BaseViewModel {
           Get.back(result: postData.data);
         },
         param: {
-          Urls.aUserId: PrefService.userId,
+          Urls.userId: PrefService.userId,
           Urls.aDescription: detectableTextFieldController.text.trim(),
           Urls.aHashtags: removeHasTag.join(','),
           Urls.aInterestIds: selectedInterests.join(','),

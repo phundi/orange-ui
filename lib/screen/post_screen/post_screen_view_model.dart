@@ -43,8 +43,8 @@ class PostScreenViewModel extends BaseViewModel {
         },
         url: Urls.aFetchPostByUser,
         param: {
-          Urls.aMyUserId: PrefService.userId,
-          Urls.aUserId: userData?.id,
+          Urls.myUserId: PrefService.userId,
+          Urls.userId: userData?.id,
           Urls.aStart: posts.length,
           Urls.aLimit: paginationLimit
         });

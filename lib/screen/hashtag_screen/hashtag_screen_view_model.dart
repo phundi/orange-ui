@@ -34,7 +34,7 @@ class HashtagScreenViewModel extends BaseViewModel {
         },
         url: Urls.aFetchPostsByHashtag,
         param: {
-          Urls.aUserId: PrefService.userId,
+          Urls.userId: PrefService.userId,
           Urls.aStart: posts.length,
           Urls.aLimit: paginationLimit,
           Urls.aHashtag: hashTag.replaceAll('#', '')

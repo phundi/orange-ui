@@ -88,7 +88,7 @@ class _LikeButtonState extends State<LikeButton>
                 completion: (response) {},
                 url: Urls.aDislikePost,
                 param: {
-                  Urls.aUserId: PrefService.userId,
+                  Urls.userId: PrefService.userId,
                   Urls.aPostId: widget.post?.id
                 });
           } else {
@@ -98,7 +98,7 @@ class _LikeButtonState extends State<LikeButton>
                 completion: (response) {},
                 url: Urls.aLikePost,
                 param: {
-                  Urls.aUserId: PrefService.userId,
+                  Urls.userId: PrefService.userId,
                   Urls.aPostId: widget.post?.id
                 });
           }

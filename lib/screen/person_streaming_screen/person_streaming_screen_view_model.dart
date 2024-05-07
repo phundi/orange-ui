@@ -97,7 +97,8 @@ class PersonStreamingScreenViewModel extends BaseViewModel {
                           onContinueTap: (isSelected) async {
                             await PrefService.setDialog(
                                 PrefConst.liveStream, isSelected);
-                            minusCoinApi();
+                            minusCoinApi(
+                                price: settingAppData?.liveWatchingPrice ?? 0);
                             countDownValue = 0;
                             countDown();
                             Get.back();
@@ -148,13 +149,25 @@ class PersonStreamingScreenViewModel extends BaseViewModel {
     }
   }
 
-  Future<void> minusCoinApi() async {
-    await ApiProvider().minusCoinFromWallet(settingAppData?.liveWatchingPrice);
-    getProfileApiCall();
+  Future<void> minusCoinApi({required int price}) async {
+    await ApiProvider().minusCoinFromWallet(price).then((value) {
+      if (value.status == true) {
+        db
+            .collection(FirebaseRes.liveHostList)
+            .doc('${liveStreamUser?.userId}')
+            .update({
+          FirebaseRes.collectedDiamond:
+              (liveStreamUser?.collectedDiamond ?? 0) + price
+        }).catchError((e) {
+          debugPrint(e);
+        });
+        getProfileApiCall();
+      }
+    });
   }
 
   void autoDebitCoin() {
-    minusCoinApi().then((value) {
+    minusCoinApi(price: settingAppData?.liveWatchingPrice ?? 0).then((value) {
       getProfileApiCall();
       countDownValue = 0;
       countDown();
@@ -373,16 +386,7 @@ class PersonStreamingScreenViewModel extends BaseViewModel {
       userName: registrationUser?.fullname ?? '',
     ).toJson());
 
-    db
-        .collection(FirebaseRes.liveHostList)
-        .doc('${liveStreamUser?.userId}')
-        .update({
-      FirebaseRes.collectedDiamond:
-          liveStreamUser!.collectedDiamond! + data!.coinPrice!
-    }).catchError((e) {
-      debugPrint(e);
-    });
-    await ApiProvider().minusCoinFromWallet(data.coinPrice);
+    minusCoinApi(price: data?.coinPrice ?? 0);
     Get.back();
   }
 
@@ -448,10 +452,6 @@ class PersonStreamingScreenViewModel extends BaseViewModel {
     );
     watchingUserRemove();
     Get.back();
-    Get.back();
-  }
-
-  void onBackTap() {
     Get.back();
   }
 

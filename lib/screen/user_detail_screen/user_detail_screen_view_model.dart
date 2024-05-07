@@ -349,8 +349,8 @@ class UserDetailScreenViewModel extends BaseViewModel {
           },
           url: Urls.aUnfollowUser,
           param: {
-            Urls.aMyUserId: PrefService.userId,
-            Urls.aUserId: userData?.id
+            Urls.myUserId: PrefService.userId,
+            Urls.userId: userData?.id
           });
       isFollow = false;
       notifyListeners();
@@ -365,8 +365,8 @@ class UserDetailScreenViewModel extends BaseViewModel {
           },
           url: Urls.aFollowUser,
           param: {
-            Urls.aMyUserId: PrefService.userId,
-            Urls.aUserId: userData?.id
+            Urls.myUserId: PrefService.userId,
+            Urls.userId: userData?.id
           });
       isFollow = true;
       notifyListeners();

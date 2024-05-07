@@ -67,6 +67,9 @@ dependencies:
   #_______________ Networking ___________________#
   http: ^0.13.4
 
+  #_______________ In App Purchase ___________________#
+  in_app_purchase: ^3.2.0
+
   #_______________ firebase ___________________#
   firebase_messaging: ^14.9.0
   firebase_core: ^2.12.0

@@ -73,7 +73,7 @@ class SubmitRedeemScreenViewModel extends BaseViewModel {
         },
         url: Urls.aPlaceRedeemRequest,
         param: {
-          Urls.aUserId: PrefService.userId.toString(),
+          Urls.userId: PrefService.userId.toString(),
           Urls.aAccountDetails: paymentGateway,
           Urls.aPaymentGateway: accountDetailController.text.trim(),
         });

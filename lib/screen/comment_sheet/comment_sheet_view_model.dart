@@ -82,7 +82,7 @@ class CommentSheetViewModel extends BaseViewModel {
         },
         url: Urls.aAddComment,
         param: {
-          Urls.aUserId: PrefService.userId,
+          Urls.userId: PrefService.userId,
           Urls.aPostId: post?.id,
           Urls.aDescription: detectableTextFieldController.text.trim(),
         });
@@ -105,7 +105,7 @@ class CommentSheetViewModel extends BaseViewModel {
             completion: (response) {},
             url: Urls.aDeleteComment,
             param: {
-              Urls.aUserId: PrefService.userId,
+              Urls.userId: PrefService.userId,
               Urls.aCommentId: commentId
             });
       },

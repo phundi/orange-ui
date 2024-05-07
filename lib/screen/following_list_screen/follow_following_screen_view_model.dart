@@ -31,9 +31,9 @@ class FollowFollowingScreenViewModel extends BaseViewModel {
     Map<String, dynamic> param = {};
 
     if (followFollowingType == FollowFollowingType.following) {
-      param[Urls.aMyUserId] = userId;
+      param[Urls.myUserId] = userId;
     } else {
-      param[Urls.aUserId] = userId;
+      param[Urls.userId] = userId;
     }
 
     param[Urls.aStart] = users.length;

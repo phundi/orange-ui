@@ -45,12 +45,12 @@ class CameraPreviewScreenViewModel extends BaseViewModel {
           Get.back();
         },
         param: {
-          Urls.aUserId: PrefService.userId,
-          Urls.aType: type,
+          Urls.userId: PrefService.userId,
+          Urls.type: type,
           Urls.aDuration: duration
         },
         filesMap: {
-          Urls.aContent: [xFile]
+          Urls.content: [xFile]
         });
   }
 

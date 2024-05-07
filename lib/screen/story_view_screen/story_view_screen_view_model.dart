@@ -35,7 +35,7 @@ class StoryViewScreenViewModel extends BaseViewModel {
       ApiProvider().callPost(
           completion: (response) {},
           url: Urls.aViewStory,
-          param: {Urls.aUserId: PrefService.userId, Urls.aStoryId: value.id});
+          param: {Urls.userId: PrefService.userId, Urls.aStoryId: value.id});
     }
   }
 
@@ -82,7 +82,7 @@ class StoryViewScreenViewModel extends BaseViewModel {
             },
             url: Urls.aDeleteStory,
             param: {
-              Urls.aMyUserId: PrefService.userId,
+              Urls.myUserId: PrefService.userId,
               Urls.aStoryId: story?.id
             },
           );

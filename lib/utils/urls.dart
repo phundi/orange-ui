@@ -93,29 +93,29 @@ class Urls {
       '${ConstRes.aBaseUrl}fetchFollowersList';
 
   ///------------------------ Params ------------------------///
-  static const String aApiKeyName = 'apikey';
-  static const String aFullName = 'fullname';
-  static const String aInstagram = 'instagram';
-  static const String aFacebook = 'facebook';
-  static const String aYoutube = 'youtube';
-  static const String aDeviceToken = 'device_token';
-  static const String aDeviceType = 'device_type';
-  static const String aLoginType = 'login_type';
-  static const String aLatitude = 'lattitude';
-  static const String aLongitude = 'longitude';
-  static const String aDeleteImagesId = 'deleteimageids[]';
-  static const String aImages = 'image[]';
-  static const String aIdentity = 'identity';
-  static const String aInterests = 'interests';
-  static const String aPassword = 'password';
-  static const String aPost = 'POST';
-  static const String aUserId = 'user_id';
-  static const String aLive = 'live';
-  static const String aBio = 'bio';
-  static const String aAge = 'age';
-  static const String aGender = 'gender';
-  static const String aType = 'type';
-  static const String aAbout = 'about';
+  static const String apiKeyName = 'apikey';
+  static const String fullName = 'fullname';
+  static const String instagram = 'instagram';
+  static const String facebook = 'facebook';
+  static const String youtube = 'youtube';
+  static const String deviceToken = 'device_token';
+  static const String deviceType = 'device_type';
+  static const String loginType = 'login_type';
+  static const String latitude = 'lattitude';
+  static const String longitude = 'longitude';
+  static const String deleteImagesId = 'deleteimageids[]';
+  static const String images = 'image[]';
+  static const String identity = 'identity';
+  static const String interests = 'interests';
+  static const String password = 'password';
+  static const String post = 'POST';
+  static const String userId = 'user_id';
+  static const String live = 'live';
+  static const String bio = 'bio';
+  static const String age = 'age';
+  static const String gender = 'gender';
+  static const String type = 'type';
+  static const String about = 'about';
   static const String aBubblyCamera = 'bubbly_camera';
   static const String aSettingData = 'settingData';
   static const String aState = 'state';
@@ -139,7 +139,6 @@ class Urls {
   static const String aAmount = 'amount';
   static const String aOne = '1';
   static const String aTwo = '2';
-  static const String aFifteen = '15';
   static const String aKeyword = 'keyword';
   static const String aInterestId = 'interest_id';
   static const String aAmountCollected = 'amount_collected';
@@ -148,8 +147,8 @@ class Urls {
   static const String aPrivacyPolicy = 'privacypolicy';
   static const String aTermsOfUse = 'termsOfUse';
   static const String aBlockedUsers = 'blocked_users';
-  static const String aLat = 'lat';
-  static const String aLong = 'long';
+  static const String lat = 'lat';
+  static const String long = 'long';
   static const String aKm = 'km';
   static const String aEmail = 'email';
   static const String aUserInfo = 'userInfo';
@@ -170,9 +169,9 @@ class Urls {
   static const String aCommentId = 'comment_id';
   static const String aStoryId = 'story_id';
   static const String aDuration = 'duration';
-  static const String aContent = 'content';
-  static const String aUserName = 'username';
+  static const String content = 'content';
+  static const String userName = 'username';
 
   // Social Media
-  static const String aMyUserId = 'my_user_id';
+  static const String myUserId = 'my_user_id';
 }

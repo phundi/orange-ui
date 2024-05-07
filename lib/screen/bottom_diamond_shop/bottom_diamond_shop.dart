@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:orange_ui/common/common_ui.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/screen/bottom_diamond_shop/bottom_diamond_shop_view_model.dart';
 import 'package:orange_ui/utils/asset_res.dart';
@@ -65,69 +66,81 @@ class BottomDiamondShop extends StatelessWidget {
                         ),
                         const SizedBox(height: 20),
                         Expanded(
-                          child: ListView.builder(
-                            shrinkWrap: true,
-                            primary: false,
-                            physics: const BouncingScrollPhysics(),
-                            padding: EdgeInsets.zero,
-                            itemCount: model.diamondPriceList?.length,
-                            itemBuilder: (context, index) {
-                              return Container(
-                                margin: const EdgeInsets.only(bottom: 8),
-                                padding:
-                                    const EdgeInsets.fromLTRB(17, 13, 9, 14),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(15),
-                                  color: ColorRes.white.withOpacity(0.14),
-                                ),
-                                child: Row(
-                                  children: [
-                                    Image.asset(AssetRes.diamond,
-                                        height: 24, width: 24),
-                                    const SizedBox(width: 7),
-                                    Text(
-                                      "${model.diamondPriceList?[index].amount} ${S.current.diamondsCamel}",
-                                      style: const TextStyle(
-                                        color: ColorRes.white,
-                                      ),
-                                    ),
-                                    const Spacer(),
-                                    InkWell(
-                                      borderRadius: BorderRadius.circular(30),
-                                      onTap: () => model.onDiamondPurchase(
-                                          model.diamondPriceList?[index]),
-                                      child: Container(
-                                        width: 131,
-                                        height: 35,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(30),
-                                          gradient: const LinearGradient(
-                                            begin: Alignment.topCenter,
-                                            end: Alignment.bottomCenter,
-                                            colors: [
-                                              ColorRes.lightOrange1,
-                                              ColorRes.darkOrange,
+                          child: model.isLoading
+                              ? CommonUI.lottieWidget()
+                              : model.products.isEmpty
+                                  ? CommonUI.noData()
+                                  : ListView.builder(
+                                      physics: const BouncingScrollPhysics(),
+                                      padding: EdgeInsets.zero,
+                                      itemCount: model.products.length,
+                                      itemBuilder: (context, index) {
+                                        return Container(
+                                          margin:
+                                              const EdgeInsets.only(bottom: 8),
+                                          padding: const EdgeInsets.fromLTRB(
+                                              17, 13, 9, 14),
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(15),
+                                            color: ColorRes.white
+                                                .withOpacity(0.14),
+                                          ),
+                                          child: Row(
+                                            children: [
+                                              Image.asset(AssetRes.diamond,
+                                                  height: 24, width: 24),
+                                              const SizedBox(width: 7),
+                                              Text(
+                                                model.products[index].title,
+                                                style: const TextStyle(
+                                                  color: ColorRes.white,
+                                                ),
+                                              ),
+                                              const Spacer(),
+                                              InkWell(
+                                                borderRadius:
+                                                    BorderRadius.circular(30),
+                                                onTap: () => model.makePurchase(
+                                                    model.products[index]),
+                                                child: Container(
+                                                  width: 131,
+                                                  height: 35,
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            30),
+                                                    gradient:
+                                                        const LinearGradient(
+                                                      begin:
+                                                          Alignment.topCenter,
+                                                      end: Alignment
+                                                          .bottomCenter,
+                                                      colors: [
+                                                        ColorRes.lightOrange1,
+                                                        ColorRes.darkOrange
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  child: Center(
+                                                    child: Text(
+                                                      model.products[index]
+                                                          .price,
+                                                      style: const TextStyle(
+                                                        color: ColorRes.white,
+                                                        fontSize: 15,
+                                                        fontFamily:
+                                                            FontRes.bold,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
                                             ],
                                           ),
-                                        ),
-                                        child: Center(
-                                          child: Text(
-                                            "${model.settingAppData?.currency} ${model.diamondPriceList?[index].price}",
-                                            style: const TextStyle(
-                                              color: ColorRes.white,
-                                              fontSize: 15,
-                                              fontFamily: FontRes.bold,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
+                                        );
+                                      },
                                     ),
-                                  ],
-                                ),
-                              );
-                            },
-                          ),
                         ),
                         const SizedBox(height: 23),
                         SizedBox(

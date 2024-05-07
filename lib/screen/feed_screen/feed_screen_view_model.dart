@@ -73,7 +73,7 @@ class FeedScreenViewModel extends BaseViewModel {
         },
         url: Urls.aFetchHomePageData,
         param: {
-          Urls.aMyUserId: PrefService.userId,
+          Urls.myUserId: PrefService.userId,
         });
   }
 
@@ -99,7 +99,7 @@ class FeedScreenViewModel extends BaseViewModel {
           notifyListeners();
         },
         url: Urls.aFetchStories,
-        param: {Urls.aMyUserId: PrefService.userId});
+        param: {Urls.myUserId: PrefService.userId});
   }
 
   void getProfile() {
@@ -176,7 +176,7 @@ class FeedScreenViewModel extends BaseViewModel {
             ApiProvider().callPost(
               completion: (response) {},
               url: Urls.aDeleteMyPost,
-              param: {Urls.aUserId: PrefService.userId, Urls.aPostId: post.id},
+              param: {Urls.userId: PrefService.userId, Urls.aPostId: post.id},
             );
           },
           description: S.current.areYouSureYouWantToDeleteThePost,

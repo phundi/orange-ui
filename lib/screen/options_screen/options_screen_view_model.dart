@@ -34,15 +34,9 @@ class OptionalScreenViewModel extends BaseViewModel {
 
   void init() {
     getProfileApiCall();
-    getPref();
-  }
-
-  void onBackBtnTap() {
-    Get.back();
   }
 
   void getProfileApiCall() {
-    isLoading = true;
     ApiProvider().getProfile(userID: PrefService.userId).then((value) {
       userData = value?.data;
       deleteId = value?.data?.id;
@@ -51,18 +45,10 @@ class OptionalScreenViewModel extends BaseViewModel {
           : value?.data?.isVerified == 1
               ? 1
               : 2;
-      isLoading = false;
-      notifyListeners();
-    });
-  }
-
-  void getPref() async {
-    PrefService.getUserData().then((value) {
-      if (value == null) return;
-      notificationEnable = value.isNotification == 1 ? true : false;
-      showMeOnMap = value.showOnMap == 1 ? true : false;
-      goAnonymous = value.anonymous == 1 ? true : false;
-      loginType = value.loginType;
+      notificationEnable = value?.data?.isNotification == 1 ? true : false;
+      showMeOnMap = value?.data?.showOnMap == 1 ? true : false;
+      goAnonymous = value?.data?.anonymous == 1 ? true : false;
+      loginType = value?.data?.loginType;
       notifyListeners();
     });
   }

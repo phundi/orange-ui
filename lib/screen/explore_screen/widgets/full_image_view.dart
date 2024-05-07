@@ -56,7 +56,7 @@ class FullImageView extends StatelessWidget {
                   aspectRatio: 1 / 1.30,
                   child: Swiper(
                     controller: userController,
-                    duration: 500,
+                    duration: 250,
                     itemCount: userList.length,
                     physics: const NeverScrollableScrollPhysics(),
                     onIndexChanged: onIndexChange,

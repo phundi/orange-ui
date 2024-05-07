@@ -20,11 +20,11 @@ class VideoPlayerScreenViewModel extends BaseViewModel {
   VideoType videoType;
   Post? post;
 
+  VideoPlayerScreenViewModel(this.videoPath, this.post, this.videoType);
+
   void init() {
     videoInit();
   }
-
-  VideoPlayerScreenViewModel(this.videoPath, this.post, this.videoType);
 
   void videoInit() {
     videoPlayerController = VideoPlayerController.networkUrl(

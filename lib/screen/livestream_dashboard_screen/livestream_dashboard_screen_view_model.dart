@@ -63,7 +63,7 @@ class LiveStreamDashBoardViewModel extends BaseViewModel {
     });
   }
 
-  void onDiamondPurchase(GetDiamondPackData? data) {
+  void onDiamondPurchase(DiamondPack? data) {
     BubblyCamera.inAppPurchase(
         Platform.isAndroid ? data?.androidProductId : data?.iosProductId);
   }

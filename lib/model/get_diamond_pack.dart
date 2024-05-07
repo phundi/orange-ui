@@ -6,7 +6,7 @@ class GetDiamondPack {
   GetDiamondPack({
     bool? status,
     String? message,
-    List<GetDiamondPackData>? data,
+    List<DiamondPack>? data,
   }) {
     _status = status;
     _message = message;
@@ -19,19 +19,19 @@ class GetDiamondPack {
     if (json['data'] != null) {
       _data = [];
       json['data'].forEach((v) {
-        _data?.add(GetDiamondPackData.fromJson(v));
+        _data?.add(DiamondPack.fromJson(v));
       });
     }
   }
 
   bool? _status;
   String? _message;
-  List<GetDiamondPackData>? _data;
+  List<DiamondPack>? _data;
 
   GetDiamondPack copyWith({
     bool? status,
     String? message,
-    List<GetDiamondPackData>? data,
+    List<DiamondPack>? data,
   }) =>
       GetDiamondPack(
         status: status ?? _status,
@@ -43,7 +43,7 @@ class GetDiamondPack {
 
   String? get message => _message;
 
-  List<GetDiamondPackData>? get data => _data;
+  List<DiamondPack>? get data => _data;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -62,8 +62,8 @@ class GetDiamondPack {
 /// android_product_id : "android code"
 /// ios_product_id : "ios code"
 
-class GetDiamondPackData {
-  GetDiamondPackData({
+class DiamondPack {
+  DiamondPack({
     int? id,
     int? amount,
     int? price,
@@ -77,7 +77,7 @@ class GetDiamondPackData {
     _iosProductId = iosProductId;
   }
 
-  GetDiamondPackData.fromJson(dynamic json) {
+  DiamondPack.fromJson(dynamic json) {
     _id = json['id'];
     _amount = json['amount'];
     _price = json['price'];
@@ -91,14 +91,14 @@ class GetDiamondPackData {
   String? _androidProductId;
   String? _iosProductId;
 
-  GetDiamondPackData copyWith({
+  DiamondPack copyWith({
     int? id,
     int? amount,
     int? price,
     String? androidProductId,
     String? iosProductId,
   }) =>
-      GetDiamondPackData(
+      DiamondPack(
         id: id ?? _id,
         amount: amount ?? _amount,
         price: price ?? _price,
