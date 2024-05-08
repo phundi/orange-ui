@@ -16,9 +16,6 @@ class ConstRes {
   static const String agoraAppId = "6e660987f7c541309c0c45a133fde8c7";
   static const String customerId = "2fa80f7f38ec48c7b3df029de7599738";
   static const String customerSecret = "ce11056b3fd44851919670703656b9e9";
-
-  ///------------------------ In App Purchase ------------------------///
-  static const String appleApiKey = 'appl_vIordyZlDBksnurkZdhZTzdshEq';
 }
 
 ///_____________________________ Image Quality _______________________///
