@@ -1,5 +1,18 @@
 # Orange Flutter
 
+***** Date 08-05-2024 *****
+
+
+[Change in Project]
+- Migrate Gradle File
+
+[Change in File]
+- [build.gradle](/android/app/build.gradle)
+- [build.gradle](/android/build.gradle)
+- [gradle-wrapper.properties](/android/gradle/wrapper/gradle-wrapper.properties)
+- [settings.gradle](/android/settings.gradle)
+
+
 ***** Date 07-05-2024 *****
 - Add In app purchase
 
