@@ -50,7 +50,7 @@ class DashboardScreenViewModel extends BaseViewModel {
   }
 
   void initBranch() {
-    FlutterBranchSdk.initSession().listen(
+    FlutterBranchSdk.listSession().listen(
       (data) {
         if (data.containsKey("+clicked_branch_link") &&
             data["+clicked_branch_link"] == true) {

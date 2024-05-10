@@ -1,7 +1,23 @@
 # Orange Flutter
 
-***** Date 08-05-2024 *****
 
+*****Date 10-05-2024*****
+
+[NOTE]
+- Remove app_tracking_transparency Library and Add Consent Form for Ad Mob
+
+[Updated Files]
+- AndroidManifest.xml
+- dashboard_screen_view_model.dart
+- main.dart
+- pubspec.yaml
+
+[Added Files]
+- ads_service.dart
+
+********************************************************************************
+
+***** Date 08-05-2024 *****
 
 [Change in Project]
 - Migrate Gradle File
@@ -13,7 +29,7 @@
 - [settings.gradle](/android/settings.gradle)
 
 
-***** Date 07-05-2024 *****
+*****Date 07-05-2024*****
 - Add In app purchase
 
 # File Changes

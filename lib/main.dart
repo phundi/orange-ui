@@ -2,11 +2,11 @@ import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
@@ -17,6 +17,7 @@ import 'package:orange_ui/screen/chat_screen/chat_screen_view_model.dart';
 import 'package:orange_ui/screen/get_started_screen/get_started_screen.dart';
 import 'package:orange_ui/screen/languages_screen/languages_screen_view_model.dart';
 import 'package:orange_ui/screen/restart_app/restart_app.dart';
+import 'package:orange_ui/service/ads_service.dart';
 import 'package:orange_ui/service/pref_service.dart';
 import 'package:orange_ui/utils/color_res.dart';
 import 'package:orange_ui/utils/font_res.dart';
@@ -57,7 +58,7 @@ Future<void> main() async {
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
-
+  FlutterBranchSdk.init();
   HttpOverrides.global = MyHttpOverrides();
   runApp(const RestartWidget(child: MyApp()));
 }
@@ -77,8 +78,7 @@ late AndroidNotificationChannel channel;
 class _MyAppState extends State<MyApp> {
   @override
   void initState() {
-    initPlugin();
-    saveTokenUpdate();
+    consentForm();
     super.initState();
   }
 
@@ -109,7 +109,17 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
-  void saveTokenUpdate() async {
+  void consentForm() async {
+    AdsService.requestConsentInfoUpdate();
+    Future.delayed(
+      const Duration(milliseconds: 200),
+      () {
+        _saveTokenUpdate();
+      },
+    );
+  }
+
+  void _saveTokenUpdate() async {
     CommonFun.subscribeTopic(null);
 
     flutterLocalNotificationsPlugin
@@ -157,21 +167,6 @@ class _MyAppState extends State<MyApp> {
         .resolvePlatformSpecificImplementation<
             AndroidFlutterLocalNotificationsPlugin>()
         ?.createNotificationChannel(channel);
-  }
-
-  void initPlugin() async {
-    try {
-      final TrackingStatus status =
-          await AppTrackingTransparency.trackingAuthorizationStatus;
-      setState(() {});
-      if (status == TrackingStatus.notDetermined) {
-        await AppTrackingTransparency.requestTrackingAuthorization();
-        setState(() {});
-      }
-    } on PlatformException {
-      setState(() {});
-    }
-    await AppTrackingTransparency.getAdvertisingIdentifier();
   }
 }
 

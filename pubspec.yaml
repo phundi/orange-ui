@@ -71,21 +71,20 @@ dependencies:
   in_app_purchase: ^3.2.0
 
   #_______________ firebase ___________________#
-  firebase_messaging: ^14.9.0
-  firebase_core: ^2.12.0
-  firebase_auth: ^4.6.0
-  cloud_firestore: ^4.7.0
-  flutter_local_notifications: ^17.1.0
+  firebase_messaging: ^14.9.2
+  firebase_core: ^2.31.0
+  firebase_auth: ^4.19.5
+  cloud_firestore: ^4.17.3
+  flutter_local_notifications: ^17.1.2
   flutter_app_badger: ^1.5.0
-  google_mobile_ads: ^3.0.0
+  google_mobile_ads: ^5.1.0
 
   #_______________ sign in  ___________________#
-  google_sign_in: ^5.3.2
+  google_sign_in: ^6.2.1
   sign_in_with_apple: ^6.1.0
 
   #_______________ permission ___________________#
   permission_handler: ^10.0.0
-  app_tracking_transparency: ^2.0.4
 
   #_______________ url_launcher ___________________#
   url_launcher: ^6.1.3
@@ -109,10 +108,10 @@ dependencies:
 
   #_____________ Share _________________#
   share_plus: ^6.3.4
-  flutter_branch_sdk: ^6.2.1
+  flutter_branch_sdk: ^7.1.0
 
   #_____________ Camera _________________#
-  camera: ^0.10.5+9
+  camera: ^0.10.6
 
   bubbly_camera:
     path: "CameraPlugin/camera"
