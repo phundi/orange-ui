@@ -21,7 +21,7 @@ import 'package:orange_ui/utils/firebase_res.dart';
 import 'package:orange_ui/utils/pref_res.dart';
 import 'package:orange_ui/utils/urls.dart';
 import 'package:stacked/stacked.dart';
-import 'package:wakelock/wakelock.dart';
+import 'package:wakelock_plus/wakelock_plus.dart';
 
 class RandomStreamingScreenViewModel extends BaseViewModel {
   FirebaseFirestore db = FirebaseFirestore.instance;
@@ -52,7 +52,7 @@ class RandomStreamingScreenViewModel extends BaseViewModel {
   Appdata? settingAppData;
 
   void init() {
-    Wakelock.enable();
+    WakelockPlus.enable();
     channelName = Get.arguments[Urls.aChannelId];
     isBroadcaster = Get.arguments[Urls.aIsBroadcasting];
     getValueFromPrefs();
@@ -68,22 +68,20 @@ class RandomStreamingScreenViewModel extends BaseViewModel {
     engine.setEventHandler(RtcEngineEventHandler(
       joinChannelSuccess: (channel, uid, elapsed) {
         PrefService.getUserData().then((value) {
-          db.collection(FirebaseRes.liveHostList).doc('${value?.id}').set(
-              LiveStreamUser(
-                      userId: value?.id,
-                      fullName: value?.fullname,
-                      userImage:
-                          CommonFun.getProfileImage(images: value?.images),
-                      agoraToken: '',
-                      id: DateTime.now().millisecondsSinceEpoch,
-                      collectedDiamond: 0,
-                      hostIdentity: value?.identity,
-                      isVerified: false,
-                      joinedUser: [],
-                      address: value?.live,
-                      age: value?.age,
-                      watchingCount: 0)
-                  .toJson());
+          db.collection(FirebaseRes.liveHostList).doc('${value?.id}').set(LiveStreamUser(
+                  userId: value?.id,
+                  fullName: value?.fullname,
+                  userImage: CommonFun.getProfileImage(images: value?.images),
+                  agoraToken: '',
+                  id: DateTime.now().millisecondsSinceEpoch,
+                  collectedDiamond: 0,
+                  hostIdentity: value?.identity,
+                  isVerified: false,
+                  joinedUser: [],
+                  address: value?.live,
+                  age: value?.age,
+                  watchingCount: 0)
+              .toJson());
         });
         notifyListeners();
       },
@@ -133,9 +131,8 @@ class RandomStreamingScreenViewModel extends BaseViewModel {
 
   /// Video view row wrapper
   Widget _expandedVideoView(List<Widget> views) {
-    final wrappedViews = views
-        .map<Widget>((view) => Expanded(child: Container(child: view)))
-        .toList();
+    final wrappedViews =
+        views.map<Widget>((view) => Expanded(child: Container(child: view))).toList();
     return Expanded(
       child: Row(
         children: wrappedViews,
@@ -197,10 +194,7 @@ class RandomStreamingScreenViewModel extends BaseViewModel {
     savePrefData().then(
       (value) async {
         disClosed();
-        db
-            .collection(FirebaseRes.liveHostList)
-            .doc('${registrationUserData?.id}')
-            .delete();
+        db.collection(FirebaseRes.liveHostList).doc('${registrationUserData?.id}').delete();
         final batch = db.batch();
         var collection = db
             .collection(FirebaseRes.liveHostList)
@@ -227,15 +221,11 @@ class RandomStreamingScreenViewModel extends BaseViewModel {
   }
 
   Future<void> savePrefData() async {
-    PrefService.saveString(
-        PrefConst.watching, '${liveStreamUser?.joinedUser?.length ?? '0'}');
-    PrefService.saveString(
-        PrefConst.diamond, '${liveStreamUser?.collectedDiamond ?? '0'}');
-    PrefService.saveString(
-        PrefConst.userImage, liveStreamUser?.userImage ?? '');
+    PrefService.saveString(PrefConst.watching, '${liveStreamUser?.joinedUser?.length ?? '0'}');
+    PrefService.saveString(PrefConst.diamond, '${liveStreamUser?.collectedDiamond ?? '0'}');
+    PrefService.saveString(PrefConst.userImage, liveStreamUser?.userImage ?? '');
     PrefService.saveString(PrefConst.date, dateTime.toString());
-    PrefService.saveString(
-        PrefConst.fullName, CommonUI.fullName(liveStreamUser?.fullName));
+    PrefService.saveString(PrefConst.fullName, CommonUI.fullName(liveStreamUser?.fullName));
   }
 
   void onEndBtnTap() async {
@@ -263,12 +253,9 @@ class RandomStreamingScreenViewModel extends BaseViewModel {
 
   void onCommentSend() {
     if (commentController.text.trim().isNotEmpty) {
-      collectionReference
-          ?.collection(FirebaseRes.comments)
-          .add(LiveStreamComment(
+      collectionReference?.collection(FirebaseRes.comments).add(LiveStreamComment(
             id: DateTime.now().millisecondsSinceEpoch,
-            userImage:
-                CommonFun.getProfileImage(images: registrationUserData?.images),
+            userImage: CommonFun.getProfileImage(images: registrationUserData?.images),
             userId: registrationUserData?.id,
             city: registrationUserData?.live ?? '',
             isHost: false,
@@ -289,9 +276,8 @@ class RandomStreamingScreenViewModel extends BaseViewModel {
     PrefService.getUserData().then((value) {
       registrationUserData = value;
 
-      collectionReference = db
-          .collection(FirebaseRes.liveHostList)
-          .doc('${registrationUserData?.id}');
+      collectionReference =
+          db.collection(FirebaseRes.liveHostList).doc('${registrationUserData?.id}');
 
       collectionReference
           ?.withConverter(
@@ -303,12 +289,10 @@ class RandomStreamingScreenViewModel extends BaseViewModel {
           .snapshots()
           .any((element) {
         liveStreamUser = element.data();
-        minimumUserLiveTimer ??=
-            Timer.periodic(const Duration(seconds: 1), (timer) {
+        minimumUserLiveTimer ??= Timer.periodic(const Duration(seconds: 1), (timer) {
           countTimer++;
           if (countTimer == maxMinutes &&
-              liveStreamUser!.watchingCount! <=
-                  (settingAppData?.minUserLive ?? 0)) {
+              liveStreamUser!.watchingCount! <= (settingAppData?.minUserLive ?? 0)) {
             timer.cancel();
             onEndVideoTap();
           }
@@ -384,7 +368,7 @@ class RandomStreamingScreenViewModel extends BaseViewModel {
 
   @override
   void dispose() {
-    Wakelock.disable();
+    WakelockPlus.disable();
     minimumUserLiveTimer?.cancel();
     scrollController.dispose();
     commentController.dispose();

@@ -27,7 +27,7 @@ import 'package:orange_ui/utils/firebase_res.dart';
 import 'package:orange_ui/utils/pref_res.dart';
 import 'package:orange_ui/utils/urls.dart';
 import 'package:stacked/stacked.dart';
-import 'package:wakelock/wakelock.dart';
+import 'package:wakelock_plus/wakelock_plus.dart';
 
 class PersonStreamingScreenViewModel extends BaseViewModel {
   FirebaseFirestore db = FirebaseFirestore.instance;
@@ -62,7 +62,7 @@ class PersonStreamingScreenViewModel extends BaseViewModel {
   Appdata? settingAppData;
 
   void init() {
-    Wakelock.enable();
+    WakelockPlus.enable();
     channel = Get.arguments[Urls.aChannelId];
     isBroadcasting = Get.arguments[Urls.aIsBroadcasting];
     liveStreamUser = Get.arguments[Urls.aUserInfo];
@@ -79,8 +79,7 @@ class PersonStreamingScreenViewModel extends BaseViewModel {
           countDownValue++;
           if (countDownValue == 60) {
             !isSelected ? timer.cancel() : null;
-            if ((settingAppData?.liveWatchingPrice ?? 0) <= walletCoin! &&
-                walletCoin != 0) {
+            if ((settingAppData?.liveWatchingPrice ?? 0) <= walletCoin! && walletCoin != 0) {
               isSelected
                   ? autoDebitCoin()
                   : Get.dialog(
@@ -95,11 +94,10 @@ class PersonStreamingScreenViewModel extends BaseViewModel {
                             _engine.destroy();
                           },
                           onContinueTap: (isSelected) async {
-                            await PrefService.setDialog(
-                                PrefConst.liveStream, isSelected);
-                            minusCoinApi(
-                                price: settingAppData?.liveWatchingPrice ?? 0);
+                            await PrefService.setDialog(PrefConst.liveStream, isSelected);
+                            minusCoinApi(price: settingAppData?.liveWatchingPrice ?? 0);
                             countDownValue = 0;
+                            this.timer?.cancel();
                             countDown();
                             Get.back();
                           },
@@ -107,10 +105,8 @@ class PersonStreamingScreenViewModel extends BaseViewModel {
                           walletCoin: walletCoin,
                           title1: S.current.liveCap,
                           title2: S.current.streamCap,
-                          dialogDisc: AppRes.liveStreamDisc(
-                              settingAppData?.liveWatchingPrice ?? 0),
-                          coinPrice:
-                              '${settingAppData?.liveWatchingPrice ?? 0}'),
+                          dialogDisc: AppRes.liveStreamDisc(settingAppData?.liveWatchingPrice ?? 0),
+                          coinPrice: '${settingAppData?.liveWatchingPrice ?? 0}'),
                       barrierColor: ColorRes.black3.withOpacity(0.44),
                     );
             } else {
@@ -152,12 +148,8 @@ class PersonStreamingScreenViewModel extends BaseViewModel {
   Future<void> minusCoinApi({required int price}) async {
     await ApiProvider().minusCoinFromWallet(price).then((value) {
       if (value.status == true) {
-        db
-            .collection(FirebaseRes.liveHostList)
-            .doc('${liveStreamUser?.userId}')
-            .update({
-          FirebaseRes.collectedDiamond:
-              (liveStreamUser?.collectedDiamond ?? 0) + price
+        db.collection(FirebaseRes.liveHostList).doc('${liveStreamUser?.userId}').update({
+          FirebaseRes.collectedDiamond: (liveStreamUser?.collectedDiamond ?? 0) + price
         }).catchError((e) {
           debugPrint(e);
         });
@@ -170,6 +162,7 @@ class PersonStreamingScreenViewModel extends BaseViewModel {
     minusCoinApi(price: settingAppData?.liveWatchingPrice ?? 0).then((value) {
       getProfileApiCall();
       countDownValue = 0;
+      timer?.cancel();
       countDown();
     });
   }
@@ -253,9 +246,8 @@ class PersonStreamingScreenViewModel extends BaseViewModel {
 
   /// Video view row wrapper
   Widget _expandedVideoView(List<Widget> views) {
-    final wrappedViews = views
-        .map<Widget>((view) => Expanded(child: Container(child: view)))
-        .toList();
+    final wrappedViews =
+        views.map<Widget>((view) => Expanded(child: Container(child: view))).toList();
     return Expanded(
       child: Row(
         children: wrappedViews,
@@ -456,22 +448,18 @@ class PersonStreamingScreenViewModel extends BaseViewModel {
   }
 
   void watchingUserRemove() {
-    db
-        .collection(FirebaseRes.liveHostList)
-        .doc('${liveStreamUser?.userId}')
-        .update(
+    db.collection(FirebaseRes.liveHostList).doc('${liveStreamUser?.userId}').update(
       {
-        FirebaseRes.watchingCount:
-            liveStreamUser != null && liveStreamUser?.watchingCount != null
-                ? liveStreamUser!.watchingCount! - 1
-                : 0
+        FirebaseRes.watchingCount: liveStreamUser != null && liveStreamUser?.watchingCount != null
+            ? liveStreamUser!.watchingCount! - 1
+            : 0
       },
     );
   }
 
   @override
   void dispose() {
-    Wakelock.disable();
+    WakelockPlus.disable();
     // clear users
     users.clear();
     // destroy sdk and leave channel

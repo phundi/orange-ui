@@ -1,6 +1,24 @@
 # Orange Flutter
 
+*****Date 22-MAY-2024*****
 
+[NOTE]
+- Timer Cancel When One Minutes Complete
+- wakelock To wakelock_plus Library Add
+
+[Updated Files]
+- api_provider.dart
+- build.gradle
+- person_streaming_screen_view_model.dart
+- pubspec.lock
+- pubspec.yaml
+- random_streaming_screen_view_model.dart
+- settings.gradle
+- urls.dart
+
+********************************************************************************
+
+ 
 *****Date 10-05-2024*****
 
 [NOTE]
