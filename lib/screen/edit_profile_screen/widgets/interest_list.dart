@@ -19,7 +19,7 @@ class InterestList extends StatelessWidget {
             : Text(
                 S.current.interest,
                 style: const TextStyle(
-                  color: ColorRes.darkGrey3,
+                  color: ColorRes.davyGrey,
                   fontSize: 15,
                   fontFamily: FontRes.extraBold,
                 ),
@@ -43,8 +43,8 @@ class InterestList extends StatelessWidget {
                           end: Alignment.topCenter,
                           begin: Alignment.bottomCenter,
                           colors: [
-                            ColorRes.orange2,
-                            ColorRes.red2,
+                            ColorRes.darkOrange,
+                            ColorRes.darkOrange,
                           ],
                         )
                       : const LinearGradient(
@@ -57,8 +57,7 @@ class InterestList extends StatelessWidget {
                         ),
                   borderRadius: BorderRadius.circular(30),
                 ),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+                padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
                 child: Text(
                   "${e.title}",
                   style: TextStyle(

@@ -10,8 +10,7 @@ class Screen1 extends StatelessWidget {
   final VoidCallback onTap;
   final GetStartedScreenViewModel model;
 
-  const Screen1({Key? key, required this.onTap, required this.model})
-      : super(key: key);
+  const Screen1({Key? key, required this.onTap, required this.model}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -35,8 +34,7 @@ class Screen1 extends StatelessWidget {
                 ),
                 if (model.settingAppData?.isDating == 1)
                   Text(S.current.getStarted1Subtitle,
-                      style:
-                          const TextStyle(color: ColorRes.grey, fontSize: 16)),
+                      style: const TextStyle(color: ColorRes.grey, fontSize: 16)),
               ],
             ),
           ),
@@ -53,14 +51,14 @@ class Screen1 extends StatelessWidget {
         height: 48,
         width: 238,
         decoration: BoxDecoration(
-          color: ColorRes.orange1.withOpacity(0.14),
+          color: ColorRes.darkOrange.withOpacity(0.14),
           borderRadius: BorderRadius.circular(50),
         ),
         child: Center(
           child: Text(
             S.current.continueText,
             style: const TextStyle(
-              color: ColorRes.orange,
+              color: ColorRes.darkOrange,
               fontSize: 15,
               fontFamily: FontRes.semiBold,
             ),

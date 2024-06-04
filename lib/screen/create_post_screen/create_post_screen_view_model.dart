@@ -7,7 +7,6 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
 import 'package:orange_ui/common/common_ui.dart';
-
 import 'package:orange_ui/model/social/post/add_post.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/service/pref_service.dart';
@@ -20,13 +19,10 @@ import 'package:video_player/video_player.dart';
 import 'package:video_thumbnail/video_thumbnail.dart';
 
 class CreatePostScreenViewModel extends BaseViewModel {
-  DetectableTextEditingController detectableTextFieldController =
-      DetectableTextEditingController(
-          detectedStyle: const TextStyle(
-              fontSize: 18,
-              color: ColorRes.orange2,
-              fontFamily: FontRes.medium),
-          regExp: detectionRegExp(atSign: false, url: false));
+  DetectableTextEditingController detectableTextFieldController = DetectableTextEditingController(
+      detectedStyle:
+          const TextStyle(fontSize: 18, color: ColorRes.darkOrange, fontFamily: FontRes.medium),
+      regExp: detectionRegExp(atSign: false, url: false));
   int pageType = 0;
   final ImagePicker _picker = ImagePicker();
 
@@ -71,15 +67,11 @@ class CreatePostScreenViewModel extends BaseViewModel {
     contentType = 0;
     detectableTextFieldFocusNode.unfocus();
     _picker
-        .pickMultiImage(
-            maxHeight: maxHeight, maxWidth: maxWidth, imageQuality: quality)
+        .pickMultiImage(maxHeight: maxHeight, maxWidth: maxWidth, imageQuality: quality)
         .then((value) {
       if (value.isNotEmpty) {
         for (int i = 0;
-            i <
-                (value.length > maxImagesForPost
-                    ? maxImagesForPost
-                    : value.length);
+            i < (value.length > maxImagesForPost ? maxImagesForPost : value.length);
             i++) {
           imagesFile.add(value[i]);
           notifyListeners();

@@ -33,7 +33,7 @@ class BottomSelectionList extends StatelessWidget {
           child: Text(
             S.current.photosCap,
             style: const TextStyle(
-              color: ColorRes.dimGrey4,
+              color: ColorRes.dimGrey3,
               fontFamily: FontRes.bold,
               fontSize: 13,
             ),
@@ -107,8 +107,7 @@ class BottomSelectionList extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: Center(
-                          child:
-                              Image.asset(AssetRes.plus, height: 17, width: 17),
+                          child: Image.asset(AssetRes.plus, height: 17, width: 17),
                         ),
                       ),
                     ),
@@ -125,7 +124,7 @@ class BottomSelectionList extends StatelessWidget {
                             begin: Alignment.topCenter,
                             end: Alignment.bottomCenter,
                             colors: [
-                              ColorRes.lightOrange1,
+                              ColorRes.lightOrange,
                               ColorRes.darkOrange,
                             ],
                           ),

@@ -9,8 +9,7 @@ class LiveStreamEndDialog extends StatelessWidget {
   final VoidCallback onYesBtnClick;
   final VoidCallback onNoBtnClick;
 
-  const LiveStreamEndDialog(
-      {Key? key, required this.onYesBtnClick, required this.onNoBtnClick})
+  const LiveStreamEndDialog({Key? key, required this.onYesBtnClick, required this.onNoBtnClick})
       : super(key: key);
 
   @override
@@ -27,13 +26,11 @@ class LiveStreamEndDialog extends StatelessWidget {
               const Spacer(flex: 2),
               RichText(
                 text: TextSpan(
-                  style: const TextStyle(
-                      fontFamily: FontRes.semiBold, fontSize: 17),
+                  style: const TextStyle(fontFamily: FontRes.semiBold, fontSize: 17),
                   children: [
                     TextSpan(
                       text: S.current.areYou,
-                      style:
-                          const TextStyle(color: ColorRes.grey15, fontSize: 15),
+                      style: const TextStyle(color: ColorRes.darkGrey9, fontSize: 15),
                     ),
                     TextSpan(
                       text: S.current.sure,
@@ -54,8 +51,7 @@ class LiveStreamEndDialog extends StatelessWidget {
                 margin: const EdgeInsets.symmetric(horizontal: 12),
                 child: Text(
                   S.current.areYouSureYouWantToEnd,
-                  style: const TextStyle(
-                      fontFamily: FontRes.semiBold, color: ColorRes.grey15),
+                  style: const TextStyle(fontFamily: FontRes.semiBold, color: ColorRes.darkGrey9),
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -73,7 +69,7 @@ class LiveStreamEndDialog extends StatelessWidget {
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
                       colors: [
-                        ColorRes.lightOrange1,
+                        ColorRes.lightOrange,
                         ColorRes.darkOrange,
                       ],
                     ),
@@ -81,8 +77,7 @@ class LiveStreamEndDialog extends StatelessWidget {
                   ),
                   child: Text(
                     S.current.yes,
-                    style: const TextStyle(
-                        color: ColorRes.white, fontFamily: FontRes.semiBold),
+                    style: const TextStyle(color: ColorRes.white, fontFamily: FontRes.semiBold),
                   ),
                 ),
               ),
@@ -100,8 +95,7 @@ class LiveStreamEndDialog extends StatelessWidget {
                   ),
                   child: Text(
                     S.current.no,
-                    style: const TextStyle(
-                        color: ColorRes.grey15, fontFamily: FontRes.semiBold),
+                    style: const TextStyle(color: ColorRes.darkGrey9, fontFamily: FontRes.semiBold),
                   ),
                 ),
               ),
@@ -116,9 +110,7 @@ class LiveStreamEndDialog extends StatelessWidget {
   }
 
   Widget endStreamButton(
-      {required VoidCallback onBtnPress,
-      required String title,
-      required Color color}) {
+      {required VoidCallback onBtnPress, required String title, required Color color}) {
     return Expanded(
         child: Container(
       margin: const EdgeInsets.symmetric(horizontal: 15),
@@ -128,17 +120,16 @@ class LiveStreamEndDialog extends StatelessWidget {
           onBtnPress();
         },
         style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(color),
-            shape: MaterialStateProperty.all(
+            backgroundColor: WidgetStateProperty.all(color),
+            shape: WidgetStateProperty.all(
               RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(5),
               ),
             ),
-            surfaceTintColor: MaterialStateProperty.all(ColorRes.white)),
+            surfaceTintColor: WidgetStateProperty.all(ColorRes.white)),
         child: Text(
           title,
-          style: const TextStyle(
-              color: ColorRes.white, fontFamily: FontRes.semiBold),
+          style: const TextStyle(color: ColorRes.white, fontFamily: FontRes.semiBold),
         ),
       ),
     ));

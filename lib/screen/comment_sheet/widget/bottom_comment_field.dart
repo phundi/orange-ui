@@ -1,6 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:detectable_text_field/detectable_text_field.dart';
 import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
+import 'package:orange_ui/common/common_fun.dart';
+import 'package:orange_ui/common/common_ui.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/screen/comment_sheet/comment_sheet_view_model.dart';
 import 'package:orange_ui/utils/asset_res.dart';
@@ -10,6 +13,7 @@ import 'package:orange_ui/utils/style_res.dart';
 
 class BottomCommentField extends StatelessWidget {
   final CommentSheetViewModel model;
+
   const BottomCommentField({Key? key, required this.model}) : super(key: key);
 
   @override
@@ -28,7 +32,16 @@ class BottomCommentField extends StatelessWidget {
                 children: [
                   ClipRRect(
                     borderRadius: SmoothBorderRadius(cornerRadius: 7, cornerSmoothing: 1),
-                    child: Image.asset(AssetRes.icImage, width: 40, height: 40, fit: BoxFit.cover),
+                    child: CachedNetworkImage(
+                      imageUrl: CommonFun.getProfileImage(images: model.userData?.images),
+                      width: 40,
+                      height: 40,
+                      fit: BoxFit.cover,
+                      errorWidget: (context, url, error) {
+                        return CommonUI.profileImagePlaceHolder(
+                            name: model.userData?.fullname, borderRadius: 7, heightWidth: 40);
+                      },
+                    ),
                   ),
                   const SizedBox(width: 10),
                   Expanded(
@@ -47,14 +60,19 @@ class BottomCommentField extends StatelessWidget {
                               child: DetectableTextField(
                                   controller: model.detectableTextFieldController,
                                   style: const TextStyle(
-                                      color: ColorRes.dimGrey3, fontSize: 14, fontFamily: FontRes.medium),
+                                      color: ColorRes.dimGrey3,
+                                      fontSize: 14,
+                                      fontFamily: FontRes.medium),
                                   textCapitalization: TextCapitalization.sentences,
                                   decoration: InputDecoration(
-                                      contentPadding: const EdgeInsets.only(left: 15, right: 15, bottom: 15),
+                                      contentPadding:
+                                          const EdgeInsets.only(left: 15, right: 15, bottom: 15),
                                       border: InputBorder.none,
                                       hintText: S.of(context).addComment,
                                       hintStyle: const TextStyle(
-                                          fontFamily: FontRes.medium, fontSize: 12, color: ColorRes.dimGrey3)),
+                                          fontFamily: FontRes.medium,
+                                          fontSize: 12,
+                                          color: ColorRes.dimGrey3)),
                                   textAlignVertical: TextAlignVertical.center),
                             ),
                           ),
@@ -69,7 +87,8 @@ class BottomCommentField extends StatelessWidget {
                                 shape: BoxShape.circle,
                                 gradient: StyleRes.linearGradient,
                               ),
-                              child: Image.asset(AssetRes.share, height: 15, alignment: Alignment.centerRight),
+                              child: Image.asset(AssetRes.share,
+                                  height: 15, alignment: Alignment.centerRight),
                             ),
                           )
                         ],

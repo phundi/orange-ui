@@ -21,8 +21,7 @@ class DetailPage extends StatelessWidget {
 
   final VoidCallback onHideBtnTap;
 
-  const DetailPage({Key? key, required this.onHideBtnTap, required this.model})
-      : super(key: key);
+  const DetailPage({Key? key, required this.onHideBtnTap, required this.model}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,8 +33,7 @@ class DetailPage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(top: 15),
             child: ClipRRect(
-              borderRadius:
-                  const BorderRadius.vertical(top: Radius.circular(30)),
+              borderRadius: const BorderRadius.vertical(top: Radius.circular(30)),
               child: BackdropFilter(
                 filter: ImageFilter.blur(sigmaY: 20, sigmaX: 20),
                 child: Container(
@@ -44,8 +42,7 @@ class DetailPage extends StatelessWidget {
                   padding: const EdgeInsets.fromLTRB(21, 20, 21, 0),
                   decoration: BoxDecoration(
                     color: ColorRes.black.withOpacity(0.33),
-                    borderRadius:
-                        const BorderRadius.vertical(top: Radius.circular(30)),
+                    borderRadius: const BorderRadius.vertical(top: Radius.circular(30)),
                   ),
                   child: SingleChildScrollView(
                     child: Column(
@@ -60,8 +57,7 @@ class DetailPage extends StatelessWidget {
                                   Flexible(
                                     flex: 5,
                                     child: Text(
-                                      model.userData?.fullname ??
-                                          AppRes.defaultFullname,
+                                      model.userData?.fullname ?? AppRes.defaultFullname,
                                       style: const TextStyle(
                                           color: ColorRes.white,
                                           fontSize: 22,
@@ -83,20 +79,15 @@ class DetailPage extends StatelessWidget {
                                   ),
                                   Flexible(
                                     child: Visibility(
-                                      visible: model.userData?.isVerified == 2
-                                          ? true
-                                          : false,
-                                      child: Image.asset(AssetRes.tickMark,
-                                          height: 20, width: 20),
+                                      visible: model.userData?.isVerified == 2 ? true : false,
+                                      child: Image.asset(AssetRes.tickMark, height: 20, width: 20),
                                     ),
                                   ),
                                 ],
                               ),
                             ),
                             Visibility(
-                              visible: PrefService.userId == model.userData?.id
-                                  ? false
-                                  : true,
+                              visible: PrefService.userId == model.userData?.id ? false : true,
                               child: InkWell(
                                 borderRadius: BorderRadius.circular(30),
                                 onTap: model.onSaveTap,
@@ -110,9 +101,7 @@ class DetailPage extends StatelessWidget {
                                   ),
                                   child: Image.asset(
                                     AssetRes.save,
-                                    color: model.save
-                                        ? null
-                                        : ColorRes.dimGrey5.withOpacity(0.70),
+                                    color: model.save ? null : ColorRes.dimGrey5.withOpacity(0.70),
                                   ),
                                 ),
                               ),
@@ -122,9 +111,7 @@ class DetailPage extends StatelessWidget {
                         const SizedBox(height: 3),
                         Text(
                           model.userData?.bio ?? '',
-                          style: TextStyle(
-                              color: ColorRes.white.withOpacity(0.80),
-                              fontSize: 14),
+                          style: TextStyle(color: ColorRes.white.withOpacity(0.80), fontSize: 14),
                         ),
                         const SizedBox(height: 10),
                         Row(
@@ -145,13 +132,11 @@ class DetailPage extends StatelessWidget {
                                   const SizedBox(width: 7),
                                   Flexible(
                                     child: Text(
-                                      model.userData?.live == null ||
-                                              model.userData!.live!.isEmpty
+                                      model.userData?.live == null || model.userData!.live!.isEmpty
                                           ? ''
                                           : '${model.userData?.live}',
                                       style: TextStyle(
-                                          color:
-                                              ColorRes.white.withOpacity(0.80),
+                                          color: ColorRes.white.withOpacity(0.80),
                                           fontSize: 14,
                                           overflow: TextOverflow.ellipsis),
                                       maxLines: 2,
@@ -163,10 +148,7 @@ class DetailPage extends StatelessWidget {
                             const SizedBox(width: 10),
                             Expanded(
                               child: Visibility(
-                                visible:
-                                    PrefService.userId == model.userData?.id
-                                        ? false
-                                        : true,
+                                visible: PrefService.userId == model.userData?.id ? false : true,
                                 child: Row(
                                   children: [
                                     Container(
@@ -191,8 +173,7 @@ class DetailPage extends StatelessWidget {
                                             ? S.of(context).noLocation
                                             : '${model.distance.toStringAsFixed(2)} ${S.of(context).kmsAway}',
                                         style: TextStyle(
-                                            color: ColorRes.white
-                                                .withOpacity(0.80),
+                                            color: ColorRes.white.withOpacity(0.80),
                                             fontSize: 14,
                                             overflow: TextOverflow.ellipsis),
                                         maxLines: 2,
@@ -208,113 +189,84 @@ class DetailPage extends StatelessWidget {
                         Text(
                           S.current.about,
                           style: const TextStyle(
-                              color: ColorRes.white,
-                              fontFamily: FontRes.bold,
-                              fontSize: 17),
+                              color: ColorRes.white, fontFamily: FontRes.bold, fontSize: 17),
                         ),
                         const SizedBox(height: 5),
                         Text(
                           model.userData?.about ?? S.current.noDataAvailable,
-                          style: TextStyle(
-                              color: ColorRes.white.withOpacity(0.80),
-                              fontSize: 14),
+                          style: TextStyle(color: ColorRes.white.withOpacity(0.80), fontSize: 14),
                         ),
                         const SizedBox(height: 15),
                         model.interestList.isNotEmpty
                             ? Text(
                                 S.current.interest,
                                 style: const TextStyle(
-                                    color: ColorRes.white,
-                                    fontFamily: FontRes.bold,
-                                    fontSize: 17),
+                                    color: ColorRes.white, fontFamily: FontRes.bold, fontSize: 17),
                               )
                             : const SizedBox(),
-                        if (model.interestList.isNotEmpty)
-                          const SizedBox(height: 11),
+                        if (model.interestList.isNotEmpty) const SizedBox(height: 11),
                         interestButtons(model.interestList),
                         if (model.settingAppData?.isSocialMedia == 1)
                           Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 10.0),
+                              padding: const EdgeInsets.symmetric(vertical: 10.0),
                               child: ClipRect(
                                 child: BackdropFilter(
-                                  filter: ImageFilter.blur(
-                                      sigmaX: 10.0, sigmaY: 10.0),
+                                  filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
                                   child: Container(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 15, vertical: 10),
+                                    padding:
+                                        const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                                     decoration: BoxDecoration(
-                                        color:
-                                            ColorRes.davyGrey.withOpacity(0.15),
-                                        border: Border.all(
-                                            color: ColorRes.dimGrey7
-                                                .withOpacity(0.15)),
-                                        borderRadius:
-                                            BorderRadius.circular(50)),
+                                        color: ColorRes.davyGrey.withOpacity(0.15),
+                                        border:
+                                            Border.all(color: ColorRes.dimGrey7.withOpacity(0.15)),
+                                        borderRadius: BorderRadius.circular(50)),
                                     child: Row(
                                       children: [
                                         VerticalColumnText(
-                                          count: NumberFormat.compact().format(
-                                              model.userData?.following ?? 0),
+                                          count: NumberFormat.compact()
+                                              .format(model.userData?.following ?? 0),
                                           title: S.of(context).following,
                                           onTap: () {
                                             Get.to(() => FollowFollowingScreen(
                                                   followFollowingType:
-                                                      FollowFollowingType
-                                                          .following,
-                                                  userId:
-                                                      model.userData?.id ?? -1,
+                                                      FollowFollowingType.following,
+                                                  userId: model.userData?.id ?? -1,
                                                 ));
                                           },
                                         ),
                                         const SizedBox(width: 20),
                                         VerticalColumnText(
-                                          count: NumberFormat.compact().format(
-                                              model.userData?.followers ?? 0),
+                                          count: NumberFormat.compact()
+                                              .format(model.userData?.followers ?? 0),
                                           title: S.of(context).followers,
                                           onTap: () {
                                             Get.to(() => FollowFollowingScreen(
-                                                  followFollowingType:
-                                                      FollowFollowingType
-                                                          .follower,
-                                                  userId:
-                                                      model.userData?.id ?? -1,
+                                                  followFollowingType: FollowFollowingType.follower,
+                                                  userId: model.userData?.id ?? -1,
                                                 ));
                                           },
                                         ),
                                         const SizedBox(width: 20),
                                         Expanded(
-                                          child: model.userData?.id ==
-                                                  PrefService.userId
+                                          child: model.userData?.id == PrefService.userId
                                               ? InkWell(
                                                   onTap: model.onEditBtnClick,
                                                   child: Container(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              15),
-                                                      alignment:
-                                                          Alignment.center,
+                                                      padding: const EdgeInsets.all(15),
+                                                      alignment: Alignment.center,
                                                       decoration: ShapeDecoration(
                                                           shape: SmoothRectangleBorder(
-                                                              borderRadius:
-                                                                  SmoothBorderRadius(
-                                                                      cornerRadius:
-                                                                          30)),
-                                                          color: ColorRes
-                                                              .dimGrey7
-                                                              .withOpacity(
-                                                                  0.15)),
+                                                              borderRadius: SmoothBorderRadius(
+                                                                  cornerRadius: 30)),
+                                                          color:
+                                                              ColorRes.dimGrey7.withOpacity(0.15)),
                                                       child: Text(
-                                                        S.current.edit
-                                                            .toUpperCase(),
+                                                        S.current.edit.toUpperCase(),
                                                         style: const TextStyle(
-                                                            fontFamily:
-                                                                FontRes.bold,
-                                                            color:
-                                                                ColorRes.white,
+                                                            fontFamily: FontRes.bold,
+                                                            color: ColorRes.white,
                                                             fontSize: 12,
-                                                            letterSpacing:
-                                                                1.33),
+                                                            letterSpacing: 1.33),
                                                       )),
                                                 )
                                               : FollowUnFollowBtn(model: model),
@@ -334,13 +286,12 @@ class DetailPage extends StatelessWidget {
                               height: 50,
                               width: Get.width,
                               decoration: BoxDecoration(
-                                  color: ColorRes.white,
-                                  borderRadius: BorderRadius.circular(10)),
+                                  color: ColorRes.white, borderRadius: BorderRadius.circular(10)),
                               child: Center(
                                 child: Text(
                                   '${S.current.chatWith}${model.userData?.fullname?.toUpperCase()}',
                                   style: const TextStyle(
-                                      color: ColorRes.red3,
+                                      color: ColorRes.darkOrange,
                                       fontSize: 12,
                                       fontFamily: FontRes.bold,
                                       letterSpacing: 0.6),
@@ -376,9 +327,7 @@ class DetailPage extends StatelessWidget {
                         ),
                         const SizedBox(height: 27),
                         Visibility(
-                          visible: PrefService.userId == model.userData?.id
-                              ? false
-                              : true,
+                          visible: PrefService.userId == model.userData?.id ? false : true,
                           child: Center(
                             child: InkWell(
                               onTap: model.onReportTap,
@@ -414,8 +363,7 @@ class DetailPage extends StatelessWidget {
           margin: const EdgeInsets.only(right: 8, bottom: 10),
           padding: const EdgeInsets.fromLTRB(20.6, 9.50, 20.6, 8.51),
           decoration: BoxDecoration(
-              color: ColorRes.white.withOpacity(0.15),
-              borderRadius: BorderRadius.circular(50)),
+              color: ColorRes.white.withOpacity(0.15), borderRadius: BorderRadius.circular(50)),
           child: Text(
             e.toUpperCase(),
             style: const TextStyle(
@@ -446,19 +394,13 @@ class FollowUnFollowBtn extends StatelessWidget {
           padding: const EdgeInsets.all(15),
           alignment: Alignment.center,
           decoration: ShapeDecoration(
-              shape: SmoothRectangleBorder(
-                  borderRadius: SmoothBorderRadius(cornerRadius: 30)),
+              shape: SmoothRectangleBorder(borderRadius: SmoothBorderRadius(cornerRadius: 30)),
               gradient: !model.isFollow ? StyleRes.linearGradient : null,
-              color:
-                  model.isFollow ? ColorRes.dimGrey7.withOpacity(0.15) : null),
+              color: model.isFollow ? ColorRes.dimGrey7.withOpacity(0.15) : null),
           child: Text(
-            (model.isFollow ? S.current.unfollow : S.current.follow)
-                .toUpperCase(),
+            (model.isFollow ? S.current.unfollow : S.current.follow).toUpperCase(),
             style: const TextStyle(
-                fontFamily: FontRes.bold,
-                color: ColorRes.white,
-                fontSize: 12,
-                letterSpacing: 1.33),
+                fontFamily: FontRes.bold, color: ColorRes.white, fontSize: 12, letterSpacing: 1.33),
           )),
     );
   }
@@ -481,9 +423,7 @@ class VerticalColumnText extends StatelessWidget {
         children: [
           Text(count,
               style: TextStyle(
-                  color: ColorRes.white.withOpacity(0.8),
-                  fontFamily: FontRes.bold,
-                  fontSize: 22)),
+                  color: ColorRes.white.withOpacity(0.8), fontFamily: FontRes.bold, fontSize: 22)),
           Text(title,
               style: TextStyle(
                   color: ColorRes.white.withOpacity(0.8),
@@ -504,8 +444,7 @@ class HideInfoChip extends StatefulWidget {
   State<HideInfoChip> createState() => _HideInfoChipState();
 }
 
-class _HideInfoChipState extends State<HideInfoChip>
-    with SingleTickerProviderStateMixin {
+class _HideInfoChipState extends State<HideInfoChip> with SingleTickerProviderStateMixin {
   double? _scale;
   AnimationController? _controller;
 
@@ -559,7 +498,7 @@ class _HideInfoChipState extends State<HideInfoChip>
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [
-                ColorRes.lightOrange1,
+                ColorRes.lightOrange,
                 ColorRes.darkOrange,
               ],
             ),

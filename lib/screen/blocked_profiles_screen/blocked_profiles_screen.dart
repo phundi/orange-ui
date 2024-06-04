@@ -38,7 +38,7 @@ class BlockedProfilesScreen extends StatelessWidget {
                               child: Text(
                                 'No Blocked Data',
                                 style: TextStyle(
-                                  color: ColorRes.darkGrey4,
+                                  color: ColorRes.darkGrey,
                                   fontSize: 18,
                                   overflow: TextOverflow.ellipsis,
                                   fontFamily: FontRes.bold,
@@ -50,8 +50,7 @@ class BlockedProfilesScreen extends StatelessWidget {
                               padding: EdgeInsets.zero,
                               itemCount: viewModel.userData.length,
                               itemBuilder: (context, index) {
-                                RegistrationUserData userData =
-                                    viewModel.userData[index];
+                                RegistrationUserData userData = viewModel.userData[index];
                                 bool isBlocked = false;
                                 for (var element in viewModel.blockedIds) {
                                   if (element == '${userData.id}') {

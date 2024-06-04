@@ -77,7 +77,7 @@ class PasswordCard extends StatelessWidget {
                           showPwd ? S.current.hide : S.current.view,
                           textAlign: TextAlign.center,
                           style: const TextStyle(
-                            color: ColorRes.veryDarkGrey2,
+                            color: ColorRes.darkGrey,
                             fontSize: 13,
                             fontFamily: FontRes.bold,
                           ),
@@ -85,7 +85,7 @@ class PasswordCard extends StatelessWidget {
                       ),
                     ),
                     hintStyle: TextStyle(
-                      color: pwdError == "" ? ColorRes.dimGrey2 : ColorRes.red,
+                      color: pwdError == "" ? ColorRes.dimGrey2 : ColorRes.darkOrange,
                       fontSize: 14,
                       fontFamily: FontRes.semiBold,
                     ),
@@ -93,8 +93,7 @@ class PasswordCard extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 15),
-              SubmitButton1(
-                  title: S.current.continueText, onTap: onContinueTap),
+              SubmitButton1(title: S.current.continueText, onTap: onContinueTap),
               const SizedBox(height: 28),
               InkWell(
                 onTap: onForgotPwdTap,
@@ -145,13 +144,13 @@ class PasswordCard extends StatelessWidget {
                 onTap: onChangeEmailTap,
                 child: Container(
                   padding: const EdgeInsets.all(5),
-                  decoration: BoxDecoration(
-                      color: ColorRes.white,
-                      borderRadius: BorderRadius.circular(30)),
+                  decoration:
+                      BoxDecoration(color: ColorRes.white, borderRadius: BorderRadius.circular(30)),
                   child: Image.asset(
                     AssetRes.edit,
                     width: 20,
                     height: 20,
+                    color: ColorRes.darkOrange,
                   ),
                 ),
               )

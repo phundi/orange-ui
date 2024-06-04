@@ -16,10 +16,7 @@ class PersonalNotificationPage extends StatelessWidget {
   final Function(RegistrationUserData? data) onUserTap;
 
   const PersonalNotificationPage(
-      {Key? key,
-      this.userNotification,
-      required this.controller,
-      required this.onUserTap})
+      {Key? key, this.userNotification, required this.controller, required this.onUserTap})
       : super(key: key);
 
   @override
@@ -43,8 +40,7 @@ class PersonalNotificationPage extends StatelessWidget {
                   onUserTap(data);
                 },
                 child: Container(
-                  margin:
-                      const EdgeInsets.only(left: 16, right: 19, bottom: 18),
+                  margin: const EdgeInsets.only(left: 16, right: 19, bottom: 18),
                   child: Row(
                     children: [
                       data?.images == null || data!.images.isEmpty
@@ -57,7 +53,7 @@ class PersonalNotificationPage extends StatelessWidget {
                                   begin: Alignment.topCenter,
                                   end: Alignment.bottomCenter,
                                   colors: [
-                                    ColorRes.lightOrange1,
+                                    ColorRes.lightOrange,
                                     ColorRes.darkOrange,
                                   ],
                                 ),
@@ -66,10 +62,8 @@ class PersonalNotificationPage extends StatelessWidget {
                           : ClipRRect(
                               borderRadius: BorderRadius.circular(30),
                               child: CachedNetworkImage(
-                                imageUrl: CommonFun.getProfileImage(
-                                    images: data.images),
-                                cacheKey: CommonFun.getProfileImage(
-                                    images: data.images),
+                                imageUrl: CommonFun.getProfileImage(images: data.images),
+                                cacheKey: CommonFun.getProfileImage(images: data.images),
                                 height: 40,
                                 width: 40,
                                 fit: BoxFit.cover,
@@ -95,14 +89,14 @@ class PersonalNotificationPage extends StatelessWidget {
                                   style: const TextStyle(
                                     fontFamily: FontRes.bold,
                                     fontSize: 15,
-                                    color: ColorRes.darkGrey4,
+                                    color: ColorRes.darkGrey,
                                   ),
                                 ),
                                 Text(
                                   ' ${data?.age}',
                                   style: const TextStyle(
                                     fontSize: 15,
-                                    color: ColorRes.darkGrey4,
+                                    color: ColorRes.darkGrey,
                                   ),
                                 ),
                                 const SizedBox(
@@ -120,23 +114,20 @@ class PersonalNotificationPage extends StatelessWidget {
                                 Text(
                                   userNotification != null
                                       ? CommonFun.timeAgo(
-                                          DateTime.parse(
-                                              '${userNotification?[index].createdAt}'),
+                                          DateTime.parse('${userNotification?[index].createdAt}'),
                                         )
                                       : '',
                                   style: const TextStyle(
                                     fontSize: 11,
-                                    color: ColorRes.grey7,
+                                    color: ColorRes.grey2,
                                   ),
                                 ),
                               ],
                             ),
-                            Text(
-                                CommonFun.getNotificationType(
-                                    userNotification?[index]),
+                            Text(CommonFun.getNotificationType(userNotification?[index]),
                                 style: const TextStyle(
                                     fontSize: 13,
-                                    color: ColorRes.grey6,
+                                    color: ColorRes.darkGrey9,
                                     overflow: TextOverflow.ellipsis),
                                 maxLines: 2)
                           ],

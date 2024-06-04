@@ -22,8 +22,7 @@ class ImageSelectionArea extends StatelessWidget {
 
   final UserDetailScreenViewModel model;
 
-  const ImageSelectionArea(
-      {Key? key, required this.onMoreInfoTap, required this.model})
+  const ImageSelectionArea({Key? key, required this.onMoreInfoTap, required this.model})
       : super(key: key);
 
   @override
@@ -37,9 +36,7 @@ class ImageSelectionArea extends StatelessWidget {
           const Spacer(),
           if (model.settingAppData?.isDating == 1)
             LikeUnlikeBtn(
-                like: model.like,
-                onLikeBtnTap: model.onLikeBtnTap,
-                userId: model.userData?.id),
+                like: model.like, onLikeBtnTap: model.onLikeBtnTap, userId: model.userData?.id),
           const SizedBox(height: 15),
           imageListArea(model.userData),
           const SizedBox(height: 20),
@@ -77,14 +74,11 @@ class ImageSelectionArea extends StatelessWidget {
                           const LiveIcon(),
                           const SizedBox(width: 3),
                           Text(S.current.liveCap,
-                              style: const TextStyle(
-                                  color: ColorRes.white, fontSize: 12)),
+                              style: const TextStyle(color: ColorRes.white, fontSize: 12)),
                           Text(
                             " ${S.current.nowCap}",
                             style: const TextStyle(
-                                color: ColorRes.white,
-                                fontSize: 12,
-                                fontFamily: FontRes.bold),
+                                color: ColorRes.white, fontSize: 12, fontFamily: FontRes.bold),
                           ),
                           const SizedBox(width: 10),
                           Container(
@@ -97,9 +91,7 @@ class ImageSelectionArea extends StatelessWidget {
                               child: Text(
                                 S.current.join,
                                 style: const TextStyle(
-                                    color: ColorRes.white,
-                                    fontSize: 12,
-                                    fontFamily: FontRes.bold),
+                                    color: ColorRes.white, fontSize: 12, fontFamily: FontRes.bold),
                               ),
                             ),
                           ),
@@ -119,8 +111,7 @@ class ImageSelectionArea extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 23, vertical: 10),
               margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
               decoration: ShapeDecoration(
-                  shape: SmoothRectangleBorder(
-                      borderRadius: SmoothBorderRadius(cornerRadius: 30)),
+                  shape: SmoothRectangleBorder(borderRadius: SmoothBorderRadius(cornerRadius: 30)),
                   gradient: StyleRes.linearGradient),
               child: Row(
                 children: [
@@ -164,9 +155,7 @@ class ImageSelectionArea extends StatelessWidget {
                     margin: const EdgeInsets.symmetric(horizontal: 5),
                     decoration: BoxDecoration(
                         border: model.selectedImgIndex == index
-                            ? Border.all(
-                                color: ColorRes.white.withOpacity(0.80),
-                                width: 2)
+                            ? Border.all(color: ColorRes.white.withOpacity(0.80), width: 2)
                             : Border.all(color: ColorRes.transparent, width: 2),
                         borderRadius: BorderRadius.circular(10)),
                     child: ClipRRect(
@@ -177,9 +166,8 @@ class ImageSelectionArea extends StatelessWidget {
                         imageUrl: '${ConstRes.aImageBaseUrl}${image.image}',
                         cacheKey: '${ConstRes.aImageBaseUrl}${image.image}',
                         fit: BoxFit.cover,
-                        errorWidget: (context, url, error) =>
-                            CommonUI.profileImagePlaceHolder(
-                                name: CommonUI.fullName(userData?.fullname)),
+                        errorWidget: (context, url, error) => CommonUI.profileImagePlaceHolder(
+                            name: CommonUI.fullName(userData?.fullname)),
                       ),
                     ),
                   ),
@@ -195,18 +183,16 @@ class LikeUnlikeBtn extends StatefulWidget {
   final bool like;
   final int? userId;
 
-  const LikeUnlikeBtn(
-      {Key? key, required this.like, required this.onLikeBtnTap, this.userId})
+  const LikeUnlikeBtn({Key? key, required this.like, required this.onLikeBtnTap, this.userId})
       : super(key: key);
 
   @override
   State<LikeUnlikeBtn> createState() => _LikeUnlikeBtnState();
 }
 
-class _LikeUnlikeBtnState extends State<LikeUnlikeBtn>
-    with SingleTickerProviderStateMixin {
-  late final AnimationController _controller = AnimationController(
-      duration: const Duration(milliseconds: 150), vsync: this, value: 1.0);
+class _LikeUnlikeBtnState extends State<LikeUnlikeBtn> with SingleTickerProviderStateMixin {
+  late final AnimationController _controller =
+      AnimationController(duration: const Duration(milliseconds: 150), vsync: this, value: 1.0);
 
   @override
   void dispose() {
@@ -227,27 +213,24 @@ class _LikeUnlikeBtnState extends State<LikeUnlikeBtn>
         child: Container(
           height: 76,
           width: 76,
-          decoration: BoxDecoration(
-              shape: BoxShape.circle, color: ColorRes.white.withOpacity(0.30)),
+          decoration:
+              BoxDecoration(shape: BoxShape.circle, color: ColorRes.white.withOpacity(0.30)),
           child: Center(
             child: Container(
               height: 66,
               width: 66,
               padding: const EdgeInsets.all(17),
-              decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: ColorRes.white.withOpacity(0.50)),
+              decoration:
+                  BoxDecoration(shape: BoxShape.circle, color: ColorRes.white.withOpacity(0.50)),
               child: widget.like
                   ? ScaleTransition(
-                      scale: Tween(begin: 0.7, end: 1.0).animate(
-                          CurvedAnimation(
-                              parent: _controller, curve: Curves.easeOut)),
+                      scale: Tween(begin: 0.7, end: 1.0)
+                          .animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut)),
                       child: Image.asset(AssetRes.icFillFav),
                     )
                   : ScaleTransition(
-                      scale: Tween(begin: 0.7, end: 1.0).animate(
-                          CurvedAnimation(
-                              parent: _controller, curve: Curves.easeOut)),
+                      scale: Tween(begin: 0.7, end: 1.0)
+                          .animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut)),
                       child: Image.asset(AssetRes.icFav)),
               //Image.asset(AssetRes.like, height: 30.23, width: 33),
             ),
@@ -261,15 +244,13 @@ class _LikeUnlikeBtnState extends State<LikeUnlikeBtn>
 class BottomMoreBtn extends StatefulWidget {
   final VoidCallback onMoreInfoTap;
 
-  const BottomMoreBtn({Key? key, required this.onMoreInfoTap})
-      : super(key: key);
+  const BottomMoreBtn({Key? key, required this.onMoreInfoTap}) : super(key: key);
 
   @override
   State<BottomMoreBtn> createState() => _BottomMoreBtnState();
 }
 
-class _BottomMoreBtnState extends State<BottomMoreBtn>
-    with SingleTickerProviderStateMixin {
+class _BottomMoreBtnState extends State<BottomMoreBtn> with SingleTickerProviderStateMixin {
   double? _scale;
   AnimationController? _controller;
   double height = AppBar().preferredSize.height;
@@ -353,7 +334,7 @@ class _BottomMoreBtnState extends State<BottomMoreBtn>
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
                         colors: [
-                          ColorRes.lightOrange1,
+                          ColorRes.lightOrange,
                           ColorRes.darkOrange,
                         ],
                       ),
@@ -394,8 +375,7 @@ class ImageListArea extends StatefulWidget {
   State<ImageListArea> createState() => _ImageListAreaState();
 }
 
-class _ImageListAreaState extends State<ImageListArea>
-    with SingleTickerProviderStateMixin {
+class _ImageListAreaState extends State<ImageListArea> with SingleTickerProviderStateMixin {
   double? _scale;
   AnimationController? _controller;
 
@@ -451,8 +431,7 @@ class _ImageListAreaState extends State<ImageListArea>
               child: Container(
                 height: 58,
                 width: 58,
-                margin: EdgeInsets.only(
-                    right: index != (widget.imageList.length - 1) ? 8.33 : 0),
+                margin: EdgeInsets.only(right: index != (widget.imageList.length - 1) ? 8.33 : 0),
                 decoration: BoxDecoration(
                   border: widget.selectedImgIndex == index
                       ? Border.all(
@@ -463,8 +442,8 @@ class _ImageListAreaState extends State<ImageListArea>
                   borderRadius: BorderRadius.circular(10),
                   image: DecorationImage(
                     fit: BoxFit.cover,
-                    image: NetworkImage(
-                        '${ConstRes.aImageBaseUrl}${widget.imageList[index].image}'),
+                    image:
+                        NetworkImage('${ConstRes.aImageBaseUrl}${widget.imageList[index].image}'),
                   ),
                 ),
               ),

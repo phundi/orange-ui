@@ -34,12 +34,11 @@ class UserCard extends StatelessWidget {
       children: [
         Container(
           margin: const EdgeInsets.only(bottom: 6),
-          padding:
-              const EdgeInsets.only(top: 8, left: 12, right: 12, bottom: 11),
+          padding: const EdgeInsets.only(top: 8, left: 12, right: 12, bottom: 11),
           height: 74,
           width: Get.width,
           decoration: BoxDecoration(
-            color: ColorRes.skyBlue,
+            color: ColorRes.lightGrey2,
             borderRadius: BorderRadius.circular(10),
           ),
           child: Row(
@@ -54,8 +53,7 @@ class UserCard extends StatelessWidget {
                   fit: BoxFit.cover,
                   cacheKey: '$image',
                   errorWidget: (context, url, error) {
-                    return CommonUI.profileImagePlaceHolder(
-                        name: name, heightWidth: 53);
+                    return CommonUI.profileImagePlaceHolder(name: name, heightWidth: 53);
                   },
                 ),
               ),
@@ -79,7 +77,7 @@ class UserCard extends StatelessWidget {
                                     (name ?? '').capitalize ?? '',
                                     softWrap: false,
                                     style: const TextStyle(
-                                        color: ColorRes.veryDarkGrey3,
+                                        color: ColorRes.darkGrey5,
                                         fontFamily: FontRes.bold,
                                         overflow: TextOverflow.ellipsis,
                                         fontSize: 16),
@@ -110,8 +108,7 @@ class UserCard extends StatelessWidget {
                             CommonFun.readTimestamp(
                               double.parse(time ?? ''),
                             ),
-                            style: const TextStyle(
-                                fontSize: 12, color: ColorRes.grey4),
+                            style: const TextStyle(fontSize: 12, color: ColorRes.grey),
                           ),
                         ],
                       ),
@@ -126,7 +123,7 @@ class UserCard extends StatelessWidget {
                               '$msg',
                               style: const TextStyle(
                                 fontSize: 14,
-                                color: ColorRes.grey3,
+                                color: ColorRes.grey,
                               ),
                               overflow: TextOverflow.ellipsis,
                               maxLines: 1,
@@ -143,8 +140,8 @@ class UserCard extends StatelessWidget {
                                 gradient: newMsg
                                     ? const LinearGradient(
                                         colors: [
-                                          ColorRes.orange2,
-                                          ColorRes.red2,
+                                          ColorRes.darkOrange,
+                                          ColorRes.darkOrange,
                                         ],
                                       )
                                     : null,

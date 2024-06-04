@@ -10,10 +10,7 @@ class BottomArea extends StatelessWidget {
   final bool isLoading;
 
   const BottomArea(
-      {Key? key,
-      required this.onCancelTap,
-      required this.isLoading,
-      required this.onNextTap})
+      {Key? key, required this.onCancelTap, required this.isLoading, required this.onNextTap})
       : super(key: key);
 
   @override
@@ -32,22 +29,20 @@ class BottomArea extends StatelessWidget {
                 height: 50,
                 width: Get.width,
                 decoration: BoxDecoration(
-                  color: ColorRes.orange3.withOpacity(0.13),
+                  color: ColorRes.darkOrange.withOpacity(0.13),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Center(
                   child: AnimatedSwitcher(
                     duration: const Duration(milliseconds: 300),
-                    transitionBuilder:
-                        (Widget child, Animation<double> animation) {
+                    transitionBuilder: (Widget child, Animation<double> animation) {
                       return ScaleTransition(scale: animation, child: child);
                     },
                     child: Text(
                       isLoading ? S.current.cancelCap : S.current.next,
-                      key: ValueKey<String>(
-                          isLoading ? S.current.cancelCap : S.current.next),
+                      key: ValueKey<String>(isLoading ? S.current.cancelCap : S.current.next),
                       style: const TextStyle(
-                        color: ColorRes.orange3,
+                        color: ColorRes.darkOrange,
                         fontFamily: FontRes.bold,
                       ),
                     ),

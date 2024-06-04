@@ -40,20 +40,20 @@ class LanguagesScreen extends StatelessWidget {
                       return RadioListTile(
                         value: index,
                         groupValue: viewModel.value,
-                        activeColor: ColorRes.orange,
+                        activeColor: ColorRes.darkOrange,
                         splashRadius: 0,
                         hoverColor: Colors.transparent,
                         dense: true,
                         onChanged: viewModel.onLanguageChange,
                         title: Text(viewModel.languages[index],
                             style: const TextStyle(
-                                color: ColorRes.veryDarkGrey,
+                                color: ColorRes.darkGrey5,
                                 fontFamily: FontRes.semiBold,
                                 fontSize: 15)),
                         subtitle: Text(
                           viewModel.subLanguage[index],
                           style: const TextStyle(
-                            color: ColorRes.veryDarkGrey2,
+                            color: ColorRes.darkGrey,
                             fontFamily: FontRes.regular,
                           ),
                         ),

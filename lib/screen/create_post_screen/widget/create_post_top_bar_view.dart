@@ -23,24 +23,29 @@ class CreatePostTopBarView extends StatelessWidget {
             child: Row(
               children: [
                 InkWell(
-                    onTap: model.onBackTap, child: const Icon(Icons.arrow_back_rounded, color: ColorRes.veryDarkGrey4)),
+                    onTap: model.onBackTap,
+                    child: const Icon(Icons.arrow_back_rounded, color: ColorRes.davyGrey)),
                 Expanded(
                   child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 10.0),
                       child: Text(S.of(context).createPost,
                           style: const TextStyle(
-                              fontFamily: FontRes.semiBold, fontSize: 18, color: ColorRes.veryDarkGrey4))),
+                              fontFamily: FontRes.semiBold,
+                              fontSize: 18,
+                              color: ColorRes.davyGrey))),
                 ),
                 InkWell(
                   onTap: () {
-                    if (model.imagesFile.isNotEmpty || model.detectableTextFieldController.text.isNotEmpty) {
+                    if (model.imagesFile.isNotEmpty ||
+                        model.detectableTextFieldController.text.isNotEmpty) {
                       model.onNextClick(type);
                     }
                   },
                   child: Container(
                     padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 17),
                     decoration: ShapeDecoration(
-                        shape: SmoothRectangleBorder(borderRadius: SmoothBorderRadius(cornerRadius: 30)),
+                        shape: SmoothRectangleBorder(
+                            borderRadius: SmoothBorderRadius(cornerRadius: 30)),
                         color: model.imagesFile.isNotEmpty ||
                                 model.detectableTextFieldController.text.isNotEmpty ||
                                 model.pageType == 1

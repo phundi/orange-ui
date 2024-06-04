@@ -52,11 +52,11 @@ class SearchBarArea extends StatelessWidget {
                 padding: const EdgeInsets.all(5),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: ColorRes.orange2.withOpacity(0.06),
+                  color: ColorRes.darkOrange.withOpacity(0.06),
                 ),
                 child: const Icon(
                   CupertinoIcons.back,
-                  color: ColorRes.red4,
+                  color: ColorRes.darkOrange,
                 ),
               ),
             ),
@@ -71,14 +71,14 @@ class SearchBarArea extends StatelessWidget {
                 width: 37,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: ColorRes.orange2.withOpacity(0.06),
+                  color: ColorRes.darkOrange.withOpacity(0.06),
                 ),
                 child: Center(
                   child: Image.asset(
                     AssetRes.locationSearch,
                     height: 30,
                     width: 20,
-                    color: ColorRes.orange2,
+                    color: ColorRes.darkOrange,
                   ),
                 ),
               ),
@@ -105,13 +105,13 @@ class SearchBarArea extends StatelessWidget {
                   height: 35,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(50),
-                    color: ColorRes.orange2.withOpacity(0.06),
+                    color: ColorRes.darkOrange.withOpacity(0.06),
                   ),
                   child: Center(
                     child: Text(
                       tabList[index].title ?? '',
                       style: const TextStyle(
-                        color: ColorRes.orange2,
+                        color: ColorRes.darkOrange,
                         fontFamily: FontRes.bold,
                       ),
                     ),
@@ -132,14 +132,14 @@ class SearchBarArea extends StatelessWidget {
         Container(
           width: Get.width,
           padding: const EdgeInsets.fromLTRB(10, 45, 10, 15),
-          color: ColorRes.orange2.withOpacity(0.06),
+          color: ColorRes.darkOrange.withOpacity(0.06),
           child: Stack(
             alignment: Alignment.center,
             children: [
               Text(
                 selectedTab,
                 style: const TextStyle(
-                  color: ColorRes.orange2,
+                  color: ColorRes.darkOrange,
                   fontSize: 18,
                   fontFamily: FontRes.bold,
                 ),
@@ -155,7 +155,7 @@ class SearchBarArea extends StatelessWidget {
                       padding: const EdgeInsets.all(5),
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: ColorRes.orange2.withOpacity(0.06),
+                        color: ColorRes.darkOrange.withOpacity(0.06),
                       ),
                       child: Image.asset(
                         AssetRes.backArrow,
@@ -188,7 +188,7 @@ class SearchBarArea extends StatelessWidget {
         cursorHeight: 15,
         onChanged: onSearchBtnTap,
         style: const TextStyle(
-          color: ColorRes.grey17,
+          color: ColorRes.darkGrey9,
           fontSize: 15,
         ),
         decoration: const InputDecoration(

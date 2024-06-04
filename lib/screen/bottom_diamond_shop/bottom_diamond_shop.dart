@@ -26,19 +26,15 @@ class BottomDiamondShop extends StatelessWidget {
           child: ClipRRect(
             borderRadius: const BorderRadius.vertical(top: Radius.circular(25)),
             child: BackdropFilter(
-              filter: ImageFilter.blur(
-                  sigmaY: 10, sigmaX: 10, tileMode: TileMode.mirror),
+              filter: ImageFilter.blur(sigmaY: 10, sigmaX: 10, tileMode: TileMode.mirror),
               child: Stack(
                 children: [
+                  Container(width: Get.width, color: ColorRes.black.withOpacity(0.3)),
                   Container(
-                      width: Get.width, color: ColorRes.black.withOpacity(0.3)),
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 12, vertical: 20),
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 20),
                     width: Get.width,
                     decoration: const BoxDecoration(
-                      borderRadius:
-                          BorderRadius.vertical(top: Radius.circular(25)),
+                      borderRadius: BorderRadius.vertical(top: Radius.circular(25)),
                     ),
                     child: Column(
                       children: [
@@ -76,20 +72,15 @@ class BottomDiamondShop extends StatelessWidget {
                                       itemCount: model.products.length,
                                       itemBuilder: (context, index) {
                                         return Container(
-                                          margin:
-                                              const EdgeInsets.only(bottom: 8),
-                                          padding: const EdgeInsets.fromLTRB(
-                                              17, 13, 9, 14),
+                                          margin: const EdgeInsets.only(bottom: 8),
+                                          padding: const EdgeInsets.fromLTRB(17, 13, 9, 14),
                                           decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(15),
-                                            color: ColorRes.white
-                                                .withOpacity(0.14),
+                                            borderRadius: BorderRadius.circular(15),
+                                            color: ColorRes.white.withOpacity(0.14),
                                           ),
                                           child: Row(
                                             children: [
-                                              Image.asset(AssetRes.diamond,
-                                                  height: 24, width: 24),
+                                              Image.asset(AssetRes.diamond, height: 24, width: 24),
                                               const SizedBox(width: 7),
                                               Text(
                                                 model.products[index].title,
@@ -99,38 +90,30 @@ class BottomDiamondShop extends StatelessWidget {
                                               ),
                                               const Spacer(),
                                               InkWell(
-                                                borderRadius:
-                                                    BorderRadius.circular(30),
-                                                onTap: () => model.makePurchase(
-                                                    model.products[index]),
+                                                borderRadius: BorderRadius.circular(30),
+                                                onTap: () =>
+                                                    model.makePurchase(model.products[index]),
                                                 child: Container(
                                                   width: 131,
                                                   height: 35,
                                                   decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            30),
-                                                    gradient:
-                                                        const LinearGradient(
-                                                      begin:
-                                                          Alignment.topCenter,
-                                                      end: Alignment
-                                                          .bottomCenter,
+                                                    borderRadius: BorderRadius.circular(30),
+                                                    gradient: const LinearGradient(
+                                                      begin: Alignment.topCenter,
+                                                      end: Alignment.bottomCenter,
                                                       colors: [
-                                                        ColorRes.lightOrange1,
+                                                        ColorRes.lightOrange,
                                                         ColorRes.darkOrange
                                                       ],
                                                     ),
                                                   ),
                                                   child: Center(
                                                     child: Text(
-                                                      model.products[index]
-                                                          .price,
+                                                      model.products[index].price,
                                                       style: const TextStyle(
                                                         color: ColorRes.white,
                                                         fontSize: 15,
-                                                        fontFamily:
-                                                            FontRes.bold,
+                                                        fontFamily: FontRes.bold,
                                                       ),
                                                     ),
                                                   ),

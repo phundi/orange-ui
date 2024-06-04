@@ -16,10 +16,10 @@ const yourSelectedPadding = EdgeInsets.symmetric(horizontal: 10, vertical: 2);
 const yourPadding = EdgeInsets.symmetric(horizontal: 10);
 const yourSelectedMargin = EdgeInsets.symmetric(vertical: 0);
 const yourMargin = EdgeInsets.symmetric(vertical: 2);
-final selectedColor = ColorRes.lightOrange1.withOpacity(0.3);
+final selectedColor = ColorRes.lightOrange.withOpacity(0.3);
 final selectedColor1 = ColorRes.darkOrange.withOpacity(0.3);
 const dateStyle = TextStyle(
-  color: ColorRes.grey11,
+  color: ColorRes.grey2,
   fontSize: 12,
 );
 
@@ -54,9 +54,8 @@ class ChatArea extends StatelessWidget {
           reverse: true,
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           itemCount: chatData != null ? chatData?.keys.length : 0,
-          physics: Platform.isAndroid
-              ? const ClampingScrollPhysics()
-              : const BouncingScrollPhysics(),
+          physics:
+              Platform.isAndroid ? const ClampingScrollPhysics() : const BouncingScrollPhysics(),
           itemBuilder: (context, index) {
             String? date = chatData?.keys.elementAt(index) ?? '';
             List<ChatMessage>? messages = chatData?[date];
@@ -70,8 +69,7 @@ class ChatArea extends StatelessWidget {
                   physics: const BouncingScrollPhysics(),
                   itemBuilder: (context, index) {
                     return Container(
-                      child: messages?[index].senderUser?.userid ==
-                              PrefService.userId
+                      child: messages?[index].senderUser?.userid == PrefService.userId
                           ? yourMsg(messages?[index])
                           : otherUserMsg(messages?[index]),
                     );
@@ -99,8 +97,7 @@ class ChatArea extends StatelessWidget {
         margin: selected ? yourSelectedMargin : yourMargin,
         decoration: BoxDecoration(
           color: selected ? selectedColor1 : ColorRes.white,
-          borderRadius:
-              selected ? BorderRadius.circular(0) : BorderRadius.circular(10),
+          borderRadius: selected ? BorderRadius.circular(0) : BorderRadius.circular(10),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
@@ -120,7 +117,7 @@ class ChatArea extends StatelessWidget {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    selected ? selectedColor : ColorRes.lightOrange1,
+                    selected ? selectedColor : ColorRes.lightOrange,
                     selected ? selectedColor1 : ColorRes.darkOrange,
                   ],
                 ),
@@ -163,8 +160,7 @@ class ChatArea extends StatelessWidget {
         margin: selected ? yourSelectedMargin : yourMargin,
         decoration: BoxDecoration(
           color: selected ? selectedColor1 : ColorRes.white,
-          borderRadius:
-              selected ? BorderRadius.circular(0) : BorderRadius.circular(10),
+          borderRadius: selected ? BorderRadius.circular(0) : BorderRadius.circular(10),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -172,9 +168,7 @@ class ChatArea extends StatelessWidget {
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
-                color: selected
-                    ? ColorRes.grey12.withOpacity(0.7)
-                    : ColorRes.grey12,
+                color: selected ? ColorRes.grey10.withOpacity(0.7) : ColorRes.grey10,
               ),
               child: data?.msgType == FirebaseRes.msg
                   ? ConstrainedBox(
@@ -186,7 +180,7 @@ class ChatArea extends StatelessWidget {
                         padding: const EdgeInsets.fromLTRB(15, 13, 12, 11),
                         child: Text(
                           '${data?.msg}',
-                          style: const TextStyle(color: ColorRes.darkGrey6),
+                          style: const TextStyle(color: ColorRes.darkGrey),
                         ),
                       ),
                     )
@@ -219,10 +213,7 @@ class ChatArea extends StatelessWidget {
             child: Column(
               children: [
                 Stack(
-                  children: [
-                    imageVideoPost(data: data),
-                    imageVideoPostColor(selected: selected)
-                  ],
+                  children: [imageVideoPost(data: data), imageVideoPostColor(selected: selected)],
                 ),
                 imageVideoPostMessage(data: data)
               ],
@@ -286,16 +277,14 @@ class ChatArea extends StatelessWidget {
         ),
         child: Text(
           '$time',
-          style: const TextStyle(color: ColorRes.grey14, fontSize: 11),
+          style: const TextStyle(color: ColorRes.darkGrey9, fontSize: 11),
         ),
       ),
     );
   }
 
   Widget imageVideoContainer(
-      {required Widget child,
-      required bool selected,
-      required ChatMessage? data}) {
+      {required Widget child, required bool selected, required ChatMessage? data}) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
       decoration: BoxDecoration(
@@ -309,7 +298,7 @@ class ChatArea extends StatelessWidget {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  selected ? selectedColor : ColorRes.lightOrange1,
+                  selected ? selectedColor : ColorRes.lightOrange,
                   selected ? selectedColor1 : ColorRes.darkOrange,
                 ],
               )
@@ -362,7 +351,7 @@ class ChatArea extends StatelessWidget {
               style: TextStyle(
                 color: data.senderUser?.userid == PrefService.userId
                     ? ColorRes.white
-                    : ColorRes.darkGrey6,
+                    : ColorRes.darkGrey,
               ),
             ),
           );

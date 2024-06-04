@@ -8,8 +8,7 @@ import 'package:orange_ui/utils/font_res.dart';
 class LanguageSection extends StatelessWidget {
   final VoidCallback navigateLanguage;
 
-  const LanguageSection({Key? key, required this.navigateLanguage})
-      : super(key: key);
+  const LanguageSection({Key? key, required this.navigateLanguage}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +28,7 @@ class LanguageSection extends StatelessWidget {
           width: Get.width,
           padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 14),
           decoration: BoxDecoration(
-            color: ColorRes.grey12,
+            color: ColorRes.grey10,
             borderRadius: BorderRadius.circular(10),
           ),
           child: InkWell(
@@ -39,7 +38,7 @@ class LanguageSection extends StatelessWidget {
                 Text(
                   S.current.languages,
                   style: const TextStyle(
-                    color: ColorRes.grey24,
+                    color: ColorRes.davyGrey,
                     fontSize: 15,
                     fontFamily: FontRes.semiBold,
                   ),

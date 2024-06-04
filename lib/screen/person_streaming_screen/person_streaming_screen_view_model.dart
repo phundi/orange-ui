@@ -9,7 +9,6 @@ import 'package:get/get.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
 import 'package:orange_ui/common/common_fun.dart';
 import 'package:orange_ui/common/common_ui.dart';
-
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/chat_and_live_stream/live_stream.dart';
 import 'package:orange_ui/model/setting.dart';
@@ -107,7 +106,7 @@ class PersonStreamingScreenViewModel extends BaseViewModel {
                           title2: S.current.streamCap,
                           dialogDisc: AppRes.liveStreamDisc(settingAppData?.liveWatchingPrice ?? 0),
                           coinPrice: '${settingAppData?.liveWatchingPrice ?? 0}'),
-                      barrierColor: ColorRes.black3.withOpacity(0.44),
+                      barrierColor: ColorRes.black.withOpacity(0.44),
                     );
             } else {
               timer.cancel();

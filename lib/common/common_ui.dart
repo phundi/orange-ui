@@ -8,15 +8,12 @@ import 'package:orange_ui/utils/font_res.dart';
 
 class CommonUI {
   static Widget profileImagePlaceHolder(
-      {required String? name,
-      double heightWidth = 0,
-      double? borderRadius,
-      Color? color}) {
+      {required String? name, double heightWidth = 0, double? borderRadius, Color? color}) {
     return Container(
       width: heightWidth,
       height: heightWidth,
       decoration: BoxDecoration(
-          color: ColorRes.orange2.withOpacity(0.1),
+          color: ColorRes.darkOrange.withOpacity(0.1),
           borderRadius: BorderRadius.circular(borderRadius ?? 50)),
       alignment: Alignment.center,
       child: Text(
@@ -24,7 +21,7 @@ class CommonUI {
         style: TextStyle(
             fontFamily: FontRes.semiBold,
             fontSize: heightWidth / 2,
-            color: (color ?? ColorRes.orange2).withOpacity(.5)),
+            color: (color ?? ColorRes.darkOrange).withOpacity(.5)),
       ),
     );
   }
@@ -55,10 +52,8 @@ class CommonUI {
     return Center(
       child: Text(
         title ?? S.current.noData,
-        style: const TextStyle(
-            fontFamily: FontRes.semiBold,
-            fontSize: 18,
-            color: ColorRes.dimGrey1),
+        style:
+            const TextStyle(fontFamily: FontRes.semiBold, fontSize: 18, color: ColorRes.dimGrey3),
       ),
     );
   }
@@ -67,9 +62,7 @@ class CommonUI {
     return showDialog(
         context: Get.context!,
         builder: (context) {
-          return Center(
-              child: Lottie.asset(AssetRes.loadingLottie,
-                  height: 100, width: 100));
+          return Center(child: Lottie.asset(AssetRes.loadingLottie, height: 100, width: 100));
         },
         barrierLabel: '');
   }
@@ -90,8 +83,7 @@ class CommonUI {
               maxLines: 2,
             ),
             backgroundColor: ColorRes.black,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             elevation: 5,
             behavior: SnackBarBehavior.floating,
             duration: const Duration(milliseconds: 2500),

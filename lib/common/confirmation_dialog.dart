@@ -36,8 +36,7 @@ class ConfirmationDialog extends StatelessWidget {
         aspectRatio: dialogSize ?? 1.8,
         child: Container(
           padding: const EdgeInsets.all(15),
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10), color: ColorRes.white),
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: ColorRes.white),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -45,17 +44,13 @@ class ConfirmationDialog extends StatelessWidget {
               Text(
                 heading ?? '${S.current.areYouSure}?',
                 style: const TextStyle(
-                    fontFamily: FontRes.bold,
-                    fontSize: 18,
-                    color: ColorRes.veryDarkGrey4),
+                    fontFamily: FontRes.bold, fontSize: 18, color: ColorRes.davyGrey),
               ),
               const Spacer(),
               Text(
                 description,
                 style: const TextStyle(
-                    color: ColorRes.dimGrey3,
-                    fontFamily: FontRes.regular,
-                    fontSize: 14),
+                    color: ColorRes.dimGrey3, fontFamily: FontRes.regular, fontSize: 14),
               ),
               const Spacer(flex: 2),
               Row(
@@ -66,8 +61,7 @@ class ConfirmationDialog extends StatelessWidget {
                       Get.back();
                     },
                     child: Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 8),
+                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(7),
                       ),
@@ -79,7 +73,7 @@ class ConfirmationDialog extends StatelessWidget {
                             style: const TextStyle(
                                 fontFamily: FontRes.semiBold,
                                 fontSize: 13,
-                                color: ColorRes.veryDarkGrey4),
+                                color: ColorRes.davyGrey),
                           ),
                           const SizedBox(width: 9),
                         ],
@@ -89,8 +83,7 @@ class ConfirmationDialog extends StatelessWidget {
                   InkWell(
                     onTap: onTap,
                     child: Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 8),
+                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(7),
                           gradient: StyleRes.linearGradient),
@@ -99,9 +92,7 @@ class ConfirmationDialog extends StatelessWidget {
                           Text(
                             textButton ?? S.current.delete,
                             style: const TextStyle(
-                                fontFamily: FontRes.semiBold,
-                                fontSize: 13,
-                                color: ColorRes.white),
+                                fontFamily: FontRes.semiBold, fontSize: 13, color: ColorRes.white),
                           ),
                           const SizedBox(width: 2),
                           Image.asset(

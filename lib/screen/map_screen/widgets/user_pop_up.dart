@@ -16,16 +16,14 @@ class UserPopUp extends StatelessWidget {
   final VoidCallback onMoreInfoTap;
   final RegistrationUserData? user;
 
-  const UserPopUp({Key? key, required this.onMoreInfoTap, required this.user})
-      : super(key: key);
+  const UserPopUp({Key? key, required this.onMoreInfoTap, required this.user}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Dialog(
         elevation: 1,
         insetPadding: const EdgeInsets.symmetric(horizontal: 70),
-        shape: SmoothRectangleBorder(
-            borderRadius: SmoothBorderRadius(cornerRadius: 20)),
+        shape: SmoothRectangleBorder(borderRadius: SmoothBorderRadius(cornerRadius: 20)),
         child: AspectRatio(
           aspectRatio: 0.8,
           child: ClipRRect(
@@ -42,14 +40,11 @@ class UserPopUp extends StatelessWidget {
                     ClipRRect(
                       borderRadius: BorderRadius.circular(50),
                       child: CachedNetworkImage(
-                        imageUrl:
-                            CommonFun.getProfileImage(images: user?.images),
-                        cacheKey:
-                            CommonFun.getProfileImage(images: user?.images),
+                        imageUrl: CommonFun.getProfileImage(images: user?.images),
+                        cacheKey: CommonFun.getProfileImage(images: user?.images),
                         errorWidget: (context, url, error) {
                           return CommonUI.profileImagePlaceHolder(
-                              name: CommonUI.fullName(user?.fullname),
-                              heightWidth: 99);
+                              name: CommonUI.fullName(user?.fullname), heightWidth: 99);
                         },
                         height: 99,
                         width: 99,
@@ -84,8 +79,7 @@ class UserPopUp extends StatelessWidget {
                           const SizedBox(width: 3),
                           user?.isVerified == 0
                               ? const SizedBox()
-                              : Image.asset(AssetRes.tickMark,
-                                  height: 16.5, width: 16.5),
+                              : Image.asset(AssetRes.tickMark, height: 16.5, width: 16.5),
                         ],
                       ),
                     ),
@@ -112,7 +106,7 @@ class UserPopUp extends StatelessWidget {
                             begin: Alignment.topCenter,
                             end: Alignment.bottomCenter,
                             colors: [
-                              ColorRes.lightOrange1,
+                              ColorRes.lightOrange,
                               ColorRes.darkOrange,
                             ],
                           ),
@@ -135,8 +129,7 @@ class UserPopUp extends StatelessWidget {
                       },
                       child: Text(
                         S.current.cancel,
-                        style: const TextStyle(
-                            color: ColorRes.grey20, fontSize: 15),
+                        style: const TextStyle(color: ColorRes.grey20, fontSize: 15),
                       ),
                     ),
                     const Spacer(

@@ -14,10 +14,7 @@ class ImageVideoMsgSheet extends StatelessWidget {
   final Function(String msg, String? image) onSendBtnClick;
 
   const ImageVideoMsgSheet(
-      {Key? key,
-      required this.image,
-      required this.onSendBtnClick,
-      required this.selectedItem})
+      {Key? key, required this.image, required this.onSendBtnClick, required this.selectedItem})
       : super(key: key);
 
   @override
@@ -57,9 +54,7 @@ class ImageVideoMsgSheet extends StatelessWidget {
                 Text(
                   S.current.sendMedia,
                   style: const TextStyle(
-                      color: ColorRes.black,
-                      fontSize: 20,
-                      fontFamily: FontRes.bold),
+                      color: ColorRes.black, fontSize: 20, fontFamily: FontRes.bold),
                 ),
                 const Spacer()
               ],
@@ -76,10 +71,8 @@ class ImageVideoMsgSheet extends StatelessWidget {
           ),
           Text(
             S.current.writeMessage,
-            style: const TextStyle(
-                color: ColorRes.black,
-                fontFamily: FontRes.semiBold,
-                fontSize: 18),
+            style:
+                const TextStyle(color: ColorRes.black, fontFamily: FontRes.semiBold, fontSize: 18),
           ),
           const SizedBox(
             height: 10,
@@ -129,8 +122,7 @@ class ImageVideoMsgSheet extends StatelessWidget {
                     cursorHeight: 15,
                     decoration: const InputDecoration(
                       isDense: true,
-                      contentPadding: EdgeInsets.only(
-                          left: 15, bottom: 3, right: 5, top: 5),
+                      contentPadding: EdgeInsets.only(left: 15, bottom: 3, right: 5, top: 5),
                       border: InputBorder.none,
                     ),
                   ),
@@ -157,15 +149,14 @@ class ImageVideoMsgSheet extends StatelessWidget {
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                     colors: [
-                      ColorRes.lightOrange1,
+                      ColorRes.lightOrange,
                       ColorRes.darkOrange,
                     ],
                   )),
               child: Center(
                 child: Text(
                   S.current.send,
-                  style: const TextStyle(
-                      color: ColorRes.white, fontFamily: FontRes.semiBold),
+                  style: const TextStyle(color: ColorRes.white, fontFamily: FontRes.semiBold),
                 ),
               ),
             ),

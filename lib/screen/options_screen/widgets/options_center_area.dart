@@ -92,8 +92,7 @@ class OptionsCenterArea extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(15),
                   child: BackdropFilter(
-                    filter: ImageFilter.blur(
-                        sigmaY: 15, sigmaX: 15, tileMode: TileMode.mirror),
+                    filter: ImageFilter.blur(sigmaY: 15, sigmaX: 15, tileMode: TileMode.mirror),
                     child: Row(
                       children: [
                         Padding(
@@ -107,7 +106,7 @@ class OptionsCenterArea extends StatelessWidget {
                         Text(
                           S.current.liveVerification,
                           style: const TextStyle(
-                            color: ColorRes.blueGrey,
+                            color: ColorRes.davyGrey,
                             fontSize: 15,
                             fontFamily: FontRes.semiBold,
                           ),
@@ -120,10 +119,10 @@ class OptionsCenterArea extends StatelessWidget {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(30),
                             color: verification == 0
-                                ? ColorRes.red7.withOpacity(0.20)
+                                ? ColorRes.darkOrange.withOpacity(0.20)
                                 : verification == 1
                                     ? ColorRes.lightOrange.withOpacity(0.20)
-                                    : ColorRes.lightGreen1.withOpacity(0.20),
+                                    : ColorRes.lightGreen.withOpacity(0.20),
                           ),
                           child: Center(
                             child: Text(
@@ -135,7 +134,7 @@ class OptionsCenterArea extends StatelessWidget {
                               style: TextStyle(
                                 fontSize: 12,
                                 color: verification == 0
-                                    ? ColorRes.red8
+                                    ? ColorRes.darkOrange
                                     : verification == 1
                                         ? ColorRes.lightOrange
                                         : ColorRes.green2,
@@ -219,8 +218,8 @@ class CircleImage extends StatelessWidget {
       height: 28,
       width: 28,
       margin: const EdgeInsets.symmetric(horizontal: 10),
-      decoration: BoxDecoration(
-          color: ColorRes.orange2.withOpacity(0.1), shape: BoxShape.circle),
+      decoration:
+          BoxDecoration(color: ColorRes.darkOrange.withOpacity(0.1), shape: BoxShape.circle),
       child: Image.asset(image),
     );
   }
@@ -248,7 +247,7 @@ class PermissionTiles extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(14, 14, 8, 18),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        color: ColorRes.grey12,
+        color: ColorRes.grey10,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -260,7 +259,7 @@ class PermissionTiles extends StatelessWidget {
                 title,
                 style: const TextStyle(
                   fontSize: 15,
-                  color: ColorRes.grey24,
+                  color: ColorRes.davyGrey,
                   fontFamily: FontRes.semiBold,
                 ),
               ),
@@ -270,7 +269,7 @@ class PermissionTiles extends StatelessWidget {
                 child: Text(
                   subTitle,
                   style: const TextStyle(
-                    color: ColorRes.grey25,
+                    color: ColorRes.grey20,
                   ),
                 ),
               ),
@@ -291,7 +290,7 @@ class PermissionTiles extends StatelessWidget {
                     ? const LinearGradient(
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
-                        colors: [ColorRes.lightOrange1, ColorRes.darkOrange],
+                        colors: [ColorRes.lightOrange, ColorRes.darkOrange],
                       )
                     : null,
               ),
@@ -333,7 +332,7 @@ class TopOptionCard extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: ColorRes.grey12,
+          color: ColorRes.grey10,
         ),
         child: Row(
           children: [
@@ -341,7 +340,7 @@ class TopOptionCard extends StatelessWidget {
             Text(
               title,
               style: const TextStyle(
-                color: ColorRes.blueGrey,
+                color: ColorRes.davyGrey,
                 fontSize: 15,
                 fontFamily: FontRes.semiBold,
               ),

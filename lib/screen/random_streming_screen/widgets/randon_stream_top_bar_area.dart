@@ -37,7 +37,7 @@ class RandomStreamTopBarArea extends StatelessWidget {
             margin: const EdgeInsets.symmetric(horizontal: 10),
             padding: const EdgeInsets.symmetric(horizontal: 5),
             decoration: BoxDecoration(
-              color: ColorRes.black4.withOpacity(0.33),
+              color: ColorRes.black.withOpacity(0.33),
               borderRadius: BorderRadius.circular(30),
             ),
             child: Stack(
@@ -72,8 +72,8 @@ class RandomStreamTopBarArea extends StatelessWidget {
                             begin: Alignment.topCenter,
                             end: Alignment.bottomCenter,
                             colors: [
-                              ColorRes.orange4,
                               ColorRes.darkOrange,
+                              ColorRes.lightOrange,
                             ],
                           ),
                         ),
@@ -112,7 +112,7 @@ class RandomStreamTopBarArea extends StatelessWidget {
               margin: const EdgeInsets.symmetric(horizontal: 10),
               padding: const EdgeInsets.symmetric(horizontal: 5),
               decoration: BoxDecoration(
-                color: ColorRes.black4.withOpacity(0.33),
+                color: ColorRes.black.withOpacity(0.33),
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Row(

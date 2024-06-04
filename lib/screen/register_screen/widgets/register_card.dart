@@ -80,8 +80,7 @@ class RegisterCard extends StatelessWidget {
               const SizedBox(height: 25),
               policyText(),
               const SizedBox(height: 30),
-              SubmitButton1(
-                  title: S.current.agreeNContinue, onTap: model.onContinueTap),
+              SubmitButton1(title: S.current.agreeNContinue, onTap: model.onContinueTap),
             ],
           ),
         ),
@@ -127,7 +126,7 @@ class RegisterCard extends StatelessWidget {
                     child: Text(
                       showPwd! ? S.current.hide : S.current.view,
                       style: const TextStyle(
-                        color: ColorRes.veryDarkGrey2,
+                        color: ColorRes.darkGrey,
                         fontSize: 13,
                         fontFamily: FontRes.bold,
                       ),
@@ -135,7 +134,7 @@ class RegisterCard extends StatelessWidget {
                   ),
                 ),
           hintStyle: TextStyle(
-            color: error == "" ? ColorRes.dimGrey2 : ColorRes.red,
+            color: error == "" ? ColorRes.dimGrey2 : ColorRes.darkOrange,
             fontSize: 14,
             fontFamily: FontRes.semiBold,
           ),
@@ -160,7 +159,7 @@ class RegisterCard extends StatelessWidget {
             text: S.current.policy2,
             recognizer: TapGestureRecognizer()..onTap = model.onTermsOfUseTap,
             style: const TextStyle(
-              color: ColorRes.lightOrange3,
+              color: ColorRes.lightOrange,
               fontSize: 13,
               fontFamily: FontRes.semiBold,
             ),
@@ -175,10 +174,9 @@ class RegisterCard extends StatelessWidget {
           ),
           TextSpan(
             text: S.current.policy4,
-            recognizer: TapGestureRecognizer()
-              ..onTap = model.onPrivacyPolicyTap,
+            recognizer: TapGestureRecognizer()..onTap = model.onPrivacyPolicyTap,
             style: const TextStyle(
-              color: ColorRes.lightOrange3,
+              color: ColorRes.lightOrange,
               fontSize: 13,
               fontFamily: FontRes.semiBold,
             ),

@@ -31,7 +31,7 @@ class BottomInfoField extends StatelessWidget {
           Text(
             title,
             style: const TextStyle(
-              color: ColorRes.veryDarkGrey,
+              color: ColorRes.darkGrey5,
               fontSize: 25,
               fontFamily: FontRes.bold,
             ),
@@ -57,7 +57,7 @@ class BottomInfoField extends StatelessWidget {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    ColorRes.lightOrange1,
+                    ColorRes.lightOrange,
                     ColorRes.darkOrange,
                   ],
                 ),
@@ -80,7 +80,7 @@ class BottomInfoField extends StatelessWidget {
             child: Text(
               S.current.skip,
               style: const TextStyle(
-                color: ColorRes.dimGrey1,
+                color: ColorRes.dimGrey3,
                 fontSize: 15,
               ),
             ),

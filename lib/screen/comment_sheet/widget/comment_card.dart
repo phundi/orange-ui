@@ -14,8 +14,8 @@ import 'package:orange_ui/utils/font_res.dart';
 class CommentCard extends StatelessWidget {
   final CommentData commentData;
   final CommentSheetViewModel model;
-  const CommentCard({Key? key, required this.commentData, required this.model})
-      : super(key: key);
+
+  const CommentCard({Key? key, required this.commentData, required this.model}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,21 +30,16 @@ class CommentCard extends StatelessWidget {
               Row(
                 children: [
                   ClipRRect(
-                    borderRadius:
-                        SmoothBorderRadius(cornerRadius: 7, cornerSmoothing: 1),
+                    borderRadius: SmoothBorderRadius(cornerRadius: 7, cornerSmoothing: 1),
                     child: CachedNetworkImage(
-                      imageUrl: CommonFun.getProfileImage(
-                          images: commentData.user?.images),
-                      cacheKey: CommonFun.getProfileImage(
-                          images: commentData.user?.images),
+                      imageUrl: CommonFun.getProfileImage(images: commentData.user?.images),
+                      cacheKey: CommonFun.getProfileImage(images: commentData.user?.images),
                       width: 35,
                       height: 35,
                       fit: BoxFit.cover,
                       errorWidget: (context, url, error) {
                         return CommonUI.profileImagePlaceHolder(
-                            name: commentData.user?.fullname,
-                            heightWidth: 30,
-                            borderRadius: 7);
+                            name: commentData.user?.fullname, heightWidth: 30, borderRadius: 7);
                       },
                     ),
                   ),
@@ -56,15 +51,12 @@ class CommentCard extends StatelessWidget {
                         Text(
                           CommonUI.userName(commentData.user?.username),
                           style: const TextStyle(
-                              color: ColorRes.veryDarkGrey4,
-                              fontFamily: FontRes.bold,
-                              fontSize: 16),
+                              color: ColorRes.davyGrey, fontFamily: FontRes.bold, fontSize: 16),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
                         Text(
-                          CommonFun.timeAgo(
-                              DateTime.parse(commentData.createdAt ?? '')),
+                          CommonFun.timeAgo(DateTime.parse(commentData.createdAt ?? '')),
                           style: const TextStyle(
                             fontSize: 12,
                             color: ColorRes.dimGrey3,
@@ -75,28 +67,21 @@ class CommentCard extends StatelessWidget {
                   ),
                   commentData.user?.id == PrefService.userId
                       ? InkWell(
-                          onTap: () =>
-                              model.deleteComment(commentData.id ?? -1),
-                          child: Image.asset(AssetRes.icBin,
-                              height: 25, width: 25),
+                          onTap: () => model.deleteComment(commentData.id ?? -1),
+                          child: Image.asset(AssetRes.icBin, height: 25, width: 25),
                         )
                       : const SizedBox()
                 ],
               ),
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 3),
+                padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 3),
                 child: DetectableText(
                   text: commentData.description ?? '',
                   detectionRegExp: RegExp(r"\B#\w\w+"),
                   detectedStyle: const TextStyle(
-                      fontFamily: FontRes.bold,
-                      color: ColorRes.orange2,
-                      fontSize: 14),
+                      fontFamily: FontRes.bold, color: ColorRes.darkOrange, fontSize: 14),
                   basicStyle: const TextStyle(
-                      color: ColorRes.dimGrey3,
-                      fontSize: 14,
-                      fontFamily: FontRes.medium),
+                      color: ColorRes.dimGrey3, fontSize: 14, fontFamily: FontRes.medium),
                 ),
               )
             ],

@@ -42,7 +42,7 @@ class PersonTopBarArea extends StatelessWidget {
               margin: const EdgeInsets.symmetric(horizontal: 10),
               padding: const EdgeInsets.fromLTRB(13, 8, 23, 9),
               decoration: BoxDecoration(
-                color: ColorRes.black4.withOpacity(0.33),
+                color: ColorRes.black.withOpacity(0.33),
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Row(
@@ -52,10 +52,8 @@ class PersonTopBarArea extends StatelessWidget {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(30),
                       child: CachedNetworkImage(
-                        imageUrl:
-                            '${ConstRes.aImageBaseUrl}${liveStreamUser?.userImage}',
-                        cacheKey:
-                            '${ConstRes.aImageBaseUrl}${liveStreamUser?.userImage}',
+                        imageUrl: '${ConstRes.aImageBaseUrl}${liveStreamUser?.userImage}',
+                        cacheKey: '${ConstRes.aImageBaseUrl}${liveStreamUser?.userImage}',
                         errorWidget: (context, error, stackTrace) {
                           return Image.asset(
                             AssetRes.themeLabel,
@@ -150,7 +148,7 @@ class PersonTopBarArea extends StatelessWidget {
                 margin: const EdgeInsets.symmetric(horizontal: 10),
                 padding: const EdgeInsets.fromLTRB(13, 4, 4, 4),
                 decoration: BoxDecoration(
-                  color: ColorRes.black4.withOpacity(0.33),
+                  color: ColorRes.black.withOpacity(0.33),
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Stack(

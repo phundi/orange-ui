@@ -14,11 +14,7 @@ class VideoUploadDialog extends StatelessWidget {
   final String? description;
 
   const VideoUploadDialog(
-      {Key? key,
-      required this.selectAnother,
-      this.text1,
-      this.text2,
-      this.description})
+      {Key? key, required this.selectAnother, this.text1, this.text2, this.description})
       : super(key: key);
 
   @override
@@ -35,12 +31,11 @@ class VideoUploadDialog extends StatelessWidget {
               const Spacer(flex: 2),
               RichText(
                 text: TextSpan(
-                  style: const TextStyle(
-                      fontFamily: FontRes.semiBold, fontSize: 18),
+                  style: const TextStyle(fontFamily: FontRes.semiBold, fontSize: 18),
                   children: [
                     TextSpan(
                       text: text1 ?? S.of(context).tooLarge,
-                      style: const TextStyle(color: ColorRes.grey15),
+                      style: const TextStyle(color: ColorRes.darkGrey9),
                     ),
                     TextSpan(
                       text: ' ${text2 ?? S.of(context).video}',
@@ -58,12 +53,8 @@ class VideoUploadDialog extends StatelessWidget {
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 16),
                 child: Text(
-                  description ??
-                      S
-                          .of(context)
-                          .thisVideoIsGreaterThan50MbnpleaseSelectAnother,
-                  style: const TextStyle(
-                      fontFamily: FontRes.semiBold, color: ColorRes.grey15),
+                  description ?? S.of(context).thisVideoIsGreaterThan50MbnpleaseSelectAnother,
+                  style: const TextStyle(fontFamily: FontRes.semiBold, color: ColorRes.darkGrey9),
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -81,7 +72,7 @@ class VideoUploadDialog extends StatelessWidget {
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
                       colors: [
-                        ColorRes.lightOrange1,
+                        ColorRes.lightOrange,
                         ColorRes.darkOrange,
                       ],
                     ),
@@ -89,8 +80,7 @@ class VideoUploadDialog extends StatelessWidget {
                   ),
                   child: Text(
                     S.of(context).selectAnother,
-                    style: const TextStyle(
-                        color: ColorRes.white, fontFamily: FontRes.semiBold),
+                    style: const TextStyle(color: ColorRes.white, fontFamily: FontRes.semiBold),
                   ),
                 ),
               ),
@@ -109,8 +99,7 @@ class VideoUploadDialog extends StatelessWidget {
                   ),
                   child: Text(
                     S.current.cancel,
-                    style: const TextStyle(
-                        color: ColorRes.grey15, fontFamily: FontRes.semiBold),
+                    style: const TextStyle(color: ColorRes.darkGrey9, fontFamily: FontRes.semiBold),
                   ),
                 ),
               ),

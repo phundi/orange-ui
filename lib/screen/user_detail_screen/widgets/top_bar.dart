@@ -22,13 +22,13 @@ class TopBar extends StatelessWidget {
         child: Container(
           margin: const EdgeInsets.symmetric(horizontal: 15),
           height: 55,
-          decoration:
-              BoxDecoration(color: ColorRes.black.withOpacity(0.33), borderRadius: BorderRadius.circular(10)),
+          decoration: BoxDecoration(
+              color: ColorRes.black.withOpacity(0.33), borderRadius: BorderRadius.circular(10)),
           child: Row(
             children: [
               IconButton(
                 onPressed: model.onBackTap,
-                icon: const Icon(CupertinoIcons.back, color: ColorRes.red4),
+                icon: const Icon(CupertinoIcons.back, color: ColorRes.darkOrange),
               ),
               const SizedBox(width: 10),
               Flexible(
@@ -84,17 +84,19 @@ class TopBar extends StatelessWidget {
                   ),
                   child: PopupMenuButton<String>(
                     onSelected: (value) => model.onMoreBtnTap(value),
-                    color: ColorRes.black2.withOpacity(0.9),
+                    color: ColorRes.black.withOpacity(0.9),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                     itemBuilder: (BuildContext context) {
                       return {model.blockUnBlock, AppRes.report}.map(
                         (String choice) {
                           return PopupMenuItem<String>(
                             value: choice,
-                            textStyle: const TextStyle(fontFamily: FontRes.medium, color: ColorRes.white),
+                            textStyle:
+                                const TextStyle(fontFamily: FontRes.medium, color: ColorRes.white),
                             child: Text(
                               choice,
-                              style: const TextStyle(fontFamily: FontRes.medium, color: ColorRes.white),
+                              style: const TextStyle(
+                                  fontFamily: FontRes.medium, color: ColorRes.white),
                             ),
                           );
                         },
@@ -102,7 +104,8 @@ class TopBar extends StatelessWidget {
                     },
                     child: Container(
                       margin: const EdgeInsets.symmetric(horizontal: 9),
-                      child: Image.asset(AssetRes.moreHorizontal, height: 10, width: 30, fit: BoxFit.cover),
+                      child: Image.asset(AssetRes.moreHorizontal,
+                          height: 10, width: 30, fit: BoxFit.cover),
                     ),
                   ),
                 ),

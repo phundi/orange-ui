@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:orange_ui/common/common_ui.dart';
-
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/utils/asset_res.dart';
@@ -13,10 +12,7 @@ class LiveGridTopArea extends StatelessWidget {
   final RegistrationUserData? userData;
 
   const LiveGridTopArea(
-      {Key? key,
-      required this.onBackBtnTap,
-      required this.onGoLiveTap,
-      this.userData})
+      {Key? key, required this.onBackBtnTap, required this.onGoLiveTap, this.userData})
       : super(key: key);
 
   @override
@@ -35,8 +31,7 @@ class LiveGridTopArea extends StatelessWidget {
                 width: 37,
                 padding: const EdgeInsets.all(5),
                 decoration: BoxDecoration(
-                    color: ColorRes.orange3.withOpacity(0.1),
-                    shape: BoxShape.circle),
+                    color: ColorRes.darkOrange.withOpacity(0.1), shape: BoxShape.circle),
                 child: Image.asset(
                   AssetRes.backArrow,
                 ),
@@ -48,7 +43,7 @@ class LiveGridTopArea extends StatelessWidget {
               " ${S.current.live}",
               style: const TextStyle(
                 fontSize: 20,
-                color: ColorRes.black2,
+                color: ColorRes.black,
               ),
             ),
             const Spacer(),
@@ -57,9 +52,8 @@ class LiveGridTopArea extends StatelessWidget {
               onTap: () {
                 if (userData?.isFake != 1) {
                   userData?.canGoLive == 0
-                      ? CommonUI.snackBarWidget(S
-                          .of(context)
-                          .pleaseApplyForLiveStreamFromLivestreamDashboardFromProfile)
+                      ? CommonUI.snackBarWidget(
+                          S.of(context).pleaseApplyForLiveStreamFromLivestreamDashboardFromProfile)
                       : userData?.canGoLive == 1
                           ? CommonUI.snackBarWidget(
                               S.of(context).yourApplicationIsPendingPleaseWait)
@@ -77,7 +71,7 @@ class LiveGridTopArea extends StatelessWidget {
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                     colors: [
-                      ColorRes.lightOrange1,
+                      ColorRes.lightOrange,
                       ColorRes.darkOrange,
                     ],
                   ),

@@ -28,7 +28,7 @@ class BottomButtons extends StatelessWidget {
         Text(
           S.current.findSomeoneRandomly,
           textAlign: TextAlign.center,
-          style: const TextStyle(color: ColorRes.darkGrey3, fontSize: 16),
+          style: const TextStyle(color: ColorRes.davyGrey, fontSize: 16),
         ),
         const SizedBox(height: 10),
         if (bannerAd != null)
@@ -43,7 +43,7 @@ class BottomButtons extends StatelessWidget {
           height: 50,
           margin: const EdgeInsets.symmetric(horizontal: 28),
           decoration: BoxDecoration(
-            color: ColorRes.grey22,
+            color: ColorRes.grey10,
             borderRadius: BorderRadius.circular(7),
           ),
           child: Stack(
@@ -56,16 +56,14 @@ class BottomButtons extends StatelessWidget {
                         ? Alignment.center
                         : Alignment.centerRight,
                 child: Container(
-                  width: (Get.width / genderList.length) -
-                      14 -
-                      (genderList.length * 5),
+                  width: (Get.width / genderList.length) - 14 - (genderList.length * 5),
                   margin: const EdgeInsets.all(5.0),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(7),
                     gradient: const LinearGradient(
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
-                        colors: [ColorRes.lightOrange1, ColorRes.darkOrange]),
+                        colors: [ColorRes.lightOrange, ColorRes.darkOrange]),
                   ),
                 ),
               ),
@@ -79,16 +77,12 @@ class BottomButtons extends StatelessWidget {
                         onGenderSelect(1);
                       },
                       child: SizedBox(
-                        width: (Get.width / genderList.length) -
-                            14 -
-                            (genderList.length * 5),
+                        width: (Get.width / genderList.length) - 14 - (genderList.length * 5),
                         child: Center(
                           child: AnimatedDefaultTextStyle(
                             duration: const Duration(milliseconds: 200),
                             style: TextStyle(
-                              color: selectedGender == 1
-                                  ? ColorRes.white
-                                  : ColorRes.darkGrey3,
+                              color: selectedGender == 1 ? ColorRes.white : ColorRes.davyGrey,
                               fontSize: 13,
                               fontFamily: FontRes.bold,
                             ),
@@ -106,16 +100,12 @@ class BottomButtons extends StatelessWidget {
                         onGenderSelect(3);
                       },
                       child: SizedBox(
-                        width: (Get.width / genderList.length) -
-                            14 -
-                            (genderList.length * 5),
+                        width: (Get.width / genderList.length) - 14 - (genderList.length * 5),
                         child: Center(
                           child: AnimatedDefaultTextStyle(
                             duration: const Duration(milliseconds: 200),
                             style: TextStyle(
-                              color: selectedGender == 3
-                                  ? ColorRes.white
-                                  : ColorRes.darkGrey3,
+                              color: selectedGender == 3 ? ColorRes.white : ColorRes.davyGrey,
                               fontSize: 13,
                               fontFamily: FontRes.bold,
                             ),
@@ -133,16 +123,12 @@ class BottomButtons extends StatelessWidget {
                         onGenderSelect(2);
                       },
                       child: SizedBox(
-                        width: (Get.width / genderList.length) -
-                            14 -
-                            (genderList.length * 5),
+                        width: (Get.width / genderList.length) - 14 - (genderList.length * 5),
                         child: Center(
                           child: AnimatedDefaultTextStyle(
                             duration: const Duration(milliseconds: 200),
                             style: TextStyle(
-                              color: selectedGender == 2
-                                  ? ColorRes.white
-                                  : ColorRes.darkGrey3,
+                              color: selectedGender == 2 ? ColorRes.white : ColorRes.davyGrey,
                               fontSize: 13,
                               fontFamily: FontRes.bold,
                             ),
@@ -167,14 +153,14 @@ class BottomButtons extends StatelessWidget {
               height: 50,
               width: Get.width,
               decoration: BoxDecoration(
-                color: ColorRes.orange3.withOpacity(0.13),
+                color: ColorRes.darkOrange.withOpacity(0.13),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Center(
                 child: Text(
                   S.current.startMatching,
                   style: const TextStyle(
-                    color: ColorRes.orange3,
+                    color: ColorRes.darkOrange,
                     fontFamily: FontRes.bold,
                     letterSpacing: 0.8,
                   ),

@@ -43,15 +43,14 @@ class BottomLegalArea extends StatelessWidget {
           child: Container(
             height: 46,
             width: Get.width,
-            decoration: BoxDecoration(
-                color: ColorRes.grey12,
-                borderRadius: BorderRadius.circular(10)),
+            decoration:
+                BoxDecoration(color: ColorRes.grey10, borderRadius: BorderRadius.circular(10)),
             child: Center(
               child: Text(
                 S.current.logOut,
                 style: const TextStyle(
                   fontSize: 15,
-                  color: ColorRes.grey24,
+                  color: ColorRes.davyGrey,
                   fontFamily: FontRes.semiBold,
                 ),
               ),
@@ -62,7 +61,7 @@ class BottomLegalArea extends StatelessWidget {
         Center(child: Image.asset(AssetRes.themeLabel, height: 28, width: 93)),
         Center(
             child: Text(S.current.versionText,
-                style: const TextStyle(fontSize: 12, color: ColorRes.grey25))),
+                style: const TextStyle(fontSize: 12, color: ColorRes.grey20))),
         const SizedBox(height: 20),
         InkWell(
           borderRadius: BorderRadius.circular(10),
@@ -70,15 +69,14 @@ class BottomLegalArea extends StatelessWidget {
           child: Container(
             height: 46,
             width: Get.width,
-            decoration: BoxDecoration(
-                color: ColorRes.grey12,
-                borderRadius: BorderRadius.circular(10)),
+            decoration:
+                BoxDecoration(color: ColorRes.grey10, borderRadius: BorderRadius.circular(10)),
             child: Center(
               child: Text(
                 S.current.deleteAccount,
                 style: const TextStyle(
                   fontSize: 15,
-                  color: ColorRes.grey24,
+                  color: ColorRes.davyGrey,
                   fontFamily: FontRes.semiBold,
                 ),
               ),
@@ -95,7 +93,7 @@ class BottomLegalArea extends StatelessWidget {
       width: Get.width,
       padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 14),
       decoration: BoxDecoration(
-        color: ColorRes.grey12,
+        color: ColorRes.grey10,
         borderRadius: BorderRadius.circular(10),
       ),
       child: InkWell(
@@ -105,7 +103,7 @@ class BottomLegalArea extends StatelessWidget {
             Text(
               title,
               style: const TextStyle(
-                color: ColorRes.grey24,
+                color: ColorRes.davyGrey,
                 fontSize: 15,
                 fontFamily: FontRes.semiBold,
               ),

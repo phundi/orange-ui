@@ -63,8 +63,7 @@ class VerificationCenterArea extends StatelessWidget {
                 children: [
                   Text(
                     '${userIdentity?.fullname} ',
-                    style:
-                        const TextStyle(fontFamily: FontRes.bold, fontSize: 15),
+                    style: const TextStyle(fontFamily: FontRes.bold, fontSize: 15),
                   ),
                   const SizedBox(
                     width: 5,
@@ -95,7 +94,7 @@ class VerificationCenterArea extends StatelessWidget {
                 child: Text(
                   S.current.fullNameCap,
                   style: const TextStyle(
-                    color: ColorRes.darkGrey3,
+                    color: ColorRes.davyGrey,
                     fontSize: 15,
                     fontFamily: FontRes.extraBold,
                   ),
@@ -115,13 +114,9 @@ class VerificationCenterArea extends StatelessWidget {
                     fontSize: 14,
                   ),
                   decoration: InputDecoration(
-                    hintText: fullNameError == ''
-                        ? S.current.enterFullName
-                        : fullNameError,
+                    hintText: fullNameError == '' ? S.current.enterFullName : fullNameError,
                     hintStyle: TextStyle(
-                      color: fullNameError == ""
-                          ? ColorRes.dimGrey2
-                          : ColorRes.red,
+                      color: fullNameError == "" ? ColorRes.dimGrey2 : ColorRes.darkOrange,
                     ),
                     border: InputBorder.none,
                     contentPadding: const EdgeInsets.only(bottom: 10, left: 10),
@@ -136,7 +131,7 @@ class VerificationCenterArea extends StatelessWidget {
                 child: Text(
                   S.current.docType,
                   style: const TextStyle(
-                    color: ColorRes.darkGrey3,
+                    color: ColorRes.davyGrey,
                     fontSize: 15,
                     fontFamily: FontRes.extraBold,
                   ),
@@ -186,9 +181,7 @@ class VerificationCenterArea extends StatelessWidget {
                         height: 15,
                       ),
                       Visibility(
-                        visible: imagesName == null || imagesName!.isEmpty
-                            ? true
-                            : false,
+                        visible: imagesName == null || imagesName!.isEmpty ? true : false,
                         child: InkWell(
                           onTap: onDocumentTap,
                           child: Container(
@@ -198,9 +191,7 @@ class VerificationCenterArea extends StatelessWidget {
                               border: Border.all(
                                   color: ColorRes.darkOrange,
                                   width: 2,
-                                  style: !isDocFile
-                                      ? BorderStyle.none
-                                      : BorderStyle.solid),
+                                  style: !isDocFile ? BorderStyle.none : BorderStyle.solid),
                               color: ColorRes.lightGrey2,
                               borderRadius: BorderRadius.circular(10),
                             ),
@@ -219,9 +210,7 @@ class VerificationCenterArea extends StatelessWidget {
                         height: 10,
                       ),
                       Visibility(
-                        visible: imagesName == null || imagesName!.isEmpty
-                            ? false
-                            : true,
+                        visible: imagesName == null || imagesName!.isEmpty ? false : true,
                         child: InkWell(
                           onTap: onDocumentTap,
                           child: Container(
@@ -235,8 +224,7 @@ class VerificationCenterArea extends StatelessWidget {
                               children: [
                                 Expanded(
                                   child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 20.0),
+                                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
                                     child: Text(
                                       '$imagesName',
                                       style: const TextStyle(
@@ -258,7 +246,7 @@ class VerificationCenterArea extends StatelessWidget {
                                   child: const Icon(
                                     Icons.edit,
                                     size: 20,
-                                    color: ColorRes.dimGrey1,
+                                    color: ColorRes.dimGrey3,
                                   ),
                                 )
                               ],
@@ -271,7 +259,7 @@ class VerificationCenterArea extends StatelessWidget {
                         child: Text(
                           S.current.yourSelfie,
                           style: const TextStyle(
-                            color: ColorRes.darkGrey3,
+                            color: ColorRes.davyGrey,
                             fontSize: 15,
                             fontFamily: FontRes.extraBold,
                           ),
@@ -288,7 +276,7 @@ class VerificationCenterArea extends StatelessWidget {
                                   height: 150,
                                   width: 150,
                                   child: DottedBorder(
-                                    color: ColorRes.darkGrey3,
+                                    color: ColorRes.davyGrey,
                                     borderType: BorderType.RRect,
                                     dashPattern: const [8, 8],
                                     radius: const Radius.circular(5),
@@ -296,7 +284,7 @@ class VerificationCenterArea extends StatelessWidget {
                                     child: const Center(
                                       child: Icon(
                                         Icons.add,
-                                        color: ColorRes.red,
+                                        color: ColorRes.darkOrange,
                                       ),
                                     ),
                                   ),
@@ -368,7 +356,7 @@ class VerificationCenterArea extends StatelessWidget {
                   height: 50,
                   margin: const EdgeInsets.symmetric(vertical: 10),
                   decoration: BoxDecoration(
-                    color: ColorRes.lightOrange4,
+                    color: ColorRes.lightOrange.withOpacity(0.3),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Center(
@@ -376,7 +364,7 @@ class VerificationCenterArea extends StatelessWidget {
                       S.current.submit,
                       style: const TextStyle(
                         fontFamily: FontRes.bold,
-                        color: ColorRes.red5,
+                        color: ColorRes.darkOrange,
                         letterSpacing: 0.8,
                       ),
                     ),

@@ -7,8 +7,7 @@ class LiveStreamEndSheet extends StatelessWidget {
   final String name;
   final VoidCallback onExitBtn;
 
-  const LiveStreamEndSheet(
-      {Key? key, required this.name, required this.onExitBtn})
+  const LiveStreamEndSheet({Key? key, required this.name, required this.onExitBtn})
       : super(key: key);
 
   @override
@@ -32,10 +31,10 @@ class LiveStreamEndSheet extends StatelessWidget {
               child: InkWell(
                 onTap: onExitBtn,
                 child: CircleAvatar(
-                  backgroundColor: ColorRes.orange.withOpacity(0.2),
+                  backgroundColor: ColorRes.darkOrange.withOpacity(0.2),
                   child: const Icon(
                     Icons.close,
-                    color: ColorRes.orange,
+                    color: ColorRes.darkOrange,
                   ),
                 ),
               ),
@@ -43,17 +42,12 @@ class LiveStreamEndSheet extends StatelessWidget {
             const Spacer(),
             Text(
               name,
-              style: const TextStyle(
-                  color: ColorRes.black2,
-                  fontSize: 20,
-                  fontFamily: FontRes.bold),
+              style: const TextStyle(color: ColorRes.black, fontSize: 20, fontFamily: FontRes.bold),
             ),
             Text(
               S.of(context).liveStreamEnded,
-              style: const TextStyle(
-                  color: ColorRes.black2,
-                  fontSize: 19,
-                  fontFamily: FontRes.regular),
+              style:
+                  const TextStyle(color: ColorRes.black, fontSize: 19, fontFamily: FontRes.regular),
             ),
             const Spacer(),
           ],

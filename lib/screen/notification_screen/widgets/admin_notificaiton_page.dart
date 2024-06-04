@@ -11,8 +11,7 @@ class AdminNotificationPage extends StatelessWidget {
   final List<AdminNotificationData>? adminNotification;
   final ScrollController controller;
 
-  const AdminNotificationPage(
-      {Key? key, this.adminNotification, required this.controller})
+  const AdminNotificationPage({Key? key, this.adminNotification, required this.controller})
       : super(key: key);
 
   @override
@@ -33,6 +32,7 @@ class AdminNotificationPage extends StatelessWidget {
               return Container(
                 margin: const EdgeInsets.only(left: 16, right: 19, bottom: 18),
                 child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
                       height: 40,
@@ -43,7 +43,7 @@ class AdminNotificationPage extends StatelessWidget {
                           begin: Alignment.topCenter,
                           end: Alignment.bottomCenter,
                           colors: [
-                            ColorRes.lightOrange1,
+                            ColorRes.lightOrange,
                             ColorRes.darkOrange,
                           ],
                         ),
@@ -62,18 +62,18 @@ class AdminNotificationPage extends StatelessWidget {
                                 style: const TextStyle(
                                   fontFamily: FontRes.bold,
                                   fontSize: 15,
-                                  color: ColorRes.darkGrey4,
+                                  color: ColorRes.darkGrey,
                                 ),
                               ),
                               const Spacer(),
                               Text(
                                 adminNotification != null
-                                    ? CommonFun.timeAgo(DateTime.parse(
-                                        '${adminNotification?[index].createdAt}'))
+                                    ? CommonFun.timeAgo(
+                                        DateTime.parse('${adminNotification?[index].createdAt}'))
                                     : '',
                                 style: const TextStyle(
                                   fontSize: 11,
-                                  color: ColorRes.grey7,
+                                  color: ColorRes.grey2,
                                 ),
                               ),
                             ],
@@ -82,7 +82,7 @@ class AdminNotificationPage extends StatelessWidget {
                             '${adminNotification?[index].message}',
                             style: const TextStyle(
                               fontSize: 13,
-                              color: ColorRes.grey6,
+                              color: ColorRes.darkGrey9,
                             ),
                           )
                         ],

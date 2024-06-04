@@ -86,9 +86,7 @@ class _ReverseSwipeDialogState extends State<ReverseSwipeDialog> {
                     Text(
                       widget.coinPrice,
                       style: const TextStyle(
-                          color: ColorRes.grey15,
-                          fontFamily: FontRes.semiBold,
-                          fontSize: 30),
+                          color: ColorRes.darkGrey9, fontFamily: FontRes.semiBold, fontSize: 30),
                     )
                   ],
                 ),
@@ -97,15 +95,14 @@ class _ReverseSwipeDialogState extends State<ReverseSwipeDialog> {
                   width: Get.width / 2,
                   child: Text(
                     widget.dialogDisc,
-                    style:
-                        const TextStyle(color: ColorRes.grey15, fontSize: 15),
+                    style: const TextStyle(color: ColorRes.darkGrey9, fontSize: 15),
                     textAlign: TextAlign.center,
                   ),
                 ),
                 const Spacer(),
                 Container(
                   width: double.infinity,
-                  color: ColorRes.grey12,
+                  color: ColorRes.grey10,
                   height: 50,
                   alignment: Alignment.center,
                   child: RichText(
@@ -114,7 +111,7 @@ class _ReverseSwipeDialogState extends State<ReverseSwipeDialog> {
                         TextSpan(
                           text: S.current.walletCap,
                           style: const TextStyle(
-                            color: ColorRes.grey15,
+                            color: ColorRes.darkGrey9,
                             fontSize: 16,
                             fontFamily: FontRes.regular,
                           ),
@@ -122,7 +119,7 @@ class _ReverseSwipeDialogState extends State<ReverseSwipeDialog> {
                         TextSpan(
                           text: " : ${widget.walletCoin}",
                           style: const TextStyle(
-                              color: ColorRes.grey15,
+                              color: ColorRes.darkGrey9,
                               fontSize: 16,
                               fontFamily: FontRes.semiBold,
                               letterSpacing: 2),
@@ -159,7 +156,7 @@ class _ReverseSwipeDialogState extends State<ReverseSwipeDialog> {
                                     begin: Alignment.topCenter,
                                     end: Alignment.bottomCenter,
                                     colors: [
-                                      ColorRes.lightOrange1,
+                                      ColorRes.lightOrange,
                                       ColorRes.darkOrange,
                                     ],
                                   )
@@ -199,16 +196,14 @@ class _ReverseSwipeDialogState extends State<ReverseSwipeDialog> {
                           begin: Alignment.topCenter,
                           end: Alignment.bottomCenter,
                           colors: [
-                            ColorRes.lightOrange1,
+                            ColorRes.lightOrange,
                             ColorRes.darkOrange,
                           ],
                         )),
                     child: Text(
                       S.current.continueText,
                       style: const TextStyle(
-                          color: ColorRes.white,
-                          fontFamily: FontRes.bold,
-                          fontSize: 15),
+                          color: ColorRes.white, fontFamily: FontRes.bold, fontSize: 15),
                     ),
                   ),
                 ),
@@ -218,9 +213,7 @@ class _ReverseSwipeDialogState extends State<ReverseSwipeDialog> {
                   child: Text(
                     S.current.cancel,
                     style: const TextStyle(
-                        color: ColorRes.grey15,
-                        fontFamily: FontRes.regular,
-                        fontSize: 15),
+                        color: ColorRes.darkGrey9, fontFamily: FontRes.regular, fontSize: 15),
                   ),
                 ),
                 const Spacer(),
@@ -239,10 +232,7 @@ class EmptyWalletDialog extends StatelessWidget {
   final int? walletCoin;
 
   const EmptyWalletDialog(
-      {Key? key,
-      this.walletCoin,
-      required this.onContinueTap,
-      required this.onCancelTap})
+      {Key? key, this.walletCoin, required this.onContinueTap, required this.onCancelTap})
       : super(key: key);
 
   @override
@@ -291,15 +281,14 @@ class EmptyWalletDialog extends StatelessWidget {
                   width: Get.width / 2,
                   child: Text(
                     S.current.itLooksLikeEtc,
-                    style:
-                        const TextStyle(color: ColorRes.grey15, fontSize: 13),
+                    style: const TextStyle(color: ColorRes.darkGrey9, fontSize: 13),
                     textAlign: TextAlign.center,
                   ),
                 ),
                 const Spacer(),
                 Container(
                   width: double.infinity,
-                  color: ColorRes.grey12,
+                  color: ColorRes.grey10,
                   height: 50,
                   alignment: Alignment.center,
                   child: RichText(
@@ -308,7 +297,7 @@ class EmptyWalletDialog extends StatelessWidget {
                         TextSpan(
                           text: S.current.walletCap,
                           style: const TextStyle(
-                            color: ColorRes.grey15,
+                            color: ColorRes.darkGrey9,
                             fontSize: 16,
                             fontFamily: FontRes.regular,
                           ),
@@ -316,7 +305,7 @@ class EmptyWalletDialog extends StatelessWidget {
                         TextSpan(
                           text: " : $walletCoin",
                           style: const TextStyle(
-                              color: ColorRes.grey15,
+                              color: ColorRes.darkGrey9,
                               fontSize: 16,
                               fontFamily: FontRes.semiBold,
                               letterSpacing: 2),
@@ -339,16 +328,14 @@ class EmptyWalletDialog extends StatelessWidget {
                           begin: Alignment.topCenter,
                           end: Alignment.bottomCenter,
                           colors: [
-                            ColorRes.lightOrange1,
+                            ColorRes.lightOrange,
                             ColorRes.darkOrange,
                           ],
                         )),
                     child: Text(
                       S.current.continueCap,
                       style: const TextStyle(
-                          color: ColorRes.white,
-                          fontFamily: FontRes.bold,
-                          fontSize: 15),
+                          color: ColorRes.white, fontFamily: FontRes.bold, fontSize: 15),
                     ),
                   ),
                 ),
@@ -358,9 +345,7 @@ class EmptyWalletDialog extends StatelessWidget {
                   child: Text(
                     S.current.cancelCap,
                     style: const TextStyle(
-                        color: ColorRes.grey15,
-                        fontFamily: FontRes.regular,
-                        fontSize: 15),
+                        color: ColorRes.darkGrey9, fontFamily: FontRes.regular, fontSize: 15),
                   ),
                 ),
                 const Spacer(),

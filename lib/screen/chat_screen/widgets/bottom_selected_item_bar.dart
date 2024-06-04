@@ -38,16 +38,13 @@ class BottomSelectedItemBar extends StatelessWidget {
                   child: Text(
                     S.current.cancel,
                     style: const TextStyle(
-                        fontSize: 15,
-                        color: ColorRes.grey24,
-                        fontFamily: FontRes.semiBold),
+                        fontSize: 15, color: ColorRes.davyGrey, fontFamily: FontRes.semiBold),
                   ),
                 ),
                 const Spacer(),
                 AnimatedSwitcher(
                   duration: const Duration(milliseconds: 300),
-                  transitionBuilder:
-                      (Widget child, Animation<double> animation) {
+                  transitionBuilder: (Widget child, Animation<double> animation) {
                     return ScaleTransition(scale: animation, child: child);
                   },
                   child: Text(
@@ -56,23 +53,21 @@ class BottomSelectedItemBar extends StatelessWidget {
                     style: const TextStyle(
                       fontFamily: FontRes.semiBold,
                       fontSize: 15,
-                      color: ColorRes.grey24,
+                      color: ColorRes.davyGrey,
                     ),
                   ),
                 ),
                 Text(
                   S.current.selected,
                   style: const TextStyle(
-                      fontSize: 15,
-                      color: ColorRes.grey24,
-                      fontFamily: FontRes.semiBold),
+                      fontSize: 15, color: ColorRes.davyGrey, fontFamily: FontRes.semiBold),
                 ),
                 const Spacer(),
                 InkWell(
                   onTap: onItemDelete,
                   child: const Icon(
                     Icons.delete,
-                    color: ColorRes.orange,
+                    color: ColorRes.darkOrange,
                   ),
                 ),
               ],

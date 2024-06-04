@@ -36,8 +36,7 @@ class UserList extends StatelessWidget {
                 onUserTap(userList?[index]);
               },
               child: Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 13, vertical: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 10),
                 decoration: BoxDecoration(
                   color: ColorRes.lightGrey2,
                   borderRadius: BorderRadius.circular(12),
@@ -69,7 +68,7 @@ class UserList extends StatelessWidget {
                                 child: Text(
                                   CommonUI.fullName(userList?[index].fullname),
                                   style: const TextStyle(
-                                    color: ColorRes.darkGrey4,
+                                    color: ColorRes.darkGrey,
                                     fontSize: 18,
                                     overflow: TextOverflow.ellipsis,
                                     fontFamily: FontRes.bold,
@@ -81,22 +80,21 @@ class UserList extends StatelessWidget {
                               Text(
                                 '${userList?[index].age ?? ''}',
                                 style: const TextStyle(
-                                    color: ColorRes.darkGrey4,
+                                    color: ColorRes.darkGrey,
                                     fontSize: 18,
                                     overflow: TextOverflow.ellipsis),
                                 maxLines: 1,
                               ),
                               const SizedBox(width: 3),
                               userList?[index].isVerified == 2
-                                  ? Image.asset(AssetRes.tickMark,
-                                      height: 18, width: 18)
+                                  ? Image.asset(AssetRes.tickMark, height: 18, width: 18)
                                   : const SizedBox(),
                             ],
                           ),
                           Text(
                             userList?[index].live ?? '',
                             style: const TextStyle(
-                                color: ColorRes.grey6,
+                                color: ColorRes.darkGrey9,
                                 fontSize: 13,
                                 overflow: TextOverflow.ellipsis),
                             maxLines: 1,

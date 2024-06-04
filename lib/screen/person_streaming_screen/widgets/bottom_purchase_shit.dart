@@ -70,8 +70,7 @@ class BottomPurchaseShirt extends StatelessWidget {
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemCount: diamondList?.length,
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 4,
                       childAspectRatio: 0.95,
                       crossAxisSpacing: 8,
@@ -89,8 +88,7 @@ class BottomPurchaseShirt extends StatelessWidget {
                             if (Get.isBottomSheetOpen == true) {
                               Get.back();
                             }
-                            CommonUI.snackBarWidget(
-                                S.of(context).youAreFakeUser);
+                            CommonUI.snackBarWidget(S.of(context).youAreFakeUser);
                           }
                         },
                         child: Container(
@@ -101,14 +99,12 @@ class BottomPurchaseShirt extends StatelessWidget {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Image.network(
-                                  '${ConstRes.aImageBaseUrl}${diamondList?[index].image}',
+                              Image.network('${ConstRes.aImageBaseUrl}${diamondList?[index].image}',
                                   height: 45.5,
                                   width: 52.45,
                                   fit: BoxFit.cover,
                                   color: diamond == null ||
-                                          diamondList![index].coinPrice! >
-                                              diamond!.toInt()
+                                          diamondList![index].coinPrice! > diamond!.toInt()
                                       ? ColorRes.black.withOpacity(0.2)
                                       : null),
                               const SizedBox(height: 2.5),
@@ -116,8 +112,7 @@ class BottomPurchaseShirt extends StatelessWidget {
                                 "${diamondList?[index].coinPrice} 💎",
                                 style: TextStyle(
                                   color: diamond == null ||
-                                          diamondList![index].coinPrice! >
-                                              diamond!.toInt()
+                                          diamondList![index].coinPrice! > diamond!.toInt()
                                       ? ColorRes.black.withOpacity(0.2)
                                       : ColorRes.white,
                                   fontSize: 12,
@@ -153,7 +148,7 @@ class BottomPurchaseShirt extends StatelessWidget {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  ColorRes.lightOrange1,
+                  ColorRes.lightOrange,
                   ColorRes.darkOrange,
                 ],
               ),
@@ -183,7 +178,7 @@ class BottomPurchaseShirt extends StatelessWidget {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  ColorRes.lightOrange1,
+                  ColorRes.lightOrange,
                   ColorRes.darkOrange,
                 ],
               ),

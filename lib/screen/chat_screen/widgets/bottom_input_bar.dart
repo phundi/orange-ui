@@ -52,8 +52,7 @@ class BottomInputBar extends StatelessWidget {
                       maxLines: 5,
                       decoration: InputDecoration(
                         isDense: true,
-                        contentPadding: const EdgeInsets.only(
-                            left: 15, bottom: 3, right: 5),
+                        contentPadding: const EdgeInsets.only(left: 15, bottom: 3, right: 5),
                         border: InputBorder.none,
                         hintText: S.current.chatHint,
                         hintStyle: const TextStyle(fontSize: 14),
@@ -73,13 +72,12 @@ class BottomInputBar extends StatelessWidget {
                           begin: Alignment.topCenter,
                           end: Alignment.bottomCenter,
                           colors: [
-                            ColorRes.lightOrange1,
+                            ColorRes.lightOrange,
                             ColorRes.darkOrange,
                           ],
                         ),
                       ),
-                      child: Image.asset(AssetRes.share,
-                          height: 16.5, width: 16.5),
+                      child: Image.asset(AssetRes.share, height: 16.5, width: 16.5),
                     ),
                   ),
                 ],

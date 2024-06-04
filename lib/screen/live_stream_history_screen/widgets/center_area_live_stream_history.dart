@@ -11,8 +11,7 @@ class CenterAreaLiveStream extends StatelessWidget {
   final List<FetchLiveStreamHistoryData>? dataList;
   final ScrollController controller;
 
-  const CenterAreaLiveStream(
-      {Key? key, required this.dataList, required this.controller})
+  const CenterAreaLiveStream({Key? key, required this.dataList, required this.controller})
       : super(key: key);
 
   @override
@@ -35,15 +34,14 @@ class CenterAreaLiveStream extends StatelessWidget {
     );
   }
 
-  Widget customContainer(
-      {String? time, String? date, String? streamed, String? collected}) {
+  Widget customContainer({String? time, String? date, String? streamed, String? collected}) {
     return Container(
       width: Get.width,
       margin: const EdgeInsets.all(7),
       padding: const EdgeInsets.only(top: 12, left: 13, bottom: 12, right: 8),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        color: ColorRes.grey26,
+        color: ColorRes.greyShade200,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -62,7 +60,7 @@ class CenterAreaLiveStream extends StatelessWidget {
                   " $time",
                   style: const TextStyle(
                     fontSize: 14,
-                    color: ColorRes.grey27,
+                    color: ColorRes.grey19,
                   ),
                 ),
               ),
@@ -70,7 +68,7 @@ class CenterAreaLiveStream extends StatelessWidget {
                 DateFormat('dd MMM yyyy').format(DateTime.parse('$date')),
                 style: const TextStyle(
                   fontSize: 14,
-                  color: ColorRes.grey27,
+                  color: ColorRes.grey19,
                 ),
               ),
             ],
@@ -90,7 +88,7 @@ class CenterAreaLiveStream extends StatelessWidget {
                 style: const TextStyle(
                   fontFamily: FontRes.regular,
                   fontSize: 14,
-                  color: ColorRes.grey27,
+                  color: ColorRes.grey19,
                 ),
               )
             ],
@@ -110,7 +108,7 @@ class CenterAreaLiveStream extends StatelessWidget {
                 style: const TextStyle(
                   fontFamily: FontRes.regular,
                   fontSize: 14,
-                  color: ColorRes.grey27,
+                  color: ColorRes.grey19,
                 ),
               )
             ],

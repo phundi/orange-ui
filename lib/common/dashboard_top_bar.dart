@@ -37,7 +37,7 @@ class DashboardTopBar extends StatelessWidget {
               height: 37,
               margin: const EdgeInsets.symmetric(horizontal: 3),
               decoration: BoxDecoration(
-                  color: ColorRes.orange3.withOpacity(0.1),
+                  color: ColorRes.darkOrange.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(30)),
               padding: const EdgeInsets.symmetric(horizontal: 15),
               child: Row(
@@ -50,15 +50,12 @@ class DashboardTopBar extends StatelessWidget {
                   const SizedBox(width: 5),
                   Text(S.of(context).lives,
                       style: const TextStyle(
-                          fontFamily: FontRes.regular,
-                          fontSize: 12,
-                          color: ColorRes.orange2))
+                          fontFamily: FontRes.regular, fontSize: 12, color: ColorRes.darkOrange))
                 ],
               ),
             ),
           ),
-          if (isDating == 1)
-            RoundedImage(onTap: onNotificationTap, image: AssetRes.bell),
+          if (isDating == 1) RoundedImage(onTap: onNotificationTap, image: AssetRes.bell),
           RoundedImage(onTap: onSearchTap, image: AssetRes.search),
         ],
       ),
@@ -70,8 +67,7 @@ class RoundedImage extends StatelessWidget {
   final VoidCallback onTap;
   final String image;
 
-  const RoundedImage({Key? key, required this.onTap, required this.image})
-      : super(key: key);
+  const RoundedImage({Key? key, required this.onTap, required this.image}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -82,8 +78,8 @@ class RoundedImage extends StatelessWidget {
         height: 37,
         width: 37,
         margin: const EdgeInsets.symmetric(horizontal: 3),
-        decoration: BoxDecoration(
-            color: ColorRes.orange3.withOpacity(0.1), shape: BoxShape.circle),
+        decoration:
+            BoxDecoration(color: ColorRes.darkOrange.withOpacity(0.1), shape: BoxShape.circle),
         child: Center(child: Image.asset(image, height: 20, width: 20)),
       ),
     );

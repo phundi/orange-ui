@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:orange_ui/common/common_fun.dart';
 import 'package:orange_ui/common/common_ui.dart';
-
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/screen/following_list_screen/follow_following_screen_view_model.dart';
@@ -17,15 +16,13 @@ class FollowFollowingScreen extends StatelessWidget {
   final FollowFollowingType followFollowingType;
   final int userId;
 
-  const FollowFollowingScreen(
-      {Key? key, required this.followFollowingType, required this.userId})
+  const FollowFollowingScreen({Key? key, required this.followFollowingType, required this.userId})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<FollowFollowingScreenViewModel>.reactive(
-      viewModelBuilder: () =>
-          FollowFollowingScreenViewModel(followFollowingType, userId),
+      viewModelBuilder: () => FollowFollowingScreenViewModel(followFollowingType, userId),
       onViewModelReady: (viewModel) => viewModel.init(),
       builder: (context, viewModel, child) {
         return Scaffold(
@@ -44,8 +41,7 @@ class FollowFollowingScreen extends StatelessWidget {
                           onTap: () {
                             Get.back();
                           },
-                          child: const Icon(Icons.arrow_back,
-                              color: ColorRes.veryDarkGrey4)),
+                          child: const Icon(Icons.arrow_back, color: ColorRes.davyGrey)),
                       Align(
                         alignment: Alignment.center,
                         child: Text(
@@ -53,9 +49,7 @@ class FollowFollowingScreen extends StatelessWidget {
                               ? S.of(context).followingList
                               : S.of(context).followerList,
                           style: const TextStyle(
-                              color: ColorRes.veryDarkGrey4,
-                              fontFamily: FontRes.semiBold,
-                              fontSize: 18),
+                              color: ColorRes.davyGrey, fontFamily: FontRes.semiBold, fontSize: 18),
                         ),
                       ),
                     ],
@@ -72,70 +66,57 @@ class FollowFollowingScreen extends StatelessWidget {
                             itemCount: viewModel.users.length,
                             padding: EdgeInsets.zero,
                             itemBuilder: (context, index) {
-                              RegistrationUserData user =
-                                  viewModel.users[index];
+                              RegistrationUserData user = viewModel.users[index];
                               return Container(
-                                margin: const EdgeInsets.symmetric(
-                                    horizontal: 15, vertical: 5),
+                                margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
                                 decoration: ShapeDecoration(
                                   shape: SmoothRectangleBorder(
-                                      borderRadius: SmoothBorderRadius(
-                                          cornerRadius: 12,
-                                          cornerSmoothing: 1)),
+                                      borderRadius:
+                                          SmoothBorderRadius(cornerRadius: 12, cornerSmoothing: 1)),
                                   color: ColorRes.lightGrey2,
                                 ),
                                 padding: const EdgeInsets.all(10),
                                 child: Row(
                                   children: [
                                     ClipRRect(
-                                        borderRadius: SmoothBorderRadius(
-                                            cornerRadius: 7,
-                                            cornerSmoothing: 1),
+                                        borderRadius:
+                                            SmoothBorderRadius(cornerRadius: 7, cornerSmoothing: 1),
                                         child: CachedNetworkImage(
-                                          imageUrl: CommonFun.getProfileImage(
-                                              images: user.images),
-                                          cacheKey: CommonFun.getProfileImage(
-                                              images: user.images),
+                                          imageUrl: CommonFun.getProfileImage(images: user.images),
+                                          cacheKey: CommonFun.getProfileImage(images: user.images),
                                           height: 50,
                                           width: 50,
                                           fit: BoxFit.cover,
                                           errorWidget: (context, url, error) {
-                                            return CommonUI
-                                                .profileImagePlaceHolder(
-                                                    name: user.fullname,
-                                                    borderRadius: 7,
-                                                    heightWidth: 50);
+                                            return CommonUI.profileImagePlaceHolder(
+                                                name: user.fullname,
+                                                borderRadius: 7,
+                                                heightWidth: 50);
                                           },
                                         )),
                                     const SizedBox(width: 10),
                                     Expanded(
                                       child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
+                                            crossAxisAlignment: CrossAxisAlignment.center,
                                             children: [
                                               Flexible(
                                                 child: Text(
-                                                  CommonUI.fullName(
-                                                      user.fullname),
+                                                  CommonUI.fullName(user.fullname),
                                                   style: const TextStyle(
                                                       fontFamily: FontRes.bold,
                                                       fontSize: 18,
-                                                      color:
-                                                          ColorRes.darkGrey4),
+                                                      color: ColorRes.darkGrey),
                                                   maxLines: 1,
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
+                                                  overflow: TextOverflow.ellipsis,
                                                 ),
                                               ),
                                               Text(' ${user.age ?? 0} ',
                                                   style: const TextStyle(
-                                                      fontFamily:
-                                                          FontRes.regular,
-                                                      color: ColorRes.darkGrey4,
+                                                      fontFamily: FontRes.regular,
+                                                      color: ColorRes.darkGrey,
                                                       fontSize: 18)),
                                               user.isVerified == 0
                                                   ? const SizedBox()
@@ -148,7 +129,7 @@ class FollowFollowingScreen extends StatelessWidget {
                                           Text(
                                             user.live ?? '',
                                             style: const TextStyle(
-                                                color: ColorRes.grey6,
+                                                color: ColorRes.darkGrey9,
                                                 fontFamily: FontRes.regular,
                                                 fontSize: 13),
                                             overflow: TextOverflow.ellipsis,

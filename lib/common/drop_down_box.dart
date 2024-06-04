@@ -47,9 +47,7 @@ class DropDownBox extends StatelessWidget {
                   child: Text(
                     AppRes.male,
                     style: TextStyle(
-                      color: gender == AppRes.male
-                          ? ColorRes.orange
-                          : ColorRes.grey,
+                      color: gender == AppRes.male ? ColorRes.darkOrange : ColorRes.grey,
                     ),
                   ),
                 ),
@@ -65,9 +63,7 @@ class DropDownBox extends StatelessWidget {
                   child: Text(
                     AppRes.female,
                     style: TextStyle(
-                      color: gender == AppRes.female
-                          ? ColorRes.orange
-                          : ColorRes.grey,
+                      color: gender == AppRes.female ? ColorRes.darkOrange : ColorRes.grey,
                     ),
                   ),
                 ),
@@ -83,9 +79,7 @@ class DropDownBox extends StatelessWidget {
                   child: Text(
                     AppRes.other,
                     style: TextStyle(
-                      color: gender == AppRes.other
-                          ? ColorRes.orange
-                          : ColorRes.grey,
+                      color: gender == AppRes.other ? ColorRes.darkOrange : ColorRes.grey,
                     ),
                   ),
                 ),

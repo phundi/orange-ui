@@ -40,7 +40,7 @@ class BottomTextField extends StatelessWidget {
                   margin: const EdgeInsets.only(left: 5),
                   padding: const EdgeInsets.all(2),
                   decoration: BoxDecoration(
-                    color: ColorRes.black4.withOpacity(0.33),
+                    color: ColorRes.black.withOpacity(0.33),
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Row(
@@ -61,8 +61,7 @@ class BottomTextField extends StatelessWidget {
                             isDense: true,
                             border: InputBorder.none,
                             hintText: S.current.comment,
-                            contentPadding: const EdgeInsets.only(
-                                left: 14, bottom: 10, top: 0),
+                            contentPadding: const EdgeInsets.only(left: 14, bottom: 10, top: 0),
                             hintStyle: TextStyle(
                               color: ColorRes.white.withOpacity(0.45),
                               fontSize: 13,
@@ -83,7 +82,7 @@ class BottomTextField extends StatelessWidget {
                               begin: Alignment.topCenter,
                               end: Alignment.bottomCenter,
                               colors: [
-                                ColorRes.lightOrange1,
+                                ColorRes.lightOrange,
                                 ColorRes.darkOrange,
                               ],
                             ),
@@ -108,7 +107,7 @@ class BottomTextField extends StatelessWidget {
                     margin: const EdgeInsets.only(right: 10),
                     padding: const EdgeInsets.all(2),
                     decoration: BoxDecoration(
-                      color: ColorRes.black4.withOpacity(0.33),
+                      color: ColorRes.black.withOpacity(0.33),
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Container(
@@ -121,8 +120,8 @@ class BottomTextField extends StatelessWidget {
                           begin: Alignment.topCenter,
                           end: Alignment.bottomCenter,
                           colors: [
-                            ColorRes.red6,
                             ColorRes.darkOrange,
+                            ColorRes.lightOrange,
                           ],
                         ),
                       ),
@@ -221,7 +220,7 @@ class BottomTextField extends StatelessWidget {
                                   begin: Alignment.topCenter,
                                   end: Alignment.bottomCenter,
                                   colors: [
-                                    ColorRes.lightOrange1,
+                                    ColorRes.lightOrange,
                                     ColorRes.darkOrange,
                                   ],
                                 ),

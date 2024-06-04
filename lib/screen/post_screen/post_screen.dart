@@ -33,8 +33,7 @@ class PostScreen extends StatelessWidget {
                   children: [
                     InkWell(
                         onTap: () => Get.back(),
-                        child: const Icon(Icons.arrow_back,
-                            color: ColorRes.veryDarkGrey4)),
+                        child: const Icon(Icons.arrow_back, color: ColorRes.davyGrey)),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 30.0),
                       child: Row(
@@ -46,9 +45,7 @@ class PostScreen extends StatelessWidget {
                             child: Text(
                               CommonUI.userName(userData?.username),
                               style: const TextStyle(
-                                  fontFamily: FontRes.bold,
-                                  fontSize: 16,
-                                  color: ColorRes.dimGrey3),
+                                  fontFamily: FontRes.bold, fontSize: 16, color: ColorRes.dimGrey3),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                             ),

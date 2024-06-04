@@ -40,9 +40,7 @@ class CommentSheet extends StatelessWidget {
                   child: Text(
                     S.of(context).comments,
                     style: const TextStyle(
-                        color: ColorRes.veryDarkGrey4,
-                        fontFamily: FontRes.bold,
-                        fontSize: 18),
+                        color: ColorRes.davyGrey, fontFamily: FontRes.bold, fontSize: 18),
                   ),
                 ),
               ),

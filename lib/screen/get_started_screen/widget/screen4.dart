@@ -32,6 +32,7 @@ class Screen4 extends StatelessWidget {
                 AssetRes.getStarted4BG,
                 width: Get.width,
                 fit: BoxFit.cover,
+                color: ColorRes.lightOrange,
               ),
             ),
           ),

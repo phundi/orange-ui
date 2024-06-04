@@ -47,8 +47,7 @@ class BottomBar extends StatelessWidget {
     );
   }
 
-  Widget iconBox(
-      String icon, String title, double height, double width, int index) {
+  Widget iconBox(String icon, String title, double height, double width, int index) {
     return InkWell(
       onTap: () {
         onBottomBarTap(index);
@@ -60,15 +59,14 @@ class BottomBar extends StatelessWidget {
             icon,
             height: height,
             width: width,
-            color: index == pageIndex ? ColorRes.orange2 : ColorRes.dimGrey6,
+            color: index == pageIndex ? ColorRes.darkOrange : ColorRes.dimGrey6,
           ),
           const SizedBox(height: 4),
           Text(
             title,
             style: TextStyle(
                 fontSize: 12,
-                color:
-                    index == pageIndex ? ColorRes.orange2 : ColorRes.dimGrey6,
+                color: index == pageIndex ? ColorRes.darkOrange : ColorRes.dimGrey6,
                 fontFamily: FontRes.medium),
           ),
           const SizedBox(height: 10),

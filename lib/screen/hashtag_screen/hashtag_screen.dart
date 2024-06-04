@@ -33,7 +33,7 @@ class HashtagScreen extends StatelessWidget {
                       },
                       child: const Icon(
                         Icons.arrow_back_rounded,
-                        color: ColorRes.veryDarkGrey4,
+                        color: ColorRes.davyGrey,
                       ),
                     ),
                     Align(
@@ -43,9 +43,7 @@ class HashtagScreen extends StatelessWidget {
                         child: Text(
                           hashtagName,
                           style: const TextStyle(
-                              fontFamily: FontRes.bold,
-                              fontSize: 18,
-                              color: ColorRes.orange2),
+                              fontFamily: FontRes.bold, fontSize: 18, color: ColorRes.darkOrange),
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
                         ),

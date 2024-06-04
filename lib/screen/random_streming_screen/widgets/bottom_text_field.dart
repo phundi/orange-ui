@@ -26,35 +26,29 @@ class BottomTextField extends StatelessWidget {
         margin: const EdgeInsets.symmetric(horizontal: 10),
         padding: const EdgeInsets.symmetric(horizontal: 5),
         decoration: BoxDecoration(
-            color: ColorRes.black4.withOpacity(0.6),
-            borderRadius: BorderRadius.circular(30)),
+            color: ColorRes.black.withOpacity(0.6), borderRadius: BorderRadius.circular(30)),
         child: Row(
           children: [
             Expanded(
               child: TextField(
                   controller: commentController,
                   focusNode: commentFocus,
-                  style: TextStyle(
-                      fontSize: 13, color: ColorRes.white.withOpacity(0.70)),
+                  style: TextStyle(fontSize: 13, color: ColorRes.white.withOpacity(0.70)),
                   keyboardType: TextInputType.multiline,
                   decoration: InputDecoration(
                     isDense: true,
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10.0),
-                        borderSide: const BorderSide(
-                            color: ColorRes.transparent, width: 0.0)),
+                        borderSide: const BorderSide(color: ColorRes.transparent, width: 0.0)),
                     focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10.0),
-                        borderSide: const BorderSide(
-                            color: ColorRes.transparent, width: 0.0)),
+                        borderSide: const BorderSide(color: ColorRes.transparent, width: 0.0)),
                     enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                            color: ColorRes.transparent, width: 0.0),
+                        borderSide: const BorderSide(color: ColorRes.transparent, width: 0.0),
                         borderRadius: BorderRadius.circular(10)),
                     hintText: S.current.comment,
                     contentPadding: const EdgeInsets.symmetric(horizontal: 10),
-                    hintStyle: TextStyle(
-                        color: ColorRes.white.withOpacity(0.45), fontSize: 13),
+                    hintStyle: TextStyle(color: ColorRes.white.withOpacity(0.45), fontSize: 13),
                   ),
                   cursorColor: ColorRes.white),
             ),
@@ -71,7 +65,7 @@ class BottomTextField extends StatelessWidget {
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                     colors: [
-                      ColorRes.lightOrange1,
+                      ColorRes.lightOrange,
                       ColorRes.darkOrange,
                     ],
                   ),

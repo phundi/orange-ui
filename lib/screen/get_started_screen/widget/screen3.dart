@@ -32,6 +32,7 @@ class Screen3 extends StatelessWidget {
                 AssetRes.getStarted3BG,
                 width: Get.width,
                 fit: BoxFit.cover,
+                color: ColorRes.lightOrange,
               ),
             ),
           ),
@@ -41,7 +42,7 @@ class Screen3 extends StatelessWidget {
             child: Center(
               child: Image.asset(
                 AssetRes.getStarted3Marker,
-                width: Get.width / 2.1,
+                width: Get.width / 1.7,
                 fit: BoxFit.cover,
               ),
             ),

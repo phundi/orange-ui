@@ -30,14 +30,11 @@ class CameraScreen extends StatelessWidget {
                       : viewModel.cameraController.value.isInitialized
                           ? Transform.scale(
                               scale: 1 /
-                                  ((viewModel
-                                          .cameraController.value.aspectRatio) *
+                                  ((viewModel.cameraController.value.aspectRatio) *
                                       MediaQuery.of(context).size.aspectRatio),
                               alignment: Alignment.topCenter,
                               child: CameraPreview(viewModel.cameraController))
-                          : Align(
-                              alignment: Alignment.center,
-                              child: CommonUI.lottieWidget()),
+                          : Align(alignment: Alignment.center, child: CommonUI.lottieWidget()),
                   SafeArea(
                     child: Column(
                       children: [
@@ -54,18 +51,17 @@ class CameraScreen extends StatelessWidget {
                                   ? const SizedBox()
                                   : Container(
                                       height: 40,
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 20, vertical: 5),
+                                      padding:
+                                          const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                                       margin: const EdgeInsets.all(15),
                                       decoration: ShapeDecoration(
                                           shape: SmoothRectangleBorder(
-                                              borderRadius: SmoothBorderRadius(
-                                                  cornerRadius: 10)),
-                                          color: ColorRes.red),
+                                              borderRadius: SmoothBorderRadius(cornerRadius: 10)),
+                                          color: ColorRes.darkOrange),
                                       alignment: Alignment.center,
                                       child: Text(
-                                        CommonFun.formatHHMMSS(int.parse(
-                                            viewModel.currentTime.value)),
+                                        CommonFun.formatHHMMSS(
+                                            int.parse(viewModel.currentTime.value)),
                                         style: const TextStyle(
                                             color: ColorRes.white,
                                             fontFamily: FontRes.medium,
@@ -84,8 +80,7 @@ class CameraScreen extends StatelessWidget {
                                 margin: const EdgeInsets.all(15),
                                 decoration: ShapeDecoration(
                                     shape: SmoothRectangleBorder(
-                                        borderRadius: SmoothBorderRadius(
-                                            cornerRadius: 30)),
+                                        borderRadius: SmoothBorderRadius(cornerRadius: 30)),
                                     color: ColorRes.white.withOpacity(0.4)),
                                 alignment: Alignment.center,
                                 child: const Icon(Icons.close_rounded,
@@ -100,8 +95,7 @@ class CameraScreen extends StatelessWidget {
                           children: [
                             InkWell(
                               onTap: viewModel.onMediaTap,
-                              child: Image.asset(AssetRes.icMedia,
-                                  width: 30, height: 30),
+                              child: Image.asset(AssetRes.icMedia, width: 30, height: 30),
                             ),
                             GestureDetector(
                               onTap: viewModel.captureImage,
@@ -112,18 +106,15 @@ class CameraScreen extends StatelessWidget {
                                 width: 75,
                                 decoration: ShapeDecoration(
                                     shape: SmoothRectangleBorder(
-                                        borderRadius: SmoothBorderRadius(
-                                            cornerRadius: 50),
-                                        side: const BorderSide(
-                                            color: ColorRes.white, width: 4))),
+                                        borderRadius: SmoothBorderRadius(cornerRadius: 50),
+                                        side: const BorderSide(color: ColorRes.white, width: 4))),
                                 alignment: Alignment.center,
                                 child: Container(
                                   width: 62,
                                   height: 62,
                                   decoration: ShapeDecoration(
                                       shape: SmoothRectangleBorder(
-                                          borderRadius: SmoothBorderRadius(
-                                              cornerRadius: 50)),
+                                          borderRadius: SmoothBorderRadius(cornerRadius: 50)),
                                       color: ColorRes.white),
                                   alignment: Alignment.center,
                                 ),
@@ -131,8 +122,7 @@ class CameraScreen extends StatelessWidget {
                             ),
                             InkWell(
                               onTap: viewModel.onCameraFlip,
-                              child: Image.asset(AssetRes.icCameraFlip,
-                                  width: 30, height: 30),
+                              child: Image.asset(AssetRes.icCameraFlip, width: 30, height: 30),
                             ),
                           ],
                         )

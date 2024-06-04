@@ -24,9 +24,7 @@ class CommentListArea extends StatelessWidget {
         ? 0
         : MediaQuery.of(pageContext).viewInsets.bottom;
     return SizedBox(
-      height: (tempSize == 0)
-          ? (Get.height - 270) / 2
-          : (Get.height - 270) - tempSize - 50,
+      height: (tempSize == 0) ? (Get.height - 270) / 2 : (Get.height - 270) - tempSize - 50,
       width: Get.width,
       child: ShaderMask(
         shaderCallback: (Rect bounds) {
@@ -34,7 +32,7 @@ class CommentListArea extends StatelessWidget {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              ColorRes.red,
+              ColorRes.darkOrange,
               Colors.transparent,
               Colors.transparent,
             ],
@@ -72,9 +70,7 @@ class CommentListArea extends StatelessWidget {
                         Text(
                           comment.userName ?? '',
                           style: const TextStyle(
-                              color: ColorRes.white,
-                              fontSize: 13,
-                              fontFamily: FontRes.semiBold),
+                              color: ColorRes.white, fontSize: 13, fontFamily: FontRes.semiBold),
                         ),
                         comment.commentType == FirebaseRes.msg
                             ? Text(
@@ -87,8 +83,7 @@ class CommentListArea extends StatelessWidget {
                             : ClipRRect(
                                 borderRadius: BorderRadius.circular(15),
                                 child: BackdropFilter(
-                                  filter:
-                                      ImageFilter.blur(sigmaY: 15, sigmaX: 15),
+                                  filter: ImageFilter.blur(sigmaY: 15, sigmaX: 15),
                                   child: Container(
                                     height: 54,
                                     width: 54,

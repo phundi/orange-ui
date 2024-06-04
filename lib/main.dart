@@ -28,8 +28,7 @@ class MyHttpOverrides extends HttpOverrides {
   @override
   HttpClient createHttpClient(SecurityContext? context) {
     return super.createHttpClient(context)
-      ..badCertificateCallback =
-          (X509Certificate cert, String host, int port) => true;
+      ..badCertificateCallback = (X509Certificate cert, String host, int port) => true;
   }
 }
 
@@ -51,8 +50,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   MobileAds.instance.initialize();
   LanguagesScreenViewModel.selectedLanguage =
-      await PrefService.getString(PrefConst.languageCode) ??
-          Platform.localeName.split('_')[0];
+      await PrefService.getString(PrefConst.languageCode) ?? Platform.localeName.split('_')[0];
   await Firebase.initializeApp();
   // Set the background messaging handler early on, as a named top-level function
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
@@ -99,11 +97,10 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
           fontFamily: FontRes.regular,
-          primaryColor: ColorRes.orange,
+          primaryColor: ColorRes.darkOrange,
           splashColor: ColorRes.transparent,
           highlightColor: ColorRes.transparent,
-          textSelectionTheme:
-              const TextSelectionThemeData(cursorColor: ColorRes.veryDarkGrey4),
+          textSelectionTheme: const TextSelectionThemeData(cursorColor: ColorRes.davyGrey),
           useMaterial3: false),
       home: const GetStartedScreen(),
     );
@@ -123,17 +120,14 @@ class _MyAppState extends State<MyApp> {
     CommonFun.subscribeTopic(null);
 
     flutterLocalNotificationsPlugin
-        .resolvePlatformSpecificImplementation<
-            AndroidFlutterLocalNotificationsPlugin>()
+        .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
         ?.requestNotificationsPermission();
 
     flutterLocalNotificationsPlugin
-        .resolvePlatformSpecificImplementation<
-            IOSFlutterLocalNotificationsPlugin>()
+        .resolvePlatformSpecificImplementation<IOSFlutterLocalNotificationsPlugin>()
         ?.requestPermissions(alert: true, sound: true);
 
-    await firebaseMessaging.requestPermission(
-        alert: true, badge: false, sound: true);
+    await firebaseMessaging.requestPermission(alert: true, badge: false, sound: true);
 
     channel = const AndroidNotificationChannel(
         'orange_flutter', // id
@@ -143,13 +137,10 @@ class _MyAppState extends State<MyApp> {
         enableVibration: true,
         importance: Importance.max);
 
-    var initializationSettingsAndroid =
-        const AndroidInitializationSettings('@mipmap/ic_launcher');
+    var initializationSettingsAndroid = const AndroidInitializationSettings('@mipmap/ic_launcher');
 
     var initializationSettingsIOS = const DarwinInitializationSettings(
-        defaultPresentAlert: true,
-        defaultPresentSound: true,
-        defaultPresentBadge: false);
+        defaultPresentAlert: true, defaultPresentSound: true, defaultPresentBadge: false);
 
     var initializationSettings = InitializationSettings(
         android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
@@ -164,8 +155,7 @@ class _MyAppState extends State<MyApp> {
     });
 
     await flutterLocalNotificationsPlugin
-        .resolvePlatformSpecificImplementation<
-            AndroidFlutterLocalNotificationsPlugin>()
+        .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
         ?.createNotificationChannel(channel);
   }
 }
@@ -176,16 +166,14 @@ void showNotification(RemoteMessage message) {
     message.notification?.title ?? message.data['title'],
     message.notification?.body ?? message.data['body'],
     const NotificationDetails(
-        iOS: DarwinNotificationDetails(
-            presentSound: true, presentAlert: true, presentBadge: false),
+        iOS: DarwinNotificationDetails(presentSound: true, presentAlert: true, presentBadge: false),
         android: AndroidNotificationDetails('orange_flutter', 'Orange')),
   );
 }
 
 class MyBehavior extends ScrollBehavior {
   @override
-  Widget buildOverscrollIndicator(
-      BuildContext context, Widget child, ScrollableDetails details) {
+  Widget buildOverscrollIndicator(BuildContext context, Widget child, ScrollableDetails details) {
     return child;
   }
 }

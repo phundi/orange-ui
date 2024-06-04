@@ -53,8 +53,7 @@ class TopBarArea extends StatelessWidget {
                 height: 37,
                 width: 37,
                 decoration: BoxDecoration(
-                    color: ColorRes.orange3.withOpacity(0.1),
-                    shape: BoxShape.circle),
+                    color: ColorRes.darkOrange.withOpacity(0.1), shape: BoxShape.circle),
                 child: Center(
                   child: Image.asset(
                     AssetRes.backArrow,

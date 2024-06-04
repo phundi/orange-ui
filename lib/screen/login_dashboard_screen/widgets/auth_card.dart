@@ -62,8 +62,7 @@ class AuthCard extends StatelessWidget {
                     border: InputBorder.none,
                     hintText: emailError == "" ? S.current.email : emailError,
                     hintStyle: TextStyle(
-                      color:
-                          emailError == "" ? ColorRes.dimGrey2 : ColorRes.red,
+                      color: emailError == "" ? ColorRes.dimGrey2 : ColorRes.darkOrange,
                       fontSize: 14,
                       fontFamily: FontRes.semiBold,
                     ),
@@ -71,8 +70,7 @@ class AuthCard extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 15),
-              SubmitButton1(
-                  title: S.current.continueText, onTap: onContinueTap),
+              SubmitButton1(title: S.current.continueText, onTap: onContinueTap),
               const SizedBox(height: 15),
               Center(
                 child: Text(
@@ -125,7 +123,7 @@ class AuthCard extends StatelessWidget {
                       S.current.signUp,
                       style: const TextStyle(
                         fontSize: 14,
-                        color: ColorRes.lightOrange2,
+                        color: ColorRes.lightOrange,
                       ),
                     ),
                   ),
@@ -138,7 +136,7 @@ class AuthCard extends StatelessWidget {
                   S.current.forgotYourPassword,
                   style: const TextStyle(
                     fontSize: 14,
-                    color: ColorRes.lightOrange2,
+                    color: ColorRes.lightOrange,
                   ),
                 ),
               )
@@ -149,8 +147,7 @@ class AuthCard extends StatelessWidget {
     );
   }
 
-  Widget socialButton(
-      Image image, String title, VoidCallback onTap, EdgeInsets padding) {
+  Widget socialButton(Image image, String title, VoidCallback onTap, EdgeInsets padding) {
     return InkWell(
       onTap: onTap,
       child: Container(
@@ -171,7 +168,7 @@ class AuthCard extends StatelessWidget {
             Text(
               title,
               style: const TextStyle(
-                color: ColorRes.darkGrey2,
+                color: ColorRes.darkGrey,
                 fontSize: 14,
                 fontFamily: FontRes.semiBold,
               ),

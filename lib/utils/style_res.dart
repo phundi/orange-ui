@@ -3,12 +3,12 @@ import 'package:orange_ui/utils/color_res.dart';
 
 class StyleRes {
   static const Gradient linearGradient = LinearGradient(
-      colors: [ColorRes.lightOrange1, ColorRes.darkOrange],
+      colors: [ColorRes.lightOrange, ColorRes.darkOrange],
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter);
 
   static const Gradient linearDimGrey = LinearGradient(
-      colors: [ColorRes.dimGrey, ColorRes.dimGrey],
+      colors: [ColorRes.dimGrey7, ColorRes.dimGrey7],
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter);
 }

@@ -18,16 +18,15 @@ class StoryViewScreen extends StatelessWidget {
   final List<RegistrationUserData> stories;
   final int userIndex;
 
-  const StoryViewScreen(
-      {Key? key, required this.stories, required this.userIndex})
+  const StoryViewScreen({Key? key, required this.stories, required this.userIndex})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<StoryViewScreenViewModel>.reactive(
       onViewModelReady: (viewModel) => viewModel.init(),
-      viewModelBuilder: () => StoryViewScreenViewModel(
-          stories, userIndex, PageController(initialPage: userIndex)),
+      viewModelBuilder: () =>
+          StoryViewScreenViewModel(stories, userIndex, PageController(initialPage: userIndex)),
       builder: (context, model, child) {
         return SafeArea(
           bottom: false,
@@ -50,22 +49,18 @@ class StoryViewScreen extends StatelessWidget {
                     overlayWidget: (item) {
                       RegistrationUserData? user = item.story?.user;
                       return Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 15, vertical: 20),
+                        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
                         child: Row(
                           children: [
                             ClipRRect(
-                              borderRadius:
-                                  SmoothBorderRadius(cornerRadius: 30),
+                              borderRadius: SmoothBorderRadius(cornerRadius: 30),
                               child: CachedNetworkImage(
-                                imageUrl: CommonFun.getProfileImage(
-                                    images: user?.images),
+                                imageUrl: CommonFun.getProfileImage(images: user?.images),
                                 width: 35,
                                 height: 35,
                                 fit: BoxFit.cover,
                                 errorWidget: (context, url, error) {
-                                  return CommonUI.profileImagePlaceHolder(
-                                      name: user?.fullname);
+                                  return CommonUI.profileImagePlaceHolder(name: user?.fullname);
                                 },
                               ),
                             ),
@@ -74,8 +69,7 @@ class StoryViewScreen extends StatelessWidget {
                               child: Row(
                                 children: [
                                   Flexible(
-                                      child: Text(
-                                          CommonUI.fullName(user?.fullname),
+                                      child: Text(CommonUI.fullName(user?.fullname),
                                           style: const TextStyle(
                                               fontFamily: FontRes.bold,
                                               color: ColorRes.white,
@@ -89,9 +83,7 @@ class StoryViewScreen extends StatelessWidget {
                                     color: ColorRes.white.withOpacity(0.7),
                                   ),
                                   const SizedBox(width: 4),
-                                  Text(
-                                      CommonFun.timeAgo(
-                                          item.story?.date ?? DateTime.now()),
+                                  Text(CommonFun.timeAgo(item.story?.date ?? DateTime.now()),
                                       style: const TextStyle(
                                           fontFamily: FontRes.regular,
                                           fontSize: 13,
@@ -101,12 +93,10 @@ class StoryViewScreen extends StatelessWidget {
                             ),
                             Container(
                               margin: const EdgeInsets.symmetric(horizontal: 5),
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 5),
+                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                               decoration: ShapeDecoration(
                                   shape: SmoothRectangleBorder(
-                                      borderRadius:
-                                          SmoothBorderRadius(cornerRadius: 30)),
+                                      borderRadius: SmoothBorderRadius(cornerRadius: 30)),
                                   color: ColorRes.white),
                               child: Row(
                                 children: [
@@ -141,17 +131,16 @@ class StoryViewScreen extends StatelessWidget {
                                           style: const TextStyle(
                                               fontFamily: FontRes.medium,
                                               fontSize: 15,
-                                              color: ColorRes.orange2),
+                                              color: ColorRes.darkOrange),
                                         ),
                                       ),
                                     ),
                                   ];
                                 },
                                 shape: SmoothRectangleBorder(
-                                    borderRadius: SmoothBorderRadius(
-                                        cornerRadius: 6, cornerSmoothing: 1),
-                                    side: const BorderSide(
-                                        color: ColorRes.greyShade200)),
+                                    borderRadius:
+                                        SmoothBorderRadius(cornerRadius: 6, cornerSmoothing: 1),
+                                    side: const BorderSide(color: ColorRes.greyShade200)),
                                 surfaceTintColor: ColorRes.white,
                                 color: ColorRes.white,
                                 position: PopupMenuPosition.under,

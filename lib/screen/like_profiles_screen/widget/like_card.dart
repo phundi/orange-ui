@@ -15,11 +15,7 @@ class LikeCard extends StatelessWidget {
   final LikeProfilesScreenViewModel viewModel;
   final bool isLike;
 
-  const LikeCard(
-      {Key? key,
-      required this.userData,
-      required this.viewModel,
-      required this.isLike})
+  const LikeCard({Key? key, required this.userData, required this.viewModel, required this.isLike})
       : super(key: key);
 
   @override
@@ -44,8 +40,7 @@ class LikeCard extends StatelessWidget {
                 height: 40,
                 fit: BoxFit.cover,
                 errorWidget: (context, url, error) {
-                  return CommonUI.profileImagePlaceHolder(
-                      name: userData.fullname, heightWidth: 40);
+                  return CommonUI.profileImagePlaceHolder(name: userData.fullname, heightWidth: 40);
                 },
               ),
             ),
@@ -59,7 +54,7 @@ class LikeCard extends StatelessWidget {
                       Flexible(
                         child: Text(userData.fullname ?? 'Unknown',
                             style: const TextStyle(
-                              color: ColorRes.darkGrey4,
+                              color: ColorRes.darkGrey,
                               fontSize: 18,
                               overflow: TextOverflow.ellipsis,
                               fontFamily: FontRes.bold,
@@ -70,23 +65,20 @@ class LikeCard extends StatelessWidget {
                       Text(
                         "${userData.age ?? ''}",
                         style: const TextStyle(
-                            color: ColorRes.darkGrey4,
+                            color: ColorRes.darkGrey,
                             fontSize: 18,
                             overflow: TextOverflow.ellipsis),
                         maxLines: 1,
                       ),
                       const SizedBox(width: 3),
                       userData.isVerified == 2
-                          ? Image.asset(AssetRes.tickMark,
-                              height: 18, width: 18)
+                          ? Image.asset(AssetRes.tickMark, height: 18, width: 18)
                           : const SizedBox(),
                     ],
                   ),
                   Text(userData.live ?? '',
                       style: const TextStyle(
-                          color: ColorRes.grey6,
-                          fontSize: 13,
-                          overflow: TextOverflow.ellipsis),
+                          color: ColorRes.darkGrey9, fontSize: 13, overflow: TextOverflow.ellipsis),
                       maxLines: 1),
                 ],
               ),

@@ -27,9 +27,7 @@ class CommentListArea extends StatelessWidget {
         ? 0
         : MediaQuery.of(pageContext).viewInsets.bottom;
     return SizedBox(
-      height: (tempSize == 0)
-          ? (Get.height - 270) / 2
-          : (Get.height - 270) - tempSize - 50,
+      height: (tempSize == 0) ? (Get.height - 270) / 2 : (Get.height - 270) - tempSize - 50,
       width: Get.width,
       child: ShaderMask(
         shaderCallback: (Rect bounds) {
@@ -37,7 +35,7 @@ class CommentListArea extends StatelessWidget {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              ColorRes.red,
+              ColorRes.darkOrange,
               Colors.transparent,
               Colors.transparent,
             ],
@@ -59,10 +57,8 @@ class CommentListArea extends StatelessWidget {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(30),
                     child: CachedNetworkImage(
-                      imageUrl:
-                          '${ConstRes.aImageBaseUrl}${commentList[index].userImage}',
-                      cacheKey:
-                          '${ConstRes.aImageBaseUrl}${commentList[index].userImage}',
+                      imageUrl: '${ConstRes.aImageBaseUrl}${commentList[index].userImage}',
+                      cacheKey: '${ConstRes.aImageBaseUrl}${commentList[index].userImage}',
                       errorWidget: (context, url, error) {
                         return Image.asset(
                           AssetRes.themeLabel,
@@ -101,8 +97,7 @@ class CommentListArea extends StatelessWidget {
                             : ClipRRect(
                                 borderRadius: BorderRadius.circular(15),
                                 child: BackdropFilter(
-                                  filter:
-                                      ImageFilter.blur(sigmaY: 15, sigmaX: 15),
+                                  filter: ImageFilter.blur(sigmaY: 15, sigmaX: 15),
                                   child: Container(
                                     height: 54,
                                     width: 54,

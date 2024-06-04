@@ -37,46 +37,36 @@ class VideoPost extends StatelessWidget {
             Container(
               constraints: BoxConstraints(maxHeight: Get.height / 1.7),
               child: CachedNetworkImage(
-                  imageUrl:
-                      '${ConstRes.aImageBaseUrl}${(post?.content ?? []).first.thumbnail}',
-                  cacheKey:
-                      '${ConstRes.aImageBaseUrl}${(post?.content ?? []).first.thumbnail}',
-                  errorWidget: (context, url, error) =>
-                      CommonUI.postPlaceHolder(),
+                  imageUrl: '${ConstRes.aImageBaseUrl}${(post?.content ?? []).first.thumbnail}',
+                  cacheKey: '${ConstRes.aImageBaseUrl}${(post?.content ?? []).first.thumbnail}',
+                  errorWidget: (context, url, error) => CommonUI.postPlaceHolder(),
                   width: double.infinity,
                   fit: BoxFit.cover),
             ),
             Container(
                 height: 53,
                 width: 53,
-                decoration: BoxDecoration(
-                    color: ColorRes.black.withOpacity(0.4),
-                    shape: BoxShape.circle),
+                decoration:
+                    BoxDecoration(color: ColorRes.black.withOpacity(0.4), shape: BoxShape.circle),
                 padding: const EdgeInsets.all(15),
-                child: Image.asset(AssetRes.icPlay,
-                    alignment: Alignment.centerRight)),
+                child: Image.asset(AssetRes.icPlay, alignment: Alignment.centerRight)),
             Positioned(
               bottom: 0,
               left: 0,
               child: FittedBox(
                 child: Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                   margin: const EdgeInsets.all(15),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      color: ColorRes.white),
+                  decoration:
+                      BoxDecoration(borderRadius: BorderRadius.circular(30), color: ColorRes.white),
                   child: Row(
                     children: [
                       Image.asset(AssetRes.icEye, width: 15, height: 15),
                       const SizedBox(width: 10),
                       Text(
-                        NumberFormat.compact()
-                            .format((post?.content ?? []).first.viewCount ?? 0),
+                        NumberFormat.compact().format((post?.content ?? []).first.viewCount ?? 0),
                         style: const TextStyle(
-                            fontFamily: FontRes.medium,
-                            color: ColorRes.veryDarkGrey4,
-                            fontSize: 12),
+                            fontFamily: FontRes.medium, color: ColorRes.davyGrey, fontSize: 12),
                       )
                     ],
                   ),

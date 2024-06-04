@@ -63,13 +63,10 @@ class TextFieldsArea extends StatelessWidget {
             focusNode: model.aboutFocus,
             model: model,
             error: model.aboutError,
-            hint: model.aboutError == ''
-                ? S.current.enterAbout
-                : model.aboutError,
+            hint: model.aboutError == '' ? S.current.enterAbout : model.aboutError,
             maxLength: 300,
             title: S.current.about,
-            optional:
-                ' (${utf8.encode(model.aboutController.text).length}/300})',
+            optional: ' (${utf8.encode(model.aboutController.text).length}/300})',
             isExpand: true,
           ),
           ExpandedTextFieldCustom(
@@ -172,7 +169,7 @@ class TextFieldsArea extends StatelessWidget {
             child: Container(
               height: 50,
               decoration: BoxDecoration(
-                color: ColorRes.lightOrange4,
+                color: ColorRes.lightOrange.withOpacity(0.3),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Center(
@@ -180,7 +177,7 @@ class TextFieldsArea extends StatelessWidget {
                   S.current.save,
                   style: const TextStyle(
                     fontFamily: FontRes.bold,
-                    color: ColorRes.red5,
+                    color: ColorRes.darkOrange,
                     letterSpacing: 0.8,
                   ),
                 ),
@@ -240,19 +237,16 @@ class ExpandedTextFieldCustom extends StatelessWidget {
                   fillColor: ColorRes.lightGrey2,
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),
-                      borderSide: const BorderSide(
-                          color: ColorRes.transparent, width: 0.0)),
+                      borderSide: const BorderSide(color: ColorRes.transparent, width: 0.0)),
                   focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),
-                      borderSide: const BorderSide(
-                          color: ColorRes.transparent, width: 0.0)),
+                      borderSide: const BorderSide(color: ColorRes.transparent, width: 0.0)),
                   enabledBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(
-                          color: ColorRes.transparent, width: 0.0),
+                      borderSide: const BorderSide(color: ColorRes.transparent, width: 0.0),
                       borderRadius: BorderRadius.circular(10)),
                   hintText: error == '' ? hint : error,
-                  hintStyle: TextStyle(
-                      color: error == "" ? ColorRes.dimGrey2 : ColorRes.red),
+                  hintStyle:
+                      TextStyle(color: error == "" ? ColorRes.dimGrey2 : ColorRes.darkOrange),
                   counter: null,
                   counterText: ''),
               maxLines: isExpand ? null : 1,
@@ -262,11 +256,10 @@ class ExpandedTextFieldCustom extends StatelessWidget {
               maxLength: maxLength,
               onChanged: model.onTextFieldChange,
               style: const TextStyle(color: ColorRes.dimGrey3, fontSize: 14),
-              inputFormatters: isExpand
-                  ? [_Utf8LengthLimitingTextInputFormatter(maxLength ?? 0)]
-                  : null,
+              inputFormatters:
+                  isExpand ? [_Utf8LengthLimitingTextInputFormatter(maxLength ?? 0)] : null,
               cursorHeight: 15,
-              cursorColor: ColorRes.veryDarkGrey,
+              cursorColor: ColorRes.darkGrey5,
               onTap: model.onAllScreenTap,
               textAlignVertical: TextAlignVertical.top),
         ),
@@ -280,8 +273,7 @@ class RichTextCustom extends StatelessWidget {
   final String title;
   final String? optional;
 
-  const RichTextCustom({Key? key, required this.title, this.optional})
-      : super(key: key);
+  const RichTextCustom({Key? key, required this.title, this.optional}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -293,7 +285,7 @@ class RichTextCustom extends StatelessWidget {
             TextSpan(
               text: title,
               style: const TextStyle(
-                color: ColorRes.darkGrey3,
+                color: ColorRes.davyGrey,
                 fontSize: 15,
                 fontFamily: FontRes.extraBold,
               ),
@@ -314,8 +306,7 @@ class RichTextCustom extends StatelessWidget {
 }
 
 class _Utf8LengthLimitingTextInputFormatter extends TextInputFormatter {
-  _Utf8LengthLimitingTextInputFormatter(this.maxLength)
-      : assert(maxLength == -1 || maxLength > 0);
+  _Utf8LengthLimitingTextInputFormatter(this.maxLength) : assert(maxLength == -1 || maxLength > 0);
 
   final int maxLength;
 

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:orange_ui/common/common_ui.dart';
-
 import 'package:orange_ui/common/top_bar_area.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/screen/notification_screen/widgets/admin_notificaiton_page.dart';
@@ -46,7 +45,7 @@ class NotificationScreen extends StatelessWidget {
                 margin: const EdgeInsets.only(left: 16),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: ColorRes.grey32,
+                  color: ColorRes.aquaHaze,
                 ),
                 child: Row(
                   children: [
@@ -58,17 +57,13 @@ class NotificationScreen extends StatelessWidget {
                         width: 132,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
-                          color: model.tabIndex == 0
-                              ? ColorRes.darkGrey10
-                              : ColorRes.grey32,
+                          color: model.tabIndex == 0 ? ColorRes.darkGrey : ColorRes.aquaHaze,
                         ),
                         child: Center(
                           child: Text(
                             S.current.personal,
                             style: TextStyle(
-                              color: model.tabIndex == 0
-                                  ? ColorRes.white
-                                  : ColorRes.darkGrey10,
+                              color: model.tabIndex == 0 ? ColorRes.white : ColorRes.darkGrey,
                               fontFamily: FontRes.regular,
                             ),
                           ),
@@ -83,17 +78,13 @@ class NotificationScreen extends StatelessWidget {
                         width: 112,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
-                          color: model.tabIndex == 1
-                              ? ColorRes.darkGrey10
-                              : ColorRes.grey32,
+                          color: model.tabIndex == 1 ? ColorRes.darkGrey : ColorRes.aquaHaze,
                         ),
                         child: Center(
                           child: Text(
                             S.current.platform,
                             style: TextStyle(
-                              color: model.tabIndex == 1
-                                  ? ColorRes.white
-                                  : ColorRes.darkGrey10,
+                              color: model.tabIndex == 1 ? ColorRes.white : ColorRes.darkGrey,
                               fontFamily: FontRes.regular,
                             ),
                           ),
@@ -107,8 +98,7 @@ class NotificationScreen extends StatelessWidget {
               model.isLoading
                   ? Expanded(
                       child: Center(
-                          child: Lottie.asset(AssetRes.loadingLottie,
-                              width: 100, height: 100)),
+                          child: Lottie.asset(AssetRes.loadingLottie, width: 100, height: 100)),
                     )
                   : Expanded(
                       child: model.tabIndex == 0

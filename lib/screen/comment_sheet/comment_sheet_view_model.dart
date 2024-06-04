@@ -22,11 +22,10 @@ class CommentSheetViewModel extends BaseViewModel {
   bool isLoading = true;
   RegistrationUserData? userData;
 
-  DetectableTextEditingController detectableTextFieldController =
-      DetectableTextEditingController(
-          detectedStyle: const TextStyle(
-              fontFamily: FontRes.bold, color: ColorRes.orange2, fontSize: 14),
-          regExp: detectionRegExp(atSign: false, url: false));
+  DetectableTextEditingController detectableTextFieldController = DetectableTextEditingController(
+      detectedStyle:
+          const TextStyle(fontFamily: FontRes.bold, color: ColorRes.darkOrange, fontSize: 14),
+      regExp: detectionRegExp(atSign: false, url: false));
 
   void init() {
     fetchCommentData();
@@ -56,8 +55,7 @@ class CommentSheetViewModel extends BaseViewModel {
 
   void fetchScrollData() {
     scrollController.addListener(() {
-      if (scrollController.offset ==
-          scrollController.position.maxScrollExtent) {
+      if (scrollController.offset == scrollController.position.maxScrollExtent) {
         if (!isLoading) {
           fetchCommentData();
         }
@@ -104,10 +102,7 @@ class CommentSheetViewModel extends BaseViewModel {
         ApiProvider().callPost(
             completion: (response) {},
             url: Urls.aDeleteComment,
-            param: {
-              Urls.userId: PrefService.userId,
-              Urls.aCommentId: commentId
-            });
+            param: {Urls.userId: PrefService.userId, Urls.aCommentId: commentId});
       },
       description: S.current.areYouSureYouWantToDeleteTheComment,
       heading: S.current.commentDelete,

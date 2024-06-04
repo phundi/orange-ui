@@ -45,9 +45,7 @@ class PostBottomBar extends StatelessWidget {
           const Spacer(),
           Text(CommonFun.timeAgo(DateTime.parse(post?.createdAt ?? '')),
               style: const TextStyle(
-                  fontFamily: FontRes.medium,
-                  fontSize: 12,
-                  color: ColorRes.dimGrey3))
+                  fontFamily: FontRes.medium, fontSize: 12, color: ColorRes.dimGrey3))
         ],
       ),
     );
@@ -63,10 +61,9 @@ class LikeButton extends StatefulWidget {
   State<LikeButton> createState() => _LikeButtonState();
 }
 
-class _LikeButtonState extends State<LikeButton>
-    with SingleTickerProviderStateMixin {
-  late final AnimationController _controller = AnimationController(
-      duration: const Duration(milliseconds: 200), vsync: this, value: 1.0);
+class _LikeButtonState extends State<LikeButton> with SingleTickerProviderStateMixin {
+  late final AnimationController _controller =
+      AnimationController(duration: const Duration(milliseconds: 200), vsync: this, value: 1.0);
 
   @override
   void dispose() {
@@ -87,20 +84,14 @@ class _LikeButtonState extends State<LikeButton>
             ApiProvider().callPost(
                 completion: (response) {},
                 url: Urls.aDislikePost,
-                param: {
-                  Urls.userId: PrefService.userId,
-                  Urls.aPostId: widget.post?.id
-                });
+                param: {Urls.userId: PrefService.userId, Urls.aPostId: widget.post?.id});
           } else {
             widget.post?.setLikesCount(1);
             widget.post?.isLike = 1;
             ApiProvider().callPost(
                 completion: (response) {},
                 url: Urls.aLikePost,
-                param: {
-                  Urls.userId: PrefService.userId,
-                  Urls.aPostId: widget.post?.id
-                });
+                param: {Urls.userId: PrefService.userId, Urls.aPostId: widget.post?.id});
           }
           setState(() {});
           _controller.reverse().then((value) => _controller.forward());
@@ -108,20 +99,20 @@ class _LikeButtonState extends State<LikeButton>
         child: Row(
           children: [
             ScaleTransition(
-              scale: Tween(begin: 0.7, end: 1.0).animate(
-                  CurvedAnimation(parent: _controller, curve: Curves.easeOut)),
+              scale: Tween(begin: 0.7, end: 1.0)
+                  .animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut)),
               child: Image.asset(
                 widget.post?.isLike == 1 ? AssetRes.icFillFav : AssetRes.icFav,
                 height: 22,
                 width: 22,
-                color: widget.post?.isLike == 0 ? ColorRes.veryDarkGrey4 : null,
+                color: widget.post?.isLike == 0 ? ColorRes.davyGrey : null,
               ),
             ),
             const SizedBox(width: 3),
             Text(
               NumberFormat.compact().format(widget.post?.likesCount ?? 0),
               style: const TextStyle(
-                  color: ColorRes.veryDarkGrey4,
+                  color: ColorRes.davyGrey,
                   fontFamily: FontRes.medium,
                   letterSpacing: 0.5,
                   fontSize: 15),
@@ -165,7 +156,7 @@ class ImageWithTextRow extends StatelessWidget {
                 Text(
                   NumberFormat.compact().format(count ?? 0),
                   style: const TextStyle(
-                      color: ColorRes.veryDarkGrey4,
+                      color: ColorRes.davyGrey,
                       fontFamily: FontRes.medium,
                       letterSpacing: 0.5,
                       fontSize: 15),

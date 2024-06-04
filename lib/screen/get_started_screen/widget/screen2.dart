@@ -24,11 +24,8 @@ class Screen2 extends StatelessWidget {
       color: ColorRes.white,
       child: Stack(
         children: [
-          Image.asset(
-            AssetRes.getStarted2BG,
-            width: Get.width,
-            fit: BoxFit.cover,
-          ),
+          Image.asset(AssetRes.getStarted2BG,
+              width: Get.width, fit: BoxFit.cover, color: ColorRes.lightOrange),
           SizedBox(
             height: Get.height,
             width: Get.width,
@@ -103,17 +100,15 @@ class Screen2 extends StatelessWidget {
     return Container(
       height: 39,
       width: 116,
-      decoration: BoxDecoration(
-          color: ColorRes.white,
-          borderRadius: BorderRadius.circular(30),
-          boxShadow: [
-            BoxShadow(
-              color: ColorRes.black.withOpacity(0.10),
-              offset: const Offset(0, 0.5),
-              blurRadius: 3,
-              spreadRadius: 2,
-            )
-          ]),
+      decoration:
+          BoxDecoration(color: ColorRes.white, borderRadius: BorderRadius.circular(30), boxShadow: [
+        BoxShadow(
+          color: ColorRes.black.withOpacity(0.10),
+          offset: const Offset(0, 0.5),
+          blurRadius: 3,
+          spreadRadius: 2,
+        )
+      ]),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -121,6 +116,7 @@ class Screen2 extends StatelessWidget {
             icon,
             height: 18,
             width: 18,
+            color: ColorRes.darkOrange,
           ),
           const SizedBox(width: 10),
           Text(

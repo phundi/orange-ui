@@ -52,8 +52,8 @@ class EulaSheet extends StatelessWidget {
                     },
                   ),
                 )
-                ..loadRequest(Uri.parse(
-                    'https://www.apple.com/legal/internet-services/itunes/dev/stdeula/')),
+                ..loadRequest(
+                    Uri.parse('https://www.apple.com/legal/internet-services/itunes/dev/stdeula/')),
               gestureRecognizers: gestureRecognizers,
             ),
           ),
@@ -62,7 +62,7 @@ class EulaSheet extends StatelessWidget {
             child: TextButton(
               onPressed: eulaAcceptClick,
               style: TextButton.styleFrom(
-                backgroundColor: ColorRes.orange,
+                backgroundColor: ColorRes.darkOrange,
                 minimumSize: const Size(double.infinity, 50),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(0),

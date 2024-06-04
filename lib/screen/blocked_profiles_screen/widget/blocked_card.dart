@@ -16,10 +16,7 @@ class BlockedCard extends StatelessWidget {
   final bool isBlocked;
 
   const BlockedCard(
-      {Key? key,
-      required this.userData,
-      required this.viewModel,
-      required this.isBlocked})
+      {Key? key, required this.userData, required this.viewModel, required this.isBlocked})
       : super(key: key);
 
   @override
@@ -45,8 +42,7 @@ class BlockedCard extends StatelessWidget {
                 height: 40,
                 fit: BoxFit.cover,
                 errorWidget: (context, url, error) {
-                  return CommonUI.profileImagePlaceHolder(
-                      name: userData.fullname, heightWidth: 40);
+                  return CommonUI.profileImagePlaceHolder(name: userData.fullname, heightWidth: 40);
                 },
               ),
             ),
@@ -60,7 +56,7 @@ class BlockedCard extends StatelessWidget {
                       Flexible(
                         child: Text(userData.fullname ?? 'Unknown',
                             style: const TextStyle(
-                              color: ColorRes.darkGrey4,
+                              color: ColorRes.darkGrey,
                               fontSize: 18,
                               overflow: TextOverflow.ellipsis,
                               fontFamily: FontRes.bold,
@@ -71,23 +67,20 @@ class BlockedCard extends StatelessWidget {
                       Text(
                         "${userData.age ?? ''}",
                         style: const TextStyle(
-                            color: ColorRes.darkGrey4,
+                            color: ColorRes.darkGrey,
                             fontSize: 18,
                             overflow: TextOverflow.ellipsis),
                         maxLines: 1,
                       ),
                       const SizedBox(width: 3),
                       userData.isVerified == 2
-                          ? Image.asset(AssetRes.tickMark,
-                              height: 18, width: 18)
+                          ? Image.asset(AssetRes.tickMark, height: 18, width: 18)
                           : const SizedBox(),
                     ],
                   ),
                   Text(userData.live ?? '',
                       style: const TextStyle(
-                          color: ColorRes.grey6,
-                          fontSize: 13,
-                          overflow: TextOverflow.ellipsis),
+                          color: ColorRes.darkGrey9, fontSize: 13, overflow: TextOverflow.ellipsis),
                       maxLines: 1),
                 ],
               ),
@@ -96,13 +89,13 @@ class BlockedCard extends StatelessWidget {
             TextButton(
               onPressed: () => viewModel.onUnblockClick(userData),
               style: ButtonStyle(
-                maximumSize: MaterialStateProperty.all(
+                maximumSize: WidgetStateProperty.all(
                   const Size(100, 100),
                 ),
-                backgroundColor: MaterialStateProperty.all(
-                  ColorRes.orange3.withOpacity(0.1),
+                backgroundColor: WidgetStateProperty.all(
+                  ColorRes.darkOrange.withOpacity(0.1),
                 ),
-                shape: MaterialStateProperty.all(
+                shape: WidgetStateProperty.all(
                   RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
@@ -112,7 +105,7 @@ class BlockedCard extends StatelessWidget {
                 'Unblock',
                 style: TextStyle(
                   fontFamily: FontRes.bold,
-                  color: ColorRes.orange3,
+                  color: ColorRes.darkOrange,
                 ),
               ),
             )

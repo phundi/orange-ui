@@ -22,7 +22,7 @@ class GradientWidget extends StatelessWidget {
           begin: Alignment.centerRight,
           end: Alignment.centerLeft,
           colors: [
-            ColorRes.lightOrange1,
+            ColorRes.lightOrange,
             ColorRes.darkOrange,
           ],
         ).createShader(bounds);
@@ -97,8 +97,8 @@ class _GradientPainter extends CustomPainter {
     var outerRRect = RRect.fromRectAndRadius(outerRect, Radius.circular(radius));
 
     // create inner rectangle smaller by strokeWidth
-    Rect innerRect =
-        Rect.fromLTWH(strokeWidth, strokeWidth, size.width - strokeWidth * 2, size.height - strokeWidth * 2);
+    Rect innerRect = Rect.fromLTWH(
+        strokeWidth, strokeWidth, size.width - strokeWidth * 2, size.height - strokeWidth * 2);
     var innerRRect = RRect.fromRectAndRadius(innerRect, Radius.circular(radius - strokeWidth));
 
     // apply gradient shader

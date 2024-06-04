@@ -20,7 +20,7 @@ class StartingProfileTopText extends StatelessWidget {
             Text(
               S.current.profile,
               style: const TextStyle(
-                color: ColorRes.black2,
+                color: ColorRes.black,
                 fontSize: 21,
               ),
             ),

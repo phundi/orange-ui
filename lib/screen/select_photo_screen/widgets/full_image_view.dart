@@ -39,8 +39,7 @@ class FullImageView extends StatelessWidget {
                   width: Get.width,
                   height: Get.height / 1.65,
                   decoration: BoxDecoration(
-                      color: ColorRes.blueGrey1,
-                      borderRadius: BorderRadius.circular(20)),
+                      color: ColorRes.lightGrey2, borderRadius: BorderRadius.circular(20)),
                   child: Image.asset(
                     AssetRes.imageWarning,
                     height: 100,
@@ -74,8 +73,7 @@ class FullImageView extends StatelessWidget {
             child: Column(
               children: [
                 const SizedBox(height: 14),
-                TopFileStoryLine(
-                    pageController: pageController, images: imageList ?? []),
+                TopFileStoryLine(pageController: pageController, images: imageList ?? []),
                 const Spacer(),
                 Padding(
                   padding: const EdgeInsets.only(left: 9),
@@ -88,16 +86,14 @@ class FullImageView extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(
-                      left: 9, right: 9, bottom: 9, top: 7),
+                  padding: const EdgeInsets.only(left: 9, right: 9, bottom: 9, top: 7),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10),
                     child: BackdropFilter(
                       filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
                       child: Container(
                         width: Get.width,
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 8.15, horizontal: 11.77),
+                        padding: const EdgeInsets.symmetric(vertical: 8.15, horizontal: 11.77),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           color: ColorRes.black.withOpacity(0.33),
@@ -188,8 +184,7 @@ class TopFileStoryLine extends StatefulWidget {
   final List<File> images;
   final PageController pageController;
 
-  const TopFileStoryLine(
-      {Key? key, required this.images, required this.pageController})
+  const TopFileStoryLine({Key? key, required this.images, required this.pageController})
       : super(key: key);
 
   @override
@@ -221,9 +216,7 @@ class _TopFileStoryLineState extends State<TopFileStoryLine> {
               height: 2.7,
               width: (Get.width - 62) / widget.images.length,
               decoration: BoxDecoration(
-                color: currentPosition == index
-                    ? ColorRes.white
-                    : ColorRes.white.withOpacity(0.30),
+                color: currentPosition == index ? ColorRes.white : ColorRes.white.withOpacity(0.30),
                 borderRadius: BorderRadius.circular(10),
               ),
             ),

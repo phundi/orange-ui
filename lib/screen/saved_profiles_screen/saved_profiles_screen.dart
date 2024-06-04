@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:orange_ui/common/common_ui.dart';
-
 import 'package:orange_ui/common/top_bar_area.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
@@ -39,7 +38,7 @@ class SavedProfilesScreen extends StatelessWidget {
                               child: Text(
                                 S.of(context).noSavedData,
                                 style: const TextStyle(
-                                  color: ColorRes.darkGrey4,
+                                  color: ColorRes.darkGrey,
                                   fontSize: 18,
                                   overflow: TextOverflow.ellipsis,
                                   fontFamily: FontRes.bold,
@@ -51,8 +50,7 @@ class SavedProfilesScreen extends StatelessWidget {
                               padding: EdgeInsets.zero,
                               itemCount: viewModel.userData.length,
                               itemBuilder: (context, index) {
-                                RegistrationUserData userData =
-                                    viewModel.userData[index];
+                                RegistrationUserData userData = viewModel.userData[index];
                                 bool isSaved = false;
                                 for (var element in viewModel.savedIds) {
                                   if (element == '${userData.id}') {

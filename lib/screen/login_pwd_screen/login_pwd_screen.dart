@@ -47,8 +47,8 @@ class LoginPwdScreen extends StatelessWidget {
                             child: Image.asset(
                               AssetRes.backArrow,
                               color: ColorRes.white,
-                              width: 20,
-                              height: 20,
+                              width: 25,
+                              height: 25,
                             ),
                           ),
                         ),

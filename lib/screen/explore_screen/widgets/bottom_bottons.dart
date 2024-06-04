@@ -26,8 +26,7 @@ class BottomButtons extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        if (settingData?.isDating == 1)
-          PlayBtnClick(onPlayBtnClick: onPlayBtnTap),
+        if (settingData?.isDating == 1) PlayBtnClick(onPlayBtnClick: onPlayBtnTap),
         UnicornOutlineButton(
           onPressed: onNextBtnTap,
           padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
@@ -39,9 +38,7 @@ class BottomButtons extends StatelessWidget {
             child: Text(
               S.current.next,
               style: const TextStyle(
-                  color: ColorRes.orange2,
-                  fontSize: 17,
-                  fontFamily: FontRes.bold),
+                  color: ColorRes.darkOrange, fontSize: 17, fontFamily: FontRes.bold),
             ),
           ),
         ),
@@ -80,15 +77,13 @@ class BottomButtons extends StatelessWidget {
 class PlayBtnClick extends StatefulWidget {
   final VoidCallback onPlayBtnClick;
 
-  const PlayBtnClick({Key? key, required this.onPlayBtnClick})
-      : super(key: key);
+  const PlayBtnClick({Key? key, required this.onPlayBtnClick}) : super(key: key);
 
   @override
   State<PlayBtnClick> createState() => _PlayBtnClickState();
 }
 
-class _PlayBtnClickState extends State<PlayBtnClick>
-    with SingleTickerProviderStateMixin {
+class _PlayBtnClickState extends State<PlayBtnClick> with SingleTickerProviderStateMixin {
   late double _scale;
   late AnimationController _controller;
 

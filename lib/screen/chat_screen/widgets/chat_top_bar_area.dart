@@ -70,12 +70,10 @@ class ChatTopBarArea extends StatelessWidget {
                           children: [
                             Text(
                               conversation?.user?.username != null
-                                  ? '${conversation?.user?.username} '
-                                          .capitalize ??
-                                      ''
+                                  ? '${conversation?.user?.username} '.capitalize ?? ''
                                   : ' ',
                               style: const TextStyle(
-                                color: ColorRes.darkGrey4,
+                                color: ColorRes.darkGrey,
                                 fontSize: 16,
                                 fontFamily: FontRes.bold,
                               ),
@@ -83,11 +81,9 @@ class ChatTopBarArea extends StatelessWidget {
                               overflow: TextOverflow.ellipsis,
                             ),
                             Text(
-                              conversation?.user?.age != null
-                                  ? "${conversation?.user?.age}"
-                                  : '',
+                              conversation?.user?.age != null ? "${conversation?.user?.age}" : '',
                               style: const TextStyle(
-                                color: ColorRes.darkGrey4,
+                                color: ColorRes.darkGrey,
                                 fontSize: 16,
                               ),
                               maxLines: 1,
@@ -99,16 +95,13 @@ class ChatTopBarArea extends StatelessWidget {
                                     conversation?.user != null &&
                                     conversation?.user?.isHost != null &&
                                     conversation!.user!.isHost!,
-                                child: Image.asset(AssetRes.tickMark,
-                                    height: 15, width: 15)),
+                                child: Image.asset(AssetRes.tickMark, height: 15, width: 15)),
                           ],
                         ),
                         Text(
-                          conversation?.user?.city != null
-                              ? "${conversation?.user?.city}"
-                              : '',
+                          conversation?.user?.city != null ? "${conversation?.user?.city}" : '',
                           style: const TextStyle(
-                            color: ColorRes.grey6,
+                            color: ColorRes.darkGrey9,
                             fontSize: 13,
                           ),
                           maxLines: 1,
@@ -151,7 +144,7 @@ class ChatTopBarArea extends StatelessWidget {
             height: 0.5,
             width: Get.width,
             margin: const EdgeInsets.only(right: 10, left: 10, bottom: 5.5),
-            color: ColorRes.grey9,
+            color: ColorRes.grey2,
           ),
         ],
       ),

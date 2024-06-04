@@ -20,18 +20,20 @@ class CreatePostPage extends StatelessWidget {
       children: [
         model.imagesFile.isEmpty
             ? Container(
-                color: ColorRes.alabaster,
+                color: ColorRes.lightGrey2,
                 padding: const EdgeInsets.symmetric(vertical: 15),
                 width: double.infinity,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     InkWell(
-                        onTap: model.onPhotoTap, child: RowImageText(image: AssetRes.icPhoto, title: S.current.photo)),
+                        onTap: model.onPhotoTap,
+                        child: RowImageText(image: AssetRes.icPhoto, title: S.current.photo)),
                     Container(height: 20, width: 1, color: ColorRes.lightGrey),
                     InkWell(
                         onTap: model.onVideoTap,
-                        child: RowImageText(image: AssetRes.icVideo, title: S.current.videoCap.capitalize ?? ''))
+                        child: RowImageText(
+                            image: AssetRes.icVideo, title: S.current.videoCap.capitalize ?? ''))
                   ],
                 ),
               )
@@ -53,10 +55,12 @@ class CreatePostPage extends StatelessWidget {
             decoration: InputDecoration(
               border: InputBorder.none,
               hintText: S.of(context).writeSomethingHere,
-              hintStyle: const TextStyle(fontSize: 17, fontFamily: FontRes.regular, color: ColorRes.dimGrey2),
+              hintStyle: const TextStyle(
+                  fontSize: 17, fontFamily: FontRes.regular, color: ColorRes.dimGrey2),
               contentPadding: const EdgeInsets.all(15),
             ),
-            style: const TextStyle(fontSize: 18, color: ColorRes.dimGrey3, fontFamily: FontRes.regular),
+            style: const TextStyle(
+                fontSize: 18, color: ColorRes.dimGrey3, fontFamily: FontRes.regular),
             // detectedStyle: const TextStyle(fontSize: 18, color: ColorRes.orange2, fontFamily: FontRes.medium),
           ),
         )
@@ -78,8 +82,9 @@ class RowImageText extends StatelessWidget {
         Image.asset(image, width: 22, height: 22),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child:
-              Text(title, style: const TextStyle(fontFamily: FontRes.regular, fontSize: 17, color: ColorRes.dimGrey5)),
+          child: Text(title,
+              style: const TextStyle(
+                  fontFamily: FontRes.regular, fontSize: 17, color: ColorRes.dimGrey5)),
         )
       ],
     );

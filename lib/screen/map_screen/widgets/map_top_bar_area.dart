@@ -34,7 +34,7 @@ class MapTopBarArea extends StatelessWidget {
               height: 54,
               padding: const EdgeInsets.fromLTRB(11, 8, 8, 8),
               decoration: BoxDecoration(
-                color: ColorRes.grey18.withOpacity(0.5),
+                color: ColorRes.aquaHaze.withOpacity(0.5),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Row(
@@ -48,14 +48,12 @@ class MapTopBarArea extends StatelessWidget {
                   const SizedBox(width: 10),
                   Image.asset(AssetRes.themeLabel, height: 25, width: 75),
                   const SizedBox(width: 4),
-                  Text(S.current.map,
-                      style: const TextStyle(
-                          color: ColorRes.black2, fontSize: 15)),
+                  Text(S.current.map, style: const TextStyle(color: ColorRes.black, fontSize: 15)),
                   const Spacer(),
                   Container(
                     padding: const EdgeInsets.fromLTRB(11, 9, 11, 13),
                     decoration: BoxDecoration(
-                      color: ColorRes.darkGrey3.withOpacity(0.10),
+                      color: ColorRes.davyGrey.withOpacity(0.10),
                       borderRadius: BorderRadius.circular(7),
                     ),
                     child: DropdownButton<int>(
@@ -65,7 +63,7 @@ class MapTopBarArea extends StatelessWidget {
                         child: Transform.rotate(
                           angle: 4.7,
                           child: Image.asset(AssetRes.backArrow,
-                              color: ColorRes.grey14, height: 20, width: 20),
+                              color: ColorRes.darkGrey9, height: 20, width: 20),
                         ),
                       ),
                       isDense: true,
@@ -78,7 +76,7 @@ class MapTopBarArea extends StatelessWidget {
                                 child: Text(
                                   "$e ${S.current.km}",
                                   style: const TextStyle(
-                                    color: ColorRes.grey14,
+                                    color: ColorRes.darkGrey9,
                                     fontFamily: FontRes.semiBold,
                                     fontSize: 14,
                                   ),

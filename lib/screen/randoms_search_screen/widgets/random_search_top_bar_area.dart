@@ -29,7 +29,7 @@ class RandomSearchTopBarArea extends StatelessWidget {
                 padding: const EdgeInsets.all(5),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: ColorRes.orange2.withOpacity(0.06),
+                  color: ColorRes.darkOrange.withOpacity(0.06),
                 ),
                 child: Image.asset(
                   AssetRes.backArrow,
@@ -48,7 +48,7 @@ class RandomSearchTopBarArea extends StatelessWidget {
                 Text(
                   S.current.randoms,
                   style: const TextStyle(
-                    color: ColorRes.black2,
+                    color: ColorRes.black,
                     fontSize: 21,
                   ),
                 ),

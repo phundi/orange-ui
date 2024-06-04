@@ -11,8 +11,8 @@ import 'package:stacked/stacked.dart';
 class RandomsSearchScreen extends StatelessWidget {
   final int selectedGender;
   final String profileImage;
-  const RandomsSearchScreen(
-      {Key? key, required this.selectedGender, required this.profileImage})
+
+  const RandomsSearchScreen({Key? key, required this.selectedGender, required this.profileImage})
       : super(key: key);
 
   @override
@@ -36,7 +36,7 @@ class RandomsSearchScreen extends StatelessWidget {
                       style: const TextStyle(
                         fontFamily: FontRes.bold,
                         fontSize: 22,
-                        color: ColorRes.darkGrey7,
+                        color: ColorRes.davyGrey,
                       ),
                     )
                   : const SizedBox(),
