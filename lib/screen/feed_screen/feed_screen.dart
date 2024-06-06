@@ -2,7 +2,6 @@ import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
 import 'package:orange_ui/common/common_ui.dart';
 import 'package:orange_ui/common/dashboard_top_bar.dart';
-import 'package:orange_ui/model/social/post/add_comment.dart';
 import 'package:orange_ui/screen/feed_screen/feed_screen_view_model.dart';
 import 'package:orange_ui/screen/feed_screen/widget/feed_story_bar.dart';
 import 'package:orange_ui/screen/post_screen/widget/post_card.dart';
@@ -46,10 +45,10 @@ class FeedScreen extends StatelessWidget {
                                       padding: EdgeInsets.zero,
                                       itemCount: model.postList.length,
                                       itemBuilder: (context, index) {
-                                        Post post = model.postList[index];
                                         return PostCard(
-                                          post: post,
+                                          post: model.postList[index],
                                           model: model,
+                                          postIndex: index,
                                         );
                                       },
                                     ),
@@ -68,8 +67,7 @@ class FeedScreen extends StatelessWidget {
             width: 50,
             height: 50,
             decoration: ShapeDecoration(
-                shape: SmoothRectangleBorder(
-                    borderRadius: SmoothBorderRadius(cornerRadius: 30)),
+                shape: SmoothRectangleBorder(borderRadius: SmoothBorderRadius(cornerRadius: 30)),
                 gradient: StyleRes.linearGradient),
             child: const Icon(Icons.add_rounded, color: ColorRes.white),
           ),

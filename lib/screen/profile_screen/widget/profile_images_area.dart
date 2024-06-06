@@ -49,22 +49,16 @@ class ProfileImageArea extends StatelessWidget {
         ? fullImageView()
         : Expanded(
             child: Container(
-              margin: const EdgeInsets.only(
-                  left: 21, top: 10, right: 21, bottom: 20),
+              margin: const EdgeInsets.only(left: 21, top: 10, right: 21, bottom: 20),
               child: InkWell(
                 onTap: onImageTap,
                 child: Stack(
                   children: [
                     userData?.images == null || userData!.images.isEmpty
-                        ? Container(
-                            width: Get.width,
-                            height: Get.height,
-                            decoration: BoxDecoration(
-                              color: ColorRes.lightGrey,
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Image.asset(AssetRes.imageWarning),
-                          )
+                        ? CommonUI.profileImagePlaceHolder(
+                            name: userData?.fullname,
+                            heightWidth: MediaQuery.of(context).size.height,
+                            borderRadius: 20)
                         : ClipRRect(
                             borderRadius: BorderRadius.circular(20),
                             child: PageView.builder(
@@ -79,8 +73,7 @@ class ProfileImageArea extends StatelessWidget {
                                       images: userData?.images, index: index),
                                   fit: BoxFit.cover,
                                   filterQuality: FilterQuality.medium,
-                                  progressIndicatorBuilder:
-                                      (context, url, progress) {
+                                  progressIndicatorBuilder: (context, url, progress) {
                                     return ShimmerScreen.rectangular(
                                       width: Get.width,
                                       height: Get.height - 256,
@@ -90,10 +83,10 @@ class ProfileImageArea extends StatelessWidget {
                                     );
                                   },
                                   errorWidget: (context, url, error) {
-                                    return Container(
-                                      color: ColorRes.lightGrey,
-                                      child: Image.asset(AssetRes.imageWarning),
-                                    );
+                                    return CommonUI.profileImagePlaceHolder(
+                                        name: userData?.fullname,
+                                        heightWidth: MediaQuery.of(context).size.height - 256,
+                                        borderRadius: 20);
                                   },
                                 );
                               },
@@ -103,42 +96,30 @@ class ProfileImageArea extends StatelessWidget {
                       children: [
                         const SizedBox(height: 14),
                         TopStoryLine(
-                            images: userData?.images ?? [],
-                            pageController: pageController),
+                            images: userData?.images ?? [], pageController: pageController),
                         const Spacer(),
                         Padding(
                           padding: const EdgeInsets.only(left: 10),
                           child: Row(
                             children: [
-                              socialIcon(
-                                  AssetRes.instagramLogo,
-                                  15,
-                                  onInstagramTap,
+                              socialIcon(AssetRes.instagramLogo, 15, onInstagramTap,
                                   isSocialBtnVisible(userData?.instagram)),
-                              socialIcon(
-                                  AssetRes.facebookLogo,
-                                  21.0,
-                                  onFacebookTap,
+                              socialIcon(AssetRes.facebookLogo, 21.0, onFacebookTap,
                                   isSocialBtnVisible(userData?.facebook)),
-                              socialIcon(
-                                  AssetRes.youtubeLogo,
-                                  20.16,
-                                  onYoutubeTap,
+                              socialIcon(AssetRes.youtubeLogo, 20.16, onYoutubeTap,
                                   isSocialBtnVisible(userData?.youtube)),
                             ],
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(
-                              left: 10, right: 10, top: 7),
+                          padding: const EdgeInsets.only(left: 10, right: 10, top: 7),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(10),
                             child: BackdropFilter(
                               filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
                               child: Container(
                                 width: Get.width,
-                                padding:
-                                    const EdgeInsets.fromLTRB(13, 9, 13, 12),
+                                padding: const EdgeInsets.fromLTRB(13, 9, 13, 12),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
                                   color: ColorRes.black.withOpacity(0.4),
@@ -147,13 +128,11 @@ class ProfileImageArea extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
+                                      crossAxisAlignment: CrossAxisAlignment.center,
                                       children: [
                                         Flexible(
                                           child: Text(
-                                            CommonUI.fullName(
-                                                userData?.fullname),
+                                            CommonUI.fullName(userData?.fullname),
                                             style: const TextStyle(
                                               color: ColorRes.white,
                                               fontSize: 20,
@@ -193,9 +172,7 @@ class ProfileImageArea extends StatelessWidget {
                                       ],
                                     ),
                                     Visibility(
-                                      visible: userData?.live?.isEmpty ?? false
-                                          ? false
-                                          : true,
+                                      visible: userData?.live?.isEmpty ?? false ? false : true,
                                       child: Row(
                                         children: [
                                           GradientWidget(
@@ -209,8 +186,7 @@ class ProfileImageArea extends StatelessWidget {
                                           Text(
                                             userData?.live ?? '',
                                             style: const TextStyle(
-                                                color: ColorRes.white,
-                                                fontSize: 11),
+                                                color: ColorRes.white, fontSize: 11),
                                           ),
                                         ],
                                       ),
@@ -236,26 +212,21 @@ class ProfileImageArea extends StatelessWidget {
                                 onTap: onEditProfileTap,
                                 borderRadius: BorderRadius.circular(10),
                                 child: Container(
-                                  margin: const EdgeInsets.symmetric(
-                                      horizontal: 10),
+                                  margin: const EdgeInsets.symmetric(horizontal: 10),
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(10),
                                     child: BackdropFilter(
-                                      filter: ImageFilter.blur(
-                                          sigmaY: 6, sigmaX: 6),
+                                      filter: ImageFilter.blur(sigmaY: 6, sigmaX: 6),
                                       child: Container(
                                         height: 48,
                                         decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            color: ColorRes.black
-                                                .withOpacity(0.4)),
+                                            borderRadius: BorderRadius.circular(10),
+                                            color: ColorRes.black.withOpacity(0.4)),
                                         alignment: Alignment.center,
                                         child: Text(
                                           S.current.editProfile,
                                           style: TextStyle(
-                                            color: ColorRes.white
-                                                .withOpacity(0.86),
+                                            color: ColorRes.white.withOpacity(0.86),
                                             letterSpacing: 0.8,
                                             fontFamily: FontRes.bold,
                                           ),
@@ -274,8 +245,7 @@ class ProfileImageArea extends StatelessWidget {
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(10),
                                   child: BackdropFilter(
-                                    filter:
-                                        ImageFilter.blur(sigmaY: 6, sigmaX: 6),
+                                    filter: ImageFilter.blur(sigmaY: 6, sigmaX: 6),
                                     child: Container(
                                       height: 48,
                                       width: 56,
@@ -308,8 +278,7 @@ class ProfileImageArea extends StatelessWidget {
           );
   }
 
-  Widget socialIcon(
-      String icon, double size, VoidCallback onSocialIconTap, bool isVisible) {
+  Widget socialIcon(String icon, double size, VoidCallback onSocialIconTap, bool isVisible) {
     return Visibility(
       visible: isVisible,
       child: InkWell(
@@ -369,8 +338,7 @@ class ProfileImageArea extends StatelessWidget {
                     height: 5,
                     decoration: ShapeDecoration(
                         color: ColorRes.white,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(4))),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4))),
                   ),
                 ),
               ),
@@ -384,8 +352,7 @@ class ProfileImageArea extends StatelessWidget {
                     alignment: Alignment.bottomCenter,
                     child: Container(
                       height: 90,
-                      margin: const EdgeInsets.only(
-                          right: 15, left: 15, bottom: 10),
+                      margin: const EdgeInsets.only(right: 15, left: 15, bottom: 10),
                       padding: const EdgeInsets.all(5),
                       width: double.infinity,
                       decoration: BoxDecoration(
@@ -399,8 +366,8 @@ class ProfileImageArea extends StatelessWidget {
                             child: ShimmerScreen.rectangular(
                               height: 20,
                               width: 200,
-                              shapeBorder: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(4)),
+                              shapeBorder:
+                                  RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
                             ),
                           ),
                           Padding(
@@ -408,8 +375,8 @@ class ProfileImageArea extends StatelessWidget {
                             child: ShimmerScreen.rectangular(
                               height: 15,
                               width: 175,
-                              shapeBorder: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(4)),
+                              shapeBorder:
+                                  RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
                             ),
                           ),
                           const Padding(
@@ -485,8 +452,7 @@ class ProfileImageArea extends StatelessWidget {
                         Expanded(
                           child: Container(
                             height: 40,
-                            margin: const EdgeInsets.only(
-                                left: 15, right: 15, bottom: 15),
+                            margin: const EdgeInsets.only(left: 15, right: 15, bottom: 15),
                             padding: const EdgeInsets.all(5),
                             decoration: BoxDecoration(
                                 color: ColorRes.white.withOpacity(0.5),

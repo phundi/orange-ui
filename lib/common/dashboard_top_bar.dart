@@ -46,6 +46,7 @@ class DashboardTopBar extends StatelessWidget {
                     AssetRes.sun,
                     height: 20,
                     width: 20,
+                    color: ColorRes.darkOrange,
                   ),
                   const SizedBox(width: 5),
                   Text(S.of(context).lives,

@@ -8,7 +8,11 @@ import 'package:orange_ui/utils/font_res.dart';
 
 class CommonUI {
   static Widget profileImagePlaceHolder(
-      {required String? name, double heightWidth = 0, double? borderRadius, Color? color}) {
+      {required String? name,
+      double heightWidth = 0,
+      double? borderRadius,
+      Color? color,
+      double? fontSize}) {
     return Container(
       width: heightWidth,
       height: heightWidth,
@@ -20,7 +24,7 @@ class CommonUI {
         (name ?? 'Unknown')[0].toUpperCase(),
         style: TextStyle(
             fontFamily: FontRes.semiBold,
-            fontSize: heightWidth / 2,
+            fontSize: fontSize ?? (heightWidth / 2),
             color: (color ?? ColorRes.darkOrange).withOpacity(.5)),
       ),
     );

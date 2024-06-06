@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
 import 'package:orange_ui/common/confirmation_dialog.dart';
 import 'package:orange_ui/generated/l10n.dart';
+import 'package:orange_ui/model/social/story/view_story.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/service/pref_service.dart';
 import 'package:orange_ui/story_view/controller/story_controller.dart';
@@ -14,15 +15,15 @@ import 'package:stacked/stacked.dart';
 class StoryViewScreenViewModel extends BaseViewModel {
   StoryController storyController = StoryController();
   List<List<StoryItem>> stories = [];
-  List<RegistrationUserData> userStories = [];
+  List<RegistrationUserData> users = [];
   PageController pageController;
   int userIndex = 0;
 
-  StoryViewScreenViewModel(
-      this.userStories, this.userIndex, this.pageController) {
-    for (var user in userStories) {
+  StoryViewScreenViewModel(this.users, this.userIndex, this.pageController) {
+    for (var user in users) {
       List<StoryItem> userStories =
           user.story?.map((e) => e.toStoryItem(storyController)).toList() ?? [];
+      print(userStories.first.story?.user?.toJson());
       stories.add(userStories);
       notifyListeners();
     }
@@ -33,9 +34,23 @@ class StoryViewScreenViewModel extends BaseViewModel {
   void onStoryShow(StoryItem value) {
     if (!value.viewedByUsersIds.contains('${PrefService.userId}')) {
       ApiProvider().callPost(
-          completion: (response) {},
-          url: Urls.aViewStory,
-          param: {Urls.userId: PrefService.userId, Urls.aStoryId: value.id});
+        completion: (response) {
+          print(response);
+          Story? s = ViewStory.fromJson(response).data;
+          if (s != null) {
+            if (userIndex < users.length) {
+              List<Story> stories = users[userIndex].story ?? [];
+              int storyIndex = stories.indexWhere((element) => element.id == s.id);
+              if (storyIndex != -1) {
+                s.user = value.story?.user;
+                stories[storyIndex] = s;
+              }
+            }
+          }
+        },
+        url: Urls.aViewStory,
+        param: {Urls.userId: PrefService.userId, Urls.aStoryId: value.id},
+      );
     }
   }
 
@@ -50,7 +65,7 @@ class StoryViewScreenViewModel extends BaseViewModel {
 
   void onNext() {
     if (userIndex == (stories.length - 1)) {
-      Get.back();
+      Get.back(result: users[userIndex]);
       return;
     }
     pageController.animateToPage(userIndex + 1,
@@ -81,10 +96,7 @@ class StoryViewScreenViewModel extends BaseViewModel {
               });
             },
             url: Urls.aDeleteStory,
-            param: {
-              Urls.myUserId: PrefService.userId,
-              Urls.aStoryId: story?.id
-            },
+            param: {Urls.myUserId: PrefService.userId, Urls.aStoryId: story?.id},
           );
 
           onNext();

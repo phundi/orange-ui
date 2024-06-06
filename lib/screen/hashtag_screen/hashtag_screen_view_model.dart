@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
 import 'package:orange_ui/model/social/post/add_comment.dart';
 import 'package:orange_ui/model/social/post/fetch_post_by_user.dart';
+import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/service/pref_service.dart';
 import 'package:orange_ui/utils/const_res.dart';
 import 'package:orange_ui/utils/urls.dart';
@@ -43,6 +44,15 @@ class HashtagScreenViewModel extends BaseViewModel {
 
   onDeleteItem(int id) {
     posts.removeWhere((element) => element.id == id);
+    notifyListeners();
+  }
+
+  updateAllPost(RegistrationUserData data) {
+    for (var element in posts) {
+      if (element.userId == data.id) {
+        element.user = data;
+      }
+    }
     notifyListeners();
   }
 }

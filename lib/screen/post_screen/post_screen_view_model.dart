@@ -52,8 +52,7 @@ class PostScreenViewModel extends BaseViewModel {
 
   void fetchScrollData() {
     scrollController.addListener(() {
-      if (scrollController.offset ==
-          scrollController.position.maxScrollExtent) {
+      if (scrollController.offset == scrollController.position.maxScrollExtent) {
         if (!isLoading) {
           fetchPostByUse();
         }
@@ -63,6 +62,15 @@ class PostScreenViewModel extends BaseViewModel {
 
   onDeleteItem(int id) {
     posts.removeWhere((element) => element.id == id);
+    notifyListeners();
+  }
+
+  updateAllPost(RegistrationUserData? data) {
+    for (var element in posts) {
+      if (element.userId == data?.id) {
+        element.user = data;
+      }
+    }
     notifyListeners();
   }
 }

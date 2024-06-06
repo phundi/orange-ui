@@ -47,7 +47,7 @@ class OptionsCenterArea extends StatelessWidget {
             onTap: onLiveStreamTap,
             widget: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10.0),
-              child: Image.asset(AssetRes.sun, height: 28, width: 28),
+              child: Image.asset(AssetRes.sun, height: 28, width: 28, color: ColorRes.lightOrange),
             )),
         Visibility(
           visible: verification == 0,

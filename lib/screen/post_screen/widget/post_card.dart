@@ -1,23 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:orange_ui/model/social/post/add_comment.dart';
+import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/screen/feed_screen/feed_screen_view_model.dart';
-import 'package:orange_ui/screen/post_screen/widget/post_bottom_bar.dart';
+import 'package:orange_ui/screen/post_screen/post_screen_view_model.dart';
 import 'package:orange_ui/screen/post_screen/widget/image_post.dart';
-import 'package:orange_ui/screen/post_screen/widget/text_post.dart';
+import 'package:orange_ui/screen/post_screen/widget/post_bottom_bar.dart';
 import 'package:orange_ui/screen/post_screen/widget/post_top_area.dart';
+import 'package:orange_ui/screen/post_screen/widget/text_post.dart';
 import 'package:orange_ui/screen/post_screen/widget/video_post.dart';
 import 'package:orange_ui/utils/color_res.dart';
 
 class PostCard extends StatelessWidget {
   final Post post;
   final FeedScreenViewModel model;
+  final PostScreenViewModel? viewModel;
   final Function(int id)? onDeleteItem;
+  final int? postIndex;
+  final Function(RegistrationUserData data)? updatePost;
 
   const PostCard({
     Key? key,
     required this.post,
     required this.model,
     this.onDeleteItem,
+    this.postIndex,
+    this.viewModel,
+    this.updatePost,
   }) : super(key: key);
 
   @override
@@ -30,7 +38,16 @@ class PostCard extends StatelessWidget {
             onSelected: (value) {
               model.onMoreBtnClick(value, post, onDeleteItem);
             },
-            onProfilePictureClick: model.onProfilePictureClick),
+            onProfilePictureClick: (userData) {
+              if (userData != null) {
+                model.onProfilePictureClick(
+                    userStories: [userData],
+                    onCallback: (data) {
+                      updatePost?.call(data!);
+                    },
+                    userIndex: 0);
+              }
+            }),
         TextPost(description: post.description),
         post.content == null || post.content!.isEmpty
             ? const SizedBox()

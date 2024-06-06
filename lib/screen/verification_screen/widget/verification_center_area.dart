@@ -265,9 +265,7 @@ class VerificationCenterArea extends StatelessWidget {
                           ),
                         ),
                       ),
-                      const SizedBox(
-                        height: 10,
-                      ),
+                      const SizedBox(height: 10),
                       Center(
                         child: selfieImage == null || selfieImage!.path.isEmpty
                             ? InkWell(

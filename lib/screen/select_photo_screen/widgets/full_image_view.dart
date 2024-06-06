@@ -3,6 +3,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:orange_ui/common/common_ui.dart';
 import 'package:orange_ui/common/gradient_widget.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
@@ -35,17 +36,10 @@ class FullImageView extends StatelessWidget {
       child: Stack(
         children: [
           imageList == null || imageList!.isEmpty
-              ? Container(
-                  width: Get.width,
-                  height: Get.height / 1.65,
-                  decoration: BoxDecoration(
-                      color: ColorRes.lightGrey2, borderRadius: BorderRadius.circular(20)),
-                  child: Image.asset(
-                    AssetRes.imageWarning,
-                    height: 100,
-                    width: 100,
-                  ),
-                )
+              ? CommonUI.profileImagePlaceHolder(
+                  name: fullName,
+                  heightWidth: MediaQuery.of(context).size.height / 1.65,
+                  borderRadius: 20)
               : PageView.builder(
                   controller: pageController,
                   itemCount: imageList?.length,

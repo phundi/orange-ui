@@ -39,7 +39,6 @@ class AssetRes {
   static const String camera = "${icons}camera.png";
   static const String camera2 = "${icons}camera2.png";
   static const String share = "${icons}share.png";
-  static const String markerBG = "${icons}marker_bg.png";
   static const String speaker = "${icons}speaker_on.png";
   static const String speakerOff = "${icons}speaker_off.png";
   static const String sun = "${icons}sun.png";
@@ -55,8 +54,7 @@ class AssetRes {
   static const String icBookMark = "${icons}ic_book_mark.png";
   static const String icBlock = "${icons}ic_block.png";
   static const String icFeed = "${icons}ic_feed.png";
-  static const String icHorizontalThreeDot =
-      "${icons}ic_horizontal_three_dot.png";
+  static const String icHorizontalThreeDot = "${icons}ic_horizontal_three_dot.png";
   static const String icComment = "${icons}ic_comment.png";
   static const String icPostShare = "${icons}ic_post_share.png";
   static const String icPlay = "${icons}ic_play.png";
@@ -94,10 +92,5 @@ class AssetRes {
   static const String loginBG = "${images}login_bg.png";
   static const String themeLabelWhite = "${images}theme_label_white.png";
   static const String edit = '${images}eva_edit-fill.png';
-  static const String icImage = '${images}ic_image.jpg';
-  static const String icImage1 = '${images}image1.jpeg';
-  static const String icImage2 = '${images}image2.jpeg';
-  static const String icImage3 = '${images}image3.jpeg';
-  static const String icImage4 = '${images}image4.jpeg';
   static const String icBlackBgShadow = '${images}ic_black_bg_shadow.png';
 }

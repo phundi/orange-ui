@@ -66,7 +66,7 @@ class BottomCommentField extends StatelessWidget {
                                   textCapitalization: TextCapitalization.sentences,
                                   decoration: InputDecoration(
                                       contentPadding:
-                                          const EdgeInsets.only(left: 15, right: 15, bottom: 15),
+                                          const EdgeInsets.only(left: 15, right: 15, bottom: 16),
                                       border: InputBorder.none,
                                       hintText: S.of(context).addComment,
                                       hintStyle: const TextStyle(

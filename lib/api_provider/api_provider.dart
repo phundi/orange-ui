@@ -649,7 +649,7 @@ class ApiProvider {
       (value) {
         log('❗️RESPONSE:  ${value.body}');
         var response = jsonDecode(value.body);
-        completion.call(response);
+        completion(response);
       },
     );
   }

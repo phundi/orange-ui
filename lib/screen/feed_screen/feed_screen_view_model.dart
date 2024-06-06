@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:camera/camera.dart';
 import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/cupertino.dart';
@@ -8,7 +10,6 @@ import 'package:orange_ui/api_provider/api_provider.dart';
 import 'package:orange_ui/common/common_fun.dart';
 import 'package:orange_ui/common/common_ui.dart';
 import 'package:orange_ui/common/confirmation_dialog.dart';
-
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/setting.dart';
 import 'package:orange_ui/model/social/feed.dart';
@@ -37,7 +38,7 @@ class FeedScreenViewModel extends BaseViewModel {
   bool isLoading = true;
   ScrollController scrollController = ScrollController();
   MoreBtnValue moreBtnValue = MoreBtnValue.share;
-  RegistrationUserData? userData;
+  RegistrationUserData? myUserData;
 
   // init Camera description
   List<CameraDescription> cameras = [];
@@ -55,7 +56,6 @@ class FeedScreenViewModel extends BaseViewModel {
     ApiProvider().callPost(
         completion: (response) {
           Feed feed = Feed.fromJson(response);
-
           if (postList.isEmpty) {
             postList = feed.data?.posts ?? [];
           } else {
@@ -104,12 +104,12 @@ class FeedScreenViewModel extends BaseViewModel {
 
   void getProfile() {
     ApiProvider().getProfile(userID: PrefService.userId).then((value) {
-      userData = value?.data;
+      myUserData = value?.data;
       // Update My PostUser
       for (var element in postList) {
         Post p = element;
-        if (userData?.id == p.user?.id) {
-          element.user = userData;
+        if (myUserData?.id == p.user?.id) {
+          element.user = myUserData;
         }
       }
       notifyListeners();
@@ -118,8 +118,7 @@ class FeedScreenViewModel extends BaseViewModel {
 
   void fetchScrollData() {
     scrollController.addListener(() {
-      if (scrollController.offset ==
-          scrollController.position.maxScrollExtent) {
+      if (scrollController.offset == scrollController.position.maxScrollExtent) {
         if (!isLoading) {
           fetchFeedData();
         }
@@ -128,8 +127,7 @@ class FeedScreenViewModel extends BaseViewModel {
   }
 
   void onCommentBtnClick(Post? post) {
-    Get.bottomSheet(CommentSheet(post: post), isScrollControlled: true)
-        .then((value) {
+    Get.bottomSheet(CommentSheet(post: post), isScrollControlled: true).then((value) {
       notifyListeners();
     });
   }
@@ -149,16 +147,14 @@ class FeedScreenViewModel extends BaseViewModel {
     });
   }
 
-  void onMoreBtnClick(
-      MoreBtnValue value, Post post, Function(int id)? onDeleteItem) {
+  void onMoreBtnClick(MoreBtnValue value, Post post, Function(int id)? onDeleteItem) {
     if (MoreBtnValue.share == value) {
       sharePost(post);
     } else if (MoreBtnValue.report == value) {
       Get.bottomSheet(
           ReportSheet(
               reportId: post.id,
-              profileImage:
-                  CommonFun.getProfileImage(images: post.user?.images),
+              profileImage: CommonFun.getProfileImage(images: post.user?.images),
               age: post.user?.age,
               fullName: post.user?.fullname,
               address: post.user?.live,
@@ -191,7 +187,7 @@ class FeedScreenViewModel extends BaseViewModel {
   void sharePost(Post post) async {
     BranchUniversalObject buo = BranchUniversalObject(
       canonicalIdentifier: 'flutter/branch',
-      title: userData?.fullname ?? '',
+      title: myUserData?.fullname ?? '',
       imageUrl: (post.content ?? []).isEmpty
           ? ''
           : ((post.content ?? []).first.contentType == 1
@@ -200,18 +196,13 @@ class FeedScreenViewModel extends BaseViewModel {
       contentDescription: post.description ?? '',
       publiclyIndex: true,
       locallyIndex: true,
-      contentMetadata: BranchContentMetaData()
-        ..addCustomMetadata(Urls.aPostId, post.id),
+      contentMetadata: BranchContentMetaData()..addCustomMetadata(Urls.aPostId, post.id),
     );
     BranchLinkProperties lp = BranchLinkProperties(
-        channel: 'facebook',
-        feature: 'sharing',
-        stage: 'new share',
-        tags: ['one', 'two', 'three']);
+        channel: 'facebook', feature: 'sharing', stage: 'new share', tags: ['one', 'two', 'three']);
     lp.addControlParam('url', 'http://www.google.com');
     lp.addControlParam('url2', 'http://flutter.dev');
-    BranchResponse response =
-        await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
+    BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
     if (response.success) {
       Share.share(
         '${S.current.checkOutThisProfile} ${response.result}',
@@ -221,7 +212,7 @@ class FeedScreenViewModel extends BaseViewModel {
   }
 
   void onNotificationTap() {
-    userData?.isBlock == 1
+    myUserData?.isBlock == 1
         ? CommonUI.snackBarWidget(S.current.userBlock)
         : Get.to(() => const NotificationScreen());
   }
@@ -231,13 +222,13 @@ class FeedScreenViewModel extends BaseViewModel {
   }
 
   void onSearchTap() {
-    userData?.isBlock == 1
+    myUserData?.isBlock == 1
         ? CommonUI.snackBarWidget(S.current.userBlock)
         : Get.to(() => const SearchScreen());
   }
 
   void prefData() async {
-    userData = await PrefService.getUserData();
+    myUserData = await PrefService.getUserData();
     PrefService.getSettingData().then((value) {
       settingAppData = value?.appdata;
       notifyListeners();
@@ -249,21 +240,40 @@ class FeedScreenViewModel extends BaseViewModel {
     }
   }
 
-  onProfilePictureClick(RegistrationUserData? userData) {
-    if ((userData?.story ?? []).isEmpty) {
+  onProfilePictureClick(
+      {required List<RegistrationUserData> userStories,
+      Function(RegistrationUserData? data)? onCallback,
+      required int userIndex}) {
+    if (userStories.isEmpty) {
       return;
     }
-    if (userData?.story != null || userData!.story!.isNotEmpty) {
-      Get.bottomSheet(
-        StoryViewScreen(stories: [userData!], userIndex: 0),
-        isScrollControlled: true,
-        barrierColor: ColorRes.black,
-        shape: SmoothRectangleBorder(
-            borderRadius: SmoothBorderRadius(cornerRadius: 0)),
-      ).then((value) {
-        getProfile();
-        fetchStories(userData: userData);
-      });
-    }
+
+    Get.bottomSheet<RegistrationUserData?>(
+      StoryViewScreen(stories: userStories, userIndex: userIndex),
+      isScrollControlled: true,
+      barrierColor: ColorRes.black,
+      shape: SmoothRectangleBorder(borderRadius: SmoothBorderRadius(cornerRadius: 0)),
+    ).then((value) {
+      getProfile();
+      if (value != null) {
+        for (var element in postList) {
+          if (element.userId == value.id) {
+            element.user = value;
+          }
+        }
+        if (myUserData?.id == value.id) {
+          myUserData = value;
+        }
+        int index = headerStories.indexWhere((element) => element.id == value.id);
+
+        if (index != -1) {
+          headerStories[index] = value;
+          log('${headerStories[index].toJson()}');
+        }
+
+        notifyListeners();
+        onCallback?.call(value);
+      }
+    });
   }
 }

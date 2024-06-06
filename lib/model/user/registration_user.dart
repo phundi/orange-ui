@@ -18,9 +18,7 @@ class RegistrationUser {
   RegistrationUser.fromJson(dynamic json) {
     _status = json['status'];
     _message = json['message'];
-    _data = json['data'] != null
-        ? RegistrationUserData.fromJson(json['data'])
-        : null;
+    _data = json['data'] != null ? RegistrationUserData.fromJson(json['data']) : null;
   }
 
   bool? _status;
@@ -522,6 +520,10 @@ class Story {
   String? get createdAt => _createdAt;
   String? get updatedAt => _updatedAt;
   bool? get storyView => _storyView;
+
+  set viewByUserIds(String? value) {
+    _viewByUserIds = value;
+  }
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};

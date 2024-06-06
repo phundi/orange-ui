@@ -81,9 +81,12 @@ class PostScreen extends StatelessWidget {
                             padding: const EdgeInsets.only(top: 10),
                             itemBuilder: (context, index) {
                               return PostCard(
-                                  post: viewModel.posts[index],
-                                  model: model,
-                                  onDeleteItem: viewModel.onDeleteItem);
+                                postIndex: index,
+                                post: viewModel.posts[index],
+                                model: model,
+                                onDeleteItem: viewModel.onDeleteItem,
+                                updatePost: viewModel.updateAllPost,
+                              );
                             },
                           ),
               ),

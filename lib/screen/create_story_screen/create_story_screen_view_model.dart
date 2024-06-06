@@ -9,12 +9,12 @@ import 'package:orange_ui/common/common_fun.dart';
 import 'package:orange_ui/common/video_upload_dialog.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/screen/camera_preview_screen/camera_preview_screen.dart';
-import 'package:orange_ui/screen/camera_screen/widget/media_sheet.dart';
+import 'package:orange_ui/screen/create_story_screen/widget/media_sheet.dart';
 import 'package:orange_ui/utils/app_res.dart';
 import 'package:orange_ui/utils/const_res.dart';
 import 'package:stacked/stacked.dart';
 
-class CameraScreenViewModel extends BaseViewModel {
+class CreateStoryScreenViewModel extends BaseViewModel {
   late CameraController cameraController;
   List<CameraDescription> cameras;
   bool isLoading = true;
@@ -23,7 +23,7 @@ class CameraScreenViewModel extends BaseViewModel {
   ImagePicker imagePicker = ImagePicker();
   bool isFirstTimeLoadCamera = true;
 
-  CameraScreenViewModel(this.cameras);
+  CreateStoryScreenViewModel(this.cameras);
 
   void init() {
     initCamera(cameras[0]);
@@ -31,12 +31,10 @@ class CameraScreenViewModel extends BaseViewModel {
 
   void initCamera(CameraDescription cameraDescription) async {
     isLoading = true;
-    cameraController =
-        CameraController(cameraDescription, ResolutionPreset.high);
+    cameraController = CameraController(cameraDescription, ResolutionPreset.high);
     cameraController.initialize().then((_) async {
       if (isFirstTimeLoadCamera) {
-        await cameraController
-            .lockCaptureOrientation(DeviceOrientation.portraitUp);
+        await cameraController.lockCaptureOrientation(DeviceOrientation.portraitUp);
         await cameraController.prepareForVideoRecording();
       }
       isFirstTimeLoadCamera = false;
@@ -52,8 +50,7 @@ class CameraScreenViewModel extends BaseViewModel {
   }
 
   void onCameraFlip() {
-    if (cameraController.description.lensDirection ==
-        CameraLensDirection.front) {
+    if (cameraController.description.lensDirection == CameraLensDirection.front) {
       final CameraDescription selectedCamera = cameras[0];
       initCamera(selectedCamera);
     } else {
@@ -118,9 +115,7 @@ class CameraScreenViewModel extends BaseViewModel {
 
   void selectVideoFromMedia() {
     imagePicker
-        .pickVideo(
-            source: ImageSource.gallery,
-            maxDuration: const Duration(seconds: 30))
+        .pickVideo(source: ImageSource.gallery, maxDuration: const Duration(seconds: 30))
         .then(
       (value) async {
         if (value != null) {

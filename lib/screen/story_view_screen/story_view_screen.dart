@@ -33,64 +33,66 @@ class StoryViewScreen extends StatelessWidget {
           child: Container(
             margin: EdgeInsets.only(top: AppBar().preferredSize.height),
             child: PageView.builder(
-                controller: model.pageController,
-                itemCount: stories.length,
-                onPageChanged: model.onPageChange,
-                itemBuilder: (context, storyIndex) {
-                  return StoryView(
-                    storyItems: model.stories[storyIndex],
-                    inline: true,
-                    onStoryShow: model.onStoryShow,
-                    onBack: model.onPreviousUser,
-                    onComplete: model.onNext,
-                    progressPosition: ProgressPosition.top,
-                    repeat: false,
-                    controller: model.storyController,
-                    overlayWidget: (item) {
-                      RegistrationUserData? user = item.story?.user;
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
-                        child: Row(
-                          children: [
-                            ClipRRect(
-                              borderRadius: SmoothBorderRadius(cornerRadius: 30),
-                              child: CachedNetworkImage(
-                                imageUrl: CommonFun.getProfileImage(images: user?.images),
-                                width: 35,
-                                height: 35,
-                                fit: BoxFit.cover,
-                                errorWidget: (context, url, error) {
-                                  return CommonUI.profileImagePlaceHolder(name: user?.fullname);
-                                },
-                              ),
+              controller: model.pageController,
+              itemCount: stories.length,
+              onPageChanged: model.onPageChange,
+              itemBuilder: (context, storyIndex) {
+                return StoryView(
+                  storyItems: model.stories[storyIndex],
+                  inline: true,
+                  onStoryShow: model.onStoryShow,
+                  onBack: model.onPreviousUser,
+                  onComplete: model.onNext,
+                  progressPosition: ProgressPosition.top,
+                  repeat: false,
+                  controller: model.storyController,
+                  overlayWidget: (item) {
+                    print(item.story?.user?.toJson());
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+                      child: Row(
+                        children: [
+                          ClipRRect(
+                            borderRadius: SmoothBorderRadius(cornerRadius: 30),
+                            child: CachedNetworkImage(
+                              imageUrl: CommonFun.getProfileImage(images: item.story?.user?.images),
+                              width: 35,
+                              height: 35,
+                              fit: BoxFit.cover,
+                              errorWidget: (context, url, error) {
+                                return CommonUI.profileImagePlaceHolder(
+                                    name: item.story?.user?.fullname);
+                              },
                             ),
-                            const SizedBox(width: 10),
-                            Expanded(
-                              child: Row(
-                                children: [
-                                  Flexible(
-                                      child: Text(CommonUI.fullName(user?.fullname),
-                                          style: const TextStyle(
-                                              fontFamily: FontRes.bold,
-                                              color: ColorRes.white,
-                                              fontSize: 15),
-                                          maxLines: 1,
-                                          overflow: TextOverflow.ellipsis)),
-                                  const SizedBox(width: 8),
-                                  Container(
-                                    width: 4,
-                                    height: 4,
-                                    color: ColorRes.white.withOpacity(0.7),
-                                  ),
-                                  const SizedBox(width: 4),
-                                  Text(CommonFun.timeAgo(item.story?.date ?? DateTime.now()),
-                                      style: const TextStyle(
-                                          fontFamily: FontRes.regular,
-                                          fontSize: 13,
-                                          color: ColorRes.white)),
-                                ],
-                              ),
+                          ),
+                          const SizedBox(width: 10),
+                          Expanded(
+                            child: Row(
+                              children: [
+                                Flexible(
+                                    child: Text(CommonUI.fullName(item.story?.user?.fullname),
+                                        style: const TextStyle(
+                                            fontFamily: FontRes.bold,
+                                            color: ColorRes.white,
+                                            fontSize: 15),
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis)),
+                                const SizedBox(width: 8),
+                                Container(
+                                  width: 4,
+                                  height: 4,
+                                  color: ColorRes.white.withOpacity(0.7),
+                                ),
+                                const SizedBox(width: 4),
+                                Text(CommonFun.timeAgo(item.story?.date ?? DateTime.now()),
+                                    style: const TextStyle(
+                                        fontFamily: FontRes.regular,
+                                        fontSize: 13,
+                                        color: ColorRes.white)),
+                              ],
                             ),
+                          ),
+                          if ((item.story?.viewByUserIds?.split(',').length ?? 0) > 0)
                             Container(
                               margin: const EdgeInsets.symmetric(horizontal: 5),
                               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
@@ -102,7 +104,7 @@ class StoryViewScreen extends StatelessWidget {
                                 children: [
                                   Image.asset(AssetRes.icEyeBlack, width: 16),
                                   Text(
-                                    ' ${NumberFormat.compact().format(stories[userIndex].story?[storyIndex].viewByUserIds?.split(',').length ?? 0)}',
+                                    ' ${NumberFormat.compact().format(item.story?.viewByUserIds?.split(',').length ?? 0)}',
                                     style: const TextStyle(
                                         fontFamily: FontRes.medium,
                                         fontSize: 12,
@@ -111,52 +113,49 @@ class StoryViewScreen extends StatelessWidget {
                                 ],
                               ),
                             ),
-                            if (item.story?.user?.id == PrefService.userId)
-                              PopupMenuButton(
-                                onSelected: (value) {
-                                  model.onStoryDelete(item.story);
-                                },
-                                onOpened: () {
-                                  model.storyController.pause();
-                                },
-                                padding: EdgeInsets.zero,
-                                itemBuilder: (context) {
-                                  return <PopupMenuEntry>[
-                                    PopupMenuItem(
-                                      value: 'Delete',
-                                      height: 30,
-                                      child: Center(
-                                        child: Text(
-                                          S.of(context).delete,
-                                          style: const TextStyle(
-                                              fontFamily: FontRes.medium,
-                                              fontSize: 15,
-                                              color: ColorRes.darkOrange),
-                                        ),
+                          if (item.story?.user?.id == PrefService.userId)
+                            PopupMenuButton(
+                              onSelected: (value) {
+                                model.onStoryDelete(item.story);
+                              },
+                              onOpened: () {
+                                model.storyController.pause();
+                              },
+                              padding: EdgeInsets.zero,
+                              itemBuilder: (context) {
+                                return <PopupMenuEntry>[
+                                  PopupMenuItem(
+                                    value: 'Delete',
+                                    height: 30,
+                                    child: Center(
+                                      child: Text(
+                                        S.of(context).delete,
+                                        style: const TextStyle(
+                                            fontFamily: FontRes.medium,
+                                            fontSize: 15,
+                                            color: ColorRes.darkOrange),
                                       ),
                                     ),
-                                  ];
-                                },
-                                shape: SmoothRectangleBorder(
-                                    borderRadius:
-                                        SmoothBorderRadius(cornerRadius: 6, cornerSmoothing: 1),
-                                    side: const BorderSide(color: ColorRes.greyShade200)),
-                                surfaceTintColor: ColorRes.white,
-                                color: ColorRes.white,
-                                position: PopupMenuPosition.under,
-                                child: Image.asset(
-                                  AssetRes.icHorizontalThreeDot,
-                                  height: 20,
-                                  width: 20,
-                                  color: ColorRes.white,
-                                ),
-                              )
-                          ],
-                        ),
-                      );
-                    },
-                  );
-                }),
+                                  ),
+                                ];
+                              },
+                              shape: SmoothRectangleBorder(
+                                  borderRadius:
+                                      SmoothBorderRadius(cornerRadius: 6, cornerSmoothing: 1),
+                                  side: const BorderSide(color: ColorRes.greyShade200)),
+                              surfaceTintColor: ColorRes.white,
+                              color: ColorRes.white,
+                              position: PopupMenuPosition.under,
+                              child: Image.asset(AssetRes.icHorizontalThreeDot,
+                                  height: 20, width: 20, color: ColorRes.white),
+                            )
+                        ],
+                      ),
+                    );
+                  },
+                );
+              },
+            ),
           ),
         );
       },

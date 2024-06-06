@@ -64,6 +64,8 @@ class HashtagScreen extends StatelessWidget {
                     itemBuilder: (context, index) => PostCard(
                       model: model,
                       post: viewModel.posts[index],
+                      postIndex: index,
+                      updatePost: viewModel.updateAllPost,
                       onDeleteItem: viewModel.onDeleteItem,
                     ),
                   );

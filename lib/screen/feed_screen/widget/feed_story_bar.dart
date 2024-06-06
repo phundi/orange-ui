@@ -5,9 +5,8 @@ import 'package:get/get.dart';
 import 'package:orange_ui/common/common_fun.dart';
 import 'package:orange_ui/common/common_ui.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
-import 'package:orange_ui/screen/camera_screen/camera_screen.dart';
+import 'package:orange_ui/screen/create_story_screen/create_story_screen.dart';
 import 'package:orange_ui/screen/feed_screen/feed_screen_view_model.dart';
-import 'package:orange_ui/screen/story_view_screen/story_view_screen.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
 import 'package:orange_ui/utils/font_res.dart';
@@ -34,36 +33,20 @@ class FeedStoryBar extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 0),
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
-                RegistrationUserData userData = model.headerStories[index];
                 return InkWell(
-                  onTap: () {
-                    Get.bottomSheet(
-                      StoryViewScreen(
-                          stories: model.headerStories, userIndex: index),
-                      isScrollControlled: true,
-                      barrierColor: ColorRes.black,
-                      shape: SmoothRectangleBorder(
-                          borderRadius: SmoothBorderRadius(cornerRadius: 0)),
-                    ).then((value) {
-                      model.fetchStories(userData: userData);
-                    });
-                  },
+                  onTap: () => model.onProfilePictureClick(
+                      userStories: model.headerStories, userIndex: index),
                   child: SizedBox(
                     width: 80,
                     height: 90,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        StoryProfileView(
-                          userData: userData,
-                          borderWidth: 2.5,
-                        ),
+                        StoryProfileView(userData: model.headerStories[index], borderWidth: 2.5),
                         Text(
                           model.headerStories[index].fullname ?? '',
                           style: const TextStyle(
-                              color: ColorRes.dimGrey3,
-                              fontSize: 13,
-                              fontFamily: FontRes.semiBold),
+                              color: ColorRes.dimGrey3, fontSize: 13, fontFamily: FontRes.semiBold),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         )
@@ -87,21 +70,13 @@ class MyStoryBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isStoryAvailable = (model.userData?.story ?? []).isNotEmpty;
+    bool isStoryAvailable = (model.myUserData?.story ?? []).isNotEmpty;
     return InkWell(
       onTap: () {
         if (isStoryAvailable) {
-          Get.bottomSheet(
-            StoryViewScreen(stories: [model.userData!], userIndex: 0),
-            isScrollControlled: true,
-            barrierColor: ColorRes.black,
-            shape: SmoothRectangleBorder(
-                borderRadius: SmoothBorderRadius(cornerRadius: 0)),
-          ).then((value) {
-            model.getProfile();
-          });
+          model.onProfilePictureClick(userStories: [model.myUserData!], userIndex: 0);
         } else {
-          Get.to(() => CameraScreen(cameras: model.cameras))?.then((value) {
+          Get.to(() => CreateStoryScreen(cameras: model.cameras))?.then((value) {
             model.getProfile();
           });
         }
@@ -113,20 +88,23 @@ class MyStoryBox extends StatelessWidget {
         child: Stack(
           alignment: Alignment.topCenter,
           children: [
-            StoryProfileView(userData: model.userData, borderWidth: 2.5),
+            StoryProfileView(userData: model.myUserData, borderWidth: 2.5),
             Positioned(
               bottom: 6,
               child: InkWell(
                 onTap: () {
-                  Get.to(() => CameraScreen(cameras: model.cameras))
-                      ?.then((value) {
+                  Get.to(() => CreateStoryScreen(cameras: model.cameras))?.then((value) {
                     model.getProfile();
                   });
                 },
                 child: Container(
-                    decoration: const BoxDecoration(
-                        color: Colors.white, shape: BoxShape.circle),
-                    child: Image.asset(AssetRes.add, height: 25, width: 25)),
+                    decoration: const BoxDecoration(color: Colors.white, shape: BoxShape.circle),
+                    child: Image.asset(
+                      AssetRes.add,
+                      height: 25,
+                      width: 25,
+                      color: ColorRes.darkOrange,
+                    )),
               ),
             )
           ],
@@ -162,13 +140,10 @@ class StoryProfileView extends StatelessWidget {
       margin: margin ?? const EdgeInsets.symmetric(horizontal: 5),
       decoration: ShapeDecoration(
         shape: SmoothRectangleBorder(
-          borderRadius: SmoothBorderRadius(
-              cornerRadius: cornerRadius ?? 15.5, cornerSmoothing: 1),
+          borderRadius: SmoothBorderRadius(cornerRadius: cornerRadius ?? 15.5, cornerSmoothing: 1),
         ),
         gradient: isStoryAvailable
-            ? (userData!.isAllStoryShown()
-                ? StyleRes.linearDimGrey
-                : StyleRes.linearGradient)
+            ? (userData!.isAllStoryShown() ? StyleRes.linearDimGrey : StyleRes.linearGradient)
             : null,
       ),
       child: Container(
@@ -177,12 +152,10 @@ class StoryProfileView extends StatelessWidget {
           color: ColorRes.white,
           shape: SmoothRectangleBorder(
               side: const BorderSide(color: ColorRes.white, width: 1),
-              borderRadius: SmoothBorderRadius(
-                  cornerRadius: imageCorner, cornerSmoothing: 1)),
+              borderRadius: SmoothBorderRadius(cornerRadius: imageCorner, cornerSmoothing: 1)),
         ),
         child: ClipRRect(
-          borderRadius: SmoothBorderRadius(
-              cornerRadius: imageCorner - 1, cornerSmoothing: 1),
+          borderRadius: SmoothBorderRadius(cornerRadius: imageCorner - 1, cornerSmoothing: 1),
           child: CachedNetworkImage(
             imageUrl: CommonFun.getProfileImage(images: userData?.images),
             cacheKey: CommonFun.getProfileImage(images: userData?.images),

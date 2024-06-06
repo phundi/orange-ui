@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
 import 'package:get/get.dart';
+import 'package:orange_ui/common/common_fun.dart';
 import 'package:orange_ui/common/common_ui.dart';
 import 'package:orange_ui/common/full_image_view_shimmer.dart';
 import 'package:orange_ui/common/live_icon.dart';
@@ -13,7 +14,6 @@ import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
-import 'package:orange_ui/utils/const_res.dart';
 import 'package:orange_ui/utils/font_res.dart';
 
 class FullImageView extends StatelessWidget {
@@ -61,53 +61,38 @@ class FullImageView extends StatelessWidget {
                     physics: const NeverScrollableScrollPhysics(),
                     onIndexChanged: onIndexChange,
                     itemBuilder: (context, currentProfileIndex) {
-                      List<Images>? imagesProfile =
-                          userList[currentProfileIndex].images;
+                      List<Images>? imagesProfile = userList[currentProfileIndex].images;
                       final PageController pageController = PageController();
                       return Stack(
                         children: [
                           imagesProfile.isEmpty
-                              ? Container(
-                                  width: double.infinity,
-                                  height: Get.height,
-                                  decoration: BoxDecoration(
-                                    color: ColorRes.lightGrey,
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  child: Image.asset(AssetRes.imageWarning),
-                                )
+                              ? CommonUI.profileImagePlaceHolder(
+                                  name: userList[currentProfileIndex].fullname,
+                                  heightWidth: MediaQuery.of(context).size.height,
+                                  borderRadius: 20)
                               : ClipRRect(
                                   borderRadius: BorderRadius.circular(20),
                                   child: PageView.builder(
                                     controller: pageController,
-                                    itemCount: userList[currentProfileIndex]
-                                        .images
-                                        .length,
-                                    physics:
-                                        const NeverScrollableScrollPhysics(),
+                                    itemCount: userList[currentProfileIndex].images.length,
+                                    physics: const NeverScrollableScrollPhysics(),
                                     itemBuilder: (context, currentImageIndex) {
                                       return Stack(
                                         children: [
                                           FadeInImage(
-                                            placeholder: const AssetImage(
-                                                AssetRes.placeholder),
-                                            image: NetworkImage(
-                                              '${ConstRes.aImageBaseUrl}${imagesProfile[currentImageIndex].image}',
-                                            ),
+                                            placeholder: const AssetImage(AssetRes.placeholder),
+                                            image: NetworkImage(CommonFun.getProfileImage(
+                                                images: userList[currentProfileIndex].images,
+                                                index: currentImageIndex)),
                                             fit: BoxFit.cover,
-                                            width: double.infinity,
-                                            height: double.infinity,
+                                            width: MediaQuery.of(context).size.width,
+                                            height: MediaQuery.of(context).size.height,
                                             filterQuality: FilterQuality.medium,
-                                            imageErrorBuilder:
-                                                (context, error, stackTrace) {
-                                              return Container(
-                                                color: ColorRes.grey13,
-                                                child: Image.asset(
-                                                  AssetRes.themeLabel,
-                                                  width: Get.width,
-                                                  height: Get.height,
-                                                ),
-                                              );
+                                            imageErrorBuilder: (context, error, stackTrace) {
+                                              return CommonUI.profileImagePlaceHolder(
+                                                  name: userList[currentProfileIndex].fullname,
+                                                  heightWidth: MediaQuery.of(context).size.height,
+                                                  borderRadius: 20);
                                             },
                                           ),
                                           Row(
@@ -115,16 +100,13 @@ class FullImageView extends StatelessWidget {
                                               Expanded(
                                                 child: InkWell(
                                                   onTap: () {
-                                                    if (currentImageIndex ==
-                                                        0) {
+                                                    if (currentImageIndex == 0) {
                                                       return;
                                                     }
                                                     pageController.previousPage(
-                                                        duration:
-                                                            const Duration(
-                                                                milliseconds:
-                                                                    500),
-                                                        curve: Curves.linear);
+                                                      duration: const Duration(milliseconds: 500),
+                                                      curve: Curves.linear,
+                                                    );
                                                   },
                                                   child: Container(
                                                     height: Get.height - 256,
@@ -135,17 +117,17 @@ class FullImageView extends StatelessWidget {
                                               Expanded(
                                                 child: InkWell(
                                                   onTap: () {
-                                                    if (imagesProfile.length -
+                                                    if (userList[currentProfileIndex]
+                                                                .images
+                                                                .length -
                                                             1 ==
                                                         currentImageIndex) {
                                                       return;
                                                     }
                                                     pageController.nextPage(
-                                                        duration:
-                                                            const Duration(
-                                                                milliseconds:
-                                                                    500),
-                                                        curve: Curves.linear);
+                                                      duration: const Duration(milliseconds: 500),
+                                                      curve: Curves.linear,
+                                                    );
                                                   },
                                                   child: Container(
                                                     height: Get.height - 256,
@@ -177,34 +159,28 @@ class FullImageView extends StatelessWidget {
                                         size: 15,
                                         onSocialIconTap: onInstagramTap,
                                         isVisible: isSocialBtnVisible(
-                                            userList[currentProfileIndex]
-                                                .instagram)),
+                                            userList[currentProfileIndex].instagram)),
                                     SocialIcon(
                                         icon: AssetRes.facebookLogo,
                                         size: 21.0,
                                         onSocialIconTap: onFacebookTap,
                                         isVisible: isSocialBtnVisible(
-                                            userList[currentProfileIndex]
-                                                .facebook)),
+                                            userList[currentProfileIndex].facebook)),
                                     SocialIcon(
                                         icon: AssetRes.youtubeLogo,
                                         size: 20.16,
                                         onSocialIconTap: onYoutubeTap,
                                         isVisible: isSocialBtnVisible(
-                                            userList[currentProfileIndex]
-                                                .youtube)),
+                                            userList[currentProfileIndex].youtube)),
                                     const Spacer(),
                                     Visibility(
-                                      visible: userList[currentProfileIndex]
-                                                  .isLiveNow ==
-                                              1
+                                      visible: userList[currentProfileIndex].isLiveNow == 1
                                           ? true
                                           : false,
                                       child: ClipRRect(
                                         borderRadius: BorderRadius.circular(20),
                                         child: BackdropFilter(
-                                          filter: ImageFilter.blur(
-                                              sigmaX: 10, sigmaY: 10),
+                                          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
                                           child: InkWell(
                                             onTap: onLiveBtnTap,
                                             child: Container(
@@ -212,10 +188,8 @@ class FullImageView extends StatelessWidget {
                                               width: 113,
                                               padding: const EdgeInsets.all(4),
                                               decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(40),
-                                                color: ColorRes.black
-                                                    .withOpacity(0.33),
+                                                borderRadius: BorderRadius.circular(40),
+                                                color: ColorRes.black.withOpacity(0.33),
                                               ),
                                               child: Row(
                                                 children: [

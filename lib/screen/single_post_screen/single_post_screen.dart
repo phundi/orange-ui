@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/social/post/add_comment.dart';
 import 'package:orange_ui/screen/feed_screen/feed_screen_view_model.dart';
 import 'package:orange_ui/screen/post_screen/widget/post_card.dart';
@@ -7,10 +8,24 @@ import 'package:orange_ui/utils/color_res.dart';
 import 'package:orange_ui/utils/font_res.dart';
 import 'package:stacked/stacked.dart';
 
-class SinglePostScreen extends StatelessWidget {
+class SinglePostScreen extends StatefulWidget {
   final Post? post;
 
   const SinglePostScreen({Key? key, required this.post}) : super(key: key);
+
+  @override
+  State<SinglePostScreen> createState() => _SinglePostScreenState();
+}
+
+class _SinglePostScreenState extends State<SinglePostScreen> {
+  Post? post;
+
+  @override
+  void initState() {
+    post = widget.post;
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,13 +47,13 @@ class SinglePostScreen extends StatelessWidget {
                       color: ColorRes.davyGrey,
                     ),
                   ),
-                  const Align(
+                  Align(
                     alignment: Alignment.center,
                     child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 40.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 40.0),
                       child: Text(
-                        'Post',
-                        style: TextStyle(
+                        S.of(context).post,
+                        style: const TextStyle(
                             fontFamily: FontRes.bold, fontSize: 18, color: ColorRes.darkOrange),
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
@@ -55,6 +70,12 @@ class SinglePostScreen extends StatelessWidget {
               post: post!,
               model: viewModel,
               onDeleteItem: (id) {},
+              updatePost: (data) {
+                if (post?.userId == data.id) {
+                  post?.user = data;
+                  setState(() {});
+                }
+              },
             ),
           )
         ],

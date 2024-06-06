@@ -4,21 +4,22 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:orange_ui/common/common_fun.dart';
 import 'package:orange_ui/common/common_ui.dart';
-import 'package:orange_ui/screen/camera_screen/camera_screen_view_model.dart';
+import 'package:orange_ui/screen/create_story_screen/create_story_screen_view_model.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
 import 'package:orange_ui/utils/font_res.dart';
 import 'package:stacked/stacked.dart';
 
-class CameraScreen extends StatelessWidget {
+class CreateStoryScreen extends StatelessWidget {
   final List<CameraDescription> cameras;
-  const CameraScreen({Key? key, required this.cameras}) : super(key: key);
+
+  const CreateStoryScreen({Key? key, required this.cameras}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<CameraScreenViewModel>.reactive(
+    return ViewModelBuilder<CreateStoryScreenViewModel>.reactive(
         onViewModelReady: (viewModel) => viewModel.init(),
-        viewModelBuilder: () => CameraScreenViewModel(cameras),
+        viewModelBuilder: () => CreateStoryScreenViewModel(cameras),
         builder: (context, viewModel, child) {
           return Scaffold(
             backgroundColor: ColorRes.black,

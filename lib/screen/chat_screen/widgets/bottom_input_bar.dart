@@ -86,7 +86,12 @@ class BottomInputBar extends StatelessWidget {
             const SizedBox(width: 8.5),
             InkWell(
               onTap: onAddBtnTap,
-              child: Image.asset(AssetRes.add, height: 25, width: 25),
+              child: Image.asset(
+                AssetRes.add,
+                height: 25,
+                width: 25,
+                color: ColorRes.darkOrange,
+              ),
             ),
             const SizedBox(width: 13.5),
             InkWell(
