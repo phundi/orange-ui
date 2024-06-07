@@ -343,5 +343,7 @@
   "areYouSureYouWantToDeleteTheComment": "댓글을 삭제하시겠습니까?",
   "enterUsername": "사용자 이름을 입력하세요",
   "username": "사용자 이름",
-  "followerList": "팔로어 목록"
+  "followerList": "팔로어 목록",
+  "userDidNotAllowCameraAndMicrophonePermission": "사용자가 카메라 및 마이크 권한을 허용하지 않았습니다.",
+  "userDidNotAllowCamera": "사용자가 카메라를 허용하지 않았습니다."
 }

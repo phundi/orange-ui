@@ -343,5 +343,7 @@
   "areYouSureYouWantToDeleteTheComment": "Apakah Anda yakin ingin menghapus komentar tersebut?",
   "enterUsername": "Masukkan nama pengguna",
   "username": "Nama belakang",
-  "followerList": "Daftar Pengikut"
+  "followerList": "Daftar Pengikut",
+  "userDidNotAllowCameraAndMicrophonePermission": "Pengguna tidak mengizinkan izin kamera dan mikrofon.",
+  "userDidNotAllowCamera": "Pengguna tidak mengizinkan kamera"
 }

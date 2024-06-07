@@ -3,25 +3,37 @@
 *****Date 06-MAY-2024*****
 
 [NOTE]
-- Timer Cancel When One Minutes Complete
-- wakelock To wakelock_plus Library Add
-- Remove UnUsed ColorCode
+
+- Timer Cancel When One Minutes Complete (Live streaming issue)
+- wakelock change To wakelock_plus Library Add
+- Remove UnUsed Color Code
 - Story read to border not change
+- Agora Library Update
 
 [Added Files]
 
 - view_story.dart
+- generate_token.dart
 
 [Updated Files]
 - api_provider.dart
+- gradle.properties
 - build.gradle
 - asset_res.dart
 - pubspec.lock
 - pubspec.yaml
+- Podfile
 - settings.gradle
 - urls.dart
-- person_streaming_screen_view_model.dart
+- random_streaming_screen.dart
 - random_streaming_screen_view_model.dart
+- live_grid_screen_view_model.dart
+- live_stream.dart
+- livestream_end_screen_view_model.dart
+- messages_en.dart
+- person_streaming_screen.dart
+- person_streaming_screen_view_model.dart
+- person_top_bar_area.dart
 - admin_notificaiton_page.dart
 - auth_card.dart
 - blocked_card.dart
@@ -133,6 +145,34 @@
 - verification_center_area.dart
 - video_post.dart
 - video_upload_dialog.dart
+- comment_list_area.dart
+- comment_list_area.dart
+- common_ui.dart
+- const_res.dart
+- create_story_screen.dart
+- create_story_screen_view_model.dart
+- custom_grid_view.dart
+- intl_ar.arb
+- intl_da.arb
+- intl_de.arb
+- intl_el.arb
+- intl_en.arb
+- intl_es.arb
+- intl_fr.arb
+- intl_hi.arb
+- intl_id.arb
+- intl_it.arb
+- intl_ja.arb
+- intl_ko.arb
+- intl_nb.arb
+- intl_nl.arb
+- intl_pl.arb
+- intl_pt.arb
+- intl_ru.arb
+- intl_th.arb
+- intl_tr.arb
+- intl_vi.arb
+- intl_zh.arb
 
 [Deleted Files]
 
@@ -152,61 +192,3 @@
 ***********************************************************************************************************************************************************
 
  
-*****Date 10-05-2024*****
-
-[NOTE]
-- Remove app_tracking_transparency Library and Add Consent Form for Ad Mob
-
-[Updated Files]
-- AndroidManifest.xml
-- dashboard_screen_view_model.dart
-- main.dart
-- pubspec.yaml
-
-[Added Files]
-- ads_service.dart
-
-********************************************************************************
-
-***** Date 08-05-2024 *****
-
-[Change in Project]
-- Migrate Gradle File
-
-[Change in File]
-- [build.gradle](/android/app/build.gradle)
-- [build.gradle](/android/build.gradle)
-- [gradle-wrapper.properties](/android/gradle/wrapper/gradle-wrapper.properties)
-- [settings.gradle](/android/settings.gradle)
-
-
-*****Date 07-05-2024*****
-- Add In app purchase
-
-# File Changes
-- api_provider.dart
-- bottom_diamond_shop.dart
-- bottom_diamond_shop_view_model.dart
-- camera_preview_screen_view_model.dart
-- comment_sheet_view_model.dart
-- const_res.dart
-- create_post_screen_view_model.dart
-- dashboard_screen_view_model.dart
-- feed_screen_view_model.dart
-- follow_following_screen_view_model.dart
-- full_image_view.dart
-- get_diamond_pack.dart
-- hashtag_screen_view_model.dart
-- Info.plist
-- livestream_dashboard_screen_view_model.dart
-- options_screen_view_model.dart
-- person_streaming_screen_view_model.dart
-- post_bottom_bar.dart
-- post_screen_view_model.dart
-- search_screen_view_model.dart
-- story_view_screen_view_model.dart
-- submit_redeem_screen_view_model.dart
-- urls.dart
-- user_detail_screen_view_model.dart
-- video_preview_screen_view_model.dart
-- [pubspec.yaml](/pubspec.yaml)

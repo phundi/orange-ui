@@ -343,6 +343,8 @@
   "areYouSureYouWantToDeleteTheComment": "Bạn có chắc chắn muốn xóa bình luận?",
   "enterUsername": "Điền tên đăng nhập",
   "username": "Tên tài khoản",
-  "followerList": "Danh sách người theo dõi"
+  "followerList": "Danh sách người theo dõi",
+  "userDidNotAllowCameraAndMicrophonePermission": "Người dùng không cho phép sử dụng máy ảnh và micrô.",
+  "userDidNotAllowCamera": "Người dùng không cho phép máy ảnh"
 
 }

@@ -57,8 +57,8 @@ class CommentListArea extends StatelessWidget {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(30),
                     child: CachedNetworkImage(
-                      imageUrl: '${ConstRes.aImageBaseUrl}${commentList[index].userImage}',
-                      cacheKey: '${ConstRes.aImageBaseUrl}${commentList[index].userImage}',
+                      imageUrl: '${commentList[index].userImage}',
+                      cacheKey: '${commentList[index].userImage}',
                       errorWidget: (context, url, error) {
                         return Image.asset(
                           AssetRes.themeLabel,

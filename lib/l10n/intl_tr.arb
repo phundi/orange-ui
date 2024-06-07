@@ -343,5 +343,7 @@
   "areYouSureYouWantToDeleteTheComment": "Yorumu silmek istediğinizden emin misiniz?",
   "enterUsername": "Kullanıcı adı girin",
   "username": "Kullanıcı adı",
-  "followerList": "Takipçi Listesi"
+  "followerList": "Takipçi Listesi",
+  "userDidNotAllowCameraAndMicrophonePermission": "Kullanıcı kamera ve mikrofon iznine izin vermedi.",
+  "userDidNotAllowCamera": "Kullanıcı kameraya izin vermedi"
 }

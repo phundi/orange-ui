@@ -343,5 +343,7 @@
   "areYouSureYouWantToDeleteTheComment": "คุณแน่ใจหรือไม่ว่าต้องการลบความคิดเห็นนี้",
   "enterUsername": "กรอกชื่อผู้ใช้",
   "username": "ชื่อผู้ใช้",
-  "followerList": "รายชื่อผู้ติดตาม"
+  "followerList": "รายชื่อผู้ติดตาม",
+  "userDidNotAllowCameraAndMicrophonePermission": "ผู้ใช้ไม่อนุญาตให้ใช้กล้องและไมโครโฟน",
+  "userDidNotAllowCamera": "ผู้ใช้ไม่อนุญาตให้ใช้กล้อง"
 }

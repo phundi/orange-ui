@@ -1,5 +1,8 @@
+import 'package:agora_rtc_engine/agora_rtc_engine.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:orange_ui/common/common_ui.dart';
+import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/screen/random_streming_screen/random_streaming_screen_view_model.dart';
 import 'package:orange_ui/screen/random_streming_screen/widgets/bottom_text_field.dart';
 import 'package:orange_ui/screen/random_streming_screen/widgets/comment_list_area.dart';
@@ -7,8 +10,17 @@ import 'package:orange_ui/screen/random_streming_screen/widgets/randon_stream_to
 import 'package:orange_ui/utils/color_res.dart';
 import 'package:stacked/stacked.dart';
 
+import '../../model/chat_and_live_stream/live_stream.dart';
+import '../../model/setting.dart';
+
 class RandomStreamingScreen extends StatelessWidget {
-  const RandomStreamingScreen({Key? key}) : super(key: key);
+  final RegistrationUserData? userData;
+  final LiveStreamUser liveStreamUser;
+  final Appdata? settingData;
+
+  const RandomStreamingScreen(
+      {Key? key, this.userData, required this.liveStreamUser, this.settingData})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +36,10 @@ class RandomStreamingScreen extends StatelessWidget {
       onViewModelReady: (model) {
         model.init();
       },
-      viewModelBuilder: () => RandomStreamingScreenViewModel(),
+      viewModelBuilder: () => RandomStreamingScreenViewModel(
+          liveStreamUser: liveStreamUser,
+          registrationUserData: userData,
+          settingAppData: settingData),
       builder: (context, model, child) {
         return PopScope(
           onPopInvoked: (didPop) => model.onEndVideoTap(),
@@ -32,7 +47,14 @@ class RandomStreamingScreen extends StatelessWidget {
           child: Scaffold(
             body: Stack(
               children: [
-                model.broadcastView(),
+                model.localUserJoined
+                    ? AgoraVideoView(
+                        controller: VideoViewController(
+                          rtcEngine: model.engine,
+                          canvas: const VideoCanvas(uid: 0),
+                        ),
+                      )
+                    : CommonUI.lottieWidget(),
                 InkWell(
                   onTap: () {
                     model.commentFocus.unfocus();

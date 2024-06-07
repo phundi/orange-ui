@@ -55,7 +55,7 @@ class CommentListArea extends StatelessWidget {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(30),
                     child: Image.network(
-                      '${ConstRes.aImageBaseUrl}${comment.userImage}',
+                      '${comment.userImage}',
                       fit: BoxFit.cover,
                       height: 34,
                       width: 34,

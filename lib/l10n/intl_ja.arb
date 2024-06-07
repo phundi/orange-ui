@@ -343,5 +343,7 @@
   "areYouSureYouWantToDeleteTheComment": "コメントを削除してもよろしいですか?",
   "enterUsername": "ユーザーネームを入力してください",
   "username": "ユーザー名",
-  "followerList": "フォロワーリスト"
+  "followerList": "フォロワーリスト",
+  "userDidNotAllowCameraAndMicrophonePermission": "ユーザーはカメラとマイクの許可を許可しませんでした。",
+  "userDidNotAllowCamera": "ユーザーはカメラを許可しませんでした"
 }

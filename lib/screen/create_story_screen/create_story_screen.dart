@@ -7,7 +7,9 @@ import 'package:orange_ui/common/common_ui.dart';
 import 'package:orange_ui/screen/create_story_screen/create_story_screen_view_model.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
+import 'package:orange_ui/utils/const_res.dart';
 import 'package:orange_ui/utils/font_res.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:stacked/stacked.dart';
 
 class CreateStoryScreen extends StatelessWidget {
@@ -28,13 +30,13 @@ class CreateStoryScreen extends StatelessWidget {
                 children: [
                   viewModel.isLoading
                       ? CommonUI.lottieWidget()
-                      : viewModel.cameraController.value.isInitialized
+                      : viewModel.cameraController != null
                           ? Transform.scale(
                               scale: 1 /
-                                  ((viewModel.cameraController.value.aspectRatio) *
+                                  ((viewModel.cameraController!.value.aspectRatio) *
                                       MediaQuery.of(context).size.aspectRatio),
                               alignment: Alignment.topCenter,
-                              child: CameraPreview(viewModel.cameraController))
+                              child: CameraPreview(viewModel.cameraController!))
                           : Align(alignment: Alignment.center, child: CommonUI.lottieWidget()),
                   SafeArea(
                     child: Column(
@@ -129,11 +131,116 @@ class CreateStoryScreen extends StatelessWidget {
                         )
                       ],
                     ),
-                  )
+                  ),
+                  if (viewModel.isPermissionNotGranted)
+                    PermissionNotGrantedWidget(viewModel: viewModel)
                 ],
               ),
             ),
           );
         });
+  }
+}
+
+class PermissionNotGrantedWidget extends StatelessWidget {
+  final CreateStoryScreenViewModel viewModel;
+
+  const PermissionNotGrantedWidget({Key? key, required this.viewModel}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: MediaQuery.of(context).size.height,
+      width: MediaQuery.of(context).size.width,
+      color: ColorRes.black,
+      child: SafeArea(
+        child: Column(
+          children: [
+            Align(
+              alignment: Alignment.topRight,
+              child: InkWell(
+                onTap: () {
+                  Get.back();
+                },
+                child: Container(
+                  height: 40,
+                  width: 40,
+                  margin: const EdgeInsets.all(15),
+                  decoration: ShapeDecoration(
+                      shape:
+                          SmoothRectangleBorder(borderRadius: SmoothBorderRadius(cornerRadius: 30)),
+                      color: ColorRes.white.withOpacity(0.4)),
+                  alignment: Alignment.center,
+                  child: const Icon(Icons.close_rounded, color: ColorRes.white, size: 30),
+                ),
+              ),
+            ),
+            const Spacer(),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30.0),
+              child: RichText(
+                text: const TextSpan(
+                  text: 'Allow ',
+                  children: [
+                    TextSpan(
+                        text: appName,
+                        style: TextStyle(
+                            color: ColorRes.darkOrange, fontFamily: FontRes.bold, fontSize: 17)),
+                    TextSpan(text: ' to access your camera and microphone')
+                  ],
+                  style: TextStyle(
+                    fontFamily: FontRes.semiBold,
+                    fontSize: 20,
+                  ),
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            const SizedBox(height: 20),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 30.0),
+              child: Text(
+                'If appears that camera permission has not been granted. To the App, you'
+                '\'ll need to allow access to the camera from the settings.',
+                style: TextStyle(fontFamily: FontRes.regular, color: ColorRes.white),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            InkWell(
+              onTap: () {
+                openAppSettings();
+              },
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                decoration: BoxDecoration(
+                  color: ColorRes.white,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: const Text(
+                  'Open Settings',
+                  style: TextStyle(
+                      color: ColorRes.darkOrange, fontFamily: FontRes.semiBold, fontSize: 15),
+                ),
+              ),
+            ),
+            const Spacer(),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                child: InkWell(
+                  onTap: viewModel.onMediaTap,
+                  child: Image.asset(AssetRes.icMedia, width: 30, height: 30),
+                ),
+              ),
+            ),
+            const SizedBox(height: 15)
+          ],
+        ),
+      ),
+    );
   }
 }

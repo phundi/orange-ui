@@ -1,8 +1,6 @@
 import 'dart:async';
 
-import 'package:agora_rtc_engine/rtc_engine.dart';
-import 'package:agora_rtc_engine/rtc_local_view.dart' as rtc_local_view;
-import 'package:agora_rtc_engine/rtc_remote_view.dart' as rtc_remote_view;
+import 'package:agora_rtc_engine/agora_rtc_engine.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -24,17 +22,20 @@ import 'package:orange_ui/utils/color_res.dart';
 import 'package:orange_ui/utils/const_res.dart';
 import 'package:orange_ui/utils/firebase_res.dart';
 import 'package:orange_ui/utils/pref_res.dart';
-import 'package:orange_ui/utils/urls.dart';
 import 'package:stacked/stacked.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
 
 class PersonStreamingScreenViewModel extends BaseViewModel {
   FirebaseFirestore db = FirebaseFirestore.instance;
 
-  String channel = '';
-  String userName = '';
+  String channelId = '';
+  String token = '';
 
   int streamId = -1;
+
+  int? _remoteUid;
+  bool _localUserJoined = false;
+
   int countDownValue = 0;
   int? walletCoin;
 
@@ -45,12 +46,12 @@ class PersonStreamingScreenViewModel extends BaseViewModel {
 
   Timer? timer;
 
-  bool isBroadcasting = false;
+  // bool isBroadcasting = false;
   bool muted = false;
   bool isSelected = false;
 
   late RtcEngine _engine;
-  LiveStreamUser? liveStreamUser = LiveStreamUser();
+  LiveStreamUser? liveStreamUser;
   CollectionReference? collectionReference;
   RegistrationUserData? registrationUser;
   TextEditingController commentController = TextEditingController();
@@ -60,11 +61,12 @@ class PersonStreamingScreenViewModel extends BaseViewModel {
 
   Appdata? settingAppData;
 
+  PersonStreamingScreenViewModel({required this.liveStreamUser, this.settingAppData});
+
   void init() {
     WakelockPlus.enable();
-    channel = Get.arguments[Urls.aChannelId];
-    isBroadcasting = Get.arguments[Urls.aIsBroadcasting];
-    liveStreamUser = Get.arguments[Urls.aUserInfo];
+    channelId = liveStreamUser?.hostIdentity ?? '';
+    token = liveStreamUser?.agoraToken ?? '';
     initializeAgora();
     getDiamondPackApiCall();
     giftApiCall();
@@ -84,13 +86,14 @@ class PersonStreamingScreenViewModel extends BaseViewModel {
                   : Get.dialog(
                       ReverseSwipeDialog(
                           onCancelTap: () {
-                            watchingUserRemove();
+                            updateWatchingCount();
                             if (Get.isBottomSheetOpen == true) {
                               Get.back();
                             }
                             Get.back();
                             Get.back();
-                            _engine.destroy();
+                            _engine.leaveChannel();
+                            _engine.release();
                           },
                           onContinueTap: (isSelected) async {
                             await PrefService.setDialog(PrefConst.liveStream, isSelected);
@@ -121,13 +124,13 @@ class PersonStreamingScreenViewModel extends BaseViewModel {
                       if (Get.isBottomSheetOpen == true) {
                         //
                       } else {
-                        watchingUserRemove();
+                        updateWatchingCount();
                         Get.back();
                       }
                     });
                   },
                   onCancelTap: () {
-                    watchingUserRemove();
+                    updateWatchingCount();
                     if (Get.isBottomSheetOpen == true) {
                       Get.back();
                     }
@@ -189,105 +192,100 @@ class PersonStreamingScreenViewModel extends BaseViewModel {
     });
   }
 
+  // Future<void> initializeAgora() async {
+  //   await _initAgoraRtcEngine();
+  //   // if (widget.isBroadcaster) {
+  //   //   streamId = (await _engine.createDataStream(false, false))!;
+  //   // }
+  //   _engine.setEventHandler(RtcEngineEventHandler(
+  //     joinChannelSuccess: (channel, uid, elapsed) {
+  //       notifyListeners();
+  //     },
+  //     userJoined: (uid, elapsed) {
+  //       users.add(uid);
+  //       notifyListeners();
+  //     },
+  //     leaveChannel: (stats) {},
+  //     userOffline: (uid, elapsed) {
+  //       users.remove(uid);
+  //       if (Get.isDialogOpen == true) {
+  //         Get.back();
+  //       } else if (Get.isBottomSheetOpen == true) {
+  //         Get.back();
+  //       }
+  //       Get.back();
+  //       notifyListeners();
+  //     },
+  //   ));
+  //   await _engine.joinChannel(null, channel, null, 0);
+  //   initFirebase();
+  // }
+
   Future<void> initializeAgora() async {
-    await _initAgoraRtcEngine();
-    // if (widget.isBroadcaster) {
-    //   streamId = (await _engine.createDataStream(false, false))!;
-    // }
-    _engine.setEventHandler(RtcEngineEventHandler(
-      joinChannelSuccess: (channel, uid, elapsed) {
-        notifyListeners();
-      },
-      userJoined: (uid, elapsed) {
-        users.add(uid);
-        notifyListeners();
-      },
-      leaveChannel: (stats) {},
-      userOffline: (uid, elapsed) {
-        users.remove(uid);
-        if (Get.isDialogOpen == true) {
-          Get.back();
-        } else if (Get.isBottomSheetOpen == true) {
-          Get.back();
-        }
-        Get.back();
-        notifyListeners();
-      },
+    // Create RtcEngine instance
+    _engine = createAgoraRtcEngine();
+
+    // Initialize RtcEngine and set the channel profile to live broadcasting
+    await _engine.initialize(const RtcEngineContext(
+      appId: ConstRes.agoraAppId,
+      channelProfile: ChannelProfileType.channelProfileLiveBroadcasting,
     ));
-    await _engine.joinChannel(null, channel, null, 0);
+    // Enable the video module
+    await _engine.enableVideo();
+    // Enable local video preview
+    await _engine.startPreview();
+    await _engine.joinChannel(
+      token: token,
+      channelId: channelId,
+      options: const ChannelMediaOptions(
+          // Set the user role as host
+          // To set the user role to audience, change clientRoleBroadcaster to clientRoleAudience
+          clientRoleType: ClientRoleType.clientRoleBroadcaster,
+          audienceLatencyLevel: AudienceLatencyLevelType.audienceLatencyLevelUltraLowLatency),
+      uid: 0,
+    );
+
+    // Add an event handler
+    _engine.registerEventHandler(
+      RtcEngineEventHandler(
+        // Occurs when the local user joins the channel successfully
+        onJoinChannelSuccess: (RtcConnection connection, int elapsed) {
+          _localUserJoined = true;
+          notifyListeners();
+        },
+        // Occurs when a remote user join the channel
+        onUserJoined: (RtcConnection connection, int remoteUid, int elapsed) {
+          _remoteUid = remoteUid;
+          notifyListeners();
+        },
+        // Occurs when a remote user leaves the channel
+        onUserOffline: (RtcConnection connection, int remoteUid, UserOfflineReasonType reason) {
+          _remoteUid = null;
+          if (Get.isDialogOpen == true || Get.isBottomSheetOpen == true) {
+            Get.back();
+          }
+          Get.back();
+
+          notifyListeners();
+        },
+      ),
+    );
     initFirebase();
   }
 
-  Future<void> _initAgoraRtcEngine() async {
-    _engine = await RtcEngine.create(ConstRes.agoraAppId);
-    await _engine.enableVideo();
-    await _engine.setChannelProfile(ChannelProfile.LiveBroadcasting);
-    await _engine.setClientRole(ClientRole.Audience);
-  }
-
-  /// Helper function to get list of native views
-  List<Widget> _getRenderViews() {
-    final List<StatefulWidget> list = [];
-    if (isBroadcasting) {
-      list.add(const rtc_local_view.SurfaceView(
-        mirrorMode: VideoMirrorMode.Auto,
-      ));
+  // Widget to display remote video
+  Widget remoteVideo() {
+    if (_remoteUid != null) {
+      return AgoraVideoView(
+        controller: VideoViewController.remote(
+          rtcEngine: _engine,
+          canvas: VideoCanvas(uid: _remoteUid),
+          connection: RtcConnection(channelId: channelId),
+        ),
+      );
+    } else {
+      return CommonUI.lottieWidget();
     }
-    for (var uid in users) {
-      list.add(rtc_remote_view.SurfaceView(
-        uid: uid,
-        channelId: channel,
-        mirrorMode: VideoMirrorMode.Enabled,
-      ));
-    }
-    return list;
-  }
-
-  /// Video view row wrapper
-  Widget _expandedVideoView(List<Widget> views) {
-    final wrappedViews =
-        views.map<Widget>((view) => Expanded(child: Container(child: view))).toList();
-    return Expanded(
-      child: Row(
-        children: wrappedViews,
-      ),
-    );
-  }
-
-  /// Video layout wrapper
-  Widget broadcastView() {
-    final views = _getRenderViews();
-    switch (views.length) {
-      case 1:
-        return Column(
-          children: <Widget>[
-            _expandedVideoView([views[0]])
-          ],
-        );
-      case 2:
-        return Column(
-          children: <Widget>[
-            _expandedVideoView([views[0]]),
-            _expandedVideoView([views[1]])
-          ],
-        );
-      case 3:
-        return Column(
-          children: <Widget>[
-            _expandedVideoView(views.sublist(0, 2)),
-            _expandedVideoView(views.sublist(2, 3))
-          ],
-        );
-      case 4:
-        return Column(
-          children: <Widget>[
-            _expandedVideoView(views.sublist(0, 2)),
-            _expandedVideoView(views.sublist(2, 4))
-          ],
-        );
-      default:
-    }
-    return Container();
   }
 
   void onViewTap() {}
@@ -391,9 +389,9 @@ class PersonStreamingScreenViewModel extends BaseViewModel {
         .collection(FirebaseRes.liveHostList)
         .doc('${liveStreamUser?.userId}')
         .withConverter(
-          fromFirestore: LiveStreamUser.fromFirestore,
+          fromFirestore: (snapshot, options) => LiveStreamUser.fromJson(snapshot.data()),
           toFirestore: (value, options) {
-            return LiveStreamUser().toFirestore();
+            return LiveStreamUser().toJson();
           },
         )
         .snapshots()
@@ -428,32 +426,35 @@ class PersonStreamingScreenViewModel extends BaseViewModel {
   }
 
   void onUserTap() {
-    watchingUserRemove();
-    Get.off(() => UserDetailScreen(
-          userId: liveStreamUser?.userId,
-        ));
+    updateWatchingCount();
+    Get.off(() => UserDetailScreen(userId: liveStreamUser?.userId));
   }
 
   void onExitTap() async {
-    showDialog(
-      context: Get.context!,
-      builder: (context) {
-        return Center(child: CommonUI.lottieWidget());
-      },
-    );
-    watchingUserRemove();
+    CommonUI.getLottieLoader();
+    updateWatchingCount();
     Get.back();
     Get.back();
   }
 
-  void watchingUserRemove() {
-    db.collection(FirebaseRes.liveHostList).doc('${liveStreamUser?.userId}').update(
-      {
-        FirebaseRes.watchingCount: liveStreamUser != null && liveStreamUser?.watchingCount != null
-            ? liveStreamUser!.watchingCount! - 1
-            : 0
-      },
-    );
+  void updateWatchingCount() async {
+    try {
+      // Check if liveStreamUser and liveStreamUser.watchingCount are not null
+      int watchingCount = (liveStreamUser?.watchingCount ?? 0) - 1;
+
+      // Ensure the count does not go below 0
+      if (watchingCount < 0) {
+        watchingCount = 0;
+      }
+
+      // Update the Firestore document
+      await db.collection(FirebaseRes.liveHostList).doc('${liveStreamUser?.userId}').update(
+        {FirebaseRes.watchingCount: watchingCount},
+      );
+      print("Watching count updated successfully.");
+    } catch (e) {
+      print("Failed to update watching count: $e");
+    }
   }
 
   @override
@@ -463,8 +464,13 @@ class PersonStreamingScreenViewModel extends BaseViewModel {
     users.clear();
     // destroy sdk and leave channel
     timer?.cancel();
-    _engine.destroy();
+    _dispose();
     super.dispose();
+  }
+
+  Future<void> _dispose() async {
+    await _engine.leaveChannel(); // Leave the channel
+    await _engine.release(); // Release resources
   }
 }
 

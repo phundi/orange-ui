@@ -7,7 +7,6 @@ import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/chat_and_live_stream/live_stream.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
-import 'package:orange_ui/utils/const_res.dart';
 import 'package:orange_ui/utils/font_res.dart';
 
 class CustomGridView extends StatelessWidget {
@@ -36,9 +35,7 @@ class CustomGridView extends StatelessWidget {
                           ? gridTile(
                               data: e,
                               width: (Get.width / 2) - 18,
-                              height: index % 4 == 0
-                                  ? (Get.width * 0.65)
-                                  : (Get.width * 0.49),
+                              height: index % 4 == 0 ? (Get.width * 0.65) : (Get.width * 0.49),
                               margin: const EdgeInsets.fromLTRB(12, 0, 12, 12),
                             )
                           : const SizedBox();
@@ -51,9 +48,8 @@ class CustomGridView extends StatelessWidget {
                           ? gridTile(
                               data: e,
                               width: (Get.width / 2) - 18,
-                              height: (index + 1) % 4 == 0
-                                  ? (Get.width * 0.65)
-                                  : (Get.width * 0.49),
+                              height:
+                                  (index + 1) % 4 == 0 ? (Get.width * 0.65) : (Get.width * 0.49),
                               margin: const EdgeInsets.fromLTRB(0, 0, 12, 12),
                             )
                           : const SizedBox();
@@ -84,7 +80,7 @@ class CustomGridView extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
             image: DecorationImage(
               fit: BoxFit.cover,
-              image: NetworkImage('${ConstRes.aImageBaseUrl}${data.userImage}'),
+              image: NetworkImage('${data.userImage}'),
             ),
           ),
           child: ClipRRect(
@@ -170,10 +166,7 @@ class CustomGridView extends StatelessWidget {
         Text(
           S.current.noUsersAreLive,
           style: const TextStyle(
-              fontFamily: FontRes.medium,
-              fontSize: 20,
-              color: ColorRes.grey,
-              letterSpacing: 1),
+              fontFamily: FontRes.medium, fontSize: 20, color: ColorRes.grey, letterSpacing: 1),
         ),
       ],
     );

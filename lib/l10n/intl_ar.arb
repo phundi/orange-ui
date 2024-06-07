@@ -343,5 +343,7 @@
   "areYouSureYouWantToDeleteTheComment": "هل أنت متأكد أنك تريد حذف التعليق؟",
   "enterUsername": "ادخل اسم المستخدم",
   "username": "اسم المستخدم",
-  "followerList": "قائمة المتابعين"
+  "followerList": "قائمة المتابعين",
+  "userDidNotAllowCameraAndMicrophonePermission": "لم يسمح المستخدم بإذن الكاميرا والميكروفون.",
+  "userDidNotAllowCamera": "لم يسمح المستخدم بالكاميرا"
 }

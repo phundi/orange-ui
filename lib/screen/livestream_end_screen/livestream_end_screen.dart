@@ -1,19 +1,24 @@
-import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:orange_ui/common/common_ui.dart';
 import 'package:orange_ui/generated/l10n.dart';
+import 'package:orange_ui/model/chat_and_live_stream/live_stream.dart';
 import 'package:orange_ui/screen/livestream_end_screen/livestream_end_screen_view_model.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
 import 'package:orange_ui/utils/const_res.dart';
 import 'package:orange_ui/utils/font_res.dart';
-import 'package:orange_ui/utils/style_res.dart';
 import 'package:stacked/stacked.dart';
 
 class LivestreamEndScreen extends StatefulWidget {
-  const LivestreamEndScreen({Key? key}) : super(key: key);
+  final LiveStreamUser liveStreamUser;
+  final String dateTime;
+  final String duration;
+
+  const LivestreamEndScreen(
+      {Key? key, required this.liveStreamUser, required this.dateTime, required this.duration})
+      : super(key: key);
 
   @override
   State<LivestreamEndScreen> createState() => _LivestreamEndScreenState();
@@ -24,8 +29,10 @@ class _LivestreamEndScreenState extends State<LivestreamEndScreen> with TickerPr
     duration: const Duration(seconds: 1),
     vsync: this,
   );
-  late final Animation<double> _animation =
-      CurvedAnimation(parent: _controller, curve: Curves.fastOutSlowIn);
+  late final Animation<double> _animation = CurvedAnimation(
+    parent: _controller,
+    curve: Curves.fastOutSlowIn,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +42,7 @@ class _LivestreamEndScreenState extends State<LivestreamEndScreen> with TickerPr
       builder: (context, child) {
         return ViewModelBuilder<LivestreamEndScreenViewModel>.reactive(
           onViewModelReady: (model) {
-            model.init();
+            model.init(widget.liveStreamUser, widget.dateTime, widget.duration);
           },
           viewModelBuilder: () => LivestreamEndScreenViewModel(),
           builder: (context, model, child) {
@@ -77,26 +84,21 @@ class _LivestreamEndScreenState extends State<LivestreamEndScreen> with TickerPr
                               );
                             },
                           ),
-                          ClipRRect(
-                              borderRadius: BorderRadius.circular(100),
-                              child: Image.network(
-                                '${ConstRes.aImageBaseUrl}${model.image}',
-                                height: Get.width / 2.5,
-                                width: Get.width / 2.5,
-                                fit: BoxFit.cover,
-                                errorBuilder: (context, error, stackTrace) {
-                                  return Container(
-                                    decoration: ShapeDecoration(
-                                        shape: SmoothRectangleBorder(
-                                            borderRadius: SmoothBorderRadius(cornerRadius: 30)),
-                                        gradient: StyleRes.linearGradient),
-                                    child: CommonUI.profileImagePlaceHolder(
-                                        name: model.fullName,
-                                        color: ColorRes.white,
-                                        heightWidth: Get.width / 2.5),
-                                  );
-                                },
-                              )),
+                          ClipOval(
+                            child: Image.network(
+                              '${widget.liveStreamUser.userImage}',
+                              height: Get.width / 2.5,
+                              width: Get.width / 2.5,
+                              fit: BoxFit.cover,
+                              errorBuilder: (context, error, stackTrace) {
+                                return CommonUI.profileImagePlaceHolder(
+                                  name: widget.liveStreamUser.fullName,
+                                  heightWidth: Get.width / 2.5,
+                                  borderRadius: 90,
+                                );
+                              },
+                            ),
+                          )
                         ],
                       ),
                     ),
@@ -119,7 +121,7 @@ class _LivestreamEndScreenState extends State<LivestreamEndScreen> with TickerPr
                               sizeFactor: _animation,
                               axis: Axis.horizontal,
                               axisAlignment: -1,
-                              child: Text(model.time,
+                              child: Text(widget.duration,
                                   style:
                                       const TextStyle(fontFamily: FontRes.semiBold, fontSize: 15)),
                             ),
@@ -135,7 +137,7 @@ class _LivestreamEndScreenState extends State<LivestreamEndScreen> with TickerPr
                               sizeFactor: _animation,
                               axis: Axis.horizontal,
                               axisAlignment: -1,
-                              child: Text(model.watching,
+                              child: Text('${widget.liveStreamUser.joinedUser?.length ?? 0}',
                                   style:
                                       const TextStyle(fontFamily: FontRes.semiBold, fontSize: 15)),
                             ),
@@ -151,7 +153,7 @@ class _LivestreamEndScreenState extends State<LivestreamEndScreen> with TickerPr
                               sizeFactor: _animation,
                               axis: Axis.horizontal,
                               axisAlignment: -1,
-                              child: Text(model.diamond,
+                              child: Text('${widget.liveStreamUser.collectedDiamond ?? 0}',
                                   style:
                                       const TextStyle(fontFamily: FontRes.semiBold, fontSize: 15)),
                             ),
@@ -168,7 +170,9 @@ class _LivestreamEndScreenState extends State<LivestreamEndScreen> with TickerPr
                       padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 10),
                       child: InkWell(
                         borderRadius: BorderRadius.circular(10),
-                        onTap: model.onOkBtnClick,
+                        onTap: () {
+                          Get.back();
+                        },
                         child: Container(
                           height: 50,
                           width: Get.width,

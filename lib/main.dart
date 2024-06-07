@@ -20,6 +20,7 @@ import 'package:orange_ui/screen/restart_app/restart_app.dart';
 import 'package:orange_ui/service/ads_service.dart';
 import 'package:orange_ui/service/pref_service.dart';
 import 'package:orange_ui/utils/color_res.dart';
+import 'package:orange_ui/utils/const_res.dart';
 import 'package:orange_ui/utils/font_res.dart';
 import 'package:orange_ui/utils/pref_res.dart';
 import 'package:orange_ui/utils/urls.dart';
@@ -131,7 +132,7 @@ class _MyAppState extends State<MyApp> {
 
     channel = const AndroidNotificationChannel(
         'orange_flutter', // id
-        'Orange', // title
+        appName, // title
         playSound: true,
         enableLights: true,
         enableVibration: true,
@@ -167,7 +168,7 @@ void showNotification(RemoteMessage message) {
     message.notification?.body ?? message.data['body'],
     const NotificationDetails(
         iOS: DarwinNotificationDetails(presentSound: true, presentAlert: true, presentBadge: false),
-        android: AndroidNotificationDetails('orange_flutter', 'Orange')),
+        android: AndroidNotificationDetails('orange_flutter', appName)),
   );
 }
 

@@ -343,5 +343,7 @@
   "areYouSureYouWantToDeleteTheComment": "Er du sikker på, at du vil slette kommentaren?",
   "enterUsername": "Indtast brugernavn",
   "username": "Brugernavn",
-  "followerList": "Følgerliste"
+  "followerList": "Følgerliste",
+  "userDidNotAllowCameraAndMicrophonePermission": "Brugeren tillod ikke kamera- og mikrofontilladelse.",
+  "userDidNotAllowCamera": "Brugeren tillod ikke kamera"
 }

@@ -52,8 +52,8 @@ class PersonTopBarArea extends StatelessWidget {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(30),
                       child: CachedNetworkImage(
-                        imageUrl: '${ConstRes.aImageBaseUrl}${liveStreamUser?.userImage}',
-                        cacheKey: '${ConstRes.aImageBaseUrl}${liveStreamUser?.userImage}',
+                        imageUrl: '${liveStreamUser?.userImage}',
+                        cacheKey: '${liveStreamUser?.userImage}',
                         errorWidget: (context, error, stackTrace) {
                           return Image.asset(
                             AssetRes.themeLabel,
@@ -77,7 +77,7 @@ class PersonTopBarArea extends StatelessWidget {
                         Row(
                           children: [
                             Text(
-                              liveStreamUser?.fullName ?? '',
+                              liveStreamUser?.fullName ?? 'Unknown',
                               style: const TextStyle(
                                 color: ColorRes.white,
                                 fontSize: 16,
@@ -85,7 +85,7 @@ class PersonTopBarArea extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              " ${liveStreamUser?.age}",
+                              " ${liveStreamUser?.age ?? 0}",
                               style: const TextStyle(
                                 color: ColorRes.white,
                                 fontSize: 16,
@@ -95,16 +95,8 @@ class PersonTopBarArea extends StatelessWidget {
                             Stack(
                               alignment: Alignment.center,
                               children: [
-                                Container(
-                                  height: 10,
-                                  width: 10,
-                                  color: ColorRes.white,
-                                ),
-                                Image.asset(
-                                  AssetRes.tickMark,
-                                  height: 18,
-                                  width: 18,
-                                ),
+                                Container(height: 10, width: 10, color: ColorRes.white),
+                                Image.asset(AssetRes.tickMark, height: 18, width: 18),
                               ],
                             ),
                           ],
@@ -124,7 +116,7 @@ class PersonTopBarArea extends StatelessWidget {
                     onTap: onMoreBtnTap,
                     child: Image.asset(
                       AssetRes.moreHorizontal,
-                      height: 10,
+                      height: 15,
                       width: 25,
                       fit: BoxFit.cover,
                       color: ColorRes.white,

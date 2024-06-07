@@ -343,5 +343,7 @@
   "areYouSureYouWantToDeleteTheComment": "您确定要删除评论吗？",
   "enterUsername": "输入用户名",
   "username": "用户名",
-  "followerList": "关注者列表"
+  "followerList": "关注者列表",
+  "userDidNotAllowCameraAndMicrophonePermission": "用户未允许摄像头和麦克风权限。",
+  "userDidNotAllowCamera": "用户未允许摄像头"
 }

@@ -18,6 +18,9 @@ class ConstRes {
   static const String customerSecret = "ce11056b3fd44851919670703656b9e9";
 }
 
+/// AppName
+const String appName = 'Orange';
+
 ///_____________________________ Image Quality _______________________///
 const double maxWidth = 1080;
 const double maxHeight = 1080;

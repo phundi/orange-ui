@@ -1,9 +1,7 @@
 import 'dart:async';
 import 'dart:developer';
 
-import 'package:agora_rtc_engine/rtc_engine.dart';
-import 'package:agora_rtc_engine/rtc_local_view.dart' as rtc_local_view;
-import 'package:agora_rtc_engine/rtc_remote_view.dart' as rtc_remote_view;
+import 'package:agora_rtc_engine/agora_rtc_engine.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -18,24 +16,27 @@ import 'package:orange_ui/screen/livestream_end_screen/livestream_end_screen.dar
 import 'package:orange_ui/service/pref_service.dart';
 import 'package:orange_ui/utils/const_res.dart';
 import 'package:orange_ui/utils/firebase_res.dart';
-import 'package:orange_ui/utils/pref_res.dart';
-import 'package:orange_ui/utils/urls.dart';
 import 'package:stacked/stacked.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
 
 class RandomStreamingScreenViewModel extends BaseViewModel {
   FirebaseFirestore db = FirebaseFirestore.instance;
-  String channelName = '';
+  String channelId = '';
+  String token = '';
   String? identity;
   late RtcEngine engine;
   int streamId = -1;
-  bool isBroadcaster = false;
+  bool isBroadcaster = true;
   bool muted = false;
+
+  int? _remoteUid;
+  bool localUserJoined = false;
+
   TextEditingController commentController = TextEditingController();
   FocusNode commentFocus = FocusNode();
   List<LiveStreamComment> commentList = [];
   final users = <int>[];
-  LiveStreamUser? liveStreamUser;
+  LiveStreamUser liveStreamUser;
   DocumentReference? collectionReference;
   RegistrationUserData? registrationUserData;
   Stopwatch watch = Stopwatch();
@@ -51,129 +52,71 @@ class RandomStreamingScreenViewModel extends BaseViewModel {
 
   Appdata? settingAppData;
 
+  RandomStreamingScreenViewModel(
+      {required this.liveStreamUser, this.registrationUserData, this.settingAppData});
+
   void init() {
     WakelockPlus.enable();
-    channelName = Get.arguments[Urls.aChannelId];
-    isBroadcaster = Get.arguments[Urls.aIsBroadcasting];
+    channelId = liveStreamUser.hostIdentity ?? '';
+    token = liveStreamUser.agoraToken ?? '';
     getValueFromPrefs();
     initializeAgora();
   }
 
   Future<void> initializeAgora() async {
-    await _initAgoraRtcEngine();
-    startWatch();
-    if (isBroadcaster) {
-      streamId = (await engine.createDataStream(false, false))!;
-    }
-    engine.setEventHandler(RtcEngineEventHandler(
-      joinChannelSuccess: (channel, uid, elapsed) {
-        PrefService.getUserData().then((value) {
-          db.collection(FirebaseRes.liveHostList).doc('${value?.id}').set(LiveStreamUser(
-                  userId: value?.id,
-                  fullName: value?.fullname,
-                  userImage: CommonFun.getProfileImage(images: value?.images),
-                  agoraToken: '',
-                  id: DateTime.now().millisecondsSinceEpoch,
-                  collectedDiamond: 0,
-                  hostIdentity: value?.identity,
-                  isVerified: false,
-                  joinedUser: [],
-                  address: value?.live,
-                  age: value?.age,
-                  watchingCount: 0)
-              .toJson());
-        });
-        notifyListeners();
-      },
-      userJoined: (uid, elapsed) {
-        log('userJoined');
-        users.add(uid);
-        notifyListeners();
-      },
-      leaveChannel: (stats) {
-        log('leaveChannel');
-      },
-      userOffline: (uid, reason) {
-        log('userOffline');
-      },
-    ));
-    await engine.joinChannel(null, channelName, null, 0).catchError((e) {});
-  }
+    // Create RtcEngine instance
+    engine = createAgoraRtcEngine();
 
-  Future<void> _initAgoraRtcEngine() async {
-    engine = await RtcEngine.create(ConstRes.agoraAppId);
+    // Initialize RtcEngine and set the channel profile to live broadcasting
+    await engine.initialize(const RtcEngineContext(
+        appId: ConstRes.agoraAppId,
+        channelProfile: ChannelProfileType.channelProfileLiveBroadcasting));
+    // Enable the video module
     await engine.enableVideo();
-    await engine.setChannelProfile(ChannelProfile.LiveBroadcasting);
-    if (isBroadcaster) {
-      await engine.setClientRole(ClientRole.Broadcaster);
-    } else {
-      await engine.setClientRole(ClientRole.Audience);
-    }
-  }
+    // Enable local video preview
+    await engine.startPreview();
+    startWatch();
 
-  /// Helper function to get list of native views
-  List<Widget> _getRenderViews() {
-    final List<StatefulWidget> list = [];
-    if (isBroadcaster) {
-      list.add(const rtc_local_view.SurfaceView(
-        mirrorMode: VideoMirrorMode.Auto,
-      ));
-    }
-    for (var uid in users) {
-      list.add(rtc_remote_view.SurfaceView(
-        uid: uid,
-        channelId: channelName,
-      ));
-    }
-    // debugPrint('list of users :- ${list.length}');
-    return list;
-  }
+    await engine.joinChannel(
+      token: token,
+      channelId: channelId,
+      options: const ChannelMediaOptions(
+          // Set the user role as host
+          // To set the user role to audience, change clientRoleBroadcaster to clientRoleAudience
+          clientRoleType: ClientRoleType.clientRoleBroadcaster,
+          audienceLatencyLevel: AudienceLatencyLevelType.audienceLatencyLevelUltraLowLatency),
+      uid: 0,
+    );
 
-  /// Video view row wrapper
-  Widget _expandedVideoView(List<Widget> views) {
-    final wrappedViews =
-        views.map<Widget>((view) => Expanded(child: Container(child: view))).toList();
-    return Expanded(
-      child: Row(
-        children: wrappedViews,
+    // Add an event handler
+    engine.registerEventHandler(
+      RtcEngineEventHandler(
+        // Occurs when the local user joins the channel successfully
+        onJoinChannelSuccess: (RtcConnection connection, int elapsed) {
+          _updateLiveStreamUser();
+          localUserJoined = true;
+          notifyListeners();
+        },
+        // Occurs when a remote user join the channel
+        onUserJoined: (RtcConnection connection, int remoteUid, int elapsed) {
+          _remoteUid = remoteUid;
+          notifyListeners();
+        },
+        // Occurs when a remote user leaves the channel
+        onUserOffline: (RtcConnection connection, int remoteUid, UserOfflineReasonType reason) {
+          _remoteUid = null;
+          notifyListeners();
+        },
       ),
     );
   }
 
-  /// Video layout wrapper
-  Widget broadcastView() {
-    final views = _getRenderViews();
-    switch (views.length) {
-      case 1:
-        return Column(
-          children: <Widget>[
-            _expandedVideoView([views[0]]),
-          ],
-        );
-      case 2:
-        return Column(
-          children: <Widget>[
-            _expandedVideoView([views[0]]),
-            _expandedVideoView([views[1]])
-          ],
-        );
-      case 3:
-        return Column(
-          children: <Widget>[
-            _expandedVideoView(views.sublist(0, 2)),
-            _expandedVideoView(views.sublist(2, 3))
-          ],
-        );
-      case 4:
-        return Column(
-          children: <Widget>[
-            _expandedVideoView(views.sublist(0, 2)),
-            _expandedVideoView(views.sublist(2, 4))
-          ],
-        );
-      default:
-    }
-    return Container();
+  Future<void> _updateLiveStreamUser() async {
+    await db
+        .collection(FirebaseRes.liveHostList)
+        .doc('${registrationUserData?.id}')
+        .set(liveStreamUser.toJson());
+    notifyListeners();
   }
 
   Future<void> getValueFromPrefs() async {
@@ -189,43 +132,48 @@ class RandomStreamingScreenViewModel extends BaseViewModel {
     initializeFireStore();
   }
 
-  void onEndVideoTap() {
+  void onEndVideoTap() async {
+    if (Get.isDialogOpen == true) {
+      Get.back();
+    }
+    // Stop timer and close resources
     stopWatch();
-    savePrefData().then(
-      (value) async {
-        disClosed();
-        db.collection(FirebaseRes.liveHostList).doc('${registrationUserData?.id}').delete();
-        final batch = db.batch();
-        var collection = db
-            .collection(FirebaseRes.liveHostList)
-            .doc('${registrationUserData?.id}')
-            .collection(FirebaseRes.comments);
-        var snapshots = await collection.get();
-        for (var doc in snapshots.docs) {
-          batch.delete(doc.reference);
-        }
-        await batch.commit();
-        if (Get.isDialogOpen == true) {
-          Get.back();
-        }
-        Get.off(() => const LivestreamEndScreen());
-      },
-    );
+    disClosed();
+    CommonUI.getLottieLoader();
+    LiveStreamUser user = liveStreamUser;
+
+    // Delete live stream data from Firestore
+    await _deleteLiveStreamData();
+    Get.back();
+    // Navigate to end screen
+    Get.off(() => LivestreamEndScreen(
+        liveStreamUser: user, dateTime: dateTime.toString(), duration: elapsedTime));
+  }
+
+  Future<void> _deleteLiveStreamData() async {
+    await db.collection(FirebaseRes.liveHostList).doc('${registrationUserData?.id}').delete();
+    final batch = db.batch();
+    var collection = db
+        .collection(FirebaseRes.liveHostList)
+        .doc('${registrationUserData?.id}')
+        .collection(FirebaseRes.comments);
+    var snapshots = await collection.get();
+    for (var doc in snapshots.docs) {
+      batch.delete(doc.reference);
+    }
+    await batch.commit();
   }
 
   void disClosed() {
     // clear users
     users.clear();
     // destroy sdk and leave channel
-    engine.destroy();
+    _dispose();
   }
 
-  Future<void> savePrefData() async {
-    PrefService.saveString(PrefConst.watching, '${liveStreamUser?.joinedUser?.length ?? '0'}');
-    PrefService.saveString(PrefConst.diamond, '${liveStreamUser?.collectedDiamond ?? '0'}');
-    PrefService.saveString(PrefConst.userImage, liveStreamUser?.userImage ?? '');
-    PrefService.saveString(PrefConst.date, dateTime.toString());
-    PrefService.saveString(PrefConst.fullName, CommonUI.fullName(liveStreamUser?.fullName));
+  Future<void> _dispose() async {
+    await engine.leaveChannel(); // Leave the channel
+    await engine.release(); // Release resources
   }
 
   void onEndBtnTap() async {
@@ -247,6 +195,7 @@ class RandomStreamingScreenViewModel extends BaseViewModel {
     muted = !muted;
     notifyListeners();
     engine.muteLocalAudioStream(muted);
+    engine.muteAllRemoteAudioStreams(muted);
   }
 
   void onDiamondTap() {}
@@ -273,26 +222,26 @@ class RandomStreamingScreenViewModel extends BaseViewModel {
   }
 
   void initializeFireStore() {
-    PrefService.getUserData().then((value) {
-      registrationUserData = value;
+    collectionReference =
+        db.collection(FirebaseRes.liveHostList).doc('${registrationUserData?.id}');
+    listenToLiveStreamUser();
+    listenToComments();
+  }
 
-      collectionReference =
-          db.collection(FirebaseRes.liveHostList).doc('${registrationUserData?.id}');
-
-      collectionReference
-          ?.withConverter(
-            fromFirestore: LiveStreamUser.fromFirestore,
-            toFirestore: (LiveStreamUser value, options) {
-              return LiveStreamUser().toFirestore();
-            },
-          )
-          .snapshots()
-          .any((element) {
-        liveStreamUser = element.data();
+  void listenToLiveStreamUser() {
+    collectionReference
+        ?.withConverter<LiveStreamUser>(
+          fromFirestore: (snapshot, options) => LiveStreamUser.fromJson(snapshot.data()!),
+          toFirestore: (value, options) => value.toJson(),
+        )
+        .snapshots()
+        .listen((snapshot) {
+      if (snapshot.data() != null) {
+        liveStreamUser = snapshot.data()!;
         minimumUserLiveTimer ??= Timer.periodic(const Duration(seconds: 1), (timer) {
           countTimer++;
           if (countTimer == maxMinutes &&
-              liveStreamUser!.watchingCount! <= (settingAppData?.minUserLive ?? 0)) {
+              (liveStreamUser.watchingCount ?? 0) <= (settingAppData?.minUserLive ?? 0)) {
             timer.cancel();
             onEndVideoTap();
           }
@@ -301,28 +250,79 @@ class RandomStreamingScreenViewModel extends BaseViewModel {
           }
         });
         notifyListeners();
-        return false;
-      });
-      collectionReference
-          ?.collection(FirebaseRes.comments)
-          .orderBy(FirebaseRes.id, descending: true)
-          .withConverter(
-            fromFirestore: LiveStreamComment.fromFirestore,
-            toFirestore: (LiveStreamComment value, options) {
-              return value.toFirestore();
-            },
-          )
-          .snapshots()
-          .any((element) {
-        commentList = [];
-        for (int i = 0; i < element.docs.length; i++) {
-          commentList.add(element.docs[i].data());
-          notifyListeners();
-        }
-        return false;
-      });
+      }
     });
   }
+
+  void listenToComments() {
+    collectionReference
+        ?.collection(FirebaseRes.comments)
+        .orderBy(FirebaseRes.id, descending: true)
+        .withConverter<LiveStreamComment>(
+          fromFirestore: (snapshot, options) => LiveStreamComment.fromJson(snapshot.data()!),
+          toFirestore: (value, options) => value.toJson(),
+        )
+        .snapshots()
+        .listen((snapshot) {
+      commentList.clear(); // Clear previous comments
+      for (var doc in snapshot.docs) {
+        commentList.add(doc.data()); // Add each comment to the list
+      }
+      notifyListeners(); // Notify listeners after all comments are added
+    });
+  }
+
+  // void initializeFireStore() {
+  //   PrefService.getUserData().then((value) {
+  //     registrationUserData = value;
+  //
+  //     collectionReference =
+  //         db.collection(FirebaseRes.liveHostList).doc('${registrationUserData?.id}');
+  //
+  //     collectionReference
+  //         ?.withConverter(
+  //           fromFirestore: LiveStreamUser.fromFirestore,
+  //           toFirestore: (LiveStreamUser value, options) {
+  //             return LiveStreamUser().toFirestore();
+  //           },
+  //         )
+  //         .snapshots()
+  //         .any((element) {
+  //       liveStreamUser = element.data()!;
+  //       minimumUserLiveTimer ??= Timer.periodic(const Duration(seconds: 1), (timer) {
+  //         countTimer++;
+  //         if (countTimer == maxMinutes &&
+  //             liveStreamUser.watchingCount! <= (settingAppData?.minUserLive ?? 0)) {
+  //           timer.cancel();
+  //           onEndVideoTap();
+  //         }
+  //         if (countTimer == maxMinutes) {
+  //           countTimer = 0;
+  //         }
+  //       });
+  //       notifyListeners();
+  //       return false;
+  //     });
+  //     collectionReference
+  //         ?.collection(FirebaseRes.comments)
+  //         .orderBy(FirebaseRes.id, descending: true)
+  //         .withConverter(
+  //           fromFirestore: LiveStreamComment.fromFirestore,
+  //           toFirestore: (LiveStreamComment value, options) {
+  //             return value.toFirestore();
+  //           },
+  //         )
+  //         .snapshots()
+  //         .any((element) {
+  //       commentList = [];
+  //       for (int i = 0; i < element.docs.length; i++) {
+  //         commentList.add(element.docs[i].data());
+  //         notifyListeners();
+  //       }
+  //       return false;
+  //     });
+  //   });
+  // }
 
   updateTime(Timer timer) {
     if (watch.isRunning) {
@@ -374,7 +374,7 @@ class RandomStreamingScreenViewModel extends BaseViewModel {
     commentController.dispose();
     timer.cancel();
     // destroy sdk and leave channel
-    engine.destroy();
+    _dispose();
     super.dispose();
   }
 }

@@ -3499,6 +3499,26 @@ class S {
       args: [],
     );
   }
+
+  /// `User did not allow camera and microphone permission.`
+  String get userDidNotAllowCameraAndMicrophonePermission {
+    return Intl.message(
+      'User did not allow camera and microphone permission.',
+      name: 'userDidNotAllowCameraAndMicrophonePermission',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `User did not allow camera`
+  String get userDidNotAllowCamera {
+    return Intl.message(
+      'User did not allow camera',
+      name: 'userDidNotAllowCamera',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

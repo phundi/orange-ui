@@ -343,5 +343,7 @@
   "areYouSureYouWantToDeleteTheComment": "Είστε βέβαιοι ότι θέλετε να διαγράψετε το σχόλιο;",
   "enterUsername": "Εισάγετε όνομα χρήστη",
   "username": "Όνομα χρήστη",
-  "followerList": "Λίστα ακολούθων"
+  "followerList": "Λίστα ακολούθων",
+  "userDidNotAllowCameraAndMicrophonePermission": "Ο χρήστης δεν επέτρεψε την άδεια κάμερας και μικροφώνου.",
+  "userDidNotAllowCamera": "Ο χρήστης δεν επέτρεψε την κάμερα"
 }

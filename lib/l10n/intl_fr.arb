@@ -343,5 +343,7 @@
   "areYouSureYouWantToDeleteTheComment": "Etes-vous sûr de vouloir supprimer le commentaire ?",
   "enterUsername": "Saisissez votre nom d'utilisateur",
   "username": "Nom d'utilisateur",
-  "followerList": "Liste des abonnés"
+  "followerList": "Liste des abonnés",
+  "userDidNotAllowCameraAndMicrophonePermission": "El usuario no permitió el permiso de la cámara y el micrófono.",
+  "userDidNotAllowCamera": "El usuario no permitió la cámara."
 }

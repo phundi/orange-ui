@@ -343,5 +343,7 @@
   "areYouSureYouWantToDeleteTheComment": "क्या आप वाकई टिप्पणी हटाना चाहते हैं?",
   "enterUsername": "उपयोगकर्ता नाम दर्ज करें",
   "username": "उपयोगकर्ता नाम",
-  "followerList": "अनुयायी सूची"
+  "followerList": "अनुयायी सूची",
+  "userDidNotAllowCameraAndMicrophonePermission": "उपयोगकर्ता ने कैमरा और माइक्रोफ़ोन की अनुमति नहीं दी।",
+  "userDidNotAllowCamera": "उपयोगकर्ता ने कैमरा की अनुमति नहीं दी"
 }

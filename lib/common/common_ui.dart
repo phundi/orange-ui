@@ -71,6 +71,10 @@ class CommonUI {
         barrierLabel: '');
   }
 
+  static Future<void> getLottieLoader() {
+    return Get.dialog(Center(child: Lottie.asset(AssetRes.loadingLottie, height: 100, width: 100)));
+  }
+
   static Widget lottieWidget() {
     return Center(
       child: Lottie.asset(AssetRes.loadingLottie, height: 100, width: 100),

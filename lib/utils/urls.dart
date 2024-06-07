@@ -62,6 +62,7 @@ class Urls {
   static const String aFetchPostsByHashtag = '${ConstRes.aBaseUrl}fetchPostsByHashtag';
   static const String aFetchFollowingList = '${ConstRes.aBaseUrl}fetchFollowingList';
   static const String aFetchFollowersList = '${ConstRes.aBaseUrl}fetchFollowersList';
+  static const String aGenerateAgoraToken = '${ConstRes.aBaseUrl}generateAgoraToken';
 
   ///------------------------ Params ------------------------///
   static const String apiKeyName = 'apikey';
@@ -142,6 +143,7 @@ class Urls {
   static const String aDuration = 'duration';
   static const String content = 'content';
   static const String userName = 'username';
+  static const String channelName = 'channelName';
 
   // Social Media
   static const String myUserId = 'my_user_id';

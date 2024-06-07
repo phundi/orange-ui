@@ -343,5 +343,7 @@
   "areYouSureYouWantToDeleteTheComment": "Вы уверены, что хотите удалить комментарий?",
   "enterUsername": "Введите имя пользователя",
   "username": "Имя пользователя",
-  "followerList": "Список подписчиков"
+  "followerList": "Список подписчиков",
+  "userDidNotAllowCameraAndMicrophonePermission": "Пользователь не предоставил разрешения камере и микрофону.",
+  "userDidNotAllowCamera": "Пользователь не разрешил камеру"
 }

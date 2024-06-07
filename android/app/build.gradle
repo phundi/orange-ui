@@ -53,7 +53,7 @@ android {
 
     defaultConfig {
         applicationId "com.retrytech.orange"
-        minSdkVersion 24
+        minSdkVersion 21
         targetSdkVersion 34
         multiDexEnabled true
         versionCode flutterVersionCode.toInteger()
@@ -65,6 +65,8 @@ android {
 
     buildTypes {
         release {
+            minifyEnabled false
+            shrinkResources false
             signingConfig signingConfigs.debug
         }
     }

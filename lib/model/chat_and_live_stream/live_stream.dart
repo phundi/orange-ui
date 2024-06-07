@@ -65,60 +65,18 @@ class LiveStreamUser {
     _fullName = json?["fullName"];
     _hostIdentity = json?["hostIdentity"];
     _id = json?["id"];
-    _isVerified = json?["_isVerified"];
+    _isVerified = json?["isVerified"];
     if (json?["joinedUser"] != null) {
       _joinedUser = [];
       json?["joinedUser"].forEach((e) {
         _joinedUser?.add(e);
       });
     }
-    _userId = json?["_userId"];
-    _userImage = json?["_userImage"];
-    _watchingCount = json?["_watchingCount"];
+    _userId = json?["userId"];
+    _userImage = json?["userImage"];
+    _watchingCount = json?["watchingCount"];
     _address = json?["address"];
     _age = json?["age"];
-  }
-
-  Map<String, dynamic> toFirestore() {
-    return {
-      "agoraToken": _agoraToken,
-      "collectedDiamond": _collectedDiamond,
-      "fullName": _fullName,
-      "hostIdentity": _hostIdentity,
-      "id": _id,
-      "isVerified": _isVerified,
-      "joinedUser": _joinedUser,
-      "userId": _userId,
-      "userImage": _userImage,
-      "watchingCount": _watchingCount,
-      "age": _age,
-      "address": _address
-    };
-  }
-
-  factory LiveStreamUser.fromFirestore(
-    DocumentSnapshot<Map<String, dynamic>> snapshot,
-    SnapshotOptions? options,
-  ) {
-    final data = snapshot.data();
-    List<String> joinedUser = [];
-    data?['joinedUser'].forEach((v) {
-      joinedUser.add(v);
-    });
-    return LiveStreamUser(
-      agoraToken: data?["agoraToken"],
-      collectedDiamond: data?["collectedDiamond"],
-      fullName: data?["fullName"],
-      hostIdentity: data?["hostIdentity"],
-      id: data?["id"],
-      isVerified: data?["isVerified"],
-      joinedUser: joinedUser,
-      userId: data?["userId"],
-      userImage: data?["userImage"],
-      watchingCount: data?["watchingCount"],
-      age: data?["age"],
-      address: data?["address"],
-    );
   }
 
   int? get watchingCount => _watchingCount;

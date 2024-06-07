@@ -343,5 +343,7 @@
   "areYouSureYouWantToDeleteTheComment": "Weet je zeker dat je de reactie wilt verwijderen?",
   "enterUsername": "Vul je gebruikersnaam in",
   "username": "Gebruikersnaam",
-  "followerList": "Volgerslijst"
+  "followerList": "Volgerslijst",
+  "userDidNotAllowCameraAndMicrophonePermission": "Gebruiker heeft geen camera- en microfoonrechten toegestaan.",
+  "userDidNotAllowCamera": "Gebruiker heeft camera niet toegestaan"
 }

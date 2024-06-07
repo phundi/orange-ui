@@ -10,9 +10,9 @@ import 'package:orange_ui/api_provider/api_provider.dart';
 import 'package:orange_ui/common/common_fun.dart';
 import 'package:orange_ui/common/common_ui.dart';
 import 'package:orange_ui/common/confirmation_dialog.dart';
-
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/chat_and_live_stream/live_stream.dart';
+import 'package:orange_ui/model/generate_token.dart';
 import 'package:orange_ui/model/setting.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/screen/bottom_diamond_shop/bottom_diamond_shop.dart';
@@ -37,7 +37,7 @@ class LiveGridScreenViewModel extends BaseViewModel {
   FirebaseFirestore db = FirebaseFirestore.instance;
   late CollectionReference collection;
   StreamSubscription<QuerySnapshot<LiveStreamUser>>? subscription;
-  int? walletCoin;
+  int walletCoin = 0;
   BannerAd? bannerAd;
   InterstitialAd? interstitialAd;
 
@@ -63,20 +63,14 @@ class LiveGridScreenViewModel extends BaseViewModel {
   void initInterstitialAds() {
     CommonFun.interstitialAd((ad) {
       interstitialAd = ad;
-    },
-        adMobIntId: Platform.isIOS
-            ? settingAppData?.admobIntIos
-            : settingAppData?.admobInt);
+    }, adMobIntId: Platform.isIOS ? settingAppData?.admobIntIos : settingAppData?.admobInt);
   }
 
   void getBannerAd() {
     CommonFun.bannerAd((ad) {
       bannerAd = ad as BannerAd;
       notifyListeners();
-    },
-        bannerId: Platform.isIOS
-            ? settingAppData?.admobBannerIos
-            : settingAppData?.admobBanner);
+    }, bannerId: Platform.isIOS ? settingAppData?.admobBannerIos : settingAppData?.admobBanner);
   }
 
   void goLiveBtnClick() {
@@ -96,20 +90,48 @@ class LiveGridScreenViewModel extends BaseViewModel {
 
   Future<void> onGoLiveYesBtnTap() async {
     Get.back();
-    await [Permission.camera, Permission.microphone].request().then((value) {
-      if ((value[Permission.camera] == PermissionStatus.granted &&
-              value[Permission.microphone] == PermissionStatus.granted) ||
-          Platform.isIOS) {
-        Get.to(() => const RandomStreamingScreen(), arguments: {
-          Urls.aChannelId: registrationUser?.identity,
-          Urls.aIsBroadcasting: true,
-        })?.then((value) async {
-          notifyListeners();
-        });
-      } else {
-        openAppSettings();
-      }
-    });
+    ApiProvider().callPost(
+        completion: (response) async {
+          GenerateToken token = GenerateToken.fromJson(response);
+          if (token.status == true) {
+            LiveStreamUser liveStreamUser = LiveStreamUser(
+                userId: registrationUser?.id,
+                fullName: registrationUser?.fullname,
+                userImage: CommonFun.getProfileImage(images: registrationUser?.images),
+                agoraToken: token.token,
+                id: DateTime.now().millisecondsSinceEpoch,
+                collectedDiamond: 0,
+                hostIdentity: registrationUser?.identity,
+                isVerified: false,
+                joinedUser: [],
+                address: registrationUser?.live,
+                age: registrationUser?.age,
+                watchingCount: 0);
+
+            // You can request multiple permissions at once.
+            Map<Permission, PermissionStatus> statuses = await [
+              Permission.camera,
+              Permission.microphone,
+            ].request();
+
+            if (statuses[Permission.camera]!.isGranted &&
+                statuses[Permission.microphone]!.isGranted) {
+              Get.to(() => RandomStreamingScreen(
+                    userData: registrationUser,
+                    liveStreamUser: liveStreamUser,
+                    settingData: settingAppData,
+                  ))?.then((value) async {
+                notifyListeners();
+              });
+            } else {
+              CommonUI.snackBar(message: S.current.userDidNotAllowCameraAndMicrophonePermission);
+            }
+          } else {
+            CommonUI.snackBar(message: token.message ?? '');
+          }
+        },
+        url: Urls.aGenerateAgoraToken,
+        param: {Urls.channelName: registrationUser?.identity});
   }
 
   void getLiveUsers() {
@@ -117,9 +139,9 @@ class LiveGridScreenViewModel extends BaseViewModel {
     collection = db.collection(FirebaseRes.liveHostList);
     subscription = collection
         .withConverter(
-          fromFirestore: LiveStreamUser.fromFirestore,
+          fromFirestore: (snapshot, options) => LiveStreamUser.fromJson(snapshot.data()),
           toFirestore: (LiveStreamUser value, options) {
-            return value.toFirestore();
+            return value.toJson();
           },
         )
         .snapshots()
@@ -140,28 +162,16 @@ class LiveGridScreenViewModel extends BaseViewModel {
       String authString = '${ConstRes.customerId}:${ConstRes.customerSecret}';
       String authToken = base64.encode(authString.codeUnits);
       ApiProvider()
-          .agoraListStreamingCheck(
-              user?.hostIdentity ?? '', authToken, ConstRes.agoraAppId)
+          .agoraListStreamingCheck(user?.hostIdentity ?? '', authToken, ConstRes.agoraAppId)
           .then((value) {
-        if (value.data?.channelExist == true ||
-            value.data!.broadcasters!.isNotEmpty) {
+        if (value.data?.channelExist == true || value.data!.broadcasters!.isNotEmpty) {
           if (registrationUser?.isFake != 1) {
-            if ((settingAppData?.liveWatchingPrice ?? 0) <= walletCoin! &&
-                walletCoin != 0) {
+            if ((settingAppData?.liveWatchingPrice ?? 0) < walletCoin) {
               Get.dialog(
                 ReverseSwipeDialog(
                     onCancelTap: onBackBtnTap,
                     onContinueTap: (isSelected) {
                       Get.back();
-                      showDialog(
-                        context: Get.context!,
-                        barrierDismissible: false,
-                        builder: (context) {
-                          return Center(
-                            child: CommonUI.lottieWidget(),
-                          );
-                        },
-                      );
                       minusCoinApi().then((value) {
                         onImageTap(user);
                       });
@@ -170,8 +180,7 @@ class LiveGridScreenViewModel extends BaseViewModel {
                     walletCoin: walletCoin,
                     title1: S.current.liveCap,
                     title2: S.current.streamCap,
-                    dialogDisc: AppRes.liveStreamDisc(
-                        settingAppData?.liveWatchingPrice ?? 0),
+                    dialogDisc: AppRes.liveStreamDisc(settingAppData?.liveWatchingPrice ?? 0),
                     coinPrice: '${settingAppData?.liveWatchingPrice ?? 0}'),
               );
             } else {
@@ -196,10 +205,7 @@ class LiveGridScreenViewModel extends BaseViewModel {
             name: user?.fullName ?? '',
             onExitBtn: () async {
               Get.back();
-              db
-                  .collection(FirebaseRes.liveHostList)
-                  .doc('${user?.userId}')
-                  .delete();
+              db.collection(FirebaseRes.liveHostList).doc('${user?.userId}').delete();
               final batch = db.batch();
               var collection = db
                   .collection(FirebaseRes.liveHostList)
@@ -220,33 +226,45 @@ class LiveGridScreenViewModel extends BaseViewModel {
   Future<void> getProfileAPi() async {
     ApiProvider().getProfile(userID: PrefService.userId).then((value) async {
       registrationUser = value?.data;
-      walletCoin = value?.data?.wallet;
+      walletCoin = (value?.data?.wallet ?? 0);
       notifyListeners();
     });
     getLiveUsers();
   }
 
   Future<void> minusCoinApi() async {
-    await ApiProvider()
-        .minusCoinFromWallet(settingAppData?.liveWatchingPrice ?? 0);
+    CommonUI.getLottieLoader();
+    await ApiProvider().minusCoinFromWallet(settingAppData?.liveWatchingPrice ?? 0);
+    Get.back();
     getProfileAPi();
   }
 
-  void onImageTap(LiveStreamUser? user) {
+  void onImageTap(LiveStreamUser? liveStreamUser) {
     userEmail.add(registrationUser?.identity);
-    db.collection(FirebaseRes.liveHostList).doc('${user?.userId}').update({
-      FirebaseRes.watchingCount: user!.watchingCount! + 1,
-      FirebaseRes.joinedUser: FieldValue.arrayUnion(userEmail)
-    }).then((value) {
-      Get.back();
-      Get.to(() => const PersonStreamingScreen(), arguments: {
-        Urls.aChannelId: user.hostIdentity,
-        Urls.aIsBroadcasting: false,
-        Urls.aUserInfo: user
+    final liveStreamUserId = liveStreamUser?.userId;
+    if (liveStreamUserId != null) {
+      print(liveStreamUserId);
+      final newWatchingCount = (liveStreamUser?.watchingCount ?? 0) + 1;
+      final newCollectedDiamond = (liveStreamUser?.collectedDiamond ?? 0) +
+          (settingAppData?.liveWatchingPrice ?? 0).toInt();
+
+      db.collection(FirebaseRes.liveHostList).doc('$liveStreamUserId').update({
+        FirebaseRes.watchingCount: newWatchingCount,
+        FirebaseRes.joinedUser: FieldValue.arrayUnion(userEmail),
+        FirebaseRes.collectedDiamond: newCollectedDiamond
+      }).then((_) {
+        Get.to(() => PersonStreamingScreen(
+              liveStreamUser: liveStreamUser,
+              settingAppData: settingAppData,
+            ))?.then(
+          (value) {
+            getProfileAPi();
+          },
+        );
+      }).catchError((error) {
+        print("Error occurred while updating live stream data: $error");
       });
-    }).then((value) {
-      getProfileAPi();
-    });
+    }
   }
 
   @override
