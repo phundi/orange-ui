@@ -8,7 +8,6 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
 import 'package:orange_ui/common/common_fun.dart';
 import 'package:orange_ui/common/common_ui.dart';
-
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/chat_and_live_stream/chat.dart';
 import 'package:orange_ui/model/chat_and_live_stream/live_stream.dart';
@@ -72,18 +71,13 @@ class UserDetailScreenViewModel extends BaseViewModel {
       contentDescription: userData?.about ?? '',
       publiclyIndex: true,
       locallyIndex: true,
-      contentMetadata: BranchContentMetaData()
-        ..addCustomMetadata('user_id', userData?.id),
+      contentMetadata: BranchContentMetaData()..addCustomMetadata('user_id', userData?.id),
     );
     BranchLinkProperties lp = BranchLinkProperties(
-        channel: 'facebook',
-        feature: 'sharing',
-        stage: 'new share',
-        tags: ['one', 'two', 'three']);
+        channel: 'facebook', feature: 'sharing', stage: 'new share', tags: ['one', 'two', 'three']);
     lp.addControlParam('url', 'http://www.google.com');
     lp.addControlParam('url2', 'http://flutter.dev');
-    BranchResponse response =
-        await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
+    BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
     if (response.success) {
       Share.share(
         '${S.current.checkOutThisProfile} ${response.result}',
@@ -100,10 +94,8 @@ class UserDetailScreenViewModel extends BaseViewModel {
       (value) async {
         userData = value?.data;
         like = value?.data?.isLiked ?? false;
-        save = (value?.data?.savedprofile?.split(',') ?? [])
-            .contains('${userId ?? userData?.id}');
-        isFollow =
-            (userData?.followingStatus == 2 || userData?.followingStatus == 3);
+        save = (value?.data?.savedprofile?.split(',') ?? []).contains('${userId ?? userData?.id}');
+        isFollow = (userData?.followingStatus == 2 || userData?.followingStatus == 3);
         List<String> interestID = (userData?.interests ?? '').split(',');
         PrefService.getInterest().then((value) {
           value?.data?.forEach((element) {
@@ -124,10 +116,9 @@ class UserDetailScreenViewModel extends BaseViewModel {
     // Latest userdata
     await ApiProvider().getProfile(userID: PrefService.userId).then((value) {
       myUserData = value?.data;
-      blockUnBlock =
-          value?.data?.blockedUsers?.contains('${userData?.id}') == true
-              ? S.current.unBlock
-              : S.current.block;
+      blockUnBlock = value?.data?.blockedUsers?.contains('${userData?.id}') == true
+          ? S.current.unBlock
+          : S.current.block;
       save = value?.data?.savedprofile?.contains('${userData?.id}') ?? false;
       // like = value?.data?.likedprofile?.contains('${userData?.id}') ?? false;
       notifyListeners();
@@ -231,10 +222,7 @@ class UserDetailScreenViewModel extends BaseViewModel {
   void initInterstitialAds() {
     CommonFun.interstitialAd((ad) {
       interstitialAd = ad;
-    },
-        adMobIntId: Platform.isIOS
-            ? settingAppData?.admobIntIos
-            : settingAppData?.admobInt);
+    }, adMobIntId: Platform.isIOS ? settingAppData?.admobIntIos : settingAppData?.admobInt);
   }
 
   void onMoreBtnTap(String value) {
@@ -287,15 +275,10 @@ class UserDetailScreenViewModel extends BaseViewModel {
         username: userData?.fullname,
       );
       Conversation conversation = Conversation(
-        block: myUserData?.blockedUsers?.contains('${userData?.id}') == true
-            ? true
-            : false,
+        block: myUserData?.blockedUsers?.contains('${userData?.id}') == true ? true : false,
         blockFromOther:
-            userData?.blockedUsers?.contains('${myUserData?.id}') == true
-                ? true
-                : false,
-        conversationId: CommonFun.getConversationID(
-            myId: value?.id, otherUserId: userData?.id),
+            userData?.blockedUsers?.contains('${myUserData?.id}') == true ? true : false,
+        conversationId: CommonFun.getConversationID(myId: value?.id, otherUserId: userData?.id),
         deletedId: '',
         time: DateTime.now().millisecondsSinceEpoch.toDouble(),
         isDeleted: false,
@@ -331,51 +314,44 @@ class UserDetailScreenViewModel extends BaseViewModel {
   double calculateDistance({lat1, lon1, lat2, lon2}) {
     var p = 0.017453292519943295;
     var c = cos;
-    var a = 0.5 -
-        c((lat2 - lat1) * p) / 2 +
-        c(lat1 * p) * c(lat2 * p) * (1 - c((lon2 - lon1) * p)) / 2;
+    var a =
+        0.5 - c((lat2 - lat1) * p) / 2 + c(lat1 * p) * c(lat2 * p) * (1 - c((lon2 - lon1) * p)) / 2;
     return 12742 * asin(sqrt(a));
   }
 
   void onFollowUnfollowBtnClick() {
+    CommonUI.getLottieLoader(isBarrierDismissible: false);
     if (isFollow) {
       ApiProvider().callPost(
           completion: (response) {
+            Get.back();
             FollowUser followUser = FollowUser.fromJson(response);
             if (followUser.status == true) {
               userData?.followerCount(-1);
+              isFollow = false;
               notifyListeners();
             }
           },
           url: Urls.aUnfollowUser,
-          param: {
-            Urls.myUserId: PrefService.userId,
-            Urls.userId: userData?.id
-          });
-      isFollow = false;
-      notifyListeners();
+          param: {Urls.myUserId: PrefService.userId, Urls.userId: userData?.id});
     } else {
       ApiProvider().callPost(
           completion: (response) {
+            Get.back();
             FollowUser followUser = FollowUser.fromJson(response);
             if (followUser.status == true) {
+              isFollow = true;
               userData?.followerCount(1);
               notifyListeners();
             }
           },
           url: Urls.aFollowUser,
-          param: {
-            Urls.myUserId: PrefService.userId,
-            Urls.userId: userData?.id
-          });
-      isFollow = true;
-      notifyListeners();
+          param: {Urls.myUserId: PrefService.userId, Urls.userId: userData?.id});
     }
   }
 
   void onEditBtnClick() {
-    Get.to<RegistrationUserData>(() => EditProfileScreen(userData: userData))
-        ?.then((value) {
+    Get.to<RegistrationUserData>(() => EditProfileScreen(userData: userData))?.then((value) {
       if (value != null) {
         if (value.id == PrefService.userId) {
           userData = value;

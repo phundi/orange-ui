@@ -71,8 +71,12 @@ class CommonUI {
         barrierLabel: '');
   }
 
-  static Future<void> getLottieLoader() {
-    return Get.dialog(Center(child: Lottie.asset(AssetRes.loadingLottie, height: 100, width: 100)));
+  static Future<void> getLottieLoader({bool isBarrierDismissible = true}) {
+    return Get.dialog(
+        Center(
+          child: Lottie.asset(AssetRes.loadingLottie, height: 100, width: 100),
+        ),
+        barrierDismissible: isBarrierDismissible);
   }
 
   static Widget lottieWidget() {

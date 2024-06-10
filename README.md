@@ -25,6 +25,7 @@
 - Podfile
 - settings.gradle
 - urls.dart
+- user_detail_screen_view_model.dart
 - random_streaming_screen.dart
 - random_streaming_screen_view_model.dart
 - live_grid_screen_view_model.dart
@@ -47,7 +48,6 @@
 - bottom_info_field.dart
 - bottom_input_bar.dart
 - live_icon.dart
-- common_ui.dart
 - create_story_screen.dart
 - create_story_screen_view_model.dart
 - dashboard_top_bar.dart
