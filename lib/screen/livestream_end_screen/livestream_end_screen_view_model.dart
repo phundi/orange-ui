@@ -1,9 +1,6 @@
-import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
 import 'package:orange_ui/model/chat_and_live_stream/live_stream.dart';
-import 'package:orange_ui/service/pref_service.dart';
-import 'package:orange_ui/utils/pref_res.dart';
 import 'package:stacked/stacked.dart';
 
 class LivestreamEndScreenViewModel extends BaseViewModel {

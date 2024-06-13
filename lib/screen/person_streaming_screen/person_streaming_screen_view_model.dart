@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:agora_rtc_engine/agora_rtc_engine.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -34,7 +35,6 @@ class PersonStreamingScreenViewModel extends BaseViewModel {
   int streamId = -1;
 
   int? _remoteUid;
-  bool _localUserJoined = false;
 
   int countDownValue = 0;
   int? walletCoin;
@@ -250,7 +250,6 @@ class PersonStreamingScreenViewModel extends BaseViewModel {
       RtcEngineEventHandler(
         // Occurs when the local user joins the channel successfully
         onJoinChannelSuccess: (RtcConnection connection, int elapsed) {
-          _localUserJoined = true;
           notifyListeners();
         },
         // Occurs when a remote user join the channel
@@ -451,9 +450,8 @@ class PersonStreamingScreenViewModel extends BaseViewModel {
       await db.collection(FirebaseRes.liveHostList).doc('${liveStreamUser?.userId}').update(
         {FirebaseRes.watchingCount: watchingCount},
       );
-      print("Watching count updated successfully.");
     } catch (e) {
-      print("Failed to update watching count: $e");
+      log("Failed to update watching count: $e");
     }
   }
 

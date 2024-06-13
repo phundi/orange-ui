@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:agora_rtc_engine/agora_rtc_engine.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -29,7 +28,6 @@ class RandomStreamingScreenViewModel extends BaseViewModel {
   bool isBroadcaster = true;
   bool muted = false;
 
-  int? _remoteUid;
   bool localUserJoined = false;
 
   TextEditingController commentController = TextEditingController();
@@ -99,12 +97,10 @@ class RandomStreamingScreenViewModel extends BaseViewModel {
         },
         // Occurs when a remote user join the channel
         onUserJoined: (RtcConnection connection, int remoteUid, int elapsed) {
-          _remoteUid = remoteUid;
           notifyListeners();
         },
         // Occurs when a remote user leaves the channel
         onUserOffline: (RtcConnection connection, int remoteUid, UserOfflineReasonType reason) {
-          _remoteUid = null;
           notifyListeners();
         },
       ),

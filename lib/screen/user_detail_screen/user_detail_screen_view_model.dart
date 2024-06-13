@@ -106,6 +106,7 @@ class UserDetailScreenViewModel extends BaseViewModel {
             }
           });
         });
+
         isLoading = false;
         notifyListeners();
       },
@@ -120,7 +121,7 @@ class UserDetailScreenViewModel extends BaseViewModel {
           ? S.current.unBlock
           : S.current.block;
       save = value?.data?.savedprofile?.contains('${userData?.id}') ?? false;
-      // like = value?.data?.likedprofile?.contains('${userData?.id}') ?? false;
+      like = value?.data?.likedprofile?.contains('${userData?.id}') ?? false;
       notifyListeners();
 
       PrefService.saveUser(value?.data);

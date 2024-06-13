@@ -21,6 +21,7 @@ class LikeProfilesScreenViewModel extends BaseViewModel {
       notifyListeners();
     });
     PrefService.getUserData().then((value) {
+      print(value?.likedprofile);
       likedIds = (value?.likedprofile ?? '').split(',');
     });
   }

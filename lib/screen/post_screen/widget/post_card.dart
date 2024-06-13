@@ -39,9 +39,9 @@ class PostCard extends StatelessWidget {
               model.onMoreBtnClick(value, post, onDeleteItem);
             },
             onProfilePictureClick: (userData) {
-              if (userData != null) {
+              if (userData?.id != -1) {
                 model.onProfilePictureClick(
-                    userStories: [userData],
+                    userStories: [userData!],
                     onCallback: (data) {
                       updatePost?.call(data!);
                     },

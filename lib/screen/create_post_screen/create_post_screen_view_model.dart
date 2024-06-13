@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
 import 'package:orange_ui/common/common_ui.dart';
+import 'package:orange_ui/model/setting.dart';
 import 'package:orange_ui/model/social/post/add_post.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/service/pref_service.dart';
@@ -39,6 +40,8 @@ class CreatePostScreenViewModel extends BaseViewModel {
   late VideoPlayerController videoPlayerController;
   bool isPlaying = false;
 
+  Appdata? appData;
+
   void init() {
     pageType = 0;
     _getPrefData();
@@ -66,17 +69,28 @@ class CreatePostScreenViewModel extends BaseViewModel {
   void onPhotoTap() {
     contentType = 0;
     detectableTextFieldFocusNode.unfocus();
+
     _picker
-        .pickMultiImage(maxHeight: maxHeight, maxWidth: maxWidth, imageQuality: quality)
-        .then((value) {
-      if (value.isNotEmpty) {
-        for (int i = 0;
-            i < (value.length > maxImagesForPost ? maxImagesForPost : value.length);
-            i++) {
-          imagesFile.add(value[i]);
+        .pickMultiImage(
+      maxHeight: maxHeight,
+      maxWidth: maxWidth,
+      imageQuality: quality,
+    )
+        .then((pickedFiles) {
+      if (pickedFiles.isNotEmpty) {
+        // Determine the limit for the number of images to be uploaded
+        final int imageLimit = appData?.postUploadImageLimit ?? defaultMaxImagesForPost;
+
+        // Add images to the imagesFile list, respecting the limit
+        for (int i = 0; i < pickedFiles.length && i < imageLimit; i++) {
+          imagesFile.add(pickedFiles[i]);
           notifyListeners();
         }
       }
+    }).catchError((error) {
+      // Handle any errors that occur during image picking
+      print('Error picking images: $error');
+      // Optionally, notify listeners or show an error message to the user
     });
   }
 
@@ -111,20 +125,31 @@ class CreatePostScreenViewModel extends BaseViewModel {
       }
       notifyListeners();
     });
+
+    PrefService.getSettingData().then(
+      (value) {
+        appData = value?.appdata;
+        notifyListeners();
+      },
+    );
   }
 
   void onImageDelete() {
     detectableTextFieldFocusNode.unfocus();
-    if (imagesFile.length > 1) {
-      imagesFile.removeAt(imageIndex);
-    } else {
-      imagesFile.removeAt(0);
+
+    if (imageIndex >= 0 && imageIndex < imagesFile.length) {
+      if (imagesFile.length > 1) {
+        imagesFile.removeAt(imageIndex);
+      } else {
+        imagesFile.removeAt(0);
+      }
     }
     notifyListeners();
   }
 
   void onPageChanged(int value) {
     imageIndex = value;
+    notifyListeners();
   }
 
   void onChangeDetectableTextField(String value) {

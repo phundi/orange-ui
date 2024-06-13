@@ -200,7 +200,13 @@ class ApiProvider {
       Urls.myUserId: PrefService.userId.toString(),
     });
 
-    return GetProfile.fromJson(jsonDecode(response.body));
+    GetProfile profile = GetProfile.fromJson(jsonDecode(response.body));
+    if (profile.status == true) {
+      if (PrefService.userId == profile.data?.id) {
+        PrefService.saveUser(profile.data);
+      }
+    }
+    return profile;
   }
 
   Future<OnOffNotification> onOffNotification(int state) async {
@@ -314,12 +320,12 @@ class ApiProvider {
     }, body: {
       Urls.userId: profileId.toString(),
       Urls.myUserId: PrefService.userId.toString(),
-      Urls.type: '4'
-      // Urls.aProfiles: likedProfile,
+      // Urls.type: '4'
+      Urls.aProfiles: likedProfile,
     });
 
     UpdateSavedProfile updateSavedProfile = UpdateSavedProfile.fromJson(jsonDecode(response.body));
-    PrefService.saveUser(updateSavedProfile.data);
+    getProfile();
     return updateSavedProfile;
   }
 
@@ -352,7 +358,7 @@ class ApiProvider {
         headers: {Urls.apiKeyName: ConstRes.apiKey},
         body: {Urls.userId: PrefService.userId.toString(), Urls.aProfiles: savedProfile});
     UpdateSavedProfile updateSavedProfile = UpdateSavedProfile.fromJson(jsonDecode(response.body));
-    PrefService.saveUser(updateSavedProfile.data);
+    getProfile();
     return updateSavedProfile;
   }
 

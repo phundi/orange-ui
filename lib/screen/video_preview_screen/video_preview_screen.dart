@@ -16,8 +16,7 @@ class VideoPreviewScreen extends StatelessWidget {
   final VideoType type;
   final Post? post;
 
-  const VideoPreviewScreen(
-      {Key? key, required this.videoUrl, required this.type, this.post})
+  const VideoPreviewScreen({Key? key, required this.videoUrl, required this.type, this.post})
       : super(key: key);
 
   @override
@@ -38,13 +37,12 @@ class VideoPreviewScreen extends StatelessWidget {
         return Scaffold(
           backgroundColor: ColorRes.black,
           body: PopScope(
-            onPopInvoked: (didPop) {
+            onPopInvokedWithResult: (didPop, _) {
               SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
                 // Status bar color
                 statusBarColor: ColorRes.transparent,
                 // Status bar brightness (optional)
-                statusBarIconBrightness:
-                    Brightness.dark, // For Android (dark icons)
+                statusBarIconBrightness: Brightness.dark, // For Android (dark icons)
                 statusBarBrightness: Brightness.light, // For iOS (dark icons)
               ));
             },
@@ -60,8 +58,7 @@ class VideoPreviewScreen extends StatelessWidget {
                         : InkWell(
                             onTap: model.onPlayPauseTap,
                             child: AspectRatio(
-                              aspectRatio:
-                                  model.videoPlayerController.value.aspectRatio,
+                              aspectRatio: model.videoPlayerController.value.aspectRatio,
                               child: VideoPlayer(model.videoPlayerController),
                             ),
                           ),
@@ -80,11 +77,9 @@ class VideoPreviewScreen extends StatelessWidget {
                                 child: Container(
                                   height: 37,
                                   width: 37,
-                                  margin:
-                                      const EdgeInsets.symmetric(horizontal: 3),
+                                  margin: const EdgeInsets.symmetric(horizontal: 3),
                                   decoration: const BoxDecoration(
-                                      color: ColorRes.black,
-                                      shape: BoxShape.circle),
+                                      color: ColorRes.black, shape: BoxShape.circle),
                                   child: Center(
                                       child: Image.asset(
                                     AssetRes.backArrow,
@@ -108,16 +103,11 @@ class VideoPreviewScreen extends StatelessWidget {
                                         margin: const EdgeInsets.all(10),
                                         decoration: ShapeDecoration(
                                             shape: SmoothRectangleBorder(
-                                                borderRadius:
-                                                    SmoothBorderRadius(
-                                                        cornerRadius: 30)),
-                                            color: ColorRes.black
-                                                .withOpacity(0.4)),
+                                                borderRadius: SmoothBorderRadius(cornerRadius: 30)),
+                                            color: ColorRes.black.withOpacity(0.4)),
                                         alignment: Alignment.center,
                                         child: Image.asset(
-                                            value.isPlaying
-                                                ? AssetRes.icPause
-                                                : AssetRes.icPlay,
+                                            value.isPlaying ? AssetRes.icPause : AssetRes.icPlay,
                                             color: ColorRes.white,
                                             width: 20,
                                             height: 20,
@@ -128,25 +118,21 @@ class VideoPreviewScreen extends StatelessWidget {
                             model.isExceptionError
                                 ? const SizedBox()
                                 : Container(
-                                    margin: const EdgeInsets.symmetric(
-                                        horizontal: 20),
+                                    margin: const EdgeInsets.symmetric(horizontal: 20),
                                     padding: const EdgeInsets.only(bottom: 10),
                                     child: Column(
                                       mainAxisAlignment: MainAxisAlignment.end,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           '${CommonFun.printDuration(value.position)} / ${CommonFun.printDuration(value.duration)}',
                                           style: const TextStyle(
-                                              color: ColorRes.white,
-                                              fontFamily: FontRes.medium),
+                                              color: ColorRes.white, fontFamily: FontRes.medium),
                                         ),
                                         VideoProgressIndicator(
                                           model.videoPlayerController,
                                           allowScrubbing: true,
-                                          padding: const EdgeInsets.only(
-                                              bottom: 15, top: 3),
+                                          padding: const EdgeInsets.only(bottom: 15, top: 3),
                                         ),
                                       ],
                                     ),

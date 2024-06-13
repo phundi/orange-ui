@@ -25,12 +25,9 @@ class ImagePostView extends StatelessWidget {
               children: [
                 model.imagesFile.length <= 1
                     ? Container(
-                        constraints:
-                            BoxConstraints(maxHeight: Get.height / 1.7),
+                        constraints: BoxConstraints(maxHeight: Get.height / 1.7),
                         child: Image.file(File(model.imagesFile.first.path),
-                            fit: BoxFit.cover,
-                            height: null,
-                            width: double.infinity),
+                            fit: BoxFit.cover, height: null, width: double.infinity),
                       )
                     : SizedBox(
                         height: 390,
@@ -39,11 +36,8 @@ class ImagePostView extends StatelessWidget {
                           itemCount: model.imagesFile.length,
                           onPageChanged: model.onPageChanged,
                           itemBuilder: (context, index) {
-                            return Image.file(
-                                File(model.imagesFile[index].path),
-                                fit: BoxFit.cover,
-                                height: 390,
-                                width: double.infinity);
+                            return Image.file(File(model.imagesFile[index].path),
+                                fit: BoxFit.cover, height: 390, width: double.infinity);
                           },
                         ),
                       ),
@@ -57,43 +51,37 @@ class ImagePostView extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
-                              (model.imagesFile.length + 1) > maxImagesForPost
+                              (model.imagesFile.length + 1) >
+                                      (model.appData?.postUploadImageLimit ??
+                                          defaultMaxImagesForPost)
                                   ? const SizedBox()
                                   : InkWell(
                                       onTap: model.onPhotoTap,
                                       child: Container(
-                                        margin: const EdgeInsets.symmetric(
-                                            horizontal: 5),
+                                        margin: const EdgeInsets.symmetric(horizontal: 5),
                                         padding: const EdgeInsets.all(10),
                                         decoration: ShapeDecoration(
                                           shape: SmoothRectangleBorder(
-                                              borderRadius: SmoothBorderRadius(
-                                                  cornerRadius: 30)),
-                                          color:
-                                              ColorRes.white.withOpacity(0.3),
+                                              borderRadius: SmoothBorderRadius(cornerRadius: 30)),
+                                          color: ColorRes.white.withOpacity(0.3),
                                         ),
                                         alignment: Alignment.center,
-                                        child: const Icon(Icons.add_rounded,
-                                            color: ColorRes.white),
+                                        child: const Icon(Icons.add_rounded, color: ColorRes.white),
                                       ),
                                     ),
                               InkWell(
                                 onTap: model.onImageDelete,
                                 child: Container(
-                                  margin:
-                                      const EdgeInsets.symmetric(horizontal: 5),
+                                  margin: const EdgeInsets.symmetric(horizontal: 5),
                                   padding: const EdgeInsets.all(10),
                                   decoration: ShapeDecoration(
                                     shape: SmoothRectangleBorder(
-                                        borderRadius: SmoothBorderRadius(
-                                            cornerRadius: 30)),
+                                        borderRadius: SmoothBorderRadius(cornerRadius: 30)),
                                     color: ColorRes.white.withOpacity(0.3),
                                   ),
                                   alignment: Alignment.center,
                                   child: Image.asset(AssetRes.icBin,
-                                      color: ColorRes.white,
-                                      width: 21,
-                                      height: 21),
+                                      color: ColorRes.white, width: 21, height: 21),
                                 ),
                               ),
                             ],
@@ -109,13 +97,9 @@ class ImagePostView extends StatelessWidget {
                             controller: model.pageController,
                             effect: CustomizableEffect(
                                 dotDecoration: DotDecoration(
-                                    width: 31,
-                                    height: 2,
-                                    color: ColorRes.white.withOpacity(0.3)),
+                                    width: 31, height: 2, color: ColorRes.white.withOpacity(0.3)),
                                 activeDotDecoration: const DotDecoration(
-                                    width: 31,
-                                    height: 2,
-                                    color: ColorRes.white)),
+                                    width: 31, height: 2, color: ColorRes.white)),
                             onDotClicked: (index) {},
                             count: model.imagesFile.length,
                           ),

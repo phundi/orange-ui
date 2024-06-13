@@ -59,7 +59,7 @@ class RegistrationUserData {
     int? isBlock,
     int? gender,
     String? savedprofile,
-    // String? likedprofile,
+    String? likedprofile,
     String? interests,
     int? age,
     String? identity,
@@ -516,6 +516,8 @@ class Story {
   int? get type => _type;
   int? get duration => _duration;
   String? get content => _content;
+
+  // ignore: unnecessary_getters_setters
   String? get viewByUserIds => _viewByUserIds;
   String? get createdAt => _createdAt;
   String? get updatedAt => _updatedAt;

@@ -23,7 +23,6 @@ class StoryViewScreenViewModel extends BaseViewModel {
     for (var user in users) {
       List<StoryItem> userStories =
           user.story?.map((e) => e.toStoryItem(storyController)).toList() ?? [];
-      print(userStories.first.story?.user?.toJson());
       stories.add(userStories);
       notifyListeners();
     }
@@ -35,7 +34,6 @@ class StoryViewScreenViewModel extends BaseViewModel {
     if (!value.viewedByUsersIds.contains('${PrefService.userId}')) {
       ApiProvider().callPost(
         completion: (response) {
-          print(response);
           Story? s = ViewStory.fromJson(response).data;
           if (s != null) {
             if (userIndex < users.length) {

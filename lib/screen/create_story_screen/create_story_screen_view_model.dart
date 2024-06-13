@@ -129,7 +129,6 @@ class CreateStoryScreenViewModel extends BaseViewModel {
         Get.to(() => CameraPreviewScreen(xFile: image, type: 0));
       }
     } on PlatformException catch (e) {
-      print("Failed to pick image: $e");
       CommonUI.snackBar(message: e.message ?? '');
       // Optionally, you can show a user-friendly error message here
     }

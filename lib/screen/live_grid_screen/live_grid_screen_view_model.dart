@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -243,7 +244,6 @@ class LiveGridScreenViewModel extends BaseViewModel {
     userEmail.add(registrationUser?.identity);
     final liveStreamUserId = liveStreamUser?.userId;
     if (liveStreamUserId != null) {
-      print(liveStreamUserId);
       final newWatchingCount = (liveStreamUser?.watchingCount ?? 0) + 1;
       final newCollectedDiamond = (liveStreamUser?.collectedDiamond ?? 0) +
           (settingAppData?.liveWatchingPrice ?? 0).toInt();
@@ -262,7 +262,7 @@ class LiveGridScreenViewModel extends BaseViewModel {
           },
         );
       }).catchError((error) {
-        print("Error occurred while updating live stream data: $error");
+        log("Error occurred while updating live stream data: $error");
       });
     }
   }

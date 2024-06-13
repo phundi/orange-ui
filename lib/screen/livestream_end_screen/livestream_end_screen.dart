@@ -7,7 +7,6 @@ import 'package:orange_ui/model/chat_and_live_stream/live_stream.dart';
 import 'package:orange_ui/screen/livestream_end_screen/livestream_end_screen_view_model.dart';
 import 'package:orange_ui/utils/asset_res.dart';
 import 'package:orange_ui/utils/color_res.dart';
-import 'package:orange_ui/utils/const_res.dart';
 import 'package:orange_ui/utils/font_res.dart';
 import 'package:stacked/stacked.dart';
 

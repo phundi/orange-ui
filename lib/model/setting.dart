@@ -57,8 +57,7 @@ class SettingData {
   }
 
   SettingData.fromJson(dynamic json) {
-    _appdata =
-        json['appdata'] != null ? Appdata.fromJson(json['appdata']) : null;
+    _appdata = json['appdata'] != null ? Appdata.fromJson(json['appdata']) : null;
     if (json['gifts'] != null) {
       _gifts = [];
       json['gifts'].forEach((v) {
@@ -177,6 +176,8 @@ class Appdata {
     String? admobBanner,
     int? isDating,
     int? isSocialMedia,
+    int? postDescriptionLimit,
+    int? postUploadImageLimit,
   }) {
     _id = id;
     _currency = currency;
@@ -193,6 +194,8 @@ class Appdata {
     _admobBanner = admobBanner;
     _isDating = isDating;
     _isSocialMedia = isSocialMedia;
+    _postDescriptionLimit = postDescriptionLimit;
+    _postUploadImageLimit = postUploadImageLimit;
   }
 
   Appdata.fromJson(dynamic json) {
@@ -211,6 +214,8 @@ class Appdata {
     _admobBanner = json['admob_banner'];
     _isDating = json['is_dating'];
     _isSocialMedia = json['is_social_media'];
+    _postDescriptionLimit = json['post_description_limit'];
+    _postUploadImageLimit = json['post_upload_image_limit'];
   }
 
   int? _id;
@@ -228,6 +233,8 @@ class Appdata {
   String? _admobBanner;
   int? _isDating;
   int? _isSocialMedia;
+  int? _postDescriptionLimit;
+  int? _postUploadImageLimit;
 
   Appdata copyWith({
     int? id,
@@ -245,6 +252,8 @@ class Appdata {
     String? admobBanner,
     int? isDating,
     int? isSocialMedia,
+    int? postDescriptionLimit,
+    int? postUploadImageLimit,
   }) =>
       Appdata(
         id: id ?? _id,
@@ -262,6 +271,8 @@ class Appdata {
         admobBanner: admobBanner ?? _admobBanner,
         isDating: isDating ?? _isDating,
         isSocialMedia: isSocialMedia ?? _isSocialMedia,
+        postDescriptionLimit: postDescriptionLimit ?? _postDescriptionLimit,
+        postUploadImageLimit: postUploadImageLimit ?? _postUploadImageLimit,
       );
 
   int? get id => _id;
@@ -290,7 +301,12 @@ class Appdata {
 
   String? get admobBanner => _admobBanner;
 
+  int? get postDescriptionLimit => _postDescriptionLimit;
+
+  int? get postUploadImageLimit => _postUploadImageLimit;
+
   int get isDating => _isDating ?? 0;
+
   int get isSocialMedia => _isSocialMedia ?? 0;
 
   Map<String, dynamic> toJson() {
@@ -310,6 +326,8 @@ class Appdata {
     map['admob_banner'] = _admobBanner;
     map['is_dating'] = _isDating;
     map['is_social_media'] = _isSocialMedia;
+    map['post_description_limit'] = _postDescriptionLimit;
+    map['post_upload_image_limit'] = _postUploadImageLimit;
     return map;
   }
 }

@@ -47,7 +47,6 @@ class StoryViewScreen extends StatelessWidget {
                   repeat: false,
                   controller: model.storyController,
                   overlayWidget: (item) {
-                    print(item.story?.user?.toJson());
                     return Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
                       child: Row(

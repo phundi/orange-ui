@@ -51,7 +51,7 @@ class CreatePostPage extends StatelessWidget {
             maxLines: null,
             minLines: null,
             expands: true,
-
+            maxLength: model.appData?.postDescriptionLimit,
             decoration: InputDecoration(
               border: InputBorder.none,
               hintText: S.of(context).writeSomethingHere,

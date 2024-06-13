@@ -9,6 +9,7 @@
 - Remove UnUsed Color Code
 - Story read to border not change
 - Agora Library Update
+- Admin has set post description and image limit
 
 [Added Files]
 
@@ -152,6 +153,12 @@
 - create_story_screen.dart
 - create_story_screen_view_model.dart
 - custom_grid_view.dart
+- follow_following_screen_view_model.dart
+- image_post_view.dart
+- like_profiles_screen_view_model.dart
+- login_dashboard_screen_view_model.dart
+- setting.dart
+- video_preview_screen.dart
 - intl_ar.arb
 - intl_da.arb
 - intl_de.arb

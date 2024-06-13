@@ -7,7 +7,6 @@ import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
 import 'package:orange_ui/common/common_ui.dart';
-
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
 import 'package:orange_ui/screen/dashboard/dashboard_screen.dart';
@@ -70,10 +69,7 @@ class LoginDashboardScreenViewModel extends BaseViewModel {
       }
       // if (value?.user?.email == null||value!.user!.email!.isEmpty) return;
       Get.back();
-      registrationApiCall(
-          email: value.user?.email,
-          name: value.user?.displayName,
-          loginType: 1);
+      registrationApiCall(email: value.user?.email, name: value.user?.displayName, loginType: 1);
     });
   }
 
@@ -83,8 +79,7 @@ class LoginDashboardScreenViewModel extends BaseViewModel {
         return;
       }
       String appleFullName = await PrefService.getFullName() ?? '';
-      registrationApiCall(
-          email: value.user?.email, name: appleFullName, loginType: 2);
+      registrationApiCall(email: value.user?.email, name: appleFullName, loginType: 2);
       notifyListeners();
     });
   }
@@ -154,31 +149,34 @@ class LoginDashboardScreenViewModel extends BaseViewModel {
   }
 
   Future<UserCredential?> signInWithGoogle() async {
-    // Trigger the authentication flow
-    final GoogleSignIn googleSignIn = GoogleSignIn();
+    try {
+      // Trigger the authentication flow
+      final GoogleSignIn googleSignIn = GoogleSignIn();
 
-    final GoogleSignInAccount? googleSignInAccount =
-        await googleSignIn.signIn();
+      final GoogleSignInAccount? googleSignInAccount = await googleSignIn.signIn();
 
-    //final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      // Obtain the auth details from the request
+      final GoogleSignInAuthentication? googleAuth = await googleSignInAccount?.authentication;
 
-    // Obtain the auth details from the request
-    final GoogleSignInAuthentication? googleAuth =
-        await googleSignInAccount?.authentication;
+      // Check if authentication details are null
+      if (googleAuth == null || googleAuth.accessToken == null || googleAuth.idToken == null) {
+        Get.back();
+        return null;
+      }
 
-    // Create a new credential
-    if (googleAuth == null ||
-        googleAuth.accessToken == null ||
-        googleAuth.idToken == null) {
+      // Create a new credential
+      OAuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      // Sign in with the credential
+      final user = await _auth.signInWithCredential(credential);
+      return user;
+    } catch (error) {
       Get.back();
       return null;
     }
-    OAuthCredential credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth.accessToken,
-      idToken: googleAuth.idToken,
-    );
-    final user = await _auth.signInWithCredential(credential);
-    return user;
   }
 
   void registrationApiCall(
@@ -186,11 +184,7 @@ class LoginDashboardScreenViewModel extends BaseViewModel {
     CommonUI.lottieLoader();
     ApiProvider()
         .registration(
-            email: email,
-            fullName: name,
-            deviceToken: tokenId,
-            loginType: loginType,
-            password: '')
+            email: email, fullName: name, deviceToken: tokenId, loginType: loginType, password: '')
         .then((value) async {
       Get.back();
       if (value.status == true) {

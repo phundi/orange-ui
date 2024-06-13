@@ -244,10 +244,6 @@ class FeedScreenViewModel extends BaseViewModel {
       {required List<RegistrationUserData> userStories,
       Function(RegistrationUserData? data)? onCallback,
       required int userIndex}) {
-    if (userStories.isEmpty) {
-      return;
-    }
-
     Get.bottomSheet<RegistrationUserData?>(
       StoryViewScreen(stories: userStories, userIndex: userIndex),
       isScrollControlled: true,
