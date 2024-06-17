@@ -1,5 +1,30 @@
 # Orange Flutter
 
+*****Date 17-June-2024*****
+
+[NOTE]
+
+- Test Google Ads Fixed
+
+[Updated Files]
+
+- [build.gradle](android/app/build.gradle)
+- ads_service.dart
+- explore_screen_view_model.dart
+- google-services.json
+- gradle-wrapper.properties
+- live_grid_screen_view_model.dart
+- livestream_dashboard_screen_view_model.dart
+- main.dart
+- message_screen_view_model.dart
+- randoms_screen_view_model.dart
+- search_screen_view_model.dart
+- settings.gradle
+- submit_redeem_screen_view_model.dart
+- user_detail_screen_view_model.dart
+
+*****************************************************************************************************************************************************************
+
 *****Date 13-June-2024*****
 
 [NOTE]

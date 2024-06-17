@@ -52,12 +52,12 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.retrytech.orange"
-        minSdkVersion 21
+        applicationId "com.retrytech.app.orange"
+        minSdkVersion 24
         targetSdkVersion 34
         multiDexEnabled true
-        versionCode flutterVersionCode.toInteger()
-        versionName flutterVersionName
+        versionCode 1
+        versionName "1.0"
         ndk {
             abiFilters 'armeabi-v7a', 'arm64-v8a'
         }

@@ -10,7 +10,6 @@ import 'package:orange_ui/api_provider/api_provider.dart';
 import 'package:orange_ui/common/common_fun.dart';
 import 'package:orange_ui/common/common_ui.dart';
 import 'package:orange_ui/common/confirmation_dialog.dart';
-
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/chat_and_live_stream/chat.dart';
 import 'package:orange_ui/model/setting.dart';
@@ -38,13 +37,10 @@ class MessageScreenViewModel extends BaseViewModel {
     getSettingData();
     getChatUsers();
     getProfileApi();
-    getBannerAd();
   }
 
   void onNotificationTap() {
-    userData?.isBlock == 1
-        ? CommonUI.snackBarWidget(S.current.userBlock)
-        : Get.to(() => const NotificationScreen());
+    userData?.isBlock == 1 ? CommonUI.snackBarWidget(S.current.userBlock) : Get.to(() => const NotificationScreen());
   }
 
   void getProfileApi() {
@@ -55,9 +51,7 @@ class MessageScreenViewModel extends BaseViewModel {
   }
 
   void onSearchTap() {
-    userData?.isBlock == 1
-        ? CommonUI.snackBarWidget(S.current.userBlock)
-        : Get.to(() => const SearchScreen());
+    userData?.isBlock == 1 ? CommonUI.snackBarWidget(S.current.userBlock) : Get.to(() => const SearchScreen());
   }
 
   void onLivesBtnClick() {
@@ -65,9 +59,7 @@ class MessageScreenViewModel extends BaseViewModel {
   }
 
   void onUserTap(Conversation conversation) {
-    userData?.isBlock == 1
-        ? CommonUI.snackBarWidget(S.current.userBlock)
-        : Get.to(() => ChatScreen(conversation: conversation));
+    userData?.isBlock == 1 ? CommonUI.snackBarWidget(S.current.userBlock) : Get.to(() => ChatScreen(conversation: conversation));
   }
 
   void getChatUsers() {
@@ -78,9 +70,7 @@ class MessageScreenViewModel extends BaseViewModel {
           .doc('${value?.id}')
           .collection(FirebaseRes.userList)
           .orderBy(FirebaseRes.time, descending: true)
-          .withConverter(
-              fromFirestore: Conversation.fromFirestore,
-              toFirestore: (Conversation value, options) => value.toFirestore())
+          .withConverter(fromFirestore: Conversation.fromFirestore, toFirestore: (Conversation value, options) => value.toFirestore())
           .snapshots()
           .listen((element) {
         userList = [];
@@ -100,10 +90,7 @@ class MessageScreenViewModel extends BaseViewModel {
     CommonFun.bannerAd((ad) {
       bannerAd = ad as BannerAd;
       notifyListeners();
-    },
-        bannerId: Platform.isIOS
-            ? settingAppData?.admobBannerIos
-            : settingAppData?.admobBanner);
+    }, bannerId: Platform.isIOS ? settingAppData?.admobBannerIos : settingAppData?.admobBanner);
   }
 
   @override
@@ -116,12 +103,7 @@ class MessageScreenViewModel extends BaseViewModel {
     HapticFeedback.vibrate();
     Get.dialog(ConfirmationDialog(
       onTap: () {
-        db
-            .collection(FirebaseRes.userChatList)
-            .doc(userData?.identity)
-            .collection(FirebaseRes.userList)
-            .doc(conversation?.user?.userIdentity)
-            .update({
+        db.collection(FirebaseRes.userChatList).doc(userData?.identity).collection(FirebaseRes.userList).doc(conversation?.user?.userIdentity).update({
           FirebaseRes.isDeleted: true,
           FirebaseRes.deletedId: '${DateTime.now().millisecondsSinceEpoch}',
           FirebaseRes.block: false,
@@ -140,6 +122,7 @@ class MessageScreenViewModel extends BaseViewModel {
   void getSettingData() {
     PrefService.getSettingData().then((value) {
       settingAppData = value?.appdata;
+      getBannerAd();
       notifyListeners();
     });
   }

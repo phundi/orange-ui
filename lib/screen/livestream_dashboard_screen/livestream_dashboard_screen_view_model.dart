@@ -28,7 +28,7 @@ class LiveStreamDashBoardViewModel extends BaseViewModel {
 
   void init() {
     getProfileApiCall();
-    getBannerAd();
+
     getSettingData();
   }
 
@@ -99,6 +99,7 @@ class LiveStreamDashBoardViewModel extends BaseViewModel {
   void getSettingData() {
     PrefService.getSettingData().then((value) {
       settingAppData = value?.appdata;
+      getBannerAd();
       notifyListeners();
     });
   }

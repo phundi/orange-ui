@@ -46,8 +46,7 @@ class LiveGridScreenViewModel extends BaseViewModel {
 
   void init() {
     getProfileAPi();
-    getBannerAd();
-    initInterstitialAds();
+
     getSettingData();
   }
 
@@ -115,8 +114,7 @@ class LiveGridScreenViewModel extends BaseViewModel {
               Permission.microphone,
             ].request();
 
-            if (statuses[Permission.camera]!.isGranted &&
-                statuses[Permission.microphone]!.isGranted) {
+            if (statuses[Permission.camera]!.isGranted && statuses[Permission.microphone]!.isGranted) {
               Get.to(() => RandomStreamingScreen(
                     userData: registrationUser,
                     liveStreamUser: liveStreamUser,
@@ -162,9 +160,7 @@ class LiveGridScreenViewModel extends BaseViewModel {
     } else {
       String authString = '${ConstRes.customerId}:${ConstRes.customerSecret}';
       String authToken = base64.encode(authString.codeUnits);
-      ApiProvider()
-          .agoraListStreamingCheck(user?.hostIdentity ?? '', authToken, ConstRes.agoraAppId)
-          .then((value) {
+      ApiProvider().agoraListStreamingCheck(user?.hostIdentity ?? '', authToken, ConstRes.agoraAppId).then((value) {
         if (value.data?.channelExist == true || value.data!.broadcasters!.isNotEmpty) {
           if (registrationUser?.isFake != 1) {
             if ((settingAppData?.liveWatchingPrice ?? 0) < walletCoin) {
@@ -208,10 +204,7 @@ class LiveGridScreenViewModel extends BaseViewModel {
               Get.back();
               db.collection(FirebaseRes.liveHostList).doc('${user?.userId}').delete();
               final batch = db.batch();
-              var collection = db
-                  .collection(FirebaseRes.liveHostList)
-                  .doc('${user?.userId}')
-                  .collection(FirebaseRes.comments);
+              var collection = db.collection(FirebaseRes.liveHostList).doc('${user?.userId}').collection(FirebaseRes.comments);
               var snapshots = await collection.get();
               for (var doc in snapshots.docs) {
                 batch.delete(doc.reference);
@@ -245,14 +238,9 @@ class LiveGridScreenViewModel extends BaseViewModel {
     final liveStreamUserId = liveStreamUser?.userId;
     if (liveStreamUserId != null) {
       final newWatchingCount = (liveStreamUser?.watchingCount ?? 0) + 1;
-      final newCollectedDiamond = (liveStreamUser?.collectedDiamond ?? 0) +
-          (settingAppData?.liveWatchingPrice ?? 0).toInt();
+      final newCollectedDiamond = (liveStreamUser?.collectedDiamond ?? 0) + (settingAppData?.liveWatchingPrice ?? 0).toInt();
 
-      db.collection(FirebaseRes.liveHostList).doc('$liveStreamUserId').update({
-        FirebaseRes.watchingCount: newWatchingCount,
-        FirebaseRes.joinedUser: FieldValue.arrayUnion(userEmail),
-        FirebaseRes.collectedDiamond: newCollectedDiamond
-      }).then((_) {
+      db.collection(FirebaseRes.liveHostList).doc('$liveStreamUserId').update({FirebaseRes.watchingCount: newWatchingCount, FirebaseRes.joinedUser: FieldValue.arrayUnion(userEmail), FirebaseRes.collectedDiamond: newCollectedDiamond}).then((_) {
         Get.to(() => PersonStreamingScreen(
               liveStreamUser: liveStreamUser,
               settingAppData: settingAppData,
@@ -276,6 +264,8 @@ class LiveGridScreenViewModel extends BaseViewModel {
   void getSettingData() {
     PrefService.getSettingData().then((value) {
       settingAppData = value?.appdata;
+      getBannerAd();
+      initInterstitialAds();
       notifyListeners();
     });
   }

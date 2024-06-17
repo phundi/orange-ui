@@ -28,7 +28,7 @@ class SearchScreenViewModel extends BaseViewModel {
     getSettingData();
     getInterestApiCall();
     getSearchByUser();
-    getBannerAd();
+
     fetchScrollData();
   }
 
@@ -44,8 +44,7 @@ class SearchScreenViewModel extends BaseViewModel {
   void fetchScrollData() {
     userScrollController.addListener(
       () {
-        if (userScrollController.offset ==
-            userScrollController.position.maxScrollExtent) {
+        if (userScrollController.offset == userScrollController.position.maxScrollExtent) {
           if (!isLoading) {
             if (selectedTab.isEmpty) {
               getSearchByUser();
@@ -60,12 +59,8 @@ class SearchScreenViewModel extends BaseViewModel {
 
   void getSearchByUser() async {
     isLoading = true;
-    ApiProvider()
-        .searchUser(
-            searchKeyword: searchController.text, start: searchUsers.length)
-        .then((value) {
-      List<String> list =
-          searchUsers.map((e) => e.id?.toString() ?? '').toList();
+    ApiProvider().searchUser(searchKeyword: searchController.text, start: searchUsers.length).then((value) {
+      List<String> list = searchUsers.map((e) => e.id?.toString() ?? '').toList();
       value.data?.forEach((element) {
         if (!list.contains(element.id?.toString())) {
           searchUsers.add(element);
@@ -78,14 +73,8 @@ class SearchScreenViewModel extends BaseViewModel {
 
   void getSearchById(int interestId) async {
     isLoading = true;
-    ApiProvider()
-        .searchUserById(
-            searchKeyword: searchController.text,
-            interestId: interestId,
-            start: searchUsers.length)
-        .then((value) {
-      List<String> list =
-          searchUsers.map((e) => e.id?.toString() ?? '').toList();
+    ApiProvider().searchUserById(searchKeyword: searchController.text, interestId: interestId, start: searchUsers.length).then((value) {
+      List<String> list = searchUsers.map((e) => e.id?.toString() ?? '').toList();
       value.data?.forEach((element) {
         if (!list.contains(element.id?.toString())) {
           searchUsers.add(element);
@@ -143,10 +132,7 @@ class SearchScreenViewModel extends BaseViewModel {
     CommonFun.bannerAd((ad) {
       bannerAd = ad as BannerAd;
       notifyListeners();
-    },
-        bannerId: Platform.isIOS
-            ? settingAppData?.admobBannerIos
-            : settingAppData?.admobBanner);
+    }, bannerId: Platform.isIOS ? settingAppData?.admobBannerIos : settingAppData?.admobBanner);
   }
 
   @override
@@ -158,6 +144,7 @@ class SearchScreenViewModel extends BaseViewModel {
   void getSettingData() {
     PrefService.getSettingData().then((value) {
       settingAppData = value?.appdata;
+      getBannerAd();
       notifyListeners();
     });
   }

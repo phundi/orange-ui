@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:firebase_core/firebase_core.dart';
@@ -10,7 +9,6 @@ import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:orange_ui/common/common_fun.dart';
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/screen/chat_screen/chat_screen_view_model.dart';
@@ -28,8 +26,7 @@ import 'package:orange_ui/utils/urls.dart';
 class MyHttpOverrides extends HttpOverrides {
   @override
   HttpClient createHttpClient(SecurityContext? context) {
-    return super.createHttpClient(context)
-      ..badCertificateCallback = (X509Certificate cert, String host, int port) => true;
+    return super.createHttpClient(context)..badCertificateCallback = (X509Certificate cert, String host, int port) => true;
   }
 }
 
@@ -37,7 +34,6 @@ class MyHttpOverrides extends HttpOverrides {
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
   showNotification(message);
-  log('Handling a background message ${message.data}');
 }
 
 Future<void> main() async {
@@ -49,14 +45,16 @@ Future<void> main() async {
     statusBarBrightness: Brightness.light, // For iOS (dark icons)
   ));
   WidgetsFlutterBinding.ensureInitialized();
-  MobileAds.instance.initialize();
-  LanguagesScreenViewModel.selectedLanguage =
-      await PrefService.getString(PrefConst.languageCode) ?? Platform.localeName.split('_')[0];
+  // MobileAds.instance.initialize();
+
+  // // thing to add
+  // RequestConfiguration configuration = RequestConfiguration(testDeviceIds: ['D5E5A833CA124D2CD5E33A574AF9EA88']);
+  // MobileAds.instance.updateRequestConfiguration(configuration);
+  LanguagesScreenViewModel.selectedLanguage = await PrefService.getString(PrefConst.languageCode) ?? Platform.localeName.split('_')[0];
   await Firebase.initializeApp();
   // Set the background messaging handler early on, as a named top-level function
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-  SystemChrome.setPreferredOrientations(
-      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   FlutterBranchSdk.init();
   HttpOverrides.global = MyHttpOverrides();
   runApp(const RestartWidget(child: MyApp()));
@@ -70,8 +68,7 @@ class MyApp extends StatefulWidget {
 }
 
 FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
-final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-    FlutterLocalNotificationsPlugin();
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 late AndroidNotificationChannel channel;
 
 class _MyAppState extends State<MyApp> {
@@ -96,13 +93,7 @@ class _MyAppState extends State<MyApp> {
       supportedLocales: S.delegate.supportedLocales,
       locale: Locale(LanguagesScreenViewModel.selectedLanguage),
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-          fontFamily: FontRes.regular,
-          primaryColor: ColorRes.darkOrange,
-          splashColor: ColorRes.transparent,
-          highlightColor: ColorRes.transparent,
-          textSelectionTheme: const TextSelectionThemeData(cursorColor: ColorRes.davyGrey),
-          useMaterial3: false),
+      theme: ThemeData(fontFamily: FontRes.regular, primaryColor: ColorRes.darkOrange, splashColor: ColorRes.transparent, highlightColor: ColorRes.transparent, textSelectionTheme: const TextSelectionThemeData(cursorColor: ColorRes.davyGrey), useMaterial3: false),
       home: const GetStartedScreen(),
     );
   }
@@ -120,13 +111,9 @@ class _MyAppState extends State<MyApp> {
   void _saveTokenUpdate() async {
     CommonFun.subscribeTopic(null);
 
-    flutterLocalNotificationsPlugin
-        .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
-        ?.requestNotificationsPermission();
+    flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()?.requestNotificationsPermission();
 
-    flutterLocalNotificationsPlugin
-        .resolvePlatformSpecificImplementation<IOSFlutterLocalNotificationsPlugin>()
-        ?.requestPermissions(alert: true, sound: true);
+    flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<IOSFlutterLocalNotificationsPlugin>()?.requestPermissions(alert: true, sound: true);
 
     await firebaseMessaging.requestPermission(alert: true, badge: false, sound: true);
 
@@ -140,11 +127,9 @@ class _MyAppState extends State<MyApp> {
 
     var initializationSettingsAndroid = const AndroidInitializationSettings('@mipmap/ic_launcher');
 
-    var initializationSettingsIOS = const DarwinInitializationSettings(
-        defaultPresentAlert: true, defaultPresentSound: true, defaultPresentBadge: false);
+    var initializationSettingsIOS = const DarwinInitializationSettings(defaultPresentAlert: true, defaultPresentSound: true, defaultPresentBadge: false);
 
-    var initializationSettings = InitializationSettings(
-        android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
+    var initializationSettings = InitializationSettings(android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
 
     flutterLocalNotificationsPlugin.initialize(initializationSettings);
 
@@ -155,9 +140,7 @@ class _MyAppState extends State<MyApp> {
       showNotification(message);
     });
 
-    await flutterLocalNotificationsPlugin
-        .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
-        ?.createNotificationChannel(channel);
+    await flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()?.createNotificationChannel(channel);
   }
 }
 
@@ -166,9 +149,7 @@ void showNotification(RemoteMessage message) {
     1,
     message.notification?.title ?? message.data['title'],
     message.notification?.body ?? message.data['body'],
-    const NotificationDetails(
-        iOS: DarwinNotificationDetails(presentSound: true, presentAlert: true, presentBadge: false),
-        android: AndroidNotificationDetails('orange_flutter', appName)),
+    const NotificationDetails(iOS: DarwinNotificationDetails(presentSound: true, presentAlert: true, presentBadge: false), android: AndroidNotificationDetails('orange_flutter', appName)),
   );
 }
 

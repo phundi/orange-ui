@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:orange_ui/common/common_fun.dart';
 import 'package:orange_ui/common/common_ui.dart';
-
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/setting.dart';
 import 'package:orange_ui/model/user/registration_user.dart';
@@ -26,7 +25,6 @@ class RandomsScreenViewModel extends BaseViewModel {
 
   void init() {
     getProfileApiCall();
-    getBannerAd();
     getSettingData();
   }
 
@@ -40,15 +38,11 @@ class RandomsScreenViewModel extends BaseViewModel {
   }
 
   void onNotificationTap() {
-    data?.isBlock == 1
-        ? CommonUI.snackBarWidget(S.current.userBlock)
-        : Get.to(() => const NotificationScreen());
+    data?.isBlock == 1 ? CommonUI.snackBarWidget(S.current.userBlock) : Get.to(() => const NotificationScreen());
   }
 
   void onSearchBtnTap() {
-    data?.isBlock == 1
-        ? CommonUI.snackBarWidget(S.current.userBlock)
-        : Get.to(() => const SearchScreen());
+    data?.isBlock == 1 ? CommonUI.snackBarWidget(S.current.userBlock) : Get.to(() => const SearchScreen());
   }
 
   void onLivesBtnClick() {
@@ -56,33 +50,25 @@ class RandomsScreenViewModel extends BaseViewModel {
   }
 
   void onGenderChange(int value) {
-    data?.isBlock == 1
-        ? CommonUI.snackBarWidget(S.current.userBlock)
-        : selectedGender = value;
+    data?.isBlock == 1 ? CommonUI.snackBarWidget(S.current.userBlock) : selectedGender = value;
     notifyListeners();
   }
 
   void onStartMatchingTap() {
-    data?.isBlock == 1
-        ? CommonUI.snackBarWidget(S.current.userBlock)
-        : Get.to(() => RandomsSearchScreen(
-            selectedGender: selectedGender,
-            profileImage: CommonFun.getProfileImage(images: data?.images)));
+    data?.isBlock == 1 ? CommonUI.snackBarWidget(S.current.userBlock) : Get.to(() => RandomsSearchScreen(selectedGender: selectedGender, profileImage: CommonFun.getProfileImage(images: data?.images)));
   }
 
   void getBannerAd() {
     CommonFun.bannerAd((ad) {
       bannerAd = ad as BannerAd;
       notifyListeners();
-    },
-        bannerId: Platform.isIOS
-            ? settingAppData?.admobBannerIos
-            : settingAppData?.admobBanner);
+    }, bannerId: Platform.isIOS ? settingAppData?.admobBannerIos : settingAppData?.admobBanner);
   }
 
   void getSettingData() {
     PrefService.getSettingData().then((value) {
       settingAppData = value?.appdata;
+      getBannerAd();
       notifyListeners();
     });
   }

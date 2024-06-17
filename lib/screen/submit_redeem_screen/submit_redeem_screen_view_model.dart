@@ -6,7 +6,6 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
 import 'package:orange_ui/common/common_fun.dart';
 import 'package:orange_ui/common/common_ui.dart';
-
 import 'package:orange_ui/generated/l10n.dart';
 import 'package:orange_ui/model/place_redeem_request.dart';
 import 'package:orange_ui/model/setting.dart';
@@ -27,7 +26,7 @@ class SubmitRedeemScreenViewModel extends BaseViewModel {
 
   void init() {
     coinValue = Get.arguments;
-    initInterstitialAds();
+
     getPrefData();
   }
 
@@ -38,10 +37,7 @@ class SubmitRedeemScreenViewModel extends BaseViewModel {
   void initInterstitialAds() {
     CommonFun.interstitialAd((ad) {
       interstitialAd = ad;
-    },
-        adMobIntId: Platform.isIOS
-            ? settingAppData?.admobIntIos
-            : settingAppData?.admobInt);
+    }, adMobIntId: Platform.isIOS ? settingAppData?.admobIntIos : settingAppData?.admobInt);
   }
 
   void onPaymentChange(String? value) {
@@ -55,8 +51,7 @@ class SubmitRedeemScreenViewModel extends BaseViewModel {
 
     ApiProvider().callPost(
         completion: (response) {
-          PlaceRedeemRequest placeRedeemRequest =
-              PlaceRedeemRequest.fromJson(response);
+          PlaceRedeemRequest placeRedeemRequest = PlaceRedeemRequest.fromJson(response);
           if (placeRedeemRequest.status == true) {
             Get.back();
             if (interstitialAd != null) {
@@ -93,6 +88,7 @@ class SubmitRedeemScreenViewModel extends BaseViewModel {
   void getPrefData() {
     PrefService.getSettingData().then((value) {
       settingAppData = value?.appdata;
+      initInterstitialAds();
       notifyListeners();
     });
   }

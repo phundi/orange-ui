@@ -2,37 +2,37 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class AdsService {
   static Future<void> requestConsentInfoUpdate() async {
-    final params = ConsentRequestParameters(
-        consentDebugSettings: ConsentDebugSettings(
-            debugGeography: DebugGeography.debugGeographyEea,
-            testIdentifiers: ['D5E5A833CA124D2CD5E33A574AF9EA88']));
+    // Create a ConsentRequestParameters object.
+    final params = ConsentRequestParameters();
 
+    // Request an update for the consent information.
     ConsentInformation.instance.requestConsentInfoUpdate(
       params,
       () async {
-        if (await ConsentInformation.instance.isConsentFormAvailable()) {
-          loadForm();
-        }
+        ConsentForm.loadAndShowConsentFormIfRequired((loadAndShowError) {
+          if (loadAndShowError != null) {
+            // Consent gathering failed.
+          }
+          _initializeMobileAdsSDK();
+          // Consent has been gathered.
+        });
       },
       (FormError error) {
-        // Handle the error
+        // Handle the error.
       },
     );
+    _initializeMobileAdsSDK();
   }
 
-  static void loadForm() {
-    ConsentForm.loadConsentForm(
-      (ConsentForm consentForm) async {
-        var status = await ConsentInformation.instance.getConsentStatus();
-        if (status == ConsentStatus.required) {
-          consentForm.show((formError) {
-            loadForm();
-          });
-        }
-      },
-      (FormError formError) {
-        // Handle the error
-      },
-    );
+  static void _initializeMobileAdsSDK() async {
+    // Initialize the Mobile Ads SDK if the SDK has gathered consent aligned with
+    // the app's configured messages.
+    var canRequestAds = await ConsentInformation.instance.canRequestAds();
+    if (canRequestAds) {
+      // Initialize the Mobile Ads SDK.
+      MobileAds.instance.initialize();
+
+      // TODO: Request an ad.
+    }
   }
 }

@@ -45,9 +45,9 @@ class ExploreScreenViewModel extends BaseViewModel {
   void prefSetting() {
     PrefService.getSettingData().then((value) {
       settingAppData = value?.appdata;
+      initInterstitialAds();
       notifyListeners();
     });
-    initInterstitialAds();
   }
 
   Future<void> exploreScreenApiCall() async {
@@ -64,16 +64,14 @@ class ExploreScreenViewModel extends BaseViewModel {
     ApiProvider().getProfile(userID: PrefService.userId).then((value) async {
       userData = value?.data;
       walletCoin = value?.data?.wallet;
-      isSelected =
-          await PrefService.getDialog(PrefConst.isDialogDialog) ?? false;
+      isSelected = await PrefService.getDialog(PrefConst.isDialogDialog) ?? false;
       await PrefService.saveUser(value?.data);
     });
   }
 
   bool isSocialBtnVisible(String? socialLink) {
     if (socialLink != null) {
-      return socialLink.contains(AppRes.isHttp) ||
-          socialLink.contains(AppRes.isHttps);
+      return socialLink.contains(AppRes.isHttp) || socialLink.contains(AppRes.isHttps);
     } else {
       return false;
     }
@@ -107,8 +105,7 @@ class ExploreScreenViewModel extends BaseViewModel {
       return CommonUI.snackBarWidget(S.current.userBlock);
     } else {
       if (userData?.isFake != 1) {
-        if ((settingAppData?.reverseSwipePrice ?? 0) <= walletCoin! &&
-            walletCoin != 0) {
+        if ((settingAppData?.reverseSwipePrice ?? 0) <= walletCoin! && walletCoin != 0) {
           !isSelected
               ? Get.dialog(
                   ReverseSwipeDialog(
@@ -116,15 +113,13 @@ class ExploreScreenViewModel extends BaseViewModel {
                     walletCoin: walletCoin,
                     title1: S.current.reverse,
                     title2: S.current.swipe,
-                    dialogDisc: AppRes.reverseSwipeDisc(
-                        settingAppData?.reverseSwipePrice ?? 0),
+                    dialogDisc: AppRes.reverseSwipeDisc(settingAppData?.reverseSwipePrice ?? 0),
                     coinPrice: '${settingAppData?.reverseSwipePrice ?? 0}',
                     onCancelTap: () {
                       onBackBtnTap();
                     },
                     onContinueTap: (isSelected) {
-                      PrefService.setDialog(
-                          PrefConst.isDialogDialog, isSelected);
+                      PrefService.setDialog(PrefConst.isDialogDialog, isSelected);
                       minusCoinApi().then(
                         (value) {
                           onBackBtnTap();
@@ -179,19 +174,14 @@ class ExploreScreenViewModel extends BaseViewModel {
         });
       }
     } else {
-      userData?.isBlock == 1
-          ? CommonUI.snackBarWidget(S.current.userBlock)
-          : userController.next(animation: true);
+      userData?.isBlock == 1 ? CommonUI.snackBarWidget(S.current.userBlock) : userController.next(animation: true);
     }
   }
 
   void initInterstitialAds() {
     CommonFun.interstitialAd((ad) {
       interstitialAd = ad;
-    },
-        adMobIntId: Platform.isIOS
-            ? settingAppData?.admobIntIos
-            : settingAppData?.admobInt);
+    }, adMobIntId: Platform.isIOS ? settingAppData?.admobIntIos : settingAppData?.admobInt);
   }
 
   void onIndexChange(int index) {
@@ -200,9 +190,7 @@ class ExploreScreenViewModel extends BaseViewModel {
   }
 
   void onNotificationTap() {
-    userData?.isBlock == 1
-        ? CommonUI.snackBarWidget(S.current.userBlock)
-        : Get.to(() => const NotificationScreen());
+    userData?.isBlock == 1 ? CommonUI.snackBarWidget(S.current.userBlock) : Get.to(() => const NotificationScreen());
   }
 
   void onLivesBtnClick() {
@@ -210,15 +198,11 @@ class ExploreScreenViewModel extends BaseViewModel {
   }
 
   void onSearchTap() {
-    userData?.isBlock == 1
-        ? CommonUI.snackBarWidget(S.current.userBlock)
-        : Get.to(() => const SearchScreen());
+    userData?.isBlock == 1 ? CommonUI.snackBarWidget(S.current.userBlock) : Get.to(() => const SearchScreen());
   }
 
   void onTitleTap() {
-    userData?.isBlock == 1
-        ? CommonUI.snackBarWidget(S.current.userBlock)
-        : Get.to(() => const MapScreen());
+    userData?.isBlock == 1 ? CommonUI.snackBarWidget(S.current.userBlock) : Get.to(() => const MapScreen());
   }
 
   void onImageTap() {
