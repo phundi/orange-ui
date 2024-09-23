@@ -48,12 +48,12 @@
 	<key>branch_key</key>
 	<dict>
 		<key>live</key>
-		<string>key_live_kb90DpySsESN42q1XsadZaaoyCbSnt5j</string>
+		<string>-------------- Branch App Key --------------</string>
 	</dict>
 	<key>branch_universal_link_domains</key>
 	<array>
-		<string>orangeflutter-alternate.app.link</string>
-		<string>orangeflutter.app.link</string>
+		<string>-------------- Branch Alternate App Link ---------------</string>
+		<string>-------------- Branch App Link --------------</string>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
@@ -81,7 +81,7 @@
 	<key>NSLocationTemporaryUsageDescriptionDictionary</key>
 	<dict>
 		<key>YourPurposeKey</key>
-		<string>The example App requires temporary access to the device&apos;s precise location.</string>
+		<string>The example App requires temporary access to the device's precise location.</string>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>This app uses this to customize your experience and let you discover more around you.</string>

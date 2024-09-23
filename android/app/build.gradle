@@ -52,7 +52,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.retrytech.app.orange"
+        applicationId "com.luptech.malovings"
         minSdkVersion 24
         targetSdkVersion 34
         multiDexEnabled true

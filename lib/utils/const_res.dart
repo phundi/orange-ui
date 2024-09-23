@@ -1,9 +1,7 @@
 class ConstRes {
   ///------------------------ Backend urls and key ------------------------///
 
-  static const String base = 'https://orange.invatomarket.com/';
-
-  // static const String base = 'http://192.168.0.107/orange/';
+  static const String base = 'https://mobile.malovings.com/';
   static const String aBaseUrl = '${base}api/';
   static const String aImageBaseUrl = '${base}public/storage/';
   static const String apiKey = '123';
@@ -13,13 +11,13 @@ class ConstRes {
   static const String subscribeTopic = 'orange';
 
   ///------------------------ Agora app Id ------------------------///
-  static const String agoraAppId = "6e660987f7c541309c0c45a133fde8c7";
-  static const String customerId = "2fa80f7f38ec48c7b3df029de7599738";
-  static const String customerSecret = "ce11056b3fd44851919670703656b9e9";
+  static const String agoraAppId = "c22dddb581324f658403022a2dbc49a1";
+  static const String customerId = "b6fbe01d27744650a32e4da5562d8dbd";
+  static const String customerSecret = "4cc5fc61d3e1420781bf4c0ddb642931";
 }
 
 /// AppName
-const String appName = 'Orange';
+const String appName = 'Malovings';
 
 ///_____________________________ Image Quality _______________________///
 const double maxWidth = 1080;

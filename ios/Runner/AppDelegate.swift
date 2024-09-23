@@ -20,7 +20,7 @@ import flutter_local_notifications
       UNUserNotificationCenter.current().delegate = self as UNUserNotificationCenterDelegate
     }
     GeneratedPluginRegistrant.register(with: self)
-    GMSServices.provideAPIKey("AIzaSyCbGuyjzXcnntY33RIzfPLfoHkuv8fXy3c")
+    GMSServices.provideAPIKey("-------------- Google map Api key --------------")
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
 }
