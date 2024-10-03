@@ -108,13 +108,12 @@ dependencies:
 
   #_____________ Share _________________#
   share_plus: ^9.0.0
-  flutter_branch_sdk: ^7.1.0
 
   #_____________ Camera _________________#
   camera: ^0.10.6
 
-  bubbly_camera:
-    path: "CameraPlugin/camera"
+  #bubbly_camera:
+  #  path: "CameraPlugin/camera"
 
 
   collection: ^1.16.0

@@ -4,7 +4,7 @@ import 'package:camera/camera.dart';
 import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
+//import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:get/get.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
 import 'package:orange_ui/common/common_fun.dart';
@@ -25,9 +25,7 @@ import 'package:orange_ui/screen/story_view_screen/story_view_screen.dart';
 import 'package:orange_ui/screen/user_report_screen/report_sheet.dart';
 import 'package:orange_ui/service/pref_service.dart';
 import 'package:orange_ui/utils/color_res.dart';
-import 'package:orange_ui/utils/const_res.dart';
 import 'package:orange_ui/utils/urls.dart';
-import 'package:share_plus/share_plus.dart';
 import 'package:stacked/stacked.dart';
 
 enum MoreBtnValue { report, delete, share }
@@ -149,7 +147,7 @@ class FeedScreenViewModel extends BaseViewModel {
 
   void onMoreBtnClick(MoreBtnValue value, Post post, Function(int id)? onDeleteItem) {
     if (MoreBtnValue.share == value) {
-      sharePost(post);
+      //sharePost(post);
     } else if (MoreBtnValue.report == value) {
       Get.bottomSheet(
           ReportSheet(
@@ -184,32 +182,6 @@ class FeedScreenViewModel extends BaseViewModel {
     }
   }
 
-  void sharePost(Post post) async {
-    BranchUniversalObject buo = BranchUniversalObject(
-      canonicalIdentifier: 'flutter/branch',
-      title: myUserData?.fullname ?? '',
-      imageUrl: (post.content ?? []).isEmpty
-          ? ''
-          : ((post.content ?? []).first.contentType == 1
-              ? '${ConstRes.aImageBaseUrl}${(post.content ?? []).first.thumbnail}'
-              : '${ConstRes.aImageBaseUrl}${(post.content ?? []).first.content ?? ''}'),
-      contentDescription: post.description ?? '',
-      publiclyIndex: true,
-      locallyIndex: true,
-      contentMetadata: BranchContentMetaData()..addCustomMetadata(Urls.aPostId, post.id),
-    );
-    BranchLinkProperties lp = BranchLinkProperties(
-        channel: 'facebook', feature: 'sharing', stage: 'new share', tags: ['one', 'two', 'three']);
-    lp.addControlParam('url', 'http://www.google.com');
-    lp.addControlParam('url2', 'http://flutter.dev');
-    BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
-    if (response.success) {
-      Share.share(
-        '${S.current.checkOutThisProfile} ${response.result}',
-        subject: '${S.current.look} ${post.description ?? ''}',
-      );
-    } else {}
-  }
 
   void onNotificationTap() {
     myUserData?.isBlock == 1

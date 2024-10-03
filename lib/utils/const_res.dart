@@ -3,7 +3,7 @@ class ConstRes {
 
   static const String base = 'https://mobile.malovings.com/';
   static const String aBaseUrl = '${base}api/';
-  static const String aImageBaseUrl = '${base}public/storage/';
+  static const String aImageBaseUrl = '${base}storage/';
   static const String apiKey = '123';
 
   ///------------------------ Firebase FCM token And Token Id ------------------------///

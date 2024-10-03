@@ -49,13 +49,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.1"
-  bubbly_camera:
-    dependency: "direct main"
-    description:
-      path: "CameraPlugin/camera"
-      relative: true
-    source: path
-    version: "2.0.0+8"
   cached_network_image:
     dependency: "direct main"
     description:
@@ -421,14 +414,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.5.0"
-  flutter_branch_sdk:
-    dependency: "direct main"
-    description:
-      name: flutter_branch_sdk
-      sha256: "4148ee0fbd2336887f5855f608293b9da00e5169517aa68780979ac58d21ef73"
-      url: "https://pub.dev"
-    source: hosted
-    version: "7.3.0"
   flutter_cache_manager:
     dependency: "direct main"
     description:

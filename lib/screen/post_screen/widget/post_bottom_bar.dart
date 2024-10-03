@@ -40,7 +40,7 @@ class PostBottomBar extends StatelessWidget {
           Container(height: 20, width: 1, color: ColorRes.lightGrey),
           const SizedBox(width: 6),
           InkWell(
-              onTap: () => model.sharePost(post!),
+              //onTap: () => model.sharePost(post!),
               child: Image.asset(AssetRes.icPostShare, height: 22, width: 22)),
           const Spacer(),
           Text(CommonFun.timeAgo(DateTime.parse(post?.createdAt ?? '')),

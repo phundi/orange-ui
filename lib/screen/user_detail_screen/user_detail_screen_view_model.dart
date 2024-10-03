@@ -2,7 +2,7 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
+//import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
@@ -22,7 +22,6 @@ import 'package:orange_ui/screen/user_report_screen/report_sheet.dart';
 import 'package:orange_ui/service/pref_service.dart';
 import 'package:orange_ui/utils/firebase_res.dart';
 import 'package:orange_ui/utils/urls.dart';
-import 'package:share_plus/share_plus.dart';
 import 'package:stacked/stacked.dart';
 
 class UserDetailScreenViewModel extends BaseViewModel {
@@ -60,28 +59,6 @@ class UserDetailScreenViewModel extends BaseViewModel {
     // }
     getSettingData();
     userDetailApiCall();
-  }
-
-  void shareLink(RegistrationUserData? userData) async {
-    BranchUniversalObject buo = BranchUniversalObject(
-      canonicalIdentifier: 'flutter/branch',
-      title: userData?.fullname ?? '',
-      imageUrl: CommonFun.getProfileImage(images: userData?.images),
-      contentDescription: userData?.about ?? '',
-      publiclyIndex: true,
-      locallyIndex: true,
-      contentMetadata: BranchContentMetaData()..addCustomMetadata('user_id', userData?.id),
-    );
-    BranchLinkProperties lp = BranchLinkProperties(channel: 'facebook', feature: 'sharing', stage: 'new share', tags: ['one', 'two', 'three']);
-    lp.addControlParam('url', 'http://www.google.com');
-    lp.addControlParam('url2', 'http://flutter.dev');
-    BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
-    if (response.success) {
-      Share.share(
-        '${S.current.checkOutThisProfile} ${response.result}',
-        subject: '${S.current.look} ${userData?.fullname}',
-      );
-    } else {}
   }
 
   List<String> interestList = [];
@@ -278,7 +255,7 @@ class UserDetailScreenViewModel extends BaseViewModel {
   }
 
   void onShareProfileBtnTap() {
-    shareLink(userData);
+    //shareLink(userData);
   }
 
   void onReportTap() {

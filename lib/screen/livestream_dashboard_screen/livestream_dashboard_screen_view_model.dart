@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:bubbly_camera/bubbly_camera.dart';
+//import 'package:bubbly_camera/bubbly_camera.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:orange_ui/api_provider/api_provider.dart';
@@ -64,8 +64,8 @@ class LiveStreamDashBoardViewModel extends BaseViewModel {
   }
 
   void onDiamondPurchase(DiamondPack? data) {
-    BubblyCamera.inAppPurchase(
-        Platform.isAndroid ? data?.androidProductId : data?.iosProductId);
+    //BubblyCamera.inAppPurchase(
+    //    Platform.isAndroid ? data?.androidProductId : data?.iosProductId);
   }
 
   void onBackBtnTap() {
